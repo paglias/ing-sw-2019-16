@@ -13,6 +13,15 @@ public abstract class Deck {
     abstract void generateCards ();
 
     /**
+     * Gets deck size.
+     *
+     * @return the deck size
+     */
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    /**
      * Pick card.
      *
      * @return A card
@@ -36,6 +45,7 @@ public abstract class Deck {
     public Deck (Boolean canRefill, int deckSize) {
         this.canRefill = canRefill;
         this.deckSize = deckSize;
+        availableCards = new ArrayList<Card>();
         generateCards();
     }
 
