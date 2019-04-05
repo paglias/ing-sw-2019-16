@@ -8,7 +8,7 @@ public class PowerUp extends Card {
         TELEPORTER
     }
     private Name name;
-    private Color color;
+
 
     /**
      * Instantiates a new Power up.
@@ -17,8 +17,8 @@ public class PowerUp extends Card {
      * @param color the color
      */
     public PowerUp (Name name, Color color) {
+        super(color);
         this.name = name;
-        this.color = color;
     }
 
     /**
@@ -30,12 +30,5 @@ public class PowerUp extends Card {
         return name;
     }
 
-    /**
-     * Gets color.
-     *
-     * @return the color
-     */
-    public Color getColor () {
-        return color;
-    }
+
 }

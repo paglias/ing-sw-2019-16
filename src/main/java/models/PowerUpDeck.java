@@ -17,5 +17,6 @@ public class PowerUpDeck extends Deck {
     }
 
     public PowerUpDeck () {
-        super(true, 24); }
+        super(true, 24);
+    }
 }

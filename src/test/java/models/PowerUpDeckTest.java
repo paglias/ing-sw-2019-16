@@ -9,6 +9,7 @@ public class PowerUpDeckTest {
     public void testPowerUpDeckConstructor(){
         PowerUpDeck powerUpDeck = new PowerUpDeck();
         assertEquals(powerUpDeck.getDeckSize(), 24);
+        assertEquals(powerUpDeck.getRemainingCards(), 24);
     }
 
     @Test
