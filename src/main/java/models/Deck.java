@@ -45,7 +45,7 @@ public abstract class Deck {
     public Deck (Boolean canRefill, int deckSize) {
         this.canRefill = canRefill;
         this.deckSize = deckSize;
-        availableCards = new ArrayList<Card>();
+        availableCards = new ArrayList<>();
         generateCards();
     }
 

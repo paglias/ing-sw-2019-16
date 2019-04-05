@@ -11,7 +11,7 @@ public class PowerUpDeckTest {
         assertEquals(powerUpDeck.getDeckSize(), 24);
     }
     @Test
-    public void testPick(){
+    public void testPickColor(){
         PowerUpDeck powerUpDeck = new PowerUpDeck();
         int nBlue = 0;
         int nRed =0;
@@ -36,6 +36,34 @@ public class PowerUpDeckTest {
         assertEquals(nYellow, 8);
         assertEquals(nRed, 8);
 
-    };
+    }
+   @Test
+   public void testPickType(){
+        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        int nTeleporter = 0;
+        int nNewton = 0;
+        int nTagback_Grenade = 0;
+        int nTargeting_Scope=0;
 
+        for (int i=0; i<24; i++){
+            PowerUp card = (PowerUp) powerUpDeck.pick();
+            if (card.getName() == PowerUp.Name.NEWTON){
+                nNewton++;
+            }
+            if (card.getName() == PowerUp.Name.TAGBACK_GRENADE){
+                nTagback_Grenade++;
+            }
+            if (card.getName() == PowerUp.Name.TELEPORTER){
+                nTeleporter++;
+            }
+            if (card.getName() == PowerUp.Name.TARGETING_SCOPE){
+                nTargeting_Scope++;
+            }
+        }
+
+        assertEquals(nNewton, 6);
+        assertEquals((nTagback_Grenade),6);
+        assertEquals(nTargeting_Scope,6);
+        assertEquals(nTeleporter,6);
+   }
 }

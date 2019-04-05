@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Collection;
 import java.util.Collections;
 
 public class PowerUpDeck extends Deck {
@@ -18,6 +17,5 @@ public class PowerUpDeck extends Deck {
     }
 
     public PowerUpDeck () {
-        super(true, 24);
-    }
+        super(true, 24); }
 }

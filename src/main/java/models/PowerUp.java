@@ -1,13 +1,12 @@
 package models;
 
 public class PowerUp extends Card {
-    public static enum Name {
+    public enum Name {
         TARGETING_SCOPE,
         NEWTON,
         TAGBACK_GRENADE,
-        TELEPORTER;
-    };
-
+        TELEPORTER
+    }
     private Name name;
     private Color color;
 
