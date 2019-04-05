@@ -21,6 +21,10 @@ public abstract class Deck {
         return deckSize;
     }
 
+    public int getRemainingCards (){
+        return availableCards.size();
+    }
+
     /**
      * Pick card.
      *
