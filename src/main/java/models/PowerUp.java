@@ -29,6 +29,4 @@ public class PowerUp extends Card {
     public Name getName () {
         return name;
     }
-
-
 }

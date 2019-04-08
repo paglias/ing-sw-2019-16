@@ -13,6 +13,9 @@ public class WeaponsDeck extends Deck {
         Collections.shuffle(availableCards);
     }
 
+    /**
+     * Instantiates a new Weapons deck.
+     */
     public WeaponsDeck () {
         super(false, 21);
     }

@@ -11,6 +11,4 @@ public class Weapon extends Card{
     public Weapon (Color color) {
         super(color);
     }
-
-
 }

@@ -21,6 +21,11 @@ public abstract class Deck {
         return deckSize;
     }
 
+    /**
+     * Get number of remaining cards.
+     *
+     * @return the int
+     */
     public int getRemainingCards (){
         return availableCards.size();
     }

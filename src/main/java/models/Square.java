@@ -8,9 +8,4 @@ public class Square {
     private Boolean IsSpawnPoint;
     protected ArrayList<Square> canView;
     protected ArrayList<Square> canAccessDirectly;
-
-
-
-
-
 }
