@@ -18,10 +18,10 @@
       "canAccess": [1,6]
     },
     {
-      "color": "NULL",
+      "color": "EMPTY",
       "isSpawnPoint": false,
-      "canView": null,
-      "canAccess": null
+      "canView": [],
+      "canAccess": []
     },
     {
       "color": "RED",
