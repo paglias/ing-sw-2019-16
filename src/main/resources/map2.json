@@ -1,0 +1,75 @@
+[
+  {
+    "color": "RED",
+    "isSpawnPoint": false,
+    "canView": [1,2,4],
+    "canAccess": [1,4]
+  },
+  {
+    "color": "BLUE",
+    "isSpawnPoint": false,
+    "canView": [0,4,2,5],
+    "canAccess": [0,2,5]
+  },
+  {
+    "color": "BLUE",
+    "isSpawnPoint": true,
+    "canView": [1,3,6,7,10,11],
+    "canAccess": [1,3,6]
+  },
+  {
+    "color": "GREEN",
+    "isSpawnPoint": false,
+    "canView": [1,2,6,7,10,11],
+    "canAccess": [2,7]
+  },
+  {
+    "color": "RED",
+    "isSpawnPoint": true,
+    "canView": [0,8,9],
+    "canAccess": [0,8]
+  },
+  {
+    "color": "PURPLE",
+    "isSpawnPoint": false,
+    "canView": [1,2,8,9],
+    "canAccess": [1,9]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [7,10,11,1,2],
+    "canAccess": [7,10,2]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [6,10,11,3],
+    "canAccess": [6,11,3]
+  },
+  {
+    "color": "WHITE",
+    "isSpawnPoint": false,
+    "canView": [4,0,9],
+    "canAccess": [9,4]
+  },
+  {
+    "color": "WHITE",
+    "isSpawnPoint": false,
+    "canView": [8,6],
+    "canAccess": [8,6]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [6,7,11,8,9],
+    "canAccess": [6,9,11]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": true,
+    "canView": [6,7,10],
+    "canAccess": [10,7]
+  }
+
+]
