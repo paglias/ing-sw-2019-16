@@ -1,7 +1,7 @@
 package models;
 
 public abstract class Card {
-    protected Color color;
+    protected Color color = null;
     protected int nYellowCubes;
     protected int nBlueCubes;
     protected int nRedCubes;
@@ -21,22 +21,13 @@ public abstract class Card {
      *
      * @param color the color
      */
-    public Card(Color color){
-        this.color= color;
+    public Card (Color color){
+        this.color = color;
     }
 
     /**
-     * Instantiates a new Card.
-     *
-     * @param nYellowCubes the n yellow cubes
-     * @param nBlueCubes   the n blue cubes
-     * @param nRedCubes    the n red cubes
-     * @param powerUpAmmo  the power up ammo
+     * Instantiates a new Card without color.
      */
-    public Card(int nYellowCubes, int nBlueCubes, int nRedCubes, boolean powerUpAmmo){
-        this.nBlueCubes= nBlueCubes;
-        this.nRedCubes= nRedCubes;
-        this.nYellowCubes= nYellowCubes;
-    }
+    public Card (){ }
 }
 

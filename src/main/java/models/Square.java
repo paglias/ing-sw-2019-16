@@ -3,7 +3,15 @@ package models;
 import java.util.ArrayList;
 
 public class Square {
-    protected Color color;
+    public enum SquareColor {
+        YELLOW,
+        RED,
+        BLUE,
+        PURPLE,
+        WHITE,
+        GREEN;
+    }
+
     private int position;
     private Boolean IsSpawnPoint;
     protected ArrayList<Square> canView;

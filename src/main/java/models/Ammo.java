@@ -1,8 +1,13 @@
 package models;
 
-public class Ammo extends Card{
+import java.util.ArrayList;
 
-    protected PowerUp powerUp;
+public class Ammo extends Card {
+    protected ArrayList<Color> cubes;
+    protected int nYellowCubes;
+    protected int nBlueCubes;
+    protected int nRedCubes;
+    protected Boolean hasPowerUp;
 
     /**
      * Instantiates a new Ammo.
@@ -13,6 +18,10 @@ public class Ammo extends Card{
      * @param powerUpAmmo  the power up ammo
      */
     public Ammo (int nYellowCubes, int nBlueCubes, int nRedCubes, boolean powerUpAmmo) {
-        super (nBlueCubes, nRedCubes, nYellowCubes, powerUpAmmo);
+        super();
+        this.nBlueCubes= nBlueCubes;
+        this.nRedCubes= nRedCubes;
+        this.nYellowCubes= nYellowCubes;
+        this.hasPowerUp = powerUpAmmo;
     }
 }

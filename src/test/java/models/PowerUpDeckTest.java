@@ -7,14 +7,14 @@ public class PowerUpDeckTest {
 
     @Test
     public void testPowerUpDeckConstructor(){
-        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        PowerUpsDeck powerUpDeck = new PowerUpsDeck();
         assertEquals(powerUpDeck.getDeckSize(), 24);
         assertEquals(powerUpDeck.getRemainingCards(), 24);
     }
 
     @Test
     public void testPickColor(){
-        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        PowerUpsDeck powerUpDeck = new PowerUpsDeck();
         int nBlue = 0;
         int nRed =0;
         int nYellow=0;
@@ -42,7 +42,7 @@ public class PowerUpDeckTest {
 
    @Test
    public void testPickType(){
-        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        PowerUpsDeck powerUpDeck = new PowerUpsDeck();
 
         int nTeleporter = 0;
         int nNewton = 0;
@@ -73,7 +73,7 @@ public class PowerUpDeckTest {
 
    @Test
     public void TestPickRefill() {
-        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        PowerUpsDeck powerUpDeck = new PowerUpsDeck();
 
        for (int i=0; i <23; i++) {
             PowerUp card = (PowerUp) powerUpDeck.pick();

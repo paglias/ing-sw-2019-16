@@ -22,9 +22,11 @@ public class AmmoDeck extends Deck {
             availableCards.add(new Ammo(0, 0, 2, true));
             availableCards.add(new Ammo(0, 2, 0, true));
             availableCards.add(new Ammo(2, 0, 0, true));
+        }
+
+        Collections.shuffle(availableCards);
     }
-                Collections.shuffle(availableCards);
-            }
+
     public AmmoDeck () {
         super(true, 36);
     }

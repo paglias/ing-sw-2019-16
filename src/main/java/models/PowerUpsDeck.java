@@ -2,7 +2,7 @@ package models;
 
 import java.util.Collections;
 
-public class PowerUpDeck extends Deck {
+public class PowerUpsDeck extends Deck {
     @Override
     void generateCards () {
         for (Color color : Color.values()) {
@@ -18,7 +18,7 @@ public class PowerUpDeck extends Deck {
     /**
      * Instantiates a new Power up deck.
      */
-    public PowerUpDeck () {
+    public PowerUpsDeck () {
         super(true, 24);
     }
 }
