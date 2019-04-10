@@ -1,6 +1,12 @@
 package models;
 
 public abstract class Card {
+    public enum Color {
+        YELLOW,
+        RED,
+        BLUE;
+    }
+
     protected Color color = null;
     protected int nYellowCubes;
     protected int nBlueCubes;

@@ -9,7 +9,7 @@ public class Player {
     private Date startTurnDate;
     private int nDeaths;
     private Boolean isFirstPlayer;
-    private ArrayList<Color> cubes;
+    private ArrayList<Card.Color> cubes;
     private ArrayList<String> points; // TODO what is this? why not integer?
     private ArrayList<Player> marks;
     private ArrayList<Player> damage;

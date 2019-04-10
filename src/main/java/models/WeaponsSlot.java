@@ -3,10 +3,10 @@ package models;
 import java.util.ArrayList;
 
 public class WeaponsSlot {
-    private Color color;
+    private Square.Color color;
     private ArrayList<Weapon> weapons;
 
-    public WeaponsSlot (Color color, WeaponsDeck weaponsDeck) {
+    public WeaponsSlot (Square.Color color, WeaponsDeck weaponsDeck) {
         this.color = color;
         this.weapons = new ArrayList<>();
 
