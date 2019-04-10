@@ -1,5 +1,6 @@
 package models;
 
+import models.cards.Card;
 import models.cards.PowerUp;
 import models.decks.PowerUpsDeck;
 import org.junit.jupiter.api.Test;
@@ -23,15 +24,15 @@ public class PowerUpDeckTest {
 
         for (int i=0; i<24; i++){
             PowerUp card = (PowerUp) powerUpDeck.pick();
-            if (card.getColor() == Color.BLUE) {
+            if (card.getColor() == Card.Color.BLUE) {
                 nBlue++;
             }
 
-            if (card.getColor() == Color.YELLOW) {
+            if (card.getColor() == Card.Color.YELLOW) {
                 nYellow++;
             }
 
-            if (card.getColor() == Color.RED) {
+            if (card.getColor() == Card.Color.RED) {
                 nRed++;
             }
         }
