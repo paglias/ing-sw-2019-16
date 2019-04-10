@@ -1,4 +1,7 @@
-package models;
+package models.decks;
+
+import models.cards.Card;
+import models.cards.PowerUp;
 
 import java.util.Collections;
 

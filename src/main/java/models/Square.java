@@ -1,5 +1,8 @@
 package models;
 
+import models.cards.Ammo;
+import models.decks.AmmoDeck;
+
 import java.util.ArrayList;
 
 public class Square {

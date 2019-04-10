@@ -1,5 +1,9 @@
 package models;
 
+import models.decks.AmmoDeck;
+import models.decks.PowerUpsDeck;
+import models.decks.WeaponsDeck;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,5 +19,5 @@ public class GameBoard {
     private AmmoDeck ammoDeck;
     private ArrayList<Player> players;
     private Boolean isFinalFrenzy;
-    private Map map;
+    private ArrayList<Square> squares;
 }
