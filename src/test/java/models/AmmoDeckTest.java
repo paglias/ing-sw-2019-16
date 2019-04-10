@@ -1,5 +1,7 @@
 package models;
 
+import models.cards.Ammo;
+import models.decks.AmmoDeck;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

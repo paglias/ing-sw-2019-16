@@ -1,4 +1,6 @@
-package models;
+package models.decks;
+
+import models.cards.Ammo;
 
 import java.util.Collections;
 

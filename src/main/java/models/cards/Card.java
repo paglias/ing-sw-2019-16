@@ -1,4 +1,4 @@
-package models;
+package models.cards;
 
 public abstract class Card {
     public enum Color {

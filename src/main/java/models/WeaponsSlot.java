@@ -1,5 +1,8 @@
 package models;
 
+import models.cards.Weapon;
+import models.decks.WeaponsDeck;
+
 import java.util.ArrayList;
 
 public class WeaponsSlot {
