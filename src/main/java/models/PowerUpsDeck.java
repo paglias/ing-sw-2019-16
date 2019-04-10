@@ -5,7 +5,7 @@ import java.util.Collections;
 public class PowerUpsDeck extends Deck {
     @Override
     void generateCards () {
-        for (Color color : Color.values()) {
+        for (Card.Color color : Card.Color.values()) {
             for (PowerUp.Name name : PowerUp.Name.values()) {
                 availableCards.add(new PowerUp(name, color));
                 availableCards.add(new PowerUp(name, color));

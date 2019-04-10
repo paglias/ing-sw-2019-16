@@ -15,5 +15,5 @@ public class GameBoard {
     private AmmoDeck ammoDeck;
     private ArrayList<Player> players;
     private Boolean isFinalFrenzy;
-    private ArrayList<Square> squares;
+    private Map map;
 }
