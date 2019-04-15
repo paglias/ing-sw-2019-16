@@ -18,7 +18,7 @@ public class MapLoader {
         int[] canAccess;
     }
 
-    private static void loadMap (String filename) throws IOException {
+    private static ArrayList<Square> loadMap (String filename) throws IOException {
         Gson gson = new Gson();
         ParsedSquare[] parsedSquares = gson.fromJson(new FileReader(filename), ParsedSquare[].class);
         ArrayList<Square> squares = new ArrayList<>();
@@ -39,12 +39,7 @@ public class MapLoader {
                 square.addCanAccessSquare(squares.get(canAccessI));
             }
         }
-    }
 
-    public static void loadMaps () throws IOException {
-        int[] maps = {1,2,3,4};
-        for (int mapI : maps) {
-            loadMap("map" + mapI + ".json");
-        }
+        return squares;
     }
 }

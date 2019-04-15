@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Deck {
     protected ArrayList<Card> availableCards;
+    private ArrayList<Card> discardedCards;
     private final Boolean canRefill;
     private final int deckSize;
 
@@ -13,6 +14,17 @@ public abstract class Deck {
      * Generate cards. Implemented in the sub classes.
      */
     abstract void generateCards ();
+
+
+    /**
+     * Refill from discarded.
+     */
+    public void refillFromDiscarded () {
+        for (Card card : discardedCards) {
+            Card toAdd = discardedCards.remove(0);
+            availableCards.add(toAdd);
+        }
+    }
 
     /**
      * Gets deck size.
@@ -38,11 +50,12 @@ public abstract class Deck {
      * @return A card
      */
     public Card pick () {
-        if (availableCards.isEmpty()) return null; // TODO exception? custom?
-        Card removed = availableCards.remove(0);
+        if (availableCards.isEmpty()) return null;
+        Card removed = availableCards.remove(0); // TODO clone? since used ad discarded and by user
+        if (canRefill) discardedCards.add(removed);
 
         if (availableCards.isEmpty() && canRefill) {
-            generateCards();
+            refillFromDiscarded();
         }
 
         return removed;
