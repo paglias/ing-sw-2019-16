@@ -45,20 +45,28 @@ public abstract class Deck {
     }
 
     /**
-     * Pick card.
+     * Pick a card.
      *
      * @return A card
      */
     public Card pick () {
         if (availableCards.isEmpty()) return null;
-        Card removed = availableCards.remove(0); // TODO clone? since used ad discarded and by user
-        if (canRefill) discardedCards.add(removed);
+        Card picked = availableCards.remove(0);
 
         if (availableCards.isEmpty() && canRefill) {
             refillFromDiscarded();
         }
 
-        return removed;
+        return picked;
+    }
+
+    /**
+     * Discard.
+     *
+     * @param card the card
+     */
+    public void discard (Card card) {
+        discardedCards.add(card);
     }
 
     /**
