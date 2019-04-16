@@ -1,0 +1,10 @@
+{
+  "Name": "MachineGun",
+  "RechargeNumber": ["BLUE","RED"],
+  "Cost": ["RED"],
+  "SecondaryCost": ["YELLOW"],
+  "TertiaryCost": ["BLUE"],
+  "PrimaryEffect": [["ShootView"],["ShootView"]],
+  "SecondaryEffect":[["ShootOtherView"],["ShootView"]],
+  "TertiaryEffect": [["ShootThirdView"],["ShootView"]]
+}

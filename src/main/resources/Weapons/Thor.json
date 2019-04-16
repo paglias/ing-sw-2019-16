@@ -1,0 +1,10 @@
+{
+  "Name": "T.H.O.R",
+  "RechargeNumber": ["BLUE","RED"],
+  "Cost": ["RED"],
+  "SecondaryCost": ["BLUE"],
+  "TertiaryCost": ["BLUE"],
+  "PrimaryEffect": [["ShootView","ShootView"]],
+  "SecondaryEffect":[["ShootTargetView"]],
+  "TertiaryEffect": [["ShootSecondTargetView","ShootSecondTargetView"]]
+}

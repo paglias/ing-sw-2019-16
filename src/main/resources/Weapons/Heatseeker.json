@@ -1,0 +1,10 @@
+{
+  "Name": "Heatseeker",
+  "RechargeNumber": ["RED","RED","YELLOW"],
+  "Cost": ["RED","YELLOW"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootCantSee","ShootCantSee","ShootCantSee"]],
+  "SecondaryEffect": null,
+  "TertiaryEffect":null
+}

@@ -1,0 +1,10 @@
+{
+  "Name": "Electroscythe",
+  "RechargeNumber": ["BLUE"],
+  "Cost": null,
+  "SecondaryCost": ["BLUE","RED"],
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootEvery"]],
+  "SecondaryEffect":[["ShootEvery","ShootEvery"]],
+  "TertiaryEffect":null
+}

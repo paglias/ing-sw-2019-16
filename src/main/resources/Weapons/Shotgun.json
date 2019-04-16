@@ -1,0 +1,10 @@
+{
+  "Name": "Shotgun",
+  "RechargeNumber": ["YELLOW","YELLOW"],
+  "Cost": ["YELLOW"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["Shoot","Shoot","Shoot","MoveTarget"]],
+  "SecondaryEffect":[["ShootOneAwayView","ShootOneAwayView"]],
+  "TertiaryEffect":null
+}

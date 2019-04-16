@@ -1,0 +1,10 @@
+{
+  "Name": "RocketLauncher",
+  "RechargeNumber": ["RED","RED"],
+  "Cost": ["RED"],
+  "SecondaryCost": ["BLUE"],
+  "TertiaryCost": ["YELLOW"],
+  "PrimaryEffect": [["ShootView","ShootView","MoveTarget"]],
+  "SecondaryEffect":[["Move"],["Move"]],
+  "TertiaryEffect": [["ShootView"]]
+}

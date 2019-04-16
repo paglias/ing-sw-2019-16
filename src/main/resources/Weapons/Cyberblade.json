@@ -1,0 +1,10 @@
+{
+  "Name": "Cyberblade",
+  "RechargeNumber": ["YELLOW","RED"],
+  "Cost": ["RED"],
+  "SecondaryCost": null,
+  "TertiaryCost": ["YELLOW"],
+  "PrimaryEffect": [["Shoot","Shoot"]],
+  "SecondaryEffect":[["Move"]],
+  "TertiaryEffect": [["Shoot","Shoot"]]
+}

@@ -1,0 +1,10 @@
+{
+  "Name": "LockRifle",
+  "RechargeNumber": ["BLUE","BLUE"],
+  "Cost": ["BLUE"],
+  "SecondaryCost": ["RED"],
+  "TertiaryCost":null,
+  "PrimaryEffect": [["ShootView","ShootView","Mark"]],
+  "SecondaryEffect":[["MarkView"]],
+  "TertiaryEffect":null
+}
