@@ -18,9 +18,9 @@ public class MapLoader {
         int[] canAccess;
     }
 
-    private static ArrayList<Square> loadMap (String filename) throws IOException {
+    static ArrayList<Square> loadMap(String filename) throws IOException {
         Gson gson = new Gson();
-        ParsedSquare[] parsedSquares = gson.fromJson(new FileReader(filename), ParsedSquare[].class);
+        ParsedSquare[] parsedSquares = gson.fromJson(new FileReader(MapLoader.class.getResource("/Maps/" + filename).getPath()), ParsedSquare[].class);
         ArrayList<Square> squares = new ArrayList<>();
 
         for (ParsedSquare parsedSquare : parsedSquares) {

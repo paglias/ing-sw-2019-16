@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Deck {
     protected ArrayList<Card> availableCards;
-    private ArrayList<Card> discardedCards;
+    private ArrayList<Card> discardedCards = new ArrayList<>();
     private final Boolean canRefill;
     private final int deckSize;
 
@@ -20,7 +20,8 @@ public abstract class Deck {
      * Refill from discarded.
      */
     public void refillFromDiscarded () {
-        for (Card card : discardedCards) {
+        int discardedCardsSize = discardedCards.size();
+        for (int i = 0; i < discardedCardsSize; i++) {
             Card toAdd = discardedCards.remove(0);
             availableCards.add(toAdd);
         }

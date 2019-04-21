@@ -3,9 +3,28 @@ package models.cards;
 import models.Player;
 import models.Square;
 
-public class Weapon extends Card{
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import com.google.gson.*;
+
+public class Weapon extends Card {
     private boolean loaded;
 
+    public static ArrayList<Weapon> loadWeapons () throws java.io.FileNotFoundException {
+        File weaponsFolder = new File("../../../reources/Weapons");
+        File[] listOfWeaponsFiles = weaponsFolder.listFiles();
+        ArrayList<Weapon> weapons = new ArrayList<>();
+        Gson gson = new Gson();
+
+        for (File file : listOfWeaponsFiles) {
+            if (file.isFile()) {
+                weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
+            }
+        }
+
+        return weapons;
+    }
 
     /**
      * Is loaded boolean.
@@ -35,7 +54,7 @@ public class Weapon extends Card{
     public void movePlayer(Player playerTarget, Square newPosition){
         //move players around based on weapon
     }
-    public void loadWeapon(){
+    public void reloadWeapon(){
         //load weapon, set is loaded to TRUE
     }
 }

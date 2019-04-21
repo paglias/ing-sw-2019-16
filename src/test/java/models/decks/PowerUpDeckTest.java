@@ -1,4 +1,4 @@
-package models;
+package models.decks;
 
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -81,9 +81,10 @@ public class PowerUpDeckTest {
        for (int i=0; i <23; i++) {
             PowerUp card = (PowerUp) powerUpDeck.pick();
             assertEquals(powerUpDeck.getRemainingCards(),  powerUpDeck.getDeckSize() - i - 1);
+            powerUpDeck.discard(card);
         }
 
         powerUpDeck.pick();
-        assertEquals(powerUpDeck.getRemainingCards(), powerUpDeck.getDeckSize());
+        assertEquals(powerUpDeck.getRemainingCards(), powerUpDeck.getDeckSize() - 1); // -1 because one is still being played
    }
 }

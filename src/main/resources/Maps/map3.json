@@ -1,76 +1,74 @@
-{
-  "map" : [
-    {
-      "color": "BLUE",
-      "isSpawnPoint": false,
-      "canView": [0,1,2,4,5],
-      "canAccess": [1,4]
-    },
-    {
-      "color": "BLUE",
-      "isSpawnPoint": false,
-      "canView": [0,1,2],
-      "canAccess": [0,2]
-    },
-    {
-      "color": "BLUE",
-      "isSpawnPoint": true,
-      "canView": [0,1,2,3,6,7,10,11],
-      "canAccess": [1,3]
-    },
-    {
-      "color": "GREEN",
-      "isSpawnPoint": false,
-      "canView": [0,1,2,3,6,7,10,11],
-      "canAccess": [2,7]
-    },
-    {
-      "color": "RED",
-      "isSpawnPoint": true,
-      "canView": [0,1,2,4,5],
-      "canAccess": [0,5]
-    },
-    {
-      "color": "RED",
-      "isSpawnPoint": false,
-      "canView": [4,5,9],
-      "canAccess": [4,9]
-    },
-    {
-      "color": "YELLOW",
-      "isSpawnPoint": false,
-      "canView": [0,1,2,6,7,10,11],
-      "canAccess": [2,7,10]
-    },
-    {
-      "color": "YELLOW",
-      "isSpawnPoint": false,
-      "canView": [3,6,7,10,11],
-      "canAccess": [3,6,11]
-    },
-    {
-      "color": "EMPTY",
-      "isSpawnPoint": false,
-      "canView": [],
-      "canAccess": []
-    },
-    {
-      "color": "WHITE",
-      "isSpawnPoint": false,
-      "canView": [4,5,6,7,9,10,11],
-      "canAccess": [5,10]
-    },
-    {
-      "color": "YELLOW",
-      "isSpawnPoint": false,
-      "canView": [6,7,9,10,11],
-      "canAccess": [6,9,11]
-    },
-    {
-      "color": "YELLOW",
-      "isSpawnPoint": true,
-      "canView": [6,7,10,11],
-      "canAccess": [7,10]
-    }
-  ]
-}
+[
+  {
+    "color": "BLUE",
+    "isSpawnPoint": false,
+    "canView": [1,2,4,5],
+    "canAccess": [1,4]
+  },
+  {
+    "color": "BLUE",
+    "isSpawnPoint": false,
+    "canView": [0,2],
+    "canAccess": [0,2]
+  },
+  {
+    "color": "BLUE",
+    "isSpawnPoint": true,
+    "canView": [0,1,3,6,7,10,11],
+    "canAccess": [1,3]
+  },
+  {
+    "color": "GREEN",
+    "isSpawnPoint": false,
+    "canView": [0,1,2,6,7,10,11],
+    "canAccess": [2,7]
+  },
+  {
+    "color": "RED",
+    "isSpawnPoint": true,
+    "canView": [0,1,2,5],
+    "canAccess": [0,5]
+  },
+  {
+    "color": "RED",
+    "isSpawnPoint": false,
+    "canView": [4,9],
+    "canAccess": [4,9]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [0,1,2,7,10,11],
+    "canAccess": [2,7,10]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [3,6,10,11],
+    "canAccess": [3,6,11]
+  },
+  {
+    "color": "EMPTY",
+    "isSpawnPoint": false,
+    "canView": [],
+    "canAccess": []
+  },
+  {
+    "color": "WHITE",
+    "isSpawnPoint": false,
+    "canView": [4,5,6,7,10,11],
+    "canAccess": [5,10]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": false,
+    "canView": [6,7,9,11],
+    "canAccess": [6,9,11]
+  },
+  {
+    "color": "YELLOW",
+    "isSpawnPoint": true,
+    "canView": [6,7,10],
+    "canAccess": [7,10]
+  }
+]

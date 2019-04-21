@@ -1,4 +1,4 @@
-package models;
+package models.decks;
 
 import models.cards.Card;
 import models.cards.Weapon;
