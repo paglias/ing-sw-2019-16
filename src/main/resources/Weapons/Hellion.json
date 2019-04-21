@@ -1,0 +1,10 @@
+{
+  "Name": "Hellion",
+  "RechargeNumber": ["RED","YELLOW"],
+  "Cost": ["YELLOW"],
+  "SecondaryCost": ["RED"],
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootOneAwayView","MarkOneAwayView"]],
+  "SecondaryEffect":[["ShootOneAwayView","MarkOneAwayView","MarkOneAwayView"]],
+  "TertiaryEffect":null
+}

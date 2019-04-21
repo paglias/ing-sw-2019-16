@@ -1,0 +1,10 @@
+{
+  "Name": "Zx2",
+  "RechargeNumber": ["YELLOW","RED"],
+  "Cost": ["RED"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootView","MarkView","MarkView"]],
+  "SecondaryEffect":[["MarkView"],["MarkView"],["MarkView"]],
+  "TertiaryEffect": [["ShootView"]]
+}

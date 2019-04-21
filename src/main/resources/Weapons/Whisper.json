@@ -1,0 +1,10 @@
+{
+  "Name": "Whisper",
+  "RechargeNumber": ["BLUE","BLUE","YELLOW"],
+  "Cost": ["BLUE","YELLOW"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootTwoAwayView","ShootTwoAwayView","ShootTwoAwayView","MarkTwoAwayView"]],
+  "SecondaryEffect": null,
+  "TertiaryEffect":null
+}

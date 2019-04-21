@@ -20,4 +20,8 @@ public class GameBoard {
     private ArrayList<Player> players;
     private Boolean isFinalFrenzy;
     private ArrayList<Square> squares;
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }

@@ -1,0 +1,10 @@
+{
+  "Name": "Furnace",
+  "RechargeNumber": ["RED","BLUE"],
+  "Cost": ["BLUE"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootRoomCanSee"]],
+  "SecondaryEffect":[["ShootEveryOneAwayView","MarkEveryOneAwayView"]],
+  "TertiaryEffect":null
+}

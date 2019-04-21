@@ -1,0 +1,10 @@
+{
+  "Name": "Shockwave",
+  "RechargeNumber": ["YELLOW"],
+  "Cost": null,
+  "SecondaryCost": ["YELLOW"],
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootOneAwayView"],["ShootOneAwayView"],["ShootOneAwayView"]],
+  "SecondaryEffect":[["ShootEveryOneAwayView"]],
+  "TertiaryEffect":null
+}

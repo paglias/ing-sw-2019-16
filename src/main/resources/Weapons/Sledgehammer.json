@@ -1,0 +1,10 @@
+{
+  "Name": "Sledgehammer",
+  "RechargeNumber": ["YELLOW"],
+  "Cost": null,
+  "SecondaryCost": ["RED"],
+  "TertiaryCost": null,
+  "PrimaryEffect": [["Shoot","Shoot"]],
+  "SecondaryEffect":[["Move"],["Move"]],
+  "TertiaryEffect": [["Shoot","Shoot","Shoot"],["MoveTarget"],["MoveTarget"]]
+}

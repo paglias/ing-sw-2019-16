@@ -1,0 +1,10 @@
+{
+  "Name": "Railgun",
+  "RechargeNumber": ["YELLOW","YELLOW","BLUE"],
+  "Cost": ["YELLOW","BLUE"],
+  "SecondaryCost": null,
+  "TertiaryCost": null,
+  "PrimaryEffect": [["ShootDirection","ShootDirection","ShootDirection"]],
+  "SecondaryEffect":[["ShootDirection","ShootDirection"],["ShootDirection","ShootDirection"]],
+  "TertiaryEffect":null
+}

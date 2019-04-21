@@ -1,0 +1,10 @@
+{
+  "Name": "Flamethrower",
+  "RechargeNumber": ["RED"],
+  "Cost": null,
+  "SecondaryCost": ["YELLOW","YELLOW"],
+  "TertiaryCost":null,
+  "PrimaryEffect": [["ShootOneAwayView","ShootTwoAwayView"]],
+  "SecondaryEffect":[["ShootOneAwayView","ShootOneAwayView","ShootTwoAwayView"]],
+  "TertiaryEffect":null
+}
