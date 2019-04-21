@@ -1,10 +1,10 @@
 {
-  "Name": "Railgun",
-  "RechargeNumber": ["YELLOW","YELLOW","BLUE"],
-  "Cost": ["YELLOW","BLUE"],
-  "SecondaryCost": null,
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootDirection","ShootDirection","ShootDirection"]],
-  "SecondaryEffect":[["ShootDirection","ShootDirection"],["ShootDirection","ShootDirection"]],
-  "TertiaryEffect":null
+  "name": "Railgun",
+  "rechargeCost": ["YELLOW","YELLOW","BLUE"],
+  "cost": ["YELLOW","BLUE"],
+  "secondaryCost": null,
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_DIRECTION","SHOOT_DIRECTION","SHOOT_DIRECTION"]],
+  "secondaryEffect":[["SHOOT_DIRECTION","SHOOT_DIRECTION"],["SHOOT_DIRECTION","SHOOT_DIRECTION"]],
+  "tertiaryEffect":null
 }

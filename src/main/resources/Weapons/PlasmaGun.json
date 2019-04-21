@@ -1,10 +1,10 @@
 {
-  "Name": "PlasmaGun",
-  "RechargeNumber": ["BLUE","YELLOW"],
-  "Cost": ["YELLOW"],
-  "SecondaryCost": null,
-  "TertiaryCost": ["BLUE"],
-  "PrimaryEffect": [["ShootView","ShootView"]],
-  "SecondaryEffect":[["Move"],["Move"]],
-  "TertiaryEffect": [["ShootView"]]
+  "name": "PlasmaGun",
+  "rechargeCost": ["BLUE","YELLOW"],
+  "cost": ["YELLOW"],
+  "secondaryCost": null,
+  "tertiaryCost": ["BLUE"],
+  "primaryEffect": [["SHOOT_VIEW","SHOOT_VIEW"]],
+  "secondaryEffect":[["MOVE"],["MOVE"]],
+  "tertiaryEffect": [["SHOOT_VIEW"]]
 }

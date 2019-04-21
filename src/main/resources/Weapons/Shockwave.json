@@ -1,10 +1,10 @@
 {
-  "Name": "Shockwave",
-  "RechargeNumber": ["YELLOW"],
-  "Cost": null,
-  "SecondaryCost": ["YELLOW"],
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootOneAwayView"],["ShootOneAwayView"],["ShootOneAwayView"]],
-  "SecondaryEffect":[["ShootEveryOneAwayView"]],
-  "TertiaryEffect":null
+  "name": "Shockwave",
+  "rechargeCost": ["YELLOW"],
+  "cost": null,
+  "secondaryCost": ["YELLOW"],
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_ONE_AWAY_VIEW"],["SHOOT_ONE_AWAY_VIEW"],["SHOOT_ONE_AWAY_VIEW"]],
+  "secondaryEffect":[["SHOOT_EVERY_ONE_AWAY_VIEW"]],
+  "tertiaryEffect":null
 }

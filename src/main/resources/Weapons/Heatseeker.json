@@ -1,10 +1,10 @@
 {
-  "Name": "Heatseeker",
-  "RechargeNumber": ["RED","RED","YELLOW"],
-  "Cost": ["RED","YELLOW"],
-  "SecondaryCost": null,
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootCantSee","ShootCantSee","ShootCantSee"]],
-  "SecondaryEffect": null,
-  "TertiaryEffect":null
+  "name": "Heatseeker",
+  "rechargeCost": ["RED","RED","YELLOW"],
+  "cost": ["RED","YELLOW"],
+  "secondaryCost": null,
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_CANT_SEE","SHOOT_CANT_SEE","SHOOT_CANT_SEE"]],
+  "secondaryEffect": null,
+  "tertiaryEffect":null
 }

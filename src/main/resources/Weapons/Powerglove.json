@@ -1,10 +1,10 @@
 {
-  "Name": "Powerglove",
-  "RechargeNumber": ["YELLOW","BLUE"],
-  "Cost": ["BLUE"],
-  "SecondaryCost": ["BLUE"],
-  "TertiaryCost": null,
-  "PrimaryEffect": [["Move","Shoot","Mark","Mark"]],
-  "SecondaryEffect":[["Move","Shoot","Shoot"],["Move","Shoot","Shoot"]],
-  "TertiaryEffect":null
+  "name": "Powerglove",
+  "rechargeCost": ["YELLOW","BLUE"],
+  "cost": ["BLUE"],
+  "secondaryCost": ["BLUE"],
+  "tertiaryCost": null,
+  "primaryEffect": [["MOVE","SHOOT","MARK","MARK"]],
+  "secondaryEffect":[["MOVE","SHOOT","SHOOT"],["MOVE","SHOOT","SHOOT"]],
+  "tertiaryEffect":null
 }

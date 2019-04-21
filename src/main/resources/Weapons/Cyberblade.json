@@ -1,10 +1,10 @@
 {
-  "Name": "Cyberblade",
-  "RechargeNumber": ["YELLOW","RED"],
-  "Cost": ["RED"],
-  "SecondaryCost": null,
-  "TertiaryCost": ["YELLOW"],
-  "PrimaryEffect": [["Shoot","Shoot"]],
-  "SecondaryEffect":[["Move"]],
-  "TertiaryEffect": [["Shoot","Shoot"]]
+  "name": "Cyberblade",
+  "rechargeCost": ["YELLOW","RED"],
+  "cost": ["RED"],
+  "secondaryCost": null,
+  "tertiaryCost": ["YELLOW"],
+  "primaryEffect": [["SHOOT","SHOOT"]],
+  "secondaryEffect":[["MOVE"]],
+  "tertiaryEffect": [["SHOOT","SHOOT"]]
 }

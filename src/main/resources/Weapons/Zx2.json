@@ -1,10 +1,10 @@
 {
-  "Name": "Zx2",
-  "RechargeNumber": ["YELLOW","RED"],
-  "Cost": ["RED"],
-  "SecondaryCost": null,
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootView","MarkView","MarkView"]],
-  "SecondaryEffect":[["MarkView"],["MarkView"],["MarkView"]],
-  "TertiaryEffect": [["ShootView"]]
+  "name": "Zx2",
+  "rechargeCost": ["YELLOW","RED"],
+  "cost": ["RED"],
+  "secondaryCost": null,
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_VIEW","MARK_VIEW","MARK_VIEW"]],
+  "secondaryEffect":[["MARK_VIEW"],["MARK_VIEW"],["MARK_VIEW"]],
+  "tertiaryEffect": [["SHOOT_VIEW"]]
 }

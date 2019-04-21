@@ -1,10 +1,10 @@
 {
-  "Name": "Furnace",
-  "RechargeNumber": ["RED","BLUE"],
-  "Cost": ["BLUE"],
-  "SecondaryCost": null,
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootRoomCanSee"]],
-  "SecondaryEffect":[["ShootEveryOneAwayView","MarkEveryOneAwayView"]],
-  "TertiaryEffect":null
+  "name": "Furnace",
+  "rechargeCost": ["RED","BLUE"],
+  "cost": ["BLUE"],
+  "secondaryCost": null,
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_ROOM_CAN_SEE"]],
+  "secondaryEffect":[["SHOOT_EVERY_ONE_AWAY_VIEW","MARK_EVERY_ONE_AWAY_VIEW"]],
+  "tertiaryEffect":null
 }

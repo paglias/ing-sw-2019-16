@@ -1,10 +1,10 @@
 {
-  "Name": "Electroscythe",
-  "RechargeNumber": ["BLUE"],
-  "Cost": null,
-  "SecondaryCost": ["BLUE","RED"],
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootEvery"]],
-  "SecondaryEffect":[["ShootEvery","ShootEvery"]],
-  "TertiaryEffect":null
+  "name": "Electroscythe",
+  "rechargeCost": ["BLUE"],
+  "cost": null,
+  "secondaryCost": ["BLUE","RED"],
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_EVERY"]],
+  "secondaryEffect":[["SHOOT_EVERY","SHOOT_EVERY"]],
+  "tertiaryEffect":null
 }

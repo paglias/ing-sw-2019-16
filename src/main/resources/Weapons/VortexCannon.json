@@ -1,10 +1,10 @@
 {
-  "Name": "TractorBeam",
-  "RechargeNumber": ["RED","BLUE"],
-  "Cost": null,
-  "SecondaryCost": ["RED"],
-  "TertiaryCost": null,
-  "PrimaryEffect": [["MoveTarget","Shoot","Shoot"]],
-  "SecondaryEffect":[["MoveTarget","Shoot"],["MoveTarget","Shoot"]],
-  "TertiaryEffect":null
+  "name": "TractorBeam",
+  "rechargeCost": ["RED","BLUE"],
+  "cost": null,
+  "secondaryCost": ["RED"],
+  "tertiaryCost": null,
+  "primaryEffect": [["MOVE_TARGET","SHOOT","SHOOT"]],
+  "secondaryEffect":[["MOVE_TARGET","SHOOT"],["MOVE_TARGET","SHOOT"]],
+  "tertiaryEffect":null
 }

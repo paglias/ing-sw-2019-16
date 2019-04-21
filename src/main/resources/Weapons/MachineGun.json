@@ -1,10 +1,10 @@
 {
-  "Name": "MachineGun",
-  "RechargeNumber": ["BLUE","RED"],
-  "Cost": ["RED"],
-  "SecondaryCost": ["YELLOW"],
-  "TertiaryCost": ["BLUE"],
-  "PrimaryEffect": [["ShootView"],["ShootView"]],
-  "SecondaryEffect":[["ShootOtherView"],["ShootView"]],
-  "TertiaryEffect": [["ShootThirdView"],["ShootView"]]
+  "name": "MachineGun",
+  "rechargeCost": ["BLUE","RED"],
+  "cost": ["RED"],
+  "secondaryCost": ["YELLOW"],
+  "tertiaryCost": ["BLUE"],
+  "primaryEffect": [["SHOOT_VIEW"],["SHOOT_VIEW"]],
+  "secondaryEffect":[["SHOOT_OTHER_VIEW"],["SHOOT_VIEW"]],
+  "tertiaryEffect": [["SHOOT_THIRD_VIEW"],["SHOOT_VIEW"]]
 }

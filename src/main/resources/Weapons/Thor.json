@@ -1,10 +1,10 @@
 {
-  "Name": "T.H.O.R",
-  "RechargeNumber": ["BLUE","RED"],
-  "Cost": ["RED"],
-  "SecondaryCost": ["BLUE"],
-  "TertiaryCost": ["BLUE"],
-  "PrimaryEffect": [["ShootView","ShootView"]],
-  "SecondaryEffect":[["ShootTargetView"]],
-  "TertiaryEffect": [["ShootSecondTargetView","ShootSecondTargetView"]]
+  "name": "T.H.O.R",
+  "rechargeCost": ["BLUE","RED"],
+  "cost": ["RED"],
+  "secondaryCost": ["BLUE"],
+  "tertiaryCost": ["BLUE"],
+  "primaryEffect": [["SHOOT_VIEW","SHOOT_VIEW"]],
+  "secondaryEffect":[["SHOOT_TARGET_VIEW"]],
+  "tertiaryEffect": [["SHOOT_SECOND_TARGET_VIEW","SHOOT_SECOND_TARGET_VIEW"]]
 }

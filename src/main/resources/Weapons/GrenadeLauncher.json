@@ -1,11 +1,11 @@
 {
-  "Name": "GrenadeLauncher",
-  "RechargeNumber": ["RED"],
-  "Cost": null,
-  "SecondaryCost": ["RED"],
-  "TertiaryCost": null,
-  "PrimaryEffect": [["ShootView","MoveTarget"]],
-  "SecondaryEffect":[["ShootView"]],
-  "TertiaryEffect":null
+  "name": "GrenadeLauncher",
+  "rechargeCost": ["RED"],
+  "cost": null,
+  "secondaryCost": ["RED"],
+  "tertiaryCost": null,
+  "primaryEffect": [["SHOOT_VIEW","MOVE_TARGET"]],
+  "secondaryEffect":[["SHOOT_VIEW"]],
+  "tertiaryEffect":null
 }
 
