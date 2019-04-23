@@ -4,6 +4,7 @@ import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,5 +24,20 @@ public class GameBoard {
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public void setupGame (Integer chosenMap) {
+        if (chosenMap == null) chosenMap = 1;
+
+        squares = new ArrayList<>();
+        try {
+            squares.addAll(MapLoader.loadMap(chosenMap));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        powerUpsDeck = new PowerUpsDeck();
+        weaponsDeck = new WeaponsDeck();
+        ammoDeck = new AmmoDeck();
     }
 }

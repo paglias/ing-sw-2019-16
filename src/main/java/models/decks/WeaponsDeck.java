@@ -8,11 +8,7 @@ import java.util.Collections;
 public class WeaponsDeck extends Deck {
     @Override
     void generateCards () {
-        for (Card.Color color : Card.Color.values()) {
-            for (int i=0; i<7; i++) {
-                availableCards.add(new Weapon(color));
-            }
-        }
+        availableCards.addAll(Weapon.loadWeapons());
         Collections.shuffle(availableCards);
     }
 
