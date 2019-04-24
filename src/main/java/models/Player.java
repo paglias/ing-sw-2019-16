@@ -16,6 +16,7 @@ public class Player {
     private int nDeaths;                    //number of deaths counted by skulls TODO Top score decreases each death
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes;    //ammo available
+    private int [] givenPoints;             //points given at next death
     private ArrayList<String> points;       // TODO what is this? why not integer?
     private ArrayList<Player> marks;        //current marks, depending on player color
     private ArrayList<Player> damage;       //list of damage amount, depending on player color
@@ -25,6 +26,26 @@ public class Player {
     private int moveCounter;                //TODO restore movecounter at startturn?
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
+
+    /**
+     * Sets given points. Receives an array and replaces the existent.
+     * Done at player creation and at finalfrenzy, when the values change.
+     *
+     * @param givenPoints the given points
+     */
+    public void setGivenPoints(int[] givenPoints) {
+        for(int i =0; i < givenPoints.length; i++)
+            this.givenPoints[i] = givenPoints[i];
+    }
+
+    /**
+     * Sets color. USED TO ASSIGN COLOR, GUI
+     *
+     * @param color the color
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     /**
      * Gets action counter.

@@ -5,6 +5,7 @@ import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -50,6 +51,7 @@ public class GameBoard {
         newPlayer.setMoveCounter(3);
         newPlayer.setActionCounter(2);
         newPlayer.setAdrenaline(0);
+        //TODO COLOR CHOOSER GUI
         //Sets first player
         if (players.isEmpty()) {
             newPlayer.setFirstPlayer(true);
@@ -75,21 +77,31 @@ public class GameBoard {
         players.get(i).setActive(true);
     }
 
-    public void finalFrenzy(){
-        isFinalFrenzy=true;
+    /**
+     * Final frenzy. Sets isFinalFrenzy to true.
+     * Compares players before or after first player and decides action counter.
+     * Changes given points for undamaged players.
+     * Sets adrenaline to zero for everyone.
+     */
+    public void finalFrenzy() {
+        isFinalFrenzy = true;
+        //decides action counter based on firstPlayer
         Player firstPlayer = new Player();
         for (Player player : players) {
             if (player.getFirstPlayer())
                 firstPlayer = player;  //TODO IS IT POSSIBLE WITHOUT CREATING another NEW PLAYER?
         }
         for (Player player : players) {
-            if (players.indexOf(player) < players.indexOf(firstPlayer)){
+            if (players.indexOf(player) < players.indexOf(firstPlayer)) {
                 player.setActionCounter(2);
-            }
-            else{
+            } else {
                 player.setActionCounter(1);
             }
         }
+        for (Player player : players)
+            if (player.getDamage().isEmpty()) {
+                player.
 
+            }
     }
 }
