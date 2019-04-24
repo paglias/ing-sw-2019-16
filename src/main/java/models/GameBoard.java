@@ -50,9 +50,28 @@ public class GameBoard {
         newPlayer.setMoveCounter(3);
         newPlayer.setActionCounter(2);
         newPlayer.setAdrenaline(0);
+        //Sets first player
+        if (players.isEmpty()) {
+            newPlayer.setFirstPlayer(true);
+        }
 
     }
-    public void activateFinalFrenzy(){
-    }
 
+    /**
+     * Next player. Receives current Player, returns next Player.
+     *
+     * @param currentPlayer the current player
+     * @return the player
+     */
+    public Player nextPlayer(Player currentPlayer) {
+        int i;
+        i = players.indexOf(currentPlayer);
+        i++;
+        try {
+            players.get(i);
+        } catch (IndexOutOfBoundsException e) {
+            return players.get(0);
+        }
+        return players.get(i);
+    }
 }

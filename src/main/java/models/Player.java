@@ -384,7 +384,7 @@ public class Player {
             }
         }
         //if weapon is loaded, use weapon effects
-        //TODO DECIDE HOW WEAPONS WORK
+        //TODO WAITING FOR WEAPONS EFFECT
         for(Weapon availableWeapon : currentPlayer.getWeapons()){
             while (availableWeapon.isLoaded()){
                 availableWeapon.dealDamage(playerTarget);
