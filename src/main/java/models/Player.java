@@ -36,8 +36,9 @@ public class Player {
 
     public void setGivenPoints(ArrayList<Integer> givenPoints) {
         this.givenPoints.clear();
-        this.givenPoints=givenPoints;
-        }
+        this.givenPoints = givenPoints;
+    }
+
     /**
      * Sets color. USED TO ASSIGN COLOR, GUI
      *
@@ -68,9 +69,10 @@ public class Player {
     /**
      * Decrease action counter.
      */
-    public void decreaseActionCounter(){
+    public void decreaseActionCounter() {
         this.actionCounter--;
     }
+
     /**
      * Gets adrenaline.
      *
@@ -86,13 +88,19 @@ public class Player {
      * @param adrenaline the adrenaline
      */
     public void setAdrenaline(int adrenaline) {
+        if (adrenaline<0 || adrenaline >2){
+            throw new IllegalArgumentException("Adrenaline must be >0 and < 2");
+        }
         this.adrenaline = adrenaline;
     }
 
     /**
      * Increase adrenaline.
      */
-    public void increaseAdrenaline(){
+    public void increaseAdrenaline() {
+        if (adrenaline > 1){
+            throw new IllegalArgumentException("Adrenaline must be less than 2");
+        }
         this.adrenaline++;
     }
 
@@ -111,18 +119,21 @@ public class Player {
      * @param cubeColor the cube color
      */
     public void addsCubes(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
-        for (Card.Color color: this.cubes) {
-            }
         this.cubes.add(cubeColor);
     }
 
     /**
-     * Adds cubes of different types to the available cubes of the player.
+     * Removes a cube types from the available cubes of the player.
      *
      * @param cubeColor the cube color
      */
-    public void removesCubes(Card.Color cubeColor) {  //TODO CHECK IF CUBES ARE NOT ZERO
-        this.cubes.remove(cubeColor);
+    public void removesCubes(Card.Color cubeColor) {
+        if (cubes.contains(cubeColor)) {
+            this.cubes.remove(cubeColor);
+        }
+        else {
+            System.out.println("There is no ammo of that color available");
+        }
     }
 
     /**
@@ -155,7 +166,7 @@ public class Player {
      *
      * @param nickname the nickname
      */
-    public void setNickname(String nickname){
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
@@ -241,7 +252,6 @@ public class Player {
     }
 
     /**
-     *
      * Sets deaths. When called (player death), nDeaths grows by 1. Cannot decrease.
      */
     public void setnDeaths() {
@@ -263,10 +273,9 @@ public class Player {
      * @param weapon the weapon
      */
     public void addWeapons(Weapon weapon) {
-        if (this.weapons.size()<=3) {
+        if (this.weapons.size() <= 3) {
             this.weapons.add(weapon);
-        }
-        else {
+        } else {
             System.out.println("Limit of weapons reached");// TODO What happens when you want to switch one? exception?
         }
     }
@@ -304,8 +313,13 @@ public class Player {
      *
      * @param damagingPlayer the damaging player
      */
-    public void addDamage(Player damagingPlayer){
-        this.damage.add(damagingPlayer);
+    public void addDamage(Player damagingPlayer) {
+        if (damage.size()<14) {
+            this.damage.add(damagingPlayer);
+        }
+        else {
+            System.out.println("Maximum damage has been reached");
+        }
     }
 
     /**
@@ -317,7 +331,6 @@ public class Player {
         return powerUps;
     }
 
-
     /**
      * Move player.
      *
@@ -325,21 +338,21 @@ public class Player {
      * @param currentPosition the current position
      * @param currentPlayer   the current player
      */
+    //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
     public void movePlayer(Square newPosition, Square currentPosition, Player currentPlayer) {
         if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
-            System.out.println("Move is not possible");  //TODO use exceptions?
-        }
-        else {
+            System.out.println("Move is not possible");
+        } else {
             for (Square square : currentPosition.canAccessDirectly) {
                 if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
                     currentPlayer.setPosition(newPosition);
                     currentPlayer.decreaseMoveCounter();
-                }
-                else {
+                } else {
                     System.out.println("Move is not Possible");
                 }
             }
         }
+        currentPlayer.decreaseMoveCounter();
     }
 
     /**
@@ -351,29 +364,26 @@ public class Player {
      * @param currentWeaponsSlot  the current weapons slot TODO Associate to the current square?
      */
     public void grabItem(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
-                         WeaponsSlot currentWeaponsSlot)
-    {
+                         WeaponsSlot currentWeaponsSlot) {
         //If you are on a spawnpoint, you will grab a weapon of your choice
-        if (currentPosition.getSpawnPoint()){
+        if (currentPosition.getSpawnPoint()) {
             currentPlayer.addWeapons((currentWeaponsSlot.weaponChoice()));
-        }
-        else {
+        } else {
             //if the ammo picked has a powerup, add it to your powerups
             if (currentPosition.getAmmo().getHasPowerUp()) {
                 currentPlayer.addPowerUps((PowerUp) currentPowerUpsDeck.pick());
-            }
-            else{
+            } else {
                 //if the ammo picked has ammocubes, add them to your cubes
                 // and decrease the cubes in the ammo card you grabbed
-                while (currentPosition.getAmmo().getnBlueCubes()!=0) {
+                while (currentPosition.getAmmo().getnBlueCubes() != 0) {
                     currentPlayer.addsCubes(Card.Color.BLUE);
                     currentPosition.getAmmo().decreasenBlueCubes();
                 }
-                while ((currentPosition.getAmmo().getnYellowCubes()!=0)){
+                while ((currentPosition.getAmmo().getnYellowCubes() != 0)) {
                     currentPlayer.addsCubes(Card.Color.YELLOW);
                     currentPosition.getAmmo().decreasenYellowCubes();
                 }
-                while ((currentPosition.getAmmo().getnRedCubes()!=0)){
+                while ((currentPosition.getAmmo().getnRedCubes() != 0)) {
                     currentPlayer.addsCubes(Card.Color.RED);
                     currentPosition.getAmmo().decreasenRedCubes();
                 }
@@ -392,15 +402,15 @@ public class Player {
      * @param newPosition      the new position
      */
     public void shootPlayer(Square currentPosition, Player currentPlayer, GameBoard currentGameBoard,
-                            Player playerTarget, Square newPosition){
+                            Player playerTarget, Square newPosition) {
 
         //initial check if any player can be shot
-        for(Player otherPlayer : currentGameBoard.getPlayers()){
+        for (Player otherPlayer : currentGameBoard.getPlayers()) {
             //TODO REMOVE CURRENT PLAYER FROM TOTAL PLAYERS EVERY TURN?LOOP ON ITSELF
 
             //if canview of current position DOES NOT contain any position of any player
 
-            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))){
+            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
                 System.out.println("No players can be shot");
             }
         }
@@ -408,24 +418,28 @@ public class Player {
         //TODO WAITING FOR WEAPONS EFFECT
         if (currentPlayer.getWeapons().isEmpty()) {
             System.out.println("No weapon is available");
-        }
-        else {
+        } else {
             for (Weapon availableWeapon : currentPlayer.getWeapons()) {
                 if (availableWeapon.isLoaded()) {
                     availableWeapon.dealDamage(playerTarget);
                     availableWeapon.addMark(playerTarget);
                     availableWeapon.movePlayer(playerTarget, newPosition);
-                }
-                else {
+                } else {
                     System.out.println("No weapon is loaded");
                 }
             }
         }
-        //Add adrenaline if damage reaches 2 or 5
-        if (playerTarget.getDamage().size()>2){
-            playerTarget.increaseAdrenaline();
+        //Add adrenaline if damage reaches 2 or 5, only if it is less than 1 and less than 2
+        if (playerTarget.getDamage().size() > 2) {
+            if (playerTarget.getAdrenaline() < 1) {
+                playerTarget.increaseAdrenaline();
+            }
         }
-
+        if (playerTarget.getDamage().size()>5){
+            if (playerTarget.getAdrenaline()<2){
+                playerTarget.increaseAdrenaline();
+            }
+        }
     }
 }
 
