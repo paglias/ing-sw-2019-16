@@ -25,10 +25,50 @@ public class GameBoard {
     private Boolean isFinalFrenzy;
     private ArrayList<Square> squares;
 
+    /**
+     * Gets skulls.
+     *
+     * @return the skulls
+     */
+    public int getSkulls() {
+        return skulls.getnRemaining();
+    }
+
+    /**
+     * Sets skulls at the start of the game.
+     *
+     * @param skulls the skulls
+     */
+    public void setGameSkulls(int skulls) {
+        this.skulls.setnRemaining(skulls);
+    }
+
+    /**
+     * Decreasen skulls on the gameboard, every time a death happens.
+     *
+     * @return the int
+     */
+    public int decreasenSkulls() {
+        if (skulls.getnRemaining() > 0) {
+            return skulls.decreaseSkullsRemaining();
+        }
+        else {
+            throw new IllegalArgumentException("Invalid Skull Value");
+        }
+    }
+    /**
+     * Gets players.
+     *
+     * @return the players
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * Create a new player.
+     * Initiates values of the new player
+     */
     //Creates new player.
     public void createPlayer() {
         //Assign nickname
@@ -106,7 +146,7 @@ public class GameBoard {
         points.add(5);
         //decides action counter based on firstPlayer
         //sets first player
-        Player firstPlayer = new Player();  //temporary player object, assignment of firstPlayer reference
+        Player firstPlayer = new Player();  //temporary player object, to assign firstPlayer reference
         for (Player player : players) {
             if (player.getFirstPlayer())
                 firstPlayer = player;

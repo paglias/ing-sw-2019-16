@@ -12,7 +12,7 @@ public class Player {
     private Color color;
     private Boolean isActive;               //TODO start of turn, set isActive next player. isActive check for every action?
     private Date startTurnDate;             //used for turn timer
-    private int nDeaths;                    //number of deaths counted by skulls TODO Top score decreases each death
+    private int nDeaths;
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes;    //ammo available
     private ArrayList<Integer> givenPoints; //points given at next death
@@ -285,7 +285,7 @@ public class Player {
     /**
      * Sets deaths. When called (player death), nDeaths grows by 1. Cannot decrease.
      */
-    public void setnDeaths() {
+    public void increasenDeaths() {
         this.nDeaths = nDeaths++;
     }
 
@@ -475,6 +475,7 @@ public class Player {
         }
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
+            playerTarget.increasenDeaths();
             //returns the last item of the arraylist
             if (givenPoints != null && !givenPoints.isEmpty()) {
                 int deathPoints = givenPoints.get(givenPoints.size() - 1);
@@ -484,6 +485,12 @@ public class Player {
                 //if givenPoints is empty, the players has been killed more than 6 times, he still awards 1 point
                 int deathPoints = 1;
                 addToTotalPoints(deathPoints);
+            }
+            //if there are no more skulls, activate finalfrenzy
+            //TODO SHOULD THE CONTROLLER DO THIS?
+            currentGameBoard.decreasenSkulls();
+            if (currentGameBoard.getSkulls()==0){
+                currentGameBoard.finalFrenzy();
             }
         }
         if (playerTarget.getDamage().size() > 11) {
