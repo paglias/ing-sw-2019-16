@@ -26,6 +26,7 @@ public class Player {
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
     private int totalPoints;                //total points of the current player
+    private boolean isDead;                 //true is the player is currently dead, stays dead until next turn
 
     /**
      * Sets given points. Receives an arraylist and replaces the existent.
@@ -198,13 +199,13 @@ public class Player {
     }
 
     /**
-     * Sets marks.
+     * Add marks.
      *
-     * @param marks the marks
+     * @param mark the mark
      */
-    public void addMarks(ArrayList<Player> marks) {
+    public void addMarks(Player mark) {
         //TODO SET MAX MARKS FOR EACH PLAYER
-        this.marks = marks;
+        this.marks.add(mark);
     }
 
     /**
@@ -223,6 +224,15 @@ public class Player {
      */
     public void removePowerUps(PowerUp powerUp) {
         this.powerUps.remove(powerUp);
+    }
+
+    /**
+     * Gets power ups. Used when you want to use a powerup.
+     *
+     * @return the power ups
+     */
+    public ArrayList<PowerUp> getPowerUps() {
+        return powerUps;
     }
 
     /**
@@ -315,7 +325,7 @@ public class Player {
      * @param damagingPlayer the damaging player
      */
     public void addDamage(Player damagingPlayer) {
-        if (damage.size()<14) {
+        if (damage.size()<12) {
             this.damage.add(damagingPlayer);
         }
         else {
@@ -324,12 +334,13 @@ public class Player {
     }
 
     /**
-     * Gets power ups. Used when you want to use a powerup.
+     * Sets player to dead status for the turn.
+     * //TODO Restore the status at the beginning of the next turn
      *
-     * @return the power ups
+     * @param dead the dead
      */
-    public ArrayList<PowerUp> getPowerUps() {
-        return powerUps;
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     /**
@@ -437,13 +448,17 @@ public class Player {
                 playerTarget.increaseAdrenaline();
             }
         }
-        if (playerTarget.getDamage().size()>5){
-            if (playerTarget.getAdrenaline()<2){
+        if (playerTarget.getDamage().size() > 5) {
+            if (playerTarget.getAdrenaline() < 2) {
                 playerTarget.increaseAdrenaline();
             }
         }
-        if (playerTarget.getDamage().size()>12){
+        if (playerTarget.getDamage().size() > 10) {
+            playerTarget.setDead(true);
 
+        }
+        if (playerTarget.getDamage().size() > 11) {
+            playerTarget.addMarks(currentPlayer);
         }
     }
 }
