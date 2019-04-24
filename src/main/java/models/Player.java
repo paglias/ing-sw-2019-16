@@ -5,8 +5,10 @@ import models.cards.PowerUp;
 import models.cards.Weapon;
 import models.decks.PowerUpsDeck;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Player {
     private String nickname;
@@ -16,7 +18,7 @@ public class Player {
     private int nDeaths;                    //number of deaths counted by skulls TODO Top score decreases each death
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes;    //ammo available
-    private int [] givenPoints;             //points given at next death
+    private ArrayList<Integer> givenPoints; //points given at next death
     private ArrayList<String> points;       // TODO what is this? why not integer?
     private ArrayList<Player> marks;        //current marks, depending on player color
     private ArrayList<Player> damage;       //list of damage amount, depending on player color
@@ -28,16 +30,18 @@ public class Player {
     private int adrenaline;                 //adrenaline counter, max 2
 
     /**
-     * Sets given points. Receives an array and replaces the existent.
+     * Sets given points. Receives an arraylist and replaces the existent.
      * Done at player creation and at finalfrenzy, when the values change.
      *
      * @param givenPoints the given points
      */
-    public void setGivenPoints(int[] givenPoints) {
-        for(int i =0; i < givenPoints.length; i++)
-            this.givenPoints[i] = givenPoints[i];
-    }
 
+    public void setGivenPoints(ArrayList<Integer> givenPoints) {
+        Iterator point = givenPoints.iterator();
+        while (point.hasNext()) {
+            this.givenPoints = givenPoints;
+        }
+    }
     /**
      * Sets color. USED TO ASSIGN COLOR, GUI
      *

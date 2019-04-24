@@ -6,6 +6,7 @@ import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -85,6 +86,12 @@ public class GameBoard {
      */
     public void finalFrenzy() {
         isFinalFrenzy = true;
+        //creates new points awarded for killshot
+        ArrayList<Integer> points = new ArrayList<>();
+        points.add(1);
+        points.add(1);
+        points.add(1);
+        points.add(5);
         //decides action counter based on firstPlayer
         Player firstPlayer = new Player();
         for (Player player : players) {
@@ -100,7 +107,7 @@ public class GameBoard {
         }
         for (Player player : players)
             if (player.getDamage().isEmpty()) {
-                player.
+                player.setGivenPoints(points);
 
             }
     }
