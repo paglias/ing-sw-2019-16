@@ -63,15 +63,15 @@ public class GameBoard {
      * @param currentPlayer the current player
      * @return the player
      */
-    public Player nextPlayer(Player currentPlayer) {
+    public void nextPlayer(Player currentPlayer) {
         int i;
         i = players.indexOf(currentPlayer);
         i++;
         try {
             players.get(i);
         } catch (IndexOutOfBoundsException e) {
-            return players.get(0);
+            players.get(0).setActive(true);
         }
-        return players.get(i);
+        players.get(i).setActive(true);
     }
 }
