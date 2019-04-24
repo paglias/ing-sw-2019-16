@@ -58,7 +58,7 @@ public class GameBoard {
     }
 
     /**
-     * Next player. Receives current Player, returns next Player.
+     * Next player. Receives current Player, sets next player to active.
      *
      * @param currentPlayer the current player
      * @return the player
@@ -73,5 +73,23 @@ public class GameBoard {
             players.get(0).setActive(true);
         }
         players.get(i).setActive(true);
+    }
+
+    public void finalFrenzy(){
+        isFinalFrenzy=true;
+        Player firstPlayer = new Player();
+        for (Player player : players) {
+            if (player.getFirstPlayer())
+                firstPlayer = player;  //TODO IS IT POSSIBLE WITHOUT CREATING another NEW PLAYER?
+        }
+        for (Player player : players) {
+            if (players.indexOf(player) < players.indexOf(firstPlayer)){
+                player.setActionCounter(2);
+            }
+            else{
+                player.setActionCounter(1);
+            }
+        }
+
     }
 }
