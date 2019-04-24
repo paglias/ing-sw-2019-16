@@ -39,6 +39,9 @@ public class Player {
      * @param cubeColor the cube color
      */
     public void addsCubes(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
+        for (Card.Color color: this.cubes) {
+
+            }
         this.cubes.add(cubeColor);
     }
 
@@ -83,6 +86,15 @@ public class Player {
      */
     public void setNickname(String nickname){
         this.nickname = nickname;
+    }
+
+    /**
+     * Gets nickname.
+     *
+     * @return the nickname
+     */
+    public String getNickname() {
+        return nickname;
     }
 
     /**
@@ -311,7 +323,6 @@ public class Player {
                             Player playerTarget, Square newPosition){
 
         //initial check if any player can be shot
-
         for(Player otherPlayer : currentGameBoard.getPlayers()){
             //TODO REMOVE CURRENT PLAYER FROM TOTAL PLAYERS EVERY TURN?LOOP ON ITSELF
 

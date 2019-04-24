@@ -6,6 +6,7 @@ import models.decks.WeaponsDeck;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class GameBoard {
     private Skulls skulls;
@@ -23,5 +24,21 @@ public class GameBoard {
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+    //Creates new player and assigns a nickname after checking for existing nicknames.
+    public void createPlayer(){
+        Player newPlayer = new Player();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter player nickname");
+        String nickName = scanner.nextLine();
+        for (Player player: players) {
+            if (player.getNickname().compareTo(nickName)!=0){
+                newPlayer.setNickname(nickName);
+            }
+            else {
+                System.out.println("Player name not available");
+            }
+
+        }
     }
 }
