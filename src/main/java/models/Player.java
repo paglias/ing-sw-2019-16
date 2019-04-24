@@ -5,7 +5,6 @@ import models.cards.PowerUp;
 import models.cards.Weapon;
 import models.decks.PowerUpsDeck;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Player {
@@ -26,6 +25,7 @@ public class Player {
     private int moveCounter;                //TODO restore movecounter at startturn?
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
+    private int totalPoints;                //total points of the current player
 
     /**
      * Sets given points. Receives an arraylist and replaces the existent.
@@ -203,6 +203,7 @@ public class Player {
      * @param marks the marks
      */
     public void addMarks(ArrayList<Player> marks) {
+        //TODO SET MAX MARKS FOR EACH PLAYER
         this.marks = marks;
     }
 
@@ -430,6 +431,7 @@ public class Player {
             }
         }
         //Add adrenaline if damage reaches 2 or 5, only if it is less than 1 and less than 2
+        //TODO ADRENALINE CHANGES COUNTER VALUES IN CONTROLLER?
         if (playerTarget.getDamage().size() > 2) {
             if (playerTarget.getAdrenaline() < 1) {
                 playerTarget.increaseAdrenaline();
@@ -439,6 +441,9 @@ public class Player {
             if (playerTarget.getAdrenaline()<2){
                 playerTarget.increaseAdrenaline();
             }
+        }
+        if (playerTarget.getDamage().size()>12){
+
         }
     }
 }

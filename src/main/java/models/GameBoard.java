@@ -44,7 +44,17 @@ public class GameBoard {
                 createPlayer();  //TODO BEST SOLUTION, RECURSIVE FUNCTION?
             }
         }
-        //Assign initial values
+        //Initial points given for each Player, order is inverted so the last element
+        //of the arraylist can be used as first, with ArrayList.remove
+        ArrayList<Integer> newPlayerPoints = new ArrayList<>();
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(2);
+        newPlayerPoints.add(4);
+        newPlayerPoints.add(6);
+        newPlayerPoints.add(8);
+
+        //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
         newPlayer.addsCubes(Card.Color.YELLOW);
         newPlayer.addsCubes(Card.Color.BLUE);
         newPlayer.addsCubes(Card.Color.RED);
@@ -52,6 +62,7 @@ public class GameBoard {
         newPlayer.setMoveCounter(3);
         newPlayer.setActionCounter(2);
         newPlayer.setAdrenaline(0);
+        newPlayer.setGivenPoints(newPlayerPoints);
         //TODO COLOR CHOOSER GUI
         //Sets first player
         if (players.isEmpty()) {
@@ -79,7 +90,8 @@ public class GameBoard {
     }
 
     /**
-     * Final frenzy. Sets isFinalFrenzy to true.
+     * Final frenzy. TO BE CALLED when nSkulls = X by controller
+     * Sets isFinalFrenzy to true.
      * Compares players before or after first player and decides action counter.
      * Changes given points for undamaged players.
      * Sets adrenaline to zero for everyone.
@@ -94,10 +106,11 @@ public class GameBoard {
         points.add(5);
         //decides action counter based on firstPlayer
         //sets first player
-        Player firstPlayer = new Player();
+        Player firstPlayer = new Player();  //temporary player object, assignment of firstPlayer reference
         for (Player player : players) {
             if (player.getFirstPlayer())
-                firstPlayer = player;  //TODO IS IT POSSIBLE WITHOUT CREATING another NEW PLAYER?
+                firstPlayer = player;
+            //TODO IS IT POSSIBLE WITHOUT CREATING ANOTHER NEW PLAYER?
         }
         for (Player player : players) {
             if (players.indexOf(player) < players.indexOf(firstPlayer)) {
