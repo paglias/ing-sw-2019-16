@@ -23,6 +23,57 @@ public class Player {
     private ArrayList<Weapon> weapons;      //list of available weapons, maximum 3 TODO set limit to 3?
     private Square position;                //current position, updated when move happens
     private int moveCounter;                //TODO restore movecounter at startturn?
+    private int actionCounter;              //remaining actions per turn
+    private int adrenaline;                 //adrenaline counter, max 2
+
+    /**
+     * Gets action counter.
+     *
+     * @return the action counter
+     */
+    public int getActionCounter() {
+        return actionCounter;
+    }
+
+    /**
+     * Sets action counter.
+     *
+     * @param actionCounter the action counter
+     */
+    public void setActionCounter(int actionCounter) {
+        this.actionCounter = actionCounter;
+    }
+
+    /**
+     * Decrease action counter.
+     */
+    public void decreaseActionCounter(){
+        this.actionCounter--;
+    }
+    /**
+     * Gets adrenaline.
+     *
+     * @return the adrenaline
+     */
+    public int getAdrenaline() {
+        return adrenaline;
+    }
+
+    /**
+     * Sets adrenaline.
+     *
+     * @param adrenaline the adrenaline
+     */
+    public void setAdrenaline(int adrenaline) {
+        this.adrenaline = adrenaline;
+    }
+
+    /**
+     * Increase adrenaline.
+     */
+    public void increaseAdrenaline(){
+        this.adrenaline++;
+    }
 
     /**
      * Gets cubes of a player. To be used to check necessary ammo.
