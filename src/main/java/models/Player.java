@@ -480,6 +480,11 @@ public class Player {
                 int deathPoints = givenPoints.get(givenPoints.size() - 1);
                  addToTotalPoints(deathPoints);
             }
+            else {
+                //if givenPoints is empty, the players has been killed more than 6 times, he still awards 1 point
+                int deathPoints = 1;
+                addToTotalPoints(deathPoints);
+            }
         }
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMarks(currentPlayer);
