@@ -28,6 +28,26 @@ public class Player {
     private int totalPoints;                //total points of the current player
     private boolean isDead;                 //true is the player is currently dead, stays dead until next turn
 
+
+    /**
+     * Adds the value received to the total points of the player.
+     * Totalpoints can never be set to a random value
+     *
+     * @param totalPoints the total points
+     */
+    public void addToTotalPoints(int totalPoints) {
+        this.totalPoints = this.totalPoints + totalPoints;
+    }
+
+    /**
+     * Gets total points.
+     *
+     * @return the total points
+     */
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
     /**
      * Sets given points. Receives an arraylist and replaces the existent.
      * Done at player creation and at finalfrenzy, when the values change.
@@ -455,7 +475,11 @@ public class Player {
         }
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
-
+            //returns the last item of the arraylist
+            if (givenPoints != null && !givenPoints.isEmpty()) {
+                int deathPoints = givenPoints.get(givenPoints.size() - 1);
+                 addToTotalPoints(deathPoints);
+            }
         }
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMarks(currentPlayer);
