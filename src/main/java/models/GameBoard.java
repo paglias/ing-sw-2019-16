@@ -93,6 +93,7 @@ public class GameBoard {
         points.add(1);
         points.add(5);
         //decides action counter based on firstPlayer
+        //sets first player
         Player firstPlayer = new Player();
         for (Player player : players) {
             if (player.getFirstPlayer())
@@ -101,6 +102,7 @@ public class GameBoard {
         for (Player player : players) {
             if (players.indexOf(player) < players.indexOf(firstPlayer)) {
                 player.setActionCounter(2);
+
             } else {
                 player.setActionCounter(1);
             }
@@ -108,7 +110,6 @@ public class GameBoard {
         for (Player player : players)
             if (player.getDamage().isEmpty()) {
                 player.setGivenPoints(points);
-
             }
     }
 }

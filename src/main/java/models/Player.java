@@ -6,9 +6,7 @@ import models.cards.Weapon;
 import models.decks.PowerUpsDeck;
 import java.awt.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 public class Player {
     private String nickname;
@@ -37,11 +35,9 @@ public class Player {
      */
 
     public void setGivenPoints(ArrayList<Integer> givenPoints) {
-        Iterator point = givenPoints.iterator();
-        while (point.hasNext()) {
-            this.givenPoints = givenPoints;
+        this.givenPoints.clear();
+        this.givenPoints=givenPoints;
         }
-    }
     /**
      * Sets color. USED TO ASSIGN COLOR, GUI
      *
@@ -116,7 +112,6 @@ public class Player {
      */
     public void addsCubes(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
         for (Card.Color color: this.cubes) {
-
             }
         this.cubes.add(cubeColor);
     }
@@ -384,6 +379,7 @@ public class Player {
                 }
             }
         }
+        decreaseActionCounter();
     }
 
     /**
@@ -410,13 +406,26 @@ public class Player {
         }
         //if weapon is loaded, use weapon effects
         //TODO WAITING FOR WEAPONS EFFECT
-        for(Weapon availableWeapon : currentPlayer.getWeapons()){
-            while (availableWeapon.isLoaded()){
-                availableWeapon.dealDamage(playerTarget);
-                availableWeapon.addMark(playerTarget);
-                availableWeapon.movePlayer(playerTarget, newPosition);
+        if (currentPlayer.getWeapons().isEmpty()) {
+            System.out.println("No weapon is available");
+        }
+        else {
+            for (Weapon availableWeapon : currentPlayer.getWeapons()) {
+                if (availableWeapon.isLoaded()) {
+                    availableWeapon.dealDamage(playerTarget);
+                    availableWeapon.addMark(playerTarget);
+                    availableWeapon.movePlayer(playerTarget, newPosition);
+                }
+                else {
+                    System.out.println("No weapon is loaded");
+                }
             }
         }
+        //Add adrenaline if damage reaches 2 or 5
+        if (playerTarget.getDamage().size()>2){
+            playerTarget.increaseAdrenaline();
+        }
+
     }
 }
 
