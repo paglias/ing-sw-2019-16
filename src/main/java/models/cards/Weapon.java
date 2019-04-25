@@ -97,6 +97,6 @@ public class Weapon extends Card {
         //move players around based on weapon
     }
     public void reloadWeapon(){
-        //load weapon, set is loaded to TRUE
+        //load weapon, set isLoaded to TRUE
     }
 }

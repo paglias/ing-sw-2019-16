@@ -477,13 +477,17 @@ public class Player {
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increasenDeaths();
+
             //assigns values in givenPoints arraylist to players
             //check if givenPoints is empty
             if (givenPoints != null && !givenPoints.isEmpty()) {
                 while(!givenPoints.isEmpty()) {
+
                     //get the last item in givenPoints, the highest
                     int deathPoints = givenPoints.get(givenPoints.size() - 1);
                     int temp = 0;
+                    int temp1 = 0;
+
                     //loop through players, count occurences of "Player" in the damage arraylist, temp= the highest
                     for (Player player : currentGameBoard.getPlayers()) {
                         int occurrences = Collections.frequency(damage, player);
@@ -491,20 +495,27 @@ public class Player {
                         if (occurrences > temp) {
                             temp = occurrences;
                         }
+                        //if 2 players have done the same damage to the player
+                        if (occurrences == temp) {
+                            temp1 = occurrences;
+                        }
                     }
                     //loop through players, if the occurence of a player == temp, that players gets the highest points
                     for (Player player : currentGameBoard.getPlayers()){
                         if (Collections.frequency(damage, player) == temp){
+                            if (temp == temp1){
+                                //TODO condition always true??
+                            }
                             player.addToTotalPoints(deathPoints);
                         }
-
                     }
                 }
             }
             else {
-                //if givenPoints is empty, the players has been killed more than 6 times, he still awards 1 point
+                //if givenPoints is empty, the players has been killed more than 6 times,
+                // he still awards 1 point to the killer
                 int deathPoints = 1;
-                //TODO ADD points to the correct player
+                currentPlayer.addToTotalPoints(deathPoints);
             }
             //if there are no more skulls, activate finalfrenzy
             //TODO SHOULD THE CONTROLLER DO THIS?
@@ -516,6 +527,9 @@ public class Player {
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMarks(currentPlayer);
         }
+    }
+    public void reload(){
+        //TODO reloads all weapons, loop through weapons, call reloadWeapon
     }
 }
 
