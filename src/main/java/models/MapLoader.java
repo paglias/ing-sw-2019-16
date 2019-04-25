@@ -19,7 +19,6 @@ public class MapLoader {
         int[] canAccess;
     }
 
-    // TODO how to handle methods with exceptions?
     static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck) throws IOException {
         Gson gson = new Gson();
 

@@ -54,7 +54,7 @@ public class Weapon extends Card {
      *
      * @return the weapons
      */
-    public static ArrayList<Weapon> loadWeapons ()  {
+    public static ArrayList<Weapon> loadWeapons () {
         File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
         File[] listOfWeaponsFiles = weaponsFolder.listFiles();
         ArrayList<Weapon> weapons = new ArrayList<>();

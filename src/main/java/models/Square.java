@@ -41,7 +41,7 @@ public class Square {
      * Create a weapons slot for the Square.
      *
      * @param weaponsDeck the weapons deck
-     * @throws IllegalStateException the illegal state exception
+     * @throws IllegalStateException if not a spawn point or if it's already been created
      */
     public void createWeaponsSlot (WeaponsDeck weaponsDeck) {
         if (!isSpawnPoint) {
@@ -75,9 +75,12 @@ public class Square {
      * Gets the attached weapons slot (if it exists).
      *
      * @return the weapons slot
+     * @throws IllegalStateException if not a spawn point
      */
     public WeaponsSlot getWeaponSlot() {
-        if (!isSpawnPoint) return null; // TODO throws?
+        if (!isSpawnPoint) {
+            throw new IllegalStateException("WeaponSlots only exists on spawn points");
+        }
         return weaponsSlot;
     }
 
