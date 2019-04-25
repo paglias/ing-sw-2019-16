@@ -398,7 +398,7 @@ public class Player {
     public void grabItem(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
                          WeaponsSlot currentWeaponsSlot) {
         //If you are on a spawnpoint, you will grab a weapon of your choice
-        if (currentPosition.getSpawnPoint()) {
+        if (currentPosition.isSpawnPoint()) {
             currentPlayer.addWeapons((currentWeaponsSlot.weaponChoice()));
         } else {
             //if the ammo picked has a powerup, add it to your powerups

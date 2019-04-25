@@ -10,15 +10,6 @@ public class WeaponsSlot {
     private ArrayList<Weapon> weapons;
 
     /**
-     * Gets weapons.
-     *
-     * @return the weapons
-     */
-    public ArrayList<Weapon> getWeapons() {
-        return weapons;
-    }
-
-    /**
      * Instantiates a new Weapons slot for each spawn point
      *
      * @param color       the color
@@ -28,7 +19,7 @@ public class WeaponsSlot {
         this.color = color;
         this.weapons = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             weapons.add((Weapon) weaponsDeck.pick());
         }
     }
@@ -38,8 +29,18 @@ public class WeaponsSlot {
      *
      * @return the weapon chosen
      */
-    public Weapon weaponChoice()//TODO Define USER CHOICE
-    {
+    public Weapon weaponChoice () {
+        // TODO what is this?
+        // TODO define USER CHOICE
         return weaponChoice();
+    }
+
+    /**
+     * Get the weapons inside the slot.
+     *
+     * @return the weapons
+     */
+    public ArrayList<Weapon> getWeapons () {
+        return weapons;
     }
 }

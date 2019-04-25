@@ -2,6 +2,7 @@ package models;
 
 import models.cards.Ammo;
 import models.decks.AmmoDeck;
+import models.decks.WeaponsDeck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,38 @@ public class Square {
 
     private Color color;
     private Boolean isSpawnPoint;
+    // Add a weapon slot to spawn points
+    private WeaponsSlot weaponsSlot;
     private ArrayList<Square> canView = new ArrayList<>();
     protected ArrayList<Square> canAccessDirectly = new ArrayList<>();
     private Ammo ammo;
+
+    /**
+     * Instantiates a new Square.
+     *
+     * @param squareColor  the square color
+     * @param isSpawnPoint the is spawn point
+     */
+    public Square (String squareColor, boolean isSpawnPoint) {
+        this.color = Square.Color.valueOf(squareColor);
+        this.isSpawnPoint = isSpawnPoint;
+    }
+
+    /**
+     * Create a weapons slot for the Square.
+     *
+     * @param weaponsDeck the weapons deck
+     * @throws IllegalStateException the illegal state exception
+     */
+    public void createWeaponsSlot (WeaponsDeck weaponsDeck) {
+        if (!isSpawnPoint) {
+            throw new IllegalStateException("A WeaponSlot can only be attached to a spawn point.");
+        }
+        if (weaponsSlot != null) {
+            throw new IllegalStateException("A WeaponSlot has already been created.");
+        }
+        weaponsSlot = new WeaponsSlot(color, weaponsDeck);
+    }
 
     /**
      * Gets can view of a square.
@@ -37,19 +67,18 @@ public class Square {
      *
      * @return the boolean spawn point
      */
-    public Boolean getSpawnPoint() {
+    public Boolean isSpawnPoint () {
         return isSpawnPoint;
     }
 
     /**
-     * Instantiates a new Square.
+     * Gets the attached weapons slot (if it exists).
      *
-     * @param squareColor  the square color
-     * @param isSpawnPoint the is spawn point
+     * @return the weapons slot
      */
-    public Square (String squareColor, boolean isSpawnPoint) {
-        this.color = Square.Color.valueOf(squareColor);
-        this.isSpawnPoint = isSpawnPoint;
+    public WeaponsSlot getWeaponSlot() {
+        if (!isSpawnPoint) return null; // TODO throws?
+        return weaponsSlot;
     }
 
     /**

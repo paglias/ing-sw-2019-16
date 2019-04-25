@@ -67,15 +67,15 @@ public class GameBoard {
     public void setupGame (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
 
+        weaponsDeck = new WeaponsDeck();
         squares = new ArrayList<>();
         try {
-            squares.addAll(MapLoader.loadMap(chosenMap));
+            squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
         } catch (IOException e) {
             System.out.println(e);
         }
 
         powerUpsDeck = new PowerUpsDeck();
-        weaponsDeck = new WeaponsDeck();
         ammoDeck = new AmmoDeck();
     }
 
