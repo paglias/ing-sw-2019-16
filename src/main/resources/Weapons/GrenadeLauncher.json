@@ -1,5 +1,6 @@
 {
   "name": "GrenadeLauncher",
+  "color": "RED",
   "rechargeCost": ["RED"],
   "cost": null,
   "secondaryCost": ["RED"],

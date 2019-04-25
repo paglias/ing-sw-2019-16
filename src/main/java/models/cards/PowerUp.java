@@ -9,7 +9,6 @@ public class PowerUp extends Card {
     }
     private Name name;
 
-
     /**
      * Instantiates a new Power up.
      *

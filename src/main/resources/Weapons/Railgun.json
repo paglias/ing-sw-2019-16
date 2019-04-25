@@ -1,5 +1,6 @@
 {
   "name": "Railgun",
+  "color": "YELLOW",
   "rechargeCost": ["YELLOW","YELLOW","BLUE"],
   "cost": ["YELLOW","BLUE"],
   "secondaryCost": null,

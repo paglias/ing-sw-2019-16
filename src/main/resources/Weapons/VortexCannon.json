@@ -1,5 +1,6 @@
 {
   "name": "TractorBeam",
+  "color": "RED",
   "rechargeCost": ["RED","BLUE"],
   "cost": null,
   "secondaryCost": ["RED"],

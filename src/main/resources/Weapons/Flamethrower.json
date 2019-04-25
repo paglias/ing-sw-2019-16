@@ -1,5 +1,6 @@
 {
   "name": "Flamethrower",
+  "color": "RED",
   "rechargeCost": ["RED"],
   "cost": null,
   "secondaryCost": ["YELLOW","YELLOW"],

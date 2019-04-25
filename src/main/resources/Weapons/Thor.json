@@ -1,5 +1,6 @@
 {
   "name": "T.H.O.R",
+  "color": "BLUE",
   "rechargeCost": ["BLUE","RED"],
   "cost": ["RED"],
   "secondaryCost": ["BLUE"],

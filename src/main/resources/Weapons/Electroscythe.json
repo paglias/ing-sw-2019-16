@@ -1,5 +1,6 @@
 {
   "name": "Electroscythe",
+  "color": "BLUE",
   "rechargeCost": ["BLUE"],
   "cost": null,
   "secondaryCost": ["BLUE","RED"],

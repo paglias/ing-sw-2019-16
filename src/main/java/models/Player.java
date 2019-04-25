@@ -407,17 +407,17 @@ public class Player {
             } else {
                 //if the ammo picked has ammocubes, add them to your cubes
                 // and decrease the cubes in the ammo card you grabbed
-                while (currentPosition.getAmmo().getnBlueCubes() != 0) {
+                while (currentPosition.getAmmo().getBlueCubes() != 0) {
                     currentPlayer.addsCubes(Card.Color.BLUE);
-                    currentPosition.getAmmo().decreasenBlueCubes();
+                    currentPosition.getAmmo().decreaseBlueCubes();
                 }
-                while ((currentPosition.getAmmo().getnYellowCubes() != 0)) {
+                while ((currentPosition.getAmmo().getYellowCubes() != 0)) {
                     currentPlayer.addsCubes(Card.Color.YELLOW);
-                    currentPosition.getAmmo().decreasenYellowCubes();
+                    currentPosition.getAmmo().decreaseYellowCubes();
                 }
-                while ((currentPosition.getAmmo().getnRedCubes() != 0)) {
+                while ((currentPosition.getAmmo().getRedCubes() != 0)) {
                     currentPlayer.addsCubes(Card.Color.RED);
-                    currentPosition.getAmmo().decreasenRedCubes();
+                    currentPosition.getAmmo().decreaseRedCubes();
                 }
             }
         }

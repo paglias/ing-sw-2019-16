@@ -1,5 +1,6 @@
 {
   "name": "Sledgehammer",
+  "color": "YELLOW",
   "rechargeCost": ["YELLOW"],
   "cost": null,
   "secondaryCost": ["RED"],

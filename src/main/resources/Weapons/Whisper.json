@@ -1,5 +1,6 @@
 {
   "name": "Whisper",
+  "color": "BLUE",
   "rechargeCost": ["BLUE","BLUE","YELLOW"],
   "cost": ["BLUE","YELLOW"],
   "secondaryCost": null,

@@ -1,5 +1,6 @@
 {
   "name": "MachineGun",
+  "color": "BLUE",
   "rechargeCost": ["BLUE","RED"],
   "cost": ["RED"],
   "secondaryCost": ["YELLOW"],

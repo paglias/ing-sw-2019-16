@@ -1,5 +1,6 @@
 {
   "name": "Heatseeker",
+  "color": "RED",
   "rechargeCost": ["RED","RED","YELLOW"],
   "cost": ["RED","YELLOW"],
   "secondaryCost": null,

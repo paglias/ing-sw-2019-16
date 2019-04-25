@@ -1,5 +1,6 @@
 {
   "name": "Shockwave",
+  "color": "YELLOW",
   "rechargeCost": ["YELLOW"],
   "cost": null,
   "secondaryCost": ["YELLOW"],

@@ -46,7 +46,8 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
 
-    private boolean loaded = false;
+    // Weapons are loaded when created / picked from a deck
+    private boolean loaded = true;
 
     public static ArrayList<Weapon> loadWeapons ()  {
         File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
@@ -57,11 +58,11 @@ public class Weapon extends Card {
         try {
             for (File file : listOfWeaponsFiles) {
                 if (file.isFile()) {
-                    // TODO what about the color parameter for the constructor?
                     weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
                 }
             }
         } catch (java.io.FileNotFoundException e) {
+            // TODO refactor
             System.out.println(e);
         }
 
@@ -69,34 +70,28 @@ public class Weapon extends Card {
     }
 
     /**
-     * Is loaded boolean.
+     * Is the weapon loaded?
      *
-     * @return the boolean
+     * @return a boolean to indicate the loading status
      */
     public boolean isLoaded() {
         return loaded;
     }
 
-    /**
-     * Instantiates a new Weapon.
-     *
-     *
-     * @param color the color
-     */
-    public Weapon (Color color) {
-        super(color);
-    }
-
     public void dealDamage(Player playerTarget){
+        // TODO
         //deal damage based on weapon
     }
     public void addMark(Player playerTarget){
+        // TODO
         //add mark based on weapon
     }
     public void movePlayer(Player playerTarget, Square newPosition){
+        // TODO
         //move players around based on weapon
     }
-    public void reloadWeapon(){
-        //load weapon, set isLoaded to TRUE
+    public void reload (){
+        // TODO
+        //load weapon, set loaded to TRUE
     }
 }

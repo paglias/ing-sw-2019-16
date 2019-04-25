@@ -1,5 +1,6 @@
 {
   "name": "Shotgun",
+  "color": "YELLOW",
   "rechargeCost": ["YELLOW","YELLOW"],
   "cost": ["YELLOW"],
   "secondaryCost": null,

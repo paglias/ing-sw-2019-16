@@ -1,5 +1,6 @@
 {
-  "name": "Powerglove",
+  "name": "Power Glove",
+  "color": "YELLOW",
   "rechargeCost": ["YELLOW","BLUE"],
   "cost": ["BLUE"],
   "secondaryCost": ["BLUE"],

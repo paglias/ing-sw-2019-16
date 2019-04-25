@@ -1,5 +1,6 @@
 {
   "name": "Furnace",
+  "color": "RED",
   "rechargeCost": ["RED","BLUE"],
   "cost": ["BLUE"],
   "secondaryCost": null,

@@ -1,5 +1,6 @@
 {
   "name": "RocketLauncher",
+  "color": "RED",
   "rechargeCost": ["RED","RED"],
   "cost": ["RED"],
   "secondaryCost": ["BLUE"],

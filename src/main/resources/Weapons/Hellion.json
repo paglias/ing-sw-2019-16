@@ -1,5 +1,6 @@
 {
   "name": "Hellion",
+  "color": "RED",
   "rechargeCost": ["RED","YELLOW"],
   "cost": ["YELLOW"],
   "secondaryCost": ["RED"],

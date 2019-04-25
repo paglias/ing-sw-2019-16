@@ -8,10 +8,6 @@ public abstract class Card {
     }
 
     protected Color color = null;
-    protected int nYellowCubes;
-    protected int nBlueCubes;
-    protected int nRedCubes;
-    protected boolean powerUpAmmo;
 
     /**
      * Gets color.

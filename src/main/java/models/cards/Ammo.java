@@ -1,9 +1,6 @@
 package models.cards;
 
-import java.util.ArrayList;
-
 public class Ammo extends Card {
-    protected ArrayList<Color> cubes;
     protected int nYellowCubes;
     protected int nBlueCubes;
     protected int nRedCubes;
@@ -12,21 +9,22 @@ public class Ammo extends Card {
     /**
      * Decrease yellow cubes.
      */
-    public void decreasenYellowCubes() {
+    public void decreaseYellowCubes() {
+        // TODO for this and the others, error or anyway prevents cubs from going below 0
         this.nYellowCubes--;
     }
 
     /**
      * Decrease blue cubes.
      */
-    public void decreasenBlueCubes() {
+    public void decreaseBlueCubes() {
         this.nBlueCubes--;
     }
 
     /**
      * Decrease red cubes.
      */
-    public void decreasenRedCubes() {
+    public void decreaseRedCubes() {
         this.nRedCubes--;
     }
 
@@ -44,7 +42,7 @@ public class Ammo extends Card {
      *
      * @return the blue cubes
      */
-    public int getnBlueCubes() {
+    public int getBlueCubes() {
         return nBlueCubes;
     }
 
@@ -53,7 +51,7 @@ public class Ammo extends Card {
      *
      * @return the red cubes
      */
-    public int getnRedCubes() {
+    public int getRedCubes() {
         return nRedCubes;
     }
 
@@ -62,7 +60,7 @@ public class Ammo extends Card {
      *
      * @return the yellow cubes
      */
-    public int getnYellowCubes() {
+    public int getYellowCubes() {
         return nYellowCubes;
     }
 
@@ -76,9 +74,9 @@ public class Ammo extends Card {
      */
     public Ammo (int nYellowCubes, int nBlueCubes, int nRedCubes, boolean powerUpAmmo) {
         super();
-        this.nBlueCubes= nBlueCubes;
-        this.nRedCubes= nRedCubes;
-        this.nYellowCubes= nYellowCubes;
+        this.nBlueCubes = nBlueCubes;
+        this.nRedCubes = nRedCubes;
+        this.nYellowCubes = nYellowCubes;
         this.hasPowerUp = powerUpAmmo;
     }
 }

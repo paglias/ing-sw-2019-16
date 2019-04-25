@@ -1,5 +1,6 @@
 {
   "name": "LockRifle",
+  "color": "BLUE",
   "rechargeCost": ["BLUE","BLUE"],
   "cost": ["BLUE"],
   "secondaryCost": ["RED"],
