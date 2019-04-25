@@ -24,7 +24,9 @@ class MapLoaderTest {
         assertEquals(map.size(), 12);
 
         assertEquals(map.get(0).isSpawnPoint(), false);
-        assertNull(map.get(0).getWeaponSlot());
+        assertThrows(IllegalStateException.class, () -> {
+            map.get(0).getWeaponSlot();
+        });
 
         assertEquals(map.get(11).isSpawnPoint(), true);
         assertTrue(map.get(11).getWeaponSlot() != null);
