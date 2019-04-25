@@ -48,20 +48,21 @@ public class Weapon extends Card {
 
     private boolean loaded = false;
 
-    public static ArrayList<Weapon> loadWeapons () throws java.io.FileNotFoundException {
+    public static ArrayList<Weapon> loadWeapons ()  {
         File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
         File[] listOfWeaponsFiles = weaponsFolder.listFiles();
         ArrayList<Weapon> weapons = new ArrayList<>();
         Gson gson = new Gson();
 
-        for (File file : listOfWeaponsFiles) {
-            if (file.isFile()) {
-                weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
+        try {
+            for (File file : listOfWeaponsFiles) {
+                if (file.isFile()) {
+                    // TODO what about the color parameter for the constructor?
+                    weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
+                }
             }
-        }
-
-        for (Weapon weapon : weapons) {
-            System.out.println(weapon.primaryEffect);
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println(e);
         }
 
         return weapons;
