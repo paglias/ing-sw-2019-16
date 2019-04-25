@@ -473,21 +473,27 @@ public class Player {
                 playerTarget.increaseAdrenaline();
             }
         }
+        //Player death scoring
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increasenDeaths();
-            //returns the last item of the arraylist, to be used as points
+            //assigns values in givenPoints to players
             if (givenPoints != null && !givenPoints.isEmpty()) {
-                int deathPoints = givenPoints.get(givenPoints.size() - 1);
-                for (Player player : currentGameBoard.getPlayers()) {
-                    int occurences = Collections.frequency(damage, player);
+                while(!givenPoints.isEmpty()){
+                    int deathPoints = givenPoints.get(givenPoints.size() - 1);
+                    for (Player player : currentGameBoard.getPlayers()) {
+                        int occurences = Collections.frequency(damage, player);
+
                     //TODO override equals? Assign points based on occurences?
+
+                    givenPoints.remove(givenPoints.size() - 1);
+                }
                 }
             }
             else {
                 //if givenPoints is empty, the players has been killed more than 6 times, he still awards 1 point
                 int deathPoints = 1;
-                addToTotalPoints(deathPoints);
+                //TODO ADD points to the correct player
             }
             //if there are no more skulls, activate finalfrenzy
             //TODO SHOULD THE CONTROLLER DO THIS?

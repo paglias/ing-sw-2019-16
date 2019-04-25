@@ -99,7 +99,7 @@ public class GameBoard {
             }
         }
         //Initial points given for each Player, order is inverted so the last element
-        //of the arraylist can be used as first, with ArrayList.remove
+        //of the arraylist can be used as first
         ArrayList<Integer> newPlayerPoints = new ArrayList<>();
         newPlayerPoints.add(1);
         newPlayerPoints.add(1);
