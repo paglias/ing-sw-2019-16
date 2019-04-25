@@ -477,17 +477,28 @@ public class Player {
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increasenDeaths();
-            //assigns values in givenPoints to players
+            //assigns values in givenPoints arraylist to players
+            //check if givenPoints is empty
             if (givenPoints != null && !givenPoints.isEmpty()) {
-                while(!givenPoints.isEmpty()){
+                while(!givenPoints.isEmpty()) {
+                    //get the last item in givenPoints, the highest
                     int deathPoints = givenPoints.get(givenPoints.size() - 1);
+                    int temp = 0;
+                    //loop through players, count occurences of "Player" in the damage arraylist, temp= the highest
                     for (Player player : currentGameBoard.getPlayers()) {
-                        int occurences = Collections.frequency(damage, player);
+                        int occurrences = Collections.frequency(damage, player);
+                        //TODO override equals? Assign points based on occurences?
+                        if (occurrences > temp) {
+                            temp = occurrences;
+                        }
+                    }
+                    //loop through players, if the occurence of a player == temp, that players gets the highest points
+                    for (Player player : currentGameBoard.getPlayers()){
+                        if (Collections.frequency(damage, player) == temp){
+                            player.addToTotalPoints(deathPoints);
+                        }
 
-                    //TODO override equals? Assign points based on occurences?
-
-                    givenPoints.remove(givenPoints.size() - 1);
-                }
+                    }
                 }
             }
             else {

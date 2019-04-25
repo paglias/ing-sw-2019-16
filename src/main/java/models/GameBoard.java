@@ -148,7 +148,7 @@ public class GameBoard {
      * Sets isFinalFrenzy to true.
      * Compares players before or after first player and decides action counter.
      * Changes given points for undamaged players.
-     * Sets adrenaline to zero for everyone.
+     * Sets adrenaline to zero for undamaged players
      */
     public void finalFrenzy() {
         isFinalFrenzy = true;
