@@ -49,6 +49,11 @@ public class Weapon extends Card {
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
 
+    /**
+     * Load weapons from file.
+     *
+     * @return the weapons
+     */
     public static ArrayList<Weapon> loadWeapons ()  {
         File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
         File[] listOfWeaponsFiles = weaponsFolder.listFiles();
@@ -78,18 +83,40 @@ public class Weapon extends Card {
         return loaded;
     }
 
+    /**
+     * Deal damage to another player.
+     *
+     * @param playerTarget the target player
+     */
     public void dealDamage(Player playerTarget){
         // TODO
         //deal damage based on weapon
     }
+
+    /**
+     * Add a mark to another player.
+     *
+     * @param playerTarget the target player
+     */
     public void addMark(Player playerTarget){
         // TODO
         //add mark based on weapon
     }
+
+    /**
+     * Move the player.
+     *
+     * @param playerTarget the target player
+     * @param newPosition  where the player will be moved
+     */
     public void movePlayer(Player playerTarget, Square newPosition){
         // TODO
         //move players around based on weapon
     }
+
+    /**
+     * Reload the weapon.
+     */
     public void reload (){
         // TODO
         //load weapon, set loaded to TRUE
