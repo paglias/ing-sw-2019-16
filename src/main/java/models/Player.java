@@ -476,10 +476,13 @@ public class Player {
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increasenDeaths();
-            //returns the last item of the arraylist
+            //returns the last item of the arraylist, to be used as points
             if (givenPoints != null && !givenPoints.isEmpty()) {
                 int deathPoints = givenPoints.get(givenPoints.size() - 1);
-                 addToTotalPoints(deathPoints);
+                for (Player player : currentGameBoard.getPlayers()) {
+                    int occurences = Collections.frequency(damage, player);
+                    //TODO override equals? Assign points based on occurences?
+                }
             }
             else {
                 //if givenPoints is empty, the players has been killed more than 6 times, he still awards 1 point
