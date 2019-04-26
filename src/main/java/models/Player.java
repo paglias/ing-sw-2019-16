@@ -437,13 +437,17 @@ public class Player {
                             Player playerTarget, Square newPosition) {
 
         //initial check if any player can be shot
+        //temp value to skip comparing currentplayer to currentplayer in players
+        boolean isCurrent = true;
         for (Player otherPlayer : currentGameBoard.getPlayers()) {
-            //TODO REMOVE CURRENT PLAYER FROM TOTAL PLAYERS EVERY TURN?LOOP ON ITSELF
-
-            //if canview of current position DOES NOT contain any position of any player
-
-            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                System.out.println("No players can be shot");
+            if (!isCurrent){
+                //if canview of current position DOES NOT contain any position of any player
+                if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
+                    System.out.println("No players can be shot");
+                }
+            }
+            else {
+                isCurrent=false;  //sets is current to false on the currentplay instance of the loop
             }
         }
         //if weapon is loaded, use weapon effects
