@@ -30,7 +30,7 @@ public class GameBoard {
      * @return the skulls
      */
     public int getSkulls() {
-        return skulls.getnRemaining();
+        return skulls.getNRemaining();
     }
 
     /**
@@ -39,7 +39,7 @@ public class GameBoard {
      * @param skulls the skulls
      */
     public void setGameSkulls(int skulls) {
-        this.skulls.setnRemaining(skulls);
+        this.skulls.setNRemaining(skulls);
     }
 
     /**
@@ -48,7 +48,7 @@ public class GameBoard {
      * @return the int
      */
     public int decreasenSkulls() {
-        if (skulls.getnRemaining() > 0) {
+        if (skulls.getNRemaining() > 0) {
             return skulls.decreaseSkullsRemaining();
         }
         else {

@@ -3,18 +3,27 @@ package models;
 import java.util.ArrayList;
 
 public class Skulls {
-    private int nRemaining;  //number of skulls, kills, remaining, before endgame starts
+    // number of skulls, kills, remaining, before endgame starts
+    private int nRemaining;
+    // List of players on the gameboard who killed someone. Used for final scoring
     private ArrayList<Player> killers;
 
     /**
      * Gets remaining.
      *
-     * @return the remaining
+     * @return the remaining skulls
      */
-    public int getnRemaining() {
+    public int getNRemaining() {
         return nRemaining;
     }
-    public int decreaseSkullsRemaining(){
+
+    /**
+     * Decrease skulls remaining int.
+     *
+     * @return the int
+     */
+    public int decreaseSkullsRemaining() {
+        if (nRemaining == 0) throw new IllegalArgumentException("Remaining skulls can't be negative.");
         return nRemaining--;
     }
 
@@ -23,11 +32,12 @@ public class Skulls {
      *
      * @param nRemaining the n remaining
      */
-    public void setnRemaining(int nRemaining) {
+    public int setNRemaining(int nRemaining) {
+        if (nRemaining < 0) throw new IllegalArgumentException("Remaining skulls can't be negative.");
         this.nRemaining = nRemaining;
+        return this.nRemaining;
     }
 
-    //arraylist of players on the gameboard who killed someone. Used for final scoring
     public Skulls () {
         killers = new ArrayList<>();
     }
