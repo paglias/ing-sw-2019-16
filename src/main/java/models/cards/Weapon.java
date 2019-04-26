@@ -54,6 +54,15 @@ public class Weapon extends Card {
     private static ArrayList<Weapon> cachedWeapons;
 
     /**
+     * Gets recharge cost.
+     *
+     * @return the recharge cost
+     */
+    public ArrayList<Color> getRechargeCost() {
+        return rechargeCost;
+    }
+
+    /**
      * Load weapons from file.
      *
      * @return the weapons
@@ -135,5 +144,6 @@ public class Weapon extends Card {
     public void reload (){
         // TODO
         //load weapon, set loaded to TRUE
+        //see Player.reload method
     }
 }

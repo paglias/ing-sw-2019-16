@@ -109,7 +109,7 @@ public class Player {
      * @param adrenaline the adrenaline
      */
     public void setAdrenaline(int adrenaline) {
-        if (adrenaline<0 || adrenaline >2){
+        if (adrenaline < 0 || adrenaline > 2) {
             throw new IllegalArgumentException("Adrenaline must be >0 and < 2");
         }
         this.adrenaline = adrenaline;
@@ -119,7 +119,7 @@ public class Player {
      * Increase adrenaline.
      */
     public void increaseAdrenaline() {
-        if (adrenaline > 1){
+        if (adrenaline > 1) {
             throw new IllegalArgumentException("Adrenaline must be less than 2");
         }
         this.adrenaline++;
@@ -151,8 +151,7 @@ public class Player {
     public void removesCubes(Card.Color cubeColor) {
         if (cubes.contains(cubeColor)) {
             this.cubes.remove(cubeColor);
-        }
-        else {
+        } else {
             System.out.println("There is no ammo of that color available");
         }
     }
@@ -345,10 +344,9 @@ public class Player {
      * @param damagingPlayer the damaging player
      */
     public void addDamage(Player damagingPlayer) {
-        if (damage.size()<12) {
+        if (damage.size() < 12) {
             this.damage.add(damagingPlayer);
-        }
-        else {
+        } else {
             System.out.println("Maximum damage has been reached");
         }
     }
@@ -440,14 +438,13 @@ public class Player {
         //temp value to skip comparing currentplayer to currentplayer in players
         boolean isCurrent = true;
         for (Player otherPlayer : currentGameBoard.getPlayers()) {
-            if (!isCurrent){
+            if (!isCurrent) {
                 //if canview of current position DOES NOT contain any position of any player
                 if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
                     System.out.println("No players can be shot");
                 }
-            }
-            else {
-                isCurrent=false;  //sets is current to false on the currentplay instance of the loop
+            } else {
+                isCurrent = false;  //sets is current to false on the currentplay instance of the loop
             }
         }
         //if weapon is loaded, use weapon effects
@@ -485,7 +482,7 @@ public class Player {
             //assigns values in givenPoints arraylist to players
             //check if givenPoints is empty
             if (givenPoints != null && !givenPoints.isEmpty()) {
-                while(!givenPoints.isEmpty()) {
+                while (!givenPoints.isEmpty()) {
 
                     //get the last item in givenPoints, the highest
                     int deathPoints = givenPoints.get(givenPoints.size() - 1);
@@ -505,17 +502,16 @@ public class Player {
                         }
                     }
                     //loop through players, if the occurence of a player == temp, that players gets the highest points
-                    for (Player player : currentGameBoard.getPlayers()){
-                        if (Collections.frequency(damage, player) == temp){
-                            if (temp == temp1){
+                    for (Player player : currentGameBoard.getPlayers()) {
+                        if (Collections.frequency(damage, player) == temp) {
+                            if (temp == temp1) {
                                 //TODO condition always true??
                             }
                             player.addToTotalPoints(deathPoints);
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 //if givenPoints is empty, the players has been killed more than 6 times,
                 // he still awards 1 point to the killer
                 int deathPoints = 1;
@@ -524,7 +520,7 @@ public class Player {
             //if there are no more skulls, activate finalfrenzy
             //TODO SHOULD THE CONTROLLER DO THIS?
             currentGameBoard.decreasenSkulls();
-            if (currentGameBoard.getSkulls()==0){
+            if (currentGameBoard.getSkulls() == 0) {
                 currentGameBoard.finalFrenzy();
             }
         }
@@ -532,8 +528,15 @@ public class Player {
             playerTarget.addMarks(currentPlayer);
         }
     }
-    public void reload(){
-        //TODO reloads all weapons, loop through weapons, call reloadWeapon
+
+    public void reload (Player currentPlayer, Weapon weaponToReload) {
+        for (Card.Color rechargeAmmo : weaponToReload.getRechargeCost()) {
+            if (currentPlayer.getCubes().contains(rechargeAmmo)) {
+                weaponToReload.reload();
+            } else {
+                System.out.println("Weapon cannot be reloaded");
+            }
+        }
     }
 }
 
