@@ -49,29 +49,44 @@ public class Weapon extends Card {
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
 
+    // Weapons are only loaded from file once
+    private static boolean weaponsLoadedFromFile = false;
+    private static ArrayList<Weapon> cachedWeapons;
+
     /**
      * Load weapons from file.
      *
      * @return the weapons
      */
     public static ArrayList<Weapon> loadWeapons () {
-        File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
-        File[] listOfWeaponsFiles = weaponsFolder.listFiles();
-        ArrayList<Weapon> weapons = new ArrayList<>();
-        Gson gson = new Gson();
+        // if (true /*!weaponsLoadedFromFile*/) {
+            File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
+            File[] listOfWeaponsFiles = weaponsFolder.listFiles();
+            ArrayList<Weapon> weapons = new ArrayList<>();
+            Gson gson = new Gson();
 
-        try {
-            for (File file : listOfWeaponsFiles) {
-                if (file.isFile()) {
-                    weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
+            try {
+                for (File file : listOfWeaponsFiles) {
+                    if (file.isFile()) {
+                        weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
+                    }
                 }
+            } catch (java.io.FileNotFoundException e) {
+                // TODO refactor
+                System.out.println(e);
             }
-        } catch (java.io.FileNotFoundException e) {
-            // TODO refactor
-            System.out.println(e);
-        }
 
-        return weapons;
+            // TODO Cache the result, see commented code, how to clone?
+            /*weaponsLoadedFromFile = true;
+            cachedWeapons = new ArrayList<>(weapons.size());
+            for (Weapon weapon : weapons) cachedWeapons.add(weapon.clone());*/
+
+            return weapons;
+        /*} else {
+            ArrayList<Weapon> clonedWeapons = new ArrayList<>(cachedWeapons.size());
+            for (Weapon weapon : cachedWeapons) clonedWeapons.add(weapon.clone());
+            return clonedWeapons;
+        }*/
     }
 
     /**

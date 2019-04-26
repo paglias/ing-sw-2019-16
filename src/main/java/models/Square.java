@@ -23,7 +23,7 @@ public class Square {
     // Add a weapon slot to spawn points
     private WeaponsSlot weaponsSlot;
     private ArrayList<Square> canView = new ArrayList<>();
-    protected ArrayList<Square> canAccessDirectly = new ArrayList<>();
+    private ArrayList<Square> canAccessDirectly = new ArrayList<>();
     private Ammo ammo;
 
     /**
@@ -77,7 +77,7 @@ public class Square {
      * @return the weapons slot
      * @throws IllegalStateException if not a spawn point
      */
-    public WeaponsSlot getWeaponSlot() {
+    public WeaponsSlot getWeaponsSlot() {
         if (!isSpawnPoint) {
             throw new IllegalStateException("WeaponSlots only exists on spawn points");
         }
@@ -129,5 +129,14 @@ public class Square {
         Ammo ammoPicked = this.ammo;
         this.ammo = null;
         return ammoPicked;
+    }
+
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
+    public Color getColor () {
+        return color;
     }
 }

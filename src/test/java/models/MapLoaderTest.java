@@ -25,10 +25,10 @@ class MapLoaderTest {
 
         assertEquals(map.get(0).isSpawnPoint(), false);
         assertThrows(IllegalStateException.class, () -> {
-            map.get(0).getWeaponSlot();
+            map.get(0).getWeaponsSlot();
         });
 
         assertEquals(map.get(11).isSpawnPoint(), true);
-        assertTrue(map.get(11).getWeaponSlot() != null);
+        assertTrue(map.get(11).getWeaponsSlot() != null);
     }
 }

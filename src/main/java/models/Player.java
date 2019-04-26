@@ -375,7 +375,7 @@ public class Player {
         if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
             System.out.println("Move is not possible");
         } else {
-            for (Square square : currentPosition.canAccessDirectly) {
+            for (Square square : currentPosition.getCanAccessDirectly()) {
                 if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
                     currentPlayer.setPosition(newPosition);
                     currentPlayer.decreaseMoveCounter();
