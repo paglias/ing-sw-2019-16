@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import com.google.gson.*;
-import org.graalvm.compiler.asm.aarch64.AArch64MacroAssembler;
 
 public class Weapon extends Card {
     private enum Effect {
@@ -46,7 +45,6 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> primaryEffect;
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
-    private Player player;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
@@ -70,11 +68,12 @@ public class Weapon extends Card {
      * @return the weapons
      */
     public static ArrayList<Weapon> loadWeapons () {
-        // if (true /*!weaponsLoadedFromFile*/) {
+        Gson gson = new Gson();
+
+        if (!weaponsLoadedFromFile) {
             File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
             File[] listOfWeaponsFiles = weaponsFolder.listFiles();
             ArrayList<Weapon> weapons = new ArrayList<>();
-            Gson gson = new Gson();
 
             try {
                 for (File file : listOfWeaponsFiles) {
@@ -87,17 +86,21 @@ public class Weapon extends Card {
                 System.out.println(e);
             }
 
-            // TODO Cache the result, see commented code, how to clone?
-            /*weaponsLoadedFromFile = true;
+            weaponsLoadedFromFile = true;
             cachedWeapons = new ArrayList<>(weapons.size());
-            for (Weapon weapon : weapons) cachedWeapons.add(weapon.clone());*/
+            for (Weapon weapon : weapons) {
+                cachedWeapons.add(gson.fromJson(gson.toJson(weapon).toString(), weapon.getClass()));
+            }
 
             return weapons;
-        /*} else {
+        } else {
             ArrayList<Weapon> clonedWeapons = new ArrayList<>(cachedWeapons.size());
-            for (Weapon weapon : cachedWeapons) clonedWeapons.add(weapon.clone());
+            for (Weapon weapon : cachedWeapons) {
+                Weapon cloneWeapon = gson.fromJson(gson.toJson(weapon).toString(), weapon.getClass());
+                clonedWeapons.add(cloneWeapon);
+            }
             return clonedWeapons;
-        }*/
+        }
     }
 
     /**
@@ -216,29 +219,6 @@ public class Weapon extends Card {
     public void attractTarget(Player playerTarget, Square newPosition) {
         movePlayer(playerTarget, newPosition);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
