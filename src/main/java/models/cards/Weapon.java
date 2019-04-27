@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import com.google.gson.*;
+import org.graalvm.compiler.asm.aarch64.AArch64MacroAssembler;
 
 public class Weapon extends Card {
     private enum Effect {
@@ -45,6 +46,7 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> primaryEffect;
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
+    private Player player;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
@@ -146,4 +148,113 @@ public class Weapon extends Card {
         //load weapon, set loaded to TRUE
         //see Player.reload method
     }
+
+    public void shoot(Player playerTarget){
+        dealDamage(playerTarget);
+    }
+    public void mark(Player playerTarget){
+        addMark(playerTarget);
+    }
+    public void move(Player playerTarget, Square newPosition) {
+        movePlayer(playerTarget, newPosition);
+    }
+    public void shootOneAwayView(Player playerTarget){
+        dealDamage(playerTarget);
+    }
+    public void markOneAwayView(Player playerTarget){
+        addMark(playerTarget);
+    }
+    public void shootTwoAwayView(Player playerTarget){
+        dealDamage(playerTarget);
+    }
+    public void markTwoAwayView(Player playerTarget){
+        addMark(playerTarget);
+    }
+    public void shootEvery(ArrayList<Player> PlayerTargets) {
+        for (Player Players : PlayerTargets) {
+            dealDamage(Players);
+        }
+    }
+    public void markEvery(ArrayList<Player> PlayerTargets) {
+        for (Player Players : PlayerTargets) {
+            addMark(Players);
+        }
+    }
+    public void shootRoomCanSee(ArrayList<Player> PlayerTargets) {
+        for (Player Players : PlayerTargets) {
+            dealDamage(Players);
+        }
+    }
+    public void shootEveryOneAwayView(ArrayList<Player> PlayerTargets) {
+            for (Player Players : PlayerTargets) {
+                dealDamage(Players);
+            }
+    }
+    public void markEveryOneAwayView(ArrayList<Player> PlayerTargets) {
+        for (Player Players : PlayerTargets) {
+            addMark(Players);
+        }
+    }
+    public void shootView(Player playerTarget) {
+        dealDamage(playerTarget);
+    }
+    public void markView(Player playerTarget) {
+        addMark(playerTarget);
+    }
+    public void moveTarget(Player playerTarget, Square newPosition) {
+        movePlayer(playerTarget, newPosition);
+    }
+    public void shootDirection(Player playerTarget) {
+        dealDamage(playerTarget);
+    }
+    public void shootTargetView(Player playerTarget) {
+        dealDamage(playerTarget);
+    }
+    public void shootSecondTargetView(Player playerTarget) {
+        dealDamage(playerTarget);
+    }
+    public void attractTarget(Player playerTarget, Square newPosition) {
+        movePlayer(playerTarget, newPosition);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
