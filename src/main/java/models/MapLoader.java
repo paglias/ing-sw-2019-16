@@ -26,7 +26,7 @@ public class MapLoader {
         ArrayList<Square> squares = new ArrayList<>();
 
         for (ParsedSquare parsedSquare : parsedSquares) {
-            squares.add(new Square(parsedSquare.color, parsedSquare.isSpawnPoint));
+            squares.add(new Square(Square.Color.valueOf(parsedSquare.color), parsedSquare.isSpawnPoint));
         }
 
         for (int i = 0; i < squares.size(); i++) {

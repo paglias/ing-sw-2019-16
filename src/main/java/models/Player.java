@@ -9,24 +9,24 @@ import java.util.*;
 
 public class Player {
     private String nickname;
-    private Color color;
+    private Color color; // TODO needed?
     private Boolean isActive;               //TODO start of turn, set isActive next player. isActive check for every action?
     private Date startTurnDate;             //used for turn timer
-    private int nDeaths;
+    private int nDeaths = 0;
     private Boolean isFirstPlayer;
-    private ArrayList<Card.Color> cubes;    //ammo available
-    private ArrayList<Integer> givenPoints; //points given at next death
+    private ArrayList<Card.Color> cubes = new ArrayList<>();    //ammo available
+    private ArrayList<Integer> givenPoints; // Points given at next death
     private ArrayList<String> points;       // TODO what is this? why not integer?
-    private ArrayList<Player> marks;        //current marks, depending on player color
-    private ArrayList<Player> damage;       //list of damage amount, depending on player color
-    private ArrayList<PowerUp> powerUps;    //list of available power ups
-    private ArrayList<Weapon> weapons;      //list of available weapons, maximum 3 TODO set limit to 3?
+    private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
+    private ArrayList<Player> damage = new ArrayList<>();       //list of damage amount, depending on player color
+    private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
+    private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3 TODO set limit to 3?
     private Square position;                //current position, updated when move happens
     private int moveCounter;                //TODO restore movecounter at startturn?
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
-    private int totalPoints;                //total points of the current player
-    private boolean isDead;                 //true is the player is currently dead, stays dead until next turn
+    private int totalPoints = 0;                //total points of the current player
+    private boolean isDead = false;                 //true is the player is currently dead, stays dead until next turn
 
 
     /**
@@ -44,7 +44,7 @@ public class Player {
      *
      * @return the total points
      */
-    public int getTotalPoints() {
+    public int getTotalPoints () {
         return totalPoints;
     }
 
@@ -54,18 +54,17 @@ public class Player {
      *
      * @param givenPoints the given points
      */
-
     public void setGivenPoints(ArrayList<Integer> givenPoints) {
         this.givenPoints.clear();
         this.givenPoints = givenPoints;
     }
 
     /**
-     * Sets color. USED TO ASSIGN COLOR, GUI
+     * Sets color. USED TO ASSIGN COLOR, GUI TODO used where?
      *
      * @param color the color
      */
-    public void setColor(Color color) {
+    public void setColor (Color color) {
         this.color = color;
     }
 
@@ -74,7 +73,7 @@ public class Player {
      *
      * @return the action counter
      */
-    public int getActionCounter() {
+    public int getActionCounter () {
         return actionCounter;
     }
 
@@ -139,7 +138,7 @@ public class Player {
      *
      * @param cubeColor the cube color
      */
-    public void addsCubes(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
+    public void addCube(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
         this.cubes.add(cubeColor);
     }
 
@@ -148,11 +147,11 @@ public class Player {
      *
      * @param cubeColor the cube color
      */
-    public void removesCubes(Card.Color cubeColor) {
+    public void removeCube (Card.Color cubeColor) {
         if (cubes.contains(cubeColor)) {
             this.cubes.remove(cubeColor);
         } else {
-            System.out.println("There is no ammo of that color available");
+            throw new IllegalArgumentException("No cube of given color to remove.");
         }
     }
 
@@ -213,7 +212,7 @@ public class Player {
      *
      * @return the marks
      */
-    public ArrayList<Player> getMarks() {
+    public ArrayList<Player> getMarks () {
         return marks;
     }
 
@@ -222,8 +221,8 @@ public class Player {
      *
      * @param mark the mark
      */
-    public void addMarks(Player mark) {
-        //TODO SET MAX MARKS FOR EACH PLAYER
+    public void addMark(Player mark) {
+        // TODO SET MAX MARKS FOR EACH PLAYER
         this.marks.add(mark);
     }
 
@@ -232,7 +231,7 @@ public class Player {
      *
      * @param powerUp the power up
      */
-    public void addPowerUps(PowerUp powerUp) {
+    public void addPowerUp(PowerUp powerUp) {
         this.powerUps.add(powerUp);
     }
 
@@ -241,7 +240,7 @@ public class Player {
      *
      * @param powerUp the power up
      */
-    public void removePowerUps(PowerUp powerUp) {
+    public void removePowerUp (PowerUp powerUp) {
         this.powerUps.remove(powerUp);
     }
 
@@ -250,7 +249,7 @@ public class Player {
      *
      * @return the power ups
      */
-    public ArrayList<PowerUp> getPowerUps() {
+    public ArrayList<PowerUp> getPowerUps () {
         return powerUps;
     }
 
@@ -282,10 +281,28 @@ public class Player {
     }
 
     /**
+     * Gets first player. Used for finalFrenzy
+     *
+     * @return the first player
+     */
+    public Boolean getFirstPlayer() {
+        return isFirstPlayer;
+    }
+
+    /**
      * Sets deaths. When called (player death), nDeaths grows by 1. Cannot decrease.
      */
-    public void increasenDeaths() {
-        this.nDeaths = nDeaths++;
+    public void increaseNDeaths() {
+        this.nDeaths++;
+    }
+
+    /**
+     * Gets deaths.
+     *
+     * @return the n deaths
+     */
+    public int getNDeaths () {
+        return nDeaths;
     }
 
     /**
@@ -302,11 +319,11 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void addWeapons(Weapon weapon) {
-        if (this.weapons.size() <= 3) {
+    public void addWeapon (Weapon weapon) {
+        if (this.weapons.size() <= 3) { // TODO allowed 4?
             this.weapons.add(weapon);
         } else {
-            System.out.println("Limit of weapons reached");// TODO What happens when you want to switch one? exception?
+            throw new IllegalArgumentException("Limit of weapons reached");
         }
     }
 
@@ -315,19 +332,9 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapons(Weapon weapon) {
+    public void removeWeapon (Weapon weapon) {
         this.weapons.remove(weapon);
     }
-
-    /**
-     * Gets first player. Used for finalFrenzy
-     *
-     * @return the first player
-     */
-    public Boolean getFirstPlayer() {
-        return isFirstPlayer;
-    }
-
 
     /**
      * Gets damage. Used for scoring purposes and to check if the player is dead.
@@ -343,11 +350,11 @@ public class Player {
      *
      * @param damagingPlayer the damaging player
      */
-    public void addDamage(Player damagingPlayer) {
+    public void addDamage (Player damagingPlayer) {
         if (damage.size() < 12) {
             this.damage.add(damagingPlayer);
         } else {
-            System.out.println("Maximum damage has been reached");
+            throw new IllegalArgumentException("Maximum damage has been reached");
         }
     }
 
@@ -361,6 +368,12 @@ public class Player {
         isDead = dead;
     }
 
+    /**
+     * Gets dead status.
+     *
+     * @return if dead
+     */
+    public boolean isDead () { return isDead; }
     /**
      * Move player.
      *
@@ -397,24 +410,24 @@ public class Player {
                          WeaponsSlot currentWeaponsSlot) {
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
-            currentPlayer.addWeapons((currentWeaponsSlot.weaponChoice()));
+            currentPlayer.addWeapon((currentWeaponsSlot.weaponChoice()));
         } else {
             //if the ammo picked has a powerup, add it to your powerups
             if (currentPosition.getAmmo().getHasPowerUp()) {
-                currentPlayer.addPowerUps((PowerUp) currentPowerUpsDeck.pick());
+                currentPlayer.addPowerUp((PowerUp) currentPowerUpsDeck.pick());
             } else {
                 //if the ammo picked has ammocubes, add them to your cubes
                 // and decrease the cubes in the ammo card you grabbed
                 while (currentPosition.getAmmo().getBlueCubes() != 0) {
-                    currentPlayer.addsCubes(Card.Color.BLUE);
+                    currentPlayer.addCube(Card.Color.BLUE);
                     currentPosition.getAmmo().decreaseBlueCubes();
                 }
                 while ((currentPosition.getAmmo().getYellowCubes() != 0)) {
-                    currentPlayer.addsCubes(Card.Color.YELLOW);
+                    currentPlayer.addCube(Card.Color.YELLOW);
                     currentPosition.getAmmo().decreaseYellowCubes();
                 }
                 while ((currentPosition.getAmmo().getRedCubes() != 0)) {
-                    currentPlayer.addsCubes(Card.Color.RED);
+                    currentPlayer.addCube(Card.Color.RED);
                     currentPosition.getAmmo().decreaseRedCubes();
                 }
             }
@@ -477,7 +490,7 @@ public class Player {
         //Player death scoring
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
-            playerTarget.increasenDeaths();
+            playerTarget.increaseNDeaths();
 
             //assigns values in givenPoints arraylist to players
             //check if givenPoints is empty
@@ -525,7 +538,7 @@ public class Player {
             }
         }
         if (playerTarget.getDamage().size() > 11) {
-            playerTarget.addMarks(currentPlayer);
+            playerTarget.addMark(currentPlayer);
         }
     }
 

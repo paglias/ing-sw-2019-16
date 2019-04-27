@@ -109,9 +109,9 @@ public class GameBoard {
         newPlayerPoints.add(8);
 
         //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
-        newPlayer.addsCubes(Card.Color.YELLOW);
-        newPlayer.addsCubes(Card.Color.BLUE);
-        newPlayer.addsCubes(Card.Color.RED);
+        newPlayer.addCube(Card.Color.YELLOW);
+        newPlayer.addCube(Card.Color.BLUE);
+        newPlayer.addCube(Card.Color.RED);
         //Set movecounter to 3  //TODO MOVECOUNTER CHANGES IF PLAYER GRABS ITEM/SHOOTS
         newPlayer.setMoveCounter(3);
         newPlayer.setActionCounter(2);

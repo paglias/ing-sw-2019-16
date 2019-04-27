@@ -28,12 +28,11 @@ public class Square {
 
     /**
      * Instantiates a new Square.
-     *
      * @param squareColor  the square color
      * @param isSpawnPoint the is spawn point
      */
-    public Square (String squareColor, boolean isSpawnPoint) {
-        this.color = Square.Color.valueOf(squareColor);
+    public Square (Color squareColor, boolean isSpawnPoint) {
+        this.color = squareColor;
         this.isSpawnPoint = isSpawnPoint;
     }
 

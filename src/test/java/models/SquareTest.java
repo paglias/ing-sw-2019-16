@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class SquareTest {
     @Test
     void createWeaponsSlot () {
-        Square noSpawnPoint = new Square(Square.Color.PURPLE.toString(), false);
+        Square noSpawnPoint = new Square(Square.Color.PURPLE, false);
         assertThrows(IllegalStateException.class, () -> {
             noSpawnPoint.createWeaponsSlot(new WeaponsDeck());
         });
 
 
-        Square spawnPoint = new Square(Square.Color.PURPLE.toString(), true);
+        Square spawnPoint = new Square(Square.Color.PURPLE, true);
         spawnPoint.createWeaponsSlot(new WeaponsDeck());
         // Cannot create it twice
         assertThrows(IllegalStateException.class, () -> {
@@ -27,9 +27,9 @@ class SquareTest {
 
     @Test
     void canViewGetAndSet () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
-        square.addCanViewSquare(new Square(Square.Color.YELLOW.toString(), false));
-        square.addCanViewSquare(new Square(Square.Color.BLUE.toString(), false));
+        Square square = new Square(Square.Color.PURPLE, false);
+        square.addCanViewSquare(new Square(Square.Color.YELLOW, false));
+        square.addCanViewSquare(new Square(Square.Color.BLUE, false));
 
         List<Square> canViewList = square.getCanView();
         assertEquals(canViewList.size(), 2);
@@ -39,16 +39,16 @@ class SquareTest {
 
     @Test
     void isSpawnPoint () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
+        Square square = new Square(Square.Color.PURPLE, false);
         assertEquals(square.isSpawnPoint(), false);
     }
 
     @Test
     void getWeaponsSlot () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
+        Square square = new Square(Square.Color.PURPLE, false);
         assertThrows(IllegalStateException.class, square::getWeaponsSlot);
 
-        Square spawnPoint = new Square(Square.Color.PURPLE.toString(), true);
+        Square spawnPoint = new Square(Square.Color.PURPLE, true);
         assertNull(spawnPoint.getWeaponsSlot());
         spawnPoint.createWeaponsSlot(new WeaponsDeck());
         assertNotNull(spawnPoint.getWeaponsSlot());
@@ -56,9 +56,9 @@ class SquareTest {
 
     @Test
     void canAccessDirectlyGetAndSet () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
-        square.addCanAccessSquare(new Square(Square.Color.YELLOW.toString(), false));
-        square.addCanAccessSquare(new Square(Square.Color.BLUE.toString(), false));
+        Square square = new Square(Square.Color.PURPLE, false);
+        square.addCanAccessSquare(new Square(Square.Color.YELLOW, false));
+        square.addCanAccessSquare(new Square(Square.Color.BLUE, false));
 
         List<Square> canAccessList = square.getCanAccessDirectly();
         assertEquals(canAccessList.size(), 2);
@@ -68,7 +68,7 @@ class SquareTest {
 
     @Test
     void ammoAndSet () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
+        Square square = new Square(Square.Color.PURPLE, false);
         assertNull(square.getAmmo());
 
         AmmoDeck ammoDeck = new AmmoDeck();
@@ -80,7 +80,7 @@ class SquareTest {
 
     @Test
     void getColor () {
-        Square square = new Square(Square.Color.PURPLE.toString(), false);
+        Square square = new Square(Square.Color.PURPLE, false);
         assertEquals(square.getColor(), Square.Color.PURPLE);
     }
 
