@@ -412,6 +412,8 @@ public class Player {
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot TODO Associate to the current square?
      */
+
+    //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT
     public void grabItem(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
                          WeaponsSlot currentWeaponsSlot) {
         //If you are on a spawnpoint, you will grab a weapon of your choice
@@ -439,18 +441,6 @@ public class Player {
             }
         }
         decreaseActionCounter();
-    }
-
-    /**
-     * Move action. Particular move action.
-     *
-     * @param currentPlayer   the current player
-     * @param newPosition     the new position
-     * @param currentPosition the current position
-     */
-    public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
-        currentPlayer.setMoveCounter(3);
-        currentPlayer.movePlayer(newPosition, currentPosition, currentPlayer);
     }
 
     /**
@@ -566,6 +556,38 @@ public class Player {
         }
         else{
             System.out.println("Weapon cannot be reloaded");
+        }
+    }
+
+    /**
+     * Move action. Particular move action.
+     *
+     * @param currentPlayer   the current player
+     * @param newPosition     the new position
+     * @param currentPosition the current position
+     */
+    public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
+        currentPlayer.setMoveCounter(3);
+        currentPlayer.movePlayer(newPosition, currentPosition, currentPlayer);
+    }
+
+    /**
+     * Grab action. Particolar move action
+     *
+     * @param currentPosition     the current position
+     * @param currentPlayer       the current player
+     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentWeaponsSlot  the current weapons slot
+     */
+    public void grabAction(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
+                           WeaponsSlot currentWeaponsSlot){
+        if (currentPlayer.getAdrenaline()==0){
+            currentPlayer.setMoveCounter(1);
+            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
+        }
+        if (currentPlayer.getAdrenaline()==1){
+            currentPlayer.setMoveCounter(2);
+            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
         }
     }
 }
