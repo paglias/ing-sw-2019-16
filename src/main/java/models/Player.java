@@ -8,6 +8,7 @@ import models.decks.PowerUpsDeck;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Player {
     private String nickname;
@@ -444,8 +445,6 @@ public class Player {
     /**
      * Shoot player. Adds damage, marks, moves players based on weapon effect
      *
-     * @param currentPosition  the current position
-     * @param currentPlayer    the current player
      * @param currentGameBoard the current game board
      * @param playerTarget     the player target
      * @param newPosition      the new position
@@ -503,9 +502,14 @@ public class Player {
             //assigns values in givenPoints arraylist to players
             //check if givenPoints is empty
             if (givenPoints != null && !givenPoints.isEmpty()) {
-                while (!givenPoints.isEmpty()) {
+                Iterator<Integer> iterator = givenPoints.iterator();
+                while (!givenPoints.isEmpty() && iterator.hasNext()) {
+                    int deathPoints = givenPoints.get(givenPoints.size() - 1);
+                    getDamage().stream();
 
-                    //TODO SCORING
+                    //TODO
+
+                    givenPoints.remove(givenPoints.size()-1);
                 }
             } else {
                 //if givenPoints is empty, the players has been killed more than 6 times,
@@ -523,7 +527,6 @@ public class Player {
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
         }
-        playerTarget.setAdrenaline(0);
     }
 
     /**
@@ -664,7 +667,7 @@ public class Player {
      *
      * @param weaponToReload the weapon to reload
      */
-    public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
+    public void finalFrenzyAfterShoot (Weapon weaponToReload, GameBoard currentGameBoard,
                                       Player playerTarget, Square newShootPosition, Square newPosition){
         setMoveCounter(1);
         while (getMoveCounter()>0) {
@@ -674,9 +677,3 @@ public class Player {
         shootPlayer(currentGameBoard, playerTarget, newShootPosition);
     }
 }
-
-
-
-
-
-
