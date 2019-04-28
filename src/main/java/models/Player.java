@@ -593,6 +593,10 @@ public class Player {
         }
         decreaseActionCounter();
     }
+
+    /**
+     * Shoot action. Specific shoot action, non finalFrenzy.
+     */
     public void shootAction(){
         if (getAdrenaline()<=1){
             setMoveCounter(0);
@@ -604,29 +608,65 @@ public class Player {
         }
         decreaseActionCounter();
     }
+
+    /**
+     * Move action for players whose turn is before the first player.
+     *
+     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentWeaponsSlot  the current weapons slot
+     * @param newWeapon           the new weapon
+     */
     public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
         setMoveCounter(3);
         grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
+
+    /**
+     * Shoot action for players whose turn is before the first player.
+     *
+     * @param weaponToReload the weapon to reload
+     */
     public void finalFrenzyBeforeShoot(Weapon weaponToReload){
         setMoveCounter(2);
         reload(weaponToReload);
         shootPlayer();
         decreaseActionCounter();
     }
+
+    /**
+     * Move action for players whose turn is after the first player.
+     *
+     * @param newPosition the new position
+     */
     public void finalFrenzyAfterMove(Square newPosition){
         setMoveCounter(4);
         move(newPosition);
         decreaseActionCounter();
     }
+
+    /**
+     * Grab action for players whose turn is after the first player.
+     *
+     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentWeaponsSlot  the current weapons slot
+     * @param newWeapon           the new weapon
+     */
     public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
         setMoveCounter(2);
         grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
-    public void finalFrenzyAfterShoot(){
 
+    /**
+     * Shoot action for players whose turn is after the first player.
+     *
+     * @param weaponToReload the weapon to reload
+     */
+    public void finalFrenzyAfterShoot(Weapon weaponToReload){
+        setMoveCounter(1);
+        reload(weaponToReload);
+        shootPlayer();
     }
 }
 
