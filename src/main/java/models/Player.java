@@ -560,21 +560,26 @@ public class Player {
         }
     }
 
+
+
+    //Specific action possibilities
+
+
+
     /**
-     * Move action. Particular move action.
+     * Move action. Specific move action, non finalFrenzy
      *
-     * @param currentPlayer   the current player
      * @param newPosition     the new position
      * @param currentPosition the current position
      */
-    public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
-        currentPlayer.setMoveCounter(3);
-        currentPlayer.move(newPosition);
-        currentPlayer.decreaseActionCounter();
+    public void moveAction(Square newPosition, Square currentPosition) {
+        setMoveCounter(3);
+        move(newPosition);
+        decreaseActionCounter();
     }
 
     /**
-     * Grab action. Particolar move action
+     * Grab action. Specific move action, non finalFrenzy
      *
      * @param currentPlayer       the current player
      * @param currentPowerUpsDeck the current power ups deck
@@ -593,14 +598,15 @@ public class Player {
         decreaseActionCounter();
     }
     public void shootAction(){
-
     }
     public void finalFrenzyBeforeMove(){
 
     }
     public void finalFrenzyBeforeShoot(){
     }
-    public void finalFrenzyAfterMove(){
+    public void finalFrenzyAfterMove(Square newPosition){
+        setMoveCounter(4);
+        move(newPosition);
     }
     public void finalFrenzyAfterGrab(){
     }
