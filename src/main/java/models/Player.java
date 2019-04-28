@@ -404,7 +404,6 @@ public class Player {
             }
         }
     }
-
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
