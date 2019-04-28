@@ -4,6 +4,7 @@ import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 import models.decks.PowerUpsDeck;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -26,8 +27,8 @@ public class Player {
     private int moveCounter;                //TODO restore movecounter at startturn?
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
-    private int totalPoints = 0;                //total points of the current player
-    private boolean isDead = false;                 //true is the player is currently dead, stays dead until next turn
+    private int totalPoints = 0;            //total points of the current player
+    private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
 
 
     /**
@@ -45,7 +46,7 @@ public class Player {
      *
      * @return the total points
      */
-    public int getTotalPoints () {
+    public int getTotalPoints() {
         return totalPoints;
     }
 
@@ -65,7 +66,7 @@ public class Player {
      *
      * @param color the color
      */
-    public void setColor (Color color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -74,7 +75,7 @@ public class Player {
      *
      * @return the action counter
      */
-    public int getActionCounter () {
+    public int getActionCounter() {
         return actionCounter;
     }
 
@@ -148,7 +149,7 @@ public class Player {
      *
      * @param cubeColor the cube color
      */
-    public void removeCube (Card.Color cubeColor) {
+    public void removeCube(Card.Color cubeColor) {
         if (cubes.contains(cubeColor)) {
             this.cubes.remove(cubeColor);
         } else {
@@ -166,13 +167,6 @@ public class Player {
     }
 
     /**
-     * Decrease move counter, after a player moved.
-     */
-    public void decreaseMoveCounter() {
-        this.moveCounter--;
-    }
-
-    /**
      * Sets move counter. Initial hard-set, in case of adrenaline/finalfrenzy.
      *
      * @param moveCounter the move counter
@@ -182,12 +176,10 @@ public class Player {
     }
 
     /**
-     * Set nickname of the player. Setter Used by gameBoard
-     *
-     * @param nickname the nickname
+     * Decrease move counter, after a player moved.
      */
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void decreaseMoveCounter() {
+        this.moveCounter--;
     }
 
     /**
@@ -197,6 +189,15 @@ public class Player {
      */
     public String getNickname() {
         return nickname;
+    }
+
+    /**
+     * Set nickname of the player. Setter Used by gameBoard
+     *
+     * @param nickname the nickname
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     /**
@@ -213,7 +214,7 @@ public class Player {
      *
      * @return the marks
      */
-    public ArrayList<Player> getMarks () {
+    public ArrayList<Player> getMarks() {
         return marks;
     }
 
@@ -241,7 +242,7 @@ public class Player {
      *
      * @param powerUp the power up
      */
-    public void removePowerUp (PowerUp powerUp) {
+    public void removePowerUp(PowerUp powerUp) {
         this.powerUps.remove(powerUp);
     }
 
@@ -250,17 +251,8 @@ public class Player {
      *
      * @return the power ups
      */
-    public ArrayList<PowerUp> getPowerUps () {
+    public ArrayList<PowerUp> getPowerUps() {
         return powerUps;
-    }
-
-    /**
-     * Sets position after player moves.
-     *
-     * @param position the position
-     */
-    public void setPosition(Square position) {
-        this.position = position;
     }
 
     /**
@@ -273,12 +265,12 @@ public class Player {
     }
 
     /**
-     * Sets first player, once at the beginning of the game.
+     * Sets position after player moves.
      *
-     * @param firstPlayer the first player
+     * @param position the position
      */
-    public void setFirstPlayer(Boolean firstPlayer) {
-        isFirstPlayer = firstPlayer;
+    public void setPosition(Square position) {
+        this.position = position;
     }
 
     /**
@@ -288,6 +280,15 @@ public class Player {
      */
     public Boolean getFirstPlayer() {
         return isFirstPlayer;
+    }
+
+    /**
+     * Sets first player, once at the beginning of the game.
+     *
+     * @param firstPlayer the first player
+     */
+    public void setFirstPlayer(Boolean firstPlayer) {
+        isFirstPlayer = firstPlayer;
     }
 
     /**
@@ -302,7 +303,7 @@ public class Player {
      *
      * @return the n deaths
      */
-    public int getNDeaths () {
+    public int getNDeaths() {
         return nDeaths;
     }
 
@@ -320,7 +321,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void addWeapon (Weapon weapon) {
+    public void addWeapon(Weapon weapon) {
         if (this.weapons.size() <= 3) { // TODO allowed 4?
             this.weapons.add(weapon);
         } else {
@@ -333,7 +334,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapon (Weapon weapon) {
+    public void removeWeapon(Weapon weapon) {
         this.weapons.remove(weapon);
     }
 
@@ -351,12 +352,21 @@ public class Player {
      *
      * @param damagingPlayer the damaging player
      */
-    public void addDamage (Player damagingPlayer) {
+    public void addDamage(Player damagingPlayer) {
         if (damage.size() < 12) {
             this.damage.add(damagingPlayer);
         } else {
             throw new IllegalArgumentException("Maximum damage has been reached");
         }
+    }
+
+    /**
+     * Gets dead status.
+     *
+     * @return if dead
+     */
+    public boolean isDead() {
+        return isDead;
     }
 
     /**
@@ -370,22 +380,17 @@ public class Player {
     }
 
     /**
-     * Gets dead status.
+     * Move player, generic move function.
+     * Called by particular actions if a move is possible once that action has been chosen.
      *
-     * @return if dead
-     */
-    public boolean isDead () { return isDead; }
-    /**
-     * Move player.
-     *
-     * @param newPosition     the new position
+     * @param newPosition the new position
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
-    public void move (Square newPosition) {
+    public void move(Square newPosition) {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
 
-        if (getMoveCounter() <= 0 || getMoveCounter() > 2 || canAccessSquares.size() == 0) { // TODO why check > 2?
+        if (getMoveCounter() <= 0 || canAccessSquares.isEmpty()) {
             throw new IllegalArgumentException("Move is not possible");
         } else {
             for (Square square : canAccessSquares) {
@@ -408,6 +413,8 @@ public class Player {
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot TODO Associate to the current square?
      */
+
+    //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT
     public void grabItem(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
                          WeaponsSlot currentWeaponsSlot) {
         //If you are on a spawnpoint, you will grab a weapon of your choice
@@ -446,6 +453,7 @@ public class Player {
      * @param playerTarget     the player target
      * @param newPosition      the new position
      */
+
     public void shootPlayer(Square currentPosition, Player currentPlayer, GameBoard currentGameBoard,
                             Player playerTarget, Square newPosition) {
 
@@ -463,7 +471,7 @@ public class Player {
             }
         }
         //if weapon is loaded, use weapon effects
-        //TODO WAITING FOR WEAPONS EFFECT
+        //TODO GENERIC "USE WEAPON"
         if (currentPlayer.getWeapons().isEmpty()) {
             System.out.println("No weapon is available");
         } else {
@@ -544,13 +552,43 @@ public class Player {
         }
     }
 
-    public void reload (Player currentPlayer, Weapon weaponToReload) {
-        for (Card.Color rechargeAmmo : weaponToReload.getRechargeCost()) {
-            if (currentPlayer.getCubes().contains(rechargeAmmo)) {
-                weaponToReload.reload();
-            } else {
-                System.out.println("Weapon cannot be reloaded");
-            }
+    public void reload(Player currentPlayer, Weapon weaponToReload) {
+        if (currentPlayer.getCubes().containsAll(weaponToReload.getRechargeCost())) {
+            weaponToReload.reload();
+        } else {
+            System.out.println("Weapon cannot be reloaded");
+        }
+    }
+
+    /**
+     * Move action. Particular move action.
+     *
+     * @param currentPlayer   the current player
+     * @param newPosition     the new position
+     * @param currentPosition the current position
+     */
+    public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
+        currentPlayer.setMoveCounter(3);
+        currentPlayer.move(newPosition);
+    }
+
+    /**
+     * Grab action. Particolar move action
+     *
+     * @param currentPosition     the current position
+     * @param currentPlayer       the current player
+     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentWeaponsSlot  the current weapons slot
+     */
+    public void grabAction(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
+                           WeaponsSlot currentWeaponsSlot) {
+        if (currentPlayer.getAdrenaline() == 0) {
+            currentPlayer.setMoveCounter(1);
+            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
+        }
+        if (currentPlayer.getAdrenaline() == 1) {
+            currentPlayer.setMoveCounter(2);
+            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
         }
     }
 }
