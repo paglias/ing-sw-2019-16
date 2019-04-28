@@ -6,6 +6,7 @@ import models.cards.Weapon;
 import models.decks.PowerUpsDeck;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class Player {
     private String nickname;
@@ -378,24 +379,25 @@ public class Player {
      * Move player.
      *
      * @param newPosition     the new position
-     * @param currentPosition the current position
-     * @param currentPlayer   the current player
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
-    public void movePlayer(Square newPosition, Square currentPosition, Player currentPlayer) {
-        if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
-            System.out.println("Move is not possible");
+    public void move (Square newPosition) {
+        Square currentPosition = getPosition();
+        List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
+
+        if (getMoveCounter() <= 0 || getMoveCounter() > 2 || canAccessSquares.size() == 0) { // TODO why check > 2?
+            throw new IllegalArgumentException("Move is not possible");
         } else {
-            for (Square square : currentPosition.getCanAccessDirectly()) {
+            for (Square square : canAccessSquares) {
                 if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
-                    currentPlayer.setPosition(newPosition);
-                    currentPlayer.decreaseMoveCounter();
+                    setPosition(newPosition);
+                    decreaseMoveCounter();
+                    break;
                 } else {
-                    System.out.println("Move is not Possible");
+                    throw new IllegalArgumentException("Move is not possible");
                 }
             }
         }
-        currentPlayer.decreaseMoveCounter();
     }
 
     /**
