@@ -3,14 +3,21 @@ package models;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
+    Player player;
+
+    @BeforeEach
+    void setup () {
+        player = new Player();
+    }
+
     @Test
     void totalPoints () {
-        Player player = new Player();
         assertEquals(player.getTotalPoints(), 0);
 
         player.addToTotalPoints(5);
@@ -22,7 +29,6 @@ class PlayerTest {
 
     @Test
     void actionCounter () {
-        Player player = new Player();
         player.setActionCounter(5);
         assertEquals(player.getActionCounter(), 5);
 
@@ -32,7 +38,6 @@ class PlayerTest {
 
     @Test
     void adrenaline () {
-        Player player = new Player();
         player.setAdrenaline(1);
         assertEquals(player.getAdrenaline(), 1);
 
@@ -54,7 +59,6 @@ class PlayerTest {
 
     @Test
     void cubes () {
-        Player player = new Player();
         assertEquals(player.getCubes().size(), 0);
 
         player.addCube(Card.Color.BLUE);
@@ -76,7 +80,6 @@ class PlayerTest {
 
     @Test
     void moveCounter () {
-        Player player = new Player();
         player.setMoveCounter(3);
         assertEquals(player.getMoveCounter(), 3);
 
@@ -86,7 +89,6 @@ class PlayerTest {
 
     @Test
     void nickname () {
-        Player player = new Player();
         player.setNickname("test");
 
         assertEquals(player.getNickname(), "test");
@@ -94,7 +96,6 @@ class PlayerTest {
 
     @Test
     void marks () {
-        Player player = new Player();
         Player player1 = new Player();
         Player player2 = new Player();
 
@@ -110,7 +111,6 @@ class PlayerTest {
 
     @Test
     void powerUps () {
-        Player player = new Player();
         PowerUp powerUp1 = new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
         PowerUp powerUp2 = new PowerUp(PowerUp.Name.TELEPORTER, Card.Color.BLUE);
 
@@ -126,7 +126,6 @@ class PlayerTest {
 
     @Test
     void position () {
-        Player player = new Player();
         Square position = new Square(Square.Color.YELLOW, false);
 
         assertNull(player.getPosition());
@@ -136,7 +135,6 @@ class PlayerTest {
 
     @Test
     void nDeaths () {
-        Player player = new Player();
         assertEquals(player.getNDeaths(), 0);
 
         player.increaseNDeaths();
@@ -146,14 +144,12 @@ class PlayerTest {
 
     @Test
     void firstPlayer () {
-        Player player = new Player();
         player.setFirstPlayer(true);
         assertTrue(player.getFirstPlayer());
     }
 
     @Test
     void weapons () {
-        Player player = new Player();
         assertEquals(player.getWeapons().size(), 0);
 
         Weapon weapon1 = new Weapon();
@@ -178,7 +174,6 @@ class PlayerTest {
 
     @Test
     void damage () {
-        Player player = new Player();
         Player player1 = new Player();
 
         assertEquals(player.getDamage().size(), 0);
@@ -207,10 +202,49 @@ class PlayerTest {
 
     @Test
     void dead () {
-        Player player = new Player();
         assertFalse(player.isDead());
 
         player.setDead(true);
         assertTrue(player.isDead());
+    }
+
+
+    @Test
+    void movePlayerThrowsNoAvailableMoves () {
+        player.setMoveCounter(0);
+        Square current = new Square(Square.Color.BLUE, false);
+        player.setPosition(current);
+        Square target = new Square(Square.Color.BLUE, false);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            player.move(target);
+        });
+    }
+
+    @Test
+    void movePlayerThrowsNoAccessSquare () {
+        player.setMoveCounter(1);
+        Square current = new Square(Square.Color.BLUE, false);
+        player.setPosition(current);
+        Square target = new Square(Square.Color.BLUE, false);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            player.move(target);
+        });
+    }
+
+    @Test
+    void movePlayer () {
+        player.setMoveCounter(1);
+
+        Square current = new Square(Square.Color.BLUE, false);
+        player.setPosition(current);
+
+        Square target = new Square(Square.Color.BLUE, false);
+        current.addCanAccessSquare(target);
+
+        player.move(target);
+        assertEquals(player.getPosition(), target);
+        assertEquals(player.getMoveCounter(), 0);
     }
 }
