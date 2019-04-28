@@ -597,14 +597,14 @@ public class Player {
     /**
      * Shoot action. Specific shoot action, non finalFrenzy.
      */
-    public void shootAction(){
+    public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newPosition){
         if (getAdrenaline()<=1){
             setMoveCounter(0);
-            shootPlayer();
+            shootPlayer(currentGameBoard, playerTarget, newPosition);
         }
         else{
             setMoveCounter(1);
-            shootPlayer();
+            shootPlayer(currentGameBoard, playerTarget, newPosition);
         }
         decreaseActionCounter();
     }
@@ -627,10 +627,11 @@ public class Player {
      *
      * @param weaponToReload the weapon to reload
      */
-    public void finalFrenzyBeforeShoot(Weapon weaponToReload){
+    public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
+                                       Player playerTarget, Square newPosition){
         setMoveCounter(2);
         reload(weaponToReload);
-        shootPlayer();
+        shootPlayer(currentGameBoard, playerTarget, newPosition);
         decreaseActionCounter();
     }
 
@@ -663,10 +664,11 @@ public class Player {
      *
      * @param weaponToReload the weapon to reload
      */
-    public void finalFrenzyAfterShoot(Weapon weaponToReload){
+    public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
+                                      Player playerTarget, Square newPosition){
         setMoveCounter(1);
         reload(weaponToReload);
-        shootPlayer();
+        shootPlayer(currentGameBoard, playerTarget, newPosition);
     }
 }
 
