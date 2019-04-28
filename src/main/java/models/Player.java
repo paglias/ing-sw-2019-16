@@ -407,8 +407,6 @@ public class Player {
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
-     * @param currentPosition     the current position
-     * @param currentPlayer       the current player
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot TODO Associate to the current square?
      */
@@ -584,8 +582,7 @@ public class Player {
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot
      */
-    public void grabAction(PowerUpsDeck currentPowerUpsDeck,
-                           WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
+    public void grabAction(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
         if (getAdrenaline() == 0) {
             setMoveCounter(1);
             grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
@@ -598,16 +595,20 @@ public class Player {
     }
     public void shootAction(){
     }
-    public void finalFrenzyBeforeMove(){
-
+    public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
+        setMoveCounter(3);
+        grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
     }
     public void finalFrenzyBeforeShoot(){
     }
     public void finalFrenzyAfterMove(Square newPosition){
         setMoveCounter(4);
         move(newPosition);
+        decreaseActionCounter();
     }
-    public void finalFrenzyAfterGrab(){
+    public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
+        setMoveCounter(2);
+        grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
     }
     public void finalFrenzyAfterShoot(){
     }
