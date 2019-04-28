@@ -378,14 +378,15 @@ public class Player {
     }
 
     /**
-     * Move player.
+     * Move player, generic move function.
+     * Called by particular actions if a move is possible once that action has been chosen.
      *
      * @param newPosition     the new position
      * @param currentPosition the current position
      * @param currentPlayer   the current player
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
-    public void movePlayer(Square newPosition, Square currentPosition, Player currentPlayer) {
+    private void movePlayer(Square newPosition, Square currentPosition, Player currentPlayer) {
         while (currentPlayer.getMoveCounter() != 0) {
             if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
                 System.out.println("Move is not possible");
@@ -440,10 +441,16 @@ public class Player {
         decreaseActionCounter();
     }
 
-    public void moveAction(Player currentPlayer, GameBoard currentGameBoard){
-        if (currentPlayer.getAdrenaline()==0){
-            currentPlayer.setMoveCounter(3);
-        }
+    /**
+     * Move action. Particular move action.
+     *
+     * @param currentPlayer   the current player
+     * @param newPosition     the new position
+     * @param currentPosition the current position
+     */
+    public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
+        currentPlayer.setMoveCounter(3);
+        currentPlayer.movePlayer(newPosition, currentPosition, currentPlayer);
     }
 
     /**
