@@ -581,19 +581,18 @@ public class Player {
     /**
      * Grab action. Specific move action, non finalFrenzy
      *
-     * @param currentPlayer       the current player
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot
      */
-    public void grabAction(Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
+    public void grabAction(PowerUpsDeck currentPowerUpsDeck,
                            WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
-        if (currentPlayer.getAdrenaline() == 0) {
-            currentPlayer.setMoveCounter(1);
-            currentPlayer.grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        if (getAdrenaline() == 0) {
+            setMoveCounter(1);
+            grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         }
-        if (currentPlayer.getAdrenaline() == 1) {
-            currentPlayer.setMoveCounter(2);
-            currentPlayer.grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        if (getAdrenaline() == 1) {
+            setMoveCounter(2);
+            grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         }
         decreaseActionCounter();
     }
