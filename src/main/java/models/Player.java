@@ -505,32 +505,7 @@ public class Player {
             if (givenPoints != null && !givenPoints.isEmpty()) {
                 while (!givenPoints.isEmpty()) {
 
-                    //get the last item in givenPoints, the highest
-                    int deathPoints = givenPoints.get(givenPoints.size() - 1);
-                    int temp = 0;
-                    int temp1 = 0;
-
-                    //loop through players, count occurences of "Player" in the damage arraylist, temp= the highest
-                    for (Player player : currentGameBoard.getPlayers()) {
-                        int occurrences = Collections.frequency(damage, player);
-                        //TODO override equals? Assign points based on occurences?
-                        if (occurrences > temp) {
-                            temp = occurrences;
-                        }
-                        //if 2 players have done the same damage to the player
-                        if (occurrences == temp) {
-                            temp1 = occurrences;
-                        }
-                    }
-                    //loop through players, if the occurence of a player == temp, that players gets the highest points
-                    for (Player player : currentGameBoard.getPlayers()) {
-                        if (Collections.frequency(damage, player) == temp) {
-                            if (temp == temp1) {
-                                //TODO condition always true??
-                            }
-                            player.addToTotalPoints(deathPoints);
-                        }
-                    }
+                    //TODO SCORING
                 }
             } else {
                 //if givenPoints is empty, the players has been killed more than 6 times,
@@ -550,6 +525,11 @@ public class Player {
         }
     }
 
+    /**
+     * Reload. Calls reload method on the weapon the user wants to reload.
+     *
+     * @param weaponToReload the weapon to reload
+     */
     public void reload (Weapon weaponToReload) {
         if (getCubes().containsAll(weaponToReload.getRechargeCost())) {
             weaponToReload.reload();
@@ -558,11 +538,7 @@ public class Player {
         }
     }
 
-
-
     //Specific action possibilities
-
-
 
     /**
      * Move action. Specific move action, non finalFrenzy
