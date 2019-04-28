@@ -594,12 +594,26 @@ public class Player {
         decreaseActionCounter();
     }
     public void shootAction(){
+        if (getAdrenaline()<=1){
+            setMoveCounter(0);
+            shootPlayer();
+        }
+        else{
+            setMoveCounter(1);
+            shootPlayer();
+        }
+        decreaseActionCounter();
     }
     public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
         setMoveCounter(3);
         grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        decreaseActionCounter();
     }
-    public void finalFrenzyBeforeShoot(){
+    public void finalFrenzyBeforeShoot(Weapon weaponToReload){
+        setMoveCounter(2);
+        reload(weaponToReload);
+        shootPlayer();
+        decreaseActionCounter();
     }
     public void finalFrenzyAfterMove(Square newPosition){
         setMoveCounter(4);
@@ -609,8 +623,10 @@ public class Player {
     public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon){
         setMoveCounter(2);
         grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        decreaseActionCounter();
     }
     public void finalFrenzyAfterShoot(){
+
     }
 }
 
