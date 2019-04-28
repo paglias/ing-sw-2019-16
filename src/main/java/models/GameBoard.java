@@ -177,6 +177,7 @@ public class GameBoard {
         for (Player player : players)
             if (player.getDamage().isEmpty()) {
                 player.setGivenPoints(points);
+                player.setAdrenaline(0);
             }
     }
 }
