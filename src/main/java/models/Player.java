@@ -25,8 +25,8 @@ public class Player {
     private int moveCounter;                //TODO restore movecounter at startturn?
     private int actionCounter;              //remaining actions per turn
     private int adrenaline;                 //adrenaline counter, max 2
-    private int totalPoints = 0;                //total points of the current player
-    private boolean isDead = false;                 //true is the player is currently dead, stays dead until next turn
+    private int totalPoints = 0;            //total points of the current player
+    private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
 
 
     /**
@@ -386,19 +386,21 @@ public class Player {
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
     public void movePlayer(Square newPosition, Square currentPosition, Player currentPlayer) {
-        if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
-            System.out.println("Move is not possible");
-        } else {
-            for (Square square : currentPosition.getCanAccessDirectly()) {
-                if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
-                    currentPlayer.setPosition(newPosition);
-                    currentPlayer.decreaseMoveCounter();
-                } else {
-                    System.out.println("Move is not Possible");
+        while (currentPlayer.getMoveCounter() != 0) {
+            if (currentPlayer.getMoveCounter() <= 0 || currentPlayer.getMoveCounter() > 2) {
+                System.out.println("Move is not possible");
+            } else {
+                for (Square square : currentPosition.getCanAccessDirectly()) {
+                    if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
+                        currentPlayer.setPosition(newPosition);
+                        currentPlayer.decreaseMoveCounter();
+                    } else {
+                        System.out.println("Move is not Possible");
+                    }
                 }
             }
+            currentPlayer.decreaseMoveCounter();
         }
-        currentPlayer.decreaseMoveCounter();
     }
 
     /**
@@ -438,6 +440,12 @@ public class Player {
         decreaseActionCounter();
     }
 
+    public void moveAction(Player currentPlayer, GameBoard currentGameBoard){
+        if (currentPlayer.getAdrenaline()==0){
+            currentPlayer.setMoveCounter(3);
+        }
+    }
+
     /**
      * Shoot player. Adds damage, marks, moves players based on weapon effect
      *
@@ -464,7 +472,7 @@ public class Player {
             }
         }
         //if weapon is loaded, use weapon effects
-        //TODO WAITING FOR WEAPONS EFFECT
+        //TODO GENERIC "USE WEAPON"
         if (currentPlayer.getWeapons().isEmpty()) {
             System.out.println("No weapon is available");
         } else {
