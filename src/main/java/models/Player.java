@@ -414,33 +414,33 @@ public class Player {
      */
 
     //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT
-    public void grabItem(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
-                         WeaponsSlot currentWeaponsSlot) {
+    public void grabItem(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
+        Square currentPosition = getPosition();
+
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
-            currentPlayer.addWeapon((currentWeaponsSlot.weaponChoice()));
+            currentWeaponsSlot.weaponChoice(newWeapon);
         } else {
             //if the ammo picked has a powerup, add it to your powerups
             if (currentPosition.getAmmo().getHasPowerUp()) {
-                currentPlayer.addPowerUp((PowerUp) currentPowerUpsDeck.pick());
+                addPowerUp((PowerUp) currentPowerUpsDeck.pick());
             } else {
                 //if the ammo picked has ammocubes, add them to your cubes
                 // and decrease the cubes in the ammo card you grabbed
                 while (currentPosition.getAmmo().getBlueCubes() != 0) {
-                    currentPlayer.addCube(Card.Color.BLUE);
+                    addCube(Card.Color.BLUE);
                     currentPosition.getAmmo().decreaseBlueCubes();
                 }
                 while ((currentPosition.getAmmo().getYellowCubes() != 0)) {
-                    currentPlayer.addCube(Card.Color.YELLOW);
+                    addCube(Card.Color.YELLOW);
                     currentPosition.getAmmo().decreaseYellowCubes();
                 }
                 while ((currentPosition.getAmmo().getRedCubes() != 0)) {
-                    currentPlayer.addCube(Card.Color.RED);
+                    addCube(Card.Color.RED);
                     currentPosition.getAmmo().decreaseRedCubes();
                 }
             }
         }
-        decreaseActionCounter();
     }
 
     /**
@@ -453,11 +453,12 @@ public class Player {
      * @param newPosition      the new position
      */
 
-    public void shootPlayer(Square currentPosition, Player currentPlayer, GameBoard currentGameBoard,
+    public void shootPlayer(GameBoard currentGameBoard,
                             Player playerTarget, Square newPosition) {
 
         //initial check if any player can be shot
         //temp value to skip comparing currentplayer to currentplayer in players
+        Square currentPosition = getPosition();
         boolean isCurrent = true;
         for (Player otherPlayer : currentGameBoard.getPlayers()) {
             if (!isCurrent) {
@@ -471,10 +472,10 @@ public class Player {
         }
         //if weapon is loaded, use weapon effects
         //TODO GENERIC "USE WEAPON"
-        if (currentPlayer.getWeapons().isEmpty()) {
+        if (getWeapons().isEmpty()) {
             System.out.println("No weapon is available");
         } else {
-            for (Weapon availableWeapon : currentPlayer.getWeapons()) {
+            for (Weapon availableWeapon : getWeapons()) {
                 if (availableWeapon.isLoaded()) {
                     availableWeapon.dealDamage(playerTarget);
                     availableWeapon.addMark(playerTarget);
@@ -537,7 +538,7 @@ public class Player {
                 //if givenPoints is empty, the players has been killed more than 6 times,
                 // he still awards 1 point to the killer
                 int deathPoints = 1;
-                currentPlayer.addToTotalPoints(deathPoints);
+                addToTotalPoints(deathPoints);
             }
             //if there are no more skulls, activate finalfrenzy
             //TODO SHOULD THE CONTROLLER DO THIS?
@@ -547,12 +548,12 @@ public class Player {
             }
         }
         if (playerTarget.getDamage().size() > 11) {
-            playerTarget.addMark(currentPlayer);
+            playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
         }
     }
 
-    public void reload(Player currentPlayer, Weapon weaponToReload) {
-        if (currentPlayer.getCubes().containsAll(weaponToReload.getRechargeCost())) {
+    public void reload (Weapon weaponToReload) {
+        if (getCubes().containsAll(weaponToReload.getRechargeCost())) {
             weaponToReload.reload();
         } else {
             System.out.println("Weapon cannot be reloaded");
@@ -569,26 +570,41 @@ public class Player {
     public void moveAction(Player currentPlayer, Square newPosition, Square currentPosition) {
         currentPlayer.setMoveCounter(3);
         currentPlayer.move(newPosition);
+        currentPlayer.decreaseActionCounter();
     }
 
     /**
      * Grab action. Particolar move action
      *
-     * @param currentPosition     the current position
      * @param currentPlayer       the current player
      * @param currentPowerUpsDeck the current power ups deck
      * @param currentWeaponsSlot  the current weapons slot
      */
-    public void grabAction(Square currentPosition, Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
-                           WeaponsSlot currentWeaponsSlot) {
+    public void grabAction(Player currentPlayer, PowerUpsDeck currentPowerUpsDeck,
+                           WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
         if (currentPlayer.getAdrenaline() == 0) {
             currentPlayer.setMoveCounter(1);
-            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
+            currentPlayer.grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         }
         if (currentPlayer.getAdrenaline() == 1) {
             currentPlayer.setMoveCounter(2);
-            currentPlayer.grabItem(currentPosition, currentPlayer, currentPowerUpsDeck, currentWeaponsSlot);
+            currentPlayer.grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
         }
+        decreaseActionCounter();
+    }
+    public void shootAction(){
+
+    }
+    public void finalFrenzyBeforeMove(){
+
+    }
+    public void finalFrenzyBeforeShoot(){
+    }
+    public void finalFrenzyAfterMove(){
+    }
+    public void finalFrenzyAfterGrab(){
+    }
+    public void finalFrenzyAfterShoot(){
     }
 }
 

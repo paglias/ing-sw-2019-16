@@ -31,9 +31,9 @@ public class WeaponsSlot {
      * @return the weapon chosen
      */
     //TODO CHECK THIS AGAIN
-    public void weaponChoice(Weapon weaponChosen) {
+    public Weapon weaponChoice (Weapon weaponChosen) {
         if (weapons.contains(weaponChosen)) {
-            player.getWeapons().add(weaponChosen);
+            return weaponChosen;
         } else {
             throw new IllegalArgumentException("That weapon is not here");
         }
