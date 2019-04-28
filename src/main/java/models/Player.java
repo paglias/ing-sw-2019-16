@@ -44,7 +44,7 @@ public class Player {
      *
      * @return the total points
      */
-    public int getTotalPoints () {
+    public int getTotalPoints() {
         return totalPoints;
     }
 
@@ -64,7 +64,7 @@ public class Player {
      *
      * @param color the color
      */
-    public void setColor (Color color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -73,7 +73,7 @@ public class Player {
      *
      * @return the action counter
      */
-    public int getActionCounter () {
+    public int getActionCounter() {
         return actionCounter;
     }
 
@@ -147,7 +147,7 @@ public class Player {
      *
      * @param cubeColor the cube color
      */
-    public void removeCube (Card.Color cubeColor) {
+    public void removeCube(Card.Color cubeColor) {
         if (cubes.contains(cubeColor)) {
             this.cubes.remove(cubeColor);
         } else {
@@ -212,7 +212,7 @@ public class Player {
      *
      * @return the marks
      */
-    public ArrayList<Player> getMarks () {
+    public ArrayList<Player> getMarks() {
         return marks;
     }
 
@@ -240,7 +240,7 @@ public class Player {
      *
      * @param powerUp the power up
      */
-    public void removePowerUp (PowerUp powerUp) {
+    public void removePowerUp(PowerUp powerUp) {
         this.powerUps.remove(powerUp);
     }
 
@@ -249,7 +249,7 @@ public class Player {
      *
      * @return the power ups
      */
-    public ArrayList<PowerUp> getPowerUps () {
+    public ArrayList<PowerUp> getPowerUps() {
         return powerUps;
     }
 
@@ -301,7 +301,7 @@ public class Player {
      *
      * @return the n deaths
      */
-    public int getNDeaths () {
+    public int getNDeaths() {
         return nDeaths;
     }
 
@@ -319,7 +319,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void addWeapon (Weapon weapon) {
+    public void addWeapon(Weapon weapon) {
         if (this.weapons.size() <= 3) { // TODO allowed 4?
             this.weapons.add(weapon);
         } else {
@@ -332,7 +332,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapon (Weapon weapon) {
+    public void removeWeapon(Weapon weapon) {
         this.weapons.remove(weapon);
     }
 
@@ -350,7 +350,7 @@ public class Player {
      *
      * @param damagingPlayer the damaging player
      */
-    public void addDamage (Player damagingPlayer) {
+    public void addDamage(Player damagingPlayer) {
         if (damage.size() < 12) {
             this.damage.add(damagingPlayer);
         } else {
@@ -373,7 +373,10 @@ public class Player {
      *
      * @return if dead
      */
-    public boolean isDead () { return isDead; }
+    public boolean isDead() {
+        return isDead;
+    }
+
     /**
      * Move player.
      *
@@ -542,13 +545,12 @@ public class Player {
         }
     }
 
-    public void reload (Player currentPlayer, Weapon weaponToReload) {
-        for (Card.Color rechargeAmmo : weaponToReload.getRechargeCost()) {
-            if (currentPlayer.getCubes().contains(rechargeAmmo)) {
-                weaponToReload.reload();
-            } else {
-                System.out.println("Weapon cannot be reloaded");
-            }
+    public void reload(Player currentPlayer, Weapon weaponToReload) {
+        if (currentPlayer.getCubes().containsAll(weaponToReload.getRechargeCost())) {
+            weaponToReload.reload();
+        }
+        else{
+            System.out.println("Weapon cannot be reloaded");
         }
     }
 }
