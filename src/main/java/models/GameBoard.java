@@ -25,37 +25,6 @@ public class GameBoard {
     private ArrayList<Square> squares;
 
     /**
-     * Gets skulls.
-     *
-     * @return the skulls
-     */
-    public int getSkulls() {
-        return skulls.getNRemaining();
-    }
-
-    /**
-     * Sets skulls at the start of the game.
-     *
-     * @param skulls the skulls
-     */
-    public void setGameSkulls(int skulls) {
-        this.skulls.setNRemaining(skulls);
-    }
-
-    /**
-     * Decreasen skulls on the gameboard, every time a death happens.
-     *
-     * @return the int
-     */
-    public int decreasenSkulls() {
-        if (skulls.getNRemaining() > 0) {
-            return skulls.decreaseSkullsRemaining();
-        }
-        else {
-            throw new IllegalArgumentException("Invalid Skull Value");
-        }
-    }
-    /**
      * Gets players.
      *
      * @return the players

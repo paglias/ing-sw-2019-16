@@ -519,10 +519,10 @@ public class Player {
             }
             //if there are no more skulls, activate finalfrenzy
             //TODO SHOULD THE CONTROLLER DO THIS?
-            currentGameBoard.decreasenSkulls();
-            if (currentGameBoard.getSkulls() == 0) {
+            // TODO currentGameBoard.skulls.decreaseSkullsRemaining() decreasenSkulls();
+            /*if (currentGameBoard.getSkulls() == 0) {
                 currentGameBoard.finalFrenzy();
-            }
+            }*/
         }
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
