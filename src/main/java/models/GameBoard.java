@@ -5,9 +5,9 @@ import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -29,7 +29,7 @@ public class GameBoard {
      *
      * @return the players
      */
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -38,14 +38,46 @@ public class GameBoard {
 
         weaponsDeck = new WeaponsDeck();
         squares = new ArrayList<>();
-        try {
-            squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
 
         powerUpsDeck = new PowerUpsDeck();
         ammoDeck = new AmmoDeck();
+    }
+
+    /**
+     * Gets power ups deck.
+     *
+     * @return the power ups deck
+     */
+    public PowerUpsDeck getPowerUpsDeck () {
+        return powerUpsDeck;
+    }
+
+    /**
+     * Gets ammo deck.
+     *
+     * @return the ammo deck
+     */
+    public AmmoDeck getAmmoDeck() {
+        return ammoDeck;
+    }
+
+    /**
+     * Gets weapons deck.
+     *
+     * @return the weapons deck
+     */
+    public WeaponsDeck getWeaponsDeck() {
+        return weaponsDeck;
+    }
+
+    /**
+     * Gets squares.
+     *
+     * @return the squares
+     */
+    public List<Square> getSquares() {
+        return squares;
     }
 
     /**
@@ -53,7 +85,7 @@ public class GameBoard {
      * Initiates values of the new player
      */
     //Creates new player.
-    public void createPlayer() {
+    public void createPlayer() { // TODO controller
         //Assign nickname
         Player newPlayer = new Player();
         Scanner scanner = new Scanner(System.in);
@@ -101,11 +133,9 @@ public class GameBoard {
      * @return the player
      */
     public void nextPlayer(Player currentPlayer) {
-        int i;
-        i = players.indexOf(currentPlayer);
-        i++;
+        int i = players.indexOf(currentPlayer);
         try {
-            players.get(i);
+            players.get(i++);
         } catch (IndexOutOfBoundsException e) {
             players.get(0).setActive(true);
         }
@@ -119,34 +149,38 @@ public class GameBoard {
      * Changes given points for undamaged players.
      * Sets adrenaline to zero for undamaged players
      */
-    public void finalFrenzy() {
+    public void finalFrenzy () {
         isFinalFrenzy = true;
+
         //creates new points awarded for killshot
         ArrayList<Integer> points = new ArrayList<>();
         points.add(1);
         points.add(1);
         points.add(1);
         points.add(5);
-        //decides action counter based on firstPlayer
-        //sets first player
-        Player firstPlayer = new Player();  //temporary player object, to assign firstPlayer reference
+
+        // decides action counter based on firstPlayer
+        // sets first player
+        Player firstPlayer = players.get(0);  //temporary set first player as the actual first
+
         for (Player player : players) {
-            if (player.getFirstPlayer())
+            if (player.getFirstPlayer()) {
                 firstPlayer = player;
-            //TODO IS IT POSSIBLE WITHOUT CREATING ANOTHER NEW PLAYER?
+                break;
+            }
         }
+
         for (Player player : players) {
             if (players.indexOf(player) < players.indexOf(firstPlayer)) {
                 player.setActionCounter(2);
-
             } else {
                 player.setActionCounter(1);
             }
-        }
-        for (Player player : players)
+
             if (player.getDamage().isEmpty()) {
                 player.setGivenPoints(points);
                 player.setAdrenaline(0);
             }
+        }
     }
 }

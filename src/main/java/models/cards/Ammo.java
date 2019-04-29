@@ -7,28 +7,6 @@ public class Ammo extends Card {
     protected Boolean hasPowerUp;
 
     /**
-     * Decrease yellow cubes.
-     */
-    public void decreaseYellowCubes() {
-        // TODO for this and the others, error or anyway prevents cubs from going below 0
-        this.nYellowCubes--;
-    }
-
-    /**
-     * Decrease blue cubes.
-     */
-    public void decreaseBlueCubes() {
-        this.nBlueCubes--;
-    }
-
-    /**
-     * Decrease red cubes.
-     */
-    public void decreaseRedCubes() {
-        this.nRedCubes--;
-    }
-
-    /**
      * Gets boolean has power up.
      *
      * @return the boolean has power up

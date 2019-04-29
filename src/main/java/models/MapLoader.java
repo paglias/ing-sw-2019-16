@@ -19,10 +19,16 @@ public class MapLoader {
         int[] canAccess;
     }
 
-    static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck) throws IOException {
+    static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck) {
         Gson gson = new Gson();
+        ParsedSquare[] parsedSquares;
 
-        ParsedSquare[] parsedSquares = gson.fromJson(new FileReader(MapLoader.class.getResource("/Maps/map" + mapNumber + ".json").getPath()), ParsedSquare[].class);
+        try {
+             parsedSquares = gson.fromJson(new FileReader(MapLoader.class.getResource("/Maps/map" + mapNumber + ".json").getPath()), ParsedSquare[].class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalStateException("Error loading map");
+        }
         ArrayList<Square> squares = new ArrayList<>();
 
         for (ParsedSquare parsedSquare : parsedSquares) {
