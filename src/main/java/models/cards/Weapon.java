@@ -47,7 +47,6 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> primaryEffect;
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
-    private Color color;
     private Boolean isSpawnPoint;
 
     // Weapons are loaded when created / picked from a deck
@@ -86,8 +85,8 @@ public class Weapon extends Card {
                     }
                 }
             } catch (java.io.FileNotFoundException e) {
-                // TODO refactor
-                System.out.println(e);
+                e.printStackTrace();
+                throw new IllegalArgumentException("Problem loading weapons from file.");
             }
 
             weaponsLoadedFromFile = true;

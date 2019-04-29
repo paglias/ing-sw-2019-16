@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class WeaponsSlot {
     private Square.Color color;
     private ArrayList<Weapon> weapons;
-    private Player player;
 
     /**
      * Instantiates a new Weapons slot for each spawn point
@@ -26,25 +25,36 @@ public class WeaponsSlot {
     }
 
     /**
-     * Receives user input on weapon of choice.
+     * Pick a weapon from the slot, remove it and pass it to the player.
      *
      * @return the weapon chosen
      */
-    //TODO CHECK THIS AGAIN
     public Weapon weaponChoice (Weapon weaponChosen) {
         if (weapons.contains(weaponChosen)) {
+            weapons.remove(weaponChosen);
             return weaponChosen;
         } else {
             throw new IllegalArgumentException("That weapon is not here");
         }
     }
 
-        /**
-         * Get the weapons inside the slot.
-         *
-         * @return the weapons
-         */
-        public ArrayList<Weapon> getWeapons () {
-            return weapons;
+    /**
+     * Refill the weapon slot after a weapon has been picked.
+     */
+    public void refill (WeaponsDeck weaponsDeck) {
+        int missing = 3 - weapons.size();
+        for (int i = 0; i < missing; i++) {
+            weapons.add((Weapon) weaponsDeck.pick());
         }
     }
+
+    /**
+     * Get the weapons inside the slot.
+     *
+     * @return the weapons
+     */
+    public ArrayList<Weapon> getWeapons () {
+        return weapons;
+    }
+
+}

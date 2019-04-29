@@ -1,14 +1,15 @@
 package models;
 
+import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
+import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Player {
     private String nickname;
@@ -134,7 +135,7 @@ public class Player {
      *
      * @return the cubes
      */
-    public ArrayList<Card.Color> getCubes() {
+    public List<Card.Color> getCubes() {
         return cubes;
     }
 
@@ -143,7 +144,8 @@ public class Player {
      *
      * @param cubeColor the cube color
      */
-    public void addCube(Card.Color cubeColor) {  //TODO MAXCUBES PER COLOR IS 3
+    public void addCube(Card.Color cubeColor) {
+        // TODO MAXCUBES PER COLOR IS 3
         this.cubes.add(cubeColor);
     }
 
@@ -393,6 +395,7 @@ public class Player {
      * @param newPosition the new position
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
+    // TODO multiple moves
     public void move(Square newPosition) {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
@@ -411,40 +414,51 @@ public class Player {
             }
         }
     }
+
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
-     * @param currentPowerUpsDeck the current power ups deck
-     * @param currentWeaponsSlot  the current weapons slot TODO Associate to the current square?
+     * @param powerUpsDeck the current power ups deck
+     * @param ammoDeck the current ammo deck
+     * @param weaponsSlot  the current weapons slot TODO Associate to the current square?
+     * @param weaponToPick the weapon to pick
      */
 
-    //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT
-    public void grabItem(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot, Weapon newWeapon) {
+    //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT? save gameboard inside player? since it's always the same
+    public void grabItem(PowerUpsDeck powerUpsDeck, AmmoDeck ammoDeck, WeaponsSlot weaponsSlot, Weapon weaponToPick) {
         Square currentPosition = getPosition();
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
-            currentWeaponsSlot.weaponChoice(newWeapon);
+            addWeapon(weaponsSlot.weaponChoice(weaponToPick));
         } else {
+            Ammo ammo = currentPosition.getAmmo();
+
             //if the ammo picked has a powerup, add it to your powerups
-            if (currentPosition.getAmmo().getHasPowerUp()) {
-                addPowerUp((PowerUp) currentPowerUpsDeck.pick());
-            } else {
-                //if the ammo picked has ammocubes, add them to your cubes
-                // and decrease the cubes in the ammo card you grabbed
-                while (currentPosition.getAmmo().getBlueCubes() != 0) {
-                    addCube(Card.Color.BLUE);
-                    currentPosition.getAmmo().decreaseBlueCubes();
-                }
-                while ((currentPosition.getAmmo().getYellowCubes() != 0)) {
-                    addCube(Card.Color.YELLOW);
-                    currentPosition.getAmmo().decreaseYellowCubes();
-                }
-                while ((currentPosition.getAmmo().getRedCubes() != 0)) {
-                    addCube(Card.Color.RED);
-                    currentPosition.getAmmo().decreaseRedCubes();
-                }
+            if (ammo.getHasPowerUp()) {
+                addPowerUp((PowerUp) powerUpsDeck.pick());
             }
+
+            //if the ammo picked has ammocubes, add them to your cubes
+            int blueCubes = ammo.getBlueCubes();
+            while (blueCubes != 0) {
+                addCube(Card.Color.BLUE);
+                blueCubes--;
+            }
+
+            int yellowCubes = ammo.getYellowCubes();
+            while ((yellowCubes != 0)) {
+                addCube(Card.Color.YELLOW);
+                yellowCubes--;
+            }
+
+            int redCubes = ammo.getRedCubes();
+            while ((redCubes != 0)) {
+                addCube(Card.Color.RED);
+                redCubes--;
+            }
+
+            ammoDeck.discard(ammo);
         }
     }
 
@@ -571,17 +585,18 @@ public class Player {
      * @param currentWeaponsSlot  the current weapons slot
      */
     public void grabAction(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
+                           AmmoDeck ammoDeck,
                            Weapon newWeapon, Square newPosition) {
         if (getAdrenaline() == 0) {
             setMoveCounter(1);
             while (getMoveCounter()>0) {
                 move(newPosition);
             }
-            grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+            grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         }
         if (getAdrenaline() == 1) {
             setMoveCounter(2);
-            grabItem(currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+            grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         }
         decreaseActionCounter();
     }
@@ -613,12 +628,12 @@ public class Player {
      * @param newWeapon           the new weapon
      */
     public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
-                                      Weapon newWeapon, Square newPosition){
+                                      Weapon newWeapon, Square newPosition, AmmoDeck ammoDeck){
         setMoveCounter(3);
         while (getMoveCounter()>0) {
             move(newPosition);
         }
-        grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        grabItem (currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
@@ -659,12 +674,13 @@ public class Player {
      * @param newWeapon           the new weapon
      */
     public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
+                                     AmmoDeck ammoDeck,
                                      Weapon newWeapon, Square newPosition){
         setMoveCounter(2);
         while (getMoveCounter()>0) {
             move(newPosition);
         }
-        grabItem (currentPowerUpsDeck, currentWeaponsSlot, newWeapon);
+        grabItem (currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
