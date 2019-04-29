@@ -155,8 +155,12 @@ public class Weapon extends Card {
         //see Player.reload method
     }
 
+    /**
+     * @param damagingPlayer
+     * @param playerTarget
+     */
     public void shoot(Player damagingPlayer,Player playerTarget){
-        if(playerTarget.getPosition().equals(damagingPlayer.getPosition())) {
+        if(playerTarget.getPosition()==damagingPlayer.getPosition()) {
             damagingPlayer.addDamage(playerTarget);
         }
         else throw new IllegalArgumentException("Not usable method");
@@ -290,16 +294,11 @@ public class Weapon extends Card {
     public void shootDirection(Player damagingPlayer, Player playerTarget) {
         Square position= damagingPlayer.getPosition();
         Square targetPosition= playerTarget.getPosition();
-        for(int i=0; i< 12;i++) {
             if ((position.sameDirection(targetPosition) == true) && position.getColor() == targetPosition.getColor() &&
                     position.getCanView() == targetPosition.getCanView()) {
                 damagingPlayer.addDamage(playerTarget);
             }
             else throw new IllegalArgumentException("Not usable method");
-        }
-
-
-
     }
     public void shootTargetView(Player damagingPlayer,Player playerTarget,Player secondTarget) {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
@@ -335,17 +334,13 @@ public class Weapon extends Card {
     public void attractTarget(Player damagingPlayer, Player playerTarget, Square newPosition) {
         Square position= damagingPlayer.getPosition();
         Square targetPosition= playerTarget.getPosition();
-        for(int i=0; i< 12;i++){
-            if((position.sameDirection(targetPosition)==true)&& position.getColor()==targetPosition.getColor() &&
+        if((position.sameDirection(targetPosition)==true)&& position.getColor()==targetPosition.getColor() &&
                     position.getCanView()==targetPosition.getCanView()){
                 playerTarget.move(newPosition);
             }
             else throw new IllegalArgumentException("Not usable method");
-        }
-
-
-
     }
+
     public void ShootCantSee(Player damagingPlayer, Player playerTarget){
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
