@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Square {
+    private int position;
     public enum Color {
         YELLOW,
         RED,
@@ -34,6 +35,41 @@ public class Square {
     public Square (Color squareColor, boolean isSpawnPoint) {
         this.color = squareColor;
         this.isSpawnPoint = isSpawnPoint;
+    }
+
+    /**
+     * Set position.
+     *
+     * @param position the position
+     */
+    public void setPosition(int position){
+        this.position=position;
+    }
+
+    /**
+     * Get position int.
+     *
+     * @return the int
+     */
+    public int getPosition(){return this.position;}
+
+    public boolean sameDirection(Square targetSquare){
+        int position1= this.getPosition();
+        int position2= targetSquare.getPosition();
+        int indexDifference = this.getPosition()-targetSquare.getPosition();
+            if(indexDifference%4==0){
+                return true;
+            }
+            if(position1>=0 && position1<=3){
+                return position2>=0 && position2<=3;
+            }
+            if(position1>=4 && position1<=7){
+                return position2>=4 && position2<=7;
+            }
+            if(position1>=8 && position1<=11){
+            return position2>=8 && position2<=11;
+            }
+            return false;
     }
 
     /**

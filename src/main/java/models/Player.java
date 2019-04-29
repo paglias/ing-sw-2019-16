@@ -61,6 +61,7 @@ public class Player {
         this.givenPoints.clear();
         this.givenPoints = givenPoints;
     }
+    public Color GetColor() {return this.color;}
 
     /**
      * Sets color. USED TO ASSIGN COLOR, GUI TODO used where?
