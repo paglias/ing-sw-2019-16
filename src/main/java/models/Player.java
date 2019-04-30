@@ -24,7 +24,6 @@ public class Player {
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes = new ArrayList<>();    //ammo available
     private ArrayList<Integer> givenPoints = new ArrayList<>(); // Points given at next death
-    private ArrayList<String> points;       // TODO what is this? why not integer?
     private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
     private ArrayList<Player> damage = new ArrayList<>();       //list of damage amount, depending on player color
     private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
