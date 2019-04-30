@@ -10,6 +10,10 @@ import models.decks.PowerUpsDeck;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.*;
 
 public class Player {
     private String nickname;
@@ -19,7 +23,7 @@ public class Player {
     private int nDeaths = 0;
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes = new ArrayList<>();    //ammo available
-    private ArrayList<Integer> givenPoints; // Points given at next death
+    private ArrayList<Integer> givenPoints = new ArrayList<>(); // Points given at next death
     private ArrayList<String> points;       // TODO what is this? why not integer?
     private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
     private ArrayList<Player> damage = new ArrayList<>();       //list of damage amount, depending on player color
@@ -31,6 +35,21 @@ public class Player {
     private int adrenaline;                 //adrenaline counter, max 2
     private int totalPoints = 0;            //total points of the current player
     private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
+
+    //EQUALS OVERRIDE OF PLAYERS
+    @Override
+    public boolean equals(Object o) {
+        Player p;
+        if (!(o instanceof Player)) {
+            return false;
+        } else {
+            p = (Player) o;
+            if (this.nickname.equals(p.getNickname())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Adds the value received to the total points of the player.
@@ -61,7 +80,10 @@ public class Player {
         this.givenPoints.clear();
         this.givenPoints = givenPoints;
     }
-    public Color GetColor() {return this.color;}
+
+    public Color GetColor() {
+        return this.color;
+    }
 
     /**
      * Sets color. USED TO ASSIGN COLOR, GUI TODO used where?
@@ -413,7 +435,7 @@ public class Player {
      * Grab item, either weapon, power up or ammo cubes.
      *
      * @param powerUpsDeck the current power ups deck
-     * @param ammoDeck the current ammo deck
+     * @param ammoDeck     the current ammo deck
      * @param weaponsSlot  the current weapons slot TODO Associate to the current square?
      * @param weaponToPick the weapon to pick
      */
@@ -508,8 +530,8 @@ public class Player {
                 playerTarget.increaseAdrenaline();
             }
         }
-        //Player death scoring
-        if (playerTarget.getDamage().size() > 10) {
+        /*Player death scoring
+        if (playerTarget.getDamage().size() >= 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
 
@@ -517,14 +539,43 @@ public class Player {
             //check if givenPoints is empty
             if (givenPoints != null && !givenPoints.isEmpty()) {
                 Iterator<Integer> iterator = givenPoints.iterator();
-                while (!givenPoints.isEmpty() && iterator.hasNext()) {
-                    int deathPoints = givenPoints.get(givenPoints.size() - 1);
-                    getDamage().stream();
+                int n = 1;
+                while (!givenPoints.isEmpty() && iterator.hasNext() && n != 0) {
+                    int deathPoints = givenPoints.get(givenPoints.size() - n);
 
-                    //TODO
+                    //OPTION ONE. STREAMS
 
-                    givenPoints.remove(givenPoints.size()-1);
+
+                    for (Player otherPlayer : currentGameBoard.getPlayers()) {
+                        long i = getDamage().stream()
+                                .filter(x -> otherPlayer == x)
+                                .count();
+                        //TODO not working, cant compare the players, temp variables?
+                    }
+
+                    //OPTION 2
+
+                    Map<String, Long> counting = getDamage().stream().collect(
+                            Collectors.groupingBy(Player::getNickname, Collectors.counting()));
+
+                    givenPoints.remove(givenPoints.size() - 1);
+
+                    //OPTION 3
+                    int temp = 0;
+                    Iterator<Player> iteratorOnPlayers = currentGameBoard.getPlayers().iterator();
+                    Player p = iteratorOnPlayers.next();
+                    while (iteratorOnPlayers.hasNext()) {
+                        //Finds the most occurences of that particular player
+                        for (Player player : currentGameBoard.getPlayers()) {
+                            int c = Collections.frequency(getDamage(), p);
+                            if (c > temp) {
+                                temp = c;
+                            }
+                        }
+                        iteratorOnPlayers.remove();
+                    }
                 }
+                n--;
             } else {
                 //if givenPoints is empty, the players has been killed more than 6 times,
                 // he still awards 1 point to the killer
@@ -537,7 +588,7 @@ public class Player {
             /*if (currentGameBoard.getSkulls() == 0) {
                 currentGameBoard.finalFrenzy();
             }*/
-        }
+
         if (playerTarget.getDamage().size() > 11) {
             playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
         }
@@ -548,7 +599,7 @@ public class Player {
      *
      * @param weaponToReload the weapon to reload
      */
-    public void reload (Weapon weaponToReload) {
+    public void reload(Weapon weaponToReload) {
         if (getCubes().containsAll(weaponToReload.getRechargeCost())) {
             weaponToReload.reload();
         } else {
@@ -566,7 +617,7 @@ public class Player {
      */
     public void moveAction(Square newPosition, Square currentPosition) {
         setMoveCounter(3);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
         decreaseActionCounter();
@@ -583,7 +634,7 @@ public class Player {
                            Weapon newWeapon, Square newPosition) {
         if (getAdrenaline() == 0) {
             setMoveCounter(1);
-            while (getMoveCounter()>0) {
+            while (getMoveCounter() > 0) {
                 move(newPosition);
             }
             grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
@@ -599,14 +650,13 @@ public class Player {
      * Shoot action. Specific shoot action, non finalFrenzy.
      */
     public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newShootPosition,
-                            Square newPosition){
-        if (getAdrenaline()<=1){
+                            Square newPosition) {
+        if (getAdrenaline() <= 1) {
             setMoveCounter(0);
             shootPlayer(currentGameBoard, playerTarget, newShootPosition);
-        }
-        else{
+        } else {
             setMoveCounter(1);
-            while (getMoveCounter()>0) {
+            while (getMoveCounter() > 0) {
                 move(newPosition);
             }
             shootPlayer(currentGameBoard, playerTarget, newShootPosition);
@@ -622,12 +672,12 @@ public class Player {
      * @param newWeapon           the new weapon
      */
     public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
-                                      Weapon newWeapon, Square newPosition, AmmoDeck ammoDeck){
+                                      Weapon newWeapon, Square newPosition, AmmoDeck ammoDeck) {
         setMoveCounter(3);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem (currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
+        grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
@@ -637,9 +687,9 @@ public class Player {
      * @param weaponToReload the weapon to reload
      */
     public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
-                                       Player playerTarget, Square newShootPosition, Square newPosition){
+                                       Player playerTarget, Square newShootPosition, Square newPosition) {
         setMoveCounter(2);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
         reload(weaponToReload);
@@ -652,9 +702,9 @@ public class Player {
      *
      * @param newPosition the new position
      */
-    public void finalFrenzyAfterMove(Square newPosition){
+    public void finalFrenzyAfterMove(Square newPosition) {
         setMoveCounter(4);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
         decreaseActionCounter();
@@ -669,12 +719,12 @@ public class Player {
      */
     public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
                                      AmmoDeck ammoDeck,
-                                     Weapon newWeapon, Square newPosition){
+                                     Weapon newWeapon, Square newPosition) {
         setMoveCounter(2);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem (currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
+        grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
@@ -683,13 +733,55 @@ public class Player {
      *
      * @param weaponToReload the weapon to reload
      */
-    public void finalFrenzyAfterShoot (Weapon weaponToReload, GameBoard currentGameBoard,
-                                      Player playerTarget, Square newShootPosition, Square newPosition){
+    public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
+                                      Player playerTarget, Square newShootPosition, Square newPosition) {
         setMoveCounter(1);
-        while (getMoveCounter()>0) {
+        while (getMoveCounter() > 0) {
             move(newPosition);
         }
         reload(weaponToReload);
         shootPlayer(currentGameBoard, playerTarget, newShootPosition);
+        decreaseActionCounter();
     }
-}
+
+
+    public void calculateDeathPoints (GameBoard currentGameBoard) {
+        //Player death scoring
+        if (getDamage().size() >= 10) {
+            setDead(true);
+            increaseNDeaths();
+
+            Map<String, Long> damageByPlayer = getDamage()
+                    .stream()
+                    .collect(groupingBy(Player::getNickname, counting()))
+                    .entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(
+                            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                                    LinkedHashMap::new));
+
+
+            //assigns values in givenPoints arraylist to players
+            //check if givenPoints is empty
+            if (givenPoints != null && !givenPoints.isEmpty()) {
+                int n = 1;
+                while (!givenPoints.isEmpty() && n != 0) {
+                    int deathPoints = givenPoints.get(givenPoints.size() - n);
+
+                    ;
+
+                    System.out.println(damageByPlayer);
+                    givenPoints.remove(givenPoints.size() - 1);
+
+                    n--;
+                }
+            }else{
+                    //if givenPoints is empty, the players has been killed more than 6 times,
+                    // he still awards 1 point to the killer
+                    int deathPoints = 1;
+                    addToTotalPoints(deathPoints);
+                }
+            }
+        }
+    }

@@ -33,6 +33,32 @@ public class GameBoard {
         return players;
     }
 
+    /**
+     * Gets player by nickname.
+     *
+     * @param nicknanem the nicknanem
+     * @return the player by nickname
+     */
+    public Player getPlayerByNickname (String nicknanem) {
+        return getPlayers().stream()
+                .filter(player -> player.getNickname().equals(nicknanem))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
+    /**
+     * Add player.
+     *
+     * @param player the player
+     */
+    public void addPlayer(Player player){
+        players.add(player);
+    }
+
+    /**
+     * Sets game.
+     *
+     * @param chosenMap the chosen map
+     */
     public void setupGame (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
 
@@ -42,6 +68,8 @@ public class GameBoard {
 
         powerUpsDeck = new PowerUpsDeck();
         ammoDeck = new AmmoDeck();
+
+        players = new ArrayList<>();
     }
 
     /**
