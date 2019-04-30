@@ -4,15 +4,10 @@ import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
-import models.decks.AmmoDeck;
-import models.decks.PowerUpsDeck;
-
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.*;
 
 public class Player {
@@ -431,7 +426,7 @@ public class Player {
      */
     //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
     // TODO multiple moves
-    public void move(Square newPosition) {
+    public void move (Square newPosition) {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
 
@@ -451,14 +446,12 @@ public class Player {
     }
 
     /**
-     * Grab item, either weapon, power up or ammo cubes.
+     * Grab item.
      *
-     * @param powerUpsDeck the current power ups deck
-     * @param ammoDeck     the current ammo deck
-     * @param weaponsSlot  the current weapons slot TODO Associate to the current square?
-     * @param weaponToPick the weapon to pick
+     * @param currentGameBoard the current game board
+     * @param weaponsSlot      the weapons slot
+     * @param weaponToPick     the weapon to pick
      */
-
     public void grabItem(GameBoard currentGameBoard, WeaponsSlot weaponsSlot, Weapon weaponToPick) {
         Square currentPosition = getPosition();
 
@@ -560,7 +553,7 @@ public class Player {
             //Player overkill
         }
         if (playerTarget.getDamage().size() > 11) {
-            playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
+            playerTarget.addMark(this);
         }
     }
 
@@ -594,8 +587,10 @@ public class Player {
     /**
      * Grab action. Specific move action, non finalFrenzy
      *
-     * @param currentPowerUpsDeck the current power ups deck
-     * @param currentWeaponsSlot  the current weapons slot
+     * @param currentGameBoard   the current game board
+     * @param currentWeaponsSlot the current weapons slot
+     * @param newWeapon          the new weapon
+     * @param newPosition        the new position
      */
     public void grabAction(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
                            Weapon newWeapon, Square newPosition) {
@@ -617,16 +612,16 @@ public class Player {
      * Shoot action. Specific shoot action, non finalFrenzy.
      */
     public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newShootPosition,
-                            Square newPosition) {
+                            Square newPosition, Weapon weapon) {
         if (getAdrenaline() <= 1) {
             setMoveCounter(0);
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition);
+            shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
         } else {
             setMoveCounter(1);
             while (getMoveCounter() > 0) {
                 move(newPosition);
             }
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition);
+            shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
         }
         decreaseActionCounter();
     }
@@ -634,33 +629,39 @@ public class Player {
     /**
      * Move action for players whose turn is before the first player.
      *
-     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentGameBoard the current gameboard
      * @param currentWeaponsSlot  the current weapons slot
      * @param newWeapon           the new weapon
      */
-    public void finalFrenzyBeforeGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
-                                      Weapon newWeapon, Square newPosition, AmmoDeck ammoDeck) {
+    public void finalFrenzyBeforeGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
+                                      Weapon newWeapon, Square newPosition) {
         setMoveCounter(3);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
+        grabItem(currentGameBoard, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
     /**
      * Shoot action for players whose turn is before the first player.
      *
-     * @param weaponToReload the weapon to reload
+     * @param weaponToReload   the weapon to reload
+     * @param currentGameBoard the current game board
+     * @param playerTarget     the player target
+     * @param newShootPosition the new shoot position
+     * @param newPosition      the new position
+     * @param weapon           the weapon
      */
     public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
-                                       Player playerTarget, Square newShootPosition, Square newPosition) {
+                                       Player playerTarget, Square newShootPosition, Square newPosition,
+                                       Weapon weapon) {
         setMoveCounter(2);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
         reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition);
+        shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
         decreaseActionCounter();
     }
 
@@ -680,18 +681,17 @@ public class Player {
     /**
      * Grab action for players whose turn is after the first player.
      *
-     * @param currentPowerUpsDeck the current power ups deck
+     * @param currentGameBoard    the current gameboard
      * @param currentWeaponsSlot  the current weapons slot
      * @param newWeapon           the new weapon
      */
-    public void finalFrenzyAfterGrab(PowerUpsDeck currentPowerUpsDeck, WeaponsSlot currentWeaponsSlot,
-                                     AmmoDeck ammoDeck,
+    public void finalFrenzyAfterGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
                                      Weapon newWeapon, Square newPosition) {
         setMoveCounter(2);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentPowerUpsDeck, ammoDeck, currentWeaponsSlot, newWeapon);
+        grabItem (currentGameBoard, currentWeaponsSlot, newWeapon);
         decreaseActionCounter();
     }
 
