@@ -61,6 +61,11 @@ class PlayerTest {
 
     @Test
     void cubes() {
+        // Remove default cubes for testing
+        player.removeCube(Card.Color.BLUE);
+        player.removeCube(Card.Color.RED);
+        player.removeCube(Card.Color.YELLOW);
+
         assertEquals(player.getCubes().size(), 0);
 
         player.addCube(Card.Color.BLUE);

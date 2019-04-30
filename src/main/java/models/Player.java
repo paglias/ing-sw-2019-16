@@ -37,7 +37,7 @@ public class Player {
     private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
 
     //EQUALS OVERRIDE OF PLAYERS
-    @Override
+    /*@Override TODO breaks tests
     public boolean equals(Object o) {
         Player p;
         if (!(o instanceof Player)) {
@@ -49,13 +49,13 @@ public class Player {
             }
         }
         return false;
-    }
+    }*/
 
     public Player () {
         //Initial points given for each Player, order is inverted so the last element
         //of the arraylist can be used as first
-        setGivenPoints(Arrays.asList(1,1,2,4,6,8));
 
+        setGivenPoints(new ArrayList<>(Arrays.asList(1,1,2,4,6,8)));
 
         addCube(Card.Color.YELLOW);
         addCube(Card.Color.BLUE);
@@ -96,9 +96,9 @@ public class Player {
      *
      * @param givenPoints the given points
      */
-    public void setGivenPoints(List<Integer> givenPoints) {
+    public void setGivenPoints(ArrayList<Integer> givenPoints) {
         this.givenPoints.clear();
-        this.givenPoints = (ArrayList<Integer>) givenPoints;
+        this.givenPoints = givenPoints;
     }
 
     public Color GetColor() {

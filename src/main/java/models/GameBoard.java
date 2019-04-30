@@ -51,6 +51,10 @@ public class GameBoard {
      * @param player the player
      */
     public void addPlayer(Player player){
+        if (players.isEmpty()) {
+            player.setFirstPlayer(true);
+        }
+
         players.add(player);
     }
 
@@ -106,31 +110,6 @@ public class GameBoard {
      */
     public List<Square> getSquares() {
         return squares;
-    }
-
-    /**
-     * Create a new player.
-     * Initiates values of the new player
-     */
-    //Creates new player.
-    public void createPlayer() { // TODO controller
-        //Assign nickname
-        Player newPlayer = new Player();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter player nickname");
-        String nickName = scanner.nextLine();
-        for (Player player : players) {
-            if (player.getNickname().compareTo(nickName) != 0) {
-                newPlayer.setNickname(nickName);
-            } else {
-                System.out.println("Player name not available");
-                createPlayer();  //TODO BEST SOLUTION, RECURSIVE FUNCTION?
-            }
-        }
-
-        //TODO COLOR CHOOSER GUI
-        //Sets first player
-
     }
 
     /**
