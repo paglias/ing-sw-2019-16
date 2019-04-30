@@ -51,6 +51,26 @@ public class Player {
         return false;
     }
 
+    public Player () {
+        //Initial points given for each Player, order is inverted so the last element
+        //of the arraylist can be used as first
+        setGivenPoints(Arrays.asList(1,1,2,4,6,8));
+
+
+        addCube(Card.Color.YELLOW);
+        addCube(Card.Color.BLUE);
+        addCube(Card.Color.RED);
+
+        //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
+        //Set movecounter to 3
+        setMoveCounter(3);
+        setActionCounter(2);
+        setAdrenaline(0);
+
+        // TODO nickname
+        // TODO player color
+    }
+
     /**
      * Adds the value received to the total points of the player.
      * Totalpoints can never be set to a random value
@@ -76,9 +96,9 @@ public class Player {
      *
      * @param givenPoints the given points
      */
-    public void setGivenPoints(ArrayList<Integer> givenPoints) {
+    public void setGivenPoints(List<Integer> givenPoints) {
         this.givenPoints.clear();
-        this.givenPoints = givenPoints;
+        this.givenPoints = (ArrayList<Integer>) givenPoints;
     }
 
     public Color GetColor() {

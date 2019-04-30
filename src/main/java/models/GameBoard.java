@@ -127,30 +127,9 @@ public class GameBoard {
                 createPlayer();  //TODO BEST SOLUTION, RECURSIVE FUNCTION?
             }
         }
-        //Initial points given for each Player, order is inverted so the last element
-        //of the arraylist can be used as first
-        ArrayList<Integer> newPlayerPoints = new ArrayList<>();
-        newPlayerPoints.add(1);
-        newPlayerPoints.add(1);
-        newPlayerPoints.add(2);
-        newPlayerPoints.add(4);
-        newPlayerPoints.add(6);
-        newPlayerPoints.add(8);
 
-        //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
-        newPlayer.addCube(Card.Color.YELLOW);
-        newPlayer.addCube(Card.Color.BLUE);
-        newPlayer.addCube(Card.Color.RED);
-        //Set movecounter to 3  //TODO MOVECOUNTER CHANGES IF PLAYER GRABS ITEM/SHOOTS
-        newPlayer.setMoveCounter(3);
-        newPlayer.setActionCounter(2);
-        newPlayer.setAdrenaline(0);
-        newPlayer.setGivenPoints(newPlayerPoints);
         //TODO COLOR CHOOSER GUI
         //Sets first player
-        if (players.isEmpty()) {
-            newPlayer.setFirstPlayer(true);
-        }
 
     }
 
