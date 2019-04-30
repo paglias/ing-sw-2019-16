@@ -42,7 +42,7 @@ public class Square {
      *
      * @param position the position
      */
-    public void setPosition(int position){
+    public void setNumber(int position){
         this.position=position;
     }
 
@@ -51,12 +51,12 @@ public class Square {
      *
      * @return the int
      */
-    public int getPosition(){return this.position;}
+    public int getNumber(){return this.position;}
 
     public boolean sameDirection(Square targetSquare){
-        int position1= this.getPosition();
-        int position2= targetSquare.getPosition();
-        int indexDifference = this.getPosition()-targetSquare.getPosition();
+        int position1= this.getNumber();
+        int position2= targetSquare.getNumber();
+        int indexDifference = this.getNumber()-targetSquare.getNumber();
             if(indexDifference%4==0){
                 return true;
             }

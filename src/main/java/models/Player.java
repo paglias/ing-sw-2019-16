@@ -31,8 +31,6 @@ public class Player {
     private int adrenaline;                 //adrenaline counter, max 2
     private int totalPoints = 0;            //total points of the current player
     private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
-    private int SPosition;
-
 
     /**
      * Adds the value received to the total points of the player.
@@ -267,10 +265,6 @@ public class Player {
      */
     public Square getPosition() {
         return position;
-    }
-
-    public void setPosition(int SPosition){
-        this.SPosition=SPosition;
     }
 
     /**

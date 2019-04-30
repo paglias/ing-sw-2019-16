@@ -38,7 +38,7 @@ public class MapLoader {
         for (int i = 0; i < squares.size(); i++) {
             Square square = squares.get(i);
             ParsedSquare parsedSquare = parsedSquares[i];
-            square.setPosition(i);
+            square.setNumber(i);
 
             if (parsedSquare.isSpawnPoint) {
                 square.createWeaponsSlot(weaponsDeck);

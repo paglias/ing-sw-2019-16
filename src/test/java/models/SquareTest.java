@@ -45,47 +45,47 @@ class SquareTest {
     @Test
     void position () {
         Square square = new Square(Square.Color.PURPLE, false);
-        square.setPosition(4);
-        assertEquals(square.getPosition(), 4);
+        square.setNumber(4);
+        assertEquals(square.getNumber(), 4);
     }
     @Test
     void samePositionVertical(){
         Square square= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, false);
-        square.setPosition(0);
-        square2.setPosition(4);
+        square.setNumber(0);
+        square2.setNumber(4);
         assertTrue(square.sameDirection(square2));
     }
     @Test
     void samePositionHorizontal1(){
         Square square= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, false);
-        square.setPosition(0);
-        square2.setPosition(3);
+        square.setNumber(0);
+        square2.setNumber(3);
         assertTrue(square.sameDirection(square2));
     }
     @Test
     void samePositionHorizontal2(){
         Square square= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, false);
-        square.setPosition(4);
-        square2.setPosition(11);
+        square.setNumber(4);
+        square2.setNumber(11);
         assertFalse(square.sameDirection(square2));
     }
     @Test
     void samePositionHorizontal3(){
         Square square= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, false);
-        square.setPosition(4);
-        square2.setPosition(7);
+        square.setNumber(4);
+        square2.setNumber(7);
         assertTrue(square.sameDirection(square2));
     }
     @Test
     void samePositionHorizontalF(){
         Square square= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, false);
-        square.setPosition(8);
-        square2.setPosition(11);
+        square.setNumber(8);
+        square2.setNumber(11);
         assertTrue(square.sameDirection(square2));
     }
 
