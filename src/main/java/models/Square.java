@@ -6,6 +6,7 @@ import models.decks.WeaponsDeck;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Square {
     private int position;
@@ -17,6 +18,12 @@ public class Square {
         WHITE,
         GREEN,
         EMPTY // Used for empty squares
+    }
+    public enum Direction{
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST
     }
 
     private Color color;
@@ -70,6 +77,54 @@ public class Square {
             return position2>=8 && position2<=11;
             }
             return false;
+    }
+
+    public boolean sameDirection(Square targetSquare, Direction direction){
+        int position1= this.getNumber();
+        int position2= targetSquare.getNumber();
+        int indexDifference = this.getNumber()-targetSquare.getNumber();
+        switch (direction){
+            case NORTH:
+               return (indexDifference>0 && indexDifference%4==0);
+            case SOUTH:
+                return (indexDifference<0 && indexDifference%4==0);
+            case EAST:
+                if(position1>=0 && position1<=3){
+                    return position2>=0 && position2<=3;
+                }
+                if(position1>=4 && position1<=7){
+                    return position2>=4 && position2<=7;
+                }
+                if(position1>=8 && position1<=11){
+                    return position2>=8 && position2<=11;
+                }
+            case WEST:
+                if(indexDifference<0){
+                    if(position1>=0 && position1<=3){
+                        return position2>=0 && position2<=3;
+                    }
+                    if(position1>=4 && position1<=7){
+                        return position2>=4 && position2<=7;
+                    }
+                    if(position1>=8 && position1<=11){
+                        return position2>=8 && position2<=11;
+                    }
+                }
+        }
+        return false;
+
+    }
+
+    public List<Square> filterDirectionSquare(List<Square>Squares, Direction direction){
+
+            return Squares.stream().filter(square -> {
+                return sameDirection(square,direction);
+            }).collect(Collectors.toList());
+    }
+    public List<Player> getPlayersHere(List<Player>Players){
+        return Players.stream().filter(player -> {
+            return player.getPosition()==this;
+        }).collect(Collectors.toList());
     }
 
     /**

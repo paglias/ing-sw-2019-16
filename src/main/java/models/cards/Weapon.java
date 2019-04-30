@@ -290,14 +290,19 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void shootDirection(Player damagingPlayer, Player playerTarget) {
+    public void shootDirection(Player damagingPlayer, List<Square> squares, Square.Direction direction,List<Player>players) {
         Square position= damagingPlayer.getPosition();
-        Square targetPosition= playerTarget.getPosition();
-            if ((position.sameDirection(targetPosition) == true) && position.getColor() == targetPosition.getColor() &&
-                    position.getCanView() == targetPosition.getCanView()) {
-                playerTarget.addDamage(damagingPlayer);
+
+        int playersShot=0;
+        for(Square square: position.filterDirectionSquare(squares, direction)){
+            for(Player player:square.getPlayersHere(players)){
+                player.addDamage(damagingPlayer);
+                playersShot++;
             }
-            else throw new IllegalArgumentException("Not usable method");
+        }
+        if(playersShot==0){
+            throw new IllegalArgumentException("Not usable method");
+        }
     }
     public void shootTargetView(Player damagingPlayer,Player playerTarget,Player secondTarget) {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
@@ -330,12 +335,11 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void attractTarget(Player damagingPlayer, Player playerTarget, Square newPosition) {
+    public void attractTarget(Player damagingPlayer, Player playerTarget, Square newPosition, Square.Direction direction) {
         Square position= damagingPlayer.getPosition();
         Square targetPosition= playerTarget.getPosition();
-        if((position.sameDirection(targetPosition)==true)&& position.getColor()==targetPosition.getColor() &&
-                    position.getCanView()==targetPosition.getCanView()){
-                playerTarget.move(newPosition);
+        if(position.sameDirection(targetPosition,direction)){
+                playerTarget.setPosition(newPosition);
             }
             else throw new IllegalArgumentException("Not usable method");
     }
