@@ -436,7 +436,7 @@ public class Player {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
 
-        if (getMoveCounter() <= 0 || canAccessSquares.isEmpty()) {
+        if (canAccessSquares.isEmpty()) {
             throw new IllegalArgumentException("Move is not possible");
         } else {
             for (Square square : canAccessSquares) {
