@@ -776,11 +776,15 @@ public class Player {
                     .collect(groupingBy(Player::getNickname, counting()))
                     .entrySet()
                     .stream()
-                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .sorted(Map.Entry.comparingByValue())
                     .collect(
                             toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
                                     LinkedHashMap::new));
-
+            ArrayList<String> nickNamesByDamageMade = new ArrayList<>(damageByPlayer.keySet());
+            List<Player> playersByDamage = nickNamesByDamageMade.stream()
+                    .map(nick -> currentGameBoard.getPlayerByNickname(nick))
+                    .collect(Collectors.toList());
+            //returns a list of players in order of damage
 
             //assigns values in givenPoints arraylist to players
             //check if givenPoints is empty
@@ -789,11 +793,8 @@ public class Player {
                 while (!givenPoints.isEmpty() && n != 0) {
                     int deathPoints = givenPoints.get(givenPoints.size() - n);
 
-                    ;
-
                     System.out.println(damageByPlayer);
                     givenPoints.remove(givenPoints.size() - 1);
-
                     n--;
                 }
             }else{
