@@ -6,18 +6,20 @@ import models.cards.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
     Player player;
 
     @BeforeEach
-    void setup () {
+    void setup() {
         player = new Player();
     }
 
     @Test
-    void totalPoints () {
+    void totalPoints() {
         assertEquals(player.getTotalPoints(), 0);
 
         player.addToTotalPoints(5);
@@ -28,7 +30,7 @@ class PlayerTest {
     }
 
     @Test
-    void actionCounter () {
+    void actionCounter() {
         player.setActionCounter(5);
         assertEquals(player.getActionCounter(), 5);
 
@@ -37,7 +39,7 @@ class PlayerTest {
     }
 
     @Test
-    void adrenaline () {
+    void adrenaline() {
         player.setAdrenaline(1);
         assertEquals(player.getAdrenaline(), 1);
 
@@ -58,16 +60,21 @@ class PlayerTest {
     }
 
     @Test
-    void cubes () {
+    void cubes() {
+        // Remove default cubes for testing
+        player.removeCube(Card.Color.BLUE);
+        player.removeCube(Card.Color.RED);
+        player.removeCube(Card.Color.YELLOW);
+
         assertEquals(player.getCubes().size(), 0);
 
         player.addCube(Card.Color.BLUE);
         assertEquals(player.getCubes().size(), 1);
-        assertEquals(player.getCubes().get(0),  Card.Color.BLUE);
+        assertEquals(player.getCubes().get(0), Card.Color.BLUE);
 
         player.addCube(Card.Color.RED);
         assertEquals(player.getCubes().size(), 2);
-        assertEquals(player.getCubes().get(1),  Card.Color.RED);
+        assertEquals(player.getCubes().get(1), Card.Color.RED);
 
         player.removeCube(Card.Color.BLUE);
         assertThrows(IllegalArgumentException.class, () -> {
@@ -75,11 +82,11 @@ class PlayerTest {
         });
 
         assertEquals(player.getCubes().size(), 1);
-        assertEquals(player.getCubes().get(0),  Card.Color.RED);
+        assertEquals(player.getCubes().get(0), Card.Color.RED);
     }
 
     @Test
-    void moveCounter () {
+    void moveCounter() {
         player.setMoveCounter(3);
         assertEquals(player.getMoveCounter(), 3);
 
@@ -88,14 +95,14 @@ class PlayerTest {
     }
 
     @Test
-    void nickname () {
+    void nickname() {
         player.setNickname("test");
 
         assertEquals(player.getNickname(), "test");
     }
 
     @Test
-    void marks () {
+    void marks() {
         Player player1 = new Player();
         Player player2 = new Player();
 
@@ -110,7 +117,7 @@ class PlayerTest {
     }
 
     @Test
-    void powerUps () {
+    void powerUps() {
         PowerUp powerUp1 = new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
         PowerUp powerUp2 = new PowerUp(PowerUp.Name.TELEPORTER, Card.Color.BLUE);
 
@@ -125,7 +132,7 @@ class PlayerTest {
     }
 
     @Test
-    void position () {
+    void position() {
         Square position = new Square(Square.Color.YELLOW, false);
 
         assertNull(player.getPosition());
@@ -134,7 +141,7 @@ class PlayerTest {
     }
 
     @Test
-    void nDeaths () {
+    void nDeaths() {
         assertEquals(player.getNDeaths(), 0);
 
         player.increaseNDeaths();
@@ -143,13 +150,13 @@ class PlayerTest {
     }
 
     @Test
-    void firstPlayer () {
+    void firstPlayer() {
         player.setFirstPlayer(true);
         assertTrue(player.getFirstPlayer());
     }
 
     @Test
-    void weapons () {
+    void weapons() {
         assertEquals(player.getWeapons().size(), 0);
 
         Weapon weapon1 = new Weapon();
@@ -173,7 +180,7 @@ class PlayerTest {
     }
 
     @Test
-    void damage () {
+    void damage() {
         Player player1 = new Player();
 
         assertEquals(player.getDamage().size(), 0);
@@ -201,7 +208,7 @@ class PlayerTest {
     }
 
     @Test
-    void dead () {
+    void dead() {
         assertFalse(player.isDead());
 
         player.setDead(true);
@@ -210,7 +217,7 @@ class PlayerTest {
 
 
     @Test
-    void movePlayerThrowsNoAvailableMoves () {
+    void movePlayerThrowsNoAvailableMoves() {
         player.setMoveCounter(0);
         Square current = new Square(Square.Color.BLUE, false);
         player.setPosition(current);
@@ -222,7 +229,7 @@ class PlayerTest {
     }
 
     @Test
-    void movePlayerThrowsNoAccessSquare () {
+    void movePlayerThrowsNoAccessSquare() {
         player.setMoveCounter(1);
         Square current = new Square(Square.Color.BLUE, false);
         player.setPosition(current);
@@ -234,7 +241,7 @@ class PlayerTest {
     }
 
     @Test
-    void movePlayer () {
+    void movePlayer() {
         player.setMoveCounter(1);
 
         Square current = new Square(Square.Color.BLUE, false);
@@ -246,5 +253,42 @@ class PlayerTest {
         player.move(target);
         assertEquals(player.getPosition(), target);
         assertEquals(player.getMoveCounter(), 0);
+    }
+
+    @Test
+    void calculateDeathPoints() {
+        Player playerA = new Player();
+        playerA.setNickname("Alfa");
+        Player playerB = new Player();
+        playerB.setNickname("Beta");
+        Player playerC = new Player();
+        playerC.setNickname("Delta");
+        Player playerD = new Player();
+        playerD.setNickname("Gamma");
+        GameBoard newGameBoard = new GameBoard();
+        newGameBoard.setupGame(1);
+        ArrayList<Integer> newPlayerPoints = new ArrayList<>();
+        newGameBoard.addPlayer(playerA);
+        newGameBoard.addPlayer(playerB);
+        newGameBoard.addPlayer(playerC);
+        newGameBoard.addPlayer(playerD);
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(2);
+        newPlayerPoints.add(4);
+        newPlayerPoints.add(6);
+        newPlayerPoints.add(8);
+        player.setGivenPoints(newPlayerPoints);
+        player.addDamage(playerA);
+        player.addDamage(playerA);
+        player.addDamage(playerD);
+        player.addDamage(playerC);
+        player.addDamage(playerA);
+        player.addDamage(playerB);
+        player.addDamage(playerC);
+        player.addDamage(playerD);
+        player.addDamage(playerA);
+        player.addDamage(playerD);
+        player.calculateDeathPoints(newGameBoard);
     }
 }

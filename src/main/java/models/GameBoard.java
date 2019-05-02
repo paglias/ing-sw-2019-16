@@ -33,6 +33,36 @@ public class GameBoard {
         return players;
     }
 
+    /**
+     * Gets player by nickname.
+     *
+     * @param nicknanem the nicknanem
+     * @return the player by nickname
+     */
+    public Player getPlayerByNickname (String nicknanem) {
+        return getPlayers().stream()
+                .filter(player -> player.getNickname().equals(nicknanem))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
+    /**
+     * Add player.
+     *
+     * @param player the player
+     */
+    public void addPlayer(Player player){
+        if (players.isEmpty()) {
+            player.setFirstPlayer(true);
+        }
+
+        players.add(player);
+    }
+
+    /**
+     * Sets game.
+     *
+     * @param chosenMap the chosen map
+     */
     public void setupGame (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
 
@@ -42,6 +72,8 @@ public class GameBoard {
 
         powerUpsDeck = new PowerUpsDeck();
         ammoDeck = new AmmoDeck();
+
+        players = new ArrayList<>();
     }
 
     /**
@@ -78,52 +110,6 @@ public class GameBoard {
      */
     public List<Square> getSquares() {
         return squares;
-    }
-
-    /**
-     * Create a new player.
-     * Initiates values of the new player
-     */
-    //Creates new player.
-    public void createPlayer() { // TODO controller
-        //Assign nickname
-        Player newPlayer = new Player();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter player nickname");
-        String nickName = scanner.nextLine();
-        for (Player player : players) {
-            if (player.getNickname().compareTo(nickName) != 0) {
-                newPlayer.setNickname(nickName);
-            } else {
-                System.out.println("Player name not available");
-                createPlayer();  //TODO BEST SOLUTION, RECURSIVE FUNCTION?
-            }
-        }
-        //Initial points given for each Player, order is inverted so the last element
-        //of the arraylist can be used as first
-        ArrayList<Integer> newPlayerPoints = new ArrayList<>();
-        newPlayerPoints.add(1);
-        newPlayerPoints.add(1);
-        newPlayerPoints.add(2);
-        newPlayerPoints.add(4);
-        newPlayerPoints.add(6);
-        newPlayerPoints.add(8);
-
-        //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
-        newPlayer.addCube(Card.Color.YELLOW);
-        newPlayer.addCube(Card.Color.BLUE);
-        newPlayer.addCube(Card.Color.RED);
-        //Set movecounter to 3  //TODO MOVECOUNTER CHANGES IF PLAYER GRABS ITEM/SHOOTS
-        newPlayer.setMoveCounter(3);
-        newPlayer.setActionCounter(2);
-        newPlayer.setAdrenaline(0);
-        newPlayer.setGivenPoints(newPlayerPoints);
-        //TODO COLOR CHOOSER GUI
-        //Sets first player
-        if (players.isEmpty()) {
-            newPlayer.setFirstPlayer(true);
-        }
-
     }
 
     /**
