@@ -7,5 +7,5 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_VIEW","MARK_VIEW","MARK_VIEW"]],
   "secondaryEffect":[["MARK_VIEW"],["MARK_VIEW"],["MARK_VIEW"]],
-  "tertiaryEffect": [["SHOOT_VIEW"]]
+  "tertiaryEffect": null
 }

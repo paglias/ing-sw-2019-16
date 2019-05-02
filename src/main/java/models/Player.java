@@ -178,6 +178,9 @@ public class Player {
         this.moveCounter = moveCounter;
     }
 
+
+
+
     /**
      * Decrease move counter, after a player moved.
      */
@@ -409,6 +412,13 @@ public class Player {
         }
     }
 
+    public void discardItem(PowerUp powerUp, GameBoard gameBoard){
+        gameBoard.getPowerUpsDeck().sell(this, powerUp);
+        powerUps.remove(powerUp);
+
+    }
+
+
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
@@ -550,7 +560,7 @@ public class Player {
      */
     public void reload (Weapon weaponToReload) {
         if (getCubes().containsAll(weaponToReload.getRechargeCost())) {
-            weaponToReload.reload();
+            weaponToReload.reload(this);
         } else {
             System.out.println("Weapon cannot be reloaded");
         }
@@ -693,3 +703,4 @@ public class Player {
         shootPlayer(currentGameBoard, playerTarget, newShootPosition);
     }
 }
+

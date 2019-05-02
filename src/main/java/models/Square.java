@@ -34,6 +34,7 @@ public class Square {
     private ArrayList<Square> canAccessDirectly = new ArrayList<>();
     private Ammo ammo;
 
+
     /**
      * Instantiates a new Square.
      * @param squareColor  the square color

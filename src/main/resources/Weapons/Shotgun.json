@@ -6,6 +6,6 @@
   "secondaryCost": null,
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT","SHOOT","SHOOT","MOVE_TARGET"]],
-  "secondaryEffect":[["SHOOT_ONE_AWAY_VIEW","SHOOT_ONE_AWAY_VIEW"]],
+  "secondaryEffect":["SHOOT_ONE_AWAY_VIEW","SHOOT_ONE_AWAY_VIEW"],
   "tertiaryEffect":null
 }
