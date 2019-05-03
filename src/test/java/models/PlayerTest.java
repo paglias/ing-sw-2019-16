@@ -289,6 +289,6 @@ class PlayerTest {
         player.addDamage(playerD);
         player.addDamage(playerA);
         player.addDamage(playerD);
-        player.calculateDeathPoints(newGameBoard);
+        calculateDeathPoints();
     }
 }
