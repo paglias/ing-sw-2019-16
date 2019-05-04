@@ -533,23 +533,21 @@ public class Player {
      */
 
     public void shootPlayer(GameBoard currentGameBoard, Player playerTarget,
-                            Square newPosition, Weapon weapon) {
+                            Square newPosition, Weapon activeWeapon) {
 
         //initial check if any player can be shot
         //temp value to skip comparing currentplayer to currentplayer in players
         Square currentPosition = getPosition();
-        boolean isCurrent = true;
         for (Player otherPlayer : currentGameBoard.getPlayers()) {
-            if (!isCurrent) {
-                //if canview of current position DOES NOT contain any position of any player
-                if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                    throw new IllegalArgumentException("No players can be shot");
-                }
-            } else {
-                isCurrent = false;  //sets is current to false on the currentplay instance of the loop
+            if (otherPlayer.getNickname().equals(this.getNickname())) {
+                continue;
+            }
+            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
+                throw new IllegalArgumentException("No players can be shot");
             }
         }
         //if weapon is loaded, use weapon effects
+        //TODO WEAPON USE GENERIC TO BE ADDED
         if (getWeapons().isEmpty()) {
             throw new IllegalArgumentException("No weapon is available");
         } else {
@@ -620,12 +618,10 @@ public class Player {
      *
      * @param currentGameBoard   the current game board
      * @param currentWeaponsSlot the current weapons slot
-     * @param ammoDeck           the ammo deck
      * @param newWeapon          the new weapon
      * @param newPosition        the new position
      */
     public void grabAction(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
-                           AmmoDeck ammoDeck,
                            Weapon newWeapon, Square newPosition) {
         if (getAdrenaline() == 0) {
             setMoveCounter(1);
@@ -648,19 +644,19 @@ public class Player {
      * @param playerTarget     the player target
      * @param newShootPosition the new shoot position
      * @param newPosition      the new position
-     * @param weapon           the weapon
+     * @param activeWeapon     the weapon
      */
     public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newShootPosition,
-                            Square newPosition, Weapon weapon) {
+                            Square newPosition, Weapon activeWeapon) {
         if (getAdrenaline() <= 1) {
             setMoveCounter(0);
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
+            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         } else {
             setMoveCounter(1);
             while (getMoveCounter() > 0) {
                 move(newPosition);
             }
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
+            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         }
         decreaseActionCounter();
     }
@@ -691,17 +687,17 @@ public class Player {
      * @param playerTarget     the player target
      * @param newShootPosition the new shoot position
      * @param newPosition      the new position
-     * @param weapon           the weapon
+     * @param activeWeapon     the weapon
      */
     public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
                                        Player playerTarget, Square newShootPosition, Square newPosition,
-                                       Weapon weapon) {
+                                       Weapon activeWeapon) {
         setMoveCounter(2);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
         reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
+        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         decreaseActionCounter();
     }
 
@@ -744,17 +740,17 @@ public class Player {
      * @param playerTarget     the player target
      * @param newShootPosition the new shoot position
      * @param newPosition      the new position
-     * @param weapon           the weapon
+     * @param activeWeapon     the weapon
      */
     public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
                                       Player playerTarget, Square newShootPosition, Square newPosition,
-                                      Weapon weapon) {
+                                      Weapon activeWeapon) {
         setMoveCounter(1);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
         reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, weapon);
+        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
     }
 
     /**
