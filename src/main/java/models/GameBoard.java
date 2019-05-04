@@ -36,12 +36,12 @@ public class GameBoard {
     /**
      * Gets player by nickname.
      *
-     * @param nicknanem the nicknanem
+     * @param nickname the nickname
      * @return the player by nickname
      */
-    public Player getPlayerByNickname (String nicknanem) {
+    public Player getPlayerByNickname (String nickname) {
         return getPlayers().stream()
-                .filter(player -> player.getNickname().equals(nicknanem))
+                .filter(player -> player.getNickname().equals(nickname))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
     }
 
