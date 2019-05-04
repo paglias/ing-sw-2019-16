@@ -267,17 +267,21 @@ public class Player {
     }
 
     /**
-     * Add marks. Checks if there are already 3 marks of a player.
+     * Add marks. Checks if there are already 3 marks of a player in getMarks.
      *
      * @param mark the mark
      */
     public void addMark(Player mark) {
-        for (Player player : getMarks()){
-            long i = getMarks()
-                    .stream()
-                    .filter(p -> p.getNickname().equals(player.getNickname()))
-        }
-        this.marks.add(mark);
+        long i = getMarks()
+                .stream()
+                .filter(p -> p.getNickname().equals(mark.getNickname()))
+                .count();
+            if (i >= 3) {
+                throw new IllegalArgumentException("Maximum marks for that player has been reached");
+            }
+            else {
+                this.marks.add(mark);
+            }
     }
 
     /**
