@@ -85,15 +85,6 @@ public class Player {
     }
 
     /**
-     * Get color color.
-     *
-     * @return the color
-     */
-    public Color GetColor() {
-        return this.color;
-    }
-
-    /**
      * Sets color for the current player at the beginning of the game.
      *
      * @param color the color
@@ -143,7 +134,7 @@ public class Player {
      */
     public void setAdrenaline(int adrenaline) {
         if (adrenaline < 0 || adrenaline > 2) {
-            throw new IllegalArgumentException("Adrenaline must be >0 and < 2");
+            throw new IllegalArgumentException("Adrenaline must be greater than 0 and less than 2");
         }
         this.adrenaline = adrenaline;
     }
@@ -169,12 +160,35 @@ public class Player {
 
     /**
      * Adds cubes of different types to the available cubes of the player.
+     * Checks if there are less than 3 cubes
      *
      * @param cubeColor the cube color
      */
     public void addCube(Card.Color cubeColor) {
-        // TODO MAXCUBES PER COLOR IS 3
-        this.cubes.add(cubeColor);
+        int nYellow = 0;
+        int nRed = 0;
+        int nBlue = 0;
+        for (Card.Color color : this.getCubes()){
+           if (color == Card.Color.YELLOW){
+               nYellow++;
+           }
+           if (color == Card.Color.RED){
+               nRed++;
+           }
+           if (color == Card.Color.BLUE){
+               nBlue++;
+           }
+       }
+        //Checks there are already 3 cubes of a color. If there are less, the cube is added.
+        if ((cubeColor == Card.Color.BLUE && nBlue >= 3) ||
+                (cubeColor == Card.Color.YELLOW && nYellow >= 3) ||
+                (cubeColor == Card.Color.RED && nRed >= 3)){
+
+            throw new IllegalArgumentException("Maximum ammo reached");
+        }
+        else {
+            this.cubes.add(cubeColor);
+        }
     }
 
     /**
