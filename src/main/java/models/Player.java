@@ -8,6 +8,7 @@ import models.decks.AmmoDeck;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.*;
 
@@ -214,7 +215,7 @@ public class Player {
     }
 
     /**
-     * Sets move counter. Initial hard-set, in case of adrenaline/finalfrenzy.
+     * Sets move counter. Initial hard-set, in case of adrenaline/finalfrenzy/actions.
      *
      * @param moveCounter the move counter
      */
@@ -266,12 +267,16 @@ public class Player {
     }
 
     /**
-     * Add marks.
+     * Add marks. Checks if there are already 3 marks of a player.
      *
      * @param mark the mark
      */
     public void addMark(Player mark) {
-        // TODO SET MAX MARKS FOR EACH PLAYER
+        for (Player player : getMarks()){
+            long i = getMarks()
+                    .stream()
+                    .filter(p -> p.getNickname().equals(player.getNickname()))
+        }
         this.marks.add(mark);
     }
 
@@ -465,6 +470,11 @@ public class Player {
         }
     }
 
+    /**
+     * Move random. //TODO Why is it different from normal move?
+     *
+     * @param newPosition the new position
+     */
     public void moveRandom(Square newPosition) {
         this.setPosition(newPosition);
 
@@ -477,7 +487,6 @@ public class Player {
      * @param weaponToPick the weapon to pick
      */
 
-    //TODO HOW TO REMOVE POWERUPDECK, CURRENTWEAPONSLOT? save gameboard inside player? since it's always the same
     public void grabItem(GameBoard currentGameBoard, WeaponsSlot weaponsSlot, Weapon weaponToPick) {
         Square currentPosition = getPosition();
 
@@ -534,7 +543,7 @@ public class Player {
             if (!isCurrent) {
                 //if canview of current position DOES NOT contain any position of any player
                 if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                    System.out.println("No players can be shot");
+                    throw new IllegalArgumentException ("No players can be shot");
                 }
             } else {
                 isCurrent = false;  //sets is current to false on the currentplay instance of the loop
@@ -576,7 +585,7 @@ public class Player {
 
         //Player overkill
         if (playerTarget.getDamage().size() > 11) {
-            playerTarget.addMark(this);  //TODO THIS HERE MAKES SENSE?
+            playerTarget.addMark(this);
         }
     }
 
@@ -597,9 +606,8 @@ public class Player {
      * Move action. Specific move action, non finalFrenzy
      *
      * @param newPosition     the new position
-     * @param currentPosition the current position
      */
-    public void moveAction(Square newPosition, Square currentPosition) {
+    public void moveAction(Square newPosition) {
         setMoveCounter(3);
         while (getMoveCounter() > 0) {
             move(newPosition);
@@ -610,7 +618,11 @@ public class Player {
     /**
      * Grab action. Specific move action, non finalFrenzy
      *
+     * @param currentGameBoard   the current game board
      * @param currentWeaponsSlot the current weapons slot
+     * @param ammoDeck           the ammo deck
+     * @param newWeapon          the new weapon
+     * @param newPosition        the new position
      */
     public void grabAction(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
                            AmmoDeck ammoDeck,
@@ -631,6 +643,12 @@ public class Player {
 
     /**
      * Shoot action. Specific shoot action, non finalFrenzy.
+     *
+     * @param currentGameBoard the current game board
+     * @param playerTarget     the player target
+     * @param newShootPosition the new shoot position
+     * @param newPosition      the new position
+     * @param weapon           the weapon
      */
     public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newShootPosition,
                             Square newPosition, Weapon weapon) {
@@ -649,8 +667,11 @@ public class Player {
 
     /**
      * Move action for players whose turn is before the first player.
-     * @param currentWeaponsSlot  the current weapons slot
-     * @param newWeapon           the new weapon
+     *
+     * @param currentGameBoard   the current game board
+     * @param currentWeaponsSlot the current weapons slot
+     * @param newWeapon          the new weapon
+     * @param newPosition        the new position
      */
     public void finalFrenzyBeforeGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
                                       Weapon newWeapon, Square newPosition) {
@@ -665,7 +686,12 @@ public class Player {
     /**
      * Shoot action for players whose turn is before the first player.
      *
-     * @param weaponToReload the weapon to reload
+     * @param weaponToReload   the weapon to reload
+     * @param currentGameBoard the current game board
+     * @param playerTarget     the player target
+     * @param newShootPosition the new shoot position
+     * @param newPosition      the new position
+     * @param weapon           the weapon
      */
     public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
                                        Player playerTarget, Square newShootPosition, Square newPosition,
@@ -695,9 +721,10 @@ public class Player {
     /**
      * Grab action for players whose turn is after the first player.
      *
-     * @param currentPowerUpsDeck the current power ups deck
-     * @param currentWeaponsSlot  the current weapons slot
-     * @param newWeapon           the new weapon
+     * @param currentGameBoard   the current game board
+     * @param currentWeaponsSlot the current weapons slot
+     * @param newWeapon          the new weapon
+     * @param newPosition        the new position
      */
     public void finalFrenzyAfterGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
                                      Weapon newWeapon, Square newPosition) {
@@ -712,7 +739,12 @@ public class Player {
     /**
      * Shoot action for players whose turn is after the first player.
      *
-     * @param weaponToReload the weapon to reload
+     * @param weaponToReload   the weapon to reload
+     * @param currentGameBoard the current game board
+     * @param playerTarget     the player target
+     * @param newShootPosition the new shoot position
+     * @param newPosition      the new position
+     * @param weapon           the weapon
      */
     public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
                                       Player playerTarget, Square newShootPosition, Square newPosition,
