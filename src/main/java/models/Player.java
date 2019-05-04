@@ -169,25 +169,24 @@ public class Player {
         int nYellow = 0;
         int nRed = 0;
         int nBlue = 0;
-        for (Card.Color color : this.getCubes()){
-           if (color == Card.Color.YELLOW){
-               nYellow++;
-           }
-           if (color == Card.Color.RED){
-               nRed++;
-           }
-           if (color == Card.Color.BLUE){
-               nBlue++;
-           }
-       }
+        for (Card.Color color : this.getCubes()) {
+            if (color == Card.Color.YELLOW) {
+                nYellow++;
+            }
+            if (color == Card.Color.RED) {
+                nRed++;
+            }
+            if (color == Card.Color.BLUE) {
+                nBlue++;
+            }
+        }
         //Checks there are already 3 cubes of a color. If there are less, the cube is added.
         if ((cubeColor == Card.Color.BLUE && nBlue >= 3) ||
                 (cubeColor == Card.Color.YELLOW && nYellow >= 3) ||
-                (cubeColor == Card.Color.RED && nRed >= 3)){
+                (cubeColor == Card.Color.RED && nRed >= 3)) {
 
             throw new IllegalArgumentException("Maximum ammo reached");
-        }
-        else {
+        } else {
             this.cubes.add(cubeColor);
         }
     }
@@ -276,12 +275,11 @@ public class Player {
                 .stream()
                 .filter(p -> p.getNickname().equals(mark.getNickname()))
                 .count();
-            if (i >= 3) {
-                throw new IllegalArgumentException("Maximum marks for that player has been reached");
-            }
-            else {
-                this.marks.add(mark);
-            }
+        if (i >= 3) {
+            throw new IllegalArgumentException("Maximum marks for that player has been reached");
+        } else {
+            this.marks.add(mark);
+        }
     }
 
     /**
@@ -380,15 +378,13 @@ public class Player {
     public void addWeapon(Weapon newWeapon) {
         if (this.weapons.size() < 3) {
             this.weapons.add(newWeapon);
-        }
-        else if (this.weapons.size()==3) {
+        } else if (this.weapons.size() == 3) {
             throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
             // Action needed in order to add that weapon. Press remove weapon button in view
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Adding that weapon is not possible");
-            }
         }
+    }
 
     /**
      * Remove weapons. Used when you have 3 weapons and you want a 4th one.
@@ -397,12 +393,11 @@ public class Player {
      * @param weapon the weapon
      */
     public void removeWeapon(Weapon weapon) {
-        if (this.getWeapons().contains(weapon)){
+        if (this.getWeapons().contains(weapon)) {
             this.weapons.remove(weapon);
             GameBoard gameBoard = new GameBoard();  //TODO CHECK THIS.
             gameBoard.getWeaponsDeck().discard(weapon);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("You cannot remove that weapon");
         }
 
@@ -548,7 +543,7 @@ public class Player {
             if (!isCurrent) {
                 //if canview of current position DOES NOT contain any position of any player
                 if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                    throw new IllegalArgumentException ("No players can be shot");
+                    throw new IllegalArgumentException("No players can be shot");
                 }
             } else {
                 isCurrent = false;  //sets is current to false on the currentplay instance of the loop
@@ -610,7 +605,7 @@ public class Player {
     /**
      * Move action. Specific move action, non finalFrenzy
      *
-     * @param newPosition     the new position
+     * @param newPosition the new position
      */
     public void moveAction(Square newPosition) {
         setMoveCounter(3);
@@ -804,5 +799,7 @@ public class Player {
             int deathPoints = 1;
             addToTotalPoints(deathPoints);
         }
+        //Assigning first blood points
+        getDamage().get(0).addToTotalPoints(1);
     }
 }
