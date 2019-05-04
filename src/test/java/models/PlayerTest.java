@@ -105,10 +105,14 @@ class PlayerTest {
     void marks() {
         Player player1 = new Player();
         Player player2 = new Player();
+        player1.setNickname("John");
+        player2.setNickname("Mark");
 
         player.addMark(player1);
         player.addMark(player2);
         player.addMark(player2);
+
+
 
         assertEquals(player.getMarks().size(), 3);
         assertEquals(player.getMarks().get(0), player1);

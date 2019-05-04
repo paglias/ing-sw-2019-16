@@ -383,6 +383,7 @@ public class Player {
         }
         else if (this.weapons.size()==3) {
             throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
+            // Action needed in order to add that weapon. Press remove weapon button in view
         }
         else{
             throw new IllegalArgumentException("Adding that weapon is not possible");
