@@ -5,32 +5,32 @@ import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 import models.decks.AmmoDeck;
-import models.decks.PowerUpsDeck;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.*;
 
+
 public class Player {
     private String nickname;
-    private Color color; // TODO needed?
-    private Boolean isActive;               //TODO start of turn, set isActive next player. isActive check for every action?
-    private Date startTurnDate;             //used for turn timer
+    private Color color;
+    private Boolean isActive;                                   //TODO start of turn, set isActive next player. isActive check for every action?
+    private Date startTurnDate;                                 //used for turn timer
     private int nDeaths = 0;
     private Boolean isFirstPlayer;
     private ArrayList<Card.Color> cubes = new ArrayList<>();    //ammo available
-    private ArrayList<Integer> givenPoints; // Points given at next death
+    private ArrayList<Integer> givenPoints = new ArrayList<>(); // Points given at next death
     private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
     private ArrayList<Player> damage = new ArrayList<>();       //list of damage amount, depending on player color
     private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
     private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3 TODO set limit to 3?
-    private Square position;                //current position, updated when move happens
-    private int moveCounter;                //TODO restore movecounter at startturn?
-    private int actionCounter;              //remaining actions per turn
-    private int adrenaline;                 //adrenaline counter, max 2
-    private int totalPoints = 0;            //total points of the current player
-    private boolean isDead = false;         //true is the player is currently dead, stays dead until next turn
+    private Square position;                                    //current position, updated when move happens
+    private int moveCounter;                                    //TODO restore movecounter at startturn?
+    private int actionCounter;                                  //remaining actions per turn
+    private int adrenaline;                                     //adrenaline counter, max 2
+    private int totalPoints = 0;                                //total points of the current player
+    private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
 
 
     /**
@@ -43,7 +43,6 @@ public class Player {
         //of the arraylist can be used as first
         setGivenPoints(new ArrayList<>(Arrays.asList(1, 1, 2, 4, 6, 8)));
 
-
         addCube(Card.Color.YELLOW);
         addCube(Card.Color.BLUE);
         addCube(Card.Color.RED);
@@ -53,9 +52,6 @@ public class Player {
         setMoveCounter(3); //TODO can we remove this?
         setActionCounter(2);
         setAdrenaline(0);
-
-        // TODO nickname
-        // TODO player color
     }
 
     /**
@@ -88,12 +84,17 @@ public class Player {
         this.givenPoints = givenPoints;
     }
 
+    /**
+     * Get color color.
+     *
+     * @return the color
+     */
     public Color GetColor() {
         return this.color;
     }
 
     /**
-     * Sets color. USED TO ASSIGN COLOR, GUI TODO used where?
+     * Sets color for the current player at the beginning of the game.
      *
      * @param color the color
      */
@@ -351,23 +352,36 @@ public class Player {
     /**
      * Add weapons to the player's available weapons (max is 3)
      *
-     * @param weapon the weapon
+     * @param newWeapon the weapon
      */
-    public void addWeapon(Weapon weapon) {
-        if (this.weapons.size() <= 3) { // TODO allowed 4?
-            this.weapons.add(weapon);
-        } else {
-            throw new IllegalArgumentException("Limit of weapons reached");
+    public void addWeapon(Weapon newWeapon) {
+        if (this.weapons.size() < 3) {
+            this.weapons.add(newWeapon);
         }
-    }
+        else if (this.weapons.size()==3) {
+            throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
+        }
+        else{
+            throw new IllegalArgumentException("Adding that weapon is not possible");
+            }
+        }
 
     /**
      * Remove weapons. Used when you have 3 weapons and you want a 4th one.
+     * Discards the weapon removed
      *
      * @param weapon the weapon
      */
     public void removeWeapon(Weapon weapon) {
-        this.weapons.remove(weapon);
+        if (this.getWeapons().contains(weapon)){
+            this.weapons.remove(weapon);
+            GameBoard gameBoard = new GameBoard();  //TODO CHECK THIS.
+            gameBoard.getWeaponsDeck().discard(weapon);
+        }
+        else{
+            throw new IllegalArgumentException("You cannot remove that weapon");
+        }
+
     }
 
     /**
@@ -411,14 +425,13 @@ public class Player {
         isDead = dead;
     }
 
+
     /**
      * Move player, generic move function.
      * Called by particular actions if a move is possible once that action has been chosen.
      *
      * @param newPosition the new position
      */
-    //TODO JSON OF ALL POSSIBLE MOVES FROM ALL SQUARES ON THE MAP?
-    // TODO multiple moves
     public void move(Square newPosition) {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
@@ -622,7 +635,6 @@ public class Player {
 
     /**
      * Move action for players whose turn is before the first player.
-     *
      * @param currentWeaponsSlot  the current weapons slot
      * @param newWeapon           the new weapon
      */
