@@ -577,13 +577,13 @@ public class Player {
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
+
             calculateDeathPoints(currentGameBoard);
 
-            //if there are no more skulls, activate finalfrenzy
-            // TODO currentGameBoard.skulls.decreaseSkullsRemaining() decreasenSkulls();
-            /*if (currentGameBoard.getSkulls() == 0) {
+            currentGameBoard.getSkulls().decreaseSkullsRemaining();
+            if (currentGameBoard.getSkulls().getNRemaining()==0){
                 currentGameBoard.finalFrenzy();
-            }*/
+            }
         }
 
         //Player overkill
