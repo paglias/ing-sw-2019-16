@@ -295,6 +295,12 @@ class PlayerTest {
         player.addDamage(playerD);
         player.addDamage(playerA);
         player.addDamage(playerD);
+        player.addDamage(playerD);
+        player.calculateDeathPoints(newGameBoard);
+        assertEquals(playerA.getTotalPoints(), 9);
+        assertEquals(playerD.getTotalPoints(), 6);
+        assertEquals(playerC.getTotalPoints(), 4);
+        assertEquals(playerB.getTotalPoints(), 2);
     }
 }
 
