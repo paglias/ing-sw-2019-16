@@ -467,7 +467,6 @@ public class Player {
     public void move(Square newPosition) {
         Square currentPosition = getPosition();
         List<Square> canAccessSquares = currentPosition.getCanAccessDirectly();
-
         if (canAccessSquares.isEmpty()) {
             throw new IllegalArgumentException("Move is not possible");
         } else {
@@ -604,14 +603,22 @@ public class Player {
     }
 
     /**
-     * Move action. Specific move action, non finalFrenzy
+     * Move action.
      *
-     * @param newPosition the new position
+     * @param firstPosition  the first position
+     * @param secondPosition the second position
+     * @param thirdPosition  the third position
      */
-    public void moveAction(Square newPosition) {
+    public void moveAction(Square firstPosition, Square secondPosition, Square thirdPosition) {
         setMoveCounter(3);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
+        if (getMoveCounter() > 0 && firstPosition != null) {
+            move(firstPosition);
+        }
+        if (getMoveCounter() > 0 && secondPosition != null){
+            move(secondPosition);
+        }
+        if (getMoveCounter() > 0 && thirdPosition != null){
+            move(thirdPosition);
         }
         decreaseActionCounter();
     }

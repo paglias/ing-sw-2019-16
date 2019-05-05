@@ -1,5 +1,6 @@
 package models;
 
+import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
@@ -111,7 +112,6 @@ class PlayerTest {
         player.addMark(player1);
         player.addMark(player2);
         player.addMark(player2);
-
 
 
         assertEquals(player.getMarks().size(), 3);
@@ -301,6 +301,45 @@ class PlayerTest {
         assertEquals(playerD.getTotalPoints(), 6);
         assertEquals(playerC.getTotalPoints(), 4);
         assertEquals(playerB.getTotalPoints(), 2);
+    }
+    @Test
+    void moveAction(){
+
+        Square current = new Square(Square.Color.BLUE, false);
+        player.setPosition(current);
+
+        Square target1 = new Square(Square.Color.BLUE, false);
+        current.addCanAccessSquare(target1);
+
+        Square target2 = new Square(Square.Color.BLUE, false);
+        target1.addCanAccessSquare(target2);
+
+        Square target3 = new Square(Square.Color.BLUE, false);
+        target2.addCanAccessSquare(target3);
+
+        //Test on moving once
+        player.moveAction(target1, null, null);
+        assertEquals(player.getPosition(), target1);
+        assertEquals(player.getMoveCounter(), 2);
+        assertEquals(player.getActionCounter(), 1);
+
+        player.setPosition(current);
+        player.setActionCounter(2);
+
+        //Test on moving twice
+        player.moveAction(target1, target2, null);
+        assertEquals(player.getPosition(), target2);
+        assertEquals(player.getMoveCounter(), 1);
+        assertEquals(player.getActionCounter(), 1);
+
+        player.setPosition(current);
+        player.setActionCounter(2);
+
+        //Test on moving 3 times
+        player.moveAction(target1, target2, target3);
+        assertEquals(player.getPosition(), target3);
+        assertEquals(player.getMoveCounter(), 0);
+        assertEquals(player.getActionCounter(), 1);
     }
 }
 
