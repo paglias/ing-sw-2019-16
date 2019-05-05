@@ -296,4 +296,14 @@ class PlayerTest {
         player.addDamage(playerA);
         player.addDamage(playerD);
     }
+
+   @Test
+   void moveRandom(){
+        Square square1= new Square(Square.Color.PURPLE, false);
+        player.setPosition(square1);
+        Square square2=new Square(Square.Color.RED, true);
+        player.moveRandom(square2);
+        assertEquals(player.getPosition(), square2);
+   }
 }
+
