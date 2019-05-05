@@ -5,10 +5,10 @@ import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class GameBoard {
     private Skulls skulls;
@@ -25,6 +25,15 @@ public class GameBoard {
     private ArrayList<Square> squares;
 
     /**
+     * Gets skulls.
+     *
+     * @return the skulls
+     */
+    public Skulls getSkulls() {
+        return skulls;
+    }
+
+    /**
      * Gets players.
      *
      * @return the players
@@ -39,7 +48,7 @@ public class GameBoard {
      * @param nickname the nickname
      * @return the player by nickname
      */
-    public Player getPlayerByNickname (String nickname) {
+    public Player getPlayerByNickname(String nickname) {
         return getPlayers().stream()
                 .filter(player -> player.getNickname().equals(nickname))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
@@ -50,7 +59,7 @@ public class GameBoard {
      *
      * @param player the player
      */
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         if (players.isEmpty()) {
             player.setFirstPlayer(true);
         }
@@ -63,7 +72,7 @@ public class GameBoard {
      *
      * @param chosenMap the chosen map
      */
-    public void setupGame (Integer chosenMap) {
+    public void setupGame(Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
 
         weaponsDeck = new WeaponsDeck();
@@ -81,7 +90,7 @@ public class GameBoard {
      *
      * @return the power ups deck
      */
-    public PowerUpsDeck getPowerUpsDeck () {
+    public PowerUpsDeck getPowerUpsDeck() {
         return powerUpsDeck;
     }
 
@@ -135,7 +144,7 @@ public class GameBoard {
      * Changes given points for undamaged players.
      * Sets adrenaline to zero for undamaged players
      */
-    public void finalFrenzy () {
+    public void finalFrenzy() {
         isFinalFrenzy = true;
 
         //creates new points awarded for killshot
@@ -167,6 +176,57 @@ public class GameBoard {
                 player.setGivenPoints(points);
                 player.setAdrenaline(0);
             }
+        }
+    }
+
+    /**
+     * Calculate game points. Called by controller at the end of the game.
+     * Conditions for call are checked by the callee.
+     */
+    public void calculateGamePoints() {
+        //Orders killer players in Skulls.killer by occurences, from lowest to highest
+        Skulls currentSkulls = getSkulls();
+        Map<String, Long> killshotByPlayer = currentSkulls.getKillers()
+                .stream()
+                .collect(groupingBy(Player::getNickname, counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(
+                        toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                                LinkedHashMap::new));
+
+        ArrayList<String> nickNamesByKillshotsMade = new ArrayList<>(killshotByPlayer.keySet());
+        List<Player> playersByKills = nickNamesByKillshotsMade.stream()
+                .map(nick -> getPlayerByNickname(nick))
+                .collect(toList());
+
+        //assigns values in finalPlayerPoints arraylist to players Skull.killers
+        List<Integer> finalPlayerPoints = new ArrayList<>();
+        finalPlayerPoints.add(1);
+        finalPlayerPoints.add(1);
+        finalPlayerPoints.add(2);
+        finalPlayerPoints.add(4);
+        finalPlayerPoints.add(6);
+        finalPlayerPoints.add(8);
+        assignPoints(finalPlayerPoints, playersByKills);
+    }
+
+    //TODO check if creating only this function is ok to avoid duplicating code.
+    /**
+     * Assign points. Used in Player and in calculateGamePoints to assign points to players,
+     *
+     * @param points  the points
+     * @param players the players
+     */
+    public void assignPoints(List<Integer> points, List<Player> players) {
+        int n = 1;
+        while (!points.isEmpty() && n >= 1 && !players.isEmpty()) {
+            int addedPoints = points.get(points.size() - n);
+            Player player = players.get(players.size() - 1);
+            player.addToTotalPoints(addedPoints);
+            players.remove(players.size() - 1);
+            n++;
         }
     }
 }

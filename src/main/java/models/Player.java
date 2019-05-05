@@ -43,16 +43,24 @@ public class Player {
         //Initial points given for each Player, order is inverted so the last element
         //of the arraylist can be used as first
         setGivenPoints(new ArrayList<>(Arrays.asList(1, 1, 2, 4, 6, 8)));
-
         addCube(Card.Color.YELLOW);
         addCube(Card.Color.BLUE);
         addCube(Card.Color.RED);
-
+        //Initial points given for each Player, order is inverted so the last element
+        //of the arraylist can be used as first
+        ArrayList<Integer> newPlayerPoints = new ArrayList<>();
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(1);
+        newPlayerPoints.add(2);
+        newPlayerPoints.add(4);
+        newPlayerPoints.add(6);
+        newPlayerPoints.add(8);
         //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
         //Set movecounter to 3
         setMoveCounter(3); //TODO can we remove this?
         setActionCounter(2);
         setAdrenaline(0);
+        this.setGivenPoints(newPlayerPoints);
     }
 
     /**
@@ -778,17 +786,10 @@ public class Player {
                 .map(nick -> currentGameBoard.getPlayerByNickname(nick))
                 .collect(Collectors.toList());
 
-        //assigns values in givenPoints arraylist to players in playerByDamage
+        //assigns values in givenPoints arraylist to players in playerByDamage, by calling assignPoints in gameBoard
         //checks if givenPoints is empty
         if (givenPoints != null && !givenPoints.isEmpty()) {
-            int n = 1;
-            while (!givenPoints.isEmpty() && n >= 0 && !playersByDamage.isEmpty()) {
-                int deathPoints = givenPoints.get(givenPoints.size() - n);
-                Player p = playersByDamage.get(playersByDamage.size() - 1);
-                p.addToTotalPoints(deathPoints);
-                playersByDamage.remove(playersByDamage.size() - 1);
-                n++;
-            }
+            currentGameBoard.assignPoints(givenPoints, playersByDamage);
         } else {
             //if givenPoints is empty, the players has been killed more than 6 times,
             // he still awards 1 point to the killer

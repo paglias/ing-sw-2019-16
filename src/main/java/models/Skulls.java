@@ -8,6 +8,25 @@ public class Skulls {
     // List of players on the gameboard who killed someone. Used for final scoring
     private ArrayList<Player> killers;
 
+
+    /**
+     * Gets killers.
+     *
+     * @return the killers
+     */
+    public ArrayList<Player> getKillers() {
+        return killers;
+    }
+
+    /**
+     * Sets killers.
+     *
+     * @param killers the killers
+     */
+    public void setKillers(ArrayList<Player> killers) {
+        this.killers = killers;
+    }
+
     /**
      * Gets remaining.
      *
