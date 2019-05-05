@@ -169,17 +169,19 @@ class PlayerTest {
         player.addWeapon(weapon1);
         player.addWeapon(weapon2);
         player.addWeapon(new Weapon());
-        player.addWeapon(new Weapon());
 
         assertThrows(IllegalArgumentException.class, () -> {
             player.addWeapon(new Weapon());
         });
 
-        assertEquals(player.getWeapons().size(), 4);
+        assertEquals(player.getWeapons().size(), 3);
         assertEquals(player.getWeapons().get(0), weapon1);
 
-        player.removeWeapon(weapon2);
-        assertEquals(player.getWeapons().size(), 3);
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setupGame(1);
+
+        player.removeWeapon(gameBoard, weapon2);
+        assertEquals(player.getWeapons().size(), 2);
         assertEquals(player.getWeapons().get(0), weapon1);
     }
 

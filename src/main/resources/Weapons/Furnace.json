@@ -6,6 +6,6 @@
   "secondaryCost": null,
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_ROOM_CAN_SEE"]],
-  "secondaryEffect":["SHOOT_EVERY_ONE_AWAY_VIEW","MARK_EVERY_ONE_AWAY_VIEW"],
+  "secondaryEffect":[["SHOOT_EVERY_ONE_AWAY_VIEW","MARK_EVERY_ONE_AWAY_VIEW"]],
   "tertiaryEffect":null
 }

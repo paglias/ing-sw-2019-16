@@ -1,15 +1,12 @@
 package models.cards;
 
-import models.GameBoard;
 import models.Player;
 import models.Square;
 
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 
 import com.google.gson.*;
 
@@ -38,7 +35,6 @@ public class Weapon extends Card {
         MARK_ONE_AWAY_VIEW,
         MARK_TWO_AWAY_VIEW,
         MARK_EVERY_ONE_AWAY_VIEW,
-        MARK_EVERY,
 
         ATTRACT_TARGET
     }
@@ -51,7 +47,7 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> primaryEffect;
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
-
+    private Boolean isSpawnPoint;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
@@ -59,9 +55,6 @@ public class Weapon extends Card {
     // Weapons are only loaded from file once
     private static boolean weaponsLoadedFromFile = false;
     private static ArrayList<Weapon> cachedWeapons;
-
-
-
 
     /**
      * Gets recharge cost.
@@ -106,7 +99,7 @@ public class Weapon extends Card {
         } else {
             ArrayList<Weapon> clonedWeapons = new ArrayList<>(cachedWeapons.size());
             for (Weapon weapon : cachedWeapons) {
-                Weapon cloneWeapon = gson.fromJson(gson.toJson(weapon), weapon.getClass());
+                Weapon cloneWeapon = gson.fromJson(gson.toJson(weapon).toString(), weapon.getClass());
                 clonedWeapons.add(cloneWeapon);
             }
             return clonedWeapons;
@@ -155,11 +148,11 @@ public class Weapon extends Card {
     /**
      * Reload the weapon.
      */
-    public boolean reload (Player player){
-        for(Color color:rechargeCost){
-            player.removeCube(color);
+    public void reload (Player player){
+        for (Color cube: getRechargeCost()) {
+            player.removeCube(cube);
         }
-        return loaded;
+        this.loaded = true;
     }
 
     /**
@@ -361,96 +354,9 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void effect(Weapon.Effect effect, Player playerTarget, Player damagingPlayer){
-        switch (effect){
-            case MARK_VIEW:
-                this.markView(damagingPlayer, playerTarget);
-
-            case SHOOT:
-                this.shoot(damagingPlayer, playerTarget);
-            case SHOOT_CANT_SEE:
-                this.ShootCantSee(damagingPlayer, playerTarget);
-            case MARK_TWO_AWAY_VIEW:
-                this.markTwoAwayView(damagingPlayer, playerTarget);
-
-            case MARK:
-                this.mark(damagingPlayer, playerTarget);
-            case SHOOT_VIEW:
-                this.shootView(damagingPlayer, playerTarget);
-
-            case SHOOT_ONE_AWAY_VIEW:
-                this.shootOneAwayView(damagingPlayer, playerTarget);
-
-        }
-    }
-    public void effect(Weapon.Effect effect, Square square, Player playerTarget, Player damagingPlayer){
-        switch(effect) {
-
-
-            case MOVE_TARGET:
-                this.moveTarget(playerTarget, square);
-            case MOVE:
-                this.move(damagingPlayer, square);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, Player playerTarget, Player secondTarget, Player thirdTarget){
-        switch (effect){
-            case SHOOT_SECOND_TARGET_VIEW:
-                this.shootSecondTargetView(damagingPlayer, playerTarget, secondTarget, thirdTarget);
-            case SHOOT_TARGET_VIEW:
-                this.shootTargetView(damagingPlayer, playerTarget, secondTarget);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, ArrayList<Player> playerTargets){
-        switch (effect){
-            case SHOOT_EVERY:
-                this.shootEvery(damagingPlayer, playerTargets);
-            case MARK_EVERY:
-                this.markEvery(damagingPlayer, playerTargets);
-            case SHOOT_EVERY_ONE_AWAY_VIEW:
-                this.shootEveryOneAwayView(damagingPlayer, playerTargets);
-            case MARK_EVERY_ONE_AWAY_VIEW:
-                this.markEveryOneAwayView(damagingPlayer, playerTargets);
-
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Square position, List<Player> playerTargets, Player damagingPlayer){
-        switch (effect){
-            case SHOOT_ROOM_CAN_SEE:
-                this.shootRoomCanSee(damagingPlayer, position, playerTargets);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, Player playerTarget, Square position, Square.Direction direction){
-        switch (effect){
-            case ATTRACT_TARGET:
-                this.attractTarget(damagingPlayer, playerTarget,position, direction );
-
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, List<Square> squares, Square.Direction direction, List<Player>playerTargets){
-        switch (effect){
-            case SHOOT_DIRECTION:
-                this.shootDirection(damagingPlayer, squares, direction, playerTargets);
-
-        }
-    }
-
-
-
-        public ArrayList<Color> getSecondaryCost(){
-            return secondaryCost;
-        }
-        public ArrayList<Color> getTertiaryCost(){
-            return tertiaryCost;
-        }
-
-
 }
+
+
 
 
 

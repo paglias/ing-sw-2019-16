@@ -4,11 +4,9 @@ import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
-import models.decks.AmmoDeck;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.*;
 
@@ -46,6 +44,7 @@ public class Player {
         addCube(Card.Color.YELLOW);
         addCube(Card.Color.BLUE);
         addCube(Card.Color.RED);
+
         //Initial points given for each Player, order is inverted so the last element
         //of the arraylist can be used as first
         ArrayList<Integer> newPlayerPoints = new ArrayList<>();
@@ -55,6 +54,7 @@ public class Player {
         newPlayerPoints.add(4);
         newPlayerPoints.add(6);
         newPlayerPoints.add(8);
+
         //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
         //Set movecounter to 3
         setMoveCounter(3); //TODO can we remove this?
@@ -386,11 +386,9 @@ public class Player {
     public void addWeapon(Weapon newWeapon) {
         if (this.weapons.size() < 3) {
             this.weapons.add(newWeapon);
-        } else if (this.weapons.size() == 3) {
-            throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
-            // Action needed in order to add that weapon. Press remove weapon button in view
         } else {
-            throw new IllegalArgumentException("Adding that weapon is not possible");
+            throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
+            // TODO Action needed in order to add that weapon. Press remove weapon button in view
         }
     }
 
@@ -400,10 +398,9 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapon(Weapon weapon) {
+    public void removeWeapon(GameBoard gameBoard, Weapon weapon) {
         if (this.getWeapons().contains(weapon)) {
             this.weapons.remove(weapon);
-            GameBoard gameBoard = new GameBoard();  //TODO CHECK THIS.
             gameBoard.getWeaponsDeck().discard(weapon);
         } else {
             throw new IllegalArgumentException("You cannot remove that weapon");
