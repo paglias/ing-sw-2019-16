@@ -2,14 +2,13 @@ package models;
 
 import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapLoaderTest {
     @Test
-    void loadMap () throws IOException {
+    void loadMap () {
         // Test that loading doesn't fail
         MapLoader.loadMap(1, new WeaponsDeck());
         MapLoader.loadMap(2, new WeaponsDeck());
@@ -18,7 +17,7 @@ class MapLoaderTest {
     }
 
     @Test
-    void mapCreation () throws IOException {
+    void mapCreation () {
         // More tests in SquareTest
         ArrayList<Square> map = MapLoader.loadMap(1, new WeaponsDeck());
         assertEquals(map.size(), 12);
@@ -29,6 +28,6 @@ class MapLoaderTest {
         });
 
         assertEquals(map.get(11).isSpawnPoint(), true);
-        assertTrue(map.get(11).getWeaponsSlot() != null);
+        assertNotNull(map.get(11).getWeaponsSlot());
     }
 }
