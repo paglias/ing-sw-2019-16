@@ -1,28 +1,44 @@
 package models;
 
-import models.cards.Card;
 import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
 public class GameBoard {
-    private Skulls skulls;
-    private Boolean started;
+    private Date gameSetupDate;
     private Date gameStartDate;
-    private Date gameLaunchDate;
-    private int turn;
-    private ArrayList<WeaponsSlot> weaponsSlots;
+    private int turn = 0;
+    private Skulls skulls;
     private PowerUpsDeck powerUpsDeck;
     private WeaponsDeck weaponsDeck;
     private AmmoDeck ammoDeck;
     private ArrayList<Player> players;
-    private Boolean isFinalFrenzy;
     private ArrayList<Square> squares;
+    private Boolean isFinalFrenzy;
+
+    /**
+     * Setup the game.
+     *
+     */
+    public GameBoard () {
+        weaponsDeck = new WeaponsDeck();
+        squares = new ArrayList<>();
+
+        powerUpsDeck = new PowerUpsDeck();
+        ammoDeck = new AmmoDeck();
+
+        players = new ArrayList<>();
+
+        gameSetupDate = new Date();
+        skulls = new Skulls();
+
+        isFinalFrenzy = false;
+        turn = 0;
+    }
 
     /**
      * Gets skulls.
@@ -55,6 +71,17 @@ public class GameBoard {
     }
 
     /**
+     * Gets active player.
+     *
+     * @return the active player
+     */
+    public Player getActivePlayer () {
+        return getPlayers().stream()
+                .filter(Player::isActive)
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
+    /**
      * Add player.
      *
      * @param player the player
@@ -67,22 +94,40 @@ public class GameBoard {
         players.add(player);
     }
 
+
     /**
-     * Sets game.
+     * Sets map.
      *
      * @param chosenMap the chosen map
      */
-    public void setupGame(Integer chosenMap) {
+    public void setMap (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
-
-        weaponsDeck = new WeaponsDeck();
-        squares = new ArrayList<>();
         squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
+    }
 
-        powerUpsDeck = new PowerUpsDeck();
-        ammoDeck = new AmmoDeck();
+    /**
+     * Start game.
+     */
+    public void startGame () {
+        gameStartDate = new Date();
+        isFinalFrenzy = false;
+    }
 
-        players = new ArrayList<>();
+    /**
+     * Has started boolean.
+     *
+     * @return the boolean
+     */
+    public boolean hasStarted () {
+        return gameStartDate != null;
+    }
+
+    /**
+     * Next turn.
+     */
+    public void nextTurn () {
+        turn++;
+        nextPlayer(getActivePlayer());
     }
 
     /**
@@ -127,7 +172,7 @@ public class GameBoard {
      * @param currentPlayer the current player
      * @return the player
      */
-    public void nextPlayer(Player currentPlayer) {
+    public Player nextPlayer (Player currentPlayer) {
         int i = players.indexOf(currentPlayer);
         try {
             players.get(i++);
@@ -135,6 +180,7 @@ public class GameBoard {
             players.get(0).setActive(true);
         }
         players.get(i).setActive(true);
+        return players.get(i);
     }
 
     /**
@@ -159,7 +205,7 @@ public class GameBoard {
         Player firstPlayer = players.get(0);  //temporary set first player as the actual first
 
         for (Player player : players) {
-            if (player.getFirstPlayer()) {
+            if (player.isFirstPlayer()) {
                 firstPlayer = player;
                 break;
             }

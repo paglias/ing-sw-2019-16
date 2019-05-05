@@ -57,7 +57,7 @@ public class PowerUp extends Card {
 
     public void effect(Player player, Square position){
         if(this.name==Name.TELEPORTER){
-                player.moveRandom(position);
+                player.setPosition(position);
         }
     }
 
@@ -65,7 +65,7 @@ public class PowerUp extends Card {
         if(this.name==Name.NEWTON){
                List<Square>squareList= square.filterDirectionSquare(squares, direction);
                if(squareList.contains(newSquare)){
-                   playerTarget.moveRandom(newSquare);
+                   playerTarget.setPosition(newSquare);
                }
             }
         }

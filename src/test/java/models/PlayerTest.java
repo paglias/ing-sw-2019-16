@@ -156,7 +156,7 @@ class PlayerTest {
     @Test
     void firstPlayer() {
         player.setFirstPlayer(true);
-        assertTrue(player.getFirstPlayer());
+        assertTrue(player.isFirstPlayer());
     }
 
     @Test
@@ -178,7 +178,7 @@ class PlayerTest {
         assertEquals(player.getWeapons().get(0), weapon1);
 
         GameBoard gameBoard = new GameBoard();
-        gameBoard.setupGame(1);
+        gameBoard.setMap(1);
 
         player.removeWeapon(gameBoard, weapon2);
         assertEquals(player.getWeapons().size(), 2);
@@ -272,7 +272,7 @@ class PlayerTest {
         Player playerD = new Player();
         playerD.setNickname("Gamma");
         GameBoard newGameBoard = new GameBoard();
-        newGameBoard.setupGame(1);
+        newGameBoard.setMap(1);
         ArrayList<Integer> newPlayerPoints = new ArrayList<>();
         newGameBoard.addPlayer(playerA);
         newGameBoard.addPlayer(playerB);
@@ -296,14 +296,5 @@ class PlayerTest {
         player.addDamage(playerA);
         player.addDamage(playerD);
     }
-
-   @Test
-   void moveRandom(){
-        Square square1= new Square(Square.Color.PURPLE, false);
-        player.setPosition(square1);
-        Square square2=new Square(Square.Color.RED, true);
-        player.moveRandom(square2);
-        assertEquals(player.getPosition(), square2);
-   }
 }
 

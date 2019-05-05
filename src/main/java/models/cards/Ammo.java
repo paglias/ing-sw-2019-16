@@ -1,10 +1,10 @@
 package models.cards;
 
 public class Ammo extends Card {
-    protected int nYellowCubes;
-    protected int nBlueCubes;
-    protected int nRedCubes;
-    protected Boolean hasPowerUp;
+    private int nYellowCubes;
+    private int nBlueCubes;
+    private int nRedCubes;
+    private Boolean hasPowerUp;
 
     /**
      * Gets boolean has power up.

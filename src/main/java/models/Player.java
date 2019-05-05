@@ -4,7 +4,6 @@ import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +12,8 @@ import static java.util.stream.Collectors.*;
 
 public class Player {
     private String nickname;
-    private Color color;
-    private Boolean isActive;                                   //TODO start of turn, set isActive next player. isActive check for every action?
+    private Square.Color color;
+    private Boolean isActive;
     private Date startTurnDate;                                 //used for turn timer
     private int nDeaths = 0;
     private Boolean isFirstPlayer;
@@ -98,7 +97,7 @@ public class Player {
      *
      * @param color the color
      */
-    public void setColor(Color color) {
+    public void setColor(Square.Color color) {
         this.color = color;
     }
 
@@ -265,6 +264,15 @@ public class Player {
     }
 
     /**
+     * Is active boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isActive() {
+        return this.isActive;
+    }
+
+    /**
      * Gets marks.
      *
      * @return the marks
@@ -340,7 +348,7 @@ public class Player {
      *
      * @return the first player
      */
-    public Boolean getFirstPlayer() {
+    public Boolean isFirstPlayer() {
         return isFirstPlayer;
     }
 
@@ -473,16 +481,6 @@ public class Player {
                 }
             }
         }
-    }
-
-    /**
-     * Move random. //TODO Why is it different from normal move?
-     *
-     * @param newPosition the new position
-     */
-    public void moveRandom(Square newPosition) {
-        this.setPosition(newPosition);
-
     }
 
     /**

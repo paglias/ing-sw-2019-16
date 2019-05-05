@@ -1,6 +1,5 @@
 package models.decks;
 
-import models.cards.Card;
 import models.cards.Weapon;
 
 import java.util.Collections;
