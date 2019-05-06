@@ -131,6 +131,15 @@ public class GameBoard {
     }
 
     /**
+     * Get the turn.
+     *
+     * @return the actual turn number
+     */
+    public int getTurn () {
+        return turn;
+    }
+
+    /**
      * Gets power ups deck.
      *
      * @return the power ups deck

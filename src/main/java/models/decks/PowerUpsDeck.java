@@ -26,7 +26,13 @@ public class PowerUpsDeck extends Deck {
         super(true, 24);
     }
 
-    public void sell(Player player, PowerUp powerUp) {
+    /**
+     * Sell.
+     *
+     * @param player  the player
+     * @param powerUp the power up
+     */
+    public void sell (Player player, PowerUp powerUp) {
         player.addCube(powerUp.getColor());
         discard(powerUp);
 

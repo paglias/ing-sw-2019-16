@@ -42,6 +42,8 @@ public class MapLoader {
 
             if (parsedSquare.isSpawnPoint) {
                 square.createWeaponsSlot(weaponsDeck);
+            } else {
+                // TODO ammo on non spawn points?
             }
 
             for (int canViewI : parsedSquare.canView) {

@@ -22,7 +22,7 @@ public class Player {
     private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
     private ArrayList<Player> damage = new ArrayList<>();       //list of damage amount, depending on player color
     private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
-    private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3 TODO set limit to 3?
+    private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3
     private Square position;                                    //current position, updated when move happens
     private int moveCounter;                                    //TODO restore movecounter at startturn?
     private int actionCounter;                                  //remaining actions per turn
@@ -416,6 +416,12 @@ public class Player {
 
     }
 
+    public void discardItem(PowerUp powerUp, GameBoard gameBoard){
+        gameBoard.getPowerUpsDeck().sell(this, powerUp);
+        powerUps.remove(powerUp);
+
+    }
+
     /**
      * Gets damage. Used for scoring purposes and to check if the player is dead.
      *
@@ -610,7 +616,7 @@ public class Player {
      * @param thirdPosition  the third position
      */
     public void moveAction(Square firstPosition, Square secondPosition, Square thirdPosition) {
-        setMoveCounter(3);
+        setMoveCounter(3); // TODO why?, no check that actionCounter > 0?
         if (getMoveCounter() > 0 && firstPosition != null) {
             move(firstPosition);
         }

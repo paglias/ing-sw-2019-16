@@ -4,6 +4,9 @@ import models.GameBoard;
 import models.Player;
 import models.Square;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Game {
     private GameBoard gameBoard;
 
@@ -14,8 +17,6 @@ public class Game {
 
         gameBoard = new GameBoard();
         gameBoard.setMap(map != null ? map : 1);
-
-        // TODO timer for starting and joining
     }
 
     public void addPlayer (String nickname, String colorString) {
@@ -31,6 +32,20 @@ public class Game {
         player.setNickname(nickname);
         player.setColor(color);
         gameBoard.addPlayer(player);
+
+        // Start the game when 5 players have joined
+        if (gameBoard.getPlayers().size() == 5) start();
+
+        // Start a timer when 3 players have started
+        if (gameBoard.getPlayers().size() == 3) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (!gameBoard.hasStarted()) start();
+                }
+            }, 3 * 1000); // TODO make timeout duration configurable
+        }
     }
 
     public void start () {
@@ -56,6 +71,12 @@ public class Game {
         }
 
         gameBoard.nextTurn();
+    }
+
+    public void turn () {
+        if (gameBoard.getTurn() == 1) {
+            // TODO first turn, pick two powerups, keep 1
+        }
     }
 
     // TODO ...
