@@ -3,12 +3,15 @@ package controllers;
 import models.GameBoard;
 import models.Player;
 import models.Square;
+import models.cards.PowerUp;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
     private GameBoard gameBoard;
+    private static int gameStartTimeout = 5;
+    private static int turnTimeout = 5;
 
     public void setup (Integer map) {
         if (gameBoard != null) {
@@ -26,11 +29,16 @@ public class Game {
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
 
-        Square.Color color = Square.Color.valueOf(colorString); // TODO catch IllegalArgumentException?
+        Square.Color color = Square.Color.valueOf(colorString);
 
         Player player = new Player();
         player.setNickname(nickname);
         player.setColor(color);
+
+        // Give the each player 2 powerups (one will be discarded)
+        player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+        player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+
         gameBoard.addPlayer(player);
 
         // Start the game when 5 players have joined
@@ -44,7 +52,7 @@ public class Game {
                 public void run() {
                     if (!gameBoard.hasStarted()) start();
                 }
-            }, 3 * 1000); // TODO make timeout duration configurable
+            }, gameStartTimeout * 1000);
         }
     }
 
@@ -53,31 +61,37 @@ public class Game {
             throw new IllegalArgumentException("Game already started, cannot create a new one.");
         }
 
-        if (gameBoard.getPlayers().size() < 2) {
-            throw new IllegalArgumentException("Need at least two players");
-        }
-
         gameBoard.startGame();
         gameBoard.getPlayers().get(0).setActive(true);
-        gameBoard.nextTurn();
     }
 
-    // TODO choose powerup at beginning of first turn
-    // TODO Execute actions
+    public void discardPowerUpAndSpawn (int powerUpToDiscardPosition) {
+        Player player = gameBoard.getActivePlayer();
+        PowerUp powerUp = player.getPowerUps().remove(powerUpToDiscardPosition);
+        gameBoard.getPowerUpsDeck().discard(powerUp);
 
-    public void nextTurn () {
-        if (!gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("Game not started...");
-        }
+        Square spawnPosition = gameBoard.getSquares().stream()
+                .filter(s -> s.getColor().toString() == powerUp.getColor().toString() && s.isSpawnPoint())
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
 
-        gameBoard.nextTurn();
+        player.setPosition(spawnPosition);
     }
 
-    public void turn () {
-        if (gameBoard.getTurn() == 1) {
-            // TODO first turn, pick two powerups, keep 1
-        }
+    public void startTurn () {
+        Timer turnTimer = new Timer();
+        turnTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                endTurn();
+            }
+        }, turnTimeout * 1000);
+
     }
 
-    // TODO ...
+    public void endTurn () {
+
+    }
+
+    // TODO Execute actions, next turn, ...
 }

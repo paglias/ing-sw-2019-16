@@ -9,9 +9,7 @@ import java.util.*;
 import static java.util.stream.Collectors.*;
 
 public class GameBoard {
-    private Date gameSetupDate;
     private Date gameStartDate;
-    private int turn = 0;
     private Skulls skulls;
     private PowerUpsDeck powerUpsDeck;
     private WeaponsDeck weaponsDeck;
@@ -33,11 +31,9 @@ public class GameBoard {
 
         players = new ArrayList<>();
 
-        gameSetupDate = new Date();
         skulls = new Skulls();
 
         isFinalFrenzy = false;
-        turn = 0;
     }
 
     /**
@@ -110,7 +106,6 @@ public class GameBoard {
      */
     public void startGame () {
         gameStartDate = new Date();
-        isFinalFrenzy = false;
     }
 
     /**
@@ -120,23 +115,6 @@ public class GameBoard {
      */
     public boolean hasStarted () {
         return gameStartDate != null;
-    }
-
-    /**
-     * Next turn.
-     */
-    public void nextTurn () {
-        turn++;
-        nextPlayer(getActivePlayer());
-    }
-
-    /**
-     * Get the turn.
-     *
-     * @return the actual turn number
-     */
-    public int getTurn () {
-        return turn;
     }
 
     /**
@@ -190,6 +168,15 @@ public class GameBoard {
         }
         players.get(i).setActive(true);
         return players.get(i);
+    }
+
+    /**
+     * Is final frenzy boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isFinalFrenzy () {
+        return isFinalFrenzy;
     }
 
     /**
