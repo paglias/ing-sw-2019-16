@@ -120,6 +120,23 @@ class PlayerTest {
     }
 
     @Test
+    void marksThrowsIllegalArgument(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setNickname("John");
+        player2.setNickname("Mark");
+
+        player.addMark(player1);
+        player.addMark(player2);
+        player.addMark(player2);
+        assertEquals(player.getMarks().size(), 3);
+        player.addMark(player2);
+        assertThrows(IllegalArgumentException.class, () -> {
+            player.addMark(player2);
+        });
+    }
+
+    @Test
     void powerUps() {
         PowerUp powerUp1 = new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
         PowerUp powerUp2 = new PowerUp(PowerUp.Name.TELEPORTER, Card.Color.BLUE);
