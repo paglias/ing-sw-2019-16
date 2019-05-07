@@ -6,7 +6,9 @@ import models.cards.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +18,20 @@ class PlayerTest {
     @BeforeEach
     void setup() {
         player = new Player();
+    }
+
+    @Test
+    void givenPoints(){
+        ArrayList<Integer> points = new ArrayList();
+        points.add(1);
+        points.add(2);
+        points.add(3);
+        points.add(4);
+        points.add(8);
+        points.add(10);
+        player.setGivenPoints(points);
+        assertEquals(player.getGivenPoints(), points);
+
     }
 
     @Test

@@ -94,6 +94,15 @@ public class Player {
     }
 
     /**
+     * Gets given points.
+     *
+     * @return the given points
+     */
+    public ArrayList<Integer> getGivenPoints() {
+        return givenPoints;
+    }
+
+    /**
      * Sets color for the current player at the beginning of the game.
      *
      * @param color the color
