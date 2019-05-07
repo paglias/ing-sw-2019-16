@@ -100,4 +100,58 @@ public class GameBoardTest {
         assertEquals(player2.getTotalPoints(), 8);
         assertEquals(player3.getTotalPoints(), 3);
     }
+
+    @Test
+    void finalFrenzy(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+
+        gameBoard.addPlayer(player);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+
+        player.addDamage(player1);
+        player.addDamage(player3);
+        player1.addDamage(player);
+
+        player.increaseAdrenaline();
+        player1.increaseAdrenaline();
+        player2.increaseAdrenaline();
+        player3.increaseAdrenaline();
+
+        ArrayList<Integer> points = new ArrayList<>();
+        points.add(1);
+        points.add(1);
+        points.add(1);
+        points.add(5);
+
+        assertTrue(player.isFirstPlayer());
+
+        gameBoard.finalFrenzy();
+
+        assertEquals(player1.getActionCounter(),1);
+        assertEquals(player3.getActionCounter(), 1);
+        player.setFirstPlayer(false);
+        assertFalse(player.isFirstPlayer());
+        player2.setFirstPlayer(true);
+
+        gameBoard.finalFrenzy();
+
+        assertEquals(player.getActionCounter(), 2);
+        assertEquals(player1.getActionCounter(), 2);
+        assertEquals(player2.getActionCounter(), 1);
+        assertEquals(player3.getActionCounter(),1);
+        assertEquals(player2.getGivenPoints(), points);
+        assertEquals(player3.getGivenPoints(), points);
+        assertEquals(player.getGivenPoints().get(0), 1);
+        assertEquals(player.getGivenPoints().get(3),4);
+        assertEquals(player.getGivenPoints().get(5), 8);
+        assertEquals(player1.getGivenPoints().get(5),8);
+        assertEquals(player.getAdrenaline(), 1);
+        assertEquals(player2.getAdrenaline(), 0);
+    }
+
+
 }
