@@ -16,7 +16,7 @@ public class Player {
     private Boolean isActive;
     private Date startTurnDate;                                 //used for turn timer
     private int nDeaths = 0;
-    private Boolean isFirstPlayer;
+    private Boolean isFirstPlayer=false;
     private ArrayList<Card.Color> cubes = new ArrayList<>();    //ammo available
     private ArrayList<Integer> givenPoints = new ArrayList<>(); // Points given at next death
     private ArrayList<Player> marks = new ArrayList<>();        //current marks, depending on player color
@@ -516,7 +516,7 @@ public class Player {
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
-            addWeapon(weaponsSlot.weaponChoice(weaponToPick));
+            addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
         } else {
             Ammo ammo = currentPosition.getAmmo();
 
