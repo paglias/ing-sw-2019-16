@@ -39,6 +39,13 @@ class PlayerTest {
     }
 
     @Test
+    void setActive(){
+        Player player1 = new Player();
+        assertFalse(player1.isActive());
+        player1.setActive(true);
+        assertTrue(player1.isActive());
+    }
+    @Test
     void adrenaline() {
         player.setAdrenaline(1);
         assertEquals(player.getAdrenaline(), 1);

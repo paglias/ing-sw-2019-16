@@ -60,6 +60,7 @@ public class Player {
         setActionCounter(2);
         setAdrenaline(0);
         this.setGivenPoints(newPlayerPoints);
+        setActive(false);
     }
 
     /**
