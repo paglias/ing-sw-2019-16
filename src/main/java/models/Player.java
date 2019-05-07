@@ -507,11 +507,10 @@ public class Player {
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
-     * @param weaponsSlot  the current weapons slot TODO Associate to the current square?
      * @param weaponToPick the weapon to pick
      */
 
-    public void grabItem(GameBoard currentGameBoard, WeaponsSlot weaponsSlot, Weapon weaponToPick) {
+    public void grabItem(GameBoard currentGameBoard, Weapon weaponToPick) {
         Square currentPosition = getPosition();
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
@@ -653,22 +652,20 @@ public class Player {
      * Grab action. Specific move action, non finalFrenzy
      *
      * @param currentGameBoard   the current game board
-     * @param currentWeaponsSlot the current weapons slot
      * @param newWeapon          the new weapon
      * @param newPosition        the new position
      */
-    public void grabAction(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
-                           Weapon newWeapon, Square newPosition) {
+    public void grabAction(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
         if (getAdrenaline() == 0) {
             setMoveCounter(1);
             while (getMoveCounter() > 0) {
                 move(newPosition);
             }
-            grabItem(currentGameBoard, currentWeaponsSlot, newWeapon);
+            grabItem(currentGameBoard, newWeapon);
         }
         if (getAdrenaline() == 1) {
             setMoveCounter(2);
-            grabItem(currentGameBoard, currentWeaponsSlot, newWeapon);
+            grabItem(currentGameBoard, newWeapon);
         }
         decreaseActionCounter();
     }
@@ -701,17 +698,15 @@ public class Player {
      * Move action for players whose turn is before the first player.
      *
      * @param currentGameBoard   the current game board
-     * @param currentWeaponsSlot the current weapons slot
      * @param newWeapon          the new weapon
      * @param newPosition        the new position
      */
-    public void finalFrenzyBeforeGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
-                                      Weapon newWeapon, Square newPosition) {
+    public void finalFrenzyBeforeGrab(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
         setMoveCounter(3);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentGameBoard, currentWeaponsSlot, newWeapon);
+        grabItem(currentGameBoard, newWeapon);
         decreaseActionCounter();
     }
 
@@ -754,17 +749,15 @@ public class Player {
      * Grab action for players whose turn is after the first player.
      *
      * @param currentGameBoard   the current game board
-     * @param currentWeaponsSlot the current weapons slot
      * @param newWeapon          the new weapon
      * @param newPosition        the new position
      */
-    public void finalFrenzyAfterGrab(GameBoard currentGameBoard, WeaponsSlot currentWeaponsSlot,
-                                     Weapon newWeapon, Square newPosition) {
+    public void finalFrenzyAfterGrab(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
         setMoveCounter(2);
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentGameBoard, currentWeaponsSlot, newWeapon);
+        grabItem(currentGameBoard, newWeapon);
         decreaseActionCounter();
     }
 
