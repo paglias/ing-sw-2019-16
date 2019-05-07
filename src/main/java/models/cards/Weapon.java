@@ -17,12 +17,9 @@ public class Weapon extends Card {
         SHOOT_EVERY,
         SHOOT_CANT_SEE,
 
-        SHOOT_OTHER_VIEW,
-        SHOOT_THIRD_VIEW,
         SHOOT_DIRECTION,
         SHOOT_ROOM_CAN_SEE,
         SHOOT_ONE_AWAY_VIEW,
-        SHOOT_TWO_AWAY_VIEW,
         SHOOT_TARGET_VIEW,
         SHOOT_SECOND_TARGET_VIEW,
         SHOOT_EVERY_ONE_AWAY_VIEW,
@@ -32,7 +29,6 @@ public class Weapon extends Card {
 
         MARK,
         MARK_VIEW,
-        MARK_ONE_AWAY_VIEW,
         MARK_TWO_AWAY_VIEW,
         MARK_EVERY_ONE_AWAY_VIEW,
         MARK_EVERY,
@@ -181,33 +177,33 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
     }
     public void shootOneAwayView(Player damagingPlayer, Player playerTarget){
-        List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
-        if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
     }
     public void markOneAwayView(Player damagingPlayer,Player playerTarget){
-        List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
-        if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
     }
     public void shootTwoAwayView(Player damagingPlayer, Player playerTarget){
-        List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
-        if(!CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
     }
     public void markTwoAwayView(Player damagingPlayer, Player playerTarget){
-        List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
-        if(!CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
         }
     }
