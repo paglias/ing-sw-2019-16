@@ -318,8 +318,8 @@ class PlayerTest {
         newPlayerPoints.add(1);
         newPlayerPoints.add(2);
         newPlayerPoints.add(4);
-        newPlayerPoints.add(6);
-        newPlayerPoints.add(8);
+        newPlayerPoints.add(5);
+        newPlayerPoints.add(7);
         player.setGivenPoints(newPlayerPoints);
         player.addDamage(playerA);
         player.addDamage(playerA);
@@ -333,8 +333,8 @@ class PlayerTest {
         player.addDamage(playerD);
         player.addDamage(playerD);
         player.calculateDeathPoints(newGameBoard);
-        assertEquals(playerA.getTotalPoints(), 9);
-        assertEquals(playerD.getTotalPoints(), 6);
+        assertEquals(playerA.getTotalPoints(), 8);
+        assertEquals(playerD.getTotalPoints(), 5);
         assertEquals(playerC.getTotalPoints(), 4);
         assertEquals(playerB.getTotalPoints(), 2);
     }

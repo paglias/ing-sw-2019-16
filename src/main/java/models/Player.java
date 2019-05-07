@@ -600,8 +600,12 @@ public class Player {
             calculateDeathPoints(currentGameBoard);
 
             currentGameBoard.getSkulls().decreaseSkullsRemaining();
+
             if (currentGameBoard.getSkulls().getNRemaining()==0){
                 currentGameBoard.finalFrenzy();
+            }
+            else{
+                currentGameBoard.getSkulls().addKiller(this);
             }
         }
 

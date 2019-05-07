@@ -19,12 +19,17 @@ public class Skulls {
     }
 
     /**
-     * Sets killers.
-     *
-     * @param killers the killers
+     * Adds a new killer in the arraylist of players who killed someone.
+     * The check is not on killers but on nRemaining.
+     * @param killer the killer
      */
-    public void setKillers(ArrayList<Player> killers) {
-        this.killers = killers;
+    public void addKiller(Player killer) {
+        if (nRemaining != 0 ) {
+            this.killers.add(killer);
+        }
+        else{
+            throw new IllegalArgumentException("No more killers can be added, FinalFrenzy activated");
+        }
     }
 
     /**

@@ -39,4 +39,23 @@ class SkullsTest {
             skulls.decreaseSkullsRemaining();
         });
     }
+    @Test
+    void addKiller(){
+        Skulls skulls = new Skulls();
+        Player player = new Player();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        skulls.setNRemaining(3);
+        skulls.addKiller(player);
+        skulls.addKiller(player1);
+        assertEquals(skulls.getKillers().get(0), player);
+        assertEquals(skulls.getKillers().get(1), player1);
+        skulls.addKiller(player2);
+        assertEquals(skulls.getKillers().get(2), player2);
+        skulls.setNRemaining(0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            skulls.addKiller(player3);
+        });
+    }
 }

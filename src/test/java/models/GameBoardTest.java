@@ -3,7 +3,9 @@ package models;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,17 +48,56 @@ public class GameBoardTest {
     }
 
     @Test
+    void calculateGamePoints(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        player.setNickname("Alpha");
+        player1.setNickname("Beta");
+        player2.setNickname("Gamma");
+        player3.setNickname("Delta");
+        gameBoard.setMap(1);
+        gameBoard.addPlayer(player);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+        gameBoard.getSkulls().setNRemaining(6);
+        gameBoard.getSkulls().addKiller(player);
+        gameBoard.getSkulls().addKiller(player1);
+        gameBoard.getSkulls().addKiller(player2);
+        gameBoard.getSkulls().addKiller(player3);
+        gameBoard.getSkulls().addKiller(player);
+        gameBoard.getSkulls().addKiller(player);
+        gameBoard.getSkulls().addKiller(player2);
+        gameBoard.getSkulls().addKiller(player);
+        gameBoard.getSkulls().addKiller(player2);
+        gameBoard.getSkulls().addKiller(player1);
+        gameBoard.calculateGamePoints();
+        assertEquals(player.getTotalPoints(), 8);
+        assertEquals(player2.getTotalPoints(),6);
+        assertEquals(player3.getTotalPoints(),2 );
+        assertEquals(player1.getTotalPoints(), 4);
+    }
+    @Test
     void assignPoints(){
-        ArrayList<Integer> points = new ArrayList();
+        List<Integer> points = new ArrayList<>();
+        points.add(1);
         points.add(1);
         points.add(2);
         points.add(3);
-        points.add(4);
         points.add(8);
-        points.add(10);
-    }
-    @Test
-    void calcateGamePoints(){
-
+        List<Player> players = new ArrayList<>();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        players.add(player);
+        players.add(player1);
+        players.add(player3);
+        players.add(player2);
+        gameBoard.assignPoints(points, players);
+        assertEquals(player.getTotalPoints(), 1);
+        assertEquals(player1.getTotalPoints(), 2);
+        assertEquals(player2.getTotalPoints(), 8);
+        assertEquals(player3.getTotalPoints(), 3);
     }
 }
