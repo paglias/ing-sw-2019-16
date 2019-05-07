@@ -153,5 +153,19 @@ public class GameBoardTest {
         assertEquals(player2.getAdrenaline(), 0);
     }
 
+    @Test
+    void nextPlayer(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
 
+        gameBoard.addPlayer(player);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+        player.setActive(true);
+        gameBoard.nextPlayer(player);
+        assertTrue(player1.isActive());
+        assertFalse(player.isActive());
+    }
 }

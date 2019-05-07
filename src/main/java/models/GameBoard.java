@@ -167,6 +167,7 @@ public class GameBoard {
             players.get(0).setActive(true);
         }
         players.get(i).setActive(true);
+        players.get(i-1).setActive(false);
         return players.get(i);
     }
 
