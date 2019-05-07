@@ -3,7 +3,6 @@ package models;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,5 +166,52 @@ public class GameBoardTest {
         gameBoard.nextPlayer(player);
         assertTrue(player1.isActive());
         assertFalse(player.isActive());
+    }
+
+    @Test
+    void addPlayer(){
+        assertFalse(gameBoard.getPlayers().contains(player));
+        gameBoard.addPlayer(player);
+        assertTrue(gameBoard.getPlayers().contains(player));
+    }
+
+    @Test
+    void getActivePlayer(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+
+        gameBoard.addPlayer(player);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+
+        player2.setActive(true);
+        Player temp = gameBoard.getActivePlayer();
+        assertEquals(temp, player2);
+        assertNotEquals(temp, player1);
+    }
+
+    @Test
+    void getPlayerByNickname(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        player.setNickname("Alpha");
+        player1.setNickname("Beta");
+        player2.setNickname("Gamma");
+        player3.setNickname("Delta");
+        gameBoard.addPlayer(player);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+
+        String x = "Alpha";
+        String y = "Deltaa";
+
+        assertEquals(gameBoard.getPlayerByNickname(x), player);
+        assertThrows(IllegalArgumentException.class, () -> {
+            gameBoard.getPlayerByNickname(y);
+        });
     }
 }

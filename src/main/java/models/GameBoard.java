@@ -239,8 +239,8 @@ public class GameBoard {
                         toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
                                 LinkedHashMap::new));
 
-        ArrayList<String> nickNamesByKillshotsMade = new ArrayList<>(killshotByPlayer.keySet());
-        List<Player> playersByKills = nickNamesByKillshotsMade.stream()
+        ArrayList<String> nickNamesByKillShotsMade = new ArrayList<>(killshotByPlayer.keySet());
+        List<Player> playersByKills = nickNamesByKillShotsMade.stream()
                 .map(nick -> getPlayerByNickname(nick))
                 .collect(toList());
 
