@@ -416,6 +416,12 @@ public class Player {
 
     }
 
+    /**
+     * Discards the powerup chosen. Gives the player a cube of the color discarded.
+     *
+     * @param powerUp   the power up
+     * @param gameBoard the game board
+     */
     public void discardItem(PowerUp powerUp, GameBoard gameBoard){
         gameBoard.getPowerUpsDeck().sell(this, powerUp);
         powerUps.remove(powerUp);

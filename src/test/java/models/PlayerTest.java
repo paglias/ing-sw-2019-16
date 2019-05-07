@@ -1,6 +1,5 @@
 package models;
 
-import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
@@ -340,6 +339,18 @@ class PlayerTest {
         assertEquals(player.getPosition(), target3);
         assertEquals(player.getMoveCounter(), 0);
         assertEquals(player.getActionCounter(), 1);
+    }
+
+
+    @Test
+    void discardItem(){
+        GameBoard newGameboard = new GameBoard();
+        PowerUp powerUp = new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
+        assertTrue(player.getCubes().contains(Card.Color.BLUE));
+        player.removeCube(Card.Color.BLUE);
+        player.addPowerUp(powerUp);
+        player.discardItem(powerUp, newGameboard);
+        assertTrue(player.getCubes().contains(Card.Color.BLUE));
     }
 }
 
