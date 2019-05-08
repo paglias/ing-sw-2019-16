@@ -69,6 +69,7 @@ public class GameBoard {
                 .findFirst().orElseThrow(IllegalArgumentException::new);
     }
 
+
     /**
      * Gets active player.
      *
