@@ -53,6 +53,8 @@ public class Weapon extends Card {
     private static boolean weaponsLoadedFromFile = false;
     private static ArrayList<Weapon> cachedWeapons;
 
+    public String getName () {return this.name; };
+
     /**
      * Gets recharge cost.
      *
@@ -437,6 +439,12 @@ public class Weapon extends Card {
         }
         public ArrayList<Color> getTertiaryCost(){
             return tertiaryCost;
+        }
+        public ArrayList<ArrayList<Effect>> getPrimaryEffect(){ return primaryEffect;
+        }
+        public ArrayList<ArrayList<Effect>> getSecondaryEffect(){return secondaryEffect;
+        }
+        public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect;
         }
 
 

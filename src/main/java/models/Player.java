@@ -1,5 +1,6 @@
 package models;
 
+import controllers.Game;
 import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -396,6 +397,12 @@ public class Player {
         return weapons;
     }
 
+    public Weapon getWeaponByName (String name) {
+        return getWeapons().stream()
+                .filter(weapon -> weapon.getName().equals(nickname))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
     /**
      * Add weapons to the player's available weapons (max is 3)
      *
@@ -591,7 +598,10 @@ public class Player {
         if (playerTarget.getDamage().size() > 5 && playerTarget.getAdrenaline() < 2) {
             playerTarget.increaseAdrenaline();
         }
-        //Player death. The 11th damage point is the killshot.
+    }
+
+    //Player death. The 11th damage point is the killshot.
+    public void playerIsDead(Player playerTarget, GameBoard currentGameBoard){
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
