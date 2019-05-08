@@ -1,5 +1,6 @@
 package models;
 
+import models.cards.Weapon;
 import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
@@ -17,6 +18,7 @@ public class GameBoard {
     private ArrayList<Player> players;
     private ArrayList<Square> squares;
     private Boolean isFinalFrenzy;
+    private ArrayList<Weapon> weapons;
 
     /**
      * Setup the game.
@@ -60,11 +62,13 @@ public class GameBoard {
      * @param nickname the nickname
      * @return the player by nickname
      */
+
     public Player getPlayerByNickname(String nickname) {
         return getPlayers().stream()
                 .filter(player -> player.getNickname().equals(nickname))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
     }
+
 
     /**
      * Gets active player.
@@ -165,6 +169,7 @@ public class GameBoard {
             players.get(i++);
         } catch (IndexOutOfBoundsException e) {
             players.get(0).setActive(true);
+            i=0;
         }
         players.get(i).setActive(true);
         players.get(i-1).setActive(false);

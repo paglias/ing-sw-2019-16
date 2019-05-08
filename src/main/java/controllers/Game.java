@@ -4,6 +4,7 @@ import models.GameBoard;
 import models.Player;
 import models.Square;
 import models.cards.PowerUp;
+import models.cards.Weapon;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -86,13 +87,32 @@ public class Game {
                 endTurn();
             }
         }, turnTimeout * 1000);
-        
 
+
+        Player player= gameBoard.getActivePlayer();
+        player.setActionCounter(2);
     }
 
     public void endTurn () {
+        gameBoard.nextPlayer(gameBoard.getActivePlayer());
+        startTurn();
 
     }
 
-    // TODO Execute actions, next turn, ...
+    public void action(Square position, Weapon weapon){
+        Player player= gameBoard.getActivePlayer();
+        if(player.getActionCounter()>0){
+
+
+        }
+    }
+
+
+
+
+
+
+
+
+
 }
