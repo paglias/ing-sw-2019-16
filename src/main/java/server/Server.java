@@ -4,18 +4,18 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
+// TODO threads import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server implements Closeable {
     private final int port;
     private ServerSocket serverSocket;
-    private ExecutorService pool;
+    // TODO threads private ExecutorService pool;
 
     public Server (int port) {
         System.out.println("closed");
         this.port = port;
-        pool = Executors.newCachedThreadPool();
+        // TODO threads pool = Executors.newCachedThreadPool();
     }
 
     public void init () throws IOException {
@@ -37,14 +37,14 @@ public class Server implements Closeable {
             final Socket socket = acceptConnection();
 
             // TODO this is a thread, synchronize methods
-            pool.submit(() -> {
+            // TODO threads  pool.submit(() -> {
                 ClientHandler clientHandler = new ClientHandler(socket);
                 try {
                     clientHandler.handleConnection();
                 } catch (IOException e) {
                     System.err.println("Problem with " + socket.getLocalAddress() + ": " + e.getMessage());
                 }
-            });
+            // TODO threads  });
         }
     }
 

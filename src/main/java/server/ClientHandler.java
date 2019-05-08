@@ -2,12 +2,15 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientHandler {
     private Socket clientConnection;
+    private static ArrayList<Socket> clients = new ArrayList<>();
 
     public ClientHandler (Socket socket) {
         this.clientConnection = socket;
+        clients.add(clientConnection);
     }
 
     public void handleConnection() throws IOException {

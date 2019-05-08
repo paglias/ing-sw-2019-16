@@ -11,7 +11,7 @@ import java.util.List;
 import com.google.gson.*;
 
 public class Weapon extends Card {
-    private enum Effect {
+    public enum Effect {
         SHOOT,
         SHOOT_VIEW,
         SHOOT_EVERY,
