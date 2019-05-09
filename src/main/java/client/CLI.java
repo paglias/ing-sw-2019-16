@@ -27,12 +27,17 @@ public class CLI {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(() -> {
                 try {
-                    while (true) {
-                        String received = connection.receive();
-                        cliView.onServerMessage(received);
-                    }
-                } finally {
-                    // Don't do anything, the main thread will take care of closing the connection
+                    String msg;
+
+                    do {
+                        msg = connection.receive();
+                        if (msg != null) cliView.onServerMessage(msg);
+                    } while (msg != null);
+
+                    connection.close();
+                } catch (IOException e){
+                    System.err.println("IOException while receiving data from client " + e.getMessage());
+                    // TODO connection.close();
                 }
             });
 

@@ -7,14 +7,23 @@ import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameController {
-    private GameBoard gameBoard;
     private static int gameStartTimeout = 5;
     private static int turnTimeout = 5;
+
+    private GameBoard gameBoard;
+    private ArrayList<ClientController> clients = new ArrayList<>();
+
+    public GameBoard getGameBoard () { return gameBoard; }
+
+    public void addClient (ClientController clientController) {
+        clients.add(clientController);
+    }
 
     public void setup(Integer map) {
         if (gameBoard != null) {

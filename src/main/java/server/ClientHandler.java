@@ -1,16 +1,17 @@
 package server;
 
-// import common.Message;
-import controllers.ClientsController;
+import controllers.ClientController;
 import controllers.GameController;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientHandler {
     private Socket clientSocket;
     private GameController gameController;
-    private ClientsController clientsController;
+    private ClientController clientController;
 
     // Not used to write or read
     private InputStream inputStream;
@@ -20,10 +21,9 @@ public class ClientHandler {
     private BufferedReader readStream;
     private PrintWriter writeStream;
 
-    ClientHandler (Socket socket, GameController gameController, ClientsController clientsController) {
+    ClientHandler (Socket socket, GameController gameController) {
         this.clientSocket = socket;
         this.gameController = gameController;
-        this.clientsController = clientsController;
     }
 
     void handleConnection() throws IOException {
@@ -35,25 +35,30 @@ public class ClientHandler {
             readStream = new BufferedReader(new InputStreamReader(inputStream));
             writeStream = new PrintWriter(outputStream);
 
-            clientsController.addClient(this);
-            System.out.println("Connected " + clientSocket.getRemoteSocketAddress());
+            System.out.println("Connected client " + clientSocket.getRemoteSocketAddress());
 
-            boolean condition = true;
-            String msg;
+            clientController = new ClientController(gameController, this);
+            clientController.init();
 
-            // TODO gameController.onConnection()
+            // Handle incoming data from client
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(() -> {
+                try {
+                    String msg;
 
-            do {
-                msg = readStream.readLine();
-                if (msg != null) {
-                    System.out.println("Client sent >>> " + msg);
-                    // TODO clientController.handleMessage(msg)
+                    do {
+                        msg = readStream.readLine();
+                        if (msg != null) clientController.onClientMessage(msg);
+                    } while (msg != null);
+
+                    close();
+                } catch (IOException ex) {
+                    System.err.println("IOException while receiving data from client " + ex.getMessage());
+                    // TODO close();
                 }
-            } while (condition && msg != null);
-            // TODO set condition to false to disconnect the client
+            });
         } catch (IOException e) {
             System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
-        } finally {
             close();
         }
     }
@@ -67,8 +72,7 @@ public class ClientHandler {
         System.out.println("Closing client " + clientSocket.getLocalAddress());
 
         // First cleanup methods that don't throw exceptions
-        clientsController.removeClient(this);
-        // TODO notify game
+        // TODO notify game, remove client, ...
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

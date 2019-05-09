@@ -2,7 +2,6 @@ package client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Connection implements Closeable {
     private final String host;

@@ -1,6 +1,5 @@
 package server;
 
-import controllers.ClientsController;
 import controllers.GameController;
 
 import java.io.*;
@@ -37,7 +36,6 @@ public class Server implements Closeable {
 
         // TODO manage in a different thread/class?
         GameController gameController = new GameController();
-        ClientsController clientsController = new ClientsController();
 
         boolean condition = true;
         while (condition) {
@@ -46,7 +44,7 @@ public class Server implements Closeable {
             // TODO this is a thread, synchronize!!!
             pool.submit(() -> {
                 try {
-                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameController, clientsController);
+                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);
                     clientHandler.handleConnection();
                 } catch (IOException e) {
                     System.err.println("Problem closing client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
