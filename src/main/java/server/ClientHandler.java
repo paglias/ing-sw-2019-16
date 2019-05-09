@@ -46,6 +46,7 @@ public class ClientHandler {
             do {
                 msg = readStream.readLine();
                 if (msg != null) {
+                    System.out.println("Client sent >>> " + msg);
                     // TODO clientController.handleMessage(msg)
                 }
             } while (condition && msg != null);
@@ -63,10 +64,11 @@ public class ClientHandler {
     }
 
     public void close () throws IOException {
+        System.out.println("Closing client " + clientSocket.getLocalAddress());
+
         // First cleanup methods that don't throw exceptions
         clientsController.removeClient(this);
         // TODO notify game
-        System.out.println("Closing client " + clientSocket.getLocalAddress());
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

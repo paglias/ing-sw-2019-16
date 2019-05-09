@@ -6,7 +6,6 @@ import controllers.GameController;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.server.ExportException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,8 +39,9 @@ public class Server implements Closeable {
         GameController gameController = new GameController();
         ClientsController clientsController = new ClientsController();
 
-        while (true) {
-            final Socket clientSocket = acceptConnection();
+        boolean condition = true;
+        while (condition) {
+            Socket clientSocket = acceptConnection();
 
             // TODO this is a thread, synchronize!!!
             pool.submit(() -> {
