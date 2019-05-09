@@ -44,7 +44,16 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> primaryEffect;
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
-
+    private Player playerTarget;
+    private Square newPosition;
+    private List<Player> PlayerTargets;
+    private Player damagingPlayer;
+    private Square targetSquare;
+    private List<Square> squares;
+    private Square.Direction direction;
+    private Player secondTarget;
+    private Player thirdTarget;
+    private List<Player>players;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
@@ -144,6 +153,31 @@ public class Weapon extends Card {
 
     }
 
+
+    public void setTargetPlayer(Player playerTarget) {
+        this.playerTarget = playerTarget;
+    }
+
+    public void setNewPosition (Square newPosition) {
+        this.newPosition = newPosition;
+    }
+
+    public void SetPlayerTargets(ArrayList<Player> PlayerTargets){this.PlayerTargets= PlayerTargets;}
+
+    public void setTargetSquare(Square targetSquare){this.targetSquare=targetSquare;}
+
+    public void setSecondTarget(Player secondTarget){this.secondTarget=secondTarget;}
+
+    public void setThirdTarget(Player thirdTarget){this.thirdTarget=thirdTarget; }
+
+    public void setDirection(Square.Direction direction){this.direction=direction;}
+
+    public void setSquares(List<Square>squares){this.squares=squares;}
+
+    public void setDamagingPlayer(Player damagingPlayer){this.damagingPlayer=damagingPlayer;}
+
+    public void SetPlayers(List<Player>players){this.players=players;}
+
     /**
      * Reload the weapon.
      */
@@ -155,142 +189,172 @@ public class Weapon extends Card {
     }
 
     /**
-     * @param damagingPlayer
-     * @param playerTarget
+     * @param
+     * @param
      */
-    public void shoot(Player damagingPlayer,Player playerTarget){
+    public void reset(){
+        playerTarget=null;
+        newPosition=null;
+        PlayerTargets=null;
+        damagingPlayer=null;
+        targetSquare=null;
+        squares=null;
+        direction=null;
+        secondTarget=null;
+        thirdTarget=null;
+
+
+    }
+    public void shoot(){
         if(playerTarget.getPosition()==damagingPlayer.getPosition()) {
             playerTarget.addDamage(damagingPlayer);
+            reset();
         }
+
         else throw new IllegalArgumentException("Not usable method");
     }
 
-    public void mark(Player damagingPlayer, Player playerTarget){
+
+    public void mark(){
         if(playerTarget.getPosition().equals(damagingPlayer.getPosition())) {
             playerTarget.addMark(damagingPlayer);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
-    public void move(Player damagingPlayer,Square newPosition) {
+    public void move() {
         List<Square>CanAccessDirectly= damagingPlayer.getPosition().getCanAccessDirectly();
         if(CanAccessDirectly.contains(newPosition)){
         damagingPlayer.move(newPosition);
+        reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
-    public void shootOneAwayView(Player damagingPlayer, Player playerTarget){
+    public void shootOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
-    public void markOneAwayView(Player damagingPlayer,Player playerTarget){
+    public void markOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
-    public void shootTwoAwayView(Player damagingPlayer, Player playerTarget){
+    public void shootTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
-    public void markTwoAwayView(Player damagingPlayer, Player playerTarget){
+    public void markTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
+            reset();
         }
     }
-    public void shootEvery(Player damagingPlayer, ArrayList<Player> PlayerTargets) {
+    public void shootEvery() {
         for (Player Players : PlayerTargets) {
             if (damagingPlayer.getPosition().equals(Players.getPosition())) {
                 Players.addDamage(damagingPlayer);
+                reset();
             }
             else throw new IllegalArgumentException("Not usable method");
         }
     }
-    public void markEvery(Player damagingPlayer, ArrayList<Player> PlayerTargets) {
+    public void markEvery() {
         for (Player Players : PlayerTargets) {
             if (damagingPlayer.getPosition().equals(Players.getPosition())) {
                 Players.addMark(damagingPlayer);
+                reset();
             }
             else throw new IllegalArgumentException("Not usable method");
         }
     }
-    public void shootRoomCanSee(Player damagingPlayer, Square targetSquare, List<Player> playerTargets) {
+    public void shootRoomCanSee() {
         if (!damagingPlayer.getPosition().getCanView().contains(targetSquare)) {
             throw new IllegalArgumentException("Invalid target square, cannot see from player.");
         }
 
-        for (Player player : playerTargets) {
+        for (Player player : PlayerTargets) {
             if (player.getPosition() == targetSquare) {
                 player.addDamage(damagingPlayer);
+                reset();
             }
         }
     }
-    public void shootEveryOneAwayView(Player damagingPlayer, ArrayList<Player> PlayerTargets) {
+    public void shootEveryOneAwayView() {
             for (Player Players : PlayerTargets) {
                 List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
                 Square position = Players.getPosition();
                 if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
                     Players.addDamage(damagingPlayer);
+                    reset();
                 }
                 else throw new IllegalArgumentException("Not usable method");
             }
 
 
     }
-    public void markEveryOneAwayView(Player damagingPlayer, ArrayList<Player> PlayerTargets) {
+    public void markEveryOneAwayView() {
         for (Player Players : PlayerTargets) {
             List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
             Square position = Players.getPosition();
             if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
                 Players.addMark(damagingPlayer);
+                reset();
             }
             else throw new IllegalArgumentException("Not usable method");
         }
 
 
     }
-    public void shootView(Player damagingPlayer, Player playerTarget) {
+    public void shootView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
+            reset();
 
         }
         else throw new IllegalArgumentException("Not usable method");
 
 
     }
-    public void markView(Player damagingPlayer, Player playerTarget) {
+    public void markView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addMark(damagingPlayer);
+            reset();
 
         }
         else throw new IllegalArgumentException("Not usable method");
 
     }
 
-    public void moveTarget(Player playerTarget, Square newPosition) {
+    public void moveTarget() {
         List<Square> CanAccessDirectly = playerTarget.getPosition().getCanAccessDirectly();
         if (CanAccessDirectly.contains(newPosition)) {
             playerTarget.move(newPosition);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void shootDirection(Player damagingPlayer, List<Square> squares, Square.Direction direction,List<Player>players) {
+    public void shootDirection() {
         Square position= damagingPlayer.getPosition();
 
         int playersShot=0;
@@ -299,31 +363,35 @@ public class Weapon extends Card {
                 player.addDamage(damagingPlayer);
                 playersShot++;
             }
+            reset();
         }
         if(playersShot==0){
             throw new IllegalArgumentException("Not usable method");
         }
     }
-    public void shootTargetView(Player damagingPlayer,Player playerTarget,Player secondTarget) {
+    public void shootTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
         Square secondTargetPosition= secondTarget.getPosition();
-        if(CanView.contains(position)){
-            playerTarget.addDamage(damagingPlayer);
-        }
-        if(position.getCanView().contains(secondTargetPosition)){
-            secondTarget.addDamage(damagingPlayer);
+        if(CanView.contains(position)) {
+            {
+                playerTarget.addDamage(damagingPlayer);
+            }
+            if (position.getCanView().contains(secondTargetPosition)) {
+                secondTarget.addDamage(damagingPlayer);
+            }
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 
 
     }
-    public void shootSecondTargetView(Player damagingPlayer, Player playerTarget, Player secondTarget,Player thirdTarget) {
+    public void shootSecondTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
         Square secondTargetPosition = secondTarget.getPosition();
         Square thirdTargetPosition= thirdTarget.getPosition();
-        if (CanView.contains(position)) {
+        if (CanView.contains(position)) {{
             playerTarget.addDamage(damagingPlayer);
         }
         if (position.getCanView().contains(secondTargetPosition)){
@@ -332,122 +400,107 @@ public class Weapon extends Card {
         if(secondTargetPosition.getCanView().contains(thirdTargetPosition)){
             thirdTarget.addDamage(damagingPlayer);
         }
+        reset();
+        }
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void attractTarget(Player damagingPlayer, Player playerTarget, Square newPosition, Square.Direction direction) {
+    public void attractTarget() {
         Square position= damagingPlayer.getPosition();
         Square targetPosition= playerTarget.getPosition();
         if(position.sameDirection(targetPosition,direction)){
                 playerTarget.setPosition(newPosition);
+                reset();
             }
             else throw new IllegalArgumentException("Not usable method");
     }
 
-    public void ShootCantSee(Player damagingPlayer, Player playerTarget){
+    public void ShootCantSee(){
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Square position = playerTarget.getPosition();
         if(!CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void effect(Weapon.Effect effect, Player playerTarget, Player damagingPlayer){
-        switch (effect){
+    public void effect(Weapon.Effect effect) {
+        switch (effect) {
             case MARK_VIEW:
-                this.markView(damagingPlayer, playerTarget);
-
+                this.markView();
             case SHOOT:
-                this.shoot(damagingPlayer, playerTarget);
+                this.shoot();
             case SHOOT_CANT_SEE:
-                this.ShootCantSee(damagingPlayer, playerTarget);
+                this.ShootCantSee();
             case MARK_TWO_AWAY_VIEW:
-                this.markTwoAwayView(damagingPlayer, playerTarget);
-
+                this.markTwoAwayView();
             case MARK:
-                this.mark(damagingPlayer, playerTarget);
+                this.mark();
             case SHOOT_VIEW:
-                this.shootView(damagingPlayer, playerTarget);
-
+                this.shootView();
             case SHOOT_ONE_AWAY_VIEW:
-                this.shootOneAwayView(damagingPlayer, playerTarget);
-
-        }
-    }
-    public void effect(Weapon.Effect effect, Square square, Player playerTarget, Player damagingPlayer){
-        switch(effect) {
-
-
+                this.shootOneAwayView();
             case MOVE_TARGET:
-                this.moveTarget(playerTarget, square);
+                this.moveTarget();
             case MOVE:
-                this.move(damagingPlayer, square);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, Player playerTarget, Player secondTarget, Player thirdTarget){
-        switch (effect){
+                this.move();
             case SHOOT_SECOND_TARGET_VIEW:
-                this.shootSecondTargetView(damagingPlayer, playerTarget, secondTarget, thirdTarget);
+                this.shootSecondTargetView();
             case SHOOT_TARGET_VIEW:
-                this.shootTargetView(damagingPlayer, playerTarget, secondTarget);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, ArrayList<Player> playerTargets){
-        switch (effect){
+                this.shootTargetView();
             case SHOOT_EVERY:
-                this.shootEvery(damagingPlayer, playerTargets);
+                this.shootEvery();
             case MARK_EVERY:
-                this.markEvery(damagingPlayer, playerTargets);
+                this.markEvery();
             case SHOOT_EVERY_ONE_AWAY_VIEW:
-                this.shootEveryOneAwayView(damagingPlayer, playerTargets);
+                this.shootEveryOneAwayView();
             case MARK_EVERY_ONE_AWAY_VIEW:
-                this.markEveryOneAwayView(damagingPlayer, playerTargets);
-
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Square position, List<Player> playerTargets, Player damagingPlayer){
-        switch (effect){
+                this.markEveryOneAwayView();
             case SHOOT_ROOM_CAN_SEE:
-                this.shootRoomCanSee(damagingPlayer, position, playerTargets);
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, Player playerTarget, Square position, Square.Direction direction){
-        switch (effect){
+                this.shootRoomCanSee();
             case ATTRACT_TARGET:
-                this.attractTarget(damagingPlayer, playerTarget,position, direction );
-
-        }
-    }
-
-    public void effect(Weapon.Effect effect, Player damagingPlayer, List<Square> squares, Square.Direction direction, List<Player>playerTargets){
-        switch (effect){
+                this.attractTarget();
             case SHOOT_DIRECTION:
-                this.shootDirection(damagingPlayer, squares, direction, playerTargets);
-
+                this.shootDirection();
         }
     }
 
 
+    public ArrayList<Color> getSecondaryCost(){
+        return secondaryCost;
+    }
+    public ArrayList<Color> getTertiaryCost(){
+        return tertiaryCost;
+    }
+    public void payPrimaryCost(){
+        if(damagingPlayer.getCubes().containsAll(cost)){
+            for(Card.Color color:cost){
+                damagingPlayer.removeCube(color);
+            }
+        }
+    }
+    public void paySecondaryCost(){
+        if(damagingPlayer.getCubes().containsAll(secondaryCost)){
+            for(Card.Color color:secondaryCost){
+                damagingPlayer.removeCube(color);
+            }
+        }
+    }
+    public void payTertiaryCost(){
+        if(damagingPlayer.getCubes().containsAll((tertiaryCost))){
+            for(Card.Color color:tertiaryCost){
+                damagingPlayer.removeCube(color);
+            }
+        }
+    }
 
-        public ArrayList<Color> getSecondaryCost(){
-            return secondaryCost;
-        }
-        public ArrayList<Color> getTertiaryCost(){
-            return tertiaryCost;
-        }
-        public ArrayList<ArrayList<Effect>> getPrimaryEffect(){ return primaryEffect;
-        }
-        public ArrayList<ArrayList<Effect>> getSecondaryEffect(){return secondaryEffect;
-        }
-        public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect;
-        }
 
+    public ArrayList<ArrayList<Effect>> getPrimaryEffect(){ return primaryEffect; }
 
+    public ArrayList<ArrayList<Effect>> getSecondaryEffect(){return secondaryEffect; }
+
+    public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect; }
 }
 
 

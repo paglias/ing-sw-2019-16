@@ -30,6 +30,7 @@ public class Player {
     private int adrenaline;                                     //adrenaline counter, max 2
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
+    private boolean isBeforeFirstPlayer;
 
 
     /**
@@ -62,6 +63,13 @@ public class Player {
         setAdrenaline(0);
         this.setGivenPoints(newPlayerPoints);
         setActive(false);
+    }
+
+    public Boolean isBeforeFirstPlayer(){
+        if(this.isBeforeFirstPlayer){
+            return true;
+        }
+        return false;
     }
 
     /**

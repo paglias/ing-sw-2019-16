@@ -91,7 +91,12 @@ public class Game {
             }
         }, turnTimeout * 1000);
         Player player = gameBoard.getActivePlayer();
-        player.setActionCounter(2);
+        if(!gameBoard.isFinalFrenzy()) {
+            player.setActionCounter(2);
+        }
+        if(gameBoard.getSkulls().getNRemaining()==0){
+            gameBoard.finalFrenzy();
+        }
     }
 
     public void endTurn() {
@@ -106,20 +111,77 @@ public class Game {
 
     }
 
-    public void action(Square position, Weapon weapon) {
+    public void action(Square position, Weapon weapon, Square secondPosition, Square thirdPosition, String action,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
-        if(!gameBoard.isFinalFrenzy()){
-            if (player.getActionCounter()==2) {
-            move(position);
-            moveGrab(position, weapon);
-            // shoot();
+        if(player.getAdrenaline()==0) {
+            switch (action) {
+                case "move":
+                    move(position, secondPosition, thirdPosition);
+                case "moveGrab":
+                    moveGrab(position, weapon);
+                case "shoot":
+                    shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
+            }
+        }
+        if(player.getAdrenaline()==1){
+            switch (action){
+                case"move":
+                    move(position,secondPosition,thirdPosition);
+                case"moveGrab":
+                    moveGrab(position,weapon);
+                case"shoot":
+                    //shoot
+                case "moveMoveGrab":
+                    moveMoveGrab(position,weapon,secondPosition);
+
+            }
+            if(player.getAdrenaline()==2){
+                switch (action){
+                    case"move":
+                        move(position,secondPosition,thirdPosition);
+                    case"moveGrab":
+                        moveGrab(position,weapon);
+                    case"shoot":
+                        //shoot
+                    case"moveMoveGrab":
+                        moveMoveGrab(position,weapon,secondPosition);
+                    case"moveShoot":
+                        moveShoot(position,weaponName,useSecondaryEffect,useTertiaryEffect);
+                }
+            }
+        }
+        }
+    public void actionBeforePlayer(String action,Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect, Square secondPosition, Square thirdPosition, Square fourthPosition){
+        Player player= gameBoard.getActivePlayer();
+        if(player.isBeforeFirstPlayer()){
+            switch(action){
+                case "moveReloadShoot":
+                    moveReloadShoot(position,weaponName,useSecondaryEffect,useTertiaryEffect);
+                case "moveMove":
+                    moveMove(position,secondPosition,thirdPosition,fourthPosition);
+                case "moveMoveGrab":
+                    moveMoveGrab(position,player.getWeaponByName(weaponName),secondPosition);
+
             }
         }
     }
+    public void actionAfterPlayer(String action, Square position, String weaponName, Square secondPosition,Square thirdPosition,Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+        Player player=gameBoard.getActivePlayer();
+        if(!player.isBeforeFirstPlayer()){
+            switch(action){
+                case "moveMoveReloadShoot":
+                    moveMoveReloadShoot(position,secondPosition,weaponName,useSecondaryEffect,useTertiaryEffect);
+                case"threeMovesGrab":
+                    threeMovesGrab(position,secondPosition,thirdPosition,player.getWeaponByName(weaponName));
 
-    public void move (Square position){
+            }
+        }
+
+    }
+
+    public void move (Square position, Square secondPosition, Square thirdPosition){
         Player player = gameBoard.getActivePlayer();
-        player.move(position);
+        player.moveAction(position, secondPosition, thirdPosition);
     }
 
     public void moveGrab (Square position, Weapon weapon){
@@ -128,17 +190,68 @@ public class Game {
         player.grabItem(gameBoard, weapon);
 
     }
-    public void shoot(String weaponName, List<Weapon.Effect>PrimaryEffect, List<Weapon.Effect>SecondaryEffect, List<Weapon.Effect>TertiaryEffect) {
+    public void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
         Weapon weapon = player.getWeaponByName(weaponName);
-        List<Weapon.Effect> effects = weapon.getPrimaryEffect().get(0);
-        for (Weapon.Effect effect : effects) {
-            switch (effect) {
-                case MOVE:
-                    // weapon.move();
-            }
 
+        // TODO ability to use other effects if more than one
+        List<Weapon.Effect> effects = weapon.getPrimaryEffect().get(0);
+        List<Weapon.Effect> secondaryEffects= weapon.getSecondaryEffect().get(0);
+        List<Weapon.Effect> tertiaryEffects= weapon.getTertiaryEffect().get(0);
+
+        weapon.payPrimaryCost();
+        for (Weapon.Effect effect : effects) {
+            weapon.effect(effect);
         }
+
+        if(useSecondaryEffect){
+            weapon.paySecondaryCost();
+            for (Weapon.Effect effect : secondaryEffects) {
+                weapon.effect(effect);
+            }
+        }
+
+        if(useTertiaryEffect){
+            weapon.payTertiaryCost();
+            for (Weapon.Effect effect : tertiaryEffects) {
+                weapon.effect(effect);
+            }
+        }
+    }
+    public void moveReloadShoot(Square position, String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+        Player player= gameBoard.getActivePlayer();
+        player.move(position);
+        player.reload(player.getWeaponByName(weaponName));
+        shoot(weaponName, useSecondaryEffect, useTertiaryEffect);
+    }
+
+    public void moveMove(Square position, Square secondPosition, Square thirdPosition, Square fourthPosition){
+        Player player=gameBoard.getActivePlayer();
+        player.moveAction(position,secondPosition,thirdPosition);
+        player.move(fourthPosition);
+    }
+    public void moveMoveGrab(Square positon, Weapon weapon, Square secondPosition){
+        Player player=gameBoard.getActivePlayer();
+        player.move(positon);
+        player.move(secondPosition);
+        player.grabItem(gameBoard, weapon);
+    }
+    public void moveMoveReloadShoot(Square position, Square secondPosition,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+        Player player=gameBoard.getActivePlayer();
+        player.move(position);
+        player.move(secondPosition);
+        player.reload(player.getWeaponByName(weaponName));
+        shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
+    }
+    public void threeMovesGrab(Square position, Square secondPosition, Square thirdPosition, Weapon weapon){
+        Player player=gameBoard.getActivePlayer();
+        player.moveAction(position,secondPosition,thirdPosition);
+        player.grabItem(gameBoard,weapon);
+    }
+    public void moveShoot(Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+        Player player=gameBoard.getActivePlayer();
+        player.move(position);
+        shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
     }
 
     public void usePowerup(PowerUp powerUp, Player playerTarget, Card.Color cubeColor, Square newSquare, Square position, Square.Direction direction
@@ -157,11 +270,4 @@ public class Game {
 
     }
 
-    public void finalFrenzyMode(){
-        Player player=gameBoard.getActivePlayer();
-        if(player.getActionCounter()==2){
-            // player.
-        }
-
-    }
 }
