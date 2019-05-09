@@ -4,14 +4,14 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class EchoClient implements Closeable {
+public class Client implements Closeable {
     private final String host;
     private final int port;
     private Socket connection;
     private BufferedReader in;
     private PrintWriter out;
 
-    public EchoClient (String host, int port) {
+    Client (String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -38,7 +38,6 @@ public class EchoClient implements Closeable {
     }
 
     public static void main(String[] args) throws IOException {
-
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Provide host:port please");
         String[] tokens = keyboard.nextLine().split(":");
@@ -50,7 +49,7 @@ public class EchoClient implements Closeable {
         String host = tokens[0];
         int port = Integer.parseInt(tokens[1]);
 
-        EchoClient client = new EchoClient(host, port);
+        Client client = new Client(host, port);
 
         try {
             client.init();
@@ -63,7 +62,7 @@ public class EchoClient implements Closeable {
                 client.send(toSend);
                 received = client.receive();
                 System.out.println(received);
-            } while (received != null);
+            } while (true);
         } finally {
             client.close();
         }

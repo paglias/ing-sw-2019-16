@@ -1,59 +1,68 @@
 package server;
 
+import controllers.ClientsController;
+import controllers.GameController;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.server.ExportException;
 import java.util.Scanner;
-// TODO threads import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server implements Closeable {
     private final int port;
     private ServerSocket serverSocket;
-    // TODO threads private ExecutorService pool;
+    private ExecutorService pool;
 
-    public Server (int port) {
-        System.out.println("closed");
+    private Server (int port) {
         this.port = port;
-        // TODO threads pool = Executors.newCachedThreadPool();
+        pool = Executors.newCachedThreadPool();
     }
 
-    public void init () throws IOException {
-        serverSocket = new ServerSocket(port);
-        System.out.println("server.Server listening on port " + port);
-    }
-
-    public Socket acceptConnection() throws IOException {
+    private Socket acceptConnection() throws IOException {
         // blocking call
         Socket accepted = serverSocket.accept();
         System.out.println("Connection accepted: " + accepted.getRemoteSocketAddress());
         return accepted;
     }
 
-    public void lifeCycle() throws IOException {
-        init();
+    private void lifeCycle() throws IOException {
+        serverSocket = new ServerSocket(port);
+        System.out.println("Server listening on port " + port);
 
-        while (true) { //NOSONAR
-            final Socket socket = acceptConnection();
+        // Create a GameController controller
+        // It's created here to make it possible to share it between clients
+        // but then it's only handled in a ClientHandler class that runs in a different thread
 
-            // TODO this is a thread, synchronize methods
-            // TODO threads  pool.submit(() -> {
-                ClientHandler clientHandler = new ClientHandler(socket);
+        // TODO manage in a different thread/class?
+        GameController gameController = new GameController();
+        ClientsController clientsController = new ClientsController();
+
+        while (true) {
+            final Socket clientSocket = acceptConnection();
+
+            // TODO this is a thread, synchronize!!!
+            pool.submit(() -> {
                 try {
+                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameController, clientsController);
                     clientHandler.handleConnection();
                 } catch (IOException e) {
-                    System.err.println("Problem with " + socket.getLocalAddress() + ": " + e.getMessage());
+                    System.err.println("Problem closing client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
                 }
-            // TODO threads  });
+            });
         }
     }
 
     public void close() throws IOException {
+        // TODO notify clients
+        System.out.println("Server is shutting down...");
         serverSocket.close();
     }
 
     public static void main (String[] args) throws IOException {
-        System.out.println("Starting...");
+        System.out.println("Server is starting...");
 
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter a port");

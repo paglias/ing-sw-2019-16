@@ -1,6 +1,5 @@
 package models;
 
-import controllers.Game;
 import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -653,7 +652,7 @@ public class Player {
      * @param thirdPosition  the third position
      */
     public void moveAction(Square firstPosition, Square secondPosition, Square thirdPosition) {
-        setMoveCounter(3);
+            setMoveCounter(3);
         if (getMoveCounter() > 0 && firstPosition != null) {
             move(firstPosition);
         }

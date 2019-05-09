@@ -195,13 +195,6 @@ public class GameBoard {
     public void finalFrenzy() {
         isFinalFrenzy = true;
 
-        //creates new points awarded for killshot
-        ArrayList<Integer> points = new ArrayList<>();
-        points.add(1);
-        points.add(1);
-        points.add(1);
-        points.add(5);
-
         // decides action counter based on firstPlayer
         // sets first player
         Player firstPlayer = players.get(0);  //temporary set first player as the actual first
@@ -221,7 +214,8 @@ public class GameBoard {
             }
 
             if (player.getDamage().isEmpty()) {
-                player.setGivenPoints(points);
+                //creates new points awarded for killshot
+                player.setGivenPoints(new ArrayList<>(Arrays.asList(1, 1, 1, 5)));
                 player.setAdrenaline(0);
             }
         }

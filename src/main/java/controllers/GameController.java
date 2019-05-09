@@ -7,19 +7,18 @@ import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game {
+public class GameController {
     private GameBoard gameBoard;
     private static int gameStartTimeout = 5;
     private static int turnTimeout = 5;
 
     public void setup(Integer map) {
         if (gameBoard != null) {
-            throw new IllegalArgumentException("Game already exists, cannot create a new one.");
+            throw new IllegalArgumentException("GameController already exists, cannot create a new one.");
         }
 
         gameBoard = new GameBoard();
@@ -28,7 +27,7 @@ public class Game {
 
     public void addPlayer(String nickname, String colorString) {
         if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("Game already started, cannot join.");
+            throw new IllegalArgumentException("GameController already started, cannot join.");
         }
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
@@ -62,7 +61,7 @@ public class Game {
 
     public void start() {
         if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("Game already started, cannot create a new one.");
+            throw new IllegalArgumentException("GameController already started, cannot create a new one.");
         }
 
         gameBoard.startGame();
