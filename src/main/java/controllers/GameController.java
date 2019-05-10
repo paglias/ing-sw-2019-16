@@ -12,14 +12,22 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game {
-    private GameBoard gameBoard;
+public class GameController {
     private static int gameStartTimeout = 5;
     private static int turnTimeout = 5;
 
+    private GameBoard gameBoard;
+    private ArrayList<ClientController> clients = new ArrayList<>();
+
+    public GameBoard getGameBoard () { return gameBoard; }
+
+    public void addClient (ClientController clientController) {
+        clients.add(clientController);
+    }
+
     public void setup(Integer map) {
         if (gameBoard != null) {
-            throw new IllegalArgumentException("Game already exists, cannot create a new one.");
+            throw new IllegalArgumentException("GameController already exists, cannot create a new one.");
         }
 
         gameBoard = new GameBoard();
@@ -28,7 +36,7 @@ public class Game {
 
     public void addPlayer(String nickname, String colorString) {
         if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("Game already started, cannot join.");
+            throw new IllegalArgumentException("GameController already started, cannot join.");
         }
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
@@ -62,7 +70,7 @@ public class Game {
 
     public void start() {
         if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("Game already started, cannot create a new one.");
+            throw new IllegalArgumentException("GameController already started, cannot create a new one.");
         }
 
         gameBoard.startGame();

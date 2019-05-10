@@ -1,47 +1,81 @@
 package server;
 
+import controllers.ClientController;
+import controllers.GameController;
+
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientHandler {
-    private Socket clientConnection;
-    private static ArrayList<Socket> clients = new ArrayList<>();
+    private Socket clientSocket;
+    private GameController gameController;
+    private ClientController clientController;
 
-    public ClientHandler (Socket socket) {
-        this.clientConnection = socket;
-        clients.add(clientConnection);
+    // Not used to write or read
+    private InputStream inputStream;
+    private OutputStream outputStream;
+
+    // To write and read
+    private BufferedReader readStream;
+    private PrintWriter writeStream;
+
+    ClientHandler (Socket socket, GameController gameController) {
+        this.clientSocket = socket;
+        this.gameController = gameController;
     }
 
-    public void handleConnection() throws IOException {
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
+    void handleConnection() throws IOException {
         try {
             // Communication streams
-            inputStream = clientConnection.getInputStream();
-            outputStream = clientConnection.getOutputStream();
+            inputStream = clientSocket.getInputStream();
+            outputStream = clientSocket.getOutputStream();
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
-            PrintWriter out = new PrintWriter(outputStream);
+            readStream = new BufferedReader(new InputStreamReader(inputStream));
+            writeStream = new PrintWriter(outputStream);
 
-            String msg;
+            System.out.println("Connected client " + clientSocket.getRemoteSocketAddress());
 
-            do {
-                msg = in.readLine();
+            clientController = new ClientController(gameController, this);
+            clientController.init();
 
-                if (msg != null && !msg.startsWith("quit")) {
-                    System.out.println("<<< " + clientConnection.getRemoteSocketAddress() + ": " + msg);
-                    out.println(">>> " + msg);
-                    // when you call flush you really send what
-                    // you added to the buffer with println.
-                    out.flush();
+            // Handle incoming data from client
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(() -> {
+                try {
+                    String msg;
+
+                    do {
+                        msg = readStream.readLine();
+                        if (msg != null) clientController.onClientMessage(msg);
+                    } while (msg != null);
+
+                    close();
+                } catch (IOException ex) {
+                    System.err.println("IOException while receiving data from client " + ex.getMessage());
+                    // TODO close();
                 }
-            } while (msg != null && !msg.startsWith("quit"));
-
-        } finally {
-            if (inputStream != null) inputStream.close();
-            if (outputStream != null) outputStream.close();
-            clientConnection.close();
+            });
+        } catch (IOException e) {
+            System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
+            close();
         }
+    }
+
+    public void sendMessage (String msg) {
+        writeStream.println(msg);
+        writeStream.flush();
+    }
+
+    public void close () throws IOException {
+        System.out.println("Closing client " + clientSocket.getLocalAddress());
+
+        // First cleanup methods that don't throw exceptions
+        // TODO notify game, remove client, ...
+
+        if (inputStream != null) inputStream.close();
+        if (outputStream != null) outputStream.close();
+        clientSocket.close();
     }
 }
