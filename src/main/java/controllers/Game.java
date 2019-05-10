@@ -254,20 +254,12 @@ public class Game {
         shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
     }
 
-    public void usePowerup(PowerUp powerUp, Player playerTarget, Card.Color cubeColor, Square newSquare, Square position, Square.Direction direction
-    , List<Square>squares){
+    public void usePowerup(PowerUp powerUp){
         Player player=gameBoard.getActivePlayer();
-        switch(powerUp.getName()){
-            case NEWTON:
-                powerUp.effect(player,playerTarget,position, newSquare,direction,squares);
-            case TELEPORTER:
-                powerUp.effect(player, position);
-            case TAGBACK_GRENADE:
-                powerUp.effect(player,playerTarget);
-            case TARGETING_SCOPE:
-                powerUp.effect(player,cubeColor,playerTarget);
-        }
-
+        powerUp.effect(powerUp.getName());
     }
 
+
+
 }
+

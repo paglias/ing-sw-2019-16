@@ -15,7 +15,48 @@ public class PowerUp extends Card {
         TAGBACK_GRENADE,
         TELEPORTER
     }
+
     private Name name;
+    private Player player;
+    private Card.Color cubeColor;
+    private Player playerTarget;
+    private Square position;
+    private Square square;
+    private Square newSquare;
+    private Square.Direction direction;
+    private List<Square> squares;
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setCubeColor(Card.Color cubeColor) {
+        this.cubeColor = cubeColor;
+    }
+
+    public void setPlayerTarget(Player playerTarget) {
+        this.playerTarget = playerTarget;
+    }
+
+    public void setPosition(Square position) {
+        this.position = position;
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
+    }
+
+    public void setNewSquare(Square newSquare) {
+        this.newSquare = newSquare;
+    }
+
+    public void setDirection(Square.Direction direction) {
+        this.direction = direction;
+    }
+
+    public void setSquares(List<Square> squares) {
+        this.squares = squares;
+    }
 
     /**
      * Instantiates a new Power up.
@@ -23,7 +64,7 @@ public class PowerUp extends Card {
      * @param name  the name
      * @param color the color
      */
-    public PowerUp (Name name, Color color) {
+    public PowerUp(Name name, Color color) {
         super(color);
         this.name = name;
     }
@@ -33,40 +74,48 @@ public class PowerUp extends Card {
      *
      * @return the name
      */
-    public Name getName () {
+    public Name getName() {
         return name;
     }
 
-    public void effect(Player player, Card.Color cubeColor, Player playerTarget){
-        if(this.name==Name.TARGETING_SCOPE) {
-            if (player.getCubes() != null) {
-                player.removeCube(cubeColor);
-                playerTarget.addDamage(player);
-            }
-        }
+    public void reset(){
+        position=null;
+        playerTarget=null;
+        player=null;
+        newSquare=null;
+        squares=null;
+        direction=null;
+        square=null;
+        cubeColor=null;
+
+
     }
 
-    public void effect(Player player, Player playerTarget){
-        if(this.name==Name.TAGBACK_GRENADE){
-                Square position= playerTarget.getPosition();
-                if(player.getPosition().getCanView().contains(position)){
-                    playerTarget.addMark(player);
+    public void effect(PowerUp.Name name) {
+        switch (name) {
+            case TARGETING_SCOPE:
+                if (player.getCubes() != null) {
+                    player.removeCube(cubeColor);
+                    playerTarget.addDamage(player);
+                    reset();
                 }
-        }
-    }
 
-    public void effect(Player player, Square position){
-        if(this.name==Name.TELEPORTER){
-                player.setPosition(position);
-        }
-    }
+            case TAGBACK_GRENADE:
+                Square position = playerTarget.getPosition();
+                if (player.getPosition().getCanView().contains(position)) {
+                    playerTarget.addMark(player);
+                    reset();
+                }
+            case TELEPORTER:
+                player.setPosition(square);
+                reset();
 
-    public void effect(Player player, Player playerTarget, Square square,Square newSquare, Square.Direction direction,List<Square>squares){
-        if(this.name==Name.NEWTON){
-               List<Square>squareList= square.filterDirectionSquare(squares, direction);
-               if(squareList.contains(newSquare)){
-                   playerTarget.setPosition(newSquare);
-               }
+            case NEWTON:
+                List<Square> squareList = square.filterDirectionSquare(squares, direction);
+                if (squareList.contains(newSquare)) {
+                    playerTarget.setPosition(newSquare);
+                    reset();
+                }
             }
         }
     }
