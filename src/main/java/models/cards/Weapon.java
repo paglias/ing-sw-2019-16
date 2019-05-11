@@ -270,7 +270,7 @@ public class Weapon extends Card {
                 }
             else throw new IllegalArgumentException("Not usable method");
         }
-        reset();
+        reset(); // TODO make sure it's called even if an error occurs
     }
     public void markEvery() {
         for (Player Players : playerTargets) {
@@ -408,7 +408,7 @@ public class Weapon extends Card {
         Square position= damagingPlayer.getPosition();
         Square targetPosition= playerTarget.getPosition();
         if(position.sameDirection(targetPosition,direction)){
-                playerTarget.setPosition(newPosition);
+                playerTarget.setPosition(position);
                 reset();
             }
             else throw new IllegalArgumentException("Not usable method");

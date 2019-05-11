@@ -117,10 +117,9 @@ public class Square {
     }
 
     public List<Square> filterDirectionSquare(List<Square>Squares, Direction direction){
-
-            return Squares.stream().filter(square -> {
-                return sameDirection(square,direction);
-            }).collect(Collectors.toList());
+        return Squares.stream().filter(square -> {
+            return sameDirection(square,direction);
+        }).collect(Collectors.toList());
     }
     public List<Player> getPlayersHere(List<Player>Players){
         return Players.stream().filter(player -> {

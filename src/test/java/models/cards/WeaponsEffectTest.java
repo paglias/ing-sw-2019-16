@@ -53,8 +53,11 @@ public class WeaponsEffectTest {
         player2.setPosition(square2);
         int nDamage = player2.getDamage().size();
 
+        weapon.setDamagingPlayer(player1);
+        weapon.setTargetPlayer(player2);
+
         assertThrows(IllegalArgumentException.class, () -> {
-            // weapon.shoot(player1, player2);
+            weapon.shoot();
         });
         assertFalse(player2.getDamage().contains(player1));
         assertEquals(player2.getDamage().size(), nDamage);
@@ -290,11 +293,14 @@ public class WeaponsEffectTest {
     @Test
     void shootDirection() {
         player1.setPosition(square1);
+
         List<Square> squares= Arrays.asList(square1,square2,square3);
-        List<Player> players=Arrays.asList(player2,player3);
+        ArrayList<Player> players=new ArrayList<>(Arrays.asList(player2,player3));
+
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
-        weapon.setTargetPlayer(player3);
+        weapon.setSquares(squares);
+        weapon.setPlayerTargets(players);
+
         player2.setPosition(square2);
         player3.setPosition(square3);
         square1.setNumber(0);
@@ -366,17 +372,21 @@ public class WeaponsEffectTest {
     void AttractTarget() {
         player1.setPosition(square1);
         player2.setPosition(square2);
+
         weapon.setDamagingPlayer(player1);
         weapon.setTargetPlayer(player2);
-        weapon.setTargetSquare(square2);
+        // TODO this is wrong, the manual doesn't mention direction
+        weapon.setDirection(Square.Direction.EAST);
+
         square1.setNumber(7);
         square2.setNumber(4);
+
         player1.setMoveCounter(8);
         player2.setMoveCounter(8);
-        weapon.setDirection(Square.Direction.EAST);
-        weapon.attractTarget();
-        assertEquals(player2.getPosition(), square1);
 
+        weapon.attractTarget();
+
+        assertEquals(player2.getPosition(), square1);
     }
 
     @Test
