@@ -43,7 +43,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>12.0.1</version>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11.0.2</version>
         </dependency>
     </dependencies>
 
@@ -52,9 +57,9 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.2</version>
+                <version>0.0.1</version>
                 <configuration>
-                    <mainClass>Game</mainClass>
+                    <mainClass>views.Game</mainClass>
                 </configuration>
             </plugin>
             <plugin>
