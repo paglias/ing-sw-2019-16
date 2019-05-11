@@ -94,20 +94,20 @@ public class PowerUp extends Card {
     public void effect(PowerUp.Name name) {
         switch (name) {
             case TARGETING_SCOPE:
-                if (player.getCubes() != null) {
+                if (player.getCubes().size()!= 0) {
                     player.removeCube(cubeColor);
                     playerTarget.addDamage(player);
                     reset();
                 }
 
             case TAGBACK_GRENADE:
-                Square position = playerTarget.getPosition();
-                if (player.getPosition().getCanView().contains(position)) {
+                Square playerPosition = playerTarget.getPosition();
+                if (player.getPosition().getCanView().contains(playerPosition)) {
                     playerTarget.addMark(player);
                     reset();
                 }
             case TELEPORTER:
-                player.setPosition(square);
+                player.setPosition(position);
                 reset();
 
             case NEWTON:

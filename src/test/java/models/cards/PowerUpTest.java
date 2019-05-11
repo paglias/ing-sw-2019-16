@@ -23,7 +23,7 @@ class PowerUpTest {
         Player player = new Player();
         player.setPosition(player.getPosition());
         Square position = new Square(Square.Color.PURPLE, false);
-        powerUp.effect(player, position);
+        // powerUp.effect(player, position);
         assertEquals(player.getPosition(), position);
     }
 
@@ -38,7 +38,7 @@ class PowerUpTest {
         player.setPosition(square1);
         player2.setPosition(square2);
         square1.addCanViewSquare(square2);
-        powerUp.effect(player, player2);
+        // powerUp.effect(player, player2);
         assertEquals(player2.getMarks().size(),nMarks+1 );
         assertTrue(player2.getMarks().contains(player));
     }
@@ -53,7 +53,7 @@ class PowerUpTest {
         Player player2=new Player();
         int nCubes= player.getCubes().size();
         int nDamages= player2.getDamage().size();
-        powerUp.effect(player, Card.Color.BLUE, player2);
+        //powerUp.effect(player, Card.Color.BLUE, player2);
         assertEquals(player2.getDamage().size(), nDamages+1);
         assertTrue(player2.getDamage().contains(player));
         assertEquals(player.getCubes().size(), nCubes-1);
@@ -71,7 +71,7 @@ class PowerUpTest {
         player2.setPosition(square1);
         square1.setNumber(0);
         square2.setNumber(4);
-        powerUp.effect(player1, player2, square1,square2, Square.Direction.SOUTH, squares);
+        //powerUp.effect(player1, player2, square1,square2, Square.Direction.SOUTH, squares);
         assertEquals(player2.getPosition(), square2);
     }
 
