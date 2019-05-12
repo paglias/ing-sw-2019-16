@@ -1,12 +1,7 @@
 package client;
 
-import messages.AbstractMessage;
-import messages.ConnectionMessage;
-
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class CLI {
     private Connection connection;
@@ -23,15 +18,15 @@ public class CLI {
             connection  = new Connection(host, port);
             connection.init();
 
-            CliView cliView = new CliView(connection, keyboard);
-            cliView.init();
+            CliController cliController = new CliController(connection, keyboard);
+            cliController.init();
 
             // Handle messages from the server
             String msg;
 
             do {
                 msg = connection.receive();
-                if (msg != null) cliView.onServerMessage(msg);
+                if (msg != null) cliController.onServerMessage(msg);
             } while (msg != null);
 
         } catch (IOException e) {

@@ -1,8 +1,13 @@
 package controllers;
 
+import messages.AbstractMessage;
+import messages.ConnectionMessage;
+import messages.GameStartedMessage;
+import messages.MessageVisitor;
 import server.ClientHandler;
 
-public class ClientController {
+
+public class ClientController implements MessageVisitor {
     private ClientHandler clientHandler;
     private GameController gameController;
 
@@ -13,7 +18,16 @@ public class ClientController {
 
     public void onClientMessage (String msg) {
         System.out.println("From client >>> " + msg);
-        clientHandler.sendMessage(msg);
+        AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
+        parsedMsg.accept(this);
+    }
+
+    public void visit(ConnectionMessage connMsg) {
+        System.out.println("handling connection msg" + connMsg.serialize());
+    }
+
+    public void visit(GameStartedMessage gameStartedMessage) {
+        System.out.println("handling gamestarted msg" + gameStartedMessage.serialize());
     }
 
     private void sendClientMessage (String msg) {

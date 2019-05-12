@@ -71,7 +71,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>views.RealMain</mainClass>
+                    <mainClass>client.RealMain</mainClass>
                 </configuration>
             </plugin>
 
@@ -80,7 +80,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.2</version>
                 <configuration>
-                    <mainClass>views.Game</mainClass>
+                    <mainClass>client.views.Game</mainClass>
                 </configuration>
             </plugin>
 
@@ -133,7 +133,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>views.RealMain</mainClass>
+                            <mainClass>client.RealMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public abstract class AbstractMessage {
+public abstract class AbstractMessage implements MessageInterface {
     static Gson gson = new Gson();
     private static JsonParser jsonParser = new JsonParser();
 
