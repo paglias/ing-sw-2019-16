@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 
 public class Game extends Application {
-
     Stage window;
     Button button1;
-    public static void main(String[] args) {
+
+    public static void startGame(String[] args) {
         launch();
     }
 

@@ -5,8 +5,6 @@ import controllers.GameController;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ClientHandler {
     private Socket clientSocket;
@@ -41,24 +39,15 @@ public class ClientHandler {
             clientController.init();
 
             // Handle incoming data from client
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.submit(() -> {
-                try {
-                    String msg;
+            String msg;
 
-                    do {
-                        msg = readStream.readLine();
-                        if (msg != null) clientController.onClientMessage(msg);
-                    } while (msg != null);
-
-                    close();
-                } catch (IOException ex) {
-                    System.err.println("IOException while receiving data from client " + ex.getMessage());
-                    // TODO close();
-                }
-            });
+            do {
+                msg = readStream.readLine();
+                if (msg != null) clientController.onClientMessage(msg);
+            } while (msg != null);
         } catch (IOException e) {
             System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
+        } finally {
             close();
         }
     }
