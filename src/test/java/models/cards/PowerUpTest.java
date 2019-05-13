@@ -1,7 +1,6 @@
 package models.cards;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import models.Player;
@@ -21,9 +20,10 @@ class PowerUpTest {
     void TeleporterEffect() {
         PowerUp powerUp = new PowerUp(PowerUp.Name.TELEPORTER, Card.Color.BLUE);
         Player player = new Player();
-        player.setPosition(player.getPosition());
-        Square position = new Square(Square.Color.PURPLE, false);
-        // powerUp.effect(player, position);
+        powerUp.setPlayer(player);
+        Square position=new Square(Square.Color.BLUE, false);
+        powerUp.setNewPosition(position);
+        powerUp.effect(PowerUp.Name.TELEPORTER);
         assertEquals(player.getPosition(), position);
     }
 
@@ -32,13 +32,17 @@ class PowerUpTest {
         PowerUp powerUp= new PowerUp(PowerUp.Name.TAGBACK_GRENADE, Card.Color.BLUE);
         Player player= new Player();
         Player player2= new Player();
+        powerUp.setPlayer(player);
+        powerUp.setPlayerTarget(player2);
         Square square1= new Square(Square.Color.PURPLE, false);
         Square square2= new Square(Square.Color.PURPLE, true);
         int nMarks= player2.getMarks().size();
         player.setPosition(square1);
         player2.setPosition(square2);
+        powerUp.setNewPosition(square1);
+        powerUp.setNewPosition(square2);
         square1.addCanViewSquare(square2);
-        // powerUp.effect(player, player2);
+        powerUp.effect(PowerUp.Name.TAGBACK_GRENADE);
         assertEquals(player2.getMarks().size(),nMarks+1 );
         assertTrue(player2.getMarks().contains(player));
     }
@@ -51,9 +55,14 @@ class PowerUpTest {
         player.addCube(Card.Color.RED);
         player.addCube(Card.Color.YELLOW);
         Player player2=new Player();
+        Square position=new Square(Square.Color.RED,true);
+        powerUp.setPlayer(player);
+        powerUp.setPlayerTarget(player2);
+        powerUp.setCubeColor(Card.Color.BLUE);
+        powerUp.setNewPosition(position);
         int nCubes= player.getCubes().size();
         int nDamages= player2.getDamage().size();
-        //powerUp.effect(player, Card.Color.BLUE, player2);
+        powerUp.effect(PowerUp.Name.TARGETING_SCOPE);
         assertEquals(player2.getDamage().size(), nDamages+1);
         assertTrue(player2.getDamage().contains(player));
         assertEquals(player.getCubes().size(), nCubes-1);
@@ -66,12 +75,25 @@ class PowerUpTest {
         Player player2=new Player();
         Square square1= new Square(Square.Color.BLUE, false);
         Square square2=new Square(Square.Color.BLUE, false);
-        player1.setPosition(square1);
-        List<Square> squares= Arrays.asList(square1,square2);
-        player2.setPosition(square1);
+
+        player2.setPosition(square2);
         square1.setNumber(0);
         square2.setNumber(4);
-        //powerUp.effect(player1, player2, square1,square2, Square.Direction.SOUTH, squares);
+
+        List<Square> squares= new ArrayList<>();
+        squares.add(square1);
+        squares.add(square2);
+        powerUp.setSquares(squares);
+
+        powerUp.setPlayer(player1);
+        powerUp.setPlayerTarget(player2);
+
+        player1.setPosition(square1);
+        powerUp.setNewPosition(square1);
+        powerUp.setNewPosition(square2);
+        powerUp.setDirection(Square.Direction.SOUTH);
+
+        powerUp.effect(PowerUp.Name.NEWTON);
         assertEquals(player2.getPosition(), square2);
     }
 

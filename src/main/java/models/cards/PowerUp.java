@@ -2,10 +2,7 @@ package models.cards;
 
 import models.Player;
 import models.Square;
-import models.decks.Deck;
-import models.decks.PowerUpsDeck;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PowerUp extends Card {
@@ -17,12 +14,11 @@ public class PowerUp extends Card {
     }
 
     private Name name;
+
     private Player player;
     private Card.Color cubeColor;
     private Player playerTarget;
-    private Square position;
-    private Square square;
-    private Square newSquare;
+    private Square newPosition;
     private Square.Direction direction;
     private List<Square> squares;
 
@@ -38,16 +34,8 @@ public class PowerUp extends Card {
         this.playerTarget = playerTarget;
     }
 
-    public void setPosition(Square position) {
-        this.position = position;
-    }
-
-    public void setSquare(Square square) {
-        this.square = square;
-    }
-
-    public void setNewSquare(Square newSquare) {
-        this.newSquare = newSquare;
+    public void setNewPosition(Square newPosition) {
+        this.newPosition = newPosition;
     }
 
     public void setDirection(Square.Direction direction) {
@@ -78,46 +66,47 @@ public class PowerUp extends Card {
         return name;
     }
 
-    public void reset(){
-        position=null;
-        playerTarget=null;
-        player=null;
-        newSquare=null;
-        squares=null;
-        direction=null;
-        square=null;
-        cubeColor=null;
-
-
+    public void reset() {
+        newPosition = null;
+        playerTarget = null;
+        player = null;
+        squares = null;
+        direction = null;
+        cubeColor = null;
     }
 
     public void effect(PowerUp.Name name) {
         switch (name) {
             case TARGETING_SCOPE:
-                if (player.getCubes().size()!= 0) {
+                if (player.getCubes().contains(cubeColor)) {
                     player.removeCube(cubeColor);
                     playerTarget.addDamage(player);
-                    reset();
                 }
+                reset();
+                break;
 
             case TAGBACK_GRENADE:
                 Square playerPosition = playerTarget.getPosition();
                 if (player.getPosition().getCanView().contains(playerPosition)) {
                     playerTarget.addMark(player);
-                    reset();
                 }
-            case TELEPORTER:
-                player.setPosition(position);
                 reset();
+                break;
+            case TELEPORTER:
+                player.setPosition(newPosition);
+                reset();
+                break;
 
             case NEWTON:
-                List<Square> squareList = square.filterDirectionSquare(squares, direction);
-                if (squareList.contains(newSquare)) {
-                    playerTarget.setPosition(newSquare);
-                    reset();
+                List<Square> squareList = playerTarget.getPosition().filterDirectionSquare(squares, direction);
+                if (squareList.contains(newPosition)) {
+                    playerTarget.setPosition(newPosition);
                 }
-            }
+                reset();
+                break;
         }
     }
+}
+
 
 
