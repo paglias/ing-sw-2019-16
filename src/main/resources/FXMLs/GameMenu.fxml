@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.GameMenu">
    <children>
       <VBox layoutX="379.0" layoutY="141.0" prefHeight="101.0" prefWidth="152.0">
@@ -25,9 +24,9 @@
             <Font name="Tahoma" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="32.0" layoutY="94.0" text="Please enter username and choose a Map" />
+      <Label fx:id="label2" layoutX="32.0" layoutY="94.0" text="Please enter username and choose a Map" />
       <Label layoutX="32.0" layoutY="191.0" text="Username" />
-      <TextField layoutX="98.0" layoutY="178.0" promptText="username" />
+      <TextField fx:id="usernameTextfield" layoutX="98.0" layoutY="178.0" promptText="username" />
       <Button layoutX="255.0" layoutY="285.0" mnemonicParsing="false" text="Button" />
    </children>
 </Pane>
