@@ -36,7 +36,7 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ConnectMessage connectMessage) {
-        GameStateMessage gameState = new GameStateMessage();
+        GameStateMessage gameState = new GameStateMessage(gameController);
         clientHandler.sendMessage(gameState.serialize());
     }
     public void visit(DisconnectMessage disconnectMessage) {
@@ -46,10 +46,16 @@ public class ClientController implements MessageVisitor {
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         System.out.println("handling choose username msg" + chooseNicknameMessage.serialize());
         gameController.addPlayer(chooseNicknameMessage.getNickname(), this);
+
+        GameStateMessage gameState = new GameStateMessage(gameController);
+        clientHandler.sendMessage(gameState.serialize());
     }
     public void visit(ChooseMapMessage chooseMapMessage) {
         System.out.println("handling choose map msg" + chooseMapMessage.serialize());
         gameController.setMap(chooseMapMessage.getMapNumber());
+
+        GameStateMessage gameState = new GameStateMessage(gameController);
+        clientHandler.sendMessage(gameState.serialize());
     }
     public void visit(ActionMessage actionMessage) {
         System.out.println("handling choose action msg" + actionMessage.serialize());

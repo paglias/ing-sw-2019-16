@@ -16,13 +16,8 @@ class CliController implements MessageVisitor  {
     void init () {
         System.out.println("Welcome to the CLI version of Adrenaline!");
 
-        boolean condition = true;
-        while (condition) {
-            System.out.println("Send some command:");
-            String command = waitForUserInput();
-            System.out.println("You asked for >>> " + command);
-            connection.send(command);
-        }
+        ConnectMessage msg = new ConnectMessage();
+        connection.send(msg.serialize());
     }
 
     void onServerMessage (String msg) {
