@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.Welcome">
+   <children>
+      <ImageView fx:id="adrenaline" fitHeight="655.0" fitWidth="1000.0" onMouseClicked="#clickAnywhere" pickOnBounds="true">
+         <image>
+            <Image url="@../JPGs/Adrenaline.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Text fx:id="welcomeText" fill="WHITE" layoutX="345.0" layoutY="535.0" opacity="0.89" stroke="#ca8383" strokeLineJoin="BEVEL" strokeType="OUTSIDE" text="Click anywhere to continue">
+         <font>
+            <Font name="Segoe UI Black Italic" size="24.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+   </children>
+</Pane>
