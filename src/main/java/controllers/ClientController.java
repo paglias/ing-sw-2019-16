@@ -13,30 +13,30 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ConnectMessage connectMessage) {
-        // Not implemented, server side only
+        System.out.println("handling connection msg" + connectMessage.serialize());
     }
     public void visit(DisconnectMessage disconnectMessage) {
-        // Not implemented, server side only
+        System.out.println("handling disconnection msg" + disconnectMessage.serialize());
     }
 
     public void visit(ChooseUsernameMessage chooseUsernameMessage) {
-        // Not implemented, server side only
+        System.out.println("handling choose username msg" + chooseUsernameMessage.serialize());
     }
     public void visit(ChooseMapMessage chooseMapMessage) {
-        // Not implemented, server side only
+        System.out.println("handling choose map msg" + chooseMapMessage.serialize());
     }
     public void visit(ActionMessage actionMessage) {
-        // Not implemented, server side only
+        System.out.println("handling choose action msg" + actionMessage.serialize());
     }
     public void visit(EndTurnMessage endTurnMessage) {
-        // Not implemented, server side only
+        System.out.println("handling choose endturn msg" + endTurnMessage.serialize());
     }
 
     public void visit(GameStateMessage gameStateMessage) {
-        System.out.println("handling game state msg" + gameStateMessage.serialize());
+        // Not implemented, client side only
     }
     public void visit(EndGameMessage endGameMessage) {
-        System.out.println("handling end game msg" + endGameMessage.serialize());
+        // Not implemented, client side only
     }
 
     public void visit(ErrorMessage errorMessage) {

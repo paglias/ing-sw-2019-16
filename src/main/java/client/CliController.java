@@ -37,30 +37,30 @@ class CliController implements MessageVisitor  {
     }
 
     public void visit(ConnectMessage connectMessage) {
-        System.out.println("handling connection msg" + connectMessage.serialize());
+        // Not implemented, server side only
     }
     public void visit(DisconnectMessage disconnectMessage) {
-        System.out.println("handling disconnection msg" + disconnectMessage.serialize());
+        // Not implemented, server side only
     }
 
     public void visit(ChooseUsernameMessage chooseUsernameMessage) {
-        System.out.println("handling choose username msg" + chooseUsernameMessage.serialize());
+        // Not implemented, server side only
     }
     public void visit(ChooseMapMessage chooseMapMessage) {
-        System.out.println("handling choose map msg" + chooseMapMessage.serialize());
+        // Not implemented, server side only
     }
     public void visit(ActionMessage actionMessage) {
-        System.out.println("handling choose action msg" + actionMessage.serialize());
+        // Not implemented, server side only
     }
     public void visit(EndTurnMessage endTurnMessage) {
-        System.out.println("handling choose endturn msg" + endTurnMessage.serialize());
+        // Not implemented, server side only
     }
 
     public void visit(GameStateMessage gameStateMessage) {
-        // Not implemented, client side only
+        System.out.println("handling game state msg" + gameStateMessage.serialize());
     }
     public void visit(EndGameMessage endGameMessage) {
-        // Not implemented, client side only
+        System.out.println("handling end game msg" + endGameMessage.serialize());
     }
 
     public void visit(ErrorMessage errorMessage) {
