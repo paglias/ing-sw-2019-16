@@ -1,11 +1,7 @@
 package controllers;
 
-import messages.AbstractMessage;
-import messages.ConnectionMessage;
-import messages.GameStartedMessage;
-import messages.MessageVisitor;
+import messages.*;
 import server.ClientHandler;
-
 
 public class ClientController implements MessageVisitor {
     private ClientHandler clientHandler;
@@ -16,27 +12,40 @@ public class ClientController implements MessageVisitor {
         this.clientHandler = clientHandler;
     }
 
-    public void onClientMessage (String msg) {
-        System.out.println("From client >>> " + msg);
-        AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
-        parsedMsg.accept(this);
+    public void visit(ConnectMessage connectMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(DisconnectMessage disconnectMessage) {
+        // Not implemented, server side only
     }
 
-    public void visit(ConnectionMessage connMsg) {
-        System.out.println("handling connection msg" + connMsg.serialize());
+    public void visit(ChooseUsernameMessage chooseUsernameMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ChooseMapMessage chooseMapMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ActionMessage actionMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(EndTurnMessage endTurnMessage) {
+        // Not implemented, server side only
     }
 
-    public void visit(GameStartedMessage gameStartedMessage) {
-        System.out.println("handling gamestarted msg" + gameStartedMessage.serialize());
+    public void visit(GameStateMessage gameStateMessage) {
+        System.out.println("handling game state msg" + gameStateMessage.serialize());
+    }
+    public void visit(EndGameMessage endGameMessage) {
+        System.out.println("handling end game msg" + endGameMessage.serialize());
     }
 
-    private void sendClientMessage (String msg) {
-        clientHandler.sendMessage(msg);
+    public void visit(ErrorMessage errorMessage) {
+        System.out.println("handling error msg" + errorMessage.serialize());
     }
 
     public void init () {
         if (gameController.getGameBoard().hasStarted()) {
-            sendClientMessage("Game already started!");
+            clientHandler.sendMessage("Game already started!");
         }
     }
 }

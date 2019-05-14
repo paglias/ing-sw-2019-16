@@ -17,10 +17,27 @@ public abstract class AbstractMessage implements MessageInterface {
         MessageTopic topic = MessageTopic.valueOf(msgTopicString);
 
         switch (topic) {
-            case CONNECTION:
-                return gson.fromJson(jsonObj, ConnectionMessage.class);
-            case GAME_STARTED:
-                return gson.fromJson(jsonObj, GameStartedMessage.class);
+            case CONNECT:
+                return gson.fromJson(jsonObj, ConnectMessage.class);
+            case DISCONNECT:
+                return gson.fromJson(jsonObj, DisconnectMessage.class);
+
+            case CHOOSE_USERNAME:
+                return gson.fromJson(jsonObj, ChooseUsernameMessage.class);
+            case CHOOSE_MAP:
+                return gson.fromJson(jsonObj, ChooseMapMessage.class);
+            case ACTION:
+                return gson.fromJson(jsonObj, ActionMessage.class);
+            case END_TURN:
+                return gson.fromJson(jsonObj, EndTurnMessage.class);
+
+            case GAME_STATE:
+                return gson.fromJson(jsonObj, GameStateMessage.class);
+            case END_GAME:
+                return gson.fromJson(jsonObj, EndGameMessage.class);
+
+            case ERROR:
+                return gson.fromJson(jsonObj, ErrorMessage.class);
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

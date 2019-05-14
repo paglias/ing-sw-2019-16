@@ -2,7 +2,8 @@ package client;
 
 import client.views.Game;
 
-public class RealMain { //the real class
+// The real main class needed to start the JavaFX GUI, otherwise it won't work
+public class RealMain {
     public static void main(String[] args) {
         Game.startGame(args);
     }

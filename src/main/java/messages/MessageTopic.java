@@ -1,9 +1,16 @@
 package messages;
 
 public enum MessageTopic {
-    CONNECTION,
+    CONNECT,
+    DISCONNECT,
+
     CHOOSE_USERNAME,
     CHOOSE_MAP,
-    PLAYER_JOOINED,
-    GAME_STARTED,
+    ACTION,
+    END_TURN,
+
+    GAME_STATE,
+    END_GAME,
+
+    ERROR
 }

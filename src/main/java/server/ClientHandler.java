@@ -2,6 +2,7 @@ package server;
 
 import controllers.ClientController;
 import controllers.GameController;
+import messages.AbstractMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -43,13 +44,19 @@ public class ClientHandler {
 
             do {
                 msg = readStream.readLine();
-                if (msg != null) clientController.onClientMessage(msg);
+                if (msg != null) handleMessage(msg);
             } while (msg != null);
         } catch (IOException e) {
             System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
         } finally {
             close();
         }
+    }
+
+    void handleMessage (String msg) {
+        System.out.println("From client >>> " + msg);
+        AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
+        parsedMsg.accept(clientController);
     }
 
     public void sendMessage (String msg) {

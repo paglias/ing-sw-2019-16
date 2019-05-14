@@ -3,7 +3,6 @@ package controllers;
 import models.GameBoard;
 import models.Player;
 import models.Square;
-import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 

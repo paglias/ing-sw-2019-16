@@ -24,9 +24,9 @@ public class Game extends Application {
         layout.getChildren().add(button1);
         Scene scene = new Scene(layout, 800, 600);
 
-            // Add the scene to the Stage
-            primaryStage.setScene(scene);
-            // Display the Stage
-            primaryStage.show();
-        }
+        // Add the scene to the Stage
+        primaryStage.setScene(scene);
+        // Display the Stage
+        primaryStage.show();
     }
+}
