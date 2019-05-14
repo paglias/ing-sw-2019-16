@@ -22,8 +22,8 @@ public abstract class AbstractMessage implements MessageInterface {
             case DISCONNECT:
                 return gson.fromJson(jsonObj, DisconnectMessage.class);
 
-            case CHOOSE_USERNAME:
-                return gson.fromJson(jsonObj, ChooseUsernameMessage.class);
+            case CHOOSE_NICKNAME:
+                return gson.fromJson(jsonObj, ChooseNicknameMessage.class);
             case CHOOSE_MAP:
                 return gson.fromJson(jsonObj, ChooseMapMessage.class);
             case ACTION:

@@ -13,7 +13,6 @@ class CliController implements MessageVisitor  {
         this.keyboard = keyboard;
     }
 
-
     void init () {
         System.out.println("Welcome to the CLI version of Adrenaline!");
 
@@ -28,6 +27,7 @@ class CliController implements MessageVisitor  {
 
     void onServerMessage (String msg) {
         System.out.println("From server >>> " + msg);
+        // TODO handle errors from deserialization/handling
         AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
         parsedMsg.accept(this);
     }
@@ -43,7 +43,7 @@ class CliController implements MessageVisitor  {
         // Not implemented, server side only
     }
 
-    public void visit(ChooseUsernameMessage chooseUsernameMessage) {
+    public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         // Not implemented, server side only
     }
     public void visit(ChooseMapMessage chooseMapMessage) {
@@ -64,6 +64,6 @@ class CliController implements MessageVisitor  {
     }
 
     public void visit(ErrorMessage errorMessage) {
-        System.out.println("handling error msg" + errorMessage.serialize());
+        System.out.println("Received error message from server" + errorMessage.getErrorMsg());
     }
 }

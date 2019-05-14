@@ -1,15 +1,13 @@
 package controllers;
 
+import messages.AbstractMessage;
 import models.GameBoard;
 import models.Player;
 import models.Square;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class GameController {
     private static int gameStartTimeout = 5;
@@ -20,27 +18,36 @@ public class GameController {
 
     public GameBoard getGameBoard () { return gameBoard; }
 
+    public GameController () {
+        gameBoard = new GameBoard();
+    }
+
     public void addClient (ClientController clientController) {
         clients.add(clientController);
     }
 
-    public void setup(Integer map) {
-        if (gameBoard != null) {
-            throw new IllegalArgumentException("GameController already exists, cannot create a new one.");
-        }
-
-        gameBoard = new GameBoard();
-        gameBoard.setMap(map != null ? map : 1);
+    public void dispatchToClients (AbstractMessage msg) {
+        String serialized = msg.serialize();
+        clients.stream().forEach(c -> c.sendMsg(serialized));
     }
 
-    public void addPlayer(String nickname, String colorString) {
+    public void setMap (int mapNumper) {
+        if (!gameBoard.getSquares().isEmpty()) {
+            throw new IllegalArgumentException("Map already loaded.");
+        }
+        gameBoard.setMap(mapNumper);
+    }
+
+    public void addPlayer(String nickname, ClientController clientController) {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot join.");
         }
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
 
-        Square.Color color = Square.Color.valueOf(colorString);
+        Random random = new Random();
+        Square.Color[] colors = Square.Color.values();
+        Square.Color color = colors[random.nextInt(colors.length)];
 
         Player player = new Player();
         player.setNickname(nickname);
@@ -51,6 +58,8 @@ public class GameController {
         player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
         gameBoard.addPlayer(player);
+        clientController.setLinkedPlayer(player);
+        addClient(clientController);
 
         // Start the game when 5 players have joined
         if (gameBoard.getPlayers().size() == 5) start();

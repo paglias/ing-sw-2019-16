@@ -5,7 +5,7 @@ public interface MessageVisitor {
     void visit(ConnectMessage msg);
     void visit(DisconnectMessage msg); // TODO from server as well?
 
-    void visit(ChooseUsernameMessage msg);
+    void visit(ChooseNicknameMessage msg);
     void visit(ChooseMapMessage msg);
     void visit(ActionMessage msg);
     void visit(EndTurnMessage msg);

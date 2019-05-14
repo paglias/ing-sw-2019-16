@@ -4,7 +4,7 @@ public enum MessageTopic {
     CONNECT,
     DISCONNECT,
 
-    CHOOSE_USERNAME,
+    CHOOSE_NICKNAME,
     CHOOSE_MAP,
     ACTION,
     END_TURN,

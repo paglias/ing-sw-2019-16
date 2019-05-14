@@ -55,6 +55,7 @@ public class ClientHandler {
 
     void handleMessage (String msg) {
         System.out.println("From client >>> " + msg);
+        // TODO handle errors from deserialization/handling
         AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
         parsedMsg.accept(clientController);
     }
