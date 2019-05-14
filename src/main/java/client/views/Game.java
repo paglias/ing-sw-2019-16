@@ -1,15 +1,18 @@
 package client.views;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 
 public class Game extends Application {
     Stage window;
-    Button button1;
 
     public static void startGame(String[] args) {
         launch();
@@ -18,15 +21,9 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
-        window.setTitle("This shit finally works");
-        button1 = new Button("Click me to break everything");
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button1);
-        Scene scene = new Scene(layout, 800, 600);
-
-            // Add the scene to the Stage
-            primaryStage.setScene(scene);
-            // Display the Stage
-            primaryStage.show();
+        window.setTitle("Adrenaline");
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Welcome.fxml"));
+        window.setScene(new Scene(root, 1000, 650));
+        window.show();
         }
     }

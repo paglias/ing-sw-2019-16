@@ -80,7 +80,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.2</version>
                 <configuration>
-                    <mainClass>client.views.Game</mainClass>
+                    <mainClass>client.views.RealMain</mainClass>
                 </configuration>
             </plugin>
 
