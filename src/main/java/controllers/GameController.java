@@ -158,7 +158,7 @@ public class GameController {
                 case"moveGrab":
                     moveGrab(position,weapon);
                 case"shoot":
-                    //shoot
+                    shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
                 case "moveMoveGrab":
                     moveMoveGrab(position,weapon,secondPosition);
 
@@ -170,7 +170,7 @@ public class GameController {
                     case"moveGrab":
                         moveGrab(position,weapon);
                     case"shoot":
-                        //shoot
+                        shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
                     case"moveMoveGrab":
                         moveMoveGrab(position,weapon,secondPosition);
                     case"moveShoot":
@@ -211,6 +211,7 @@ public class GameController {
         Player player = gameBoard.getActivePlayer();
         player.moveAction(position, secondPosition, thirdPosition);
     }
+
 
     public void moveGrab (Square position, Weapon weapon){
         Player player = gameBoard.getActivePlayer();
