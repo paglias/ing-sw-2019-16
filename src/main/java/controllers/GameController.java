@@ -26,16 +26,28 @@ public class GameController {
         clients.add(clientController);
     }
 
+    public ClientController getClientForPlayer (String nickname) {
+        Player player = gameBoard.getPlayerByNickname(nickname);
+        return getClientForPlayer(player);
+    }
+
+    public ClientController getClientForPlayer (Player player) {
+        return clients.stream()
+                .filter(c -> c.getLinkedPlayer() == player)
+                .findFirst()
+                .orElse(null);
+    }
+
     public void dispatchToClients (AbstractMessage msg) {
         String serialized = msg.serialize();
         clients.stream().forEach(c -> c.sendMsg(serialized));
     }
 
-    public void setMap (int mapNumper) {
+    public void setMap (int mapNumber) {
         if (!gameBoard.getSquares().isEmpty()) {
             throw new IllegalArgumentException("Map already loaded.");
         }
-        gameBoard.setMap(mapNumper);
+        gameBoard.setMap(mapNumber);
     }
 
     public void addPlayer(String nickname, ClientController clientController) {
