@@ -10,8 +10,8 @@ import models.cards.Weapon;
 import java.util.*;
 
 public class GameController {
-    private static int gameStartTimeout = 5;
-    private static int turnTimeout = 5;
+    private static int gameStartTimeout = 30;
+    private static int turnTimeout = 30;
 
     private GameBoard gameBoard;
     private ArrayList<ClientController> clients = new ArrayList<>();
