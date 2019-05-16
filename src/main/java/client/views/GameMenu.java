@@ -1,23 +1,33 @@
 package client.views;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
+
 public class GameMenu {
 
-    public void chooseMap1(){
+    public void chooseMap1() {
     }
-    public void chooseMap2(){
+
+    public void chooseMap2() {
     }
-    public void chooseMap3(){
+
+    public void chooseMap3() {
     }
-    public void chooseMap4(){
+
+    public void chooseMap4() {
     }
-    public void setNickname(){
+
+    public void setNickname() {
     }
+
     public void previewMap1() throws Exception {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -29,9 +39,9 @@ public class GameMenu {
 
         window.setScene(scene);
         window.show();
-        }
+    }
 
-    public void previewMap2() throws Exception{
+    public void previewMap2() throws Exception {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Map two");
@@ -43,7 +53,8 @@ public class GameMenu {
         window.setScene(scene);
         window.show();
     }
-    public void previewMap3() throws Exception{
+
+    public void previewMap3() throws Exception {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Map two");
@@ -55,7 +66,8 @@ public class GameMenu {
         window.setScene(scene);
         window.show();
     }
-    public void previewMap4() throws Exception{
+
+    public void previewMap4() throws Exception {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Map two");
@@ -67,7 +79,21 @@ public class GameMenu {
         window.setScene(scene);
         window.show();
     }
-    public void nextWindow(){
-        //username must be inserted and map must be chosen
+
+    @FXML
+    public Button confirmButton;
+
+
+    public void nextWindow(ActionEvent event) throws Exception {
+        Parent root;
+        Stage window;
+
+        if (event.getSource() == confirmButton) {
+            window = (Stage) confirmButton.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/FXMLs/Lobby.fxml"));
+            Scene scene = new Scene(root, 600, 400);
+            window.setScene(scene);
+            window.show();
+        }
     }
 }
