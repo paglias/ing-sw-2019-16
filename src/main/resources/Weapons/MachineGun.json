@@ -6,6 +6,8 @@
   "secondaryCost": ["YELLOW"],
   "tertiaryCost": ["BLUE"],
   "primaryEffect": [["SHOOT_VIEW"],["SHOOT_VIEW"]],
-  "secondaryEffect":[["SHOOT_OTHER_VIEW"],["SHOOT_VIEW"]],
-  "tertiaryEffect": [["SHOOT_THIRD_VIEW"],["SHOOT_VIEW"]]
+  "secondaryEffect":[["SHOOT_TARGET_VIEW"],["SHOOT_VIEW"]],
+  "tertiaryEffect": [["SHOOT_SECOND_TARGET_VIEW"],["SHOOT_VIEW"]],
+  "parameterPrimary": ["PLAYER_TARGET"],
+  "parameterSecondary": ["PLAYER_TARGET"]
 }

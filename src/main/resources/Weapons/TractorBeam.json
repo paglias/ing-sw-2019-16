@@ -7,5 +7,7 @@
   "tertiaryCost":null,
   "primaryEffect": [["ATTRACT_TARGET"],["ATTRACT_TARGET"],["SHOOT"]],
   "secondaryEffect": [["ATTRACT_TARGET"],["ATTRACT_TARGET"],["SHOOT","SHOOT","SHOOT"]],
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["POSITION","PLAYER_TARGET"],
+  "parameterSecondary": ["POSITION","PLAYER_TARGET"]
 }

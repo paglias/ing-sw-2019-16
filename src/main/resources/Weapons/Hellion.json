@@ -7,5 +7,7 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_ONE_AWAY_VIEW","MARK_ONE_AWAY_VIEW"]],
   "secondaryEffect":[["SHOOT_ONE_AWAY_VIEW","MARK_ONE_AWAY_VIEW","MARK_ONE_AWAY_VIEW"]],
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["PLAYER_TARGET"],
+  "parameterSecondary": ["PLAYER_TARGET"]
 }

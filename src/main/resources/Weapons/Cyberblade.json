@@ -7,5 +7,7 @@
   "tertiaryCost": ["YELLOW"],
   "primaryEffect": [["SHOOT","SHOOT"]],
   "secondaryEffect":[["MOVE"]],
-  "tertiaryEffect": [["SHOOT","SHOOT"]]
+  "tertiaryEffect": [["SHOOT","SHOOT"]],
+  "parameterPrimary": ["PLAYER_TARGET"],
+  "parameterSecondary": ["POSITION"]
 }

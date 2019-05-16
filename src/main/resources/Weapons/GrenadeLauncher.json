@@ -7,6 +7,8 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_VIEW","MOVE_TARGET"]],
   "secondaryEffect":[["SHOOT_VIEW"]],
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["PLAYER_TARGET","POSITION"],
+  "parameterSecondary": ["PLAYER_TARGET"]
 }
 

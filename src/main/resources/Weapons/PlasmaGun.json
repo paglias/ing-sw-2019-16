@@ -7,7 +7,9 @@
   "tertiaryCost": ["BLUE"],
   "primaryEffect": [["SHOOT_VIEW","SHOOT_VIEW"]],
   "secondaryEffect":[["MOVE"],["MOVE"]],
-  "tertiaryEffect": [["SHOOT_VIEW"]]
+  "tertiaryEffect": [["SHOOT_VIEW"]],
+  "parameterPrimary": ["PLAYER_TARGET"],
+  "parameterSecondary": ["POSITION"]
 }
 
 

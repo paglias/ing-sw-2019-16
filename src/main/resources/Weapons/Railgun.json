@@ -7,5 +7,7 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_DIRECTION","SHOOT_DIRECTION","SHOOT_DIRECTION"]],
   "secondaryEffect":[["SHOOT_DIRECTION","SHOOT_DIRECTION"],["SHOOT_DIRECTION","SHOOT_DIRECTION"]],
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["PLAYER_TARGETS"],
+  "parameterSecondary": ["PLAYER_TARGETS"]
 }

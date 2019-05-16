@@ -36,6 +36,7 @@ public class Weapon extends Card {
         ATTRACT_TARGET
     }
 
+
     private String name;
     private ArrayList<Color> rechargeCost;
     private ArrayList<Color> cost;

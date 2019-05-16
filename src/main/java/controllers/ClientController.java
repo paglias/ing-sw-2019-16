@@ -2,6 +2,7 @@ package controllers;
 
 import messages.*;
 import models.Player;
+import models.Square;
 import server.ClientHandler;
 
 public class ClientController implements MessageVisitor {
@@ -13,6 +14,7 @@ public class ClientController implements MessageVisitor {
         this.gameController = gameController;
         this.clientHandler = clientHandler;
     }
+
 
     public Player getLinkedPlayer () {
         return linkedPlayer;

@@ -7,6 +7,8 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_EVERY"]],
   "secondaryEffect":[["SHOOT_EVERY","SHOOT_EVERY"]],
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["PLAYER_TARGETS"],
+  "parameterSecondary": ["PLAYER_TARGETS"]
 }
 

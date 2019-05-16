@@ -7,5 +7,7 @@
   "tertiaryCost": null,
   "primaryEffect": [["SHOOT_CANT_SEE","SHOOT_CANT_SEE","SHOOT_CANT_SEE"]],
   "secondaryEffect": null,
-  "tertiaryEffect":null
+  "tertiaryEffect":null,
+  "parameterPrimary": ["PLAYER_TARGET"],
+  "parameterSecondary": null
 }
