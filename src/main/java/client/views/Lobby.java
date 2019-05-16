@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -16,6 +17,12 @@ import java.util.List;
 
 
 public class Lobby {
+
+    public int Map=0;
+
+    public void setMap(int map) {
+        Map = map;
+    }
 
     @FXML
     Button startButton;
@@ -47,17 +54,108 @@ public class Lobby {
     @FXML
     RadioButton eightSkulls;
 
+    public void chooseMap1() {
+        setMap(1);
+    }
+
+    public void chooseMap2() {
+        setMap(2);
+    }
+
+    public void chooseMap3() {
+        setMap(3);
+    }
+
+    public void chooseMap4() {
+        setMap(4);
+    }
+
+    public void previewMap1() throws Exception {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Map one");
+        Scene scene;
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap1.fxml"));
+
+        scene = new Scene(root, 600, 430);
+
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void previewMap2() throws Exception {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Map two");
+        Scene scene;
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap2.fxml"));
+
+        scene = new Scene(root, 600, 430);
+
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void previewMap3() throws Exception {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Map two");
+        Scene scene;
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap3.fxml"));
+
+        scene = new Scene(root, 600, 430);
+
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void previewMap4() throws Exception {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Map two");
+        Scene scene;
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap4.fxml"));
+
+        scene = new Scene(root, 600, 430);
+
+        window.setScene(scene);
+        window.show();
+    }
+    //Called by Start Game button
     public void startGame(ActionEvent event) throws Exception {
         Stage stage;
         Parent root;
         if (event.getSource() == startButton) {
             stage = (Stage) startButton.getScene().getWindow();
             stage.close();
-            List<Window> open = Stage.getWindows().filtered(window -> window.isShowing());
-            stage = (Stage) open.get(0);
-            root = FXMLLoader.load(getClass().getResource("/FXMLs/Game.fxml"));
-            Scene scene = new Scene(root, 1000, 650);
-            stage.setScene(scene);
+
+            List<Window> openWindows = Stage.getWindows().filtered(window -> window.isShowing());
+            stage = (Stage) openWindows.get(0);
+
+            switch (Map) {
+                case 1:
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game1.fxml"));
+                    Scene scene = new Scene(root, 1000, 650);
+                    stage.setScene(scene);
+                    break;
+                case 2:
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game2.fxml"));
+                    Scene scene2 = new Scene(root, 1000, 650);
+                    stage.setScene(scene2);
+                    break;
+                case 3:
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game3.fxml"));
+                    Scene scene3 = new Scene(root, 1000, 650);
+                    stage.setScene(scene3);
+                    break;
+                case 4:
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game4.fxml"));
+                    Scene scene4 = new Scene(root, 1000, 650);
+                    stage.setScene(scene4);
+                    break;
+                default:
+                    System.out.println("No map was chosen");
+            }
         }
     }
 }
