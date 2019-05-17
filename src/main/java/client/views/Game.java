@@ -4,13 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
-
+//Creates game stage, loads Adrenaline.jpg. Later it will be changed to game overview.
 public class Game extends Application {
     Stage window;
 

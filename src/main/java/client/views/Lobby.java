@@ -135,26 +135,30 @@ public class Lobby {
             switch (Map) {
                 case 1:
                     root = FXMLLoader.load(getClass().getResource("/FXMLs/Game1.fxml"));
-                    Scene scene = new Scene(root, 1000, 650);
+                    Scene scene = new Scene(root, 1300, 700);
                     stage.setScene(scene);
+                    stage.centerOnScreen();
                     break;
                 case 2:
                     root = FXMLLoader.load(getClass().getResource("/FXMLs/Game2.fxml"));
-                    Scene scene2 = new Scene(root, 1000, 650);
+                    Scene scene2 = new Scene(root, 1300, 700);
                     stage.setScene(scene2);
+                    stage.centerOnScreen();
                     break;
                 case 3:
                     root = FXMLLoader.load(getClass().getResource("/FXMLs/Game3.fxml"));
-                    Scene scene3 = new Scene(root, 1000, 650);
+                    Scene scene3 = new Scene(root, 1300, 700);
                     stage.setScene(scene3);
+                    stage.centerOnScreen();
                     break;
                 case 4:
                     root = FXMLLoader.load(getClass().getResource("/FXMLs/Game4.fxml"));
-                    Scene scene4 = new Scene(root, 1000, 650);
+                    Scene scene4 = new Scene(root, 1300, 700);
                     stage.setScene(scene4);
+                    stage.centerOnScreen();
                     break;
                 default:
-                    System.out.println("No map was chosen");
+                    System.out.println("No map was chosen");//TODO CREATE ALERT BOX
             }
         }
     }
