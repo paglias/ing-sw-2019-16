@@ -19,7 +19,9 @@ public class Game extends Application {
         window = primaryStage;
         window.setTitle("Adrenaline");
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Welcome.fxml"));
-        window.setScene(new Scene(root, 1000, 650));
+        window.setScene(new Scene(root));
         window.show();
+        window.setResizable(false);
+        window.centerOnScreen();
     }
 }

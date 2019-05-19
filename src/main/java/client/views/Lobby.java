@@ -11,17 +11,14 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
-
 import java.util.List;
-
 
 public class Lobby {
 
     public int Map=0;
 
     public void setMap(int map) {
-        Map = map;
+        this.Map = map;
     }
 
     @FXML
@@ -134,26 +131,26 @@ public class Lobby {
 
             switch (Map) {
                 case 1:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game1.fxml"));
-                    Scene scene = new Scene(root, 1300, 700);
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map1.fxml"));
+                    Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     break;
                 case 2:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game2.fxml"));
-                    Scene scene2 = new Scene(root, 1300, 700);
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map2.fxml"));
+                    Scene scene2 = new Scene(root, 1366, 768);
                     stage.setScene(scene2);
                     stage.centerOnScreen();
                     break;
                 case 3:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game3.fxml"));
-                    Scene scene3 = new Scene(root, 1300, 700);
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map3.fxml"));
+                    Scene scene3 = new Scene(root, 1366, 768);
                     stage.setScene(scene3);
                     stage.centerOnScreen();
                     break;
                 case 4:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Game4.fxml"));
-                    Scene scene4 = new Scene(root, 1300, 700);
+                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map4.fxml"));
+                    Scene scene4 = new Scene(root, 1366, 768);
                     stage.setScene(scene4);
                     stage.centerOnScreen();
                     break;
