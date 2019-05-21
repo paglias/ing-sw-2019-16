@@ -14,16 +14,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="workArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mapController1">
     <children>
-        <SplitPane fx:id="horizontalSplit" dividerPositions="0.4222873900293255" layoutX="147.0" layoutY="93.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane fx:id="verticalSplit" dividerPositions="0.4222873900293255" layoutX="147.0" layoutY="93.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <SplitPane dividerPositions="0.14521193092621665" layoutX="39.0" layoutY="78.0" orientation="VERTICAL" prefHeight="766.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="horizontalSplit" dividerPositions="0.14521193092621665" layoutX="39.0" layoutY="78.0" orientation="VERTICAL" prefHeight="766.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <AnchorPane fx:id="upperLeftPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
@@ -57,7 +58,8 @@
                            <children>
                               <GridPane fx:id="playerboardGrid" alignment="CENTER" gridLinesVisible="true" prefHeight="650.0" prefWidth="572.0">
                                 <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.4666748046875" minWidth="10.0" prefWidth="73.39999084472656" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="502.53336334228516" minWidth="10.0" prefWidth="498.2000091552734" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -67,34 +69,34 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ImageView fx:id="playerboard1" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                    <ImageView fx:id="playerboard1" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1">
                                        <image>
                                           <Image url="@../JPGs/Playerboard1.jpg" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="playerboard2" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="1">
+                                    <ImageView fx:id="playerboard2" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <image>
                                           <Image url="@../JPGs/Playerboard2.jpg" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="playerboard3" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="2">
+                                    <ImageView fx:id="playerboard3" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../JPGs/Playerboard3.jpg" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="playerboard4" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="3">
+                                    <ImageView fx:id="playerboard4" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <image>
                                           <Image url="@../JPGs/Playerboard4.jpg" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="playerboard5" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="4">
+                                    <ImageView fx:id="playerboard5" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <image>
                                           <Image url="@../JPGs/Playerboard5.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                    <Pane prefHeight="131.0" prefWidth="351.0" GridPane.columnIndex="1">
                                        <children>
-                                          <GridPane layoutX="100.0" layoutY="45.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                             <columnConstraints>
                                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -113,7 +115,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                           </GridPane>
-                                          <GridPane layoutX="151.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                          <GridPane layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -126,16 +128,11 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <Button layoutX="298.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <GridPane layoutX="100.0" layoutY="48.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -154,7 +151,7 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <GridPane layoutX="151.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                          <GridPane layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -167,16 +164,11 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <Button layoutX="298.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <GridPane layoutX="98.0" layoutY="44.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -195,7 +187,7 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <GridPane layoutX="151.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                          <GridPane layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -208,16 +200,11 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <Button layoutX="298.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <GridPane layoutX="100.0" layoutY="44.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -236,7 +223,7 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <GridPane layoutX="151.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                          <GridPane layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -249,16 +236,11 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <Button layoutX="298.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
-                                          <GridPane layoutX="100.0" layoutY="44.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -277,7 +259,7 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <GridPane layoutX="151.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                          <GridPane layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -290,13 +272,93 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                           </GridPane>
-                                          <Button layoutX="298.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                       </children>
+                                    </Pane>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                       <children>
+                                          <Label fx:id="username5" text="Username">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Button fx:id="marksPlayer5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
                                           </Button>
                                        </children>
-                                    </Pane>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label fx:id="userName1" text="Username">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Button fx:id="marksPlayer1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label fx:id="username2" text="Username">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Button fx:id="marksPlayer2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label fx:id="username3" text="Username">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Button fx:id="marksPlayer3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                       <children>
+                                          <Label fx:id="username4" text="Username">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Button fx:id="marksPlayer4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -312,7 +374,7 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="427.0">
                     <children>
-                        <SplitPane fx:id="verticalSplit" dividerPositions="0.7820383451059536" layoutX="117.0" layoutY="92.0" orientation="VERTICAL" prefHeight="398.4" prefWidth="393.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="horizontalSplit2" dividerPositions="0.7820383451059536" layoutX="117.0" layoutY="92.0" orientation="VERTICAL" prefHeight="398.4" prefWidth="393.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <AnchorPane fx:id="imageAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="392.0">
                                     <children>
