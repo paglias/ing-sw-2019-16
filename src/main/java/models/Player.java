@@ -12,7 +12,6 @@ import static java.util.stream.Collectors.*;
 
 public class Player {
     private String nickname;
-    private Square.Color color;
     private Boolean isActive;
     private Date startTurnDate;                                 //used for turn timer
     private int nDeaths = 0;
@@ -30,7 +29,6 @@ public class Player {
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
-
 
     /**
      * Player constructor. Instantiates a new Player.
@@ -56,8 +54,6 @@ public class Player {
         newPlayerPoints.add(8);
 
         //Assign initial values, 1 ammo for each color, set counters, add pointsGiven (order is inverted, see above)
-        //Set movecounter to 3
-        setMoveCounter(3); //TODO can we remove this?
         setActionCounter(2);
         setAdrenaline(0);
         this.setGivenPoints(newPlayerPoints);
@@ -110,15 +106,6 @@ public class Player {
      */
     public ArrayList<Integer> getGivenPoints() {
         return givenPoints;
-    }
-
-    /**
-     * Sets color for the current player at the beginning of the game.
-     *
-     * @param color the color
-     */
-    public void setColor(Square.Color color) {
-        this.color = color;
     }
 
     /**

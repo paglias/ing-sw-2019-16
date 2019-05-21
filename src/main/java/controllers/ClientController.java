@@ -1,8 +1,8 @@
 package controllers;
 
 import messages.*;
+import models.GameBoard;
 import models.Player;
-import models.Square;
 import server.ClientHandler;
 
 public class ClientController implements MessageVisitor {
@@ -15,6 +15,8 @@ public class ClientController implements MessageVisitor {
         this.clientHandler = clientHandler;
     }
 
+    // TODO make sure any method from model called here is unsing synchronized
+    // Already done for GameController
 
     public Player getLinkedPlayer () {
         return linkedPlayer;
@@ -52,12 +54,31 @@ public class ClientController implements MessageVisitor {
         GameStateMessage gameState = new GameStateMessage(gameController);
         clientHandler.sendMessage(gameState.serialize());
     }
-    public void visit(ChooseMapMessage chooseMapMessage) {
-        System.out.println("handling choose map msg" + chooseMapMessage.serialize());
-        gameController.setMap(chooseMapMessage.getMapNumber());
+    public void visit(GameSettingsMessage gameSettingsMessage) {
+        System.out.println("handling game settings msg" + gameSettingsMessage.serialize());
+
+        GameBoard gameBoard = gameController.getGameBoard();
+
+        if (gameBoard.isGameSetup()) {
+            throw new IllegalArgumentException("Game already setup.");
+        }
+
+        int nSkulls = gameSettingsMessage.getSkullsNumber();
+        int mapN = gameSettingsMessage.getMapNumber();
+
+        if (mapN < 1 || mapN > 4) {
+            throw new IllegalArgumentException("Invalid map number.");
+        }
+        if (nSkulls < 5 || nSkulls > 8) {
+            throw new IllegalArgumentException("Invalid skulls number.");
+        }
+
+        gameBoard.getSkulls().setNRemaining(nSkulls);
+        gameBoard.setMap(mapN);
+        gameBoard.setGameSetup(true);
 
         GameStateMessage gameState = new GameStateMessage(gameController);
-        clientHandler.sendMessage(gameState.serialize());
+        gameController.dispatchToClients(gameState);
     }
     public void visit(ActionMessage actionMessage) {
         System.out.println("handling choose action msg" + actionMessage.serialize());

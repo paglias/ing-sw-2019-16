@@ -41,7 +41,7 @@ class CliController implements MessageVisitor  {
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         // Not implemented, server side only
     }
-    public void visit(ChooseMapMessage chooseMapMessage) {
+    public void visit(GameSettingsMessage gameSettingsMessage) {
         // Not implemented, server side only
     }
     public void visit(ActionMessage actionMessage) {

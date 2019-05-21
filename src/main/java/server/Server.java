@@ -34,14 +34,13 @@ public class Server implements Closeable {
         // It's created here to make it possible to share it between clients
         // but then it's only handled in a ClientHandler class that runs in a different thread
 
-        // TODO manage in a different thread/class?
+        // TODO support multiple games
         GameController gameController = new GameController();
 
         boolean condition = true;
         while (condition) {
             Socket clientSocket = acceptConnection();
 
-            // TODO this is a thread, synchronize!!!
             pool.submit(() -> {
                 try {
                     ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);

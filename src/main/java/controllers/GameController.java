@@ -1,6 +1,7 @@
 package controllers;
 
 import messages.AbstractMessage;
+import messages.GameStateMessage;
 import models.GameBoard;
 import models.Player;
 import models.Square;
@@ -43,27 +44,15 @@ public class GameController {
         clients.stream().forEach(c -> c.sendMsg(serialized));
     }
 
-    public void setMap (int mapNumber) {
-        if (!gameBoard.getSquares().isEmpty()) {
-            throw new IllegalArgumentException("Map already loaded.");
-        }
-        gameBoard.setMap(mapNumber);
-    }
-
-    public void addPlayer(String nickname, ClientController clientController) {
+    public synchronized void addPlayer(String nickname, ClientController clientController) {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot join.");
         }
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
 
-        Random random = new Random();
-        Square.Color[] colors = Square.Color.values();
-        Square.Color color = colors[random.nextInt(colors.length)];
-
         Player player = new Player();
         player.setNickname(nickname);
-        player.setColor(color);
 
         // Give the each player 2 powerups (one will be discarded)
         player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
@@ -86,18 +75,24 @@ public class GameController {
                 }
             }, gameStartTimeout * 1000);
         }
+
+        GameStateMessage gameState = new GameStateMessage(this);
+        dispatchToClients(gameState);
     }
 
-    public void start() {
+    public synchronized void start() {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot create a new one.");
         }
 
         gameBoard.startGame();
         gameBoard.getPlayers().get(0).setActive(true);
+
+        GameStateMessage gameState = new GameStateMessage(this);
+        dispatchToClients(gameState);
     }
 
-    public void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
+    public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
         Player player = gameBoard.getActivePlayer();
         PowerUp powerUp = player.getPowerUps().remove(powerUpToDiscardPosition);
         gameBoard.getPowerUpsDeck().discard(powerUp);
@@ -110,7 +105,7 @@ public class GameController {
         player.setPosition(spawnPosition);
     }
 
-    public void startTurn() {
+    public synchronized void startTurn() {
         Timer turnTimer = new Timer();
         turnTimer.schedule(new TimerTask() {
             @Override
@@ -127,7 +122,7 @@ public class GameController {
         }
     }
 
-    public void endTurn() {
+    public synchronized void endTurn() {
         Player currentPlayer=gameBoard.getActivePlayer();
         for(Player player: gameBoard.getPlayers()){
             player.playerIsDead(currentPlayer, gameBoard);
@@ -139,7 +134,7 @@ public class GameController {
 
     }
 
-    public void action(Square position, Weapon weapon, Square secondPosition, Square thirdPosition, String action,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
+    public synchronized void action(Square position, Weapon weapon, Square secondPosition, Square thirdPosition, String action,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
         if(player.getAdrenaline()==0) {
             switch (action) {
@@ -178,8 +173,9 @@ public class GameController {
                 }
             }
         }
-        }
-    public void actionBeforePlayer(String action,Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect, Square secondPosition, Square thirdPosition, Square fourthPosition){
+    }
+
+    public synchronized void actionBeforePlayer(String action,Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect, Square secondPosition, Square thirdPosition, Square fourthPosition){
         Player player= gameBoard.getActivePlayer();
         if(player.isBeforeFirstPlayer()){
             switch(action){
@@ -193,7 +189,7 @@ public class GameController {
             }
         }
     }
-    public void actionAfterPlayer(String action, Square position, String weaponName, Square secondPosition,Square thirdPosition,Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+    public synchronized void actionAfterPlayer(String action, Square position, String weaponName, Square secondPosition,Square thirdPosition,Boolean useSecondaryEffect, Boolean useTertiaryEffect){
         Player player=gameBoard.getActivePlayer();
         if(!player.isBeforeFirstPlayer()){
             switch(action){
@@ -207,18 +203,18 @@ public class GameController {
 
     }
 
-    public void move (Square position, Square secondPosition, Square thirdPosition){
+    public synchronized void move (Square position, Square secondPosition, Square thirdPosition){
         Player player = gameBoard.getActivePlayer();
         player.moveAction(position, secondPosition, thirdPosition);
     }
 
 
-    public void moveGrab (Square position, Weapon weapon){
+    public synchronized void moveGrab (Square position, Weapon weapon){
         Player player = gameBoard.getActivePlayer();
         player.move(position);
         player.grabItem(gameBoard, weapon);
     }
-    public void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
+    public synchronized void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
         Weapon weapon = player.getWeaponByName(weaponName);
 
@@ -246,48 +242,44 @@ public class GameController {
             }
         }
     }
-    public void moveReloadShoot(Square position, String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+    public synchronized void moveReloadShoot(Square position, String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
         Player player= gameBoard.getActivePlayer();
         player.move(position);
         player.reload(player.getWeaponByName(weaponName));
         shoot(weaponName, useSecondaryEffect, useTertiaryEffect);
     }
 
-    public void moveMove(Square position, Square secondPosition, Square thirdPosition, Square fourthPosition){
+    public synchronized void moveMove(Square position, Square secondPosition, Square thirdPosition, Square fourthPosition){
         Player player=gameBoard.getActivePlayer();
         player.moveAction(position,secondPosition,thirdPosition);
         player.move(fourthPosition);
     }
-    public void moveMoveGrab(Square positon, Weapon weapon, Square secondPosition){
+    public synchronized void moveMoveGrab(Square positon, Weapon weapon, Square secondPosition){
         Player player=gameBoard.getActivePlayer();
         player.move(positon);
         player.move(secondPosition);
         player.grabItem(gameBoard, weapon);
     }
-    public void moveMoveReloadShoot(Square position, Square secondPosition,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+    public synchronized void moveMoveReloadShoot(Square position, Square secondPosition,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
         Player player=gameBoard.getActivePlayer();
         player.move(position);
         player.move(secondPosition);
         player.reload(player.getWeaponByName(weaponName));
         shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
     }
-    public void threeMovesGrab(Square position, Square secondPosition, Square thirdPosition, Weapon weapon){
+    public synchronized void threeMovesGrab(Square position, Square secondPosition, Square thirdPosition, Weapon weapon){
         Player player=gameBoard.getActivePlayer();
         player.moveAction(position,secondPosition,thirdPosition);
         player.grabItem(gameBoard,weapon);
     }
-    public void moveShoot(Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
+    public synchronized void moveShoot(Square position,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect){
         Player player=gameBoard.getActivePlayer();
         player.move(position);
         shoot(weaponName,useSecondaryEffect,useTertiaryEffect);
     }
-
-    public void usePowerup(PowerUp powerUp){
-        Player player=gameBoard.getActivePlayer();
+    public synchronized void usePowerup(PowerUp powerUp){
+        Player player = gameBoard.getActivePlayer();
         powerUp.effect(powerUp.getName());
     }
-
-
-
 }
 
