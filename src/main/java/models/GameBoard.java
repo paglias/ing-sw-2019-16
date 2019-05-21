@@ -9,8 +9,12 @@ import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
+/**
+ * The type Game board.
+ */
 public class GameBoard {
     private Date gameStartDate;
+    private Boolean gameSetup;;
     private Skulls skulls;
     private PowerUpsDeck powerUpsDeck;
     private WeaponsDeck weaponsDeck;
@@ -36,6 +40,23 @@ public class GameBoard {
         skulls = new Skulls();
 
         isFinalFrenzy = false;
+        gameSetup = false;
+    }
+
+    /**
+     * Is game setup boolean.
+     *
+     * @return the boolean
+     */
+    public synchronized Boolean isGameSetup () { return gameSetup; }
+
+    /**
+     * Sets game setup.
+     *
+     * @param gameSetup the game setup
+     */
+    public synchronized void setGameSetup (Boolean gameSetup) {
+        this.gameSetup = gameSetup;
     }
 
     /**
@@ -117,7 +138,7 @@ public class GameBoard {
      *
      * @return the boolean
      */
-    public boolean hasStarted () {
+    public synchronized boolean hasStarted () {
         return gameStartDate != null;
     }
 

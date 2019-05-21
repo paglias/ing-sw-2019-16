@@ -6,10 +6,9 @@ public interface MessageVisitor {
     void visit(DisconnectMessage msg); // TODO from server as well?
 
     void visit(ChooseNicknameMessage msg);
-    void visit(ChooseMapMessage msg);
+    void visit(GameSettingsMessage msg);
     void visit(ActionMessage msg);
     void visit(EndTurnMessage msg);
-
 
     // Server -> Client(s)
     void visit(GameStateMessage msg);

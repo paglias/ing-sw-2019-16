@@ -5,7 +5,7 @@ public enum MessageTopic {
     DISCONNECT,
 
     CHOOSE_NICKNAME,
-    CHOOSE_MAP,
+    GAME_SETTINGS,
     ACTION,
     END_TURN,
 
