@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mapController3 implements Initializable {
+public class MapController3 implements Initializable {
     AlertBoxes alertBoxes = new AlertBoxes();
 
     @FXML

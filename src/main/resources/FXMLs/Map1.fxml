@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="workArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mapController1">
+<AnchorPane fx:id="workArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.MapController1">
     <children>
         <SplitPane fx:id="verticalSplit" dividerPositions="0.4223" layoutX="147.0" layoutY="93.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -281,7 +281,7 @@
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Button fx:id="marksPlayer5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                          <Button fx:id="marksPlayer5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer5" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
@@ -298,7 +298,7 @@
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Button fx:id="marksPlayer1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                          <Button fx:id="marksPlayer1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer1" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
@@ -315,7 +315,7 @@
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Button fx:id="marksPlayer2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                          <Button fx:id="marksPlayer2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer2" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
@@ -332,7 +332,7 @@
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Button fx:id="marksPlayer3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                          <Button fx:id="marksPlayer3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer3" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
@@ -349,7 +349,7 @@
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Button fx:id="marksPlayer4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                          <Button fx:id="marksPlayer4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer4" prefHeight="30.0" prefWidth="61.0" text="Marks">
                                              <font>
                                                 <Font size="10.0" />
                                              </font>
@@ -426,7 +426,25 @@
                                   <RowConstraints maxHeight="88.80005493164063" minHeight="10.0" prefHeight="83.9999755859375" vgrow="SOMETIMES" />
                                 </rowConstraints>
                               </GridPane>
-                              <Pane layoutX="700.0" layoutY="32.0" prefHeight="83.0" prefWidth="62.0" />
+                              <Pane fx:id="powerrUpDeck" layoutX="700.0" layoutY="32.0" prefHeight="83.0" prefWidth="62.0" />
+                              <GridPane layoutX="56.0" layoutY="33.0" prefHeight="32.0" prefWidth="266.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="30.0" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="35.0" prefWidth="25.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                              <Pane fx:id="weaponsDeck" layoutX="676.0" layoutY="160.0" prefHeight="125.0" prefWidth="86.0" />
+                              <Button fx:id="drawButton" layoutX="705.0" layoutY="122.0" mnemonicParsing="false" onAction="#drawPowerUp" text="Draw" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
