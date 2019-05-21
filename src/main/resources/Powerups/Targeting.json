@@ -1,0 +1,5 @@
+{
+  "name": "TargetingScope",
+  "effect":["SHOOT"],
+  "effectParameter": ["PLAYER_TARGET"]
+}

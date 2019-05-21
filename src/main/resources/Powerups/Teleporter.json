@@ -1,0 +1,5 @@
+{
+  "name": "Teleporter",
+  "effect":["MOVE"],
+  "effectParameter": ["POSITION"]
+}

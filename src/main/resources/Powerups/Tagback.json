@@ -1,0 +1,5 @@
+{
+"name": "TagbackGrenade",
+"effect":["MARK_VIEW"],
+"effectParameter": ["PLAYER_TARGET"]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Newton",
+  "effect":["MOVE_DIRECTION"],
+  "effectParameter": ["POSITION"]
+}
