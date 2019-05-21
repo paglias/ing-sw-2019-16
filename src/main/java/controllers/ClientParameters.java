@@ -16,14 +16,4 @@ public class ClientParameters {
     public Player secondTarget;
     public Player thirdTarget;
     public List<Player> playerTargets;
-    public ArrayList<Player> marks = new ArrayList<>();
-    public ArrayList<Player> damage = new ArrayList<>();
-    public int adrenaline;
-    public int totalPoints = 0;
-    public boolean isDead = false;
-    public boolean isBeforeFirstPlayer;
-    public Skulls skulls;
-    public ArrayList<Player> players;
-    public Boolean isFinalFrenzy;
-
 }

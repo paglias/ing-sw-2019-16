@@ -217,7 +217,6 @@ public class GameController {
         Player player = gameBoard.getActivePlayer();
         player.move(position);
         player.grabItem(gameBoard, weapon);
-
     }
     public void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
