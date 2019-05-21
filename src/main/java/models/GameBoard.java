@@ -209,8 +209,10 @@ public class GameBoard {
         for (Player player : players) {
             if (players.indexOf(player) < players.indexOf(firstPlayer)) {
                 player.setActionCounter(2);
+                player.setIsBeforeFirstPlayer(true);
             } else {
                 player.setActionCounter(1);
+                player.setIsBeforeFirstPlayer(false);
             }
 
             if (player.getDamage().isEmpty()) {

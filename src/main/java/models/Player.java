@@ -65,11 +65,13 @@ public class Player {
     }
 
     public Boolean isBeforeFirstPlayer(){
-        if(this.isBeforeFirstPlayer){
-            return true;
-        }
-        return false;
+        return this.isBeforeFirstPlayer;
     }
+
+    public void setIsBeforeFirstPlayer(Boolean isBeforeFirstPlayer){
+        this.isBeforeFirstPlayer = isBeforeFirstPlayer;
+    }
+
 
     /**
      * Adds the value received to the total points of the player.

@@ -13,7 +13,7 @@ public class ActionController {
         SHOOT,
         RELOAD
     }
-    public enum UserInputs{
+    public enum UserInputs {
         POSITION,
         WEAPON_NAME,
         PLAYER_TARGET,
@@ -42,8 +42,6 @@ public class ActionController {
     public List<Action[]> getPossibleActions(Player player, GameBoard gameBoard){
         List<Action[]> actionsList= new ArrayList<>();
         int adrenalineLevel = player.getAdrenaline();
-
-
 
         if(!gameBoard.isFinalFrenzy()) {
             if (player.getActionCounter() == 0) {
