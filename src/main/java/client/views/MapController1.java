@@ -1,14 +1,18 @@
 package client.views;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,6 +33,78 @@ public class MapController1 implements Initializable {
     @FXML
     SplitPane horizontalSplit2;
 
+    @FXML private AnchorPane upperLeftPane;
+
+    @FXML private Button settingsButton;
+
+    @FXML private AnchorPane lowerLeftPane;
+
+    @FXML private GridPane playerboardGrid;
+
+    @FXML private Label username5;
+
+    @FXML private Button marksPlayer5;
+
+    @FXML private Label userName1;
+
+    @FXML private Button marksPlayer1;
+
+    @FXML private Label username2;
+
+    @FXML private Button marksPlayer2;
+
+    @FXML private Label username3;
+
+    @FXML private Button marksPlayer3;
+
+    @FXML private Label username4;
+
+    @FXML private Button marksPlayer4;
+
+    @FXML private GridPane gridPane1;
+
+    @FXML private Label redWeapon1;
+
+    @FXML private Label redWeapon2;
+
+    @FXML private Label redWeapon3;
+
+    @FXML private Label blueWeapon1;
+
+    @FXML private Label blueWeapon2;
+
+    @FXML private Label blueWeapon3;
+
+    @FXML private Label yellowWeapon1;
+
+    @FXML private Label yellowWeapon2;
+
+    @FXML private Label yellowWeapon3;
+
+    @FXML private Button drawButton;
+
+    @FXML private Button actionsButton;
+
+    @FXML private TextField actionChosen;
+
+    @FXML private Button confirmAction;
+
+    @FXML private Button powerUpsButton;
+
+    @FXML private TextField powerUpChosen;
+
+    @FXML private Button confirmPowerUp;
+
+    @FXML private Button grabButton;
+
+    @FXML private Text redAmmo;
+
+    @FXML private Text blueAmmo;
+
+    @FXML private Text yellowAmmo;
+
+    @FXML private Text moveCounter;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,8 +113,7 @@ public class MapController1 implements Initializable {
         image1.fitWidthProperty().bind(imageAnchorPane.widthProperty());
         image1.fitHeightProperty().bind(imageAnchorPane.heightProperty());
 
-        //Locks all splitpanes so they cannot be moved
-
+        //Locks all splitPanes so they cannot be moved
         ArrayList<SplitPane> splitPanes = new ArrayList();
         splitPanes.add(verticalSplit);
         splitPanes.add(horizontalSplit);
@@ -79,48 +154,51 @@ public class MapController1 implements Initializable {
         alertBoxes.actionWindow();
     }
 
-    @FXML
-    public void timerPrint(){
-        alertBoxes.timerPrint();
+
+    //Buttons methods
+    @FXML void openPowerUpsWindow(ActionEvent event) {}
+
+    @FXML void confirmAction(ActionEvent event) {}
+
+    @FXML void confirmPowerUp(ActionEvent event) {}
+
+    @FXML void drawPowerUp(ActionEvent event) {}
+
+    @FXML void grabAction(ActionEvent event) {}
+
+
+
+    //Opens window showing marks on player
+    @FXML void marksPlayer1(ActionEvent event) {
+        alertBoxes.showMarks(1);
     }
 
-    @FXML
-    public void openPowerUpsWindow(){
-    }
+    @FXML void marksPlayer2(ActionEvent event) {}
 
-    @FXML
-    public void confirmAction(){
-    }
+    @FXML void marksPlayer3(ActionEvent event) {}
 
-    @FXML
-    public void confirmPowerUp(){
-    }
+    @FXML void marksPlayer4(ActionEvent event) {}
 
-    @FXML
-    public void grabAction() {
-    }
+    @FXML void marksPlayer5(ActionEvent event) {}
 
-    @FXML
-    public void drawPowerUp(){
-    }
 
-    @FXML
-    public void marksPlayer1(){
-    }
 
-    @FXML
-    public void marksPlayer2(){
-    }
+    //Handling clicks on weapons on board
+    @FXML void redWeapon1Click(MouseEvent event) {}
 
-    @FXML
-    public void marksPlayer3(){
-    }
+    @FXML void redWeapon2Click(MouseEvent event) {}
 
-    @FXML
-    public void marksPlayer4(){
-    }
+    @FXML void redWeapon3Click(MouseEvent event) {}
 
-    @FXML
-    public void marksPlayer5(){
-    }
+    @FXML void yellowWeapon1Click(MouseEvent event) {}
+
+    @FXML void yellowWeapon2Click(MouseEvent event) {}
+
+    @FXML void yellowWeapon3Click(MouseEvent event) {}
+
+    @FXML void blueWeapon1Click(MouseEvent event) {}
+
+    @FXML void blueWeapon2Click(MouseEvent event) {}
+
+    @FXML void blueWeapon3Click(MouseEvent event) {}
 }

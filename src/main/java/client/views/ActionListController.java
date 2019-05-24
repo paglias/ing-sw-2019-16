@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class actionListController implements Initializable {
+public class ActionListController implements Initializable {
 
     @FXML
     Button confirmButton;

@@ -44,11 +44,6 @@ public class MapController3 implements Initializable {
     }
 
     @FXML
-    public void timerPrint(){
-        alertBoxes.timerPrint();
-    }
-
-    @FXML
     public void openPowerUpsWindow(){
     }
 

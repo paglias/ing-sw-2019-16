@@ -11,11 +11,12 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import java.io.IOException;
 import java.util.List;
 
 public class Lobby {
 
-    public int Map=0;
+    public int Map = 0;
 
     public void setMap(int map) {
         this.Map = map;
@@ -67,59 +68,73 @@ public class Lobby {
         setMap(4);
     }
 
-    public void previewMap1() throws Exception {
+
+    public void previewMap1() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Map one");
         Scene scene;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap1.fxml"));
-
-        scene = new Scene(root, 600, 430);
-
-        window.setScene(scene);
-        window.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap1.fxml"));
+            scene = new Scene(root, 600, 430);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            AlertBoxes alertBox = new AlertBoxes();
+            alertBox.loadingFailure();
+        }
     }
 
-    public void previewMap2() throws Exception {
+    public void previewMap2() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Map two");
         Scene scene;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap2.fxml"));
-
-        scene = new Scene(root, 600, 430);
-
-        window.setScene(scene);
-        window.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap2.fxml"));
+            scene = new Scene(root, 600, 430);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            AlertBoxes alertBox = new AlertBoxes();
+            alertBox.loadingFailure();
+        }
     }
 
-    public void previewMap3() throws Exception {
+    public void previewMap3() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Map two");
+        window.setTitle("Map three");
         Scene scene;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap3.fxml"));
-
-        scene = new Scene(root, 600, 430);
-
-        window.setScene(scene);
-        window.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap3.fxml"));
+            scene = new Scene(root, 600, 430);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            AlertBoxes alertBox = new AlertBoxes();
+            alertBox.loadingFailure();
+        }
     }
 
-    public void previewMap4() throws Exception {
+    public void previewMap4() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Map two");
+        window.setTitle("Map four");
         Scene scene;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap4.fxml"));
-
-        scene = new Scene(root, 600, 430);
-
-        window.setScene(scene);
-        window.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap4.fxml"));
+            scene = new Scene(root, 600, 430);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            AlertBoxes alertBox = new AlertBoxes();
+            alertBox.loadingFailure();
+        }
     }
+
     //Called by Start Game button
-    public void startGame(ActionEvent event) throws Exception {
+    public void startGame(ActionEvent event) {
         Stage stage;
         Parent root;
         if (event.getSource() == startButton) {
@@ -129,33 +144,38 @@ public class Lobby {
             List<Window> openWindows = Stage.getWindows().filtered(window -> window.isShowing());
             stage = (Stage) openWindows.get(0);
 
-            switch (Map) {
-                case 1:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map1.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
-                    break;
-                case 2:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map2.fxml"));
-                    Scene scene2 = new Scene(root, 1366, 768);
-                    stage.setScene(scene2);
-                    stage.centerOnScreen();
-                    break;
-                case 3:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map3.fxml"));
-                    Scene scene3 = new Scene(root, 1366, 768);
-                    stage.setScene(scene3);
-                    stage.centerOnScreen();
-                    break;
-                case 4:
-                    root = FXMLLoader.load(getClass().getResource("/FXMLs/Map4.fxml"));
-                    Scene scene4 = new Scene(root, 1366, 768);
-                    stage.setScene(scene4);
-                    stage.centerOnScreen();
-                    break;
-                default:
-                    System.out.println("No map was chosen");//TODO CREATE ALERT BOX
+            try {
+                switch (Map) {
+                    case 1:
+                        root = FXMLLoader.load(getClass().getResource("/FXMLs/Map1.fxml"));
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.centerOnScreen();
+                        break;
+                    case 2:
+                        root = FXMLLoader.load(getClass().getResource("/FXMLs/Map2.fxml"));
+                        Scene scene2 = new Scene(root, 1366, 768);
+                        stage.setScene(scene2);
+                        stage.centerOnScreen();
+                        break;
+                    case 3:
+                        root = FXMLLoader.load(getClass().getResource("/FXMLs/Map3.fxml"));
+                        Scene scene3 = new Scene(root, 1366, 768);
+                        stage.setScene(scene3);
+                        stage.centerOnScreen();
+                        break;
+                    case 4:
+                        root = FXMLLoader.load(getClass().getResource("/FXMLs/Map4.fxml"));
+                        Scene scene4 = new Scene(root, 1366, 768);
+                        stage.setScene(scene4);
+                        stage.centerOnScreen();
+                        break;
+                    default:
+                        System.out.println("No map was chosen");
+                }
+            } catch (IOException e) {
+                AlertBoxes alertBox = new AlertBoxes();
+                alertBox.loadingFailure();
             }
         }
     }

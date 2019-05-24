@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+import java.io.IOException;
 
 
 public class GameMenu {
@@ -16,18 +16,24 @@ public class GameMenu {
     public Button confirmButton;
 
     //When Confirm is pressed, loads a new scene with Lobby view
-    public void nextWindow(ActionEvent event) throws Exception {
+    public void nextWindow(ActionEvent event) {
         Parent root;
         Stage window;
 
         if (event.getSource() == confirmButton) {
             window = (Stage) confirmButton.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/FXMLs/Lobby.fxml"));
-            Scene scene = new Scene(root, 600, 400);
-            window.setScene(scene);
-            window.show();
+            try {
+                root = FXMLLoader.load(getClass().getResource("/FXMLs/Lobby.fxml"));
+                Scene scene = new Scene(root, 600, 400);
+                window.setScene(scene);
+                window.show();
+            } catch (IOException e) {
+                AlertBoxes alertBoxes = new AlertBoxes();
+                alertBoxes.loadingFailure();
+            }
         }
     }
+
     public void setNickname(){
     }
 }
