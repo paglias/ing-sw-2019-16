@@ -171,7 +171,8 @@ public class Lobby {
                         stage.centerOnScreen();
                         break;
                     default:
-                        System.out.println("No map was chosen");
+                        AlertBoxes alertBox = new AlertBoxes();
+                        alertBox.noMapChosen();
                 }
             } catch (IOException e) {
                 AlertBoxes alertBox = new AlertBoxes();
