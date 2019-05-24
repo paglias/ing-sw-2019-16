@@ -18,7 +18,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         window.setTitle("Adrenaline");
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Map1.fxml"));
         window.setScene(new Scene(root));
         window.show();
         window.setResizable(false);

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<BorderPane> fx:controller="client.views.Timer"
+<Button fx:id="button" layoutX="120.0" layoutY="40.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+        mnemonicParsing="false" text="Start Timer" onAction="#handle" />
+<Label fx:id="timerLabel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" layoutX="132.0" layoutY="92.0" prefHeight="17.0" prefWidth="65.0"
+       textFill="#f20b0b">
+<font>
+    <Font size="24.0" />
+</font>
+</Label>
+</BorderPane>

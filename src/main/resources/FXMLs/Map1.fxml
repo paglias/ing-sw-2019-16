@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -30,14 +32,14 @@
                            <children>
                               <HBox alignment="CENTER" layoutY="4.0" prefHeight="108.0" prefWidth="572.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Button fx:id="timer" defaultButton="true" mnemonicParsing="false" onAction="#timerPrint" prefHeight="50.0" prefWidth="150.0" text="Timer Place Holder">
+                                    <SubScene fx:id="subscene" height="97.0" width="122.0">
+                                      <root>
+                                        <Region />
+                                      </root>
                                        <HBox.margin>
                                           <Insets right="40.0" />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Button>
+                                    </SubScene>
                                     <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#showSettings" prefHeight="50.0" prefWidth="150.0" text="Settings" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets right="40.0" />

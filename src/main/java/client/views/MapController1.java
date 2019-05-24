@@ -4,11 +4,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapController1 implements Initializable {
@@ -27,23 +29,36 @@ public class MapController1 implements Initializable {
     @FXML
     SplitPane horizontalSplit2;
 
-    //Sets map size correctly
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //Adjusts map size correctly
         image1.fitWidthProperty().bind(imageAnchorPane.widthProperty());
         image1.fitHeightProperty().bind(imageAnchorPane.heightProperty());
 
-        //Locks the split dividers
+        //Locks all splitpanes so they cannot be moved
 
-        SplitPane.Divider divider = horizontalSplit.getDividers().get(0);
-        divider.positionProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldvalue, Number newvalue )
-            {
-                divider.setPosition(0.5);
+        ArrayList<SplitPane> splitPanes = new ArrayList();
+        splitPanes.add(verticalSplit);
+        splitPanes.add(horizontalSplit);
+        splitPanes.add(horizontalSplit2);
+
+        for (SplitPane pane : splitPanes ) {
+            final double pos[] = pane.getDividerPositions();
+
+            pane.setDividerPositions(pos);
+
+            for (int i = 0; i < pane.getDividers().size(); i++) {
+                final int ind = i;
+                SplitPane.Divider divider = pane.getDividers().get(i);
+                divider.positionProperty().addListener(
+                        (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
+                        {
+                            divider.setPosition(pos[ind]);
+                        });
             }
-        });
+        }
     }
 
     //Show possible settings? //TODO
