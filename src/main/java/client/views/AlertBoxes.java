@@ -6,14 +6,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
 public class AlertBoxes {
+
+    private static int currentPlayer;
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+    public void setCurrentPlayer(int Player) {
+        this.currentPlayer = Player;
+    }
 
     public void settings() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -72,6 +79,7 @@ public class AlertBoxes {
         Stage marksWindow = new Stage();
         marksWindow.initModality(Modality.APPLICATION_MODAL);
         try {
+            setCurrentPlayer(playerNumber);
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Marks.fxml"));
             Scene actionListView = new Scene(root);
             marksWindow.setScene(actionListView);

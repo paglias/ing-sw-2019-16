@@ -20,89 +20,47 @@ import java.util.ResourceBundle;
 public class MapController1 implements Initializable {
     AlertBoxes alertBoxes = new AlertBoxes();
 
-    @FXML
-    ImageView image1;
-    @FXML
-    AnchorPane imageAnchorPane;
-    @FXML
-    Button quitButton;
-    @FXML
-    SplitPane horizontalSplit;
-    @FXML
-    SplitPane verticalSplit;
-    @FXML
-    SplitPane horizontalSplit2;
-
+    @FXML private ImageView image1;
+    @FXML private AnchorPane imageAnchorPane;
+    @FXML private Button quitButton;
+    @FXML private SplitPane horizontalSplit;
+    @FXML private SplitPane verticalSplit;
+    @FXML private SplitPane horizontalSplit2;
     @FXML private AnchorPane upperLeftPane;
-
     @FXML private Button settingsButton;
-
     @FXML private AnchorPane lowerLeftPane;
-
     @FXML private GridPane playerboardGrid;
-
     @FXML private Label username5;
-
     @FXML private Button marksPlayer5;
-
     @FXML private Label userName1;
-
     @FXML private Button marksPlayer1;
-
     @FXML private Label username2;
-
     @FXML private Button marksPlayer2;
-
     @FXML private Label username3;
-
     @FXML private Button marksPlayer3;
-
     @FXML private Label username4;
-
     @FXML private Button marksPlayer4;
-
     @FXML private GridPane gridPane1;
-
     @FXML private Label redWeapon1;
-
     @FXML private Label redWeapon2;
-
     @FXML private Label redWeapon3;
-
     @FXML private Label blueWeapon1;
-
     @FXML private Label blueWeapon2;
-
     @FXML private Label blueWeapon3;
-
     @FXML private Label yellowWeapon1;
-
     @FXML private Label yellowWeapon2;
-
     @FXML private Label yellowWeapon3;
-
     @FXML private Button drawButton;
-
     @FXML private Button actionsButton;
-
     @FXML private TextField actionChosen;
-
     @FXML private Button confirmAction;
-
     @FXML private Button powerUpsButton;
-
     @FXML private TextField powerUpChosen;
-
     @FXML private Button confirmPowerUp;
-
     @FXML private Button grabButton;
-
     @FXML private Text redAmmo;
-
     @FXML private Text blueAmmo;
-
     @FXML private Text yellowAmmo;
-
     @FXML private Text moveCounter;
 
 
@@ -173,13 +131,21 @@ public class MapController1 implements Initializable {
         alertBoxes.showMarks(1);
     }
 
-    @FXML void marksPlayer2(ActionEvent event) {}
+    @FXML void marksPlayer2(ActionEvent event) {
+        alertBoxes.showMarks(2);
+    }
 
-    @FXML void marksPlayer3(ActionEvent event) {}
+    @FXML void marksPlayer3(ActionEvent event) {
+        alertBoxes.showMarks(3);
+    }
 
-    @FXML void marksPlayer4(ActionEvent event) {}
+    @FXML void marksPlayer4(ActionEvent event) {
+        alertBoxes.showMarks(4);
+    }
 
-    @FXML void marksPlayer5(ActionEvent event) {}
+    @FXML void marksPlayer5(ActionEvent event) {
+        alertBoxes.showMarks(5);
+    }
 
 
 
