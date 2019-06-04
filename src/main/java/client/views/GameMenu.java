@@ -6,14 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 
 public class GameMenu {
 
-    @FXML
-    public Button confirmButton;
+    @FXML Button confirmButton;
+    @FXML TextField address;
+    @FXML TextField username;
 
     //When Confirm is pressed, loads a new scene with Lobby view
     public void nextWindow(ActionEvent event) {
@@ -35,5 +39,7 @@ public class GameMenu {
     }
 
     public void setNickname(){
+    }
+    public void setAddress(){
     }
 }

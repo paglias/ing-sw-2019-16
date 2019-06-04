@@ -25,4 +25,5 @@ public class  Welcome {
             alertBox.loadingFailure();
         }
     }
+
 }
