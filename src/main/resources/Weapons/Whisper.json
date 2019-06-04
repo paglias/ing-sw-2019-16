@@ -1,12 +1,50 @@
 {
   "name": "Whisper",
   "color": "BLUE",
-  "rechargeCost": ["BLUE","BLUE","YELLOW"],
-  "cost": ["BLUE","YELLOW"],
-  "secondaryCost": null,
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_TWO_AWAY_VIEW","SHOOT_TWO_AWAY_VIEW","SHOOT_TWO_AWAY_VIEW","MARK_TWO_AWAY_VIEW"]],
-  "secondaryEffect": null,
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGET"]
+  "rechargeCost": [
+    "BLUE",
+    "BLUE",
+    "YELLOW"
+  ],
+  "cost": [
+    "BLUE",
+    "YELLOW"
+  ],
+  "primaryEffect": [
+    {
+      "input": [
+        "TARGET"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_TWO_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_TWO_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_TWO_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MARK_TWO_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
+

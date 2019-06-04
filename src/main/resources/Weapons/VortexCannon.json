@@ -1,13 +1,70 @@
 {
-  "name": "TractorBeam",
+  "name": "VortexCannon",
   "color": "RED",
   "rechargeCost": ["RED","BLUE"],
   "cost": null,
-  "secondaryCost": ["RED"],
-  "tertiaryCost": null,
-  "primaryEffect": [["MOVE_TARGET","SHOOT","SHOOT"]],
-  "secondaryEffect":[["MOVE_TARGET","SHOOT"],["MOVE_TARGET","SHOOT"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["POSITION","PLAYER_TARGET"],
-  "parameterSecondary": ["POSITION","PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": ["POSITION","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MOVE_TARGET",
+          "parameters": [
+           "POSITION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["POSITION","TARGET","TARGET"],
+      "cost": ["RED"],
+      "actions": [
+        {
+          "name": "MOVE_TARGET",
+          "parameters": [
+            "POSITION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MOVE_TARGET",
+          "parameters": [
+            "POSITION.0",
+            "TARGET.1"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.1"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
+
+
+

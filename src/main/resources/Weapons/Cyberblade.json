@@ -1,13 +1,73 @@
 {
   "name": "Cyberblade",
   "color": "YELLOW",
-  "rechargeCost": ["YELLOW","RED"],
-  "cost": ["RED"],
-  "secondaryCost": null,
-  "tertiaryCost": ["YELLOW"],
-  "primaryEffect": [["SHOOT","SHOOT"]],
-  "secondaryEffect":[["MOVE"]],
-  "tertiaryEffect": [["SHOOT","SHOOT"]],
-  "parameterPrimary": ["PLAYER_TARGET"],
-  "parameterSecondary": ["POSITION"]
+  "rechargeCost": [
+    "YELLOW",
+    "RED"
+  ],
+  "cost": [
+    "RED"
+  ],
+  "primaryEffect": [
+    {
+      "input": [
+        "TARGET"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ],
+  "secondaryEffect": [
+    {
+      "input": [
+        "POSITION"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MOVE",
+          "parameters": [
+            "POSITION.0"
+          ]
+        }
+      ]
+    }
+  ],
+  "tertiaryEffect": [
+    {
+      "input": [
+        "TARGET"
+      ],
+      "cost": [
+        "YELLOW"
+      ],
+      "actions": [
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

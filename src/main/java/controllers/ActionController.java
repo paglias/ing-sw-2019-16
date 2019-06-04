@@ -21,6 +21,7 @@ public class ActionController {
         SECOND_TARGET,
         THIRD_TARGET,
         DIRECTION,
+
     }
     // Normal actions
     public Action[] moveAction={Action.MOVE, Action.MOVE, Action.MOVE};

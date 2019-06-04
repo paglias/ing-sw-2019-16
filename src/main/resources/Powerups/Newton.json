@@ -1,5 +1,21 @@
 {
   "name": "Newton",
-  "effect":["MOVE_DIRECTION"],
-  "effectParameter": ["POSITION"]
+  "primaryEffect": [
+    {
+      "input": [
+        "DIRECTION",
+        "TARGET"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MOVE_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

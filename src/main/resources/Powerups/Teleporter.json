@@ -1,5 +1,19 @@
 {
   "name": "Teleporter",
-  "effect":["MOVE"],
-  "effectParameter": ["POSITION"]
+  "primaryEffect": [
+    {
+      "input": [
+        "POSITION"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MOVE",
+          "parameters": [
+            "POSITION.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

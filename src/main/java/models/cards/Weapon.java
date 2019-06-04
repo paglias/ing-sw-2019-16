@@ -46,15 +46,10 @@ public class Weapon extends Card {
     private ArrayList<ArrayList<Effect>> secondaryEffect;
     private ArrayList<ArrayList<Effect>> tertiaryEffect;
 
-    private Player playerTarget;
-    private Square newPosition;
+    private ArrayList<Player> playerTargets;
+    private ArrayList<Square> positions;
     private Player damagingPlayer;
-    private Square targetSquare;
-    private List<Square> squares;
     private Square.Direction direction;
-    private Player secondTarget;
-    private Player thirdTarget;
-    private List<Player> playerTargets;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
@@ -155,28 +150,12 @@ public class Weapon extends Card {
     }
 
 
-    public void setTargetPlayer(Player playerTarget) {
-        this.playerTarget = playerTarget;
-    }
 
-    public void setNewPosition (Square newPosition) {
-        this.newPosition = newPosition;
-    }
 
     public void setPlayerTargets(ArrayList<Player> playerTargets){this.playerTargets= playerTargets;}
-
-    public void setTargetSquare(Square targetSquare){this.targetSquare=targetSquare;}
-
-    public void setSecondTarget(Player secondTarget){this.secondTarget=secondTarget;}
-
-    public void setThirdTarget(Player thirdTarget){this.thirdTarget=thirdTarget; }
-
     public void setDirection(Square.Direction direction){this.direction=direction;}
-
-    public void setSquares(List<Square>squares){this.squares=squares;}
-
     public void setDamagingPlayer(Player damagingPlayer){this.damagingPlayer=damagingPlayer;}
-
+    public void setPositions(ArrayList<Square> positions){this.positions = positions; };
     /**
      * Reload the weapon.
      */
@@ -192,19 +171,17 @@ public class Weapon extends Card {
      * @param
      */
     public void reset(){
-        playerTarget=null;
-        newPosition=null;
-        playerTargets=null;
         damagingPlayer=null;
-        targetSquare=null;
-        squares=null;
         direction=null;
-        secondTarget=null;
-        thirdTarget=null;
+        playerTargets.clear();
+        positions.clear();
+        }
 
 
-    }
+
+
     public void shoot(){
+        Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition()==damagingPlayer.getPosition()) {
             playerTarget.addDamage(damagingPlayer);
             reset();
@@ -215,6 +192,7 @@ public class Weapon extends Card {
 
 
     public void mark(){
+        Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition().equals(damagingPlayer.getPosition())) {
             playerTarget.addMark(damagingPlayer);
             reset();
@@ -222,15 +200,17 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
     }
     public void move() {
+        Square position= positions.get(0);
         List<Square>CanAccessDirectly= damagingPlayer.getPosition().getCanAccessDirectly();
-        if(CanAccessDirectly.contains(newPosition)){
-        damagingPlayer.move(newPosition);
+        if(CanAccessDirectly.contains(position)){
+        damagingPlayer.move(position);
         reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
     public void shootOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
@@ -240,6 +220,7 @@ public class Weapon extends Card {
     }
     public void markOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
@@ -249,6 +230,7 @@ public class Weapon extends Card {
     }
     public void shootTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
@@ -258,6 +240,7 @@ public class Weapon extends Card {
     }
     public void markTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
@@ -283,6 +266,7 @@ public class Weapon extends Card {
         reset();
     }
     public void shootRoomCanSee() {
+        Square targetSquare= positions.get(0);
         if (!damagingPlayer.getPosition().getCanView().contains(targetSquare)) {
             throw new IllegalArgumentException("Invalid target square, cannot see from player.");
         }
@@ -323,6 +307,7 @@ public class Weapon extends Card {
     }
     public void shootView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
@@ -335,6 +320,7 @@ public class Weapon extends Card {
     }
     public void markView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addMark(damagingPlayer);
@@ -346,7 +332,9 @@ public class Weapon extends Card {
     }
 
     public void moveTarget() {
+        Player playerTarget= playerTargets.get(0);
         List<Square> CanAccessDirectly = playerTarget.getPosition().getCanAccessDirectly();
+        Square newPosition=positions.get(0);
         if (CanAccessDirectly.contains(newPosition)) {
             playerTarget.move(newPosition);
             reset();
@@ -358,7 +346,7 @@ public class Weapon extends Card {
         Square position= damagingPlayer.getPosition();
 
         int playersShot=0;
-        for(Square square: position.filterDirectionSquare(squares, direction)){
+        for(Square square: position.filterDirectionSquare(positions, direction)){
             for(Player player:square.getPlayersHere(playerTargets)){
                 player.addDamage(damagingPlayer);
                 playersShot++;
@@ -371,7 +359,9 @@ public class Weapon extends Card {
     }
     public void shootTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
+        Player secondTarget= playerTargets.get(1);
         Square secondTargetPosition= secondTarget.getPosition();
         if(CanView.contains(position)) {
             {
@@ -388,8 +378,11 @@ public class Weapon extends Card {
     }
     public void shootSecondTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
+        Player secondTarget= playerTargets.get(1);
         Square secondTargetPosition = secondTarget.getPosition();
+        Player thirdTarget= playerTargets.get(2);
         Square thirdTargetPosition= thirdTarget.getPosition();
         if (CanView.contains(position)) {{
             playerTarget.addDamage(damagingPlayer);
@@ -407,6 +400,7 @@ public class Weapon extends Card {
     }
     public void attractTarget() {
         Square position= damagingPlayer.getPosition();
+        Player playerTarget= playerTargets.get(0);
         Square targetPosition= playerTarget.getPosition();
         if(position.sameDirection(targetPosition,direction)){
                 playerTarget.setPosition(position);
@@ -417,6 +411,7 @@ public class Weapon extends Card {
 
     public void ShootCantSee(){
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
+        Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
         if(!CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
