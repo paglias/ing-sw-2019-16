@@ -99,6 +99,14 @@ public class Player {
         this.givenPoints = givenPoints;
     }
 
+    public Date getStartTurnDate () {
+        return startTurnDate;
+    }
+
+    public void setStartTurnDate (Date date) {
+        startTurnDate = date;
+    }
+
     /**
      * Gets given points.
      *

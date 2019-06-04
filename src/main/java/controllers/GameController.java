@@ -27,16 +27,16 @@ public class GameController {
         clients.add(clientController);
     }
 
-    public ClientController getClientForPlayer (String nickname) {
-        Player player = gameBoard.getPlayerByNickname(nickname);
-        return getClientForPlayer(player);
-    }
-
     public ClientController getClientForPlayer (Player player) {
         return clients.stream()
                 .filter(c -> c.getLinkedPlayer() == player)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public ClientController getClientForPlayer (String nickname) {
+        Player player = gameBoard.getPlayerByNickname(nickname);
+        return getClientForPlayer(player);
     }
 
     public void dispatchToClients (AbstractMessage msg) {
@@ -76,8 +76,7 @@ public class GameController {
             }, gameStartTimeout * 1000);
         }
 
-        GameStateMessage gameState = new GameStateMessage(this);
-        dispatchToClients(gameState);
+        GameStateMessage.updateClients(this);
     }
 
     public synchronized void start() {
@@ -88,8 +87,7 @@ public class GameController {
         gameBoard.startGame();
         gameBoard.getPlayers().get(0).setActive(true);
 
-        GameStateMessage gameState = new GameStateMessage(this);
-        dispatchToClients(gameState);
+        GameStateMessage.updateClients(this);
     }
 
     public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
@@ -120,6 +118,7 @@ public class GameController {
         if(gameBoard.getSkulls().getNRemaining()==0){
             gameBoard.finalFrenzy();
         }
+        player.setStartTurnDate(new Date());
     }
 
     public synchronized void endTurn() {
