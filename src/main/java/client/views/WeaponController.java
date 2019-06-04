@@ -2,8 +2,11 @@ package client.views;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +22,7 @@ public class WeaponController implements Initializable {
 
     //Area that receives the image to be loaded
     @FXML ImageView weaponImage;
+    @FXML Button closeButton;
 
     public void initialize(URL location, ResourceBundle resources) {
         AlertBoxes alertBox = new AlertBoxes();
@@ -61,5 +65,10 @@ public class WeaponController implements Initializable {
                 weaponImage.setImage(image9);
                 break;
         }
+    }
+    //Closes the weaponWindow
+    public void closeWindow(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }
