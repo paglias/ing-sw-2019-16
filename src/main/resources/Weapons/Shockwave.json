@@ -3,11 +3,50 @@
   "color": "YELLOW",
   "rechargeCost": ["YELLOW"],
   "cost": null,
-  "secondaryCost": ["YELLOW"],
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_ONE_AWAY_VIEW"],["SHOOT_ONE_AWAY_VIEW"],["SHOOT_ONE_AWAY_VIEW"]],
-  "secondaryEffect":[["SHOOT_EVERY_ONE_AWAY_VIEW"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGET"],
-  "parameterSecondary": ["PLAYER_TARGETS"]
+  "primaryEffect": [
+    {
+      "input": ["TARGET","TARGET","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.1"
+          ]
+        },
+        {
+          "name": "SHOOT_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.2"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": ["YELLOW"],
+      "actions": [
+        {
+          "name": "SHOOT_EVERY_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
+
+
+

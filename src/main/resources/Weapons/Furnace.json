@@ -3,11 +3,41 @@
   "color": "RED",
   "rechargeCost": ["RED","BLUE"],
   "cost": ["BLUE"],
-  "secondaryCost": null,
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_ROOM_CAN_SEE"]],
-  "secondaryEffect":[["SHOOT_EVERY_ONE_AWAY_VIEW","MARK_EVERY_ONE_AWAY_VIEW"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGETS"],
-  "parameterSecondary": ["PLAYER_TARGETS"]
+  "primaryEffect": [
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_ROOM_CAN_SEE",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": ["BLUE", "RED"],
+      "actions": [
+        {
+          "name": "SHOOT_EVERY_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
+
+
+

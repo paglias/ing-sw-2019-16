@@ -3,11 +3,55 @@
   "color": "YELLOW",
   "rechargeCost": ["YELLOW","RED"],
   "cost": ["RED"],
-  "secondaryCost": null,
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_VIEW","MARK_VIEW","MARK_VIEW"]],
-  "secondaryEffect":[["MARK_VIEW"],["MARK_VIEW"],["MARK_VIEW"]],
-  "tertiaryEffect": null,
-  "parameterPrimary": ["PLAYER_TARGET"],
-  "parameterSecondary": ["PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": ["TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MARK_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MARK_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["TARGET","TARGET","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.1"
+          ]
+        },
+        {
+          "name": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.2"
+          ]
+        }
+      ]
+    }
+  ]
 }
+

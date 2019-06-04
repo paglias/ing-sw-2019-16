@@ -23,6 +23,7 @@ public class GameBoard {
     private ArrayList<Square> squares;
     private Boolean isFinalFrenzy;
     private ArrayList<Weapon> weapons;
+    private int mapN;
 
     /**
      * Setup the game.
@@ -124,7 +125,10 @@ public class GameBoard {
     public void setMap (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
         squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
+        mapN = chosenMap;
     }
+
+    public int getMap () { return mapN; }
 
     /**
      * Start game.

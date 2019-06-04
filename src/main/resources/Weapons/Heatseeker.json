@@ -3,11 +3,30 @@
   "color": "RED",
   "rechargeCost": ["RED","RED","YELLOW"],
   "cost": ["RED","YELLOW"],
-  "secondaryCost": null,
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_CANT_SEE","SHOOT_CANT_SEE","SHOOT_CANT_SEE"]],
-  "secondaryEffect": null,
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGET"],
-  "parameterSecondary": null
+  "primaryEffect": [
+    {
+      "input": ["TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_CANT_SEE",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_CANT_SEE",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_CANT_SEE",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

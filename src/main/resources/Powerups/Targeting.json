@@ -1,5 +1,19 @@
 {
   "name": "TargetingScope",
-  "effect":["SHOOT"],
-  "effectParameter": ["PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": [
+        "TARGET"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

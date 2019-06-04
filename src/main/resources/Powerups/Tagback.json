@@ -1,5 +1,19 @@
 {
 "name": "TagbackGrenade",
-"effect":["MARK_VIEW"],
-"effectParameter": ["PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": [
+        "TARGET"
+      ],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MARK_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    }
+  ]
 }

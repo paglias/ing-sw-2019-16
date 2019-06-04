@@ -3,12 +3,45 @@
   "color": "RED",
   "rechargeCost": ["RED"],
   "cost": null,
-  "secondaryCost": ["RED"],
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_VIEW","MOVE_TARGET"]],
-  "secondaryEffect":[["SHOOT_VIEW"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGET","POSITION"],
-  "parameterSecondary": ["PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": ["TARGET","POSITION"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MOVE_TARGET",
+          "parameters": [
+            "TARGET.0",
+            "POSITION.0"
+          ]
+        }
+      ]
+    }
+  ],
+    "secondaryEffect":[
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": ["RED"],
+      "actions": [
+        {
+          "name": "SHOOT_ROOM_CAN_SEE",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
 

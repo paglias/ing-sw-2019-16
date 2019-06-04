@@ -3,11 +3,68 @@
   "color": "YELLOW",
   "rechargeCost": ["YELLOW","BLUE"],
   "cost": ["BLUE"],
-  "secondaryCost": ["BLUE"],
-  "tertiaryCost": null,
-  "primaryEffect": [["MOVE","SHOOT","MARK","MARK"]],
-  "secondaryEffect":[["MOVE","SHOOT","SHOOT"],["MOVE","SHOOT","SHOOT"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["POSITION", "PLAYER_TARGET"],
-  "parameterSecondary": ["POSITION","PLAYER_TARGET"]
+  "primaryEffect": [
+    {
+      "input": ["POSITION","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "MOVE",
+          "parameters": [
+            "POSITION.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MARK",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MARK",
+          "parameters": [
+            "TARGET.0"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["POSITION","TARGET","POSITION","TARGET"],
+      "cost": ["BLUE"],
+      "actions": [
+        {
+          "name": "MOVE",
+          "parameters": [
+            "POSITION.0"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "MOVE",
+          "parameters": [
+            "POSITION.1"
+          ]
+        },
+        {
+          "name": "SHOOT",
+          "parameters": [
+            "TARGET.1"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+

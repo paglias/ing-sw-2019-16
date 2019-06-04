@@ -3,11 +3,70 @@
   "color": "YELLOW",
   "rechargeCost": ["YELLOW","YELLOW","BLUE"],
   "cost": ["YELLOW","BLUE"],
-  "secondaryCost": null,
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_DIRECTION","SHOOT_DIRECTION","SHOOT_DIRECTION"]],
-  "secondaryEffect":[["SHOOT_DIRECTION","SHOOT_DIRECTION"],["SHOOT_DIRECTION","SHOOT_DIRECTION"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGETS"],
-  "parameterSecondary": ["PLAYER_TARGETS"]
+  "primaryEffect": [
+    {
+      "input": ["DIRECTION","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        }
+      ]
+    },
+    {
+      "input": ["DIRECTION","TARGET","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.0"
+          ]
+        },
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.1"
+          ]
+        },
+        {
+          "name": "SHOOT_DIRECTION",
+          "parameters": [
+            "DIRECTION.0",
+            "TARGET.1"
+          ]
+        }
+      ]
+    }
+  ]
 }
+
+
+

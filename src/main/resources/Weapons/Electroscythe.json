@@ -3,12 +3,49 @@
   "color": "BLUE",
   "rechargeCost": ["BLUE"],
   "cost": null,
-  "secondaryCost": ["BLUE","RED"],
-  "tertiaryCost": null,
-  "primaryEffect": [["SHOOT_EVERY"]],
-  "secondaryEffect":[["SHOOT_EVERY","SHOOT_EVERY"]],
-  "tertiaryEffect":null,
-  "parameterPrimary": ["PLAYER_TARGETS"],
-  "parameterSecondary": ["PLAYER_TARGETS"]
-}
+  "primaryEffect": [
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": null,
+      "actions": [
+        {
+          "name": "SHOOT_EVERY",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        }
+        ]
+        },
+    {
+      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "cost": ["BLUE", "RED"],
+      "actions": [
+        {
+          "name": "SHOOT_EVERY",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        },
+        {
+          "name": "SHOOT_EVERY",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+
+          ]
+        }
+      ]
+    }
+      ]
+    }
+
+
 
