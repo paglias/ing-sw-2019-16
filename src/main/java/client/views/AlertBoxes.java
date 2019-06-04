@@ -8,16 +8,25 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Optional;
 
 public class AlertBoxes {
 
     private static int currentPlayer;
+    private static int currentSlot;
 
+    public int getCurrentSlot(){
+        return currentSlot;
+    }
+    public void setCurrentSlot(int n){
+        this.currentSlot = n;
+    }
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+
     public void setCurrentPlayer(int Player) {
         this.currentPlayer = Player;
     }
@@ -86,6 +95,23 @@ public class AlertBoxes {
             marksWindow.show();
             marksWindow.setResizable(false);
         } catch (IOException e) {
+            loadingFailure();
+        }
+    }
+
+    //Shows a window with the weapon contained in the weaponSlot.
+    //The weapon is loaded in WeaponController
+    public void showWeapon(int currentSlot){
+        setCurrentSlot(currentSlot);
+        Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
+        weaponWindow.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/WeaponWindow.fxml"));
+            Scene scene = new Scene(root);
+            weaponWindow.setScene(scene);
+            weaponWindow.showAndWait();
+        }
+        catch (IOException e){
             loadingFailure();
         }
     }

@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 
@@ -38,8 +36,11 @@ public class GameMenu {
         }
     }
 
+    //sends nickname entered by user
     public void setNickname(){
     }
+
+    //sends address enteres by user
     public void setAddress(){
     }
 }

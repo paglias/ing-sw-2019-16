@@ -148,23 +148,41 @@ public class MapController1 implements Initializable {
     }
 
 
-
     //Handling clicks on weapons on board
-    @FXML void redWeapon1Click(MouseEvent event) {}
+    @FXML void redWeapon1Click(MouseEvent event) {
+        alertBoxes.showWeapon(1);
 
-    @FXML void redWeapon2Click(MouseEvent event) {}
+    }
+    @FXML void redWeapon2Click(MouseEvent event) {
+        alertBoxes.showWeapon(2);
 
-    @FXML void redWeapon3Click(MouseEvent event) {}
+    }
+    @FXML void redWeapon3Click(MouseEvent event) {
+        alertBoxes.showWeapon(3);
 
-    @FXML void yellowWeapon1Click(MouseEvent event) {}
+    }
+    @FXML void yellowWeapon1Click(MouseEvent event) {
+        alertBoxes.showWeapon(4);
 
-    @FXML void yellowWeapon2Click(MouseEvent event) {}
+    }
+    @FXML void yellowWeapon2Click(MouseEvent event) {
+        alertBoxes.showWeapon(5);
 
-    @FXML void yellowWeapon3Click(MouseEvent event) {}
+    }
+    @FXML void yellowWeapon3Click(MouseEvent event) {
+        alertBoxes.showWeapon(6);
 
-    @FXML void blueWeapon1Click(MouseEvent event) {}
+    }
+    @FXML void blueWeapon1Click(MouseEvent event) {
+        alertBoxes.showWeapon(7);
 
-    @FXML void blueWeapon2Click(MouseEvent event) {}
+    }
+    @FXML void blueWeapon2Click(MouseEvent event) {
+        alertBoxes.showWeapon(8);
 
-    @FXML void blueWeapon3Click(MouseEvent event) {}
+    }
+    @FXML void blueWeapon3Click(MouseEvent event) {
+        alertBoxes.showWeapon(9);
+
+    }
 }
