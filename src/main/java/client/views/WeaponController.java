@@ -25,7 +25,7 @@ public class WeaponController implements Initializable {
     @FXML Button closeButton;
 
     public void initialize(URL location, ResourceBundle resources) {
-        AlertBoxes alertBox = new AlertBoxes();
+        GenericWindows alertBox = new GenericWindows();
         int i = alertBox.getCurrentSlot();
         switch (i) {
             case 1:

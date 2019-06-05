@@ -23,7 +23,7 @@ public class Marks implements Initializable {
     private int currentPlayer;
 
     public void setCurrentPlayer() {
-        AlertBoxes alertBox = new AlertBoxes();
+        GenericWindows alertBox = new GenericWindows();
         this.currentPlayer = alertBox.getCurrentPlayer();
     }
 

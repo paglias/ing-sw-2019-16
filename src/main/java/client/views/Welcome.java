@@ -21,7 +21,7 @@ public class  Welcome {
             window.show();
         }
         catch (IOException e){
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }

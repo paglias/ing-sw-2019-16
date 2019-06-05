@@ -80,7 +80,7 @@ public class Lobby {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -96,7 +96,7 @@ public class Lobby {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -112,7 +112,7 @@ public class Lobby {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -128,7 +128,7 @@ public class Lobby {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -171,11 +171,11 @@ public class Lobby {
                         stage.centerOnScreen();
                         break;
                     default:
-                        AlertBoxes alertBox = new AlertBoxes();
+                        GenericWindows alertBox = new GenericWindows();
                         alertBox.noMapChosen();
                 }
             } catch (IOException e) {
-                AlertBoxes alertBox = new AlertBoxes();
+                GenericWindows alertBox = new GenericWindows();
                 alertBox.loadingFailure();
             }
         }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapController1 implements Initializable {
-    AlertBoxes alertBoxes = new AlertBoxes();
+    GenericWindows genericWindows = new GenericWindows();
 
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
@@ -97,19 +97,19 @@ public class MapController1 implements Initializable {
     //Show possible settings? //TODO
     @FXML
     public void showSettings(){
-        alertBoxes.settings();
+        genericWindows.settings();
     }
 
     //Alert box for quitting the game
     @FXML
     public void quitGame(){
-        alertBoxes.quitGame();
+        genericWindows.quitGame();
     }
 
     //Opens a window with the actions available. Many buttons will be disabled.
     @FXML
     public void openActionWindow(){
-        alertBoxes.actionWindow();
+        genericWindows.actionWindow();
     }
 
 
@@ -128,61 +128,61 @@ public class MapController1 implements Initializable {
 
     //Opens window showing marks on player
     @FXML void marksPlayer1(ActionEvent event) {
-        alertBoxes.showMarks(1);
+        genericWindows.showMarks(1);
     }
 
     @FXML void marksPlayer2(ActionEvent event) {
-        alertBoxes.showMarks(2);
+        genericWindows.showMarks(2);
     }
 
     @FXML void marksPlayer3(ActionEvent event) {
-        alertBoxes.showMarks(3);
+        genericWindows.showMarks(3);
     }
 
     @FXML void marksPlayer4(ActionEvent event) {
-        alertBoxes.showMarks(4);
+        genericWindows.showMarks(4);
     }
 
     @FXML void marksPlayer5(ActionEvent event) {
-        alertBoxes.showMarks(5);
+        genericWindows.showMarks(5);
     }
 
 
     //Handling clicks on weapons on board
     @FXML void redWeapon1Click(MouseEvent event) {
-        alertBoxes.showWeapon(1);
+        genericWindows.showWeapon(1);
 
     }
     @FXML void redWeapon2Click(MouseEvent event) {
-        alertBoxes.showWeapon(2);
+        genericWindows.showWeapon(2);
 
     }
     @FXML void redWeapon3Click(MouseEvent event) {
-        alertBoxes.showWeapon(3);
+        genericWindows.showWeapon(3);
 
     }
     @FXML void yellowWeapon1Click(MouseEvent event) {
-        alertBoxes.showWeapon(4);
+        genericWindows.showWeapon(4);
 
     }
     @FXML void yellowWeapon2Click(MouseEvent event) {
-        alertBoxes.showWeapon(5);
+        genericWindows.showWeapon(5);
 
     }
     @FXML void yellowWeapon3Click(MouseEvent event) {
-        alertBoxes.showWeapon(6);
+        genericWindows.showWeapon(6);
 
     }
     @FXML void blueWeapon1Click(MouseEvent event) {
-        alertBoxes.showWeapon(7);
+        genericWindows.showWeapon(7);
 
     }
     @FXML void blueWeapon2Click(MouseEvent event) {
-        alertBoxes.showWeapon(8);
+        genericWindows.showWeapon(8);
 
     }
     @FXML void blueWeapon3Click(MouseEvent event) {
-        alertBoxes.showWeapon(9);
+        genericWindows.showWeapon(9);
 
     }
 }

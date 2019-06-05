@@ -30,8 +30,8 @@ public class GameMenu {
                 window.setScene(scene);
                 window.show();
             } catch (IOException e) {
-                AlertBoxes alertBoxes = new AlertBoxes();
-                alertBoxes.loadingFailure();
+                GenericWindows genericWindows = new GenericWindows();
+                genericWindows.loadingFailure();
             }
         }
     }

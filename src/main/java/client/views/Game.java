@@ -26,8 +26,8 @@ public class Game extends Application {
             window.setResizable(false);
             window.centerOnScreen();
         } catch (IOException e) {
-            AlertBoxes alertBoxes = new AlertBoxes();
-            alertBoxes.loadingFailure();
+            GenericWindows genericWindows = new GenericWindows();
+            genericWindows.loadingFailure();
         }
     }
 }

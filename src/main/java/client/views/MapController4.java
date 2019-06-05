@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MapController4 implements Initializable {
-    AlertBoxes alertBoxes = new AlertBoxes();
+    GenericWindows genericWindows = new GenericWindows();
 
     @FXML
     ImageView image1;
@@ -28,19 +28,19 @@ public class MapController4 implements Initializable {
     //Show possible settings? //TODO
     @FXML
     public void showSettings(){
-        alertBoxes.settings();
+        genericWindows.settings();
     }
 
     //Alert box for quitting the game
     @FXML
     public void quitGame(){
-        alertBoxes.quitGame();
+        genericWindows.quitGame();
     }
 
     //Opens a window with the actions available. Many buttons will be disabled.
     @FXML
     public void openActionWindow(){
-        alertBoxes.actionWindow();
+        genericWindows.actionWindow();
     }
 
     @FXML

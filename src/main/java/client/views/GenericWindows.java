@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Optional;
 
-public class AlertBoxes {
+public class GenericWindows {
 
     private static int currentPlayer;
     private static int currentSlot;
