@@ -58,11 +58,9 @@ public class Server implements Closeable {
         serverSocket.close();
     }
 
-    public static void main (String[] args) throws IOException {
+    public static void start (Scanner keyboard) throws IOException {
         System.out.println("Server is starting...");
-
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("Enter a port");
+        System.out.println("Choose a port:");
         int chosenPort = Integer.parseInt(keyboard.nextLine());
         keyboard.close();
 

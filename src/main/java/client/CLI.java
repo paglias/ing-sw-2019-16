@@ -36,7 +36,7 @@ public class CLI {
         }
     }
 
-    public static void main(String[] args)  throws IOException {
+    public static void startCli (String[] args)  throws IOException {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Provide host:port please");
         String[] tokens = keyboard.nextLine().split(":");
