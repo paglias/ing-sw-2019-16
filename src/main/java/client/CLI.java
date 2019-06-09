@@ -18,15 +18,15 @@ public class CLI {
             connection  = new Connection(host, port);
             connection.init();
 
-            CliController cliController = new CliController(connection, keyboard);
-            cliController.init();
+            Controller controller = new Controller(connection, keyboard);
+            controller.init();
 
             // Handle messages from the server
             String msg;
 
             do {
                 msg = connection.receive();
-                if (msg != null) cliController.onServerMessage(msg);
+                if (msg != null) controller.onServerMessage(msg);
             } while (msg != null);
 
         } catch (IOException e) {
@@ -36,13 +36,12 @@ public class CLI {
         }
     }
 
-    public static void startCli (String[] args)  throws IOException {
-        Scanner keyboard = new Scanner(System.in);
+    public static void startCli (Scanner keyboard) throws IOException {
         System.out.println("Provide host:port please");
         String[] tokens = keyboard.nextLine().split(":");
 
         if (tokens.length < 2) {
-            throw new IllegalArgumentException("Bad formatting: " + args[0]);
+            throw new IllegalArgumentException("Bad formatting: " + tokens[0]);
         }
 
         String host = tokens[0];

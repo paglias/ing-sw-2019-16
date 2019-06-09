@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 public class PlayerYouData extends PlayerOtherData {
     public Date startTurnDate;                                  // when the turn started
-    public ArrayList<PowerUpData> powerUps = new ArrayList<>();    // list of available power ups
-    public ArrayList<WeaponData> weapons = new ArrayList<>();      // list of available weapons
+    public ArrayList<PowerUpData> powerUps;    // list of available power ups
+    public ArrayList<WeaponData> weapons;      // list of available weapons
     public int moveCounter;                                    // how many moves can be done TODO needed on client?
     public int actionCounter;                                  // remaining actions that can be done during turn
     public int totalPoints;                                // total points of the current player

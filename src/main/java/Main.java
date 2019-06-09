@@ -1,3 +1,4 @@
+import client.CLI;
 import client.views.Game;
 import server.Server;
 
@@ -14,7 +15,7 @@ public class Main {
         if (choice == 1) {
             Server.start(keyboard);
         } else if (choice == 2) {
-            Game.startGame(args);
+            CLI.startCli(keyboard);
             keyboard.close();
         }
     }
