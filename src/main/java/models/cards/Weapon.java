@@ -11,40 +11,12 @@ import java.util.List;
 import com.google.gson.*;
 
 public class Weapon extends Card {
-    public enum Effect {
-        SHOOT,
-        SHOOT_VIEW,
-        SHOOT_EVERY,
-        SHOOT_CANT_SEE,
-
-        SHOOT_DIRECTION,
-        SHOOT_ROOM_CAN_SEE,
-        SHOOT_ONE_AWAY_VIEW,
-        SHOOT_TARGET_VIEW,
-        SHOOT_SECOND_TARGET_VIEW,
-        SHOOT_EVERY_ONE_AWAY_VIEW,
-
-        MOVE,
-        MOVE_TARGET,
-
-        MARK,
-        MARK_VIEW,
-        MARK_TWO_AWAY_VIEW,
-        MARK_EVERY_ONE_AWAY_VIEW,
-        MARK_EVERY,
-
-        ATTRACT_TARGET
-    }
-
-
     private String name;
     private ArrayList<Color> rechargeCost;
     private ArrayList<Color> cost;
-    private ArrayList<Color> secondaryCost;
-    private ArrayList<Color> tertiaryCost;
-    private ArrayList<ArrayList<Effect>> primaryEffect;
-    private ArrayList<ArrayList<Effect>> secondaryEffect;
-    private ArrayList<ArrayList<Effect>> tertiaryEffect;
+    private ArrayList<WeaponEffect> primaryEffect;
+    private ArrayList<WeaponEffect> secondaryEffect;
+    private ArrayList<WeaponEffect> tertiaryEffect;
 
     private ArrayList<Player> playerTargets;
     private ArrayList<Square> positions;
@@ -420,7 +392,7 @@ public class Weapon extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
-    public void effect(Weapon.Effect effect) {
+    public void effect(WeaponAction.Type effect) {
         switch (effect) {
             case MARK_VIEW:
                 this.markView();
@@ -462,7 +434,7 @@ public class Weapon extends Card {
     }
 
 
-    public ArrayList<Color> getSecondaryCost(){
+    /*public ArrayList<Color> getSecondaryCost(){
         return secondaryCost;
     }
     public ArrayList<Color> getTertiaryCost(){
@@ -495,7 +467,7 @@ public class Weapon extends Card {
 
     public ArrayList<ArrayList<Effect>> getSecondaryEffect(){return secondaryEffect; }
 
-    public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect; }
+    public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect; }*/
 }
 
 
