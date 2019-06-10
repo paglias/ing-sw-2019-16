@@ -414,38 +414,55 @@ public class Weapon extends Card {
         switch (effect) {
             case MARK_VIEW:
                 this.markView();
+                return;
             case SHOOT:
                 this.shoot();
+                return;
             case SHOOT_CANT_SEE:
                 this.ShootCantSee();
+                return;
             case MARK_TWO_AWAY_VIEW:
                 this.markTwoAwayView();
+                return;
             case MARK:
                 this.mark();
+                return;
             case SHOOT_VIEW:
                 this.shootView();
+                return;
             case SHOOT_ONE_AWAY_VIEW:
                 this.shootOneAwayView();
+                return;
             case MOVE_TARGET:
                 this.moveTarget();
+                return;
             case MOVE:
                 this.move();
+                return;
             case SHOOT_SECOND_TARGET_VIEW:
                 this.shootSecondTargetView();
+                return;
             case SHOOT_TARGET_VIEW:
                 this.shootTargetView();
+                return;
             case SHOOT_EVERY:
                 this.shootEvery();
+                return;
             case MARK_EVERY:
                 this.markEvery();
+                return;
             case SHOOT_EVERY_ONE_AWAY_VIEW:
                 this.shootEveryOneAwayView();
+                return;
             case MARK_EVERY_ONE_AWAY_VIEW:
                 this.markEveryOneAwayView();
+                return;
             case SHOOT_ROOM_CAN_SEE:
                 this.shootRoomCanSee();
+                return;
             case ATTRACT_TARGET:
                 this.attractTarget();
+                return;
             case SHOOT_DIRECTION:
                 this.shootDirection();
         }

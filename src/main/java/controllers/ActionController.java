@@ -101,7 +101,11 @@ public class ActionController {
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
         WeaponEffect effect = weapon.getEffect(effectType);
 
-        weapon.payEffect(player, effect);
+        // TODO pay weapon cost?
+
+        if (effect.getCost() != null) {
+            weapon.payEffect(player, effect);
+        }
 
         // execute actions
         for (WeaponAction weaponAction: effect.getActions()) {
@@ -116,6 +120,8 @@ public class ActionController {
             if (type == POSITION) {
                 weapon.positons.add(inputs.positions.get(number))
             }*/
+
+            // TODO call player.shoot
         }
 
     }

@@ -11,7 +11,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -27,7 +27,7 @@
       "cost": ["BLUE"],
       "actions": [
         {
-          "name": "SHOOT_TARGET_VIEW",
+          "type": "SHOOT_TARGET_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -45,7 +45,7 @@
       ],
       "actions": [
         {
-          "name": "SHOOT_SECOND_TARGET_VIEW",
+          "type": "SHOOT_SECOND_TARGET_VIEW",
           "parameters": [
             "TARGET.0"
           ]

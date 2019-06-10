@@ -9,19 +9,19 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_ONE_AWAY_VIEW",
+          "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_ONE_AWAY_VIEW",
+          "type": "MARK_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_EVERY_ONE_AWAY_VIEW",
+          "type": "MARK_EVERY_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.1",
             "TARGET.2",
@@ -35,25 +35,25 @@
       "cost": ["RED"],
       "actions": [
         {
-          "name": "SHOOT_ONE_AWAY_VIEW",
+          "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK__ONE_AWAY_VIEW",
+          "type": "MARK__ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK__ONE_AWAY_VIEW",
+          "type": "MARK__ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_EVERY_ONE_AWAY_VIEW",
+          "type": "MARK_EVERY_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.1",
             "TARGET.2",
@@ -61,7 +61,7 @@
           ]
         },
         {
-          "name": "MARK_EVERY_ONE_AWAY_VIEW",
+          "type": "MARK_EVERY_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.1",
             "TARGET.2",

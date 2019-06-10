@@ -9,7 +9,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_EVERY",
+          "type": "SHOOT_EVERY",
           "parameters": [
             "TARGET.0",
             "TARGET.1",
@@ -24,7 +24,7 @@
       "cost": ["BLUE", "RED"],
       "actions": [
         {
-          "name": "SHOOT_EVERY",
+          "type": "SHOOT_EVERY",
           "parameters": [
             "TARGET.0",
             "TARGET.1",
@@ -33,7 +33,7 @@
           ]
         },
         {
-          "name": "SHOOT_EVERY",
+          "type": "SHOOT_EVERY",
           "parameters": [
             "TARGET.0",
             "TARGET.1",

@@ -9,19 +9,19 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_CANT_SEE",
+          "type": "SHOOT_CANT_SEE",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_CANT_SEE",
+          "type": "SHOOT_CANT_SEE",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_CANT_SEE",
+          "type": "SHOOT_CANT_SEE",
           "parameters": [
             "TARGET.0"
           ]

@@ -9,18 +9,18 @@
       "cost": null,
       "actions": [
         {
-          "name": "ATTRACT_TARGET",
+          "type": "ATTRACT_TARGET",
           "parameters": [
             "POSITION.0",
             "TARGET.0"
           ]
         },
         {
-          "name": "ATTRACT_TARGET",
+          "type": "ATTRACT_TARGET",
           "parameters": [0, 1]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [1]
         }
       ]
@@ -30,29 +30,29 @@
       "cost": ["RED", "YELLOW"],
       "actions": [
         {
-          "name": "ATTRACT_TARGET",
+          "type": "ATTRACT_TARGET",
         "parameters": [
           "POSITION.0",
           "TARGET.0"
         ]
         },
         {
-          "name": "ATTRACT_TARGET",
+          "type": "ATTRACT_TARGET",
           "parameters": [
             "POSITION.0",
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": ["TARGET.0"]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": ["TARGET.0"]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": ["TARGET.0"]
         }
 

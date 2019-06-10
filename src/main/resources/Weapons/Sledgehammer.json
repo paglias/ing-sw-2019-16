@@ -9,13 +9,13 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
@@ -27,32 +27,32 @@
       "cost": ["RED"],
       "actions": [
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MOVE_TARGET",
+          "type": "MOVE_TARGET",
           "parameters": [
             "TARGET.0",
             "POSITION.0"
           ]
         },
         {
-          "name": "MOVE_TARGET",
+          "type": "MOVE_TARGET",
           "parameters": [
             "TARGET.0",
             "POSITION.1"

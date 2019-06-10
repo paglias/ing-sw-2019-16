@@ -9,14 +9,14 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_ONE_AWAY_VIEW",
+          "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
             "DIRECTION.0",
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_TWO_AWAY_VIEW",
+          "type": "SHOOT_TWO_AWAY_VIEW",
           "parameters": [
             "DIRECTION.0",
             "TARGET.1"
@@ -31,7 +31,7 @@
       "cost": ["YELLOW", "YELLOW"],
       "actions": [
         {
-          "name": "SHOOT_EVERY_ONE_AWAY_VIEW",
+          "type": "SHOOT_EVERY_ONE_AWAY_VIEW",
           "parameters": [
             "DIRECTION.0",
             "TARGET.0",

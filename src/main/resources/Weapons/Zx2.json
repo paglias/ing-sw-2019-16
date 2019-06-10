@@ -9,19 +9,19 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_VIEW",
+          "type": "MARK_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_VIEW",
+          "type": "MARK_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -33,19 +33,19 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.1"
           ]
         },
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.2"
           ]

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class WeaponEffect {
     public enum Input {
         DIRECTION,
+        POSITION,
         TARGET,
     }
 
@@ -18,5 +19,9 @@ public class WeaponEffect {
 
     public ArrayList<WeaponAction> getActions () {
         return actions;
+    }
+
+    public ArrayList<Input> getInput () {
+        return input;
     }
 }

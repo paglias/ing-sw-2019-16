@@ -11,13 +11,13 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -33,13 +33,13 @@
       "cost": null,
       "actions": [
         {
-          "name": "MOVE",
+          "type": "MOVE",
           "parameters": [
             "POSITION.0"
           ]
         },
         {
-          "name": "MOVE",
+          "type": "MOVE",
           "parameters": [
             "POSITION.0"
           ]
@@ -57,7 +57,7 @@
       ],
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]

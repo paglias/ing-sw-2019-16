@@ -9,25 +9,25 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MOVE_TARGET",
+          "type": "MOVE_TARGET",
           "parameters": [
             "TARGET.0",
             "POSITION.0"
@@ -40,7 +40,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_ONE_AWAY_VIEW",
+          "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0",
             "TARGET.1",
@@ -49,7 +49,7 @@
           ]
         },
         {
-          "name": "SHOOT_ONE_AWAY_VIEW",
+          "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0",
             "TARGET.1",
