@@ -133,7 +133,7 @@ public class GameController {
 
     }
 
-    public synchronized void action(Square position, Weapon weapon, Square secondPosition, Square thirdPosition, String action,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
+    /*public synchronized void action(Square position, Weapon weapon, Square secondPosition, Square thirdPosition, String action,String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
         if(player.getAdrenaline()==0) {
             switch (action) {
@@ -200,7 +200,7 @@ public class GameController {
             }
         }
 
-    }
+    }*/
 
     public synchronized void move (Square position, Square secondPosition, Square thirdPosition){
         Player player = gameBoard.getActivePlayer();
@@ -213,7 +213,7 @@ public class GameController {
         player.move(position);
         player.grabItem(gameBoard, weapon);
     }
-    public synchronized void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
+    /*public synchronized void shoot(String weaponName, Boolean useSecondaryEffect, Boolean useTertiaryEffect) {
         Player player = gameBoard.getActivePlayer();
         Weapon weapon = player.getWeaponByName(weaponName);
 
@@ -279,7 +279,7 @@ public class GameController {
     public synchronized void usePowerup(PowerUp powerUp){
         Player player = gameBoard.getActivePlayer();
         powerUp.effect(powerUp.getName());
-    }
+    }*/
 }
 
 

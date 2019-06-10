@@ -1,23 +1,26 @@
 package client;
 
+import client.views.Game;
 import messages.*;
 
 import java.util.Scanner;
 
-class CliController implements MessageVisitor  {
+public class Controller implements MessageVisitor  {
     private Connection connection;
     private Scanner keyboard;
 
-    CliController(Connection connection, Scanner keyboard) {
+    Controller(Connection connection, Scanner keyboard) {
         this.connection = connection;
         this.keyboard = keyboard;
     }
 
     void init () {
-        System.out.println("Welcome to the CLI version of Adrenaline!");
+        System.out.println("Starting the GUI...");
 
-        ConnectMessage msg = new ConnectMessage();
-        connection.send(msg.serialize());
+        // TODO ConnectMessage msg = new ConnectMessage();
+        // connection.send(msg.serialize());
+
+        Game.startGame(this);
     }
 
     void onServerMessage (String msg) {

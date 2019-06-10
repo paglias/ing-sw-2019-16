@@ -1,5 +1,6 @@
 package client.views;
 
+import client.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +11,10 @@ import java.io.IOException;
 //Creates game stage, loads Adrenaline.jpg. Later it will be changed to game overview.
 public class Game extends Application {
     Stage window;
+    static Controller controller; // TODO how to make this not static?
 
-    public static void startGame(String[] args) {
+    public static void startGame (Controller controller) {
+        Game.controller = controller;
         launch();
     }
 
