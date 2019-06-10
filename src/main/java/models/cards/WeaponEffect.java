@@ -11,4 +11,12 @@ public class WeaponEffect {
     private ArrayList<Input> input;
     private ArrayList<Card.Color> cost;
     private ArrayList<WeaponAction> actions;
+
+    public ArrayList<Card.Color> getCost () {
+        return cost;
+    }
+
+    public ArrayList<WeaponAction> getActions () {
+        return actions;
+    }
 }

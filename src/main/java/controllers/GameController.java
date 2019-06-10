@@ -200,7 +200,7 @@ public class GameController {
             }
         }
 
-    }*/
+    }
 
     public synchronized void move (Square position, Square secondPosition, Square thirdPosition){
         Player player = gameBoard.getActivePlayer();

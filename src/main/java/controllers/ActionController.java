@@ -2,6 +2,9 @@ package controllers;
 
 import models.GameBoard;
 import models.Player;
+import models.cards.Weapon;
+import models.cards.WeaponAction;
+import models.cards.WeaponEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,19 @@ public class ActionController {
         PLAYER_TARGETS,
         SECOND_TARGET,
         THIRD_TARGET,
-        DIRECTION,
-
+        DIRECTION
     }
+
+    public GameController gameController;
+    public GameBoard gameBoardModel;
+    public Player player;
+
+    public ActionController (GameController gameController) {
+        this.gameController = gameController;
+        this.gameBoardModel = gameController.getGameBoard();
+        this.player = gameBoardModel.getActivePlayer();
+    }
+
     // Normal actions
     public Action[] moveAction={Action.MOVE, Action.MOVE, Action.MOVE};
     public Action[] moveGrabAction={Action.MOVE,Action.GRAB};
@@ -82,4 +95,28 @@ public class ActionController {
                 }
         }
    }
+
+    public void shoot (String weaponName, Integer effectType) {
+        Weapon weapon = player.getWeaponByName(weaponName);
+        if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
+        WeaponEffect effect = weapon.getEffect(effectType);
+
+        weapon.payEffect(player, effect);
+
+        // execute actions
+        for (WeaponAction weaponAction: effect.getActions()) {
+            WeaponAction.Type actionType = weaponAction.getType();
+            weapon.effect(actionType);
+
+            // TODO pass parameters
+            /*for (parameters: weaponAction.parameters) // array di string {
+                String type parameter.split('.').get(0)
+                String number parameter.split('.').get(1)
+
+            if (type == POSITION) {
+                weapon.positons.add(inputs.positions.get(number))
+            }*/
+        }
+
+    }
 }

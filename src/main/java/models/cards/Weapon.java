@@ -91,6 +91,19 @@ public class Weapon extends Card {
         return loaded;
     }
 
+    public WeaponEffect getEffect (Integer effectType) {
+        switch (effectType) {
+            case 1:
+                return this.primaryEffect.get(0); // TODO allow multiple effects
+            case 2:
+                return this.secondaryEffect.get(0);
+            case 3:
+                return this.tertiaryEffect.get(0);
+            default:
+                throw new IllegalArgumentException("effectType must be 1, 2 or 3.");
+        }
+    }
+
     /**
      * Deal damage to another player.
      *
@@ -138,6 +151,14 @@ public class Weapon extends Card {
         this.loaded = true;
     }
 
+    public void payEffect (Player player, WeaponEffect effect) {
+        ArrayList<Card.Color> cost = effect.getCost();
+
+        for(Color color: cost){
+            player.removeCube(color);
+        }
+    }
+
     /**
      * @param
      * @param
@@ -148,9 +169,6 @@ public class Weapon extends Card {
         playerTargets.clear();
         positions.clear();
         }
-
-
-
 
     public void shoot(){
         Player playerTarget= playerTargets.get(0);
@@ -460,14 +478,7 @@ public class Weapon extends Card {
                 damagingPlayer.removeCube(color);
             }
         }
-    }
-
-
-    public ArrayList<ArrayList<Effect>> getPrimaryEffect(){ return primaryEffect; }
-
-    public ArrayList<ArrayList<Effect>> getSecondaryEffect(){return secondaryEffect; }
-
-    public ArrayList<ArrayList<Effect>> getTertiaryEffect(){return tertiaryEffect; }*/
+    }*/
 }
 
 

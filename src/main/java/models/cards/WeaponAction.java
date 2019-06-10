@@ -29,5 +29,10 @@ public class WeaponAction {
     }
 
     private ArrayList<String> parameters; // TODO transform in specific types?
+    private Type name; // from the JSON
+
+    public Type getType () {
+        return name;
+    }
 
 }
