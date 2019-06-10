@@ -559,42 +559,11 @@ public class Player {
     }
 
     /**
-     * Shoot player. Adds damage, marks, moves players based on weapon effect
-     *
-     * @param currentGameBoard the current game board
+     * After shoot player. Adds damage, marks, moves players based on weapon effect
      * @param playerTarget     the player target
-     * @param newPosition      the new position
      */
 
-    public void shootPlayer(GameBoard currentGameBoard, Player playerTarget,
-                            Square newPosition, Weapon activeWeapon) {
-
-        //initial check if any player can be shot
-        //temp value to skip comparing currentplayer to currentplayer in players
-        Square currentPosition = getPosition();
-        for (Player otherPlayer : currentGameBoard.getPlayers()) {
-            if (otherPlayer.getNickname().equals(this.getNickname())) {
-                continue;
-            }
-            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                throw new IllegalArgumentException("No players can be shot");
-            }
-        }
-        //if weapon is loaded, use weapon effects
-        //TODO WEAPON USE GENERIC TO BE ADDED
-        if (getWeapons().isEmpty()) {
-            throw new IllegalArgumentException("No weapon is available");
-        } else {
-            for (Weapon availableWeapon : getWeapons()) {
-                if (availableWeapon.isLoaded()) {
-                    availableWeapon.dealDamage(playerTarget);
-                    availableWeapon.addMark(playerTarget);
-                    availableWeapon.movePlayer(playerTarget, newPosition);
-                } else {
-                    throw new IllegalArgumentException("No weapon is loaded");
-                }
-            }
-        }
+    public void afterShoot (GameBoard gameBoard, Player playerTarget) {
         //Add adrenaline if damage reaches 2 or 5, only if it is less than 1 and less than 2
         if (playerTarget.getDamage().size() > 2 && playerTarget.getAdrenaline() < 1) {
             playerTarget.increaseAdrenaline();
@@ -602,23 +571,21 @@ public class Player {
         if (playerTarget.getDamage().size() > 5 && playerTarget.getAdrenaline() < 2) {
             playerTarget.increaseAdrenaline();
         }
-    }
 
-    //Player death. The 11th damage point is the killshot.
-    public void playerIsDead(Player playerTarget, GameBoard currentGameBoard){
+        //Player death. The 11th damage point is the killshot.
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
 
-            calculateDeathPoints(currentGameBoard);
+            calculateDeathPoints(gameBoard);
 
-            currentGameBoard.getSkulls().decreaseSkullsRemaining();
+            gameBoard.getSkulls().decreaseSkullsRemaining();
 
-            if (currentGameBoard.getSkulls().getNRemaining()==0){
-                currentGameBoard.finalFrenzy();
+            if (gameBoard.getSkulls().getNRemaining()==0){
+                gameBoard.finalFrenzy();
             }
             else{
-                currentGameBoard.getSkulls().addKiller(this);
+                gameBoard.getSkulls().addKiller(this);
             }
         }
 
@@ -697,13 +664,13 @@ public class Player {
                             Square newPosition, Weapon activeWeapon) {
         if (getAdrenaline() <= 1) {
             setMoveCounter(0);
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
+            // TODO shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         } else {
             setMoveCounter(1);
             while (getMoveCounter() > 0) {
                 move(newPosition);
             }
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
+            // TODO shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         }
         decreaseActionCounter();
     }
@@ -742,7 +709,7 @@ public class Player {
             move(newPosition);
         }
         reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
+        // TODO shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
         decreaseActionCounter();
     }
 
@@ -793,7 +760,7 @@ public class Player {
             move(newPosition);
         }
         reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
+        // TODO shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
     }
 
     /**

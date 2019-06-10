@@ -124,7 +124,7 @@ public class GameController {
     public synchronized void endTurn() {
         Player currentPlayer=gameBoard.getActivePlayer();
         for(Player player: gameBoard.getPlayers()){
-            player.playerIsDead(currentPlayer, gameBoard);
+            // ToDOO redo, done after using shootAction player.playerIsDead(currentPlayer, gameBoard);
        }// controlla quali tra i giocatori sono morti
 
         gameBoard.nextPlayer(gameBoard.getActivePlayer());

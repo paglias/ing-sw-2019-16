@@ -106,6 +106,7 @@ public class Weapon extends Card {
 
     public void setPlayerTargets(ArrayList<Player> playerTargets){this.playerTargets = playerTargets;}
     public void addPlayerTarget (Player playerTarget) {this.playerTargets.add(playerTarget);}
+    public ArrayList<Player> getPlayerTargets () { return playerTargets; }
 
     public void setDirection(Square.Direction direction){this.direction = direction;}
 
@@ -143,7 +144,6 @@ public class Weapon extends Card {
         Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition()==damagingPlayer.getPosition()) {
             playerTarget.addDamage(damagingPlayer);
-            reset();
         }
 
         else throw new IllegalArgumentException("Not usable method");
@@ -154,7 +154,6 @@ public class Weapon extends Card {
         Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition().equals(damagingPlayer.getPosition())) {
             playerTarget.addMark(damagingPlayer);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -163,7 +162,6 @@ public class Weapon extends Card {
         List<Square>CanAccessDirectly= damagingPlayer.getPosition().getCanAccessDirectly();
         if(CanAccessDirectly.contains(position)){
             damagingPlayer.move(position);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -173,7 +171,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -183,7 +180,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -193,7 +189,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -203,7 +198,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
-            reset();
         }
     }
     public void shootEvery() {
@@ -213,7 +207,6 @@ public class Weapon extends Card {
                 }
             else throw new IllegalArgumentException("Not usable method");
         }
-        reset(); // TODO make sure it's called even if an error occurs
     }
     public void markEvery() {
         for (Player Players : playerTargets) {
@@ -222,7 +215,6 @@ public class Weapon extends Card {
             }
             else throw new IllegalArgumentException("Not usable method");
         }
-        reset();
     }
     public void shootRoomCanSee() {
         Square targetSquare= positions.get(0);
@@ -235,7 +227,6 @@ public class Weapon extends Card {
                 player.addDamage(damagingPlayer);
             }
         }
-        reset();
     }
     public void shootEveryOneAwayView() {
             for (Player Players : playerTargets) {
@@ -247,8 +238,6 @@ public class Weapon extends Card {
                 }
                 else throw new IllegalArgumentException("Not usable method");
             }
-        reset();
-
 
     }
     public void markEveryOneAwayView() {
@@ -260,9 +249,6 @@ public class Weapon extends Card {
             }
             else throw new IllegalArgumentException("Not usable method");
         }
-        reset();
-
-
     }
     public void shootView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
@@ -270,8 +256,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
-            reset();
-
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -283,8 +267,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(CanView.contains(position)){
             playerTarget.addMark(damagingPlayer);
-            reset();
-
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -296,7 +278,6 @@ public class Weapon extends Card {
         Square newPosition=positions.get(0);
         if (CanAccessDirectly.contains(newPosition)) {
             playerTarget.move(newPosition);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -311,7 +292,6 @@ public class Weapon extends Card {
                 playersShot++;
             }
         }
-        reset();
         if(playersShot==0){
             throw new IllegalArgumentException("Not usable method");
         }
@@ -323,13 +303,10 @@ public class Weapon extends Card {
         Player secondTarget= playerTargets.get(1);
         Square secondTargetPosition= secondTarget.getPosition();
         if(CanView.contains(position)) {
-            {
-                playerTarget.addDamage(damagingPlayer);
-            }
+            playerTarget.addDamage(damagingPlayer);
             if (position.getCanView().contains(secondTargetPosition)) {
                 secondTarget.addDamage(damagingPlayer);
             }
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -343,16 +320,14 @@ public class Weapon extends Card {
         Square secondTargetPosition = secondTarget.getPosition();
         Player thirdTarget= playerTargets.get(2);
         Square thirdTargetPosition= thirdTarget.getPosition();
-        if (CanView.contains(position)) {{
+        if (CanView.contains(position)) {
             playerTarget.addDamage(damagingPlayer);
-        }
-        if (position.getCanView().contains(secondTargetPosition)){
-            secondTarget.addDamage(damagingPlayer);
-        }
-        if(secondTargetPosition.getCanView().contains(thirdTargetPosition)){
-            thirdTarget.addDamage(damagingPlayer);
-        }
-        reset();
+            if (position.getCanView().contains(secondTargetPosition)){
+                secondTarget.addDamage(damagingPlayer);
+            }
+            if(secondTargetPosition.getCanView().contains(thirdTargetPosition)){
+                thirdTarget.addDamage(damagingPlayer);
+            }
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -363,7 +338,6 @@ public class Weapon extends Card {
         Square targetPosition= playerTarget.getPosition();
         if(position.sameDirection(targetPosition,direction)){
                 playerTarget.setPosition(position);
-                reset();
             }
             else throw new IllegalArgumentException("Not usable method");
     }
@@ -374,7 +348,6 @@ public class Weapon extends Card {
         Square position = playerTarget.getPosition();
         if(!CanView.contains(position)){
             playerTarget.addDamage(damagingPlayer);
-            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
 

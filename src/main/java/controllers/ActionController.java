@@ -103,8 +103,6 @@ public class ActionController {
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
         WeaponEffect effect = weapon.getEffect(effectType);
 
-        // TODO pay weapon cost?
-
         if (effect.getCost() != null) {
             weapon.payEffect(player, effect);
         }
@@ -130,7 +128,10 @@ public class ActionController {
             });
             weapon.effect(actionType);
 
-            // TODO call player.shoot
+            Player activePlayer = gameBoardModel.getActivePlayer();
+            // For all the target players call afterShoot to check adrenaline, if it's dead, ...
+            weapon.getPlayerTargets().forEach(p -> activePlayer.afterShoot(gameBoardModel, p));
+            weapon.reset();
         }
 
     }
