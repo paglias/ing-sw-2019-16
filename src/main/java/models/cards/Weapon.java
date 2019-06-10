@@ -11,6 +11,10 @@ import java.util.List;
 import com.google.gson.*;
 
 public class Weapon extends Card {
+    // Weapons are only loaded from file once
+    private static boolean weaponsLoadedFromFile = false;
+    private static ArrayList<Weapon> cachedWeapons;
+
     private String name;
     private ArrayList<Color> rechargeCost;
     private ArrayList<Color> cost;
@@ -20,15 +24,11 @@ public class Weapon extends Card {
 
     private ArrayList<Player> playerTargets;
     private ArrayList<Square> positions;
-    private Player damagingPlayer;
     private Square.Direction direction;
+    private Player damagingPlayer;
 
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
-
-    // Weapons are only loaded from file once
-    private static boolean weaponsLoadedFromFile = false;
-    private static ArrayList<Weapon> cachedWeapons;
 
     public String getName () {return this.name; };
 
@@ -104,43 +104,16 @@ public class Weapon extends Card {
         }
     }
 
-    /**
-     * Deal damage to another player.
-     *
-     * @param playerTarget the target player
-     */
-    public void dealDamage(Player playerTarget){
-        // TODO
-        //deal damage based on weapon
-    }
+    public void setPlayerTargets(ArrayList<Player> playerTargets){this.playerTargets = playerTargets;}
+    public void addPlayerTarget (Player playerTarget) {this.playerTargets.add(playerTarget);}
 
-    /**
-     * Add a mark to another player.
-     *
-     * @param playerTarget the target player
-     */
-    public void addMark(Player playerTarget){
-        // TODO
-        //add mark based on weapon
-    }
+    public void setDirection(Square.Direction direction){this.direction = direction;}
 
-    /**
-     * Move the player.
-     *
-     * @param playerTarget the target player
-     * @param newPosition  where the player will be moved
-     */
-    public void movePlayer(Player playerTarget, Square newPosition){
-
-    }
-
-
-
-
-    public void setPlayerTargets(ArrayList<Player> playerTargets){this.playerTargets= playerTargets;}
-    public void setDirection(Square.Direction direction){this.direction=direction;}
-    public void setDamagingPlayer(Player damagingPlayer){this.damagingPlayer=damagingPlayer;}
     public void setPositions(ArrayList<Square> positions){this.positions = positions; };
+    public void addPosition (Square position) {this.positions.add(position);}
+
+    public void setDamagingPlayer(Player damagingPlayer){this.damagingPlayer = damagingPlayer;}
+
     /**
      * Reload the weapon.
      */
@@ -159,16 +132,12 @@ public class Weapon extends Card {
         }
     }
 
-    /**
-     * @param
-     * @param
-     */
     public void reset(){
-        damagingPlayer=null;
-        direction=null;
+        damagingPlayer = null;
+        direction = null;
         playerTargets.clear();
         positions.clear();
-        }
+    }
 
     public void shoot(){
         Player playerTarget= playerTargets.get(0);
@@ -193,8 +162,8 @@ public class Weapon extends Card {
         Square position= positions.get(0);
         List<Square>CanAccessDirectly= damagingPlayer.getPosition().getCanAccessDirectly();
         if(CanAccessDirectly.contains(position)){
-        damagingPlayer.move(position);
-        reset();
+            damagingPlayer.move(position);
+            reset();
         }
         else throw new IllegalArgumentException("Not usable method");
     }
@@ -467,35 +436,6 @@ public class Weapon extends Card {
                 this.shootDirection();
         }
     }
-
-
-    /*public ArrayList<Color> getSecondaryCost(){
-        return secondaryCost;
-    }
-    public ArrayList<Color> getTertiaryCost(){
-        return tertiaryCost;
-    }
-    public void payPrimaryCost(){
-        if(damagingPlayer.getCubes().containsAll(cost)){
-            for(Card.Color color:cost){
-                damagingPlayer.removeCube(color);
-            }
-        }
-    }
-    public void paySecondaryCost(){
-        if(damagingPlayer.getCubes().containsAll(secondaryCost)){
-            for(Card.Color color:secondaryCost){
-                damagingPlayer.removeCube(color);
-            }
-        }
-    }
-    public void payTertiaryCost(){
-        if(damagingPlayer.getCubes().containsAll((tertiaryCost))){
-            for(Card.Color color:tertiaryCost){
-                damagingPlayer.removeCube(color);
-            }
-        }
-    }*/
 }
 
 

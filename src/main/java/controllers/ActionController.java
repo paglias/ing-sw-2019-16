@@ -1,5 +1,6 @@
 package controllers;
 
+import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import models.cards.Weapon;
@@ -7,6 +8,7 @@ import models.cards.WeaponAction;
 import models.cards.WeaponEffect;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ActionController {
@@ -96,7 +98,7 @@ public class ActionController {
         }
    }
 
-    public void shoot (String weaponName, Integer effectType) {
+    public void shoot (String weaponName, Integer effectType, ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
         WeaponEffect effect = weapon.getEffect(effectType);
@@ -110,16 +112,23 @@ public class ActionController {
         // execute actions
         for (WeaponAction weaponAction: effect.getActions()) {
             WeaponAction.Type actionType = weaponAction.getType();
+            HashMap<WeaponEffect.Input, Integer> parameters = weaponAction.getParameters();
+
+            // reset the parameters just to be sure there's no old data
+            weapon.reset();
+            parameters.forEach((WeaponEffect.Input type, Integer index) -> {
+                switch (type) {
+                    case TARGET:
+                        weapon.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
+                        return;
+                    case POSITION:
+                        weapon.addPosition(clientInput.getPositions(gameBoardModel).get(index));
+                        return;
+                    case DIRECTION:
+                        weapon.setDirection(clientInput.getDirection());
+                }
+            });
             weapon.effect(actionType);
-
-            // TODO pass parameters
-            /*for (parameters: weaponAction.parameters) // array di string {
-                String type parameter.split('.').get(0)
-                String number parameter.split('.').get(1)
-
-            if (type == POSITION) {
-                weapon.positons.add(inputs.positions.get(number))
-            }*/
 
             // TODO call player.shoot
         }

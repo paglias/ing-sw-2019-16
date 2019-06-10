@@ -1,6 +1,7 @@
 package models.cards;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WeaponAction {
     public enum Type {
@@ -28,11 +29,23 @@ public class WeaponAction {
         ATTRACT_TARGET
     }
 
-    private ArrayList<String> parameters; // TODO transform in specific types?
-    private Type name;
+    private ArrayList<String> parameters;
+    private Type type;
 
     public Type getType () {
-        return name;
+        return type;
+    }
+
+    public HashMap<WeaponEffect.Input, Integer> getParameters () {
+        HashMap<WeaponEffect.Input, Integer> map = new HashMap<>();
+        parameters.forEach(stringParameter -> {
+            String[] parts = stringParameter.split(".");
+            WeaponEffect.Input actionType = WeaponEffect.Input.valueOf(parts[0]);
+            Integer index = Integer.parseInt(parts[1]);
+            map.put(actionType, index);
+        });
+
+        return map;
     }
 
 }
