@@ -12,20 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ActionController {
-    public enum Action{
+    public enum Action {
         MOVE,
         GRAB,
         SHOOT,
-        RELOAD
-    }
-    public enum UserInputs {
-        POSITION,
-        WEAPON_NAME,
-        PLAYER_TARGET,
-        PLAYER_TARGETS,
-        SECOND_TARGET,
-        THIRD_TARGET,
-        DIRECTION
+        RELOAD,
+        USE_POWER_UP
     }
 
     public GameController gameController;
@@ -39,36 +31,36 @@ public class ActionController {
     }
 
     // Normal actions
-    public Action[] moveAction={Action.MOVE, Action.MOVE, Action.MOVE};
-    public Action[] moveGrabAction={Action.MOVE,Action.GRAB};
-    public Action[] shootAction={Action.SHOOT};
-    public Action[] reloadAction= {Action.RELOAD};
+    public final Action[] moveAction={Action.MOVE, Action.MOVE, Action.MOVE};
+    public final Action[] moveGrabAction={Action.MOVE,Action.GRAB};
+    public final Action[] shootAction={Action.SHOOT};
+    public final Action[] reloadAction= {Action.RELOAD};
+    public final Action[] usePowerUp = {Action.USE_POWER_UP};
 
     // Adrenaline actions
-    public Action[] moveShootAction={Action.MOVE,Action.SHOOT};
-    public Action[] moveMoveGrabAction= {Action.MOVE,Action.MOVE,Action.GRAB};
+    public final Action[] moveShootAction={Action.MOVE,Action.SHOOT};
+    public final Action[] moveMoveGrabAction= {Action.MOVE,Action.MOVE,Action.GRAB};
 
     // Final frenzy actions
-    public Action[] moveReloadShootAction={Action.MOVE, Action.RELOAD, Action.SHOOT};
-    public Action[] threeMovesGrabAction={Action.MOVE,Action.MOVE,Action.MOVE,Action.GRAB};
-    public Action[] moveMoveAction={Action.MOVE,Action.MOVE,Action.MOVE,Action.MOVE};
-    public Action[] moveMoveReloadShootAction= {Action.MOVE,Action.MOVE,Action.RELOAD,Action.SHOOT};
+    public final Action[] moveReloadShootAction={Action.MOVE, Action.RELOAD, Action.SHOOT};
+    public final Action[] threeMovesGrabAction={Action.MOVE,Action.MOVE,Action.MOVE,Action.GRAB};
+    public final Action[] moveMoveAction={Action.MOVE,Action.MOVE,Action.MOVE,Action.MOVE};
+    public final Action[] moveMoveReloadShootAction= {Action.MOVE,Action.MOVE,Action.RELOAD,Action.SHOOT};
 
-    public List<Action[]> getPossibleActions(Player player, GameBoard gameBoard){
-        List<Action[]> actionsList= new ArrayList<>();
+    public List<Action[]> getPossibleActions (){
+        List<Action[]> actionsList = new ArrayList<>();
+        actionsList.add(usePowerUp);
         int adrenalineLevel = player.getAdrenaline();
 
-        if(!gameBoard.isFinalFrenzy()) {
+        if(!gameBoardModel.isFinalFrenzy()) {
             if (player.getActionCounter() == 0) {
                 actionsList.add(reloadAction);
                 return actionsList;
-
             } else if (adrenalineLevel == 0) {
                 actionsList.add(moveAction);
                 actionsList.add(moveGrabAction);
                 actionsList.add(shootAction);
                 return actionsList;
-
             } else if (adrenalineLevel == 1) {
                 actionsList.add(moveAction);
                 actionsList.add(moveGrabAction);
