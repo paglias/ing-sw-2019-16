@@ -525,14 +525,15 @@ public class Player {
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
-     * @param weaponToPick the weapon to pick
+     * @param weaponName the weapon to pick
      */
 
-    public void grabItem(GameBoard currentGameBoard, Weapon weaponToPick) {
+    public void grabItem(GameBoard currentGameBoard, String weaponName) {
         Square currentPosition = getPosition();
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
+            Weapon weaponToPick = getWeaponByName(weaponName);
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
         } else {
             Ammo ammo = currentPosition.getAmmo();
@@ -616,14 +617,14 @@ public class Player {
     }
 
     /**
-     * Move action.
+     * Move action. // TODO needed?
      *
      * @param firstPosition  the first position
      * @param secondPosition the second position
      * @param thirdPosition  the third position
      */
     public void moveAction(Square firstPosition, Square secondPosition, Square thirdPosition) {
-            setMoveCounter(3);
+        setMoveCounter(3);
         if (getMoveCounter() > 0 && firstPosition != null) {
             move(firstPosition);
         }
@@ -637,7 +638,7 @@ public class Player {
     }
 
     /**
-     * Grab action. Specific move action, non finalFrenzy
+     * Grab action. Specific move action, non finalFrenzy // TODO used?
      *
      * @param currentGameBoard   the current game board
      * @param newWeapon          the new weapon
@@ -649,17 +650,17 @@ public class Player {
             while (getMoveCounter() > 0) {
                 move(newPosition);
             }
-            grabItem(currentGameBoard, newWeapon);
+            grabItem(currentGameBoard, newWeapon.getName());
         }
         if (getAdrenaline() == 1) {
             setMoveCounter(2);
-            grabItem(currentGameBoard, newWeapon);
+            grabItem(currentGameBoard, newWeapon.getName());
         }
         decreaseActionCounter();
     }
 
     /**
-     * Shoot action. Specific shoot action, non finalFrenzy.
+     * Shoot action. Specific shoot action, non finalFrenzy. // TODO used? all of these
      *
      * @param currentGameBoard the current game board
      * @param playerTarget     the player target
@@ -694,7 +695,7 @@ public class Player {
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentGameBoard, newWeapon);
+        grabItem(currentGameBoard, newWeapon.getName());
         decreaseActionCounter();
     }
 
@@ -745,7 +746,7 @@ public class Player {
         while (getMoveCounter() > 0) {
             move(newPosition);
         }
-        grabItem(currentGameBoard, newWeapon);
+        grabItem(currentGameBoard, newWeapon.getName());
         decreaseActionCounter();
     }
 

@@ -3,6 +3,8 @@ package controllers;
 import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
+import models.Square;
+import models.cards.PowerUp;
 import models.cards.Weapon;
 import models.cards.WeaponAction;
 import models.cards.WeaponEffect;
@@ -100,27 +102,29 @@ public class ActionController {
     }
 
     // Single items implementation
-
     public void move (ClientInput clientInput) {
-
+        Square newPosition = gameBoardModel.getSquares().get(clientInput.position);
+        player.move(newPosition);
     }
 
     public void grab (ClientInput clientInput) {
-
+        player.grabItem(gameBoardModel, clientInput.weaponName);
     }
 
     public void reload (ClientInput clientInput) {
-
+        Weapon weapon = player.getWeaponByName(clientInput.weaponName);
+        player.reload(weapon);
     }
 
     public void usePowerUp (ClientInput clientInput) {
-
+        PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
+        // TODO effects like shoot, implement from json
     }
 
-    public void shoot (String weaponName, Integer effectType, ClientInput clientInput) {
-        Weapon weapon = player.getWeaponByName(weaponName);
+    public void shoot (ClientInput clientInput) {
+        Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
-        WeaponEffect effect = weapon.getEffect(effectType);
+        WeaponEffect effect = weapon.getEffect(clientInput.effectType);
 
         if (effect.getCost() != null) {
             weapon.payEffect(player, effect);
@@ -152,6 +156,5 @@ public class ActionController {
             weapon.getPlayerTargets().forEach(p -> activePlayer.afterShoot(gameBoardModel, p));
             weapon.reset();
         }
-
     }
 }

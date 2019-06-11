@@ -8,6 +8,17 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class ClientInput {
+    // Use powerup action
+    public Integer powerUpIndex;
+
+    // Move action
+    public Integer position;
+
+    // Grab & Shoot & Reload action
+    public String weaponName;
+
+    // Shoot action
+    public Integer effectType;
     public ArrayList<String> players;
     public ArrayList<Integer> positions;
     public String direction;

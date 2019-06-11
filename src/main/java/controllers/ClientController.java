@@ -1,6 +1,7 @@
 package controllers;
 
 import messages.*;
+import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import server.ClientHandler;
@@ -79,7 +80,25 @@ public class ClientController implements MessageVisitor {
         GameStateMessage.updateClients(gameController);
     }
     public void visit(ActionMessage actionMessage) {
-        System.out.println("handling choose action msg" + actionMessage.serialize());
+        // TODO refuse if no active player
+        // TODO check action is possible for user
+        ActionController actionController = new ActionController(gameController);
+
+        ActionController.ActionItem actionItem = actionMessage.getAction();
+        ClientInput clientInput = actionMessage.getClientInput();
+
+        switch (actionMessage.getAction()) {
+            case GRAB:
+                actionController.grab(clientInput);
+            case MOVE:
+                actionController.move(clientInput);
+            case SHOOT:
+                actionController.shoot(clientInput);
+            case RELOAD:
+                actionController.reload(clientInput);
+            case USE_POWER_UP:
+                actionController.usePowerUp(clientInput);
+        }
     }
     public void visit(EndTurnMessage endTurnMessage) {
         System.out.println("handling choose endturn msg" + endTurnMessage.serialize());

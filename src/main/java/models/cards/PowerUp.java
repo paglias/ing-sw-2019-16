@@ -25,23 +25,18 @@ public class PowerUp extends Card {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
     public void setCubeColor(Card.Color cubeColor) {
         this.cubeColor = cubeColor;
     }
-
     public void setPlayerTarget(Player playerTarget) {
         this.playerTarget = playerTarget;
     }
-
     public void setNewPosition(Square newPosition) {
         this.newPosition = newPosition;
     }
-
     public void setDirection(Square.Direction direction) {
         this.direction = direction;
     }
-
     public void setSquares(List<Square> squares) {
         this.squares = squares;
     }
