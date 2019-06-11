@@ -112,6 +112,10 @@ public class GameController {
             }
         }, turnTimeout * 1000);
         Player player = gameBoard.getActivePlayer();
+
+        ActionController actionController = new ActionController(this);
+        player.setPossibleActions(actionController.getPossibleActions());
+
         if(!gameBoard.isFinalFrenzy()) {
             player.setActionCounter(2);
         }
@@ -122,15 +126,8 @@ public class GameController {
     }
 
     public synchronized void endTurn() {
-        Player currentPlayer=gameBoard.getActivePlayer();
-        for(Player player: gameBoard.getPlayers()){
-            // ToDOO redo, done after using shootAction player.playerIsDead(currentPlayer, gameBoard);
-       }// controlla quali tra i giocatori sono morti
-
         gameBoard.nextPlayer(gameBoard.getActivePlayer());
         startTurn();
-
-
     }
 
 }

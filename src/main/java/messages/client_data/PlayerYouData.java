@@ -4,6 +4,7 @@ import models.Player;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // Class used to represent the Player model on the client
@@ -19,6 +20,7 @@ public class PlayerYouData extends PlayerOtherData {
     public int moveCounter;                                    // how many moves can be done TODO needed on client?
     public int actionCounter;                                  // remaining actions that can be done during turn
     public int totalPoints;                                // total points of the current player
+    public List<String> possibleActions;
 
     public PlayerYouData (Player player) {
         super(player);
@@ -30,5 +32,7 @@ public class PlayerYouData extends PlayerOtherData {
         moveCounter = player.getMoveCounter();
         actionCounter = player.getActionCounter();
         totalPoints = player.getTotalPoints();
+        possibleActions = new ArrayList<>(player.getPossibleActions().stream()
+                .map(a -> a.values().toString()).collect(Collectors.toList()));
     }
 }

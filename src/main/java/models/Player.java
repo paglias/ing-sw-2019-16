@@ -1,5 +1,6 @@
 package models;
 
+import controllers.ActionController;
 import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -29,6 +30,7 @@ public class Player {
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
+    private List<ActionController.Action> possibleActions;
 
     /**
      * Player constructor. Instantiates a new Player.
@@ -63,12 +65,17 @@ public class Player {
     public Boolean isBeforeFirstPlayer(){
         return this.isBeforeFirstPlayer;
     }
-
     public void setIsBeforeFirstPlayer(Boolean isBeforeFirstPlayer){
         this.isBeforeFirstPlayer = isBeforeFirstPlayer;
     }
 
+    public List<ActionController.Action> getPossibleActions () {
+        return this.possibleActions;
+    }
 
+    public void setPossibleActions (List<ActionController.Action> possibleActions) {
+        this.possibleActions = possibleActions;
+    }
     /**
      * Adds the value received to the total points of the player.
      * Totalpoints can never be set to a random value
@@ -417,7 +424,7 @@ public class Player {
             this.weapons.add(newWeapon);
         } else {
             throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
-            // TODO Action needed in order to add that weapon. Press remove weapon button in view
+            // TODO ActionItem needed in order to add that weapon. Press remove weapon button in view
         }
     }
 
