@@ -79,15 +79,22 @@ public class ClientController implements MessageVisitor {
 
         GameStateMessage.updateClients(gameController);
     }
-    public void visit(ActionMessage actionMessage) {
+
+    public void visit(ActionStartMessage actionStartMessage) {
         // TODO refuse if no active player
         // TODO check action is possible for user
+        // set action as active
+        // decrease action counter
+    }
+
+    public void visit(ActionMessage actionMessage) {
+        // TODO check action is active
         ActionController actionController = new ActionController(gameController);
 
         ActionController.ActionItem actionItem = actionMessage.getAction();
         ClientInput clientInput = actionMessage.getClientInput();
 
-        switch (actionMessage.getAction()) {
+        switch (actionItem) {
             case GRAB:
                 actionController.grab(clientInput);
             case MOVE:
@@ -100,6 +107,11 @@ public class ClientController implements MessageVisitor {
                 actionController.usePowerUp(clientInput);
         }
     }
+
+    public void visit (ActionEndMessage actionEndMessage) {
+        // TODO
+    }
+
     public void visit(EndTurnMessage endTurnMessage) {
         System.out.println("handling choose endturn msg" + endTurnMessage.serialize());
     }
