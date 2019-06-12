@@ -1,7 +1,6 @@
 package messages;
 
 import controllers.ActionController;
-import messages.client_data.ClientInput;
 
 public class ActionStartMessage extends AbstractMessage {
     public final MessageTopic topic = MessageTopic.ACTION;

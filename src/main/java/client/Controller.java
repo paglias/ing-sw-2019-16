@@ -34,26 +34,6 @@ public class Controller implements MessageVisitor  {
         return keyboard.nextLine();
     }
 
-    public void visit(ConnectMessage connectMessage) {
-        // Not implemented, server side only
-    }
-    public void visit(DisconnectMessage disconnectMessage) {
-        // Not implemented, server side only
-    }
-
-    public void visit(ChooseNicknameMessage chooseNicknameMessage) {
-        // Not implemented, server side only
-    }
-    public void visit(GameSettingsMessage gameSettingsMessage) {
-        // Not implemented, server side only
-    }
-    public void visit(ActionMessage actionMessage) {
-        // Not implemented, server side only
-    }
-    public void visit(EndTurnMessage endTurnMessage) {
-        // Not implemented, server side only
-    }
-
     public void visit(GameStateMessage gameStateMessage) {
         System.out.println("handling game state msg" + gameStateMessage.serialize());
     }
@@ -63,5 +43,30 @@ public class Controller implements MessageVisitor  {
 
     public void visit(ErrorMessage errorMessage) {
         System.out.println("Received error message from server" + errorMessage.getErrorMsg());
+    }
+
+    public void visit(ConnectMessage connectMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(DisconnectMessage disconnectMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ChooseNicknameMessage chooseNicknameMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(GameSettingsMessage gameSettingsMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ActionStartMessage actionStartMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ActionMessage actionMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(ActionEndMessage actionEndMessage) {
+        // Not implemented, server side only
+    }
+    public void visit(EndTurnMessage endTurnMessage) {
+        // Not implemented, server side only
     }
 }

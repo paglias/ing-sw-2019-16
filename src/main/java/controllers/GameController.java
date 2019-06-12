@@ -1,12 +1,11 @@
 package controllers;
 
 import messages.AbstractMessage;
+import messages.GameSettingsMessage;
 import messages.GameStateMessage;
 import models.GameBoard;
 import models.Player;
-import models.Square;
 import models.cards.PowerUp;
-import models.cards.Weapon;
 
 import java.util.*;
 
@@ -79,6 +78,28 @@ public class GameController {
         GameStateMessage.updateClients(this);
     }
 
+    public synchronized void setup (GameSettingsMessage gameSettingsMessage) {
+        if (gameBoard.isGameSetup()) {
+            throw new IllegalArgumentException("Game already setup.");
+        }
+
+        int nSkulls = gameSettingsMessage.getSkullsNumber();
+        int mapN = gameSettingsMessage.getMapNumber();
+
+        if (mapN < 1 || mapN > 4) {
+            throw new IllegalArgumentException("Invalid map number.");
+        }
+        if (nSkulls < 5 || nSkulls > 8) {
+            throw new IllegalArgumentException("Invalid skulls number.");
+        }
+
+        gameBoard.getSkulls().setNRemaining(nSkulls);
+        gameBoard.setMap(mapN);
+        gameBoard.setGameSetup(true);
+
+        GameStateMessage.updateClients(this);
+    }
+
     public synchronized void start() {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot create a new one.");
@@ -88,19 +109,6 @@ public class GameController {
         gameBoard.getPlayers().get(0).setActive(true);
 
         GameStateMessage.updateClients(this);
-    }
-
-    public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
-        Player player = gameBoard.getActivePlayer();
-        PowerUp powerUp = player.getPowerUps().remove(powerUpToDiscardPosition);
-        gameBoard.getPowerUpsDeck().discard(powerUp);
-
-        Square spawnPosition = gameBoard.getSquares().stream()
-                .filter(s -> s.getColor().toString() == powerUp.getColor().toString() && s.isSpawnPoint())
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-
-        player.setPosition(spawnPosition);
     }
 
     public synchronized void startTurn() {
@@ -123,13 +131,13 @@ public class GameController {
             gameBoard.finalFrenzy();
         }
         player.setStartTurnDate(new Date());
+        GameStateMessage.updateClients(this);
     }
 
     public synchronized void endTurn() {
         gameBoard.nextPlayer(gameBoard.getActivePlayer());
         startTurn();
     }
-
 }
 
 

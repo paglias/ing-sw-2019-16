@@ -9,11 +9,13 @@ import server.ClientHandler;
 public class ClientController implements MessageVisitor {
     private ClientHandler clientHandler;
     private GameController gameController;
+    private GameBoard gameBoard;
     private Player linkedPlayer; // The player associated to this client
 
     public ClientController (GameController gameController, ClientHandler clientHandler) {
         this.gameController = gameController;
         this.clientHandler = clientHandler;
+        this.gameBoard = gameController.getGameBoard();
     }
 
     // TODO make sure any method from model called here is unsing synchronized
@@ -56,28 +58,7 @@ public class ClientController implements MessageVisitor {
     }
     public void visit(GameSettingsMessage gameSettingsMessage) {
         System.out.println("handling game settings msg" + gameSettingsMessage.serialize());
-
-        GameBoard gameBoard = gameController.getGameBoard();
-
-        if (gameBoard.isGameSetup()) {
-            throw new IllegalArgumentException("Game already setup.");
-        }
-
-        int nSkulls = gameSettingsMessage.getSkullsNumber();
-        int mapN = gameSettingsMessage.getMapNumber();
-
-        if (mapN < 1 || mapN > 4) {
-            throw new IllegalArgumentException("Invalid map number.");
-        }
-        if (nSkulls < 5 || nSkulls > 8) {
-            throw new IllegalArgumentException("Invalid skulls number.");
-        }
-
-        gameBoard.getSkulls().setNRemaining(nSkulls);
-        gameBoard.setMap(mapN);
-        gameBoard.setGameSetup(true);
-
-        GameStateMessage.updateClients(gameController);
+        gameController.setup(gameSettingsMessage);
     }
 
     public void visit(ActionStartMessage actionStartMessage) {
@@ -113,7 +94,12 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(EndTurnMessage endTurnMessage) {
-        System.out.println("handling choose endturn msg" + endTurnMessage.serialize());
+        gameController.endTurn();
+    }
+
+    public void visit(ErrorMessage errorMessage) {
+        // TODO which client?
+        System.out.println("Received error message from client" + errorMessage.getErrorMsg());
     }
 
     public void visit(GameStateMessage gameStateMessage) {
@@ -121,10 +107,5 @@ public class ClientController implements MessageVisitor {
     }
     public void visit(EndGameMessage endGameMessage) {
         // Not implemented, client side only
-    }
-
-    public void visit(ErrorMessage errorMessage) {
-        // TODO which client?
-        System.out.println("Received error message from client" + errorMessage.getErrorMsg());
     }
 }

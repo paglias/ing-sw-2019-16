@@ -121,6 +121,20 @@ public class ActionController {
         // TODO effects like shoot, implement from json
     }
 
+    // TODO discard powerups at the beginning
+    /*public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
+        Player player = gameBoard.getActivePlayer();
+        PowerUp powerUp = player.getPowerUps().remove(powerUpToDiscardPosition);
+        gameBoard.getPowerUpsDeck().discard(powerUp);
+
+        Square spawnPosition = gameBoard.getSquares().stream()
+                .filter(s -> s.getColor().toString() == powerUp.getColor().toString() && s.isSpawnPoint())
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+        player.setPosition(spawnPosition);
+    }*/
+
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
