@@ -114,6 +114,7 @@ public class GameBoard {
         }
 
         players.add(player);
+        player.setGameBoard(this);
     }
 
 

@@ -108,7 +108,7 @@ public class ActionController {
     }
 
     public void grab (ClientInput clientInput) {
-        player.grabItem(gameBoardModel, clientInput.weaponName);
+        player.grabItem(clientInput.weaponName);
     }
 
     public void reload (ClientInput clientInput) {
@@ -167,7 +167,7 @@ public class ActionController {
 
             Player activePlayer = gameBoardModel.getActivePlayer();
             // For all the target players call afterShoot to check adrenaline, if it's dead, ...
-            weapon.getPlayerTargets().forEach(p -> activePlayer.afterShoot(gameBoardModel, p));
+            weapon.getPlayerTargets().forEach(p -> activePlayer.afterShoot(p));
             weapon.reset();
         }
     }

@@ -32,6 +32,8 @@ public class Player {
     private boolean isBeforeFirstPlayer;
     private List<ActionController.Action> possibleActions;
 
+    private GameBoard gameBoard;
+
     /**
      * Player constructor. Instantiates a new Player.
      * Adds one cube of each color, sets points the player can give.
@@ -60,6 +62,10 @@ public class Player {
         setAdrenaline(0);
         this.setGivenPoints(newPlayerPoints);
         setActive(false);
+    }
+
+    public void setGameBoard (GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
     }
 
     public Boolean isBeforeFirstPlayer(){
@@ -434,7 +440,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapon(GameBoard gameBoard, Weapon weapon) {
+    public void removeWeapon(Weapon weapon) {
         if (this.getWeapons().contains(weapon)) {
             this.weapons.remove(weapon);
             gameBoard.getWeaponsDeck().discard(weapon);
@@ -446,11 +452,10 @@ public class Player {
 
     /**
      * Discards the powerup chosen. Gives the player a cube of the color discarded.
+     *  @param powerUp   the power up
      *
-     * @param powerUp   the power up
-     * @param gameBoard the game board
      */
-    public void discardItem(PowerUp powerUp, GameBoard gameBoard){
+    public void discardItem(PowerUp powerUp){
         gameBoard.getPowerUpsDeck().sell(this, powerUp);
         powerUps.remove(powerUp);
 
@@ -528,7 +533,7 @@ public class Player {
      * @param weaponName the weapon to pick
      */
 
-    public void grabItem(GameBoard currentGameBoard, String weaponName) {
+    public void grabItem(String weaponName) {
         Square currentPosition = getPosition();
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
@@ -540,7 +545,7 @@ public class Player {
 
             //if the ammo picked has a powerup, add it to your powerups
             if (ammo.getHasPowerUp()) {
-                addPowerUp((PowerUp) currentGameBoard.getPowerUpsDeck().pick());
+                addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             }
 
             //if the ammo picked has ammocubes, add them to your cubes
@@ -562,7 +567,7 @@ public class Player {
                 redCubes--;
             }
 
-            currentGameBoard.getAmmoDeck().discard(ammo);
+            gameBoard.getAmmoDeck().discard(ammo);
         }
     }
 
@@ -571,7 +576,7 @@ public class Player {
      * @param playerTarget     the player target
      */
 
-    public void afterShoot (GameBoard gameBoard, Player playerTarget) {
+    public void afterShoot(Player playerTarget) {
         //Add adrenaline if damage reaches 2 or 5, only if it is less than 1 and less than 2
         if (playerTarget.getDamage().size() > 2 && playerTarget.getAdrenaline() < 1) {
             playerTarget.increaseAdrenaline();
@@ -585,7 +590,7 @@ public class Player {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
 
-            calculateDeathPoints(gameBoard);
+            calculateDeathPoints();
 
             gameBoard.getSkulls().decreaseSkullsRemaining();
 
@@ -620,10 +625,8 @@ public class Player {
      * Calculate death points. Creates an arraylist of players,
      * ordered from least points inflicted to most points inflicted.
      *
-     * @param currentGameBoard the current game board
      */
-    public void calculateDeathPoints(GameBoard currentGameBoard) {
-
+    public void calculateDeathPoints() {
         //returns a list of players in order of damage, by ordering the getDamage array by damage inflicted
         //Order is from lowest to highest
         Map<String, Long> damageByPlayer = getDamage()
@@ -638,13 +641,13 @@ public class Player {
 
         ArrayList<String> nickNamesByDamageMade = new ArrayList<>(damageByPlayer.keySet());
         List<Player> playersByDamage = nickNamesByDamageMade.stream()
-                .map(nick -> currentGameBoard.getPlayerByNickname(nick))
+                .map(nick -> gameBoard.getPlayerByNickname(nick))
                 .collect(Collectors.toList());
 
         //assigns values in givenPoints arraylist to players in playerByDamage, by calling assignPoints in gameBoard
         //checks if givenPoints is empty
         if (givenPoints != null && !givenPoints.isEmpty()) {
-            currentGameBoard.assignPoints(givenPoints, playersByDamage);
+            gameBoard.assignPoints(givenPoints, playersByDamage);
         } else {
             //if givenPoints is empty, the players has been killed more than 6 times,
             // he still awards 1 point to the killer
