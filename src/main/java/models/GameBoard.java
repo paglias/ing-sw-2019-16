@@ -134,7 +134,7 @@ public class GameBoard {
     /**
      * Start game.
      */
-    public void startGame () {
+    public synchronized void startGame () {
         gameStartDate = new Date();
     }
 
