@@ -17,8 +17,6 @@ public abstract class AbstractMessage implements MessageInterface {
         MessageTopic topic = MessageTopic.valueOf(msgTopicString);
 
         switch (topic) {
-            case CONNECT:
-                return gson.fromJson(jsonObj, ConnectMessage.class);
             case DISCONNECT:
                 return gson.fromJson(jsonObj, DisconnectMessage.class);
 
@@ -26,8 +24,15 @@ public abstract class AbstractMessage implements MessageInterface {
                 return gson.fromJson(jsonObj, ChooseNicknameMessage.class);
             case GAME_SETTINGS:
                 return gson.fromJson(jsonObj, GameSettingsMessage.class);
+            case ACTION_START:
+                return gson.fromJson(jsonObj, ActionStartMessage.class);
+
             case ACTION:
                 return gson.fromJson(jsonObj, ActionMessage.class);
+
+            case ACTION_END:
+                return gson.fromJson(jsonObj, ActionEndMessage.class);
+
             case END_TURN:
                 return gson.fromJson(jsonObj, EndTurnMessage.class);
 

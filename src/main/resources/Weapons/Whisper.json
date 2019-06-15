@@ -18,25 +18,25 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_TWO_AWAY_VIEW",
+          "type": "SHOOT_TWO_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_TWO_AWAY_VIEW",
+          "type": "SHOOT_TWO_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_TWO_AWAY_VIEW",
+          "type": "SHOOT_TWO_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "MARK_TWO_AWAY_VIEW",
+          "type": "MARK_TWO_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]

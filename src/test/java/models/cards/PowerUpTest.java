@@ -3,6 +3,7 @@ package models.cards;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.GameBoard;
 import models.Player;
 import models.Square;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ class PowerUpTest {
     @Test
     void TeleporterEffect() {
         PowerUp powerUp = new PowerUp(PowerUp.Name.TELEPORTER, Card.Color.BLUE);
+        GameBoard gameBoard = new GameBoard();
         Player player = new Player();
         powerUp.setPlayer(player);
         Square position=new Square(Square.Color.BLUE, false);
@@ -30,8 +32,9 @@ class PowerUpTest {
     @Test
     void TagbackEffect(){
         PowerUp powerUp= new PowerUp(PowerUp.Name.TAGBACK_GRENADE, Card.Color.BLUE);
-        Player player= new Player();
-        Player player2= new Player();
+        GameBoard gameBoard = new GameBoard();
+        Player player = new Player();
+        Player player2 = new Player();
         powerUp.setPlayer(player);
         powerUp.setPlayerTarget(player2);
         Square square1= new Square(Square.Color.PURPLE, false);
@@ -49,6 +52,8 @@ class PowerUpTest {
 
     @Test
     void TargetingEffect(){
+        GameBoard gameBoard = new GameBoard();
+
         PowerUp powerUp= new PowerUp(PowerUp.Name.TARGETING_SCOPE, Card.Color.BLUE);
         Player player=new Player();
         player.addCube(Card.Color.BLUE);
@@ -71,6 +76,8 @@ class PowerUpTest {
     @Test
     void NewtonEffect(){
         PowerUp powerUp= new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
+        GameBoard gameBoard = new GameBoard();
+
         Player player1=new Player();
         Player player2=new Player();
         Square square1= new Square(Square.Color.BLUE, false);

@@ -33,13 +33,25 @@ public class Server implements Closeable {
         // Create a GameController controller
         // It's created here to make it possible to share it between clients
         // but then it's only handled in a ClientHandler class that runs in a different thread
+        // Multiple games are supported
 
-        // TODO support multiple games
-        GameController gameController = new GameController();
+        GameController lastGameController = null;
 
         boolean condition = true;
         while (condition) {
             Socket clientSocket = acceptConnection();
+
+            if (lastGameController == null) {
+                // Create a game controller if none exists
+                lastGameController = new GameController();
+            } else if (lastGameController.getGameBoard().hasStarted()) {
+                // If a game has already started setup a new one
+                lastGameController = new GameController();
+            }
+
+            // Trick needed to use a gameController in the lambda
+            // See https://stackoverflow.com/questions/34865383/variable-used-in-lambda-expression-should-be-final-or-effectively-final
+            GameController gameController = lastGameController;
 
             pool.submit(() -> {
                 try {
@@ -53,7 +65,6 @@ public class Server implements Closeable {
     }
 
     public void close() throws IOException {
-        // TODO notify clients
         System.out.println("Server is shutting down...");
         serverSocket.close();
     }

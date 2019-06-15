@@ -12,13 +12,13 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.1"
           ]
@@ -35,7 +35,7 @@
       "cost": ["YELLOW"],
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0",
             "TARGET.1"
@@ -56,14 +56,14 @@
       ],
       "actions": [
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0",
             "TARGET.1"
           ]
         },
         {
-          "name": "SHOOT_VIEW",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.2"
           ]

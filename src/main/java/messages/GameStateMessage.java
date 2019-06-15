@@ -15,7 +15,6 @@ public class GameStateMessage extends AbstractMessage {
     public static void updateClients (GameController gameController) {
         GameBoard gameBoard = gameController.getGameBoard();
         GameBoardData gameBoardData = new GameBoardData(gameBoard);
-
         gameBoard.getPlayers().stream().forEach(p -> {
             ClientController clientForPlayer = gameController.getClientForPlayer(p);
             PlayerYouData playerYouData = new PlayerYouData(p);

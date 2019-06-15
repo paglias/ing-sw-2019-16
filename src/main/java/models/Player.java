@@ -1,5 +1,6 @@
 package models;
 
+import controllers.ActionController;
 import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -23,12 +24,15 @@ public class Player {
     private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
     private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3
     private Square position;                                    //current position, updated when move happens
-    private int moveCounter;                                    //TODO restore movecounter at startturn?
+    private int moveCounter;                                    //TODO restore movecounter at startturn? actually needed?
     private int actionCounter;                                  //remaining actions per turn
     private int adrenaline;                                     //adrenaline counter, max 2
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
+    private List<ActionController.Action> possibleActions;
+
+    private GameBoard gameBoard;
 
     /**
      * Player constructor. Instantiates a new Player.
@@ -60,15 +64,24 @@ public class Player {
         setActive(false);
     }
 
+    public void setGameBoard (GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
     public Boolean isBeforeFirstPlayer(){
         return this.isBeforeFirstPlayer;
     }
-
     public void setIsBeforeFirstPlayer(Boolean isBeforeFirstPlayer){
         this.isBeforeFirstPlayer = isBeforeFirstPlayer;
     }
 
+    public List<ActionController.Action> getPossibleActions () {
+        return this.possibleActions;
+    }
 
+    public void setPossibleActions (List<ActionController.Action> possibleActions) {
+        this.possibleActions = possibleActions;
+    }
     /**
      * Adds the value received to the total points of the player.
      * Totalpoints can never be set to a random value
@@ -417,7 +430,7 @@ public class Player {
             this.weapons.add(newWeapon);
         } else {
             throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
-            // TODO Action needed in order to add that weapon. Press remove weapon button in view
+            // TODO ActionItem needed in order to add that weapon. Press remove weapon button in view
         }
     }
 
@@ -427,7 +440,7 @@ public class Player {
      *
      * @param weapon the weapon
      */
-    public void removeWeapon(GameBoard gameBoard, Weapon weapon) {
+    public void removeWeapon(Weapon weapon) {
         if (this.getWeapons().contains(weapon)) {
             this.weapons.remove(weapon);
             gameBoard.getWeaponsDeck().discard(weapon);
@@ -439,11 +452,10 @@ public class Player {
 
     /**
      * Discards the powerup chosen. Gives the player a cube of the color discarded.
+     *  @param powerUp   the power up
      *
-     * @param powerUp   the power up
-     * @param gameBoard the game board
      */
-    public void discardItem(PowerUp powerUp, GameBoard gameBoard){
+    public void discardItem(PowerUp powerUp){
         gameBoard.getPowerUpsDeck().sell(this, powerUp);
         powerUps.remove(powerUp);
 
@@ -518,21 +530,22 @@ public class Player {
     /**
      * Grab item, either weapon, power up or ammo cubes.
      *
-     * @param weaponToPick the weapon to pick
+     * @param weaponName the weapon to pick
      */
 
-    public void grabItem(GameBoard currentGameBoard, Weapon weaponToPick) {
+    public void grabItem(String weaponName) {
         Square currentPosition = getPosition();
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
+            Weapon weaponToPick = getWeaponByName(weaponName);
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
         } else {
             Ammo ammo = currentPosition.getAmmo();
 
             //if the ammo picked has a powerup, add it to your powerups
             if (ammo.getHasPowerUp()) {
-                addPowerUp((PowerUp) currentGameBoard.getPowerUpsDeck().pick());
+                addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             }
 
             //if the ammo picked has ammocubes, add them to your cubes
@@ -554,47 +567,16 @@ public class Player {
                 redCubes--;
             }
 
-            currentGameBoard.getAmmoDeck().discard(ammo);
+            gameBoard.getAmmoDeck().discard(ammo);
         }
     }
 
     /**
-     * Shoot player. Adds damage, marks, moves players based on weapon effect
-     *
-     * @param currentGameBoard the current game board
+     * After shoot player. Adds damage, marks, moves players based on weapon effect
      * @param playerTarget     the player target
-     * @param newPosition      the new position
      */
 
-    public void shootPlayer(GameBoard currentGameBoard, Player playerTarget,
-                            Square newPosition, Weapon activeWeapon) {
-
-        //initial check if any player can be shot
-        //temp value to skip comparing currentplayer to currentplayer in players
-        Square currentPosition = getPosition();
-        for (Player otherPlayer : currentGameBoard.getPlayers()) {
-            if (otherPlayer.getNickname().equals(this.getNickname())) {
-                continue;
-            }
-            if (!(currentPosition.getCanView().contains(otherPlayer.getPosition()))) {
-                throw new IllegalArgumentException("No players can be shot");
-            }
-        }
-        //if weapon is loaded, use weapon effects
-        //TODO WEAPON USE GENERIC TO BE ADDED
-        if (getWeapons().isEmpty()) {
-            throw new IllegalArgumentException("No weapon is available");
-        } else {
-            for (Weapon availableWeapon : getWeapons()) {
-                if (availableWeapon.isLoaded()) {
-                    availableWeapon.dealDamage(playerTarget);
-                    availableWeapon.addMark(playerTarget);
-                    availableWeapon.movePlayer(playerTarget, newPosition);
-                } else {
-                    throw new IllegalArgumentException("No weapon is loaded");
-                }
-            }
-        }
+    public void afterShoot(Player playerTarget) {
         //Add adrenaline if damage reaches 2 or 5, only if it is less than 1 and less than 2
         if (playerTarget.getDamage().size() > 2 && playerTarget.getAdrenaline() < 1) {
             playerTarget.increaseAdrenaline();
@@ -602,23 +584,21 @@ public class Player {
         if (playerTarget.getDamage().size() > 5 && playerTarget.getAdrenaline() < 2) {
             playerTarget.increaseAdrenaline();
         }
-    }
 
-    //Player death. The 11th damage point is the killshot.
-    public void playerIsDead(Player playerTarget, GameBoard currentGameBoard){
+        //Player death. The 11th damage point is the killshot.
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
 
-            calculateDeathPoints(currentGameBoard);
+            calculateDeathPoints();
 
-            currentGameBoard.getSkulls().decreaseSkullsRemaining();
+            gameBoard.getSkulls().decreaseSkullsRemaining();
 
-            if (currentGameBoard.getSkulls().getNRemaining()==0){
-                currentGameBoard.finalFrenzy();
+            if (gameBoard.getSkulls().getNRemaining()==0){
+                gameBoard.finalFrenzy();
             }
             else{
-                currentGameBoard.getSkulls().addKiller(this);
+                gameBoard.getSkulls().addKiller(this);
             }
         }
 
@@ -642,168 +622,11 @@ public class Player {
     }
 
     /**
-     * Move action.
-     *
-     * @param firstPosition  the first position
-     * @param secondPosition the second position
-     * @param thirdPosition  the third position
-     */
-    public void moveAction(Square firstPosition, Square secondPosition, Square thirdPosition) {
-            setMoveCounter(3);
-        if (getMoveCounter() > 0 && firstPosition != null) {
-            move(firstPosition);
-        }
-        if (getMoveCounter() > 0 && secondPosition != null){
-            move(secondPosition);
-        }
-        if (getMoveCounter() > 0 && thirdPosition != null){
-            move(thirdPosition);
-        }
-        decreaseActionCounter();
-    }
-
-    /**
-     * Grab action. Specific move action, non finalFrenzy
-     *
-     * @param currentGameBoard   the current game board
-     * @param newWeapon          the new weapon
-     * @param newPosition        the new position
-     */
-    public void grabAction(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
-        if (getAdrenaline() == 0) {
-            setMoveCounter(1);
-            while (getMoveCounter() > 0) {
-                move(newPosition);
-            }
-            grabItem(currentGameBoard, newWeapon);
-        }
-        if (getAdrenaline() == 1) {
-            setMoveCounter(2);
-            grabItem(currentGameBoard, newWeapon);
-        }
-        decreaseActionCounter();
-    }
-
-    /**
-     * Shoot action. Specific shoot action, non finalFrenzy.
-     *
-     * @param currentGameBoard the current game board
-     * @param playerTarget     the player target
-     * @param newShootPosition the new shoot position
-     * @param newPosition      the new position
-     * @param activeWeapon     the weapon
-     */
-    public void shootAction(GameBoard currentGameBoard, Player playerTarget, Square newShootPosition,
-                            Square newPosition, Weapon activeWeapon) {
-        if (getAdrenaline() <= 1) {
-            setMoveCounter(0);
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
-        } else {
-            setMoveCounter(1);
-            while (getMoveCounter() > 0) {
-                move(newPosition);
-            }
-            shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
-        }
-        decreaseActionCounter();
-    }
-
-    /**
-     * Move action for players whose turn is before the first player.
-     *
-     * @param currentGameBoard   the current game board
-     * @param newWeapon          the new weapon
-     * @param newPosition        the new position
-     */
-    public void finalFrenzyBeforeGrab(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
-        setMoveCounter(3);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
-        }
-        grabItem(currentGameBoard, newWeapon);
-        decreaseActionCounter();
-    }
-
-    /**
-     * Shoot action for players whose turn is before the first player.
-     *
-     * @param weaponToReload   the weapon to reload
-     * @param currentGameBoard the current game board
-     * @param playerTarget     the player target
-     * @param newShootPosition the new shoot position
-     * @param newPosition      the new position
-     * @param activeWeapon     the weapon
-     */
-    public void finalFrenzyBeforeShoot(Weapon weaponToReload, GameBoard currentGameBoard,
-                                       Player playerTarget, Square newShootPosition, Square newPosition,
-                                       Weapon activeWeapon) {
-        setMoveCounter(2);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
-        }
-        reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
-        decreaseActionCounter();
-    }
-
-    /**
-     * Move action for players whose turn is after the first player.
-     *
-     * @param newPosition the new position
-     */
-    public void finalFrenzyAfterMove(Square newPosition) {
-        setMoveCounter(4);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
-        }
-        decreaseActionCounter();
-    }
-
-    /**
-     * Grab action for players whose turn is after the first player.
-     *
-     * @param currentGameBoard   the current game board
-     * @param newWeapon          the new weapon
-     * @param newPosition        the new position
-     */
-    public void finalFrenzyAfterGrab(GameBoard currentGameBoard, Weapon newWeapon, Square newPosition) {
-        setMoveCounter(2);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
-        }
-        grabItem(currentGameBoard, newWeapon);
-        decreaseActionCounter();
-    }
-
-    /**
-     * Shoot action for players whose turn is after the first player.
-     *
-     * @param weaponToReload   the weapon to reload
-     * @param currentGameBoard the current game board
-     * @param playerTarget     the player target
-     * @param newShootPosition the new shoot position
-     * @param newPosition      the new position
-     * @param activeWeapon     the weapon
-     */
-    public void finalFrenzyAfterShoot(Weapon weaponToReload, GameBoard currentGameBoard,
-                                      Player playerTarget, Square newShootPosition, Square newPosition,
-                                      Weapon activeWeapon) {
-        setMoveCounter(1);
-        while (getMoveCounter() > 0) {
-            move(newPosition);
-        }
-        reload(weaponToReload);
-        shootPlayer(currentGameBoard, playerTarget, newShootPosition, activeWeapon);
-    }
-
-    /**
      * Calculate death points. Creates an arraylist of players,
      * ordered from least points inflicted to most points inflicted.
      *
-     * @param currentGameBoard the current game board
      */
-    public void calculateDeathPoints(GameBoard currentGameBoard) {
-
+    public void calculateDeathPoints() {
         //returns a list of players in order of damage, by ordering the getDamage array by damage inflicted
         //Order is from lowest to highest
         Map<String, Long> damageByPlayer = getDamage()
@@ -818,13 +641,13 @@ public class Player {
 
         ArrayList<String> nickNamesByDamageMade = new ArrayList<>(damageByPlayer.keySet());
         List<Player> playersByDamage = nickNamesByDamageMade.stream()
-                .map(nick -> currentGameBoard.getPlayerByNickname(nick))
+                .map(nick -> gameBoard.getPlayerByNickname(nick))
                 .collect(Collectors.toList());
 
         //assigns values in givenPoints arraylist to players in playerByDamage, by calling assignPoints in gameBoard
         //checks if givenPoints is empty
         if (givenPoints != null && !givenPoints.isEmpty()) {
-            currentGameBoard.assignPoints(givenPoints, playersByDamage);
+            gameBoard.assignPoints(givenPoints, playersByDamage);
         } else {
             //if givenPoints is empty, the players has been killed more than 6 times,
             // he still awards 1 point to the killer

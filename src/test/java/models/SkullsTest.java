@@ -41,6 +41,7 @@ class SkullsTest {
     }
     @Test
     void addKiller(){
+        GameBoard gameBoard = new GameBoard();
         Skulls skulls = new Skulls();
         Player player = new Player();
         Player player1 = new Player();

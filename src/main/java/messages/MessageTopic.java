@@ -6,7 +6,9 @@ public enum MessageTopic {
 
     CHOOSE_NICKNAME,
     GAME_SETTINGS,
+    ACTION_START,
     ACTION,
+    ACTION_END,
     END_TURN,
 
     GAME_STATE,

@@ -11,7 +11,7 @@ import java.io.IOException;
 //Creates game stage, loads Adrenaline.jpg. Later it will be changed to game overview.
 public class Game extends Application {
     Stage window;
-    static Controller controller; // TODO how to make this not static?
+    static Controller controller;
 
     public static void startGame (Controller controller) {
         Game.controller = controller;
