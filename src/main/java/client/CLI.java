@@ -23,8 +23,6 @@ public class CLI {
 
             // Handle messages from the server
             String msg;
-
-            // TODO thread?
             do {
                 msg = connection.receive();
                 if (msg != null) controller.onServerMessage(msg);

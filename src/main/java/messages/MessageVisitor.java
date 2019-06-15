@@ -2,7 +2,6 @@ package messages;
 
 public interface MessageVisitor {
     // Client -> Server
-    void visit(ConnectMessage msg);
     void visit(DisconnectMessage msg); // TODO from server as well?
 
     void visit(ChooseNicknameMessage msg);

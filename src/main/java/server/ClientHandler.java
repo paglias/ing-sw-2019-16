@@ -44,11 +44,13 @@ public class ClientHandler {
 
             do {
                 msg = readStream.readLine();
+                System.out.println("arrived message" + msg);
                 if (msg != null) handleMessage(msg);
             } while (msg != null);
         } catch (IOException e) {
             System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
         } finally {
+            System.out.println("closiing because");
             close();
         }
     }
@@ -61,6 +63,7 @@ public class ClientHandler {
     }
 
     public void sendMessage (String msg) {
+        System.out.println("sending message" + msg);
         writeStream.println(msg);
         writeStream.flush();
     }

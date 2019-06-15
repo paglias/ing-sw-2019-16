@@ -32,6 +32,5 @@ public class GameBoardData {
         isFinalFrenzy = gameBoard.isFinalFrenzy();
         squares = new ArrayList<>(gameBoard.getSquares().stream()
                 .map(s -> new SquareData(s)).collect(Collectors.toList()));
-
     }
 }

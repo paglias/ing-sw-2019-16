@@ -42,10 +42,6 @@ public class ClientController implements MessageVisitor {
         clientHandler.sendMessage(msg);
     }
 
-    public void visit(ConnectMessage connectMessage) {
-        GameStateMessage.updateClients(gameController);
-    }
-
     public void visit(DisconnectMessage disconnectMessage) {
         System.out.println("handling disconnection msg" + disconnectMessage.serialize());
     }
@@ -53,8 +49,6 @@ public class ClientController implements MessageVisitor {
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         System.out.println("handling choose username msg" + chooseNicknameMessage.serialize());
         gameController.addPlayer(chooseNicknameMessage.getNickname(), this);
-
-        GameStateMessage.updateClients(gameController);
     }
     public void visit(GameSettingsMessage gameSettingsMessage) {
         System.out.println("handling game settings msg" + gameSettingsMessage.serialize());
@@ -98,7 +92,6 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ErrorMessage errorMessage) {
-        // TODO which client?
         System.out.println("Received error message from client" + errorMessage.getErrorMsg());
     }
 

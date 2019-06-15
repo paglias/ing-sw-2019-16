@@ -1,5 +1,4 @@
 import client.CLI;
-import client.views.Game;
 import server.Server;
 
 import java.io.IOException;

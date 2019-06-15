@@ -1,20 +1,26 @@
 package client.views;
 
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SplitPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class Lobby {
+public class Lobby implements Initializable {
 
     public int Map = 0;
 
@@ -179,5 +185,15 @@ public class Lobby {
                 alertBox.loadingFailure();
             }
         }
+    }
+
+    public void updateNicknam (String nickname) {
+        connectedPlayer1.setText(nickname);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("setting up lobby");
+        Game.controller.setLobby(this);
     }
 }

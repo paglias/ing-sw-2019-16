@@ -1,26 +1,41 @@
 package client;
 
 import client.views.Game;
+import client.views.Lobby;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import messages.*;
 
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Controller implements MessageVisitor  {
     private Connection connection;
     private Scanner keyboard;
+    private ExecutorService pool;
+    private Lobby lobby;
 
     Controller(Connection connection, Scanner keyboard) {
         this.connection = connection;
         this.keyboard = keyboard;
+        this.pool = Executors.newCachedThreadPool();
     }
 
     void init () {
         System.out.println("Starting the GUI...");
 
-        // TODO ConnectMessage msg = new ConnectMessage();
-        // connection.send(msg.serialize());
+        pool.submit(() -> {
+            Game.startGame(this);
+        });
+    }
 
-        Game.startGame(this);
+    public void setLobby (Lobby lobby) {
+        this.lobby = lobby;
+    }
+
+    public void sendMsg (AbstractMessage msg) {
+        connection.send(msg.serialize());
     }
 
     void onServerMessage (String msg) {
@@ -35,7 +50,8 @@ public class Controller implements MessageVisitor  {
     }
 
     public void visit(GameStateMessage gameStateMessage) {
-        System.out.println("handling game state msg" + gameStateMessage.serialize());
+        System.out.println("handling game state msg" );
+        lobby.updateNicknam(gameStateMessage.playerYouData.nickname);
     }
     public void visit(EndGameMessage endGameMessage) {
         System.out.println("handling end game msg" + endGameMessage.serialize());
@@ -45,9 +61,6 @@ public class Controller implements MessageVisitor  {
         System.out.println("Received error message from server" + errorMessage.getErrorMsg());
     }
 
-    public void visit(ConnectMessage connectMessage) {
-        // Not implemented, server side only
-    }
     public void visit(DisconnectMessage disconnectMessage) {
         // Not implemented, server side only
     }

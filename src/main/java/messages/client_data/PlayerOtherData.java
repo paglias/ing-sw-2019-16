@@ -21,7 +21,7 @@ public class PlayerOtherData {
 
     public PlayerOtherData (Player player) {
         nickname = player.getNickname();
-        position = player.getPosition().getNumber();
+        position = player.getPosition() != null ? player.getPosition().getNumber() : null;
         isActive = player.isActive();
         nDeaths = player.getNDeaths();
         marks = new ArrayList<>(player.getMarks().stream()
@@ -29,6 +29,6 @@ public class PlayerOtherData {
         damage = new ArrayList<>(player.getDamage().stream()
                 .map(p -> p.getNickname()).collect(Collectors.toList()));
         cubes = new ArrayList<>(player.getCubes().stream()
-                .map(c -> c.toString()).collect(Collectors.toList()));;
+                .map(c -> c.toString()).collect(Collectors.toList()));
     }
 }

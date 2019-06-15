@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import messages.ChooseNicknameMessage;
+
 import java.io.IOException;
 
 
@@ -37,7 +39,10 @@ public class GameMenu {
     }
 
     //sends nickname entered by user
-    public void setNickname(){
+    public void setNickname (){
+        ChooseNicknameMessage chooseNicknameMessage = new ChooseNicknameMessage();
+        chooseNicknameMessage.setNickname(username.getText());
+        Game.controller.sendMsg(chooseNicknameMessage);
     }
 
     //sends address enteres by user

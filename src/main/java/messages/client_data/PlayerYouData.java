@@ -24,15 +24,18 @@ public class PlayerYouData extends PlayerOtherData {
 
     public PlayerYouData (Player player) {
         super(player);
+
         startTurnDate = player.getStartTurnDate();
+
         powerUps = new ArrayList<>(player.getPowerUps().stream()
                 .map(p -> new PowerUpData(p)).collect(Collectors.toList()));
+
         weapons = new ArrayList<>(player.getWeapons().stream()
                 .map(w -> new WeaponData(w)).collect(Collectors.toList()));
         moveCounter = player.getMoveCounter();
         actionCounter = player.getActionCounter();
         totalPoints = player.getTotalPoints();
-        possibleActions = new ArrayList<>(player.getPossibleActions().stream()
-                .map(a -> a.values().toString()).collect(Collectors.toList()));
+        possibleActions = new ArrayList<>(); /* TODO ew ArrayList<>(player.getPossibleActions().stream()
+                .map(a -> a.values().toString()).collect(Collectors.toList()))*/;
     }
 }

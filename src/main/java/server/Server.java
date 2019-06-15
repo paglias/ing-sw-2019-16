@@ -65,7 +65,6 @@ public class Server implements Closeable {
     }
 
     public void close() throws IOException {
-        // TODO notify clients
         System.out.println("Server is shutting down...");
         serverSocket.close();
     }
