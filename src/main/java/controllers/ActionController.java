@@ -121,6 +121,7 @@ public class ActionController {
         // TODO effects like shoot, implement from json
     }
 
+    // TODO action to discard powerup
     // TODO discard powerups at the beginning
     /*public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
         Player player = gameBoard.getActivePlayer();

@@ -6,7 +6,7 @@ import messages.client_data.ClientInput;
 public class ActionMessage extends AbstractMessage {
     public final MessageTopic topic = MessageTopic.ACTION;
     private ClientInput clientInput;
-    private String action; // Single action tiem
+    private String action; // Single action item
 
     public void accept(MessageVisitor v) {
         v.visit(this);

@@ -62,20 +62,23 @@ public class GameController {
         addClient(clientController);
 
         // Start the game when 5 players have joined
-        if (gameBoard.getPlayers().size() == 5) start();
+        if (gameBoard.getPlayers().size() == 5) {
+            start();
+        } else {
+            // Start a timer when 3 players have started
+            if (gameBoard.getPlayers().size() == 3) {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (!gameBoard.hasStarted()) start();
+                    }
+                }, gameStartTimeout * 1000);
+            }
 
-        // Start a timer when 3 players have started
-        if (gameBoard.getPlayers().size() == 3) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    if (!gameBoard.hasStarted()) start();
-                }
-            }, gameStartTimeout * 1000);
+            GameStateMessage.updateClients(this);
         }
 
-        GameStateMessage.updateClients(this);
     }
 
     public synchronized void setup (GameSettingsMessage gameSettingsMessage) {
