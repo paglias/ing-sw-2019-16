@@ -387,7 +387,7 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                  <children>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <AnchorPane fx:id="square0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
                                           <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                                              <children>
@@ -420,7 +420,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                    <AnchorPane fx:id="square1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
                                           <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -433,7 +433,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <AnchorPane fx:id="square4" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
                                           <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -446,7 +446,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <AnchorPane fx:id="square5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
                                           <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -459,7 +459,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                    <AnchorPane fx:id="square8" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                        <children>
                                           <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -472,7 +472,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <AnchorPane fx:id="square9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
                                           <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -485,7 +485,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <AnchorPane fx:id="square10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <children>
                                           <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -498,7 +498,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <AnchorPane fx:id="square6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
                                           <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -511,7 +511,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                    <AnchorPane fx:id="square11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                        <children>
                                           <HBox layoutX="12.0" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -524,7 +524,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <AnchorPane fx:id="square7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <children>
                                           <HBox layoutX="12.0" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
@@ -537,7 +537,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                    <AnchorPane fx:id="square2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                        <children>
                                           <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
