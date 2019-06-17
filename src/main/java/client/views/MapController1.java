@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -101,12 +100,10 @@ public class MapController1 implements Initializable {
     }
 
 
-    //Buttons methods
-    @FXML void openPowerUpsWindow(ActionEvent event) {}
-
-    @FXML void confirmAction(ActionEvent event) {}
-
-    @FXML void confirmPowerUp(ActionEvent event) {}
+    //Opens the powerup window where you can choose what powerup you want to use
+    @FXML void openPowerUpsWindow() {
+        genericWindows.powerUps();
+    }
 
     @FXML void drawPowerUp(ActionEvent event) {}
 

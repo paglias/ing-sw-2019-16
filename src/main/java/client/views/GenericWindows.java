@@ -107,4 +107,20 @@ public class GenericWindows {
             loadingFailure();
         }
     }
+
+    public void powerUps(){
+        Stage powerUpWindow = new Stage();
+        powerUpWindow.setTitle("Available PowerUps");
+        powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps.fxml"));
+            Scene scene = new Scene(root);
+            powerUpWindow.setScene(scene);
+            powerUpWindow.show();
+            powerUpWindow.setResizable(false);
+        }
+        catch (IOException e){
+            loadingFailure();
+        }
+    }
 }

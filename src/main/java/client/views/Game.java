@@ -23,7 +23,7 @@ public class Game extends Application {
         window = primaryStage;
         window.setTitle("Adrenaline");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Welcome.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Map1.fxml"));
             window.setScene(new Scene(root));
             window.show();
             window.setResizable(false);

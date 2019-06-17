@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="FXMLs.PowerUps"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.PowerUpController">
+   <children>
+      <HBox alignment="CENTER" layoutX="-2.0" prefHeight="59.0" prefWidth="350.0">
+         <children>
+            <Label text="Choose a PowerUp from below:" />
+         </children>
+      </HBox>
+      <GridPane layoutX="-2.0" layoutY="62.0" prefHeight="188.0" prefWidth="350.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Name" />
+            <Label text="Availability" GridPane.columnIndex="1" />
+            <Label text="Newton" GridPane.rowIndex="1" />
+            <Label text="Tagback Grenade" GridPane.rowIndex="2" />
+            <Label text="Teleporter" GridPane.rowIndex="3" />
+            <Label text="Targeting Scope" GridPane.rowIndex="4" />
+            <Text fx:id="newtonAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="grenadeAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text fx:id="teleporterAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fx:id="scopeAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="confirmNewton" mnemonicParsing="false" onAction="#useNewton" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="confirmGrenade" mnemonicParsing="false" onAction="#useGrenade" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="confirmTeleporter" mnemonicParsing="false" onAction="#useTeleporter" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="confirmScope" mnemonicParsing="false" onAction="#useScope" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
