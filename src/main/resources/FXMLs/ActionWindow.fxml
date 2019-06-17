@@ -26,7 +26,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="moveButton" mnemonicParsing="false" onAction="#move" prefHeight="60.0" prefWidth="140.0" text="MOVE" GridPane.valignment="CENTER" />
+                        <Button fx:id="moveButton" mnemonicParsing="false" onAction="#move" prefHeight="60.0" prefWidth="140.0" text="MOVE X3" GridPane.valignment="CENTER" />
                         <Button fx:id="moveGrabButton" layoutX="34.0" layoutY="35.0" mnemonicParsing="false" onAction="#moveGrab" prefHeight="60.0" prefWidth="140.0" text="MOVE/GRAB" GridPane.rowIndex="1" />
                         <Button fx:id="shootButton" layoutX="26.0" layoutY="133.0" mnemonicParsing="false" onAction="#shoot" prefHeight="60.0" prefWidth="140.0" text="SHOOT" GridPane.rowIndex="2" />
                         <Button fx:id="adrenalineGrabButton" layoutX="28.0" layoutY="32.0" mnemonicParsing="false" onAction="#adrenalineGrab" prefHeight="60.0" prefWidth="140.0" text="MOVE X2/GRAB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
