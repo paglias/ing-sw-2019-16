@@ -25,12 +25,6 @@ public class MapController2 implements Initializable {
         image1.fitHeightProperty().bind(imageAnchorPane.heightProperty());
     }
 
-    //Show possible settings? //TODO
-    @FXML
-    public void showSettings(){
-        genericWindows.settings();
-    }
-
     //Alert box for quitting the game
     @FXML
     public void quitGame(){

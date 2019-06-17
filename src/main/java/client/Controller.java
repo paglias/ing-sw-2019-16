@@ -2,8 +2,6 @@ package client;
 
 import client.views.Game;
 import client.views.Lobby;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import messages.*;
 
 import java.util.Scanner;
@@ -51,7 +49,7 @@ public class Controller implements MessageVisitor  {
 
     public void visit(GameStateMessage gameStateMessage) {
         System.out.println("handling game state msg" );
-        lobby.updateNicknam(gameStateMessage.playerYouData.nickname);
+        lobby.updateNickname(gameStateMessage.playerYouData.nickname);
     }
     public void visit(EndGameMessage endGameMessage) {
         System.out.println("handling end game msg" + endGameMessage.serialize());

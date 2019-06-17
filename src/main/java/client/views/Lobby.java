@@ -187,7 +187,7 @@ public class Lobby implements Initializable {
         }
     }
 
-    public void updateNicknam (String nickname) {
+    public void updateNickname(String nickname) {
         connectedPlayer1.setText(nickname);
     }
 

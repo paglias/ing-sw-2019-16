@@ -31,14 +31,6 @@ public class GenericWindows {
         this.currentPlayer = Player;
     }
 
-    public void settings() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning Dialog");
-        alert.setHeaderText("OMG a wild Warning Dialog appeared");
-        alert.setContentText("This is useless lol");
-        alert.showAndWait();
-    }
-
     public void quitGame() {
         Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         quitAlert.setTitle("Quit Game");

@@ -27,7 +27,6 @@ public class MapController1 implements Initializable {
     @FXML private SplitPane verticalSplit;
     @FXML private SplitPane horizontalSplit2;
     @FXML private AnchorPane upperLeftPane;
-    @FXML private Button settingsButton;
     @FXML private AnchorPane lowerLeftPane;
     @FXML private GridPane playerboardGrid;
     @FXML private Label username5;
@@ -52,12 +51,7 @@ public class MapController1 implements Initializable {
     @FXML private Label yellowWeapon3;
     @FXML private Button drawButton;
     @FXML private Button actionsButton;
-    @FXML private TextField actionChosen;
-    @FXML private Button confirmAction;
     @FXML private Button powerUpsButton;
-    @FXML private TextField powerUpChosen;
-    @FXML private Button confirmPowerUp;
-    @FXML private Button grabButton;
     @FXML private Text redAmmo;
     @FXML private Text blueAmmo;
     @FXML private Text yellowAmmo;
@@ -92,12 +86,6 @@ public class MapController1 implements Initializable {
                         });
             }
         }
-    }
-
-    //Show possible settings? //TODO
-    @FXML
-    public void showSettings(){
-        genericWindows.settings();
     }
 
     //Alert box for quitting the game
