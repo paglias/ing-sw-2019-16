@@ -55,6 +55,14 @@ public class MapController1 implements Initializable {
     @FXML private Text blueAmmo;
     @FXML private Text yellowAmmo;
     @FXML private Text moveCounter;
+    @FXML private ImageView skullOne;
+    @FXML private ImageView skullTwo;
+    @FXML private ImageView skullThree;
+    @FXML private ImageView skullFour;
+    @FXML private ImageView skullFive;
+    @FXML private ImageView skullSix;
+    @FXML private ImageView skullSeven;
+    @FXML private ImageView skullEight;
 
 
     @Override
