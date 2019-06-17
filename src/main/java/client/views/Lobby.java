@@ -1,5 +1,6 @@
 package client.views;
 
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SplitPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -78,12 +81,12 @@ public class Lobby implements Initializable {
         window.setTitle("Map one");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap1.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap1.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
+            AlertBoxes alertBox = new AlertBoxes();
             alertBox.loadingFailure();
         }
     }
@@ -94,12 +97,12 @@ public class Lobby implements Initializable {
         window.setTitle("Map two");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap2.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap2.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
+            AlertBoxes alertBox = new AlertBoxes();
             alertBox.loadingFailure();
         }
     }
@@ -110,12 +113,12 @@ public class Lobby implements Initializable {
         window.setTitle("Map three");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap3.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap3.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
+            AlertBoxes alertBox = new AlertBoxes();
             alertBox.loadingFailure();
         }
     }
@@ -126,12 +129,12 @@ public class Lobby implements Initializable {
         window.setTitle("Map four");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap4.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap4.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
+            AlertBoxes alertBox = new AlertBoxes();
             alertBox.loadingFailure();
         }
     }
@@ -174,17 +177,17 @@ public class Lobby implements Initializable {
                         stage.centerOnScreen();
                         break;
                     default:
-                        GenericWindows alertBox = new GenericWindows();
+                        AlertBoxes alertBox = new AlertBoxes();
                         alertBox.noMapChosen();
                 }
             } catch (IOException e) {
-                GenericWindows alertBox = new GenericWindows();
+                AlertBoxes alertBox = new AlertBoxes();
                 alertBox.loadingFailure();
             }
         }
     }
 
-    public void updateNickname(String nickname) {
+    public void updateNicknam (String nickname) {
         connectedPlayer1.setText(nickname);
     }
 
