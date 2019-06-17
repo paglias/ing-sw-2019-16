@@ -1,26 +1,23 @@
 package client.views;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.SplitPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import messages.GameStateMessage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Lobby implements Initializable {
+public class Lobby extends AbstractView {
 
     public int Map = 0;
 
@@ -28,35 +25,25 @@ public class Lobby implements Initializable {
         this.Map = map;
     }
 
-    @FXML
-    Button startButton;
+    @FXML Button startButton;
 
-    @FXML
-    Label connectedPlayer1;
+    @FXML Label connectedPlayer1;
 
-    @FXML
-    Label connectedPlayer2;
+    @FXML Label connectedPlayer2;
 
-    @FXML
-    Label connectedPlayer3;
+    @FXML Label connectedPlayer3;
 
-    @FXML
-    Label connectedPlayer4;
+    @FXML Label connectedPlayer4;
 
-    @FXML
-    Label connectedPlayer5;
+    @FXML Label connectedPlayer5;
 
-    @FXML
-    RadioButton fiveSkulls;
+    @FXML RadioButton fiveSkulls;
 
-    @FXML
-    RadioButton sixSkulls;
+    @FXML RadioButton sixSkulls;
 
-    @FXML
-    RadioButton sevenSkulls;
+    @FXML RadioButton sevenSkulls;
 
-    @FXML
-    RadioButton eightSkulls;
+    @FXML RadioButton eightSkulls;
 
     public void chooseMap1() {
         setMap(1);
@@ -74,7 +61,6 @@ public class Lobby implements Initializable {
         setMap(4);
     }
 
-
     public void previewMap1() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -86,7 +72,7 @@ public class Lobby implements Initializable {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -102,7 +88,7 @@ public class Lobby implements Initializable {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -118,7 +104,7 @@ public class Lobby implements Initializable {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -134,7 +120,7 @@ public class Lobby implements Initializable {
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            AlertBoxes alertBox = new AlertBoxes();
+            GenericWindows alertBox = new GenericWindows();
             alertBox.loadingFailure();
         }
     }
@@ -177,23 +163,23 @@ public class Lobby implements Initializable {
                         stage.centerOnScreen();
                         break;
                     default:
-                        AlertBoxes alertBox = new AlertBoxes();
+                        GenericWindows alertBox = new GenericWindows();
                         alertBox.noMapChosen();
                 }
             } catch (IOException e) {
-                AlertBoxes alertBox = new AlertBoxes();
+                GenericWindows alertBox = new GenericWindows();
                 alertBox.loadingFailure();
             }
         }
     }
 
-    public void updateNicknam (String nickname) {
-        connectedPlayer1.setText(nickname);
+    public void updateWithData(GameStateMessage gameStateMessage) {
+        // TODO update view with data here
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("setting up lobby");
-        Game.controller.setLobby(this);
+        Game.controller.registerCurrentView(this);
     }
 }
