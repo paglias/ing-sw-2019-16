@@ -57,7 +57,7 @@ public class GenericWindows {
         Stage actionWindow = new Stage();
         actionWindow.initModality(Modality.APPLICATION_MODAL);
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/actionWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionWindow.fxml"));
             Scene actionListView = new Scene(root);
             actionWindow.setScene(actionListView);
             actionWindow.show();
