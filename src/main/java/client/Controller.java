@@ -1,5 +1,6 @@
 package client;
 
+import client.views.AbstractView;
 import client.views.Game;
 import client.views.Lobby;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ public class Controller implements MessageVisitor  {
     private Connection connection;
     private Scanner keyboard;
     private ExecutorService pool;
-    private Lobby lobby;
+    private AbstractView currentView;
 
     Controller(Connection connection, Scanner keyboard) {
         this.connection = connection;
@@ -30,8 +31,8 @@ public class Controller implements MessageVisitor  {
         });
     }
 
-    public void setLobby (Lobby lobby) {
-        this.lobby = lobby;
+    public void registerCurrentView (AbstractView abstractView) {
+        currentView = abstractView;
     }
 
     public void sendMsg (AbstractMessage msg) {
@@ -51,7 +52,8 @@ public class Controller implements MessageVisitor  {
 
     public void visit(GameStateMessage gameStateMessage) {
         System.out.println("handling game state msg" );
-        lobby.updateNicknam(gameStateMessage.playerYouData.nickname);
+        if (currentView != null) currentView.updateWithData(gameStateMessage);
+
     }
     public void visit(EndGameMessage endGameMessage) {
         System.out.println("handling end game msg" + endGameMessage.serialize());
