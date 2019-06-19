@@ -30,7 +30,7 @@ public class Player {
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
-    private List<ActionController.Action> possibleActions;
+    private List<ActionController.Action> possibleActions = new ArrayList<>();
 
     private GameBoard gameBoard;
 

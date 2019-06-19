@@ -20,7 +20,8 @@ public class ActionController {
         GRAB,
         SHOOT,
         RELOAD,
-        USE_POWER_UP
+        USE_POWER_UP,
+        DISCARD_AND_SPAWN,
     }
 
     // List of ActionItems
@@ -30,6 +31,7 @@ public class ActionController {
         SHOOT(ActionItem.SHOOT),
         RELOAD(ActionItem.RELOAD),
         USE_POWER_UP(ActionItem.USE_POWER_UP),
+        DISCARD_AND_SPAWN(ActionItem.DISCARD_AND_SPAWN),
 
         // Adrenaline actions
         MOVE_SHOOT(ActionItem.MOVE, ActionItem.SHOOT),

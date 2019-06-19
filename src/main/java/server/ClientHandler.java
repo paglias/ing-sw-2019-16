@@ -47,7 +47,8 @@ public class ClientHandler {
                 System.out.println("arrived message" + msg);
                 if (msg != null) handleMessage(msg);
             } while (msg != null);
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
         } finally {
             System.out.println("closiing because");
