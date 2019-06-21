@@ -15,48 +15,37 @@ public class ActionListController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    @FXML
-    public void move(){
+    @FXML public void move(){
     }
 
-    @FXML
-    public void moveGrab(){
+    @FXML public void moveGrab(){
     }
 
-    @FXML
-    public void shoot(){
+    @FXML public void shoot(){
     }
 
-    @FXML
-    public void adrenalineGrab(){
+    @FXML public void adrenalineGrab(){
     }
 
-    @FXML
-    public void adrenalineShoot(){
+    @FXML public void adrenalineShoot(){
     }
 
-    @FXML
-    public void beforeFrenzyShoot(){
+    @FXML public void beforeFrenzyShoot(){
     }
 
-    @FXML
-    public void beforeFrenzyGrab(){
+    @FXML public void beforeFrenzyGrab(){
     }
 
-    @FXML
-    public void beforeFrenzyMove(){
+    @FXML public void beforeFrenzyMove(){
     }
 
-    @FXML
-    public void afterFrenzyGrab(){
+    @FXML public void afterFrenzyGrab(){
     }
 
-    @FXML
-    public void afterFrenzyShoot(){
+    @FXML public void afterFrenzyShoot(){
     }
 
-    @FXML
-    public void confirmAction(){
+    @FXML public void confirmAction(){
         Stage mainWindow;
         mainWindow = (Stage) confirmButton.getScene().getWindow();
         mainWindow.close();
