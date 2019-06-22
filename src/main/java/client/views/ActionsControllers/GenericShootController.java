@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//Main shoot window. Lets player select a weapon and opens a clickable window with the weapon selected.
+//Main shoot window. Lets a player select a weapon and opens a clickable window with the weapon selected.
 //The available weapons are stored in 3 string attributes.
 // The attributes must be updated using the available setter methods.
 
