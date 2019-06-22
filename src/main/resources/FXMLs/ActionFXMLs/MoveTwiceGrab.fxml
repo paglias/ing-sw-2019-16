@@ -22,7 +22,7 @@
                 </Label>
                 <Button fx:id="moveOne" layoutX="65.0" layoutY="100.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="Move" />
                 <Button fx:id="moveTwo" layoutX="65.0" layoutY="150.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="Move" />
-                <Button fx:id="grab" layoutX="65.0" layoutY="200.0" mnemonicParsing="false" onAction="#openGrab" prefHeight="25.0" prefWidth="88.0" text="Grab" />
+                <Button fx:id="grab" layoutX="65.0" layoutY="200.0" mnemonicParsing="false" onAction="#grab" prefHeight="25.0" prefWidth="88.0" text="Grab" />
                 <Text layoutX="65.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please perform the following actions as needed:" />
             </children>
         </Pane>

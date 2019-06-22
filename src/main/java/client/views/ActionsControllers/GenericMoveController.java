@@ -1,5 +1,6 @@
 package client.views.ActionsControllers;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,17 +22,6 @@ public class GenericMoveController {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        newPosition.getItems().add("0");
-        newPosition.getItems().add("1");
-        newPosition.getItems().add("2");
-        newPosition.getItems().add("3");
-        newPosition.getItems().add("4");
-        newPosition.getItems().add("5");
-        newPosition.getItems().add("6");
-        newPosition.getItems().add("7");
-        newPosition.getItems().add("8");
-        newPosition.getItems().add("9");
-        newPosition.getItems().add("10");
-        newPosition.getItems().add("11");
+        //TODO ADD POSITIONS
     }
 }

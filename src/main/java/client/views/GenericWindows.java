@@ -17,12 +17,14 @@ public class GenericWindows {
     private static int currentPlayer;
     private static int currentSlot;
 
-    public int getCurrentSlot(){
+    public int getCurrentSlot() {
         return currentSlot;
     }
-    public void setCurrentSlot(int n){
+
+    public void setCurrentSlot(int n) {
         this.currentSlot = n;
     }
+
     public int getCurrentPlayer() {
         return currentPlayer;
     }
@@ -45,7 +47,7 @@ public class GenericWindows {
         }
     }
 
-    public void noMapChosen(){
+    public void noMapChosen() {
         Alert mapAlert = new Alert(Alert.AlertType.WARNING);
         mapAlert.setTitle("Warning Dialog");
         mapAlert.setHeaderText("There was an error choosing the map.");
@@ -76,7 +78,7 @@ public class GenericWindows {
     }
 
     //Shows a window with the current marks
-    public void showMarks(int playerNumber){
+    public void showMarks(int playerNumber) {
         Stage marksWindow = new Stage();
         marksWindow.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -93,7 +95,7 @@ public class GenericWindows {
 
     //Shows a window with the weapon contained in the weaponSlot.
     //The weapon is loaded in WeaponController
-    public void showWeapon(int currentSlot){
+    public void showWeapon(int currentSlot) {
         setCurrentSlot(currentSlot);
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
         weaponWindow.initModality(Modality.APPLICATION_MODAL);
@@ -102,24 +104,69 @@ public class GenericWindows {
             Scene scene = new Scene(root);
             weaponWindow.setScene(scene);
             weaponWindow.showAndWait();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             loadingFailure();
         }
     }
 
-    public void powerUps(){
+    public void powerUps() {
         Stage powerUpWindow = new Stage();
         powerUpWindow.setTitle("Available PowerUps");
         powerUpWindow.initModality(Modality.APPLICATION_MODAL);
-        try{
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps.fxml"));
             Scene scene = new Scene(root);
             powerUpWindow.setScene(scene);
             powerUpWindow.show();
             powerUpWindow.setResizable(false);
+        } catch (IOException e) {
+            loadingFailure();
         }
-        catch (IOException e){
+    }
+
+    public void moveWindow() {
+        Stage moveStage = new Stage();
+        moveStage.setTitle("Move action");
+        moveStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericMove.fxml"));
+            Scene scene = new Scene(root);
+            moveStage.setScene(scene);
+            moveStage.show();
+            moveStage.setResizable(false);
+        } catch (
+                IOException e) {
+            loadingFailure();
+        }
+    }
+
+    public void shootWindow() {
+        Stage moveStage = new Stage();
+        moveStage.setTitle("Shoot action");
+        moveStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericShoot.fxml"));
+            Scene scene = new Scene(root);
+            moveStage.setScene(scene);
+            moveStage.show();
+            moveStage.setResizable(false);
+        } catch (
+                IOException e) {
+            loadingFailure();
+        }
+    }
+    public void reloadWindow() {
+        Stage moveStage = new Stage();
+        moveStage.setTitle("Reload action");
+        moveStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericReload.fxml"));
+            Scene scene = new Scene(root);
+            moveStage.setScene(scene);
+            moveStage.show();
+            moveStage.setResizable(false);
+        } catch (
+                IOException e) {
             loadingFailure();
         }
     }
