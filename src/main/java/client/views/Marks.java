@@ -33,6 +33,9 @@ public class Marks extends AbstractView implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+
+        Game.controller.registerCurrentView(this);
+
         setCurrentPlayer();
         String player = "Player";
         switch (currentPlayer) {

@@ -74,6 +74,8 @@ public class MapController1 extends AbstractView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Game.controller.registerCurrentView(this);
+
         //Adjusts map size correctly
         image1.fitWidthProperty().bind(imageAnchorPane.widthProperty());
         image1.fitHeightProperty().bind(imageAnchorPane.heightProperty());

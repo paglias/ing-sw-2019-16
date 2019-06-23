@@ -39,7 +39,6 @@ public class ClientInput {
                         .map(pos -> gameBoard.getSquares().get(pos))
                         .collect(Collectors.toList())
         );
-
     }
 
     public Square.Direction getDirection () {

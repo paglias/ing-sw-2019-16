@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,6 +22,8 @@ public class GenericMoveController implements Initializable {
 
     @FXML public ChoiceBox<String> newPosition;
 
+    //Takes the selected value from the choicebox, creates clientinput, sends the message to the
+    // server
     @FXML void confirmMove(ActionEvent event) {
         String positionSelected = newPosition.getSelectionModel().getSelectedItem();
         int square = Integer.parseInt(positionSelected);

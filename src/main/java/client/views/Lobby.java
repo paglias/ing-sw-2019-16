@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 
 public class Lobby extends AbstractView {
 
+    GenericWindows errorWindow = new GenericWindows();
+
     public int Map = 0;
 
     public void setMap(int map) {
@@ -67,13 +69,12 @@ public class Lobby extends AbstractView {
         window.setTitle("Map one");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap1.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap1.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
-            alertBox.loadingFailure();
+            errorWindow.loadingFailure();
         }
     }
 
@@ -83,13 +84,12 @@ public class Lobby extends AbstractView {
         window.setTitle("Map two");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap2.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap2.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
-            alertBox.loadingFailure();
+            errorWindow.loadingFailure();
         }
     }
 
@@ -99,13 +99,12 @@ public class Lobby extends AbstractView {
         window.setTitle("Map three");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap3.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap3.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
-            alertBox.loadingFailure();
+            errorWindow.loadingFailure();
         }
     }
 
@@ -115,13 +114,12 @@ public class Lobby extends AbstractView {
         window.setTitle("Map four");
         Scene scene;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/previewMap4.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap4.fxml"));
             scene = new Scene(root, 600, 430);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
-            GenericWindows alertBox = new GenericWindows();
-            alertBox.loadingFailure();
+            errorWindow.loadingFailure();
         }
     }
 
@@ -163,12 +161,10 @@ public class Lobby extends AbstractView {
                         stage.centerOnScreen();
                         break;
                     default:
-                        GenericWindows alertBox = new GenericWindows();
-                        alertBox.noMapChosen();
+                        errorWindow.loadingFailure();
                 }
             } catch (IOException e) {
-                GenericWindows alertBox = new GenericWindows();
-                alertBox.loadingFailure();
+                errorWindow.loadingFailure();
             }
         }
     }
