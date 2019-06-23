@@ -21,7 +21,7 @@
                         <Insets left="10.0" right="10.0" top="20.0" />
                     </padding>
                 </Label>
-                <Button fx:id="confirm" layoutX="182.0" layoutY="198.0" mnemonicParsing="false" onAction="#confirmShoot" prefHeight="25.0" prefWidth="88.0" text="Confirm" />
+                <Button fx:id="confirm" layoutX="182.0" layoutY="198.0" mnemonicParsing="false" onAction="#confirmReload" prefHeight="25.0" prefWidth="88.0" text="Confirm" />
                 <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select a weapon to reload." />
                 <Label layoutX="44.0" layoutY="138.0" text="Weapon Selected" />
                 <ChoiceBox fx:id="weaponSelected" layoutX="164.0" layoutY="134.0" prefWidth="150.0" />

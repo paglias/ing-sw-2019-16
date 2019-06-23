@@ -94,7 +94,7 @@ public class GenericWindows {
     }
 
     //Shows a window with the weapon contained in the weaponSlot.
-    //The weapon is loaded in WeaponController
+    //The weapon is loaded in WeaponPreviewController
     public void showWeapon(int currentSlot) {
         setCurrentSlot(currentSlot);
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);

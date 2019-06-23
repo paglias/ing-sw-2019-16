@@ -724,7 +724,7 @@
                                                       <Font size="11.0" />
                                                    </font>
                                                 </Button>
-                                                <Button layoutX="202.0" layoutY="130.0" mnemonicParsing="false" onAction="#grabAction" prefHeight="35.0" prefWidth="90.0" text="WEAPONS" GridPane.rowIndex="2" />
+                                                <Button fx:id="weaponsButton" layoutX="202.0" layoutY="130.0" mnemonicParsing="false" onAction="#openWeaponsWindow" prefHeight="35.0" prefWidth="90.0" text="WEAPONS" GridPane.rowIndex="2" />
                                              </children>
                                           </GridPane>
                                           <GridPane layoutX="391.0" prefHeight="164.0" prefWidth="217.0">
@@ -738,8 +738,8 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label text="Moves" GridPane.rowIndex="1" />
-                                                <Text fx:id="moveCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Actions left" GridPane.rowIndex="1" />
+                                                <Text fx:id="actionCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="125.0" text="AVAILABILITY" wrapText="true" />
                                                 <Label text="Total Points" GridPane.rowIndex="2" />
                                                 <Text fx:id="totalPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />

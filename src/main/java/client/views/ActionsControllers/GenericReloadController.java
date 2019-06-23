@@ -1,6 +1,5 @@
 package client.views.ActionsControllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -26,6 +25,8 @@ public class GenericReloadController {
         weaponSelected.getItems().add(weapon1);
         weaponSelected.getItems().add(weapon2);
         weaponSelected.getItems().add(weapon3);
+    }
+    @FXML void confirmReload(){
     }
 
     public void setWeapon1(String weapon1) {

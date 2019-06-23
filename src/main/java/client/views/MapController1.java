@@ -22,6 +22,8 @@ public class MapController1 extends AbstractView implements Initializable {
     GenericWindows genericWindows = new GenericWindows();
 
 
+
+
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
     @FXML private Button quitButton;
@@ -54,10 +56,12 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Button drawButton;
     @FXML private Button actionsButton;
     @FXML private Button powerUpsButton;
+    @FXML private Button weaponsButton;
     @FXML private Text redAmmo;
     @FXML private Text blueAmmo;
     @FXML private Text yellowAmmo;
-    @FXML private Text moveCounter;
+    @FXML private Text actionCounter;
+    @FXML private Text totalPoints;
     @FXML private ImageView skullOne;
     @FXML private ImageView skullTwo;
     @FXML private ImageView skullThree;
@@ -123,7 +127,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     @FXML void drawPowerUp(ActionEvent event) {}
 
-    @FXML void grabAction(ActionEvent event) {}
+    @FXML void openWeaponsWindow(ActionEvent event) {}
 
 
 
