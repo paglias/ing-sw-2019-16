@@ -1,6 +1,6 @@
 package client.views.ActionsControllers;
 
-import client.Controller;
+import client.views.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +29,7 @@ public class GenericMoveController implements Initializable {
         ActionMessage newPositionMessage = new ActionMessage();
         ClientInput clientInput = new ClientInput();
         clientInput.position= square;
-        //TODO SEND POSITION TO SERVER
+        Game.controller.sendMsg(newPositionMessage);
     }
 
     @Override
