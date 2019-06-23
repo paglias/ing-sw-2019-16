@@ -155,6 +155,7 @@ public class GenericWindows {
             loadingFailure();
         }
     }
+
     public void reloadWindow() {
         Stage moveStage = new Stage();
         moveStage.setTitle("Reload action");
@@ -169,5 +170,28 @@ public class GenericWindows {
                 IOException e) {
             loadingFailure();
         }
+    }
+
+    //Receives a weapon selected from the previous window, creates a new window and passes the value
+    //to the controller of that window (WeaponController)
+    public void weaponWindow(String weaponName) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/Weapon.fxml"));
+        try {
+            Loader.load();
+        } catch (
+                IOException e) {
+            loadingFailure();
+        }
+        WeaponController weapon = Loader.getController();
+        weapon.setWeaponChosen(weaponName);
+        Parent root = Loader.getRoot();
+        Stage moveStage = new Stage();
+        moveStage.setTitle(weaponName);
+        moveStage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(root);
+        moveStage.setScene(scene);
+        moveStage.show();
+        moveStage.setResizable(false);
     }
 }
