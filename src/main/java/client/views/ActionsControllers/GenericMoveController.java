@@ -1,5 +1,6 @@
 package client.views.ActionsControllers;
 
+import client.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,13 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import messages.ActionMessage;
+import messages.client_data.ClientInput;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //Window that lets the user select a new position and confirm it.
 // Confirm sends a message to server.
-
 public class GenericMoveController implements Initializable {
 
     @FXML public Button confirm;
@@ -22,6 +25,10 @@ public class GenericMoveController implements Initializable {
 
     @FXML void confirmMove(ActionEvent event) {
         String positionSelected = newPosition.getSelectionModel().getSelectedItem();
+        int square = Integer.parseInt(positionSelected);
+        ActionMessage newPositionMessage = new ActionMessage();
+        ClientInput clientInput = new ClientInput();
+        clientInput.position= square;
         //TODO SEND POSITION TO SERVER
     }
 

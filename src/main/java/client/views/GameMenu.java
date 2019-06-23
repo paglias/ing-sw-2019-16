@@ -16,7 +16,6 @@ import java.io.IOException;
 public class GameMenu {
 
     @FXML Button confirmButton;
-    @FXML TextField address;
     @FXML TextField username;
 
     //When Confirm is pressed, loads a new scene with Lobby view
@@ -43,9 +42,5 @@ public class GameMenu {
         ChooseNicknameMessage chooseNicknameMessage = new ChooseNicknameMessage();
         chooseNicknameMessage.setNickname(username.getText());
         Game.controller.sendMsg(chooseNicknameMessage);
-    }
-
-    //sends address enteres by user
-    public void setAddress(){
     }
 }

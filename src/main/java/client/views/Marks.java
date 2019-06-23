@@ -3,12 +3,13 @@ package client.views;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import messages.GameStateMessage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 //Marks windows showing how many marks has each player
-public class Marks implements Initializable {
+public class Marks extends AbstractView implements Initializable {
 
     @FXML Label currentPlayerMarks;
     @FXML Label firstPlayerMarks;
@@ -25,6 +26,10 @@ public class Marks implements Initializable {
     public void setCurrentPlayer() {
         GenericWindows alertBox = new GenericWindows();
         this.currentPlayer = alertBox.getCurrentPlayer();
+    }
+
+    //Updates game values with message received by server
+    public void updateWithData(GameStateMessage gameStatus){
     }
 
     public void initialize(URL location, ResourceBundle resources) {

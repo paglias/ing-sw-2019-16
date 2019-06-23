@@ -12,12 +12,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import messages.GameStateMessage;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MapController1 implements Initializable {
+public class MapController1 extends AbstractView implements Initializable {
     GenericWindows genericWindows = new GenericWindows();
+
 
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
@@ -64,6 +67,9 @@ public class MapController1 implements Initializable {
     @FXML private ImageView skullSeven;
     @FXML private ImageView skullEight;
 
+    //Updates game values with message received by server
+    public void updateWithData(GameStateMessage gameStatus){
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
