@@ -18,9 +18,6 @@ public class ClientController implements MessageVisitor {
         this.gameBoard = gameController.getGameBoard();
     }
 
-    // TODO make sure any method from model called here is unsing synchronized
-    // Already done for GameController
-
     public Player getLinkedPlayer () {
         return linkedPlayer;
     }

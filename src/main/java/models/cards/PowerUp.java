@@ -20,7 +20,8 @@ public class PowerUp extends CardWithAction {
         Gson gson = new Gson();
 
         if (!powerUpsLoadedFromFile) {
-            File powerUpsFolder = new File(PowerUp.class.getResource("/Powerups").getPath());
+            String powerUpsPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Powerups";
+            File powerUpsFolder = new File(powerUpsPath);
             File[] listOfPowerUpsFiles = powerUpsFolder.listFiles();
             ArrayList<PowerUp> powerUps = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class PowerUp extends CardWithAction {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new IllegalArgumentException("Problem loading weapons from file.");
+                throw new IllegalArgumentException("Problem loading powerups from file.");
             }
 
             powerUpsLoadedFromFile = true;

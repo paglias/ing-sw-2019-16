@@ -40,7 +40,8 @@ public class Weapon extends CardWithAction {
         Gson gson = new Gson();
 
         if (!loadedFromFile) {
-            File weaponsFolder = new File(Weapon.class.getResource("/Weapons").getPath());
+            String weaponsPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Weapons";
+            File weaponsFolder = new File(weaponsPath);
             File[] listOfWeaponsFiles = weaponsFolder.listFiles();
             ArrayList<Weapon> weapons = new ArrayList<>();
 
