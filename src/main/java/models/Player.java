@@ -590,14 +590,16 @@ public class Player {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
 
+            // Give the target player a power up
+            playerTarget.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+
             calculateDeathPoints();
 
             gameBoard.getSkulls().decreaseSkullsRemaining();
 
             if (gameBoard.getSkulls().getNRemaining()==0){
                 gameBoard.finalFrenzy();
-            }
-            else{
+            } else{
                 gameBoard.getSkulls().addKiller(this);
             }
         }

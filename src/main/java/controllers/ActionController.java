@@ -149,6 +149,7 @@ public class ActionController {
         Effect effect = powerUp.getEffects(1).get(0); // A power up has only one primary effect
 
         // TODO targeting scope dovrebbe essere a pagamento!
+        // TODO regole di utilizzo diverse
         if (effect.getCost() != null) {
             // weapon.payEffect(player, effect);
         }
