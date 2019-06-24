@@ -161,9 +161,10 @@ public class ActionController {
 
         // execute actions
         executeAction(effect, powerUp, clientInput);
+        gameBoardModel.getPowerUpsDeck().discard(powerUp);
     }
 
-    public synchronized void discardPowerUpAndSpawn (ClientInput clientInput) {
+    public void discardPowerUpAndSpawn (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
 

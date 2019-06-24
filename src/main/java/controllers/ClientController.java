@@ -82,11 +82,19 @@ public class ClientController implements MessageVisitor {
             sendMsg(errorMessage);
         }
 
+
         if (action != ActionController.Action.USE_POWER_UP && action != ActionController.Action.DISCARD_AND_SPAWN) {
             linkedPlayer.decreaseActionCounter();
         }
 
-        if (action != ActionController.Action.USE_POWER_UP) {
+        // If you use the Reload action, it must be at the end of the turn
+        // So we set the action count to 0
+        if (action == ActionController.Action.RELOAD) {
+            linkedPlayer.setActionCounter(0);
+        }
+
+        // Spawning can be done only once
+        if (action == ActionController.Action.DISCARD_AND_SPAWN) {
             linkedPlayer.getPossibleActions().remove(action);
         }
 
