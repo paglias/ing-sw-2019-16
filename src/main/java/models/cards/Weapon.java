@@ -41,6 +41,9 @@ public class Weapon extends Card {
         return rechargeCost;
     }
 
+    public ArrayList<Color> getCost() {
+        return cost;
+    }
     /**
      * Load weapons from file.
      *
@@ -99,6 +102,19 @@ public class Weapon extends Card {
                 return this.secondaryEffect.get(0);
             case 3:
                 return this.tertiaryEffect.get(0);
+            default:
+                throw new IllegalArgumentException("effectType must be 1, 2 or 3.");
+        }
+    }
+
+    public List<WeaponEffect> getEffects (Integer effectType) {
+        switch (effectType) {
+            case 1:
+                return this.primaryEffect;
+            case 2:
+                return this.secondaryEffect;
+            case 3:
+                return this.tertiaryEffect;
             default:
                 throw new IllegalArgumentException("effectType must be 1, 2 or 3.");
         }
