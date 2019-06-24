@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import messages.ActionStartMessage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +24,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void move() {
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE");
+        Game.controller.sendMsg(message);
+
         Stage moveStage = new Stage();
         moveStage.setTitle("ACTION");
         moveStage.initModality(Modality.APPLICATION_MODAL);
@@ -37,6 +43,11 @@ public class ActionListController implements Initializable {
         }
     }
     @FXML public void moveGrab(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_GRAB");
+        Game.controller.sendMsg(message);
+
         Stage moveGrabStage = new Stage();
         moveGrabStage.setTitle("ACTION");
         moveGrabStage.initModality(Modality.APPLICATION_MODAL);
@@ -52,6 +63,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void shoot(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("SHOOT");
+        Game.controller.sendMsg(message);
+
         Stage shoot = new Stage();
         shoot.setTitle("ACTION");
         shoot.initModality(Modality.APPLICATION_MODAL);
@@ -67,6 +83,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void adrenalineGrab(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_MOVE_GRAB");
+        Game.controller.sendMsg(message);
+
         Stage moveAndGrabStage = new Stage();
         moveAndGrabStage.setTitle("ACTION");
         moveAndGrabStage.initModality(Modality.APPLICATION_MODAL);
@@ -82,6 +103,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void adrenalineShoot(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_SHOOT");
+        Game.controller.sendMsg(message);
+
         Stage moveShootStage = new Stage();
         moveShootStage.setTitle("ACTION");
         moveShootStage.initModality(Modality.APPLICATION_MODAL);
@@ -97,6 +123,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void beforeFrenzyShoot(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_RELOAD_SHOOT");
+        Game.controller.sendMsg(message);
+
         Stage frenzyStageOne = new Stage();
         frenzyStageOne.setTitle("ACTION");
         frenzyStageOne.initModality(Modality.APPLICATION_MODAL);
@@ -112,10 +143,20 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void beforeFrenzyGrab(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_MOVE_GRAB");
+        Game.controller.sendMsg(message);
+
         adrenalineGrab();
     }
 
     @FXML public void beforeFrenzyMove(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("FOUR_MOVE");
+        Game.controller.sendMsg(message);
+
         Stage frenzyStageFour = new Stage();
         frenzyStageFour.setTitle("ACTION");
         frenzyStageFour.initModality(Modality.APPLICATION_MODAL);
@@ -131,6 +172,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void afterFrenzyGrab(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("THREE_MOVE_GRAB");
+        Game.controller.sendMsg(message);
+
         Stage frenzyStageFive = new Stage();
         frenzyStageFive.setTitle("ACTION");
         frenzyStageFive.initModality(Modality.APPLICATION_MODAL);
@@ -146,6 +192,11 @@ public class ActionListController implements Initializable {
     }
 
     @FXML public void afterFrenzyShoot(){
+
+        ActionStartMessage message = new ActionStartMessage();
+        message.setAction("MOVE_MOVE_RELOAD_SHOOT");
+        Game.controller.sendMsg(message);
+
         Stage frenzyStageSix = new Stage();
         frenzyStageSix.setTitle("ACTION");
         frenzyStageSix.initModality(Modality.APPLICATION_MODAL);

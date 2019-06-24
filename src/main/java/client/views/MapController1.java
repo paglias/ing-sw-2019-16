@@ -23,7 +23,6 @@ public class MapController1 extends AbstractView implements Initializable {
 
 
 
-
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
     @FXML private Button quitButton;
@@ -70,6 +69,11 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private ImageView skullSix;
     @FXML private ImageView skullSeven;
     @FXML private ImageView skullEight;
+    @FXML private Label player1Active;
+    @FXML private Label player2Active;
+    @FXML private Label player3Active;
+    @FXML private Label player4Active;
+    @FXML private Label player5Active;
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStatus){
