@@ -1,32 +1,309 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.40160642570281124" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<SplitPane dividerPositions="0.40160642570281124" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <ImageView fx:id="weaponView" fitHeight="298.0" fitWidth="204.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="weaponView" fitHeight="298.0" fitWidth="204.0" layoutX="97.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
     <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="247.0">
          <children>
-            <SplitPane dividerPositions="0.5026990553306343" orientation="VERTICAL" prefHeight="298.0" prefWidth="295.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <Label layoutX="186.0" layoutY="40.0" prefHeight="34.0" prefWidth="222.0" text="EFFECTS AND TARGETS">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <GridPane layoutY="85.0" prefHeight="425.0" prefWidth="594.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                  <RowConstraints maxHeight="54.19998779296875" minHeight="10.0" prefHeight="54.19998779296875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="198.59998168945313" minHeight="10.0" prefHeight="137.40001220703124" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="138.6000183105469" minHeight="0.2000183105469091" prefHeight="119.99998779296874" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="107.99997558593748" minHeight="10.0" prefHeight="107.99997558593748" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <RadioButton mnemonicParsing="false" text="First Primary" GridPane.rowIndex="3">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="primaryEffect" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Second Primary" toggleGroup="$primaryEffect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckBox mnemonicParsing="false" text="Secondary" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <CheckBox mnemonicParsing="false" text="Tertiary" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <VBox fx:id="VB1" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                      <children>
-                        <Label layoutX="119.0" layoutY="14.0" text="EFFECTS" />
+                        <Label text="PLAYERS">
+                           <VBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <CheckBox mnemonicParsing="false" text="Player 1">
+                           <VBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox mnemonicParsing="false" text="Player 2">
+                           <VBox.margin>
+                              <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox mnemonicParsing="false" text="Player 3">
+                           <VBox.margin>
+                              <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox mnemonicParsing="false" text="Player 4">
+                           <VBox.margin>
+                              <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox mnemonicParsing="false" text="Player 5">
+                           <VBox.margin>
+                              <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                        </CheckBox>
                      </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                  </VBox>
+                  <VBox fx:id="VB2" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                   <children>
+                       <Label text="PLAYERS">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </Label>
+                       <CheckBox mnemonicParsing="false" text="Player 1">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 2">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 3">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 4">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 5">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB3" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                   <children>
+                       <Label text="PLAYERS">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </Label>
+                       <CheckBox mnemonicParsing="false" text="Player 1">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 2">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 3">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 4">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 5">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB4" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                   <children>
+                       <Label text="PLAYERS">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </Label>
+                       <CheckBox mnemonicParsing="false" text="Player 1">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 2">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 3">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 4">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                       <CheckBox mnemonicParsing="false" text="Player 5">
+                           <VBox.margin>
+                               <Insets left="10.0" top="3.0" />
+                           </VBox.margin>
+                       </CheckBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB5" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
                      <children>
-                        <Label layoutX="122.0" layoutY="14.0" text="TARGETS" />
+                        <Label text="POSITIONS">
+                           <VBox.margin>
+                              <Insets left="42.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                           <VBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                        </ChoiceBox>
                      </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
+                  </VBox>
+                  <VBox fx:id="VB6" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                   <children>
+                       <Label text="POSITIONS">
+                           <VBox.margin>
+                               <Insets left="42.0" />
+                           </VBox.margin>
+                       </Label>
+                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </ChoiceBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB7" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                   <children>
+                       <Label text="POSITIONS">
+                           <VBox.margin>
+                               <Insets left="42.0" />
+                           </VBox.margin>
+                       </Label>
+                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </ChoiceBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB8" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                   <children>
+                       <Label text="POSITIONS">
+                           <VBox.margin>
+                               <Insets left="42.0" />
+                           </VBox.margin>
+                       </Label>
+                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                           <VBox.margin>
+                               <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                       </ChoiceBox>
+                   </children>
+                  </VBox>
+                  <VBox fx:id="VB9" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
+                     <children>
+                        <Label text="DIRECTION">
+                           <VBox.margin>
+                              <Insets left="42.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                           <VBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </VBox.margin>
+                        </ChoiceBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="VB10" prefHeight="200.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                      <children>
+                          <Label text="DIRECTION">
+                              <VBox.margin>
+                                  <Insets left="42.0" />
+                              </VBox.margin>
+                          </Label>
+                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                              <VBox.margin>
+                                  <Insets left="10.0" top="5.0" />
+                              </VBox.margin>
+                          </ChoiceBox>
+                      </children>
+                  </VBox>
+                  <VBox fx:id="VB11" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                      <children>
+                          <Label text="DIRECTION">
+                              <VBox.margin>
+                                  <Insets left="42.0" />
+                              </VBox.margin>
+                          </Label>
+                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                              <VBox.margin>
+                                  <Insets left="10.0" top="5.0" />
+                              </VBox.margin>
+                          </ChoiceBox>
+                      </children>
+                  </VBox>
+                  <VBox fx:id="VB12" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                      <children>
+                          <Label text="DIRECTION">
+                              <VBox.margin>
+                                  <Insets left="42.0" />
+                              </VBox.margin>
+                          </Label>
+                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                              <VBox.margin>
+                                  <Insets left="10.0" top="5.0" />
+                              </VBox.margin>
+                          </ChoiceBox>
+                      </children>
+                  </VBox>
+               </children>
+            </GridPane>
+            <Button layoutX="263.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
          </children></AnchorPane>
   </items>
 </SplitPane>
