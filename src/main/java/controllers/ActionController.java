@@ -158,20 +158,17 @@ public class ActionController {
         executeAction(effect, powerUp, clientInput);
     }
 
-    // TODO action to discard powerup
-    // TODO discard powerups at the beginning
-    /*public synchronized void discardPowerUpAndSpawn(int powerUpToDiscardPosition) {
-        Player player = gameBoard.getActivePlayer();
-        PowerUp powerUp = player.getPowerUps().remove(powerUpToDiscardPosition);
-        gameBoard.getPowerUpsDeck().discard(powerUp);
+    public synchronized void discardPowerUpAndSpawn (ClientInput clientInput) {
+        PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
+        gameBoardModel.getPowerUpsDeck().discard(powerUp);
 
-        Square spawnPosition = gameBoard.getSquares().stream()
+        Square spawnPosition = gameBoardModel.getSquares().stream()
                 .filter(s -> s.getColor().toString() == powerUp.getColor().toString() && s.isSpawnPoint())
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
 
         player.setPosition(spawnPosition);
-    }*/
+    }
 
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);

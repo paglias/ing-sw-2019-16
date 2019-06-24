@@ -80,6 +80,8 @@ public class ClientController implements MessageVisitor {
                 actionController.reload(clientInput);
             case USE_POWER_UP:
                 actionController.usePowerUp(clientInput);
+            case DISCARD_AND_SPAWN:
+                actionController.discardPowerUpAndSpawn(clientInput);
         }
     }
 
