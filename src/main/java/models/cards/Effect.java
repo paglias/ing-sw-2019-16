@@ -2,7 +2,7 @@ package models.cards;
 
 import java.util.ArrayList;
 
-public class WeaponEffect {
+public class Effect {
     public enum Input {
         DIRECTION,
         POSITION,
@@ -11,13 +11,13 @@ public class WeaponEffect {
 
     private ArrayList<Input> input;
     private ArrayList<Card.Color> cost;
-    private ArrayList<WeaponAction> actions;
+    private ArrayList<Action> actions;
 
     public ArrayList<Card.Color> getCost () {
         return cost;
     }
 
-    public ArrayList<WeaponAction> getActions () {
+    public ArrayList<Action> getActions () {
         return actions;
     }
 

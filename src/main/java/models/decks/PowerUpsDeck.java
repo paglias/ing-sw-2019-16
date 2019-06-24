@@ -4,16 +4,23 @@ import models.Player;
 import models.cards.Card;
 import models.cards.PowerUp;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class PowerUpsDeck extends Deck {
     @Override
     void generateCards() {
         for (Card.Color color : Card.Color.values()) {
-            for (PowerUp.Name name : PowerUp.Name.values()) {
-                availableCards.add(new PowerUp(name, color));
-                availableCards.add(new PowerUp(name, color));
+            ArrayList<PowerUp> powerUps1 = PowerUp.loadPowerUps();
+            for (PowerUp powerUp : powerUps1) {
+                powerUp.setColor(color);
+                availableCards.add(powerUp);
+            }
 
+            ArrayList<PowerUp> powerUps2 = PowerUp.loadPowerUps();
+            for (PowerUp powerUp : powerUps2) {
+                powerUp.setColor(color);
+                availableCards.add(powerUp);
             }
         }
         Collections.shuffle(availableCards);
@@ -35,7 +42,6 @@ public class PowerUpsDeck extends Deck {
     public void sell (Player player, PowerUp powerUp) {
         player.addCube(powerUp.getColor());
         discard(powerUp);
-
     }
 
 

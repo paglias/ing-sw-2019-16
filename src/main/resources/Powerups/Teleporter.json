@@ -1,7 +1,6 @@
 {
   "name": "Teleporter",
-  "primaryEffect": [
-    {
+  "primaryEffect": [{
       "input": [
         "POSITION"
       ],
@@ -14,6 +13,5 @@
           ]
         }
       ]
-    }
-  ]
+    }]
 }

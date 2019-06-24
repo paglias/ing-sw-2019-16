@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PowerUpTest {
-    @Test
+    /*@Test
     void getName() {
         PowerUp powerUp = new PowerUp(PowerUp.Name.NEWTON, Card.Color.BLUE);
         assertEquals(powerUp.getName(), PowerUp.Name.NEWTON);
@@ -102,7 +102,7 @@ class PowerUpTest {
 
         powerUp.effect(PowerUp.Name.NEWTON);
         assertEquals(player2.getPosition(), square2);
-    }
+    }*/
 
 
 

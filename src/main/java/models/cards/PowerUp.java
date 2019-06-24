@@ -1,106 +1,58 @@
 package models.cards;
 
-import models.Player;
-import models.Square;
+import com.google.gson.Gson;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
 
-public class PowerUp extends Card {
-    public enum Name {
-        TARGETING_SCOPE,
-        NEWTON,
-        TAGBACK_GRENADE,
-        TELEPORTER
-    }
-
-    private Name name;
-
-    private Player player;
-    private Card.Color cubeColor;
-    private Player playerTarget;
-    private Square newPosition;
-    private Square.Direction direction;
-    private List<Square> squares;
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-    public void setCubeColor(Card.Color cubeColor) {
-        this.cubeColor = cubeColor;
-    }
-    public void setPlayerTarget(Player playerTarget) {
-        this.playerTarget = playerTarget;
-    }
-    public void setNewPosition(Square newPosition) {
-        this.newPosition = newPosition;
-    }
-    public void setDirection(Square.Direction direction) {
-        this.direction = direction;
-    }
-    public void setSquares(List<Square> squares) {
-        this.squares = squares;
-    }
+public class PowerUp extends CardWithAction {
+    // PowerUps are only loaded from file once
+    private static boolean powerUpsLoadedFromFile = false;
+    private static ArrayList<PowerUp> cachedPowerUps;
 
     /**
-     * Instantiates a new Power up.
+     * Load weapons from file.
      *
-     * @param name  the name
-     * @param color the color
+     * @return the weapons
      */
-    public PowerUp(Name name, Color color) {
-        super(color);
-        this.name = name;
-    }
+    public static ArrayList<PowerUp> loadPowerUps () {
+        Gson gson = new Gson();
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public Name getName() {
-        return name;
-    }
+        if (!powerUpsLoadedFromFile) {
+            File powerUpsFolder = new File(PowerUp.class.getResource("/Powerups").getPath());
+            File[] listOfPowerUpsFiles = powerUpsFolder.listFiles();
+            ArrayList<PowerUp> powerUps = new ArrayList<>();
 
-    public void reset() {
-        newPosition = null;
-        playerTarget = null;
-        player = null;
-        squares = null;
-        direction = null;
-        cubeColor = null;
-    }
-
-    public void effect(PowerUp.Name name) {
-        switch (name) {
-            case TARGETING_SCOPE:
-                if (player.getCubes().contains(cubeColor)) {
-                    player.removeCube(cubeColor);
-                    playerTarget.addDamage(player);
+            try {
+                for (File file : listOfPowerUpsFiles) {
+                    if (file.isFile()) {
+                        powerUps.add(gson.fromJson(new FileReader(file.getAbsolutePath()), PowerUp.class));
+                    }
                 }
-                reset();
-                break;
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Problem loading weapons from file.");
+            }
 
-            case TAGBACK_GRENADE:
-                Square playerPosition = playerTarget.getPosition();
-                if (player.getPosition().getCanView().contains(playerPosition)) {
-                    playerTarget.addMark(player);
-                }
-                reset();
-                break;
-            case TELEPORTER:
-                player.setPosition(newPosition);
-                reset();
-                break;
+            powerUpsLoadedFromFile = true;
+            cachedPowerUps = new ArrayList<>(powerUps.size());
+            for (PowerUp powerUp : powerUps) {
+                // To string must be called to clone the classes when they're loaded again
+                cachedPowerUps.add(gson.fromJson(gson.toJson(powerUp).toString(), powerUp.getClass()));
+            }
 
-            case NEWTON:
-                List<Square> squareList = playerTarget.getPosition().filterDirectionSquare(squares, direction);
-                if (squareList.contains(newPosition)) {
-                    playerTarget.setPosition(newPosition);
-                }
-                reset();
-                break;
+            return powerUps;
+        } else {
+            ArrayList<PowerUp> clonedPowerUps = new ArrayList<>(cachedPowerUps.size());
+            for (PowerUp powerUp : cachedPowerUps) {
+                PowerUp clonePowerUp = gson.fromJson(gson.toJson(powerUp), powerUp.getClass());
+                clonedPowerUps.add(clonePowerUp);
+            }
+            return clonedPowerUps;
         }
     }
+
 }
 
 

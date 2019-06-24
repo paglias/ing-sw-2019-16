@@ -4,10 +4,7 @@ import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import models.Square;
-import models.cards.PowerUp;
-import models.cards.Weapon;
-import models.cards.WeaponAction;
-import models.cards.WeaponEffect;
+import models.cards.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,42 +59,42 @@ public class ActionController {
 
     public List<Action> getPossibleActions (){
         List<Action> actionsList = new ArrayList<>();
-        actionsList.add(Action.USE_POWER_UP);
+        actionsList.add(ActionController.Action.USE_POWER_UP);
         int adrenalineLevel = player.getAdrenaline();
 
         if(!gameBoardModel.isFinalFrenzy()) {
             if (player.getActionCounter() == 0) {
-                actionsList.add(Action.RELOAD);
+                actionsList.add(ActionController.Action.RELOAD);
                 return actionsList;
             } else if (adrenalineLevel == 0) {
-                actionsList.add(Action.MOVE);
-                actionsList.add(Action.MOVE_GRAB);
-                actionsList.add(Action.SHOOT);
+                actionsList.add(ActionController.Action.MOVE);
+                actionsList.add(ActionController.Action.MOVE_GRAB);
+                actionsList.add(ActionController.Action.SHOOT);
                 return actionsList;
             } else if (adrenalineLevel == 1) {
-                actionsList.add(Action.MOVE);
-                actionsList.add(Action.MOVE_GRAB);
-                actionsList.add(Action.SHOOT);
-                actionsList.add(Action.MOVE_MOVE_GRAB);
+                actionsList.add(ActionController.Action.MOVE);
+                actionsList.add(ActionController.Action.MOVE_GRAB);
+                actionsList.add(ActionController.Action.SHOOT);
+                actionsList.add(ActionController.Action.MOVE_MOVE_GRAB);
                 return actionsList;
 
             } else { // adrenaline 2
-                actionsList.add(Action.MOVE);
-                actionsList.add(Action.MOVE_GRAB);
-                actionsList.add(Action.SHOOT);
-                actionsList.add(Action.MOVE_MOVE_GRAB);
-                actionsList.add(Action.MOVE_SHOOT);
+                actionsList.add(ActionController.Action.MOVE);
+                actionsList.add(ActionController.Action.MOVE_GRAB);
+                actionsList.add(ActionController.Action.SHOOT);
+                actionsList.add(ActionController.Action.MOVE_MOVE_GRAB);
+                actionsList.add(ActionController.Action.MOVE_SHOOT);
                 return actionsList;
             }
         } else {
                 if(player.isBeforeFirstPlayer()) {
-                    actionsList.add(Action.MOVE_RELOAD_SHOOT);
-                    actionsList.add(Action.FOUR_MOVE);
-                    actionsList.add(Action.MOVE_MOVE_GRAB);
+                    actionsList.add(ActionController.Action.MOVE_RELOAD_SHOOT);
+                    actionsList.add(ActionController.Action.FOUR_MOVE);
+                    actionsList.add(ActionController.Action.MOVE_MOVE_GRAB);
                     return actionsList;
                 } else {
-                    actionsList.add(Action.MOVE_MOVE_RELOAD_SHOOT);
-                    actionsList.add(Action.THREE_MOVE_GRAB);
+                    actionsList.add(ActionController.Action.MOVE_MOVE_RELOAD_SHOOT);
+                    actionsList.add(ActionController.Action.THREE_MOVE_GRAB);
                     return actionsList;
                 }
         }
@@ -118,9 +115,46 @@ public class ActionController {
         player.reload(weapon);
     }
 
+    private void executeAction (Effect effect, CardWithAction card, ClientInput clientInput) {
+        for (models.cards.Action action : effect.getActions()) {
+            models.cards.Action.Type actionType = action.getType();
+            HashMap<Effect.Input, Integer> parameters = action.getParameters();
+
+            // reset the parameters just to be sure there's no old data
+            card.reset();
+            card.setDamagingPlayer(player);
+            parameters.forEach((Effect.Input type, Integer index) -> {
+                switch (type) {
+                    case TARGET:
+                        card.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
+                        return;
+                    case POSITION:
+                        card.addPosition(clientInput.getPositions(gameBoardModel).get(index));
+                        return;
+                    case DIRECTION:
+                        card.setDirection(clientInput.getDirection());
+                }
+            });
+            card.effect(actionType);
+
+            Player activePlayer = gameBoardModel.getActivePlayer();
+            // For all the target players call afterShoot to check adrenaline, if it's dead, ...
+            card.getPlayerTargets().forEach(p -> activePlayer.afterShoot(p));
+            card.reset();
+        }
+    }
+
     public void usePowerUp (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
-        // TODO effects like shoot, implement from json
+        Effect effect = powerUp.getEffects(1).get(0); // A power up has only one primary effect
+
+        // TODO targeting scope dovrebbe essere a pagamento!
+        if (effect.getCost() != null) {
+            // weapon.payEffect(player, effect);
+        }
+
+        // execute actions
+        executeAction(effect, powerUp, clientInput);
     }
 
     // TODO action to discard powerup
@@ -141,37 +175,13 @@ public class ActionController {
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
-        WeaponEffect effect = weapon.getEffect(clientInput.effectType);
+        Effect effect = weapon.getEffects(clientInput.effectType).get(0); // TODO allow multiple inputs
 
         if (effect.getCost() != null) {
             weapon.payEffect(player, effect);
         }
 
         // execute actions
-        for (WeaponAction weaponAction: effect.getActions()) {
-            WeaponAction.Type actionType = weaponAction.getType();
-            HashMap<WeaponEffect.Input, Integer> parameters = weaponAction.getParameters();
-
-            // reset the parameters just to be sure there's no old data
-            weapon.reset();
-            parameters.forEach((WeaponEffect.Input type, Integer index) -> {
-                switch (type) {
-                    case TARGET:
-                        weapon.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
-                        return;
-                    case POSITION:
-                        weapon.addPosition(clientInput.getPositions(gameBoardModel).get(index));
-                        return;
-                    case DIRECTION:
-                        weapon.setDirection(clientInput.getDirection());
-                }
-            });
-            weapon.effect(actionType);
-
-            Player activePlayer = gameBoardModel.getActivePlayer();
-            // For all the target players call afterShoot to check adrenaline, if it's dead, ...
-            weapon.getPlayerTargets().forEach(p -> activePlayer.afterShoot(p));
-            weapon.reset();
-        }
+        executeAction(effect, weapon, clientInput);
     }
 }

@@ -1,7 +1,6 @@
 {
 "name": "TagbackGrenade",
-  "primaryEffect": [
-    {
+  "primaryEffect": [{
       "input": [
         "TARGET"
       ],
@@ -14,6 +13,5 @@
           ]
         }
       ]
-    }
-  ]
+    }]
 }

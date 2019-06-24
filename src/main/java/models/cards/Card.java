@@ -18,6 +18,8 @@ public abstract class Card {
         return color;
     }
 
+    public void setColor (Color color) { this.color = color; }
+
     /**
      * Instantiates a new Card.
      *

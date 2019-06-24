@@ -3,7 +3,7 @@ package models.cards;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class WeaponAction {
+public class Action {
     public enum Type {
         SHOOT,
         SHOOT_VIEW,
@@ -36,11 +36,11 @@ public class WeaponAction {
         return type;
     }
 
-    public HashMap<WeaponEffect.Input, Integer> getParameters () {
-        HashMap<WeaponEffect.Input, Integer> map = new HashMap<>();
+    public HashMap<Effect.Input, Integer> getParameters () {
+        HashMap<Effect.Input, Integer> map = new HashMap<>();
         parameters.forEach(stringParameter -> {
             String[] parts = stringParameter.split(".");
-            WeaponEffect.Input actionType = WeaponEffect.Input.valueOf(parts[0]);
+            Effect.Input actionType = Effect.Input.valueOf(parts[0]);
             Integer index = Integer.parseInt(parts[1]);
             map.put(actionType, index);
         });

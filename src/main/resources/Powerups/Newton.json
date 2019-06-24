@@ -1,7 +1,6 @@
 {
   "name": "Newton",
-  "primaryEffect": [
-    {
+  "primaryEffect": [{
       "input": [
         "DIRECTION",
         "TARGET"
@@ -16,6 +15,5 @@
           ]
         }
       ]
-    }
-  ]
+    }]
 }
