@@ -96,6 +96,7 @@ public class ClientController implements MessageVisitor {
         }
 
         linkedPlayer.setActiveAction(action);
+        // TODO di settare azione attiva sul client
         GameStateMessage.updateClients(gameController);
     }
 
@@ -111,6 +112,8 @@ public class ClientController implements MessageVisitor {
             errorMessage.setErrorMsg("No active action!");
             sendMsg(errorMessage);
         }
+
+        // TODO ordine di actionitem
 
 
         ActionController.ActionItem actionItem = actionMessage.getActionItem();
