@@ -37,7 +37,6 @@ public class ClientHandler {
             System.out.println("Connected client " + clientSocket.getRemoteSocketAddress());
 
             clientController = new ClientController(gameController, this);
-            clientController.init();
 
             // Handle incoming data from client
             String msg;

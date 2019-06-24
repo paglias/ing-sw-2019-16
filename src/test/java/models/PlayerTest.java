@@ -110,15 +110,6 @@ class PlayerTest {
     }
 
     @Test
-    void moveCounter() {
-        player.setMoveCounter(3);
-        assertEquals(player.getMoveCounter(), 3);
-
-        player.decreaseMoveCounter();
-        assertEquals(player.getMoveCounter(), 2);
-    }
-
-    @Test
     void nickname() {
         player.setNickname("test");
 
@@ -261,22 +252,8 @@ class PlayerTest {
         assertTrue(player.isDead());
     }
 
-
-    @Test
-    void movePlayerThrowsNoAvailableMoves() {
-        player.setMoveCounter(0);
-        Square current = new Square(Square.Color.BLUE, false);
-        player.setPosition(current);
-        Square target = new Square(Square.Color.BLUE, false);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            player.move(target);
-        });
-    }
-
     @Test
     void movePlayerThrowsNoAccessSquare() {
-        player.setMoveCounter(1);
         Square current = new Square(Square.Color.BLUE, false);
         player.setPosition(current);
         Square target = new Square(Square.Color.BLUE, false);
@@ -288,8 +265,6 @@ class PlayerTest {
 
     @Test
     void movePlayer() {
-        player.setMoveCounter(1);
-
         Square current = new Square(Square.Color.BLUE, false);
         player.setPosition(current);
 
@@ -298,7 +273,6 @@ class PlayerTest {
 
         player.move(target);
         assertEquals(player.getPosition(), target);
-        assertEquals(player.getMoveCounter(), 0);
     }
 
     @Test

@@ -29,10 +29,6 @@ public class ClientController implements MessageVisitor {
         linkedPlayer = player;
     }
 
-    public void init () {
-        // TODO
-    }
-
     public void sendMsg (AbstractMessage msg) {
         clientHandler.sendMessage(msg.serialize());
     }
@@ -47,27 +43,82 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
-        System.out.println("handling choose username msg" + chooseNicknameMessage.serialize());
         gameController.addPlayer(chooseNicknameMessage.getNickname(), this);
     }
     public void visit(GameSettingsMessage gameSettingsMessage) {
-        System.out.println("handling game settings msg" + gameSettingsMessage.serialize());
         gameController.setup(gameSettingsMessage);
     }
 
     public void visit(ActionStartMessage actionStartMessage) {
-        // TODO refuse if no active player
-        // TODO check action is possible for user
-        // set action as active
-        // decrease action counter
+        if (!linkedPlayer.isActive()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Not your turn!");
+            sendMsg(errorMessage);
+        }
+
+        if (linkedPlayer.getActionCounter() < 1) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Not available actions remained!");
+            sendMsg(errorMessage);
+        }
+
+        if (linkedPlayer.getActiveAction() != null) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("An action has already started, finish it first!");
+            sendMsg(errorMessage);
+        }
+
+        ActionController.Action action = actionStartMessage.getAction();
+
+        if (!linkedPlayer.getPossibleActions().contains(action)) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Invalid action!");
+            sendMsg(errorMessage);
+        }
+
+        if (linkedPlayer.isDead() && action != ActionController.Action.DISCARD_AND_SPAWN) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("You must respawn before doing anything else!");
+            sendMsg(errorMessage);
+        }
+
+        if (action != ActionController.Action.USE_POWER_UP && action != ActionController.Action.DISCARD_AND_SPAWN) {
+            linkedPlayer.decreaseActionCounter();
+        }
+
+        if (action != ActionController.Action.USE_POWER_UP) {
+            linkedPlayer.getPossibleActions().remove(action);
+        }
+
+        linkedPlayer.setActiveAction(action);
+        GameStateMessage.updateClients(gameController);
     }
 
     public void visit(ActionMessage actionMessage) {
-        // TODO check action is active
-        ActionController actionController = new ActionController(gameController);
+        if (!linkedPlayer.isActive()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Not your turn!");
+            sendMsg(errorMessage);
+        }
 
-        ActionController.ActionItem actionItem = actionMessage.getAction();
+        if (linkedPlayer.getActiveAction() == null) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("No active action!");
+            sendMsg(errorMessage);
+        }
+
+
+        ActionController.ActionItem actionItem = actionMessage.getActionItem();
+        ActionController.Action activeAction = linkedPlayer.getActiveAction();
+
+        if (!activeAction.getActionItems().contains(actionItem)) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Invalid action item for the active action!");
+            sendMsg(errorMessage);
+        }
+
         ClientInput clientInput = actionMessage.getClientInput();
+        ActionController actionController = new ActionController(gameController);
 
         switch (actionItem) {
             case GRAB:
@@ -83,10 +134,27 @@ public class ClientController implements MessageVisitor {
             case DISCARD_AND_SPAWN:
                 actionController.discardPowerUpAndSpawn(clientInput);
         }
+
+        activeAction.getActionItems().remove(actionItem);
+
+        GameStateMessage.updateClients(gameController);
     }
 
     public void visit (ActionEndMessage actionEndMessage) {
-        // TODO
+        if (!linkedPlayer.isActive()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Not your turn!");
+            sendMsg(errorMessage);
+        }
+
+        if (linkedPlayer.getActiveAction() == null) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("No active action!");
+            sendMsg(errorMessage);
+        }
+
+        linkedPlayer.setActiveAction(null);
+        GameStateMessage.updateClients(gameController);
     }
 
     public void visit(EndTurnMessage endTurnMessage) {

@@ -24,13 +24,13 @@ public class Player {
     private ArrayList<PowerUp> powerUps = new ArrayList<>();    //list of available power ups
     private ArrayList<Weapon> weapons = new ArrayList<>();      //list of available weapons, maximum 3
     private Square position;                                    //current position, updated when move happens
-    private int moveCounter;                                    //TODO restore movecounter at startturn? actually needed?
     private int actionCounter;                                  //remaining actions per turn
     private int adrenaline;                                     //adrenaline counter, max 2
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
     private List<ActionController.Action> possibleActions = new ArrayList<>();
+    private ActionController.Action activeAction;
 
     private GameBoard gameBoard;
 
@@ -81,6 +81,14 @@ public class Player {
 
     public void setPossibleActions (List<ActionController.Action> possibleActions) {
         this.possibleActions = possibleActions;
+    }
+
+    public synchronized void setActiveAction (ActionController.Action activeAction) {
+        this.activeAction = activeAction;
+    }
+
+    public synchronized ActionController.Action getActiveAction () {
+        return this.activeAction;
     }
     /**
      * Adds the value received to the total points of the player.
@@ -240,31 +248,6 @@ public class Player {
     }
 
     /**
-     * Gets move counter.
-     *
-     * @return the move counter
-     */
-    public int getMoveCounter() {
-        return moveCounter;
-    }
-
-    /**
-     * Sets move counter. Initial hard-set, in case of adrenaline/finalfrenzy/actions.
-     *
-     * @param moveCounter the move counter
-     */
-    public void setMoveCounter(int moveCounter) {
-        this.moveCounter = moveCounter;
-    }
-
-    /**
-     * Decrease move counter, after a player moved.
-     */
-    public void decreaseMoveCounter() {
-        this.moveCounter--;
-    }
-
-    /**
      * Gets nickname.
      *
      * @return the nickname
@@ -287,7 +270,7 @@ public class Player {
      *
      * @param isActive the is active
      */
-    public void setActive(Boolean isActive) {
+    public synchronized void setActive(Boolean isActive) {
         this.isActive = isActive;
     }
 
@@ -296,7 +279,7 @@ public class Player {
      *
      * @return the boolean
      */
-    public boolean isActive() {
+    public synchronized boolean isActive() {
         return this.isActive;
     }
 
@@ -430,7 +413,6 @@ public class Player {
             this.weapons.add(newWeapon);
         } else {
             throw new IllegalArgumentException("Weapon limit reached. Remove a weapon first");
-            // TODO ActionItem needed in order to add that weapon. Press remove weapon button in view
         }
     }
 
@@ -494,7 +476,6 @@ public class Player {
 
     /**
      * Sets player to dead status for the turn.
-     * //TODO Restore the status at the beginning of the next turn
      *
      * @param dead the dead
      */
@@ -518,7 +499,6 @@ public class Player {
             for (Square square : canAccessSquares) {
                 if (currentPosition.getCanAccessDirectly().contains(newPosition)) {
                     setPosition(newPosition);
-                    decreaseMoveCounter();
                     break;
                 } else {
                     throw new IllegalArgumentException("Move is not possible");

@@ -20,11 +20,11 @@ public class ActionMessage extends AbstractMessage {
         this.clientInput = clientInput;
     }
 
-    public ActionController.ActionItem getAction() {
+    public ActionController.ActionItem getActionItem() {
         return ActionController.ActionItem.valueOf(action);
     }
 
-    public void setAction(String action) {
+    public void setActionItem(String action) {
         this.action = action;
     }
 }

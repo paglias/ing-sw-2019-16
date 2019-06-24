@@ -7,6 +7,7 @@ import models.Square;
 import models.cards.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,10 +41,11 @@ public class ActionController {
         FOUR_MOVE(ActionItem.MOVE, ActionItem.MOVE, ActionItem.MOVE, ActionItem.MOVE),
         MOVE_MOVE_RELOAD_SHOOT(ActionItem.MOVE, ActionItem.MOVE, ActionItem.RELOAD, ActionItem.SHOOT);
 
-        private final ActionItem[] actionItems;
+        private final ArrayList<ActionItem> actionItems;
+        public List<ActionItem> getActionItems () { return this.actionItems; }
 
         Action(ActionItem ...actionItems) {
-            this.actionItems = actionItems;
+            this.actionItems = new ArrayList<>(Arrays.asList(actionItems));
         }
     }
 
@@ -60,6 +62,9 @@ public class ActionController {
     public List<Action> getPossibleActions (){
         List<Action> actionsList = new ArrayList<>();
         actionsList.add(ActionController.Action.USE_POWER_UP);
+
+        if (player.isDead()) actionsList.add(Action.DISCARD_AND_SPAWN);
+
         int adrenalineLevel = player.getAdrenaline();
 
         if(!gameBoardModel.isFinalFrenzy()) {
@@ -168,6 +173,10 @@ public class ActionController {
                 .orElseThrow(IllegalArgumentException::new);
 
         player.setPosition(spawnPosition);
+
+        // Make sure to reset the user to the initial state
+        player.setDead(false);
+        player.getDamage().clear();
     }
 
     public void shoot (ClientInput clientInput) {

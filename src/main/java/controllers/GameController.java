@@ -57,6 +57,8 @@ public class GameController {
         player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
         player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
+        player.setDead(true); // Useful to make sure they spawn as first thing
+
         gameBoard.addPlayer(player);
         clientController.setLinkedPlayer(player);
         addClient(clientController);
