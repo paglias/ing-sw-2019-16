@@ -21,15 +21,6 @@ import java.util.ResourceBundle;
 public class MapController1 extends AbstractView implements Initializable {
     GenericWindows genericWindows = new GenericWindows();
 
-    //GAME STATE DATA TODO UPDATE THE FOLLOWING ATTRIBUTES WITH GAMESTATEMESSAGE
-
-    public static String playerOne = "Player 1";
-    public static String playerTwo = "Player 2";
-    public static String playerThree = "Player 3";
-    public static String playerFour = "Player 4";
-    public static String playerFive = "Player 5";
-
-
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
     @FXML private Button quitButton;
@@ -84,6 +75,13 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStatus){
+        //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
+        //TODO PLAYER STATUS = UPDATE player1Active labels with ACTIVE/CONNECTED/DISABLED, metodo setText
+        //TODO TOTALPOINTS = update totalpoints Text of the current player metodo setText
+        //TODO AMMO= update redAmmo Text of the current player, metodo setText
+        //TODO red/blue/yellow weapons label: update the labels with the current weaponSlot weapons
+        //TODO USERNAME labels: update with player usernames
+        //TODO actionCounter text = update with action counter of the current player
     }
 
     @Override
