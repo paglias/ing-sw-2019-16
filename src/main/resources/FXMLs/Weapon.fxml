@@ -70,7 +70,7 @@
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                         </CheckBox>
-                        <CheckBox fx:id="player3primary3" mnemonicParsing="false" text="Player 3">
+                        <CheckBox fx:id="player3primary1" mnemonicParsing="false" text="Player 3">
                            <VBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>

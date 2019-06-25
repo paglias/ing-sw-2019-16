@@ -21,6 +21,13 @@ import java.util.ResourceBundle;
 public class MapController1 extends AbstractView implements Initializable {
     GenericWindows genericWindows = new GenericWindows();
 
+    //GAME STATE DATA TODO UPDATE THE FOLLOWING ATTRIBUTES WITH GAMESTATEMESSAGE
+
+    public static String playerOne = "Player 1";
+    public static String playerTwo = "Player 2";
+    public static String playerThree = "Player 3";
+    public static String playerFour = "Player 4";
+    public static String playerFive = "Player 5";
 
 
     @FXML private ImageView image1;
