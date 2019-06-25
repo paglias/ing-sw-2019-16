@@ -52,7 +52,7 @@ public class Weapon extends CardWithAction {
                         weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
                     }
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.err(e, "Problem loading weapons from file.");
                 throw new IllegalArgumentException("Problem loading weapons from file.");
             }

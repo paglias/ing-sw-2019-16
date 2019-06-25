@@ -1,5 +1,6 @@
 package client;
 
+import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;
@@ -27,10 +28,11 @@ public class CLI {
             String msg;
             do {
                 msg = connection.receive();
+                if (Constants.DEBUG) Logger.info("message from server >>> "+ msg);
                 if (msg != null) controller.onServerMessage(msg);
             } while (msg != null);
 
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.err(e, null);
         } finally {
             Logger.info("Closing connection to server!");

@@ -7,6 +7,7 @@ import models.GameBoard;
 import models.Player;
 import models.cards.PowerUp;
 import utils.Constants;
+import utils.Logger;
 
 import java.util.*;
 
@@ -70,6 +71,14 @@ public class GameController {
         }
 
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
+
+        gameBoard.getPlayers().stream()
+                .filter(p -> p.getNickname().equals(nickname)).findFirst()
+                .ifPresent(p -> {
+                    throw new IllegalArgumentException("A player with this nickname already exists!");
+                });
+
+        Logger.info("Player " + nickname + " joined!");
 
         Player player = new Player();
         player.setNickname(nickname);
@@ -139,8 +148,16 @@ public class GameController {
             throw new IllegalArgumentException("GameController already started, cannot create a new one.");
         }
 
+        // Automatically setup the game if not done manually
+        if (!gameBoard.isGameSetup()) {
+            gameBoard.setMap(1);
+            gameBoard.getSkulls().setNRemaining(5);
+        }
+
         gameBoard.startGame();
         gameBoard.getPlayers().get(0).setActive(true);
+
+        Logger.info("Staring game!");
 
         GameStateMessage.updateClients(this);
     }
@@ -168,6 +185,8 @@ public class GameController {
             gameBoard.finalFrenzy();
         }
         player.setStartTurnDate(new Date());
+
+        Logger.info("Starting turn, active player " + player.getNickname());
         GameStateMessage.updateClients(this);
     }
 
@@ -175,7 +194,9 @@ public class GameController {
      * End turn.
      */
     public synchronized void endTurn() {
-        gameBoard.nextPlayer(gameBoard.getActivePlayer());
+        Player player = gameBoard.getActivePlayer();
+        Logger.info("Ending turn for " + player.getNickname());
+        gameBoard.nextPlayer(player);
         startTurn();
     }
 }

@@ -47,7 +47,7 @@ public class ClientHandler {
                 msg = readStream.readLine();
                 if (msg != null) handleMessage(msg);
             } while (msg != null);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.err(e, "Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
         } finally {
             Logger.info("Closing connection from client " + clientSocket.getLocalAddress());
@@ -57,12 +57,12 @@ public class ClientHandler {
 
     void handleMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From client >>> " + msg);
-        // TODO handle errors from deserialization/handling
+        // TODO handle errors from deserialization
         AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
 
         try {
             parsedMsg.accept(clientController);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.err(e, "Error handling client message " + parsedMsg.getClass().getName());
         }
     }
