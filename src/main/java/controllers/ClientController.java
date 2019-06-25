@@ -9,6 +9,9 @@ import server.ClientHandler;
 import utils.Constants;
 import utils.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientController implements MessageVisitor {
     private ClientHandler clientHandler;
     private GameController gameController;
@@ -97,7 +100,6 @@ public class ClientController implements MessageVisitor {
         }
 
         linkedPlayer.setActiveAction(action);
-        // TODO di settare azione attiva sul client
         GameStateMessage.updateClients(gameController);
     }
 
@@ -108,15 +110,19 @@ public class ClientController implements MessageVisitor {
             sendMsg(errorMessage);
         }
 
-        // TODO ordine di actionitem
-
-
         ActionController.ActionItem actionItem = actionMessage.getActionItem();
         ActionController.Action activeAction = linkedPlayer.getActiveAction();
+        List<ActionController.ActionItem> activeActionItems = linkedPlayer.getActiveActionItems();
 
-        if (!activeAction.getActionItems().contains(actionItem)) {
+        if (!activeActionItems.contains(actionItem)) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Invalid action item for the active action!");
+            sendMsg(errorMessage);
+        }
+
+        if (activeActionItems.get(0) != actionItem) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Action items must be done in order!");
             sendMsg(errorMessage);
         }
 
@@ -153,8 +159,7 @@ public class ClientController implements MessageVisitor {
                 actionController.discardPowerUpAndSpawn(clientInput);
         }
 
-        activeAction.getActionItems().remove(actionItem);
-
+        activeActionItems.remove(actionItem);
         GameStateMessage.updateClients(gameController);
     }
 

@@ -61,9 +61,12 @@ public class Controller implements MessageVisitor  {
 
     void onServerMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From server >>> " + msg);
-        // TODO handle errors from deserialization/handling
-        AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
-        parsedMsg.accept(this);
+        try {
+            AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
+            parsedMsg.accept(this);
+        } catch (Throwable e) {
+            // TODO show popup
+        }
     }
 
     public void visit(GameStateMessage gameStateMessage) {

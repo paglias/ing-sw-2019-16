@@ -1,5 +1,6 @@
 package models;
 
+import models.decks.AmmoDeck;
 import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -10,16 +11,16 @@ class MapLoaderTest {
     @Test
     void loadMap () {
         // Test that loading doesn't fail
-        MapLoader.loadMap(1, new WeaponsDeck());
-        MapLoader.loadMap(2, new WeaponsDeck());
-        MapLoader.loadMap(3, new WeaponsDeck());
-        MapLoader.loadMap(4, new WeaponsDeck());
+        MapLoader.loadMap(1, new WeaponsDeck(), new AmmoDeck());
+        MapLoader.loadMap(2, new WeaponsDeck(), new AmmoDeck());
+        MapLoader.loadMap(3, new WeaponsDeck(), new AmmoDeck());
+        MapLoader.loadMap(4, new WeaponsDeck(), new AmmoDeck());
     }
 
     @Test
     void mapCreation () {
         // More tests in SquareTest
-        ArrayList<Square> map = MapLoader.loadMap(1, new WeaponsDeck());
+        ArrayList<Square> map = MapLoader.loadMap(1, new WeaponsDeck(), new AmmoDeck());
         assertEquals(map.size(), 12);
 
         assertEquals(map.get(0).isSpawnPoint(), false);

@@ -228,7 +228,7 @@ public class ActionController {
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
-        Effect effect = weapon.getEffects(clientInput.effectType).get(0); // TODO allow multiple inputs
+        Effect effect = weapon.getEffects(clientInput.effectType).get(0);
 
         if (effect.getCost() != null) {
             weapon.payEffect(player, effect);

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.*;
+import models.decks.AmmoDeck;
 import models.decks.WeaponsDeck;
 import utils.Logger;
 
@@ -31,7 +32,7 @@ public class MapLoader {
      * @param weaponsDeck the weapons deck
      * @return the array list
      */
-    static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck) {
+    static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck, AmmoDeck ammoDeck) {
         Gson gson = new Gson();
         ParsedSquare[] parsedSquares;
 
@@ -56,7 +57,7 @@ public class MapLoader {
             if (parsedSquare.isSpawnPoint) {
                 square.createWeaponsSlot(weaponsDeck);
             } else {
-                // TODO ammo on non spawn points?
+                square.setAmmo(ammoDeck);
             }
 
             for (int canViewI : parsedSquare.canView) {

@@ -26,12 +26,16 @@ public class Player {
     private Square position;                                    //current position, updated when move happens
     private int actionCounter;                                  //remaining actions per turn
     private int adrenaline;                                     //adrenaline counter, max 2
-    private int totalPoints = 0;                                //total points of the current player
+    private int totalPoints = 0;
+
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
     private boolean hasCompletedFinalFrenzyTurn = false;
+
     private List<ActionController.Action> possibleActions = new ArrayList<>();
     private ActionController.Action activeAction;
+    private List<ActionController.ActionItem> activeActionItems = new ArrayList<>();
+
     private boolean isConnected;
 
     private GameBoard gameBoard;
@@ -89,16 +93,23 @@ public class Player {
         this.possibleActions = possibleActions;
     }
 
-    public synchronized void setActiveAction (ActionController.Action activeAction) {
+    public void setActiveAction (ActionController.Action activeAction) {
         this.activeAction = activeAction;
+        this.activeActionItems.clear();
+
+        if (activeAction != null) {
+            this.activeActionItems.addAll(activeAction.getActionItems());
+        }
     }
+    public ActionController.Action getActiveAction () {
+        return this.activeAction;
+    }
+
+    public List<ActionController.ActionItem> getActiveActionItems () { return  this.activeActionItems; }
 
     public synchronized boolean isConnected () { return  isConnected; }
     public synchronized void setConnected (boolean isConnected) { this.isConnected = isConnected; }
 
-    public synchronized ActionController.Action getActiveAction () {
-        return this.activeAction;
-    }
     /**
      * Adds the value received to the total points of the player.
      * Totalpoints can never be set to a random value

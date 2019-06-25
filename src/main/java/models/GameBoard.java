@@ -134,7 +134,7 @@ public class GameBoard {
      */
     public void setMap (Integer chosenMap) {
         if (chosenMap == null) chosenMap = 1;
-        squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck));
+        squares.addAll(MapLoader.loadMap(chosenMap, weaponsDeck, ammoDeck));
         mapN = chosenMap;
     }
 
