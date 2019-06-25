@@ -12,13 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import messages.client_data.ClientInput;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class WeaponController implements Initializable {
 
-    String weaponChosen = "Railgun";
+    public String weaponChosen = "Railgun";
+
 
     public void setWeaponChosen(String weaponChosen) {
         this.weaponChosen = weaponChosen;
@@ -123,9 +125,28 @@ public class WeaponController implements Initializable {
     @FXML private Button confirmButton;
 
 
-    @FXML void confirm(ActionEvent event) {
+    @FXML void confirmShoot (ActionEvent event) {
+        ClientInput input = new ClientInput();
+        if (firstPrimary.isSelected()){
+            //TODO SEND EFFECT
+        }
+        else if (secondPrimary.isSelected()){
+            //TODO SEND EFFECT
+        }
+        if (secondary.isSelected()){
+            //TODO SEND EFFECT
+        }
+        if (tertiary.isSelected()){
+            //TODO SEND EFFECT
+        }
 
     }
+
+
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources){
         String imagePath = "/JPGs/Weapons/";
