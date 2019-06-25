@@ -63,7 +63,7 @@ public class ClientHandler {
         try {
             parsedMsg.accept(clientController);
         } catch (Exception e) {
-            Logger.err(e, "Error handling client message " + parsedMsg.getClass().getName() + " " + e.getMessage());
+            Logger.err(e, "Error handling client message " + parsedMsg.getClass().getName());
         }
     }
 

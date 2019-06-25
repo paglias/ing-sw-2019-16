@@ -36,7 +36,10 @@ public class PlayerYouData extends PlayerOtherData {
         totalPoints = player.getTotalPoints();
         possibleActions = new ArrayList<>(player.getPossibleActions().stream()
                 .map(a -> a.toString()).collect(Collectors.toList()));
-        activeAction = new ArrayList<>(player.getActiveAction().getActionItems().stream()
-                .map(a -> a.toString()).collect(Collectors.toList()));
+
+        if (player.getActiveAction() != null) {
+            activeAction = new ArrayList<>(player.getActiveAction().getActionItems().stream()
+                    .map(a -> a.toString()).collect(Collectors.toList()));
+        }
     }
 }
