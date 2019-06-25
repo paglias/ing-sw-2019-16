@@ -14,8 +14,8 @@ public class SquareData {
     public Boolean isSpawnPoint;
     public Boolean ammo; // If there's an ammo
     public WeaponsSlotData weaponsSlot;
-    public ArrayList<SquareData> canView;
-    public ArrayList<SquareData> canAccessDirectly;
+    public ArrayList<Integer> canView;
+    public ArrayList<Integer> canAccessDirectly;
 
     public SquareData (Square square) {
         color = square.getColor().toString();
@@ -27,9 +27,10 @@ public class SquareData {
         } else {
             weaponsSlot = null;
         }
+
         canView = new ArrayList<>(square.getCanView().stream()
-                .map(s -> new SquareData(s)).collect(Collectors.toList()));
+                .map(s -> s.getNumber()).collect(Collectors.toList()));
         canAccessDirectly = new ArrayList<>(square.getCanAccessDirectly().stream()
-                .map(s -> new SquareData(s)).collect(Collectors.toList()));
+                .map(s -> s.getNumber()).collect(Collectors.toList()));
     }
 }

@@ -58,7 +58,7 @@ public class Server implements Closeable {
                 try {
                     ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);
                     clientHandler.handleConnection();
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     Logger.err(e, "Problem! closing client " + clientSocket.getLocalAddress());
                 }
             });
@@ -81,7 +81,7 @@ public class Server implements Closeable {
         Server server = new Server(chosenPort);
         try {
             server.lifeCycle();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.err(e, "Exception in server.lifeCycle!");
         } finally {
             server.close();

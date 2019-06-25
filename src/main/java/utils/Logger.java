@@ -7,7 +7,7 @@ public class Logger {
         System.out.println(s);
     }
 
-    public static void err (Exception e, String s) {
+    public static void err (Throwable e, String s) {
         e.printStackTrace();
 
         String eMsg = e.getMessage();

@@ -32,7 +32,7 @@ public class CLI {
                 if (msg != null) controller.onServerMessage(msg);
             } while (msg != null);
 
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.err(e, null);
         } finally {
             Logger.info("Closing connection to server!");

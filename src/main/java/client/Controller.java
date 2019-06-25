@@ -41,7 +41,7 @@ public class Controller implements MessageVisitor  {
         Platform.runLater(() -> {
             try {
                 currentView.updateWithData(lastGameStateMessage);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.err(e, "Error updating view.");
             }
         });

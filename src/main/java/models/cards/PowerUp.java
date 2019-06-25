@@ -32,7 +32,7 @@ public class PowerUp extends CardWithAction {
                         powerUps.add(gson.fromJson(new FileReader(file.getAbsolutePath()), PowerUp.class));
                     }
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.err(e, "Problem loading powerups from file.");
                 throw new IllegalArgumentException("Problem loading powerups from file.");
             }
