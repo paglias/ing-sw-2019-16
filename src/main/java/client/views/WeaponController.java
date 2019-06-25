@@ -5,22 +5,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
-
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-//TODO USE PLAYERSETTERS TO SET PLAYER NICKNAMES FROM MAPCONTROLLER BASED ON GAMESTATEMESSAGE
-
+//SHOOT WINDOW CONTROLLER. HAS A WEAPON IMAGE ON THE LEFT, TARGETS AND EFFECTS ON THE RIGHT.
+//EFFECTS CAN BE FIRST PRIMARY, SECOND PRIMARY, SECONDARY, TERTIARY
+//EACH EFFECT CAN HAVE A MULTIPLE PLAYER TARGET, A POSITION TARGET AND A DIRECTION TARGET
 public class WeaponController implements Initializable {
 
     public String weaponChosen = "Railgun";
@@ -31,92 +30,155 @@ public class WeaponController implements Initializable {
     }
 
     @FXML private ImageView weaponView;
-
     @FXML private RadioButton firstPrimary;
-
     @FXML private RadioButton secondPrimary;
-
     @FXML private CheckBox secondary;
-
     @FXML private CheckBox tertiary;
-
     @FXML private CheckBox player1primary1;
-
     @FXML private CheckBox player2primary1;
-
     @FXML private CheckBox player3primary1;
-
     @FXML private CheckBox player4primary1;
-
     @FXML private CheckBox player5primary1;
-
     @FXML private CheckBox player1primary2;
-
     @FXML private CheckBox player2primary2;
-
     @FXML private CheckBox player3primary2;
-
     @FXML private CheckBox player4primary2;
-
     @FXML private CheckBox player5primary2;
-
     @FXML private CheckBox player1secondary;
-
     @FXML private CheckBox player2secondary;
-
     @FXML private CheckBox player3secondary;
-
     @FXML private CheckBox player4secondary;
-
     @FXML private CheckBox player5secondary;
-
     @FXML private CheckBox player1tertiary;
-
     @FXML private CheckBox player2tertiary;
-
     @FXML private CheckBox player3tertiary;
-
     @FXML private CheckBox player4tertiary;
-
     @FXML private CheckBox player5tertiary;
-
     @FXML private ChoiceBox<String> FPPosition;
-
     @FXML private ChoiceBox<String> SPPosition;
-
     @FXML private ChoiceBox<String> SecondaryPosition;
-
     @FXML private ChoiceBox<String> tertiaryPosition;
-
     @FXML private ChoiceBox<String> FPDirection;
-
     @FXML private ChoiceBox<String> SPDirection;
-
     @FXML private ChoiceBox<String> secondaryDirection;
-
     @FXML private ChoiceBox<String> tertiaryDirection;
 
-    @FXML private Button confirmButton;
 
-
-    @FXML
-    void confirmShoot(ActionEvent event) {
+    @FXML void confirmShoot(ActionEvent event) {
         ClientInput input = new ClientInput();
 
-        //what effects are chosen
+        //what effects and targets are chosen
 
         {
             if (firstPrimary.isSelected()) {
-                //TODO SEND EFFECT
+                //TODO add effect to message
             } else if (secondPrimary.isSelected()) {
-                //TODO SEND EFFECT
+                //TODO add effect to message
             }
             if (secondary.isSelected()) {
-                //TODO SEND EFFECT
+                //TODO add effect to message
             }
             if (tertiary.isSelected()) {
-                //TODO SEND EFFECT
+                //TODO add effect to message
             }
+
+            //TARGETS TO BE SENT TO SERVER
+            //PLAYER TARGETS
+            List<CheckBox> firstPrimarySelectedTargets = new ArrayList<>();
+            firstPrimarySelectedTargets.add(player1primary1);
+            firstPrimarySelectedTargets.add(player2primary1);
+            firstPrimarySelectedTargets.add(player3primary1);
+            firstPrimarySelectedTargets.add(player4primary1);
+            firstPrimarySelectedTargets.add(player5primary1);
+
+            List<CheckBox> secondPrimarySelectedTargets = new ArrayList<>();
+            secondPrimarySelectedTargets.add(player1primary2);
+            secondPrimarySelectedTargets.add(player2primary2);
+            secondPrimarySelectedTargets.add(player3primary2);
+            secondPrimarySelectedTargets.add(player4primary2);
+            secondPrimarySelectedTargets.add(player5primary2);
+
+            List<CheckBox> secondarySelectedTargets = new ArrayList<>();
+            secondarySelectedTargets.add(player1secondary);
+            secondarySelectedTargets.add(player2secondary);
+            secondarySelectedTargets.add(player3secondary);
+            secondarySelectedTargets.add(player4secondary);
+            secondarySelectedTargets.add(player5secondary);
+
+            List<CheckBox> tertiarySelectedTargets = new ArrayList<>();
+            tertiarySelectedTargets.add(player1tertiary);
+            tertiarySelectedTargets.add(player2tertiary);
+            tertiarySelectedTargets.add(player3tertiary);
+            tertiarySelectedTargets.add(player4tertiary);
+            tertiarySelectedTargets.add(player5tertiary);
+
+            for(CheckBox playerIsSelected : firstPrimarySelectedTargets){
+                if (playerIsSelected.isSelected()){
+                    String s = playerIsSelected.getText();
+                    //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                }
+            }
+            for(CheckBox playerIsSelected : secondPrimarySelectedTargets){
+                if (playerIsSelected.isSelected()){
+                    String f = playerIsSelected.getText();
+                    //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                }
+            }
+            for(CheckBox playerIsSelected : secondarySelectedTargets){
+                if (playerIsSelected.isSelected()){
+                    String s = playerIsSelected.getText();
+                    //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                }
+            }
+            for(CheckBox playerIsSelected : tertiarySelectedTargets){
+                if (playerIsSelected.isSelected()){
+                    String s = playerIsSelected.getText();
+                    //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                }
+            }
+        }
+        boolean isFirstPrimaryPositionEmpty = FPPosition.getSelectionModel().isEmpty();
+        boolean isSecondPrimaryPositionEmpty = SPPosition.getSelectionModel().isEmpty();
+        boolean isSecondaryPositionEmpty = SecondaryPosition.getSelectionModel().isEmpty();
+        boolean isTertiaryPositionEmpty = tertiaryPosition.getSelectionModel().isEmpty();
+
+        boolean isFirstPrimaryDirectionEmpty = FPDirection.getSelectionModel().isEmpty();
+        boolean isSecondPrimaryDirectionEmpty = SPDirection.getSelectionModel().isEmpty();
+        boolean isSecondaryDirectionEmpty = secondaryDirection.getSelectionModel().isEmpty();
+        boolean isTertiaryDirectionEmpty = tertiaryDirection.getSelectionModel().isEmpty();
+
+        if (!isFirstPrimaryPositionEmpty){
+            String s = FPPosition.getValue();
+            //TODO SEND STRING POSITION TARGET TO SERVER
+        }
+        if (!isSecondPrimaryPositionEmpty){
+            String s = SPPosition.getValue();
+            //TODO SEND STRING POSITION TARGET TO SERVER
+        }
+        if (!isSecondaryPositionEmpty){
+            String s = SecondaryPosition.getValue();
+            //TODO SEND STRING POSITION TO SERVER
+        }
+        if (!isTertiaryPositionEmpty){
+            String s = tertiaryPosition.getValue();
+            //TODO SEND STRING POSITION TO SERVER
+        }
+
+        if (!isFirstPrimaryDirectionEmpty){
+            String s = FPDirection.getValue();
+            //TODO SEND STRING DIRECTION TO SERVER
+        }
+        if (!isSecondPrimaryDirectionEmpty){
+            String s = SPDirection.getValue();
+            //TODO SEND STRING DIRECTION TO SERVER
+        }
+        if (!isSecondaryDirectionEmpty){
+            String s = secondaryDirection.getValue();
+            //TODO SEND STRING DIRECTION TO SERVER
+        }
+        if (!isTertiaryDirectionEmpty){
+            String s = tertiaryDirection.getValue();
+            //TODO SEND STRING DIRECTION TO SERVER
         }
     }
 
@@ -180,7 +242,8 @@ public class WeaponController implements Initializable {
         FPDirection.setItems(availableDirectionChoices);
         SPDirection.setItems(availableDirectionChoices);
         secondaryDirection.setItems(availableDirectionChoices);
-        tertiaryPosition.setItems(availableDirectionChoices);
+        tertiaryDirection.setItems(availableDirectionChoices);
+
 
         //SETS NICKNAMES OF PLAYERS
         ArrayList<PlayerOtherData> players = Game.controller.getLastGameStateMessage().gameBoardData.players;
@@ -224,4 +287,3 @@ public class WeaponController implements Initializable {
         }
     }
 }
-
