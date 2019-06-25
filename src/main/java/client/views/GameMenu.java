@@ -17,7 +17,12 @@ public class GameMenu {
     @FXML Button confirmButton;
     @FXML TextField username;
 
-    //When Confirm is pressed, loads a new scene with Lobby view
+    /**
+     * Next window.
+     *
+     * @param event the event
+     */
+//When Confirm is pressed, loads a new scene with Lobby view
     public void nextWindow(ActionEvent event) {
         setNickname();
 
@@ -38,7 +43,10 @@ public class GameMenu {
         }
     }
 
-    //sends nickname entered by user
+    /**
+     * Set nickname.
+     */
+//sends nickname entered by user
     void setNickname (){
         ChooseNicknameMessage chooseNicknameMessage = new ChooseNicknameMessage();
         chooseNicknameMessage.setNickname(username.getText());

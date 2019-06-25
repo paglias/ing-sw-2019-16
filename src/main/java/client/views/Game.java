@@ -13,6 +13,11 @@ public class Game extends Application {
     Stage window;
     public static Controller controller;
 
+    /**
+     * Start game.
+     *
+     * @param controller the controller
+     */
     public static void startGame (Controller controller) {
         Game.controller = controller;
         launch();

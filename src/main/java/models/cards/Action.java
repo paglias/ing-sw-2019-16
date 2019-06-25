@@ -32,10 +32,20 @@ public class Action {
     private ArrayList<String> parameters;
     private Type type;
 
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public Type getType () {
         return type;
     }
 
+    /**
+     * Gets parameters.
+     *
+     * @return the parameters
+     */
     public HashMap<Effect.Input, Integer> getParameters () {
         HashMap<Effect.Input, Integer> map = new HashMap<>();
         parameters.forEach(stringParameter -> {

@@ -27,6 +27,12 @@ public class CardWithAction extends Card {
 
     public List<Player> getPlayerTargets () { return this.playerTargets; }
 
+    /**
+     * Gets effects.
+     *
+     * @param effectType the effect type
+     * @return the effects
+     */
     public List<Effect> getEffects (Integer effectType) {
         switch (effectType) {
             case 1:
@@ -40,6 +46,11 @@ public class CardWithAction extends Card {
         }
     }
 
+    /**
+     * Effect.
+     *
+     * @param effect the effect
+     */
     public void effect(Action.Type effect) {
         switch (effect) {
             case MARK_VIEW:
@@ -98,6 +109,9 @@ public class CardWithAction extends Card {
         }
     }
 
+    /**
+     * Reset.
+     */
     public void reset(){
         damagingPlayer = null;
         direction = null;
@@ -105,6 +119,9 @@ public class CardWithAction extends Card {
         positions.clear();
     }
 
+    /**
+     * Shoot target on the same square.
+     */
     public void shoot(){
         Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition()==damagingPlayer.getPosition()) {
@@ -115,6 +132,9 @@ public class CardWithAction extends Card {
     }
 
 
+    /**
+     * Mark target on the same square..
+     */
     public void mark(){
         Player playerTarget= playerTargets.get(0);
         if(playerTarget.getPosition().equals(damagingPlayer.getPosition())) {
@@ -122,6 +142,10 @@ public class CardWithAction extends Card {
         }
         else throw new IllegalArgumentException("Not usable method");
     }
+
+    /**
+     * Move to an adjacent square .
+     */
     public void move() {
         Square position= positions.get(0);
         List<Square> CanAccessDirectly= damagingPlayer.getPosition().getCanAccessDirectly();
@@ -130,6 +154,10 @@ public class CardWithAction extends Card {
         }
         else throw new IllegalArgumentException("Not usable method");
     }
+
+    /**
+     * Shoot to a target that you can see, distant one square.
+     */
     public void shootOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
@@ -139,6 +167,10 @@ public class CardWithAction extends Card {
         }
         else throw new IllegalArgumentException("Not usable method");
     }
+
+    /**
+     * Mark a target that you can see, distant one square.
+     */
     public void markOneAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
@@ -148,6 +180,10 @@ public class CardWithAction extends Card {
         }
         else throw new IllegalArgumentException("Not usable method");
     }
+
+    /**
+     * Shoot to a target that you can see, distant two squares.
+     */
     public void shootTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
@@ -157,6 +193,10 @@ public class CardWithAction extends Card {
         }
         else throw new IllegalArgumentException("Not usable method");
     }
+
+    /**
+     * Mark a target that you can see, distant two squares..
+     */
     public void markTwoAwayView(){
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
@@ -165,6 +205,10 @@ public class CardWithAction extends Card {
             playerTarget.addMark(damagingPlayer);
         }
     }
+
+    /**
+     * Shoot every other target in your square.
+     */
     public void shootEvery() {
         for (Player Players : playerTargets) {
             if (damagingPlayer.getPosition().equals(Players.getPosition())) {
@@ -173,6 +217,10 @@ public class CardWithAction extends Card {
             else throw new IllegalArgumentException("Not usable method");
         }
     }
+
+    /**
+     * Mark every other target in your square.
+     */
     public void markEvery() {
         for (Player Players : playerTargets) {
             if (damagingPlayer.getPosition().equals(Players.getPosition())) {
@@ -181,6 +229,10 @@ public class CardWithAction extends Card {
             else throw new IllegalArgumentException("Not usable method");
         }
     }
+
+    /**
+     * Shoot every target in a room you can see.
+     */
     public void shootRoomCanSee() {
         Square targetSquare= positions.get(0);
         if (!damagingPlayer.getPosition().getCanView().contains(targetSquare)) {
@@ -193,6 +245,10 @@ public class CardWithAction extends Card {
             }
         }
     }
+
+    /**
+     * Choose an adjacent square and shoot every target on that square.
+     */
     public void shootEveryOneAwayView() {
         for (Player Players : playerTargets) {
             List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
@@ -205,6 +261,10 @@ public class CardWithAction extends Card {
         }
 
     }
+
+    /**
+     * Choose an adjacent square and mark every target on that square.
+     */
     public void markEveryOneAwayView() {
         for (Player Players : playerTargets) {
             List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
@@ -215,6 +275,10 @@ public class CardWithAction extends Card {
             else throw new IllegalArgumentException("Not usable method");
         }
     }
+
+    /**
+     * Shoot a target you can see.
+     */
     public void shootView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
@@ -226,6 +290,10 @@ public class CardWithAction extends Card {
 
 
     }
+
+    /**
+     *  Mark a target you can see.
+     */
     public void markView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
@@ -237,6 +305,9 @@ public class CardWithAction extends Card {
 
     }
 
+    /**
+     * Move the target in an adjacent square.
+     */
     public void moveTarget() {
         Player playerTarget= playerTargets.get(0);
         List<Square> CanAccessDirectly = playerTarget.getPosition().getCanAccessDirectly();
@@ -247,6 +318,10 @@ public class CardWithAction extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
+
+    /**
+     * Shoot every target in a cardinal direction you choose.
+     */
     public void shootDirection() {
         Square position= damagingPlayer.getPosition();
 
@@ -261,6 +336,10 @@ public class CardWithAction extends Card {
             throw new IllegalArgumentException("Not usable method");
         }
     }
+
+    /**
+     * Shoot one target that your target can see.
+     */
     public void shootTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
@@ -277,6 +356,11 @@ public class CardWithAction extends Card {
 
 
     }
+
+    /**
+     * Choose one target. Your target can see another target.
+     * the second target can see a third target, shoot the third.
+     */
     public void shootSecondTargetView() {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
@@ -297,6 +381,10 @@ public class CardWithAction extends Card {
         else throw new IllegalArgumentException("Not usable method");
 
     }
+
+    /**
+     * Attract target to your square.
+     */
     public void attractTarget() {
         Square position= damagingPlayer.getPosition();
         Player playerTarget= playerTargets.get(0);
@@ -307,6 +395,9 @@ public class CardWithAction extends Card {
         else throw new IllegalArgumentException("Not usable method");
     }
 
+    /**
+     * Shoot a target you can't see.
+     */
     public void ShootCantSee(){
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);

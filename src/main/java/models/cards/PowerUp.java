@@ -13,9 +13,9 @@ public class PowerUp extends CardWithAction {
     private static ArrayList<PowerUp> cachedPowerUps;
 
     /**
-     * Load weapons from file.
+     * Load powerups from file.
      *
-     * @return the weapons
+     * @return the powerups
      */
     public static ArrayList<PowerUp> loadPowerUps () {
         Gson gson = new Gson();

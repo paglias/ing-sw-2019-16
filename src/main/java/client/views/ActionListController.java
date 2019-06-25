@@ -18,11 +18,17 @@ public class ActionListController implements Initializable {
 
     GenericWindows newWindow = new GenericWindows();
 
+    /**
+     * The Confirm button.
+     */
     @FXML Button confirmButton;
 
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    /**
+     * Move.
+     */
     @FXML public void move() {
 
         ActionStartMessage message = new ActionStartMessage();
@@ -42,6 +48,10 @@ public class ActionListController implements Initializable {
             newWindow.loadingFailure();
         }
     }
+
+    /**
+     * Move grab.
+     */
     @FXML public void moveGrab(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -62,6 +72,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Shoot.
+     */
     @FXML public void shoot(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -82,6 +95,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Adrenaline grab.
+     */
     @FXML public void adrenalineGrab(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -102,6 +118,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Adrenaline shoot.
+     */
     @FXML public void adrenalineShoot(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -122,6 +141,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Before frenzy shoot.
+     */
     @FXML public void beforeFrenzyShoot(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -142,6 +164,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Before frenzy grab.
+     */
     @FXML public void beforeFrenzyGrab(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -151,6 +176,9 @@ public class ActionListController implements Initializable {
         adrenalineGrab();
     }
 
+    /**
+     * Before frenzy move.
+     */
     @FXML public void beforeFrenzyMove(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -171,6 +199,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * After frenzy grab.
+     */
     @FXML public void afterFrenzyGrab(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -191,6 +222,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * After frenzy shoot.
+     */
     @FXML public void afterFrenzyShoot(){
 
         ActionStartMessage message = new ActionStartMessage();
@@ -211,6 +245,9 @@ public class ActionListController implements Initializable {
         }
     }
 
+    /**
+     * Confirm action.
+     */
     @FXML public void confirmAction(){
         Stage mainWindow;
         mainWindow = (Stage) confirmButton.getScene().getWindow();

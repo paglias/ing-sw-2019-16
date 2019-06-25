@@ -8,6 +8,9 @@ import com.google.gson.*;
 import models.decks.WeaponsDeck;
 import utils.Logger;
 
+/**
+ * The type Map loader.
+ */
 public class MapLoader {
     private MapLoader() {
         throw new IllegalStateException("MapLoader class cannot be instantiated.");
@@ -21,6 +24,13 @@ public class MapLoader {
         int[] canAccess;
     }
 
+    /**
+     * Load map array list.
+     *
+     * @param mapNumber   the map number
+     * @param weaponsDeck the weapons deck
+     * @return the array list
+     */
     static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck) {
         Gson gson = new Gson();
         ParsedSquare[] parsedSquares;

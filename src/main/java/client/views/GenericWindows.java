@@ -33,6 +33,9 @@ public class GenericWindows {
         this.currentPlayer = Player;
     }
 
+    /**
+     * Quit game.
+     */
     public void quitGame() {
         Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         quitAlert.setTitle("Quit Game");
@@ -47,6 +50,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * No map chosen.
+     */
     public void noMapChosen() {
         Alert mapAlert = new Alert(Alert.AlertType.WARNING);
         mapAlert.setTitle("Warning Dialog");
@@ -55,6 +61,9 @@ public class GenericWindows {
         mapAlert.showAndWait();
     }
 
+    /**
+     * Action window.
+     */
     public void actionWindow() {
         Stage actionWindow = new Stage();
         actionWindow.initModality(Modality.APPLICATION_MODAL);
@@ -69,6 +78,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Loading failure.
+     */
     public void loadingFailure() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Loading error");
@@ -77,7 +89,12 @@ public class GenericWindows {
         alert.showAndWait();
     }
 
-    //Shows a window with the current marks
+    /**
+     * Show marks.
+     *
+     * @param playerNumber the player number
+     */
+//Shows a window with the current marks
     public void showMarks(int playerNumber) {
         Stage marksWindow = new Stage();
         marksWindow.initModality(Modality.APPLICATION_MODAL);
@@ -93,7 +110,12 @@ public class GenericWindows {
         }
     }
 
-    //Shows a window with the weapon contained in the weaponSlot.
+    /**
+     * Show weapon.
+     *
+     * @param currentSlot the current slot
+     */
+//Shows a window with the weapon contained in the weaponSlot.
     //The weapon is loaded in WeaponPreviewController
     public void showWeapon(int currentSlot) {
         setCurrentSlot(currentSlot);
@@ -109,6 +131,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Power ups.
+     */
     public void powerUps() {
         Stage powerUpWindow = new Stage();
         powerUpWindow.setTitle("Available PowerUps");
@@ -124,6 +149,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Move window.
+     */
     public void moveWindow() {
         Stage moveStage = new Stage();
         moveStage.setTitle("Move action");
@@ -140,6 +168,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Shoot window.
+     */
     public void shootWindow() {
         Stage moveStage = new Stage();
         moveStage.setTitle("Shoot action");
@@ -156,6 +187,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Reload window.
+     */
     public void reloadWindow() {
         Stage moveStage = new Stage();
         moveStage.setTitle("Reload action");
@@ -172,7 +206,12 @@ public class GenericWindows {
         }
     }
 
-    //Receives a weapon selected from the previous window, creates a new window and passes the value
+    /**
+     * Weapon window.
+     *
+     * @param weaponName the weapon name
+     */
+//Receives a weapon selected from the previous window, creates a new window and passes the value
     //to the controller of that window (WeaponController)
     public void weaponWindow(String weaponName) {
         FXMLLoader Loader = new FXMLLoader();

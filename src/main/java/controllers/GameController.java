@@ -24,6 +24,12 @@ public class GameController {
         clients.add(clientController);
     }
 
+    /**
+     * Gets client for player.
+     *
+     * @param player the player
+     * @return the client for player
+     */
     public ClientController getClientForPlayer (Player player) {
         return clients.stream()
                 .filter(c -> c.getLinkedPlayer() == player)
@@ -31,16 +37,33 @@ public class GameController {
                 .orElse(null);
     }
 
+    /**
+     * Gets client for player.
+     *
+     * @param nickname the nickname
+     * @return the client for player
+     */
     public ClientController getClientForPlayer (String nickname) {
         Player player = gameBoard.getPlayerByNickname(nickname);
         return getClientForPlayer(player);
     }
 
+    /**
+     * Dispatch to clients.
+     *
+     * @param msg the msg
+     */
     public void dispatchToClients (AbstractMessage msg) {
         String serialized = msg.serialize();
         clients.stream().forEach(c -> c.sendMsg(serialized));
     }
 
+    /**
+     * Add player.
+     *
+     * @param nickname         the nickname
+     * @param clientController the client controller
+     */
     public synchronized void addPlayer(String nickname, ClientController clientController) {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot join.");
@@ -81,6 +104,11 @@ public class GameController {
 
     }
 
+    /**
+     * Sets .
+     *
+     * @param gameSettingsMessage the game settings message
+     */
     public synchronized void setup (GameSettingsMessage gameSettingsMessage) {
         if (gameBoard.isGameSetup()) {
             throw new IllegalArgumentException("Game already setup.");
@@ -103,6 +131,9 @@ public class GameController {
         GameStateMessage.updateClients(this);
     }
 
+    /**
+     * Start.
+     */
     public synchronized void start() {
         if (gameBoard.hasStarted()) {
             throw new IllegalArgumentException("GameController already started, cannot create a new one.");
@@ -114,6 +145,9 @@ public class GameController {
         GameStateMessage.updateClients(this);
     }
 
+    /**
+     * Start turn.
+     */
     public synchronized void startTurn() {
         Timer turnTimer = new Timer();
         turnTimer.schedule(new TimerTask() {
@@ -137,6 +171,9 @@ public class GameController {
         GameStateMessage.updateClients(this);
     }
 
+    /**
+     * End turn.
+     */
     public synchronized void endTurn() {
         gameBoard.nextPlayer(gameBoard.getActivePlayer());
         startTurn();

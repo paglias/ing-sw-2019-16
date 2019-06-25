@@ -59,6 +59,11 @@ public class ActionController {
         this.player = gameBoardModel.getActivePlayer();
     }
 
+    /**
+     * Get possible actions list.
+     *
+     * @return the list
+     */
     public List<Action> getPossibleActions (){
         List<Action> actionsList = new ArrayList<>();
         actionsList.add(ActionController.Action.USE_POWER_UP);
@@ -105,16 +110,31 @@ public class ActionController {
         }
     }
 
-    // Single items implementation
+    /**
+     * Move.
+     *
+     * @param clientInput the client input
+     */
+// Single items implementation
     public void move (ClientInput clientInput) {
         Square newPosition = gameBoardModel.getSquares().get(clientInput.position);
         player.move(newPosition);
     }
 
+    /**
+     * Grab.
+     *
+     * @param clientInput the client input
+     */
     public void grab (ClientInput clientInput) {
         player.grabItem(clientInput.weaponName);
     }
 
+    /**
+     * Reload.
+     *
+     * @param clientInput the client input
+     */
     public void reload (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         player.reload(weapon);
@@ -149,6 +169,11 @@ public class ActionController {
         }
     }
 
+    /**
+     * Use power up.
+     *
+     * @param clientInput the client input
+     */
     public void usePowerUp (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         Effect effect = powerUp.getEffects(1).get(0); // A power up has only one primary effect
@@ -164,6 +189,11 @@ public class ActionController {
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
     }
 
+    /**
+     * Discard power up and spawn.
+     *
+     * @param clientInput the client input
+     */
     public void discardPowerUpAndSpawn (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
@@ -180,6 +210,11 @@ public class ActionController {
         player.getDamage().clear();
     }
 
+    /**
+     * Shoot.
+     *
+     * @param clientInput the client input
+     */
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
