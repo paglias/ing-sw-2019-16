@@ -4,6 +4,7 @@ import messages.*;
 import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
+import models.cards.PowerUp;
 import server.ClientHandler;
 import utils.Constants;
 import utils.Logger;
@@ -45,7 +46,10 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ActionStartMessage actionStartMessage) {
-        if (!linkedPlayer.isActive()) {
+        ActionController.Action action = actionStartMessage.getAction();
+
+        // Allow out of turn actions only for some powerups
+        if (!linkedPlayer.isActive() && action != ActionController.Action.USE_POWER_UP) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not your turn!");
             sendMsg(errorMessage);
@@ -63,7 +67,6 @@ public class ClientController implements MessageVisitor {
             sendMsg(errorMessage);
         }
 
-        ActionController.Action action = actionStartMessage.getAction();
 
         if (!linkedPlayer.getPossibleActions().contains(action)) {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -99,12 +102,6 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ActionMessage actionMessage) {
-        if (!linkedPlayer.isActive()) {
-            ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setErrorMsg("Not your turn!");
-            sendMsg(errorMessage);
-        }
-
         if (linkedPlayer.getActiveAction() == null) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("No active action!");
@@ -125,6 +122,21 @@ public class ClientController implements MessageVisitor {
 
         ClientInput clientInput = actionMessage.getClientInput();
         ActionController actionController = new ActionController(gameController);
+
+        // Tagback grenade can be used outside of the user's turn
+        if (!linkedPlayer.isActive()) {
+            PowerUp powerUp = null;
+
+            if (activeAction == ActionController.Action.USE_POWER_UP) {
+                powerUp = linkedPlayer.getPowerUps().get(clientInput.powerUpIndex);
+            }
+
+            if (powerUp == null || !powerUp.getName().equals("TagbackGrenade")) {
+                ErrorMessage errorMessage = new ErrorMessage();
+                errorMessage.setErrorMsg("Not your turn!");
+                sendMsg(errorMessage);
+            }
+        }
 
         switch (actionItem) {
             case GRAB:
