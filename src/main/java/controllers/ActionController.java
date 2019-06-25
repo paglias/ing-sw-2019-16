@@ -20,6 +20,7 @@ public class ActionController {
         RELOAD,
         USE_POWER_UP,
         DISCARD_AND_SPAWN,
+        DISCARD,
     }
 
     // List of ActionItems
@@ -30,6 +31,7 @@ public class ActionController {
         RELOAD(ActionItem.RELOAD),
         USE_POWER_UP(ActionItem.USE_POWER_UP),
         DISCARD_AND_SPAWN(ActionItem.DISCARD_AND_SPAWN),
+        DISCARD(ActionItem.DISCARD),
 
         // Adrenaline actions
         MOVE_SHOOT(ActionItem.MOVE, ActionItem.SHOOT),
@@ -66,7 +68,9 @@ public class ActionController {
      */
     public List<Action> getPossibleActions (){
         List<Action> actionsList = new ArrayList<>();
+
         actionsList.add(ActionController.Action.USE_POWER_UP);
+        actionsList.add(ActionController.Action.DISCARD);
 
         if (player.isDead()) actionsList.add(Action.DISCARD_AND_SPAWN);
 
@@ -218,6 +222,21 @@ public class ActionController {
         // Make sure to reset the user to the initial state
         player.setDead(false);
         player.getDamage().clear();
+    }
+
+    /**
+     * Discard a powerup or a weapon.
+     *
+     * @param clientInput the client input
+     */
+    public void discard (ClientInput clientInput) {
+        if (clientInput.weaponName != null) {
+            Weapon weapon = player.getWeaponByName(clientInput.weaponName);
+            gameBoardModel.getWeaponsDeck().discard(weapon);
+        } else if (clientInput.powerUpIndex != null) {
+            PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
+            gameBoardModel.getPowerUpsDeck().sell(player, powerUp);
+        }
     }
 
     /**

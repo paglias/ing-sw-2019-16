@@ -6,10 +6,8 @@ import models.GameBoard;
 import models.Player;
 import models.cards.PowerUp;
 import server.ClientHandler;
-import utils.Constants;
 import utils.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClientController implements MessageVisitor {
@@ -83,8 +81,12 @@ public class ClientController implements MessageVisitor {
             sendMsg(errorMessage);
         }
 
-
-        if (action != ActionController.Action.USE_POWER_UP && action != ActionController.Action.DISCARD_AND_SPAWN) {
+        // These actions are not counted towards the actions limit
+        if (
+                action != ActionController.Action.USE_POWER_UP
+                && action != ActionController.Action.DISCARD_AND_SPAWN
+                && action != ActionController.Action.DISCARD
+        ) {
             linkedPlayer.decreaseActionCounter();
         }
 
@@ -157,6 +159,8 @@ public class ClientController implements MessageVisitor {
                 actionController.usePowerUp(clientInput);
             case DISCARD_AND_SPAWN:
                 actionController.discardPowerUpAndSpawn(clientInput);
+            case DISCARD:
+                actionController.discard(clientInput);
         }
 
         activeActionItems.remove(actionItem);
