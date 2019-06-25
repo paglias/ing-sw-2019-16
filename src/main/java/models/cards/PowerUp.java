@@ -1,6 +1,7 @@
 package models.cards;
 
 import com.google.gson.Gson;
+import utils.Logger;
 
 import java.io.File;
 import java.io.FileReader;
@@ -32,7 +33,7 @@ public class PowerUp extends CardWithAction {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.err(e, "Problem loading powerups from file.");
                 throw new IllegalArgumentException("Problem loading powerups from file.");
             }
 

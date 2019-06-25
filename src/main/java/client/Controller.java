@@ -6,6 +6,8 @@ import client.views.Lobby;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import messages.*;
+import utils.Constants;
+import utils.Logger;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -24,7 +26,7 @@ public class Controller implements MessageVisitor  {
     }
 
     void init () {
-        System.out.println("Starting the GUI...");
+        Logger.info("Starting the GUI...");
 
         pool.submit(() -> {
             Game.startGame(this);
@@ -40,7 +42,7 @@ public class Controller implements MessageVisitor  {
     }
 
     void onServerMessage (String msg) {
-        System.out.println("From server >>> " + msg);
+        if (Constants.DEBUG) Logger.info("From server >>> " + msg);
         // TODO handle errors from deserialization/handling
         AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
         parsedMsg.accept(this);
@@ -51,16 +53,17 @@ public class Controller implements MessageVisitor  {
     }
 
     public void visit(GameStateMessage gameStateMessage) {
-        System.out.println("handling game state msg" );
+        if (Constants.DEBUG) Logger.info("handling game state msg");
         if (currentView != null) currentView.updateWithData(gameStateMessage);
 
     }
     public void visit(EndGameMessage endGameMessage) {
-        System.out.println("handling end game msg" + endGameMessage.serialize());
+        if (Constants.DEBUG) Logger.info("handling end game msg" + endGameMessage.serialize());
     }
 
     public void visit(ErrorMessage errorMessage) {
-        System.out.println("Received error message from server" + errorMessage.getErrorMsg());
+        // TODO show popup
+        Logger.info("Received error message from server: " + errorMessage.getErrorMsg());
     }
 
     public void visit(DisconnectMessage disconnectMessage) {

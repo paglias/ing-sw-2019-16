@@ -1,6 +1,7 @@
 package server;
 
 import controllers.GameController;
+import utils.Logger;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -22,13 +23,13 @@ public class Server implements Closeable {
     private Socket acceptConnection() throws IOException {
         // blocking call
         Socket accepted = serverSocket.accept();
-        System.out.println("Connection accepted: " + accepted.getRemoteSocketAddress());
+        Logger.info("Connection accepted: " + accepted.getRemoteSocketAddress());
         return accepted;
     }
 
     private void lifeCycle() throws IOException {
         serverSocket = new ServerSocket(port);
-        System.out.println("Server listening on port " + port);
+        Logger.info("Server listening on port " + port);
 
         // Create a GameController controller
         // It's created here to make it possible to share it between clients
@@ -57,8 +58,8 @@ public class Server implements Closeable {
                 try {
                     ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);
                     clientHandler.handleConnection();
-                } catch (IOException e) {
-                    System.err.println("Problem! closing client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
+                } catch (Exception e) {
+                    Logger.err(e, "Problem! closing client " + clientSocket.getLocalAddress());
                 }
             });
 
@@ -67,22 +68,21 @@ public class Server implements Closeable {
     }
 
     public void close() throws IOException {
-        System.out.println("Server is shutting down...");
+        Logger.info("Server is shutting down...");
         serverSocket.close();
     }
 
     public static void start (Scanner keyboard) throws IOException {
-        System.out.println("Server is starting...");
-        System.out.println("Choose a port:");
+        Logger.info("Server is starting...");
+        Logger.info("Choose a port:");
         int chosenPort = Integer.parseInt(keyboard.nextLine());
         keyboard.close();
 
         Server server = new Server(chosenPort);
         try {
             server.lifeCycle();
-        } catch (IOException e) {
-            System.out.println("IOException in server.lifeCycle!");
-            e.printStackTrace();
+        } catch (Exception e) {
+            Logger.err(e, "Exception in server.lifeCycle!");
         } finally {
             server.close();
         }

@@ -5,6 +5,8 @@ import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import server.ClientHandler;
+import utils.Constants;
+import utils.Logger;
 
 public class ClientController implements MessageVisitor {
     private ClientHandler clientHandler;
@@ -36,7 +38,7 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(DisconnectMessage disconnectMessage) {
-        System.out.println("handling disconnection msg" + disconnectMessage.serialize());
+        if (Constants.DEBUG) Logger.info("handling disconnection msg" + disconnectMessage.serialize());
     }
 
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
@@ -170,7 +172,7 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(ErrorMessage errorMessage) {
-        System.out.println("Received error message from client" + errorMessage.getErrorMsg());
+        Logger.info("Received error message from client: " + errorMessage.getErrorMsg());
     }
 
     public void visit(GameStateMessage gameStateMessage) {

@@ -1,10 +1,12 @@
 package models;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.*;
 import models.decks.WeaponsDeck;
+import utils.Logger;
 
 public class MapLoader {
     private MapLoader() {
@@ -24,10 +26,11 @@ public class MapLoader {
         ParsedSquare[] parsedSquares;
 
         try {
-             parsedSquares = gson.fromJson(new FileReader(MapLoader.class.getResource("/Maps/map" + mapNumber + ".json").getPath()), ParsedSquare[].class);
+            String mapPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Maps" + File.separatorChar + "map" + mapNumber + ".json";
+            parsedSquares = gson.fromJson(new FileReader(mapPath), ParsedSquare[].class);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new IllegalStateException("Error loading map");
+            Logger.err(e, "Error loading map " + mapNumber);
+            throw new IllegalStateException("Error loading maps!");
         }
         ArrayList<Square> squares = new ArrayList<>();
 

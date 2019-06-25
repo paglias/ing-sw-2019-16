@@ -14,12 +14,13 @@ import java.io.IOException;
 
 
 public class GameMenu {
-
     @FXML Button confirmButton;
     @FXML TextField username;
 
     //When Confirm is pressed, loads a new scene with Lobby view
     public void nextWindow(ActionEvent event) {
+        setNickname();
+
         Parent root;
         Stage window;
 
@@ -38,7 +39,7 @@ public class GameMenu {
     }
 
     //sends nickname entered by user
-    public void setNickname (){
+    void setNickname (){
         ChooseNicknameMessage chooseNicknameMessage = new ChooseNicknameMessage();
         chooseNicknameMessage.setNickname(username.getText());
         Game.controller.sendMsg(chooseNicknameMessage);

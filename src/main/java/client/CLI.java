@@ -1,5 +1,7 @@
 package client;
 
+import utils.Logger;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -13,7 +15,7 @@ public class CLI {
 
     void connect (String host, int port) throws IOException {
         try {
-            System.out.println("Connecting to server at " + host + ":" + port);
+            Logger.info("Connecting to server at " + host + ":" + port);
 
             connection  = new Connection(host, port);
             connection.init();
@@ -28,15 +30,16 @@ public class CLI {
                 if (msg != null) controller.onServerMessage(msg);
             } while (msg != null);
 
-        } catch (IOException e) {
-            System.err.println("IOException " + e.getMessage());
+        } catch (Exception e) {
+            Logger.err(e, null);
         } finally {
+            Logger.info("Closing connection to server!");
             if (!connection.isClosed()) connection.close();
         }
     }
 
     public static void startCli (Scanner keyboard) throws IOException {
-        System.out.println("Provide host:port please");
+        Logger.info("Provide host:port please");
         String[] tokens = keyboard.nextLine().split(":");
 
         if (tokens.length < 2) {

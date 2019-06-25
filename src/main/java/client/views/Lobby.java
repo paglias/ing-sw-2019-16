@@ -175,7 +175,6 @@ public class Lobby extends AbstractView {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("setting up lobby");
         Game.controller.registerCurrentView(this);
     }
 }

@@ -6,13 +6,11 @@ import messages.GameStateMessage;
 import models.GameBoard;
 import models.Player;
 import models.cards.PowerUp;
+import utils.Constants;
 
 import java.util.*;
 
 public class GameController {
-    private static int gameStartTimeout = 30;
-    private static int turnTimeout = 30;
-
     private GameBoard gameBoard;
     private ArrayList<ClientController> clients = new ArrayList<>();
 
@@ -75,7 +73,7 @@ public class GameController {
                     public void run() {
                         if (!gameBoard.hasStarted()) start();
                     }
-                }, gameStartTimeout * (long)1000);
+                }, Constants.TIMEOUT * 1000);
             }
 
             GameStateMessage.updateClients(this);
@@ -123,7 +121,7 @@ public class GameController {
             public void run() {
                 endTurn();
             }
-        }, turnTimeout * (long)1000);
+        }, Constants.TIMEOUT * 1000);
         Player player = gameBoard.getActivePlayer();
 
         ActionController actionController = new ActionController(this);

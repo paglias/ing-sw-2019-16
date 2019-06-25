@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 import com.google.gson.*;
+import utils.Logger;
 
 public class Weapon extends CardWithAction {
     // Weapons are only loaded from file once
@@ -52,7 +53,7 @@ public class Weapon extends CardWithAction {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.err(e, "Problem loading weapons from file.");
                 throw new IllegalArgumentException("Problem loading weapons from file.");
             }
 

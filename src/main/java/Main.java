@@ -1,5 +1,6 @@
 import client.CLI;
 import server.Server;
+import utils.Logger;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -7,8 +8,8 @@ import java.util.Scanner;
 public class Main {
     public static void main (String[] args) throws IOException {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Welcome to Adrenaline!");
-        System.out.println("Choose 1 for the server, 2 for the client:");
+        Logger.info("Welcome to Adrenaline!");
+        Logger.info("Choose 1 for the server, 2 for the client:");
         int choice = Integer.parseInt(keyboard.nextLine());
 
         if (choice == 1) {

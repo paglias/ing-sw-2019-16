@@ -1,5 +1,7 @@
 package client;
 
+import utils.Logger;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -33,7 +35,7 @@ public class Connection implements Closeable {
     public boolean isClosed () { return socket.isClosed(); }
 
     public void close() throws IOException {
-        System.out.println("Closing connection to server at " + host + ":" + port);
+        Logger.info("Closing connection to server at " + host + ":" + port);
         in.close();
         out.close();
         socket.close();

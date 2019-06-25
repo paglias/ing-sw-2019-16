@@ -3,6 +3,8 @@ package server;
 import controllers.ClientController;
 import controllers.GameController;
 import messages.AbstractMessage;
+import utils.Constants;
+import utils.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -34,7 +36,7 @@ public class ClientHandler {
             readStream = new BufferedReader(new InputStreamReader(inputStream));
             writeStream = new PrintWriter(outputStream);
 
-            System.out.println("Connected client " + clientSocket.getRemoteSocketAddress());
+            Logger.info("Connected client " + clientSocket.getRemoteSocketAddress());
 
             clientController = new ClientController(gameController, this);
 
@@ -43,33 +45,36 @@ public class ClientHandler {
 
             do {
                 msg = readStream.readLine();
-                System.out.println("arrived message" + msg);
                 if (msg != null) handleMessage(msg);
             } while (msg != null);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
+            Logger.err(e, "Problem with client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
         } finally {
-            System.out.println("closiing because");
+            Logger.info("Closing connection from client " + clientSocket.getLocalAddress());
             close();
         }
     }
 
     void handleMessage (String msg) {
-        System.out.println("From client >>> " + msg);
+        if (Constants.DEBUG) Logger.info("From client >>> " + msg);
         // TODO handle errors from deserialization/handling
         AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
-        parsedMsg.accept(clientController);
+
+        try {
+            parsedMsg.accept(clientController);
+        } catch (Exception e) {
+            Logger.err(e, "Error handling client message " + parsedMsg.getClass().getName() + " " + e.getMessage());
+        }
     }
 
     public void sendMessage (String msg) {
-        System.out.println("sending message" + msg);
+        if (Constants.DEBUG) Logger.info("Sending message >>> " + msg);
         writeStream.println(msg);
         writeStream.flush();
     }
 
     public void close () throws IOException {
-        System.out.println("Closing client " + clientSocket.getLocalAddress());
+        Logger.info("Closing client " + clientSocket.getLocalAddress());
 
         // First cleanup methods that don't throw exceptions
         // TODO notify game, remove client, ...
