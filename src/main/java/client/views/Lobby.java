@@ -214,7 +214,8 @@ public class Lobby extends AbstractView {
                 default:
                     errorWindow.loadingFailure();
             }
-        } catch (IOException e) {
+        } catch (Throwable e) {
+            Logger.err(e, null);
             errorWindow.loadingFailure();
         }
     }
