@@ -58,9 +58,11 @@ public class Server implements Closeable {
                     ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);
                     clientHandler.handleConnection();
                 } catch (IOException e) {
-                    System.err.println("Problem closing client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
+                    System.err.println("Problem! closing client " + clientSocket.getLocalAddress() + ": " + e.getMessage());
                 }
             });
+
+            if (serverSocket.isClosed()) condition = false;
         }
     }
 

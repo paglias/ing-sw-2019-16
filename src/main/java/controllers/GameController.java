@@ -75,7 +75,7 @@ public class GameController {
                     public void run() {
                         if (!gameBoard.hasStarted()) start();
                     }
-                }, gameStartTimeout * 1000);
+                }, gameStartTimeout * (long)1000);
             }
 
             GameStateMessage.updateClients(this);
@@ -123,7 +123,7 @@ public class GameController {
             public void run() {
                 endTurn();
             }
-        }, turnTimeout * 1000);
+        }, turnTimeout * (long)1000);
         Player player = gameBoard.getActivePlayer();
 
         ActionController actionController = new ActionController(this);

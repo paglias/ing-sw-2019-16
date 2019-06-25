@@ -169,7 +169,7 @@ public class ActionController {
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
 
         Square spawnPosition = gameBoardModel.getSquares().stream()
-                .filter(s -> s.getColor().toString() == powerUp.getColor().toString() && s.isSpawnPoint())
+                .filter(s -> s.getColor().toString().equals(powerUp.getColor().toString()) && s.isSpawnPoint())
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
 
