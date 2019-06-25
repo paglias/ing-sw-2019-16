@@ -168,7 +168,7 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(EndTurnMessage endTurnMessage) {
-        gameController.endTurn();
+        gameController.endTurn(false);
     }
 
     public void visit(ErrorMessage errorMessage) {

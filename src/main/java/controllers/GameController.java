@@ -66,55 +66,72 @@ public class GameController {
      * @param clientController the client controller
      */
     public synchronized void addPlayer(String nickname, ClientController clientController) {
-        if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("GameController already started, cannot join.");
-        }
-
         if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
+        Player existingPlayer = gameBoard.getPlayers().stream()
+                .filter(p -> p.getNickname().equals(nickname))
+                .findFirst()
+                .orElse(null);
 
-        gameBoard.getPlayers().stream()
-                .filter(p -> p.getNickname().equals(nickname)).findFirst()
-                .ifPresent(p -> {
-                    throw new IllegalArgumentException("A player with this nickname already exists!");
-                });
-
-        Logger.info("Player " + nickname + " joined!");
-
-        Player player = new Player();
-        player.setNickname(nickname);
-
-        // Give the each player 2 powerups (one will be discarded)
-        player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
-        player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
-
-        player.setDead(true); // Useful to make sure they spawn as first thing
-
-        gameBoard.addPlayer(player);
-        clientController.setLinkedPlayer(player);
-        addClient(clientController);
-
-        // Start the game when 5 players have joined
-        if (gameBoard.getPlayers().size() == 5) {
-            start();
-        } else {
-            // Start a timer when 3 players have started
-            if (gameBoard.getPlayers().size() == 3) {
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (!gameBoard.hasStarted()) start();
-                    }
-                }, Constants.TIMEOUT * 1000);
+        // Player riconnected
+        if (existingPlayer != null) {
+            ClientController oldClient = getClientForPlayer(existingPlayer);
+            clients.remove(oldClient);
+            clientController.setLinkedPlayer(existingPlayer);
+            addClient(clientController);
+            existingPlayer.setConnected(true);
+        } else { // new player
+            if (gameBoard.hasStarted()) {
+                throw new IllegalArgumentException("GameController already started, cannot join.");
             }
 
-            GameStateMessage.updateClients(this);
-        }
+            Logger.info("Player " + nickname + " joined!");
 
+            Player player = new Player();
+            player.setNickname(nickname);
+
+            // Give the each player 2 powerups (one will be discarded)
+            player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+            player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+
+            player.setDead(true); // Useful to make sure they spawn as first thing
+
+            gameBoard.addPlayer(player);
+            clientController.setLinkedPlayer(player);
+            addClient(clientController);
+
+            // Start the game when 5 players have joined
+            if (gameBoard.getPlayers().size() == 5) {
+                start();
+            } else {
+                // Start a timer when 3 players have started
+                if (gameBoard.getPlayers().size() == 3) {
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (!gameBoard.hasStarted()) start();
+                        }
+                    }, Constants.TIMEOUT * 1000);
+                }
+
+                GameStateMessage.updateClients(this);
+            }
+        }
     }
 
     /**
-     * Sets .
+     * Disconnect a player.
+     *
+     * @param clientController the client controller
+     */
+    public synchronized void disconnectPlayer (ClientController clientController) {
+        Player player = clientController.getLinkedPlayer();
+        player.setConnected(false);
+        Logger.info("Player " + player.getNickname() + " disconnected.");
+    }
+
+    /**
+     * Setup the game.
      *
      * @param gameSettingsMessage the game settings message
      */
@@ -170,7 +187,7 @@ public class GameController {
         turnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                endTurn();
+                endTurn(true);
             }
         }, Constants.TIMEOUT * 1000);
         Player player = gameBoard.getActivePlayer();
@@ -193,10 +210,23 @@ public class GameController {
     /**
      * End turn.
      */
-    public synchronized void endTurn() {
+    public synchronized void endTurn(boolean fromTimeout) {
         Player player = gameBoard.getActivePlayer();
+
+        // Disconnect players if the timeout activated
+        if (fromTimeout) {
+            player.setConnected(false);
+            Logger.info("Turn timeout ended for " + player.getNickname());
+        }
+
         Logger.info("Ending turn for " + player.getNickname());
-        gameBoard.nextPlayer(player);
+
+        // Make sure the next player is connected
+        Player newActivePlayer = gameBoard.nextPlayer(player);
+        while (!newActivePlayer.isConnected()) {
+            newActivePlayer = gameBoard.nextPlayer(player);
+        }
+
         startTurn();
     }
 }

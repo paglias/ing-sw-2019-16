@@ -57,13 +57,12 @@ public class ClientHandler {
 
     void handleMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From client >>> " + msg);
-        // TODO handle errors from deserialization
-        AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
 
         try {
+            AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
             parsedMsg.accept(clientController);
         } catch (Throwable e) {
-            Logger.err(e, "Error handling client message " + parsedMsg.getClass().getName());
+            Logger.err(e, "Error handling client message " + clientSocket.getLocalAddress());
         }
     }
 
@@ -76,8 +75,7 @@ public class ClientHandler {
     public void close () throws IOException {
         Logger.info("Closing client " + clientSocket.getLocalAddress());
 
-        // First cleanup methods that don't throw exceptions
-        // TODO notify game, remove client, ...
+        gameController.disconnectPlayer(clientController);
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

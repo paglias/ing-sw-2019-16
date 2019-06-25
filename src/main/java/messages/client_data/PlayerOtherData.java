@@ -18,11 +18,13 @@ public class PlayerOtherData {
     public ArrayList<String> marks; // marks, as a list of nicknames
     public ArrayList<String> damage; // damage, as a list of nicknames
     public ArrayList<String> cubes; // cubes of the player, as a list of colors
+    public boolean isConnected;
 
     public PlayerOtherData (Player player) {
         nickname = player.getNickname();
         position = player.getPosition() != null ? player.getPosition().getNumber() : null;
         isActive = player.isActive();
+        isConnected = player.isConnected();
         nDeaths = player.getNDeaths();
         marks = new ArrayList<>(player.getMarks().stream()
             .map(p -> p.getNickname()).collect(Collectors.toList()));

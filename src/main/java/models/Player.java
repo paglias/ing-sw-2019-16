@@ -31,6 +31,7 @@ public class Player {
     private boolean isBeforeFirstPlayer;
     private List<ActionController.Action> possibleActions = new ArrayList<>();
     private ActionController.Action activeAction;
+    private boolean isConnected;
 
     private GameBoard gameBoard;
 
@@ -62,6 +63,7 @@ public class Player {
         setAdrenaline(0);
         this.setGivenPoints(newPlayerPoints);
         setActive(false);
+        setConnected(true);
     }
 
     public void setGameBoard (GameBoard gameBoard) {
@@ -86,6 +88,9 @@ public class Player {
     public synchronized void setActiveAction (ActionController.Action activeAction) {
         this.activeAction = activeAction;
     }
+
+    public synchronized boolean isConnected () { return  isConnected; }
+    public synchronized void setConnected (boolean isConnected) { this.isConnected = isConnected; }
 
     public synchronized ActionController.Action getActiveAction () {
         return this.activeAction;
