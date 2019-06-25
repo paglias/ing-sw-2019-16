@@ -83,9 +83,6 @@ public class Controller implements MessageVisitor  {
         Logger.info("Received error message from server: " + errorMessage.getErrorMsg());
     }
 
-    public void visit(DisconnectMessage disconnectMessage) {
-        // Not implemented, server side only
-    }
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         // Not implemented, server side only
     }

@@ -1,6 +1,7 @@
 package controllers;
 
 import messages.AbstractMessage;
+import messages.EndGameMessage;
 import messages.GameSettingsMessage;
 import messages.GameStateMessage;
 import models.GameBoard;
@@ -14,6 +15,7 @@ import java.util.*;
 public class GameController {
     private GameBoard gameBoard;
     private ArrayList<ClientController> clients = new ArrayList<>();
+    private Timer gameStartTimer;
 
     public GameBoard getGameBoard () { return gameBoard; }
 
@@ -98,24 +100,27 @@ public class GameController {
             gameBoard.addPlayer(player);
             clientController.setLinkedPlayer(player);
             addClient(clientController);
+        }
 
-            // Start the game when 5 players have joined
-            if (gameBoard.getPlayers().size() == 5) {
-                start();
-            } else {
-                // Start a timer when 3 players have started
-                if (gameBoard.getPlayers().size() == 3) {
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (!gameBoard.hasStarted()) start();
+        // Start the game when 5 players have joined
+        if (gameBoard.getPlayers().size() == 5) {
+            start();
+        } else {
+            // Start a timer when 3 players are connected
+            if (gameBoard.getNConnectedPlayers() == 3) {
+                if (gameStartTimer != null) gameStartTimer.cancel();
+                gameStartTimer = new Timer();
+                gameStartTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (!gameBoard.hasStarted() && gameBoard.getNConnectedPlayers() >= 3) {
+                            start();
                         }
-                    }, Constants.TIMEOUT * 1000);
-                }
-
-                GameStateMessage.updateClients(this);
+                    }
+                }, Constants.TIMEOUT * 1000);
             }
+
+            GameStateMessage.updateClients(this);
         }
     }
 
@@ -128,6 +133,16 @@ public class GameController {
         Player player = clientController.getLinkedPlayer();
         player.setConnected(false);
         Logger.info("Player " + player.getNickname() + " disconnected.");
+
+        long remainingPlayers = gameBoard.getNConnectedPlayers();
+
+        if (remainingPlayers < 3) {
+            if (gameBoard.hasStarted()) {
+                endGame();
+            } else if (gameStartTimer != null){
+                gameStartTimer.cancel();
+            }
+        }
     }
 
     /**
@@ -162,7 +177,9 @@ public class GameController {
      */
     public synchronized void start() {
         if (gameBoard.hasStarted()) {
-            throw new IllegalArgumentException("GameController already started, cannot create a new one.");
+            // Not throwing an error because multiple timers could have started at once
+            Logger.info("Game already started!");
+            return;
         }
 
         // Automatically setup the game if not done manually
@@ -183,14 +200,16 @@ public class GameController {
      * Start turn.
      */
     public synchronized void startTurn() {
+        Player player = gameBoard.getActivePlayer();
+
         Timer turnTimer = new Timer();
         turnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                endTurn(true);
+                if (player.isActive()) endTurn(true);
             }
         }, Constants.TIMEOUT * 1000);
-        Player player = gameBoard.getActivePlayer();
+
 
         ActionController actionController = new ActionController(this);
         player.setPossibleActions(actionController.getPossibleActions());
@@ -221,13 +240,32 @@ public class GameController {
 
         Logger.info("Ending turn for " + player.getNickname());
 
-        // Make sure the next player is connected
         Player newActivePlayer = gameBoard.nextPlayer(player);
+
+        // Everyone has done their final frenzy turn, the game ends here
+        if (gameBoard.isFinalFrenzy() && newActivePlayer.isFirstPlayer() && newActivePlayer.finalFrenzyDone()) {
+            endGame();
+            return;
+        }
+
+        // Make sure the next player is connected
         while (!newActivePlayer.isConnected()) {
             newActivePlayer = gameBoard.nextPlayer(player);
         }
 
         startTurn();
+    }
+
+    public synchronized void endGame () {
+        Logger.info("Ending the game!");
+
+        gameBoard.calculateGamePoints();
+        Player winner =  Collections.max(gameBoard.getPlayers(), Comparator.comparing(s -> s.getTotalPoints()));
+
+        EndGameMessage endGameMessage = new EndGameMessage();
+        endGameMessage.setWinner(winner.getNickname());
+
+        dispatchToClients(endGameMessage);
     }
 }
 

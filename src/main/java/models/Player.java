@@ -29,6 +29,7 @@ public class Player {
     private int totalPoints = 0;                                //total points of the current player
     private boolean isDead = false;                             //true is the player is currently dead, stays dead until next turn
     private boolean isBeforeFirstPlayer;
+    private boolean hasCompletedFinalFrenzyTurn = false;
     private List<ActionController.Action> possibleActions = new ArrayList<>();
     private ActionController.Action activeAction;
     private boolean isConnected;
@@ -70,12 +71,15 @@ public class Player {
         this.gameBoard = gameBoard;
     }
 
-    public Boolean isBeforeFirstPlayer(){
+    public boolean isBeforeFirstPlayer(){
         return this.isBeforeFirstPlayer;
     }
     public void setIsBeforeFirstPlayer(Boolean isBeforeFirstPlayer){
         this.isBeforeFirstPlayer = isBeforeFirstPlayer;
     }
+
+    public boolean finalFrenzyDone () { return hasCompletedFinalFrenzyTurn; }
+    public void setFinalFrenzyDone () { hasCompletedFinalFrenzyTurn = true; }
 
     public List<ActionController.Action> getPossibleActions () {
         return this.possibleActions;

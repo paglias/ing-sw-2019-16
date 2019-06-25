@@ -37,10 +37,6 @@ public class ClientController implements MessageVisitor {
         clientHandler.sendMessage(msg);
     }
 
-    public void visit(DisconnectMessage disconnectMessage) {
-        if (Constants.DEBUG) Logger.info("handling disconnection msg" + disconnectMessage.serialize());
-    }
-
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         gameController.addPlayer(chooseNicknameMessage.getNickname(), this);
     }

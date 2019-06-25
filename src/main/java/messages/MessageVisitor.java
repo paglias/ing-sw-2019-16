@@ -1,9 +1,6 @@
 package messages;
 
 public interface MessageVisitor {
-    // Client -> Server
-    void visit(DisconnectMessage msg); // TODO from server as well?
-
     void visit(ChooseNicknameMessage msg);
     void visit(GameSettingsMessage msg);
 
@@ -15,7 +12,7 @@ public interface MessageVisitor {
 
     // Server -> Client(s)
     void visit(GameStateMessage msg);
-    void visit(EndGameMessage msg); // TODO can collapse into GameState?
+    void visit(EndGameMessage msg);
 
     // Both way
     void visit(ErrorMessage msg);

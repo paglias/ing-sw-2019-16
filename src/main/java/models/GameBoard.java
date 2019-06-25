@@ -61,6 +61,15 @@ public class GameBoard {
     }
 
     /**
+     * Gets number of connected players.
+     *
+     * @return the number connected players
+     */
+    public synchronized long getNConnectedPlayers () {
+        return this.players.stream().filter(p -> p.isConnected()).count();
+    }
+
+    /**
      * Gets skulls.
      *
      * @return the skulls
@@ -190,6 +199,11 @@ public class GameBoard {
      * @return the player
      */
     public Player nextPlayer (Player currentPlayer) {
+        // If we're in the final frenzy mark the current player as having completed final frenzy
+        if (isFinalFrenzy()) {
+            currentPlayer.setFinalFrenzyDone();
+        }
+
         int i = players.indexOf(currentPlayer);
         try {
             players.get(i++);
@@ -198,7 +212,7 @@ public class GameBoard {
             i=0;
         }
         players.get(i).setActive(true);
-        players.get(i-1).setActive(false);
+        currentPlayer.setActive(false);
         return players.get(i);
     }
 
@@ -282,7 +296,6 @@ public class GameBoard {
         assignPoints(finalPlayerPoints, playersByKills);
     }
 
-    //TODO check if creating only this function is ok to avoid duplicating code.
     /**
      * Assign points. Used in Player and in calculateGamePoints to assign points to players,
      *
