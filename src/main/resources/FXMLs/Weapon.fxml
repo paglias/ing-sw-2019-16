@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.40160642570281124" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.40160642570281124" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.WeaponController">
   <items>
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -45,14 +45,14 @@
                   <RowConstraints maxHeight="107.99997558593748" minHeight="10.0" prefHeight="107.99997558593748" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton mnemonicParsing="false" text="First Primary" GridPane.rowIndex="3">
+                  <RadioButton fx:id="firstPrimary" mnemonicParsing="false" text="First Primary" GridPane.rowIndex="3">
                      <toggleGroup>
                         <ToggleGroup fx:id="primaryEffect" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Second Primary" toggleGroup="$primaryEffect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <CheckBox mnemonicParsing="false" text="Secondary" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <CheckBox mnemonicParsing="false" text="Tertiary" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <RadioButton fx:id="secondPrimary" mnemonicParsing="false" text="Second Primary" toggleGroup="$primaryEffect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="secondary" mnemonicParsing="false" text="Secondary" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="tertiary" mnemonicParsing="false" text="Tertiary" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <VBox fx:id="VB1" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="PLAYERS">
@@ -60,27 +60,27 @@
                               <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <CheckBox mnemonicParsing="false" text="Player 1">
+                        <CheckBox fx:id="player1primary1" mnemonicParsing="false" text="Player 1">
                            <VBox.margin>
                               <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="Player 2">
+                        <CheckBox fx:id="player2primary1" mnemonicParsing="false" text="Player 2">
                            <VBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="Player 3">
+                        <CheckBox fx:id="player3primary3" mnemonicParsing="false" text="Player 3">
                            <VBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="Player 4">
+                        <CheckBox fx:id="player4primary1" mnemonicParsing="false" text="Player 4">
                            <VBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="Player 5">
+                        <CheckBox fx:id="player5primary1" mnemonicParsing="false" text="Player 5">
                            <VBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </VBox.margin>
@@ -94,27 +94,27 @@
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </Label>
-                       <CheckBox mnemonicParsing="false" text="Player 1">
+                       <CheckBox fx:id="player1primary2" mnemonicParsing="false" text="Player 1">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 2">
+                       <CheckBox fx:id="player2primary2" mnemonicParsing="false" text="Player 2">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 3">
+                       <CheckBox fx:id="player3primary2" mnemonicParsing="false" text="Player 3">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 4">
+                       <CheckBox fx:id="player4primary2" mnemonicParsing="false" text="Player 4">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 5">
+                       <CheckBox fx:id="player5primary2" mnemonicParsing="false" text="Player 5">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
@@ -128,27 +128,27 @@
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </Label>
-                       <CheckBox mnemonicParsing="false" text="Player 1">
+                       <CheckBox fx:id="player1secondary" mnemonicParsing="false" text="Player 1">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 2">
+                       <CheckBox fx:id="player2secondary" mnemonicParsing="false" text="Player 2">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 3">
+                       <CheckBox fx:id="player3secondary" mnemonicParsing="false" text="Player 3">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 4">
+                       <CheckBox fx:id="player4secondary" mnemonicParsing="false" text="Player 4">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 5">
+                       <CheckBox fx:id="player5secondary" mnemonicParsing="false" text="Player 5">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
@@ -162,27 +162,27 @@
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </Label>
-                       <CheckBox mnemonicParsing="false" text="Player 1">
+                       <CheckBox fx:id="player1tertiary" mnemonicParsing="false" text="Player 1">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 2">
+                       <CheckBox fx:id="player2tertiary" mnemonicParsing="false" text="Player 2">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 3">
+                       <CheckBox fx:id="player3tertiary" mnemonicParsing="false" text="Player 3">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 4">
+                       <CheckBox fx:id="player4tertiary" mnemonicParsing="false" text="Player 4">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
                        </CheckBox>
-                       <CheckBox mnemonicParsing="false" text="Player 5">
+                       <CheckBox fx:id="player5tertiary" mnemonicParsing="false" text="Player 5">
                            <VBox.margin>
                                <Insets left="10.0" top="3.0" />
                            </VBox.margin>
@@ -196,7 +196,7 @@
                               <Insets left="42.0" />
                            </VBox.margin>
                         </Label>
-                        <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                        <ChoiceBox fx:id="FPPosition" prefHeight="30.0" prefWidth="122.0">
                            <VBox.margin>
                               <Insets left="10.0" top="5.0" />
                            </VBox.margin>
@@ -210,7 +210,7 @@
                                <Insets left="42.0" />
                            </VBox.margin>
                        </Label>
-                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                       <ChoiceBox fx:id="SPPosition" prefHeight="30.0" prefWidth="122.0">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
@@ -224,7 +224,7 @@
                                <Insets left="42.0" />
                            </VBox.margin>
                        </Label>
-                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                       <ChoiceBox fx:id="SecondaryPosition" prefHeight="30.0" prefWidth="122.0">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
@@ -238,7 +238,7 @@
                                <Insets left="42.0" />
                            </VBox.margin>
                        </Label>
-                       <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                       <ChoiceBox fx:id="tertiaryPosition" prefHeight="30.0" prefWidth="122.0">
                            <VBox.margin>
                                <Insets left="10.0" top="5.0" />
                            </VBox.margin>
@@ -252,7 +252,7 @@
                               <Insets left="42.0" />
                            </VBox.margin>
                         </Label>
-                        <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                        <ChoiceBox fx:id="FPDirection" prefHeight="30.0" prefWidth="122.0">
                            <VBox.margin>
                               <Insets left="10.0" top="5.0" />
                            </VBox.margin>
@@ -266,7 +266,7 @@
                                   <Insets left="42.0" />
                               </VBox.margin>
                           </Label>
-                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                          <ChoiceBox fx:id="SPDirection" prefHeight="30.0" prefWidth="122.0">
                               <VBox.margin>
                                   <Insets left="10.0" top="5.0" />
                               </VBox.margin>
@@ -280,7 +280,7 @@
                                   <Insets left="42.0" />
                               </VBox.margin>
                           </Label>
-                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                          <ChoiceBox fx:id="secondaryDirection" prefHeight="30.0" prefWidth="122.0">
                               <VBox.margin>
                                   <Insets left="10.0" top="5.0" />
                               </VBox.margin>
@@ -294,7 +294,7 @@
                                   <Insets left="42.0" />
                               </VBox.margin>
                           </Label>
-                          <ChoiceBox prefHeight="30.0" prefWidth="122.0">
+                          <ChoiceBox fx:id="tertiaryDirection" prefHeight="30.0" prefWidth="122.0">
                               <VBox.margin>
                                   <Insets left="10.0" top="5.0" />
                               </VBox.margin>
@@ -303,7 +303,7 @@
                   </VBox>
                </children>
             </GridPane>
-            <Button layoutX="263.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
+            <Button fx:id="confirmButton" layoutX="263.0" layoutY="528.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
          </children></AnchorPane>
   </items>
 </SplitPane>
