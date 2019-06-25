@@ -11,6 +11,9 @@ public class ClientInput {
     // Use powerup action
     public Integer powerUpIndex;
 
+    // When a cube is needed (the color)
+    public String cube;
+
     // Move action
     public Integer position;
 

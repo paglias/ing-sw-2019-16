@@ -160,6 +160,22 @@ public class ActionController {
                         card.setDirection(clientInput.getDirection());
                 }
             });
+
+            // Targeting scope is a special case in that it doesn't follow the same rules as every other card
+            // So it gets some special code
+            if (card.getName().equals("TargetingScope")) {
+                // Make sure the target is valid
+                Player target = card.getPlayerTargets().get(0);
+                if (!target.getDamage().contains(player)) {
+                    throw new IllegalArgumentException("Invalid target.");
+                };
+
+                // Pay
+                Card.Color cube = Card.Color.valueOf(clientInput.cube);
+                player.removeCube(cube);
+            }
+
+
             card.effect(actionType);
 
             Player activePlayer = gameBoardModel.getActivePlayer();
@@ -177,12 +193,6 @@ public class ActionController {
     public void usePowerUp (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         Effect effect = powerUp.getEffects(1).get(0); // A power up has only one primary effect
-
-        // TODO targeting scope dovrebbe essere a pagamento!
-        // TODO regole di utilizzo diverse
-        if (effect.getCost() != null) {
-            // weapon.payEffect(player, effect);
-        }
 
         // execute actions
         executeAction(effect, powerUp, clientInput);
