@@ -21,7 +21,12 @@ public class SquareData {
         color = square.getColor().toString();
         isSpawnPoint = square.isSpawnPoint();
         ammo = square.getAmmo() != null;
-        weaponsSlot = new WeaponsSlotData(square.getWeaponsSlot());
+
+        if (isSpawnPoint) {
+            weaponsSlot = new WeaponsSlotData(square.getWeaponsSlot());
+        } else {
+            weaponsSlot = null;
+        }
         canView = new ArrayList<>(square.getCanView().stream()
                 .map(s -> new SquareData(s)).collect(Collectors.toList()));
         canAccessDirectly = new ArrayList<>(square.getCanAccessDirectly().stream()

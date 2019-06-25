@@ -3,6 +3,7 @@ package client;
 import client.views.AbstractView;
 import client.views.Game;
 import client.views.Lobby;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import messages.*;
@@ -18,6 +19,7 @@ public class Controller implements MessageVisitor  {
     private Scanner keyboard;
     private ExecutorService pool;
     private AbstractView currentView;
+    private GameStateMessage lastGameStateMessage;
 
     Controller(Connection connection, Scanner keyboard) {
         this.connection = connection;
@@ -33,13 +35,29 @@ public class Controller implements MessageVisitor  {
         });
     }
 
+    void updateView () {
+        if (currentView == null) return;
+
+        Platform.runLater(() -> {
+            try {
+                currentView.updateWithData(lastGameStateMessage);
+            } catch (Exception e) {
+                Logger.err(e, "Error updating view.");
+            }
+        });
+    }
+
     public void registerCurrentView (AbstractView abstractView) {
         currentView = abstractView;
+        // Update immediately with current data
+        updateView();
     }
 
     public void sendMsg (AbstractMessage msg) {
         connection.send(msg.serialize());
     }
+
+    public GameStateMessage getLastGameStateMessage () { return lastGameStateMessage; }
 
     void onServerMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From server >>> " + msg);
@@ -48,15 +66,14 @@ public class Controller implements MessageVisitor  {
         parsedMsg.accept(this);
     }
 
-    private String waitForUserInput () {
-        return keyboard.nextLine();
-    }
-
     public void visit(GameStateMessage gameStateMessage) {
         if (Constants.DEBUG) Logger.info("handling game state msg");
-        if (currentView != null) currentView.updateWithData(gameStateMessage);
-
+        // Save a reference to the game state message in case we're changing window
+        // and it can't update right away
+        lastGameStateMessage = gameStateMessage;
+        updateView();
     }
+
     public void visit(EndGameMessage endGameMessage) {
         if (Constants.DEBUG) Logger.info("handling end game msg" + endGameMessage.serialize());
     }
