@@ -22,6 +22,7 @@ public class ClientInput {
 
     // Shoot action
     public Integer effectType;
+    public boolean useSecondPrimary;
     public ArrayList<String> players;
     public ArrayList<Integer> positions;
     public String direction;

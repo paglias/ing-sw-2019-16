@@ -247,7 +247,17 @@ public class ActionController {
     public void shoot (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
-        Effect effect = weapon.getEffects(clientInput.effectType).get(0);
+
+        List<Effect> effects = weapon.getEffects(clientInput.effectType);
+
+        Effect effect;
+
+        // Allow the use of the second primary effect
+        if (clientInput.effectType == 1 && clientInput.useSecondPrimary) {
+            effect = effects.get(1);
+        } else {
+            effect = effects.get(0);
+        }
 
         if (effect.getCost() != null) {
             weapon.payEffect(player, effect);
