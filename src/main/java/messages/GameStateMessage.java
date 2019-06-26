@@ -21,7 +21,8 @@ public class GameStateMessage extends AbstractMessage {
             ClientController clientForPlayer = gameController.getClientForPlayer(p);
             PlayerYouData playerYouData = new PlayerYouData(p);
             GameStateMessage gameStateMessage = new GameStateMessage(gameBoardData, playerYouData);
-            clientForPlayer.sendMsg(gameStateMessage);
+
+            if (clientForPlayer != null) clientForPlayer.sendMsg(gameStateMessage);
         });
     }
 

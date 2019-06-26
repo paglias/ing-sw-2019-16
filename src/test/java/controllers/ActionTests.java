@@ -4,45 +4,35 @@ import messages.GameSettingsMessage;
 import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
-import models.Square;
-import models.cards.Action;
-import models.cards.Card;
-import models.cards.PowerUp;
-import models.cards.Weapon;
-import org.graalvm.compiler.nodes.calc.PointerEqualsNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActionTests {
-    GameBoard gameBoard;
-    List<Action> ActionsList= new ArrayList<>();
     ActionController actionController;
     GameController gameController;
-    Square square1;
-    Square square2;
-    Square square3;
-    Square square4;
+    GameBoard gameBoard;
     ClientInput clientInput;
     Player player;
 
 
     @BeforeEach
     void setup(){
-        gameBoard= new GameBoard();
         gameController= new GameController();
+        player = new Player();
+        player.setActive(true);
+        player.setNickname("test");
+        gameBoard = gameController.getGameBoard();
+        gameBoard.addPlayer(player);
         actionController= new ActionController(gameController);
         clientInput= new ClientInput();
-        Player player = new Player();
 
-
-
-
-
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.setup(msg);
     }
 
    /* @Test
@@ -57,22 +47,14 @@ public class ActionTests {
 
     @Test
     void move(){
-        GameSettingsMessage msg = new GameSettingsMessage();
-        msg.setSkullsNumber(8);
-        msg.setMapNumber(1);
-        gameController.getGameBoard().addPlayer(player);
-        player.setActive(true);
-        player.setPosition(square1);
-        square1.addCanAccessSquare(square2);
-        square1.setNumber(0);
-        square2.setNumber(1);
-        gameController.setup(msg);
+        player.setPosition(gameBoard.getSquares().get(0));
+
         clientInput.position=1;
         actionController.move(clientInput);
         assertEquals(player.getPosition().getNumber(), 1);
     }
 
-    @Test
+    /*@Test
     void reload(){
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
@@ -105,6 +87,7 @@ public class ActionTests {
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
+        System.out.println(gameController.getGameBoard().getPlayers().size());
         player.setActive(true);
         PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
         int nPowerups= player.getPowerUps().size();
@@ -122,7 +105,7 @@ public class ActionTests {
         player.setPosition(square1);
         square1.isSpawnPoint();
         square1.setNumber(1);
-        clientInput.position=1
+        clientInput.position=1;
         PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
         int nPowerups= player.getPowerUps().size();
         actionController.usePowerUp(clientInput);
@@ -149,7 +132,7 @@ public class ActionTests {
         int nWeapons= player.getWeapons().size();
         assertEquals(player.getPowerUps().size(), nPowerups-1);
         assertEquals(player.getWeapons().size(), nWeapons-1);
-    }
+    }*/
 
 
 
