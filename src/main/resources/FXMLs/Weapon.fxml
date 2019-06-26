@@ -51,8 +51,6 @@
                      </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="secondPrimary" mnemonicParsing="false" text="Second Primary" toggleGroup="$primaryEffect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="secondary" mnemonicParsing="false" text="Secondary" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="tertiary" mnemonicParsing="false" text="Tertiary" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <VBox fx:id="VB1" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="PLAYERS">
@@ -301,9 +299,14 @@
                           </ChoiceBox>
                       </children>
                   </VBox>
+                  <RadioButton fx:id="secondary" mnemonicParsing="false" text="Secondary" toggleGroup="$primaryEffect" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <RadioButton fx:id="tertiary" mnemonicParsing="false" text="Tertiary" toggleGroup="$primaryEffect" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Button fx:id="confirmButton" layoutX="263.0" layoutY="528.0" mnemonicParsing="false" onAction="#confirmShoot" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
+            <Button fx:id="confirm1" layoutX="42.0" layoutY="523.0" mnemonicParsing="false" onAction="#confirmFirstPrimary" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
+            <Button fx:id="confirm2" layoutX="186.0" layoutY="523.0" mnemonicParsing="false" onAction="#confirmSecondPrimary" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
+            <Button fx:id="confirm3" layoutX="332.0" layoutY="523.0" mnemonicParsing="false" onAction="#confirmSecondary" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
+            <Button fx:id="confirm4" layoutX="479.0" layoutY="523.0" mnemonicParsing="false" onAction="#confirmTertiary" prefHeight="30.0" prefWidth="78.0" text="CONFIRM" />
          </children></AnchorPane>
   </items>
 </SplitPane>
