@@ -3,8 +3,10 @@ package models;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import models.decks.AmmoDeck;
 import models.decks.WeaponsDeck;
 import utils.Logger;
@@ -32,14 +34,16 @@ public class MapLoader {
      * @param weaponsDeck the weapons deck
      * @return the array list
      */
-    static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck, AmmoDeck ammoDeck) {
+    public static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck, AmmoDeck ammoDeck) {
         Gson gson = new Gson();
         ParsedSquare[] parsedSquares;
 
         try {
-            String mapPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Maps" + File.separatorChar + "map" + mapNumber + ".json";
-            parsedSquares = gson.fromJson(new FileReader(mapPath), ParsedSquare[].class);
-        } catch (IOException e) {
+            String mapPath = File.separatorChar + "Maps" + File.separatorChar + "map" + mapNumber + ".json";
+            InputStreamReader mapInput = new InputStreamReader(MapLoader.class.getResourceAsStream(mapPath));
+            JsonReader mapReader = new JsonReader(mapInput);
+            parsedSquares = gson.fromJson(mapReader, ParsedSquare[].class);
+        } catch (Throwable e) {
             Logger.err(e, "Error loading map " + mapNumber);
             throw new IllegalStateException("Error loading maps!");
         }

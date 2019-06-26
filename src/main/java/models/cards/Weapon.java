@@ -1,9 +1,11 @@
 package models.cards;
 
+import com.google.gson.stream.JsonReader;
 import models.Player;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import com.google.gson.*;
@@ -48,16 +50,20 @@ public class Weapon extends CardWithAction {
         Gson gson = new Gson();
 
         if (!loadedFromFile) {
-            String weaponsPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Weapons";
-            File weaponsFolder = new File(weaponsPath);
-            File[] listOfWeaponsFiles = weaponsFolder.listFiles();
+            String[] weaponsNames = {"Cyberblade",   "Hellion",    "RocketLauncher", "VortexCannon",
+                    "Electroscythe",  "LockRifle",    "Shockwave",    "Whisper",
+                    "Flamethrower", "MachineGun",   "Shotgun",    "Zx2",
+                    "Furnace",    "PlasmaGun",    "Sledgehammer",
+                    "GrenadeLauncher",  "PowerGlove",   "Thor",
+                    "Heatseeker",   "Railgun",    "TractorBeam"};
             ArrayList<Weapon> weapons = new ArrayList<>();
 
             try {
-                for (File file : listOfWeaponsFiles) {
-                    if (file.isFile()) {
-                        weapons.add(gson.fromJson(new FileReader(file.getAbsolutePath()), Weapon.class));
-                    }
+                for (String weaponName : weaponsNames) {
+                    String weaponPath = File.separatorChar + "Weapons" + File.separatorChar + weaponName + ".json";
+                    InputStreamReader weaponInput = new InputStreamReader(Weapon.class.getResourceAsStream(weaponPath));
+                    JsonReader weapon = new JsonReader(weaponInput);
+                    weapons.add(gson.fromJson(weapon, Weapon.class));
                 }
             } catch (Throwable e) {
                 Logger.err(e, "Problem loading weapons from file.");

@@ -1,10 +1,12 @@
 package models.cards;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import utils.Logger;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class PowerUp extends CardWithAction {
@@ -21,16 +23,15 @@ public class PowerUp extends CardWithAction {
         Gson gson = new Gson();
 
         if (!powerUpsLoadedFromFile) {
-            String powerUpsPath = "." + File.separatorChar + "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar + "Powerups";
-            File powerUpsFolder = new File(powerUpsPath);
-            File[] listOfPowerUpsFiles = powerUpsFolder.listFiles();
+            String[] powerUpsNames = {"Newton",   "Tagback",    "Targeting", "Teleporter"};
             ArrayList<PowerUp> powerUps = new ArrayList<>();
 
             try {
-                for (File file : listOfPowerUpsFiles) {
-                    if (file.isFile()) {
-                        powerUps.add(gson.fromJson(new FileReader(file.getAbsolutePath()), PowerUp.class));
-                    }
+                for (String powerUpName : powerUpsNames) {
+                    String powerUpPath = File.separatorChar + "Powerups" + File.separatorChar + powerUpName + ".json";
+                    InputStreamReader powerUpInput = new InputStreamReader(PowerUp.class.getResourceAsStream(powerUpPath));
+                    JsonReader powerUp = new JsonReader(powerUpInput);
+                    powerUps.add(gson.fromJson(powerUp, PowerUp.class));
                 }
             } catch (Throwable e) {
                 Logger.err(e, "Problem loading powerups from file.");
