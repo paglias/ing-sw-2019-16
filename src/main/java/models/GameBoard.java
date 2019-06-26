@@ -107,10 +107,9 @@ public class GameBoard {
      * @return the active player
      */
     public Player getActivePlayer () {
-        Player player = getPlayers().stream()
+        return getPlayers().stream()
                 .filter(Player::isActive)
                 .findFirst().orElseThrow(IllegalArgumentException::new);
-        return player;
     }
 
     /**

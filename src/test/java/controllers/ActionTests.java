@@ -6,6 +6,10 @@ import models.GameBoard;
 import models.Player;
 import models.Square;
 import models.cards.Action;
+import models.cards.Card;
+import models.cards.PowerUp;
+import models.cards.Weapon;
+import org.graalvm.compiler.nodes.calc.PointerEqualsNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,6 +71,86 @@ public class ActionTests {
         actionController.move(clientInput);
         assertEquals(player.getPosition().getNumber(), 1);
     }
+
+    @Test
+    void reload(){
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        Weapon weapon= player.getWeaponByName(clientInput.weaponName);
+        ArrayList<Card.Color> cost= weapon.getRechargeCost();
+        actionController.reload(clientInput);
+        assertEquals(weapon.isLoaded(), true);
+    }
+
+    @Test
+    void grab(){
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        Weapon weapon=player.getWeaponByName(clientInput.weaponName);
+        int nWeapons= player.getWeapons().size();
+        actionController.reload(clientInput);
+        assertEquals(player.getWeapons().size(),nWeapons+1);
+
+    }
+
+    @Test
+    void usePowerUp(){
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
+        int nPowerups= player.getPowerUps().size();
+        actionController.usePowerUp(clientInput);
+        assertEquals(player.getPowerUps().size(), nPowerups-1);
+    }
+
+    @Test
+    void discardPowerupAndSpawn(){
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        player.setPosition(square1);
+        square1.isSpawnPoint();
+        square1.setNumber(1);
+        clientInput.position=1
+        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
+        int nPowerups= player.getPowerUps().size();
+        actionController.usePowerUp(clientInput);
+        assertEquals(player.getPowerUps().size(), nPowerups-1);
+        assertEquals(player.getPosition().getNumber(), 1);
+    }
+
+    @Test
+    void discard(){
+        GameSettingsMessage msg = new GameSettingsMessage();
+        msg.setSkullsNumber(8);
+        msg.setMapNumber(1);
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        player.setPosition(square1);
+        square1.isSpawnPoint();
+        square1.setNumber(1);
+        clientInput.position=1;
+        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
+        int nPowerups= player.getPowerUps().size();
+        actionController.usePowerUp(clientInput);
+        Card.Color color= powerUp.getColor();
+        Weapon weapon=player.getWeaponByName(clientInput.weaponName);
+        int nWeapons= player.getWeapons().size();
+        assertEquals(player.getPowerUps().size(), nPowerups-1);
+        assertEquals(player.getWeapons().size(), nWeapons-1);
+    }
+
 
 
 
