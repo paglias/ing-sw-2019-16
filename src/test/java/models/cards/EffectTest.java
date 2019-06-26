@@ -12,8 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-/*
-public class WeaponsEffectTest {
+
+public class EffectTest {
     Weapon weapon;
     Player player1;
     Player player2;
@@ -22,16 +22,18 @@ public class WeaponsEffectTest {
     Square square2;
     Square square3;
     Square square4;
+
     @BeforeEach
     void setup() {
         weapon = new Weapon();
         player1 = new Player();
         player2 = new Player();
-        player3= new Player();
+        player3 = new Player();
         square1 = new Square(Square.Color.PURPLE, false);
         square2 = new Square(Square.Color.RED, false);
-        square3= new Square(Square.Color.PURPLE, false);
-        square4= new Square(Square.Color.PURPLE, false);
+        square3 = new Square(Square.Color.PURPLE, false);
+        square4 = new Square(Square.Color.PURPLE, false);
+
 
     }
 
@@ -40,13 +42,15 @@ public class WeaponsEffectTest {
     void shootSamePosition() {
         player1.setPosition(square1);
         player2.setPosition(square1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         weapon.setDamagingPlayer(player1);
         int nDamage = player2.getDamage().size();
         weapon.shoot();
         assertEquals(player2.getDamage().size(), nDamage + 1);
         assertTrue(player2.getDamage().contains(player1));
     }
+
+
     @Test
     void shootNotSamePosition() {
         player1.setPosition(square1);
@@ -54,7 +58,7 @@ public class WeaponsEffectTest {
         int nDamage = player2.getDamage().size();
 
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
 
         assertThrows(IllegalArgumentException.class, () -> {
             weapon.shoot();
@@ -69,7 +73,7 @@ public class WeaponsEffectTest {
         player2.setPosition(square1);
 
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         int nMarks = player2.getMarks().size();
         weapon.mark();
         assertEquals(player2.getMarks().size(), nMarks + 1);
@@ -81,8 +85,7 @@ public class WeaponsEffectTest {
     void move() {
         player1.setPosition(square1);
         weapon.setDamagingPlayer(player1);
-        weapon.setNewPosition(square2);
-        player1.setMoveCounter(1);
+        weapon.addPosition(square2);
         square1.addCanAccessSquare(square2);
         weapon.move();
         assertEquals(player1.getPosition(), square2);
@@ -92,7 +95,7 @@ public class WeaponsEffectTest {
     void shootOneAwayView() {
         player1.setPosition(square1);
         player2.setPosition(square2);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         weapon.setDamagingPlayer(player1);
         square1.addCanAccessSquare(square2);
         square1.addCanViewSquare(square2);
@@ -106,7 +109,7 @@ public class WeaponsEffectTest {
     void shootTwoAwayView() {
         player1.setPosition(square1);
         player2.setPosition(square2);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         weapon.setDamagingPlayer(player1);
         square1.addCanViewSquare(square2);
         int nDamage = player2.getDamage().size();
@@ -120,7 +123,7 @@ public class WeaponsEffectTest {
     void markOneAwayView() {
         player1.setPosition(square1);
         player2.setPosition(square2);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         weapon.setDamagingPlayer(player1);
         square1.addCanAccessSquare(square2);
         square1.addCanViewSquare(square2);
@@ -135,7 +138,7 @@ public class WeaponsEffectTest {
     void markTwoAwayView() {
         player1.setPosition(square1);
         player2.setPosition(square2);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         weapon.setDamagingPlayer(player1);
         square1.addCanViewSquare(square2);
         int nDamage = player2.getMarks().size();
@@ -148,11 +151,8 @@ public class WeaponsEffectTest {
     @Test
     void shootEvery() {
         player1.setPosition(square1);
-        Player player3 = new Player();
-        ArrayList<Player> Players = new ArrayList<Player>();
-        Players.add(player2);
-        Players.add(player3);
-        weapon.setPlayerTargets(Players);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
         weapon.setDamagingPlayer(player1);
         player2.setPosition(square1);
         player3.setPosition(square1);
@@ -170,10 +170,9 @@ public class WeaponsEffectTest {
     void markEvery() {
         player1.setPosition(square1);
         Player player3 = new Player();
-        ArrayList<Player> Players = new ArrayList<Player>();
-        Players.add(player2);
-        Players.add(player3);
-        weapon.setPlayerTargets(Players);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
+        weapon.setDamagingPlayer(player1);
         weapon.setDamagingPlayer(player1);
         player2.setPosition(square1);
         player3.setPosition(square1);
@@ -189,17 +188,13 @@ public class WeaponsEffectTest {
     @Test
     void shootRoomCanSee() {
         player1.setPosition(square1);
-        Player player3 = new Player();
-        ArrayList<Player> Players = new ArrayList<Player>();
-        Players.add(player2);
-        Players.add(player3);
-        weapon.setPlayerTargets(Players);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetSquare(square2);
+        weapon.addPosition(square2);
         player2.setPosition(square2);
         player3.setPosition(square3);
         square1.addCanViewSquare(square2);
-        weapon.setTargetPlayer(player2);
         int nDamage = player2.getDamage().size();
         int nDamage3 = player3.getDamage().size();
         weapon.shootRoomCanSee();
@@ -212,12 +207,10 @@ public class WeaponsEffectTest {
     @Test
     void shootEveryOneAwayView() {
         player1.setPosition(square1);
-        Player player3 = new Player();
-        ArrayList<Player> Players = new ArrayList<Player>();
-        Players.add(player2);
-        Players.add(player3);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
         weapon.setDamagingPlayer(player1);
-        weapon.setPlayerTargets(Players);
+        weapon.setDamagingPlayer(player1);
         player2.setPosition(square2);
         player3.setPosition(square2);
         square1.addCanAccessSquare(square2);
@@ -234,12 +227,10 @@ public class WeaponsEffectTest {
     @Test
     void markEveryOneAwayView() {
         player1.setPosition(square1);
-        Player player3 = new Player();
-        ArrayList<Player> Players = new ArrayList<Player>();
-        Players.add(player2);
-        Players.add(player3);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
         weapon.setDamagingPlayer(player1);
-        weapon.setPlayerTargets(Players);
+        weapon.setDamagingPlayer(player1);
         player2.setPosition(square2);
         player3.setPosition(square2);
         square1.addCanAccessSquare(square2);
@@ -258,7 +249,7 @@ public class WeaponsEffectTest {
         player1.setPosition(square1);
         player2.setPosition(square2);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         square1.addCanViewSquare(square2);
         int nDamage = player2.getDamage().size();
         weapon.shootView();
@@ -271,7 +262,7 @@ public class WeaponsEffectTest {
         player1.setPosition(square1);
         player2.setPosition(square2);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         square1.addCanViewSquare(square2);
         int nDamage = player2.getMarks().size();
         weapon.markView();
@@ -282,10 +273,9 @@ public class WeaponsEffectTest {
     @Test
     void moveTarget() {
         player1.setPosition(square1);
-        player1.setMoveCounter(1);
-        weapon.setTargetPlayer(player1);
+        weapon.addPlayerTarget(player1);
         square1.addCanAccessSquare(square2);
-        weapon.setNewPosition(square2);
+        weapon.addPosition(square2);
         weapon.moveTarget();
         assertEquals(player1.getPosition(), square2);
     }
@@ -293,14 +283,12 @@ public class WeaponsEffectTest {
     @Test
     void shootDirection() {
         player1.setPosition(square1);
-
-        List<Square> squares= Arrays.asList(square1,square2,square3);
-        ArrayList<Player> players=new ArrayList<>(Arrays.asList(player2,player3));
-
         weapon.setDamagingPlayer(player1);
-        weapon.setSquares(squares);
-        weapon.setPlayerTargets(players);
-
+        weapon.addPosition(square1);
+        weapon.addPosition(square2);
+        weapon.addPosition(square3);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
         player2.setPosition(square2);
         player3.setPosition(square3);
         square1.setNumber(0);
@@ -323,10 +311,10 @@ public class WeaponsEffectTest {
         Player player3 = new Player();
         player3.setPosition(square3);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
-        weapon.setSecondTarget(player3);
-        weapon.setTargetSquare(square2);
-        weapon.setTargetSquare(square3);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
+        weapon.addPosition(square2);
+        weapon.addPosition(square3);
         square1.addCanViewSquare(square2);
         square2.addCanViewSquare(square3);
         int nDamage = player2.getDamage().size();
@@ -342,17 +330,16 @@ public class WeaponsEffectTest {
     void ShootSecondTargetView() {
         player1.setPosition(square1);
         player2.setPosition(square2);
-        Player player3 = new Player();
         Player player4 = new Player();
         player3.setPosition(square3);
         player4.setPosition(square4);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
-        weapon.setSecondTarget(player3);
-        weapon.setThirdTarget(player4);
-        weapon.setTargetSquare(square2);
-        weapon.setTargetSquare(square3);
-        weapon.setTargetSquare(square4);
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
+        weapon.addPlayerTarget(player4);
+        weapon.addPosition(square2);
+        weapon.addPosition(square3);
+        weapon.addPosition(square4);
         square1.addCanViewSquare(square2);
         square2.addCanViewSquare(square3);
         square3.addCanViewSquare(square4);
@@ -374,15 +361,13 @@ public class WeaponsEffectTest {
         player2.setPosition(square2);
 
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         // TODO this is wrong, the manual doesn't mention direction
         weapon.setDirection(Square.Direction.EAST);
 
         square1.setNumber(7);
         square2.setNumber(4);
 
-        player1.setMoveCounter(8);
-        player2.setMoveCounter(8);
 
         weapon.attractTarget();
 
@@ -394,11 +379,11 @@ public class WeaponsEffectTest {
         player1.setPosition(square1);
         player2.setPosition(square2);
         weapon.setDamagingPlayer(player1);
-        weapon.setTargetPlayer(player2);
+        weapon.addPlayerTarget(player2);
         int nDamage = player2.getDamage().size();
         weapon.ShootCantSee();
         assertEquals(player2.getDamage().size(), nDamage+1);
         assertTrue(player2.getDamage().contains(player1));
     }
 }
-*/
+

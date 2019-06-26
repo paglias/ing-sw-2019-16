@@ -240,7 +240,7 @@ public class ActionController {
     }
 
     /**
-     * Shoot.
+     * Use weapon effect.
      *
      * @param clientInput the client input
      */

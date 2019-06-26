@@ -13,8 +13,8 @@ public class CardWithAction extends Card {
     protected ArrayList<Effect> secondaryEffect;
     protected ArrayList<Effect> tertiaryEffect;
 
-    protected ArrayList<Player> playerTargets;
-    protected ArrayList<Square> positions;
+    protected ArrayList<Player> playerTargets = new ArrayList<>();
+    protected ArrayList<Square> positions= new ArrayList<>();
     protected Square.Direction direction;
     protected Player damagingPlayer;
 
