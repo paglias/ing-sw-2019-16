@@ -27,7 +27,9 @@ public class GenericMoveController implements Initializable {
     @FXML void confirmMove(ActionEvent event) {
         String positionSelected = newPosition.getSelectionModel().getSelectedItem();
         int square = Integer.parseInt(positionSelected);
+
         ActionMessage newPositionMessage = new ActionMessage();
+        newPositionMessage.setActionItem("MOVE");
         ClientInput clientInput = new ClientInput();
         clientInput.position= square;
         Game.controller.sendMsg(newPositionMessage);

@@ -124,8 +124,6 @@ public class MapController1 extends AbstractView implements Initializable {
                     playerStatus.setText("CONNECTED");
                 }
             }
-
-
             pIndex++;
         }
 
@@ -228,8 +226,7 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //Alert box for quitting the game
-    @FXML
-    public void quitGame(){
+    @FXML public void quitGame(){
         genericWindows.quitGame();
     }
 
@@ -308,6 +305,5 @@ public class MapController1 extends AbstractView implements Initializable {
     }
     @FXML void blueWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(9);
-
     }
 }
