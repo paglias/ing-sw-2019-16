@@ -56,7 +56,7 @@ public class MapLoader {
 
             if (parsedSquare.isSpawnPoint) {
                 square.createWeaponsSlot(weaponsDeck);
-            } else {
+            } else if (parsedSquare.color != "EMPTY") {
                 square.setAmmo(ammoDeck);
             }
 

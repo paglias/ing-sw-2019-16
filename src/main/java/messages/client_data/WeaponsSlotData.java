@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
 // Every attribute is public to make it easier to create it
 public class WeaponsSlotData {
     public ArrayList<WeaponData> weapons;
+    public String color;
 
     public WeaponsSlotData (WeaponsSlot weaponsSlot) {
+        color = weaponsSlot.getColor().toString();
         weapons = new ArrayList<>(weaponsSlot.getWeapons().stream()
         .map(w -> new WeaponData(w)).collect(Collectors.toList()));
     }

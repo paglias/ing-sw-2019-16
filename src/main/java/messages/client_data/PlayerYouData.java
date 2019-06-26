@@ -20,7 +20,6 @@ public class PlayerYouData extends PlayerOtherData {
     public int actionCounter;                                  // remaining actions that can be done during turn
     public int totalPoints;                                // total points of the current player
     public List<String> possibleActions;
-    public List<String> activeAction;
 
     public PlayerYouData (Player player) {
         super(player);
@@ -37,9 +36,5 @@ public class PlayerYouData extends PlayerOtherData {
         possibleActions = new ArrayList<>(player.getPossibleActions().stream()
                 .map(a -> a.toString()).collect(Collectors.toList()));
 
-        if (player.getActiveAction() != null) {
-            activeAction = new ArrayList<>(player.getActiveAction().getActionItems().stream()
-                    .map(a -> a.toString()).collect(Collectors.toList()));
-        }
     }
 }

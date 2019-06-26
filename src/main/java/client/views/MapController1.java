@@ -15,11 +15,15 @@ import javafx.scene.text.Text;
 import messages.GameStateMessage;
 import messages.client_data.PlayerOtherData;
 import messages.client_data.PlayerYouData;
+import messages.client_data.WeaponData;
+import messages.client_data.WeaponsSlotData;
+import models.cards.Weapon;
 import utils.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MapController1 extends AbstractView implements Initializable {
     GenericWindows genericWindows = new GenericWindows();
@@ -151,7 +155,44 @@ public class MapController1 extends AbstractView implements Initializable {
         blueAmmo.setText(String.valueOf(blueAmmoN));
 
         //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
-        //TODO red/blue/yellow weapons label: update the labels with the current weaponSlot weapons
+        // TODO MAP POSITION
+
+        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(gameStateMessage.gameBoardData.squares.stream()
+                .filter(s -> s.isSpawnPoint == true)
+                .map(s -> s.weaponsSlot)
+                .collect(Collectors.toList()));
+
+
+        for (WeaponsSlotData slot : weaponsSlots) {
+            ArrayList<WeaponData> weapons = slot.weapons;
+            Label weapon1;
+            Label weapon2;
+            Label weapon3;
+
+            if (slot.color.equals("RED")) {
+                weapon1 = redWeapon1;
+                weapon2 = redWeapon2;
+                weapon3 = redWeapon3;
+            } else if (slot.color.equals("YELLOW")) {
+                weapon1 = yellowWeapon1;
+                weapon2 = yellowWeapon2;
+                weapon3 = yellowWeapon3;
+            } else { // BLUE
+                weapon1 = blueWeapon1;
+                weapon2 = blueWeapon2;
+                weapon3 = blueWeapon3;
+            }
+
+            if (!weapons.isEmpty()) {
+                weapon1.setText(weapons.get(0).name);
+            }
+            if (weapons.size() > 1) {
+                weapon2.setText(weapons.get(1).name);
+            }
+            if (weapons.size() > 2) {
+                weapon3.setText(weapons.get(2).name);
+            }
+        }
     }
 
     @Override

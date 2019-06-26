@@ -24,6 +24,8 @@ public class WeaponsSlot {
         }
     }
 
+    public Square.Color getColor () { return this.color; }
+
     /**
      * Pick a weapon from the slot, remove it and pass it to the player.
      *

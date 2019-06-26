@@ -37,7 +37,7 @@
     },
     {
       "color": "PURPLE",
-      "isSpawnPoint": true,
+      "isSpawnPoint": false,
       "canView": [5,1,2,7,11],
       "canAccess": [7,5,2]
     },

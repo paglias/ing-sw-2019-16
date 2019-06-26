@@ -186,6 +186,7 @@ public class GameController {
         if (!gameBoard.isGameSetup()) {
             gameBoard.setMap(1);
             gameBoard.getSkulls().setNRemaining(5);
+            gameBoard.setGameSetup(true);
         }
 
         gameBoard.startGame();
@@ -252,6 +253,12 @@ public class GameController {
         while (!newActivePlayer.isConnected()) {
             newActivePlayer = gameBoard.nextPlayer(player);
         }
+
+        // Refill weapon slots
+        gameBoard.getSquares().stream()
+                .filter(s -> s.isSpawnPoint())
+                .map(s -> s.getWeaponsSlot())
+                .forEach(slot -> slot.refill(gameBoard.getWeaponsDeck()));
 
         startTurn();
     }
