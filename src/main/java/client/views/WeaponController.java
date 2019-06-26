@@ -11,6 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
 import java.net.URL;
@@ -25,6 +26,7 @@ public class WeaponController implements Initializable {
 
     public String weaponChosen;
     ClientInput clientInput = new ClientInput();
+    ActionMessage shootMessage = new ActionMessage();
 
 
     public void setWeaponChosen(String weaponChosen) {
@@ -72,9 +74,11 @@ public class WeaponController implements Initializable {
     //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
     @FXML void confirmFirstPrimary(ActionEvent event) {
 
+        clientInput.weaponName = weaponChosen;
+        shootMessage.setActionItem("SHOOT");
+
         if (firstPrimary.isSelected()) {
-            clientInput.weaponName = weaponChosen;
-            clientInput.effectType=1; //TODO FIRST PRIMARY FOR SERVER?
+            clientInput.effectType=1;
         }
 
         List<CheckBox> firstPrimarySelectedTargets = new ArrayList<>();
@@ -86,31 +90,35 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : firstPrimarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String s = playerIsSelected.getText();
-                //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                String t = playerIsSelected.getText();
+                clientInput.players.add(t);
             }
         }
         boolean isFirstPrimaryPositionEmpty = FPPosition.getSelectionModel().isEmpty();
         boolean isFirstPrimaryDirectionEmpty = FPDirection.getSelectionModel().isEmpty();
 
         if (!isFirstPrimaryPositionEmpty) {
-            String s = FPPosition.getValue();
-            //TODO SEND STRING POSITION TARGET TO SERVER
+            String p = FPPosition.getValue();
+            clientInput.positions.add(Integer.parseInt(p));
         }
         if (!isFirstPrimaryDirectionEmpty) {
-            String s = FPDirection.getValue();
-            //TODO SEND STRING DIRECTION TO SERVER
+            String d = FPDirection.getValue();
+            clientInput.direction = d;
         }
 
+        shootMessage.setClientInput(clientInput);
+        Game.controller.sendMsg(shootMessage);
     }
 
     //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
     @FXML void confirmSecondPrimary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
+        shootMessage.setActionItem("SHOOT");
 
         if (secondPrimary.isSelected()) {
-            //TODO add effect to message
+            clientInput.effectType = 1;
+            clientInput.useSecondPrimary = true;
         }
 
         List<CheckBox> secondPrimarySelectedTargets = new ArrayList<>();
@@ -122,8 +130,8 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : secondPrimarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String f = playerIsSelected.getText();
-                //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                String t = playerIsSelected.getText();
+                clientInput.players.add(t);
             }
         }
 
@@ -131,22 +139,26 @@ public class WeaponController implements Initializable {
         boolean isSecondPrimaryDirectionEmpty = SPDirection.getSelectionModel().isEmpty();
 
         if (!isSecondPrimaryPositionEmpty) {
-            String s = SPPosition.getValue();
-            //TODO SEND STRING POSITION TARGET TO SERVER
+            String p = SPPosition.getValue();
+            clientInput.positions.add(Integer.parseInt(p));
         }
         if (!isSecondPrimaryDirectionEmpty) {
-            String s = SPDirection.getValue();
-            //TODO SEND STRING DIRECTION TO SERVER
+            String d = SPDirection.getValue();
+            clientInput.direction = d;
         }
+
+        shootMessage.setClientInput(clientInput);
+        Game.controller.sendMsg(shootMessage);
     }
 
     //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
     @FXML void confirmSecondary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
+        shootMessage.setActionItem("SHOOT");
 
         if (secondary.isSelected()) {
-            //TODO add effect to message
+            clientInput.effectType=2;
         }
 
         List<CheckBox> secondarySelectedTargets = new ArrayList<>();
@@ -158,8 +170,8 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : secondarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String s = playerIsSelected.getText();
-                //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                String t = playerIsSelected.getText();
+                clientInput.players.add(t);
             }
         }
 
@@ -167,23 +179,27 @@ public class WeaponController implements Initializable {
         boolean isSecondaryDirectionEmpty = secondaryDirection.getSelectionModel().isEmpty();
 
         if (!isSecondaryPositionEmpty) {
-            String s = SecondaryPosition.getValue();
-            //TODO SEND STRING POSITION TO SERVER
+            String p = SecondaryPosition.getValue();
+            clientInput.positions.add(Integer.parseInt(p));
         }
 
         if (!isSecondaryDirectionEmpty) {
-            String s = secondaryDirection.getValue();
-            //TODO SEND STRING DIRECTION TO SERVER
+            String d = secondaryDirection.getValue();
+            clientInput.direction = d;
         }
+
+        shootMessage.setClientInput(clientInput);
+        Game.controller.sendMsg(shootMessage);
     }
 
 
     @FXML void confirmTertiary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
+        shootMessage.setActionItem("SHOOT");
 
         if (tertiary.isSelected()) {
-            //TODO add effect to message
+            clientInput.effectType = 3;
         }
 
         List<CheckBox> tertiarySelectedTargets = new ArrayList<>();
@@ -195,25 +211,27 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : tertiarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String s = playerIsSelected.getText();
-                //TODO ADD STRING TO CLIENTINPUT, SEND MESSAGE TO SERVER
+                String t = playerIsSelected.getText();
+                clientInput.players.add(t);
             }
         }
 
         boolean isTertiaryPositionEmpty = tertiaryPosition.getSelectionModel().isEmpty();
-
-
         boolean isTertiaryDirectionEmpty = tertiaryDirection.getSelectionModel().isEmpty();
 
 
         if (!isTertiaryPositionEmpty) {
-            String s = tertiaryPosition.getValue();
-            //TODO SEND STRING POSITION TO SERVER
+            String p = tertiaryPosition.getValue();
+            clientInput.positions.add(Integer.parseInt(p));
         }
+
         if (!isTertiaryDirectionEmpty) {
-            String s = tertiaryDirection.getValue();
-            //TODO SEND STRING DIRECTION TO SERVER
+            String d = tertiaryDirection.getValue();
+            clientInput.direction = d;
         }
+
+        shootMessage.setClientInput(clientInput);
+        Game.controller.sendMsg(shootMessage);
     }
 
     @Override
