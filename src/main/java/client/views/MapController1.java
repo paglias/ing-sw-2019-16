@@ -13,6 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
+import messages.client_data.PlayerOtherData;
+import messages.client_data.PlayerYouData;
+import utils.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private GridPane playerboardGrid;
     @FXML private Label username5;
     @FXML private Button marksPlayer5;
-    @FXML private Label userName1;
+    @FXML private Label username1;
     @FXML private Button marksPlayer1;
     @FXML private Label username2;
     @FXML private Button marksPlayer2;
@@ -74,14 +77,81 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Label player5Active;
 
     //Updates game values with message received by server
-    public void updateWithData(GameStateMessage gameStatus){
+    public void updateWithData(GameStateMessage gameStateMessage){
+        int pIndex = 0;
+
+        ArrayList<PlayerOtherData> players = gameStateMessage.gameBoardData.players;
+        PlayerYouData currentPlayer = gameStateMessage.playerYouData;
+
+        Label usernameLabel = null;
+        Label playerStatus = null;
+
+        for (PlayerOtherData player : players) {
+            switch (pIndex) {
+                case 0:
+                    usernameLabel = username1;
+                    playerStatus = player1Active;
+                    break;
+                case 1:
+                    usernameLabel = username2;
+                    playerStatus = player2Active;
+                    break;
+                case 2:
+                    usernameLabel = username3;
+                    playerStatus = player3Active;
+                    break;
+                case 3:
+                    usernameLabel = username4;
+                    playerStatus = player4Active;
+                    break;
+                case 4:
+                    usernameLabel = username5;
+                    playerStatus = player5Active;
+                    break;
+            }
+
+            if (usernameLabel != null && playerStatus != null) {
+                usernameLabel.setText(player.nickname);
+                if (player.isActive) {
+                    playerStatus.setText("ACTIVE");
+                } else if (!player.isConnected) {
+                    playerStatus.setText("DISABLED");
+                } else {
+                    playerStatus.setText("CONNECTED");
+                }
+            }
+
+
+            pIndex++;
+        }
+
+        totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
+        actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
+
+        int redAmmoN = 0;
+        int blueAmmoN = 0;
+        int yellowAmmoN = 0;
+
+        for (String cube : currentPlayer.cubes) {
+            switch (cube) {
+                case "RED":
+                    redAmmoN++;
+                    break;
+                case "BLUE":
+                    blueAmmoN++;
+                    break;
+                case "YELLOW":
+                    yellowAmmoN++;
+                    break;
+            }
+        }
+
+        redAmmo.setText(String.valueOf(redAmmoN));
+        yellowAmmo.setText(String.valueOf(yellowAmmoN));
+        blueAmmo.setText(String.valueOf(blueAmmoN));
+
         //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
-        //TODO PLAYER STATUS = UPDATE player1Active labels with ACTIVE/CONNECTED/DISABLED, metodo setText
-        //TODO TOTALPOINTS = update totalpoints Text of the current player metodo setText
-        //TODO AMMO= update redAmmo Text of the current player, metodo setText
         //TODO red/blue/yellow weapons label: update the labels with the current weaponSlot weapons
-        //TODO USERNAME labels: update with player usernames
-        //TODO actionCounter text = update with action counter of the current player
     }
 
     @Override
