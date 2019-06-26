@@ -248,6 +248,23 @@ public class ActionController {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         if (!weapon.isLoaded()) throw new IllegalArgumentException("Weapon is not loaded.");
 
+        // Make sure the player only uses one weapon per SHOOT action
+        player.getWeapons().forEach(w -> {
+            if (w != weapon && w.getUsedEffects().size() > 0) {
+                throw new IllegalArgumentException("Only one weapon per SHOoT action allowed!");
+            }
+        });
+
+        // Make sure only one primary/secondary/tertiary effects can be used per action
+        if (weapon.getUsedEffects().contains(clientInput.effectType)) {
+            throw new IllegalArgumentException("Effect " + clientInput.effectType + " already used!");
+        }
+
+        // Make sure secondary/tertiary can only be used after primary
+        if (clientInput.effectType > 1 && !weapon.getUsedEffects().contains(1)) {
+            throw new IllegalArgumentException("Secondary/tertiary can only be used after primary has been used.");
+        }
+
         List<Effect> effects = weapon.getEffects(clientInput.effectType);
 
         Effect effect;
@@ -265,5 +282,7 @@ public class ActionController {
 
         // execute actions
         executeAction(effect, weapon, clientInput);
+
+        weapon.getUsedEffects().add(clientInput.effectType);
     }
 }

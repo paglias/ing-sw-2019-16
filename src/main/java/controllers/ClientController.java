@@ -163,7 +163,10 @@ public class ClientController implements MessageVisitor {
                 actionController.discard(clientInput);
         }
 
-        activeActionItems.remove(actionItem);
+        // Do not remove shoot because it can be used once per effect
+        if (actionItem != ActionController.ActionItem.SHOOT) {
+            activeActionItems.remove(actionItem);
+        }
         GameStateMessage.updateClients(gameController);
     }
 
@@ -180,7 +183,14 @@ public class ClientController implements MessageVisitor {
             sendMsg(errorMessage);
         }
 
+
+        // Reset the used effects of weapons
+        if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
+            linkedPlayer.getWeapons().forEach(w -> w.getUsedEffects().clear());
+        }
+
         linkedPlayer.setActiveAction(null);
+
         GameStateMessage.updateClients(gameController);
     }
 

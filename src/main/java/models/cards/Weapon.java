@@ -20,6 +20,13 @@ public class Weapon extends CardWithAction {
     // Weapons are loaded when created / picked from a deck
     private boolean loaded = true;
 
+    // Which effects have been used during this turn?
+    // {1,2} means primary and secondary for example
+    // Used to make sure only one primary/secondary/tertiary can be used
+    private ArrayList<Integer> usedEffects = new ArrayList<>();
+    public ArrayList<Integer> getUsedEffects() { return usedEffects; }
+
+
     /**
      * Gets recharge cost.
      *

@@ -42,15 +42,13 @@ public class Server implements Closeable {
         while (condition) {
             Socket clientSocket = acceptConnection();
 
-            if (lastGameController == null) {
+            if (lastGameController == null || lastGameController.getGameBoard().hasStarted()) {
                 // Create a game controller if none exists
-                lastGameController = new GameController();
-            } else if (lastGameController.getGameBoard().hasStarted()) {
-                // If a game has already started setup a new one
+                // Or if a game has already started setup a new one
                 lastGameController = new GameController();
             }
 
-            // Trick needed to use a gameController in the lambda
+            // Trick needed to use gameController in the lambda
             // See https://stackoverflow.com/questions/34865383/variable-used-in-lambda-expression-should-be-final-or-effectively-final
             GameController gameController = lastGameController;
 
