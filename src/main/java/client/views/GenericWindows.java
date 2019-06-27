@@ -239,4 +239,21 @@ public class GenericWindows {
         moveStage.show();
         moveStage.setResizable(false);
     }
+
+    //Opens user available weapons on button click
+    public void availableWeapons(){
+        Stage availableWeapons = new Stage();
+        availableWeapons.setTitle("WEAPONS");
+        availableWeapons.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/AvailableWeapons.fxml"));
+            Scene scene = new Scene(root);
+            availableWeapons.setScene(scene);
+            availableWeapons.show();
+            availableWeapons.setResizable(false);
+        } catch (
+                IOException e) {
+            loadingFailure();
+        }
+    }
 }

@@ -516,9 +516,9 @@ public class MapController1 extends AbstractView implements Initializable {
 
     @FXML void drawPowerUp(ActionEvent event) {}
 
-    @FXML void openWeaponsWindow(ActionEvent event) {}
-
-
+    @FXML void openWeaponsWindow(ActionEvent event) {
+        genericWindows.availableWeapons();
+    }
 
     //Opens window showing marks on player
     @FXML void marksPlayer1(ActionEvent event) {
