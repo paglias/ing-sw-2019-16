@@ -12,8 +12,13 @@ import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionMessage;
+import messages.GameStateMessage;
 import messages.client_data.ClientInput;
+import messages.client_data.SquareData;
+import models.Square;
 import utils.Logger;
+
+import java.util.ArrayList;
 
 public class MoveGrabController {
 
@@ -23,22 +28,19 @@ public class MoveGrabController {
     @FXML private Button grab;
 
     @FXML void openGrab (ActionEvent event) {
-        Integer playerPosition = Game.controller.getLastGameStateMessage().playerYouData.position;
-        Game.controller.getLastGameStateMessage().gameBoardData.squares
-                .stream()
-                .filter(p->p.isSpawnPoint);
+        GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
 
-        if (true) //TODO  FILL "IF" WITH CONDITION (CURRENT POSITION IS NOT SPAWNPOINT)
-        {
+        int playerPosition = gameStateMessage.playerYouData.position;
+        ArrayList<SquareData> squares = gameStateMessage.gameBoardData.squares;
+
+        if (!squares.get(playerPosition).isSpawnPoint) {
             //Send message to server, without a weapon. Ammo will be grabbed
             ActionMessage actionMessage = new ActionMessage();
             actionMessage.setActionItem("GRAB");
             ClientInput clientInput = new ClientInput();
             actionMessage.setClientInput(clientInput);
             Game.controller.sendMsg(actionMessage);
-
         } else {
-
             //Create new window, let user choose which weapon
             FXMLLoader Loader = new FXMLLoader();
             Loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/WeaponGrab.fxml"));
