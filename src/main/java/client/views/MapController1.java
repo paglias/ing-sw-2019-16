@@ -149,6 +149,13 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB10;
     @FXML private HBox HB11;
 
+    //These integers contain the players positions on the map, as square numbers
+    Integer player1Position;
+    Integer player2Position;
+    Integer player3Position;
+    Integer player4Position;
+    Integer player5Position;
+
 
 
 
@@ -159,38 +166,65 @@ public class MapController1 extends AbstractView implements Initializable {
         ArrayList<PlayerOtherData> players = gameStateMessage.gameBoardData.players;
         PlayerYouData currentPlayer = gameStateMessage.playerYouData;
 
-        //These integers contain the players positions on the map, as square numbers
-        Integer player1Position;
-        Integer player2Position;
-        Integer player3Position;
-        Integer player4Position;
-        Integer player5Position;
 
         //For-switch that gets the player position for each player and assigns it to the Integers above.
         //Then sends the player number and position to the loadPlayerOnMap function
+        //IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
+        //If the position of a player is different than gamestatemessage, unloads all players
+        // and call loadplayeronmap and load image.
         int posIndex = 0;
         for (PlayerOtherData playerForPosition : players) {
             switch (posIndex) {
                 case 0:
-                    player1Position = playerForPosition.position;
-                    loadPlayerOnMap(posIndex, player1Position);
-                    break;
+                    if (playerForPosition.position == player1Position) {
+                        break;
+                    }
+                    else {
+                        unloadPlayerFromMap(posIndex, player1Position);
+                        player1Position = playerForPosition.position;
+                        loadPlayerOnMap(posIndex, player1Position);
+                        break;
+                    }
                 case 1:
-                    player2Position = playerForPosition.position;
-                    loadPlayerOnMap(posIndex, player2Position);
-                    break;
+                    if (playerForPosition.position == player2Position) {
+                        break;
+                    }
+                    else {
+                        unloadPlayerFromMap(posIndex, player2Position);
+                        player2Position = playerForPosition.position;
+                        loadPlayerOnMap(posIndex, player2Position);
+                        break;
+                    }
                 case 2:
-                    player3Position = playerForPosition.position;
-                    loadPlayerOnMap(posIndex, player3Position);
-                    break;
+                    if (playerForPosition.position == player3Position) {
+                        break;
+                    }
+                    else {
+                        unloadPlayerFromMap(posIndex, player3Position);
+                        player3Position = playerForPosition.position;
+                        loadPlayerOnMap(posIndex, player3Position);
+                        break;
+                    }
                 case 3:
-                    player4Position = playerForPosition.position;
-                    loadPlayerOnMap(posIndex, player4Position);
-                    break;
+                    if (playerForPosition.position == player4Position) {
+                        break;
+                    }
+                    else {
+                        unloadPlayerFromMap(posIndex, player4Position);
+                        player4Position = playerForPosition.position;
+                        loadPlayerOnMap(posIndex, player4Position);
+                        break;
+                    }
                 case 4:
-                    player5Position = playerForPosition.position;
-                    loadPlayerOnMap(posIndex, player5Position);
-                    break;
+                    if (playerForPosition.position == player5Position) {
+                        break;
+                    }
+                    else {
+                        unloadPlayerFromMap(posIndex, player5Position);
+                        player5Position = playerForPosition.position;
+                        loadPlayerOnMap(posIndex, player5Position);
+                        break;
+                    }
             }
             posIndex++;
         }
@@ -267,8 +301,6 @@ public class MapController1 extends AbstractView implements Initializable {
         yellowAmmo.setText(String.valueOf(yellowAmmoN));
         blueAmmo.setText(String.valueOf(blueAmmoN));
 
-        //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
-
         //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(gameStateMessage.gameBoardData.squares.stream()
                 .filter(s -> s.isSpawnPoint == true)
@@ -312,75 +344,17 @@ public class MapController1 extends AbstractView implements Initializable {
     //gamestate message. Loads a JPG with color based on player number and his position.
     public void loadPlayerOnMap(int playerNumber, int position) {
 
-        String correctImage = "/JPGs";
-
-        //Selects the correct image to be loaded, based on player order/number
-        switch (playerNumber) {
-            case 0:
-                correctImage = correctImage+"/Gray.jpg";
-                break;
-            case 1:
-                correctImage = correctImage+"/Blue.jpg";
-                break;
-            case 2:
-                correctImage = correctImage+"/Purple.jpg";
-                break;
-            case 3:
-                correctImage = correctImage+"/Green.jpg";
-                break;
-            case 4:
-                correctImage = correctImage+"/Yellow.jpg";
-                break;
-            default:
-        }
+        String correctImage = getImageToLoadByPlayerNumber(playerNumber);
 
         //Selects the location where to load the image.
-        //HBOX is the parent of the objects (ImageView) that load the image.
+        //HBOX is the parent of the objects (ImageView) that each load an image representing a player on a square.
         //HB1,2,3,4... are HBOXs on each square. Each HBOX has 5 Imageviews (in case 5 players are on the same square).
         //Each Imageview can load one image, based on player.
-        HBox correctHbox = new HBox();
+        HBox correctHBox = getHBoxByPosition(position);
 
-        switch (position) {
-            case 0:
-                correctHbox = HB0;
-                break;
-            case 1:
-                correctHbox = HB1;
-                break;
-            case 2:
-                correctHbox = HB2;
-                break;
-            case 3:
-                System.out.println("Error, this map does not have that square");
-                break;
-            case 4:
-                correctHbox = HB4;
-                break;
-            case 5:
-                correctHbox = HB5;
-                break;
-            case 6:
-                correctHbox = HB6;
-                break;
-            case 7:
-                correctHbox = HB7;
-                break;
-            case 8:
-                correctHbox = HB8;
-                break;
-            case 9:
-                correctHbox = HB9;
-                break;
-            case 10:
-                correctHbox = HB10;
-                break;
-            case 11:
-                correctHbox = HB11;
-                break;
-        }
         //Gets all the imageViews of the correct square (indentified by a HBOX)
         ArrayList<ImageView> squarePictures = new ArrayList<>();
-        squarePictures.add((ImageView) correctHbox.getChildren());
+        squarePictures.add((ImageView) correctHBox.getChildren());
 
         for (ImageView picture : squarePictures) {
             if (picture.getImage() == null) {
@@ -390,6 +364,103 @@ public class MapController1 extends AbstractView implements Initializable {
                 break;
             }
         }
+    }
+
+    //Receives playernumber and position.
+    //Finds the square based on the position
+    //Finds the playerImageColor based on the position.
+    //Unloads the player image from the position.
+    //For loop that compares each image in that square (5 max possible images) and if
+    //the one of those images matches the standard Player image, it removes it from the square.
+    public void unloadPlayerFromMap(int playerNumber, int position){
+        HBox correctHBox = getHBoxByPosition(position);
+
+        ArrayList<ImageView> squarePictures = new ArrayList<>();
+        squarePictures.add((ImageView) correctHBox.getChildren());
+
+        String correctImage = getImageToLoadByPlayerNumber(playerNumber);
+        Image playerImage = new Image(correctImage);
+
+        for (ImageView picture : squarePictures) {
+            for (int i = 0; i < picture.getFitWidth(); i++) {
+                for (int j = 0; j < picture.getFitHeight(); j++) {
+                    if (picture.getImage().getPixelReader().getColor(i, j).equals(playerImage.getPixelReader().getColor(i, j))){
+                        picture.setImage(null);
+                    }
+                }
+            }
+        }
+    }
+
+    //Gets the correct square based by an int position (example, position 5 means square 5)
+    public HBox getHBoxByPosition(int position){
+
+        HBox correctHBox = new HBox();
+
+        switch (position) {
+            case 0:
+                correctHBox = HB0;
+                break;
+            case 1:
+                correctHBox = HB1;
+                break;
+            case 2:
+                correctHBox = HB2;
+                break;
+            case 3:
+                System.out.println("Error, this map does not have that square");
+                break;
+            case 4:
+                correctHBox = HB4;
+                break;
+            case 5:
+                correctHBox = HB5;
+                break;
+            case 6:
+                correctHBox = HB6;
+                break;
+            case 7:
+                correctHBox = HB7;
+                break;
+            case 8:
+                correctHBox = HB8;
+                break;
+            case 9:
+                correctHBox = HB9;
+                break;
+            case 10:
+                correctHBox = HB10;
+                break;
+            case 11:
+                correctHBox = HB11;
+                break;
+        }
+        return correctHBox;
+    }
+
+    public String getImageToLoadByPlayerNumber(int playerNumber) {
+
+        String correctImage = "/JPGs";
+
+        //Selects the correct image to be loaded, based on player order/number
+        switch (playerNumber) {
+            case 0:
+                correctImage = correctImage + "/Gray.jpg";
+                break;
+            case 1:
+                correctImage = correctImage + "/Blue.jpg";
+                break;
+            case 2:
+                correctImage = correctImage + "/Purple.jpg";
+                break;
+            case 3:
+                correctImage = correctImage + "/Green.jpg";
+                break;
+            case 4:
+                correctImage = correctImage + "/Yellow.jpg";
+                break;
+        }
+        return correctImage;
     }
 
     @Override
