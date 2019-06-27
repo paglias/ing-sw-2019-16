@@ -389,7 +389,7 @@
                                  <children>
                                     <AnchorPane fx:id="square0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                                          <HBox fx:id="HB1" layoutY="14.0" prefHeight="40.0" prefWidth="133.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -422,7 +422,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB2" layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square1" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -435,7 +435,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square4" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB4" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square4" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -448,7 +448,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB5" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square5" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -461,7 +461,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square8" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB8" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square8" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -474,7 +474,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB9" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square9" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -487,7 +487,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB10" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square10" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -500,7 +500,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
-                                          <HBox layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB6" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square6" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -513,7 +513,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox layoutX="12.0" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB11" layoutX="12.0" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square11" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -526,7 +526,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <children>
-                                          <HBox layoutX="12.0" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB7" layoutX="12.0" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square7" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -539,7 +539,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="square2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                        <children>
-                                          <HBox layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
+                                          <HBox fx:id="HB3" layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
                                              <children>
                                                 <ImageView fx:id="slot1Square2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ImageView fx:id="slot2Square2" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />

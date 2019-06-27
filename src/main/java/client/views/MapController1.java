@@ -79,10 +79,75 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Label player3Active;
     @FXML private Label player4Active;
     @FXML private Label player5Active;
+    @FXML private ImageView slot1Square0;
+    @FXML private ImageView slot2Square0;
+    @FXML private ImageView slot3Square0;
+    @FXML private ImageView slot4Square0;
+    @FXML private ImageView slot5Square0;
+    @FXML private ImageView slot1Square1;
+    @FXML private ImageView slot2Square1;
+    @FXML private ImageView slot3Square1;
+    @FXML private ImageView slot4Square1;
+    @FXML private ImageView slot5Square1;
+    @FXML private ImageView slot1Square2;
+    @FXML private ImageView slot2Square2;
+    @FXML private ImageView slot3Square2;
+    @FXML private ImageView slot4Square2;
+    @FXML private ImageView slot5Square2;
+    @FXML private ImageView slot1Square4;
+    @FXML private ImageView slot2Square4;
+    @FXML private ImageView slot3Square4;
+    @FXML private ImageView slot4Square4;
+    @FXML private ImageView slot5Square4;
+    @FXML private ImageView slot1Square5;
+    @FXML private ImageView slot2Square5;
+    @FXML private ImageView slot3Square5;
+    @FXML private ImageView slot4Square5;
+    @FXML private ImageView slot5Square5;
+    @FXML private ImageView slot1Square6;
+    @FXML private ImageView slot2Square6;
+    @FXML private ImageView slot3Square6;
+    @FXML private ImageView slot4Square6;
+    @FXML private ImageView slot5Square6;
+    @FXML private ImageView slot1Square7;
+    @FXML private ImageView slot2Square7;
+    @FXML private ImageView slot3Square7;
+    @FXML private ImageView slot4Square7;
+    @FXML private ImageView slot5Square7;
+    @FXML private ImageView slot1Square8;
+    @FXML private ImageView slot2Square8;
+    @FXML private ImageView slot3Square8;
+    @FXML private ImageView slot4Square8;
+    @FXML private ImageView slot5Square8;
+    @FXML private ImageView slot1Square9;
+    @FXML private ImageView slot2Square9;
+    @FXML private ImageView slot3Square9;
+    @FXML private ImageView slot4Square9;
+    @FXML private ImageView slot5Square9;
+    @FXML private ImageView slot1Square10;
+    @FXML private ImageView slot2Square10;
+    @FXML private ImageView slot3Square10;
+    @FXML private ImageView slot4Square10;
+    @FXML private ImageView slot5Square10;
+    @FXML private ImageView slot1Square11;
+    @FXML private ImageView slot2Square11;
+    @FXML private ImageView slot3Square11;
+    @FXML private ImageView slot4Square11;
+    @FXML private ImageView slot5Square11;
+
+
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage){
         int pIndex = 0;
+
+        //update player positions on the map
+
+
+
+
+
+
 
         ArrayList<PlayerOtherData> players = gameStateMessage.gameBoardData.players;
         PlayerYouData currentPlayer = gameStateMessage.playerYouData;
