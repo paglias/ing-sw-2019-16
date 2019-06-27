@@ -4,8 +4,14 @@ import messages.GameSettingsMessage;
 import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
+import models.Square;
+import models.cards.Card;
+import models.cards.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -16,18 +22,21 @@ public class ActionTests {
     GameBoard gameBoard;
     ClientInput clientInput;
     Player player;
+    Weapon weapon;
+    Square square1;
 
 
     @BeforeEach
-    void setup(){
-        gameController= new GameController();
+    void setup() {
+        gameController = new GameController();
         player = new Player();
         player.setActive(true);
         player.setNickname("test");
         gameBoard = gameController.getGameBoard();
         gameBoard.addPlayer(player);
-        actionController= new ActionController(gameController);
-        clientInput= new ClientInput();
+        actionController = new ActionController(gameController);
+        clientInput = new ClientInput();
+        Square square1 = new Square(Square.Color.BLUE, true);
 
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
@@ -46,97 +55,94 @@ public class ActionTests {
     }*/
 
     @Test
-    void move(){
+    void move() {
         player.setPosition(gameBoard.getSquares().get(0));
 
-        clientInput.position=1;
+        clientInput.position = 1;
         actionController.move(clientInput);
         assertEquals(player.getPosition().getNumber(), 1);
     }
 
-    /*@Test
+   /* @Test
     void reload(){
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
         player.setActive(true);
-        Weapon weapon= player.getWeaponByName(clientInput.weaponName);
-        ArrayList<Card.Color> cost= weapon.getRechargeCost();
+        int nCubes= player.getCubes().size();
+        clientInput.weaponName="Electroscythe";
+        int cost=player.getWeaponByName(clientInput.weaponName).getRechargeCost().size();
         actionController.reload(clientInput);
-        assertEquals(weapon.isLoaded(), true);
-    }
+        assertEquals(player.getCubes().size(), nCubes-cost);
+    }*/
 
     @Test
-    void grab(){
+    void grab() {
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
         player.setActive(true);
-        Weapon weapon=player.getWeaponByName(clientInput.weaponName);
-        int nWeapons= player.getWeapons().size();
-        actionController.reload(clientInput);
-        assertEquals(player.getWeapons().size(),nWeapons+1);
+        square1.isSpawnPoint();
+        player.setPosition(square1);
+        clientInput.weaponName = "Electroscythe";
+        int nWeapons = player.getWeapons().size();
+        actionController.grab(clientInput);
+        assertEquals(player.getWeapons().size(), nWeapons + 1);
 
     }
 
     @Test
-    void usePowerUp(){
+    void usePowerUp() {
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
         System.out.println(gameController.getGameBoard().getPlayers().size());
         player.setActive(true);
-        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
-        int nPowerups= player.getPowerUps().size();
+        clientInput.powerUpIndex=0;
+        int nPowerups = player.getPowerUps().size();
         actionController.usePowerUp(clientInput);
-        assertEquals(player.getPowerUps().size(), nPowerups-1);
+        assertEquals(player.getPowerUps().size(), nPowerups - 1);
     }
 
     @Test
-    void discardPowerupAndSpawn(){
+    void discardPowerupAndSpawn() {
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
         player.setActive(true);
         player.setPosition(square1);
-        square1.isSpawnPoint();
-        square1.setNumber(1);
-        clientInput.position=1;
-        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
-        int nPowerups= player.getPowerUps().size();
+        clientInput.position = 1;
+        clientInput.powerUpIndex=0;
+        int nPowerups = player.getPowerUps().size();
         actionController.usePowerUp(clientInput);
-        assertEquals(player.getPowerUps().size(), nPowerups-1);
+        assertEquals(player.getPowerUps().size(), nPowerups - 1);
         assertEquals(player.getPosition().getNumber(), 1);
     }
 
     @Test
-    void discard(){
+    void discard() {
         GameSettingsMessage msg = new GameSettingsMessage();
         msg.setSkullsNumber(8);
         msg.setMapNumber(1);
         gameController.getGameBoard().addPlayer(player);
         player.setActive(true);
-        player.setPosition(square1);
-        square1.isSpawnPoint();
-        square1.setNumber(1);
-        clientInput.position=1;
-        PowerUp powerUp= player.getPowerUps().get(clientInput.powerUpIndex);
-        int nPowerups= player.getPowerUps().size();
+        clientInput.position = 1;
+        clientInput.powerUpIndex=0;
+        int nPowerups = player.getPowerUps().size();
         actionController.usePowerUp(clientInput);
-        Card.Color color= powerUp.getColor();
-        Weapon weapon=player.getWeaponByName(clientInput.weaponName);
-        int nWeapons= player.getWeapons().size();
-        assertEquals(player.getPowerUps().size(), nPowerups-1);
-        assertEquals(player.getWeapons().size(), nWeapons-1);
-    }*/
-
-
-
-
+        Weapon weapon = player.getWeaponByName(clientInput.weaponName);
+        int nWeapons = player.getWeapons().size();
+        assertEquals(player.getPowerUps().size(), nPowerups - 1);
+        assertEquals(player.getWeapons().size(), nWeapons - 1);
+    }
 
 
 }
+
+
+
+

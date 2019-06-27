@@ -263,6 +263,9 @@ public class GameController {
         startTurn();
     }
 
+    /**
+     * End game.
+     */
     public synchronized void endGame () {
         Logger.info("Ending the game!");
 
