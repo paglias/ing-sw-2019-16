@@ -7,10 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
 import messages.client_data.PlayerOtherData;
@@ -135,6 +137,18 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private ImageView slot3Square11;
     @FXML private ImageView slot4Square11;
     @FXML private ImageView slot5Square11;
+    @FXML private HBox HB0;
+    @FXML private HBox HB1;
+    @FXML private HBox HB2;
+    @FXML private HBox HB4;
+    @FXML private HBox HB5;
+    @FXML private HBox HB6;
+    @FXML private HBox HB7;
+    @FXML private HBox HB8;
+    @FXML private HBox HB9;
+    @FXML private HBox HB10;
+    @FXML private HBox HB11;
+
 
 
 
@@ -254,7 +268,6 @@ public class MapController1 extends AbstractView implements Initializable {
         blueAmmo.setText(String.valueOf(blueAmmoN));
 
         //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
-        // TODO MAP POSITION
 
         //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(gameStateMessage.gameBoardData.squares.stream()
@@ -297,8 +310,86 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
     //gamestate message. Loads a JPG with color based on player number and his position.
-    public void loadPlayerOnMap(int playerNumber, int position){
+    public void loadPlayerOnMap(int playerNumber, int position) {
 
+        String correctImage = "/JPGs";
+
+        //Selects the correct image to be loaded, based on player order/number
+        switch (playerNumber) {
+            case 0:
+                correctImage = correctImage+"/Gray.jpg";
+                break;
+            case 1:
+                correctImage = correctImage+"/Blue.jpg";
+                break;
+            case 2:
+                correctImage = correctImage+"/Purple.jpg";
+                break;
+            case 3:
+                correctImage = correctImage+"/Green.jpg";
+                break;
+            case 4:
+                correctImage = correctImage+"/Yellow.jpg";
+                break;
+            default:
+        }
+
+        //Selects the location where to load the image.
+        //HBOX is the parent of the objects (ImageView) that load the image.
+        //HB1,2,3,4... are HBOXs on each square. Each HBOX has 5 Imageviews (in case 5 players are on the same square).
+        //Each Imageview can load one image, based on player.
+        HBox correctHbox = new HBox();
+
+        switch (position) {
+            case 0:
+                correctHbox = HB0;
+                break;
+            case 1:
+                correctHbox = HB1;
+                break;
+            case 2:
+                correctHbox = HB2;
+                break;
+            case 3:
+                System.out.println("Error, this map does not have that square");
+                break;
+            case 4:
+                correctHbox = HB4;
+                break;
+            case 5:
+                correctHbox = HB5;
+                break;
+            case 6:
+                correctHbox = HB6;
+                break;
+            case 7:
+                correctHbox = HB7;
+                break;
+            case 8:
+                correctHbox = HB8;
+                break;
+            case 9:
+                correctHbox = HB9;
+                break;
+            case 10:
+                correctHbox = HB10;
+                break;
+            case 11:
+                correctHbox = HB11;
+                break;
+        }
+        //Gets all the imageViews of the correct square (indentified by a HBOX)
+        ArrayList<ImageView> squarePictures = new ArrayList<>();
+        squarePictures.add((ImageView) correctHbox.getChildren());
+
+        for (ImageView picture : squarePictures) {
+            if (picture.getImage() == null) {
+                Image finalPlayerImagePosition = new Image(correctImage);
+                picture.setImage(finalPlayerImagePosition);
+                System.out.println("Player positions were loaded on the map");
+                break;
+            }
+        }
     }
 
     @Override
