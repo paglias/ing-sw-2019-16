@@ -40,6 +40,12 @@ public class WeaponsSlot {
         }
     }
 
+    public Weapon getWeaponByName (String name) {
+        return getWeapons().stream()
+                .filter(weapon -> weapon.getName().equals(name))
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+    }
+
     /**
      * Refill the weapon slot after a weapon has been picked.
      */

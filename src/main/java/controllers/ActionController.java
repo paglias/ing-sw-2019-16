@@ -71,16 +71,14 @@ public class ActionController {
 
         actionsList.add(ActionController.Action.USE_POWER_UP);
         actionsList.add(ActionController.Action.DISCARD);
+        actionsList.add(ActionController.Action.RELOAD);
 
         if (player.isDead()) actionsList.add(Action.DISCARD_AND_SPAWN);
 
         int adrenalineLevel = player.getAdrenaline();
 
         if(!gameBoardModel.isFinalFrenzy()) {
-            if (player.getActionCounter() == 0) {
-                actionsList.add(ActionController.Action.RELOAD);
-                return actionsList;
-            } else if (adrenalineLevel == 0) {
+            if (adrenalineLevel == 0) {
                 actionsList.add(ActionController.Action.MOVE);
                 actionsList.add(ActionController.Action.MOVE_GRAB);
                 actionsList.add(ActionController.Action.SHOOT);
@@ -201,6 +199,7 @@ public class ActionController {
         // execute actions
         executeAction(effect, powerUp, clientInput);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
+        player.removePowerUp(powerUp);
     }
 
     /**
@@ -211,6 +210,7 @@ public class ActionController {
     public void discardPowerUpAndSpawn (ClientInput clientInput) {
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
+        player.removePowerUp(powerUp);
 
         Square spawnPosition = gameBoardModel.getSquares().stream()
                 .filter(s -> s.getColor().toString().equals(powerUp.getColor().toString()) && s.isSpawnPoint())
@@ -232,7 +232,7 @@ public class ActionController {
     public void discard (ClientInput clientInput) {
         if (clientInput.weaponName != null) {
             Weapon weapon = player.getWeaponByName(clientInput.weaponName);
-            gameBoardModel.getWeaponsDeck().discard(weapon);
+            player.removeWeapon(weapon);
         } else if (clientInput.powerUpIndex != null) {
             PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
             gameBoardModel.getPowerUpsDeck().sell(player, powerUp);

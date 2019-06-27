@@ -419,7 +419,7 @@ public class Player {
 
     public Weapon getWeaponByName (String name) {
         return getWeapons().stream()
-                .filter(weapon -> weapon.getName().equals(nickname))
+                .filter(weapon -> weapon.getName().equals(name))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
     }
 
@@ -538,7 +538,7 @@ public class Player {
 
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
-            Weapon weaponToPick = getWeaponByName(weaponName);
+            Weapon weaponToPick = currentPosition.getWeaponsSlot().getWeaponByName(weaponName);
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
         } else {
             Ammo ammo = currentPosition.getAmmo();
