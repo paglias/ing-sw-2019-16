@@ -22,6 +22,7 @@ import utils.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -139,18 +140,51 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage){
-        int pIndex = 0;
-
-        //update player positions on the map
-
-
-
-
-
 
 
         ArrayList<PlayerOtherData> players = gameStateMessage.gameBoardData.players;
         PlayerYouData currentPlayer = gameStateMessage.playerYouData;
+
+        //These integers contain the players positions on the map, as square numbers
+        Integer player1Position;
+        Integer player2Position;
+        Integer player3Position;
+        Integer player4Position;
+        Integer player5Position;
+
+        //For-switch that gets the player position for each player and assigns it to the Integers above.
+        //Then sends the player number and position to the loadPlayerOnMap function
+        int posIndex = 0;
+        for (PlayerOtherData playerForPosition : players) {
+            switch (posIndex) {
+                case 0:
+                    player1Position = playerForPosition.position;
+                    loadPlayerOnMap(posIndex, player1Position);
+                    break;
+                case 1:
+                    player2Position = playerForPosition.position;
+                    loadPlayerOnMap(posIndex, player2Position);
+                    break;
+                case 2:
+                    player3Position = playerForPosition.position;
+                    loadPlayerOnMap(posIndex, player3Position);
+                    break;
+                case 3:
+                    player4Position = playerForPosition.position;
+                    loadPlayerOnMap(posIndex, player4Position);
+                    break;
+                case 4:
+                    player5Position = playerForPosition.position;
+                    loadPlayerOnMap(posIndex, player5Position);
+                    break;
+            }
+            posIndex++;
+        }
+        //At the end of this cycle the integers above contain the player positions.
+
+
+        //Loads the username tags and status on GUI with the server message
+        int pIndex = 0;
 
         Label usernameLabel = null;
         Label playerStatus = null;
@@ -192,9 +226,11 @@ public class MapController1 extends AbstractView implements Initializable {
             pIndex++;
         }
 
+        //Set totalpoints and actioncounter
         totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
         actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
 
+        //Set ammo on GUI
         int redAmmoN = 0;
         int blueAmmoN = 0;
         int yellowAmmoN = 0;
@@ -220,6 +256,7 @@ public class MapController1 extends AbstractView implements Initializable {
         //TODO NSKULLS = LOAD A SKULL JPG IN EACH IMAGEVIEW (SKULLONE, SKULLTWO...)
         // TODO MAP POSITION
 
+        //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(gameStateMessage.gameBoardData.squares.stream()
                 .filter(s -> s.isSpawnPoint == true)
                 .map(s -> s.weaponsSlot)
@@ -256,6 +293,12 @@ public class MapController1 extends AbstractView implements Initializable {
                 weapon3.setText(weapons.get(2).name);
             }
         }
+    }
+
+    //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
+    //gamestate message. Loads a JPG with color based on player number and his position.
+    public void loadPlayerOnMap(int playerNumber, int position){
+
     }
 
     @Override
