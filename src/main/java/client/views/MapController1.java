@@ -228,7 +228,9 @@ public class MapController1 extends AbstractView implements Initializable {
             }
             posIndex++;
         }
-        //At the end of this cycle the integers above contain the player positions.
+        //At the end of this cycle the integers above contain the player positions and
+        //if position change is detected, the old images on the map are unloaded and
+        //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
 
 
         //Loads the username tags and status on GUI with the server message
