@@ -22,19 +22,39 @@ public class ClientController implements MessageVisitor {
         this.gameBoard = gameController.getGameBoard();
     }
 
+    /**
+     * Gets linked player.
+     *
+     * @return the linked player
+     */
     public Player getLinkedPlayer () {
         return linkedPlayer;
     }
 
+    /**
+     * Sets linked player.
+     *
+     * @param player the player
+     */
     public void setLinkedPlayer (Player player) {
         linkedPlayer = player;
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void sendMsg (AbstractMessage msg) {
         clientHandler.sendMessage(msg.serialize());
     }
 
-    // Message already serialized
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
+// Message already serialized
     public void sendMsg (String msg) {
         clientHandler.sendMessage(msg);
     }

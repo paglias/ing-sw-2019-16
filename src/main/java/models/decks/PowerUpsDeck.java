@@ -42,6 +42,7 @@ public class PowerUpsDeck extends Deck {
     public void sell (Player player, PowerUp powerUp) {
         player.addCube(powerUp.getColor());
         discard(powerUp);
+        player.removePowerUp(powerUp);
     }
 
 
