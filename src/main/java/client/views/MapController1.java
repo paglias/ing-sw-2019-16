@@ -176,7 +176,7 @@ public class MapController1 extends AbstractView implements Initializable {
         for (PlayerOtherData playerForPosition : players) {
             switch (posIndex) {
                 case 0:
-                    if (playerForPosition.position == player1Position) {
+                    if (playerForPosition.position.equals(player1Position)) {
                         break;
                     }
                     else {
@@ -186,7 +186,7 @@ public class MapController1 extends AbstractView implements Initializable {
                         break;
                     }
                 case 1:
-                    if (playerForPosition.position == player2Position) {
+                    if (playerForPosition.position.equals(player2Position)) {
                         break;
                     }
                     else {
@@ -196,7 +196,7 @@ public class MapController1 extends AbstractView implements Initializable {
                         break;
                     }
                 case 2:
-                    if (playerForPosition.position == player3Position) {
+                    if (playerForPosition.position.equals(player3Position)) {
                         break;
                     }
                     else {
@@ -206,7 +206,7 @@ public class MapController1 extends AbstractView implements Initializable {
                         break;
                     }
                 case 3:
-                    if (playerForPosition.position == player4Position) {
+                    if (playerForPosition.position.equals(player4Position)) {
                         break;
                     }
                     else {
@@ -216,7 +216,7 @@ public class MapController1 extends AbstractView implements Initializable {
                         break;
                     }
                 case 4:
-                    if (playerForPosition.position == player5Position) {
+                    if (playerForPosition.position.equals(player5Position)) {
                         break;
                     }
                     else {
