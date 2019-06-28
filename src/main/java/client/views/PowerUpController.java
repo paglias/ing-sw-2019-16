@@ -5,58 +5,100 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import messages.client_data.PowerUpData;
+
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PowerUpController implements Initializable {
 
-    @FXML private Text newtonAvailable;
-    @FXML private Text grenadeAvailable;
-    @FXML private Text teleporterAvailable;
-    @FXML private Text scopeAvailable;
     @FXML private Button confirmNewton;
     @FXML private Button confirmGrenade;
     @FXML private Button confirmTeleporter;
     @FXML private Button confirmScope;
-
-    @FXML void useGrenade(ActionEvent event) {
-        //TODO IMPLEMENT
-        Stage mainWindow;
-        mainWindow = (Stage) confirmGrenade.getScene().getWindow();
-        mainWindow.close();
-    }
-
-    @FXML void useNewton(ActionEvent event) {
-        //TODO IMPLEMENT
-        Stage mainWindow;
-        mainWindow = (Stage) confirmNewton.getScene().getWindow();
-        mainWindow.close();
-    }
-
-    @FXML void useScope(ActionEvent event) {
-        //TODO IMPLEMENT
-        Stage mainWindow;
-        mainWindow = (Stage) confirmScope.getScene().getWindow();
-        mainWindow.close();
-    }
-
-    @FXML void useTeleporter(ActionEvent event) {
-        //TODO IMPLEMENT
-        Stage mainWindow;
-        mainWindow = (Stage) confirmTeleporter.getScene().getWindow();
-        mainWindow.close();
-    }
+    @FXML private Text netwonAvailability;
+    @FXML private Text grenadeAvailability;
+    @FXML private Text teleporterAvailability;
+    @FXML private Text scopeAvailability;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources){
-        assert newtonAvailable != null : "fx:id=\"newtonAvailable\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert grenadeAvailable != null : "fx:id=\"grenadeAvailable\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert teleporterAvailable != null : "fx:id=\"teleporterAvailable\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert scopeAvailable != null : "fx:id=\"scopeAvailable\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert confirmNewton != null : "fx:id=\"confirmNewton\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert confirmGrenade != null : "fx:id=\"confirmGrenade\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert confirmTeleporter != null : "fx:id=\"confirmTeleporter\" was not injected: check your FXML file 'PowerUps.fxml'.";
-        assert confirmScope != null : "fx:id=\"confirmScope\" was not injected: check your FXML file 'PowerUps.fxml'.";
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //Initializes the values to zero
+        scopeAvailability.setText("0");
+        teleporterAvailability.setText("0");
+        grenadeAvailability.setText("0");
+        netwonAvailability.setText("0");
+
+        //Gets the powerUps in playeryoudata
+        //increments availability of each powerup based on the powerUps received.
+        ArrayList<PowerUpData> powerUps = Game.controller.getLastGameStateMessage().playerYouData.powerUps;
+        for (PowerUpData powerUp : powerUps){
+            switch (powerUp.name){
+                case "Tagback":
+                    int availableGrenades = Integer.parseInt(grenadeAvailability.getText());
+                    availableGrenades++;
+                    grenadeAvailability.setText(Integer.toString(availableGrenades));
+                    break;
+
+                case "Newton":
+                    int availableNewton = Integer.parseInt(netwonAvailability.getText());
+                    availableNewton++;
+                    netwonAvailability.setText(Integer.toString(availableNewton));
+                    break;
+
+                case "Targeting":
+                    int availableScopes = Integer.parseInt(scopeAvailability.getText());
+                    availableScopes++;
+                    scopeAvailability.setText(Integer.toString(availableScopes));
+                    break;
+
+                case "Teleporter":
+                    int availableTeleporters = Integer.parseInt(teleporterAvailability.getText());
+                    availableTeleporters++;
+                    teleporterAvailability.setText(Integer.toString(availableTeleporters));
+                    break;
+            }
+        }
     }
+
+    @FXML void discardGrenade(ActionEvent event) {
+
+    }
+
+    @FXML void discardNewton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void discardScope(ActionEvent event) {
+
+    }
+
+    @FXML
+    void discardTeleporter(ActionEvent event) {
+
+    }
+
+    @FXML
+    void useGrenade(ActionEvent event) {
+
+    }
+
+    @FXML
+    void useNewton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void useScope(ActionEvent event) {
+
+    }
+
+    @FXML
+    void useTeleporter(ActionEvent event) {
+
+    }
+
 }

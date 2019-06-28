@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.PowerUpController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.PowerUpController">
    <children>
-      <HBox alignment="CENTER" layoutX="-2.0" prefHeight="59.0" prefWidth="350.0">
-         <children>
-            <Label text="Choose a PowerUp from below:" />
-         </children>
-      </HBox>
-      <GridPane layoutX="-2.0" layoutY="62.0" prefHeight="188.0" prefWidth="350.0">
+      <Label layoutX="165.0" layoutY="23.0" text="Choose a PowerUp from below:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <GridPane gridLinesVisible="true" layoutX="27.0" layoutY="76.0" prefHeight="275.0" prefWidth="540.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -32,20 +33,28 @@
         </rowConstraints>
          <children>
             <Label text="Name" />
-            <Label text="Availability" GridPane.columnIndex="1" />
             <Label text="Newton" GridPane.rowIndex="1" />
-            <Label text="Tagback Grenade" GridPane.rowIndex="2" />
+            <Label text="Tagback Grenade" wrapText="true" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
             <Label text="Teleporter" GridPane.rowIndex="3" />
-            <Label text="Targeting Scope" GridPane.rowIndex="4" />
-            <Text fx:id="newtonAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text fx:id="grenadeAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Text fx:id="teleporterAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Text fx:id="scopeAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="confirmNewton" mnemonicParsing="false" onAction="#useNewton" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="confirmGrenade" mnemonicParsing="false" onAction="#useGrenade" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="confirmTeleporter" mnemonicParsing="false" onAction="#useTeleporter" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="confirmScope" mnemonicParsing="false" onAction="#useScope" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label text="Targeting Scope" wrapText="true" GridPane.rowIndex="4" />
+            <Button fx:id="confirmNewton" mnemonicParsing="false" onAction="#useNewton" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="confirmGrenade" mnemonicParsing="false" onAction="#useGrenade" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="confirmTeleporter" mnemonicParsing="false" onAction="#useTeleporter" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="confirmScope" mnemonicParsing="false" onAction="#useScope" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#discardNewton" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#discardGrenade" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#discardTeleporter" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#discardScope" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label layoutX="217.0" layoutY="29.0" text="AVAILABLE" GridPane.columnIndex="1" />
+            <Text fx:id="netwonAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="grenadeAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text fx:id="teleporterAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fx:id="scopeAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+      <Button layoutX="265.0" layoutY="391.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" text="Close" />
    </children>
 </AnchorPane>
