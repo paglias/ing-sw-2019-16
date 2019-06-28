@@ -1,5 +1,7 @@
 package models;
 
+import controllers.ActionController;
+import controllers.GameController;
 import models.cards.Action;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -7,6 +9,7 @@ import models.cards.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
     Player player;
     GameBoard gameBoard;
+    ActionController actionController;
+    GameController gameController;
 
     @BeforeEach
     void setup() {
@@ -21,6 +26,7 @@ class PlayerTest {
         player.setNickname("First");
         gameBoard = new GameBoard();
         gameBoard.addPlayer(player);
+
     }
 
     @Test
@@ -336,6 +342,27 @@ class PlayerTest {
         int size=player.getWeapons().size();
         player.removeWeapon(weapon);
         assertEquals(player.getWeapons().size(), size-1);
+    }
+
+    @Test
+    void setPossibleActions(){
+        List<ActionController.Action>pActions=new ArrayList<>();
+        player.setActionCounter(2);
+        player.setPossibleActions(pActions);
+        assertFalse(pActions.size()>0);
+    }
+    @Test
+    void setStartTurnDate(){
+        Date date=new Date();
+        player.setStartTurnDate(date);
+        assertNotNull(date);;
+
+    }
+    @Test
+    void getActiveActionsItem(){
+        List<ActionController.Action>pActions=new ArrayList<>();
+        player.getActiveActionItems();
+        assertFalse(pActions.size()>0);
     }
 
 }
