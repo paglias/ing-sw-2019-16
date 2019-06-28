@@ -329,6 +329,14 @@ class PlayerTest {
         player.discardItem(powerUp);
         assertEquals(player.getPowerUps().size(), size-1);
     }
+    @Test
+    void discardWeapon(){
+        player.addWeapon((Weapon)gameBoard.getWeaponsDeck().pick());
+        Weapon weapon=player.getWeapons().get(player.getWeapons().size()-1);
+        int size=player.getWeapons().size();
+        player.removeWeapon(weapon);
+        assertEquals(player.getWeapons().size(), size-1);
+    }
 
 }
 

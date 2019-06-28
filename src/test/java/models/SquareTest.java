@@ -130,4 +130,42 @@ class SquareTest {
         assertEquals(square.getColor(), Square.Color.PURPLE);
     }
 
+    @Test
+    void sameDirectionSouth(){
+        Square square1=new Square(Square.Color.PURPLE,false);
+        Square square2=new Square(Square.Color.PURPLE,true);
+        square1.setNumber(0);
+        square2.setNumber(4);
+        assertTrue(square1.sameDirection(square2, Square.Direction.SOUTH));
+
+    }
+
+    @Test
+    void sameDirectionEast(){
+        Square square1=new Square(Square.Color.PURPLE,false);
+        Square square2=new Square(Square.Color.PURPLE,true);
+        square1.setNumber(0);
+        square2.setNumber(3);
+        assertTrue(square1.sameDirection(square2, Square.Direction.EAST));
+
+    }
+    @Test
+    void sameDirectionWest(){
+        Square square1=new Square(Square.Color.PURPLE,false);
+        Square square2=new Square(Square.Color.PURPLE,true);
+        square1.setNumber(3);
+        square2.setNumber(0);
+        assertTrue(square2.sameDirection(square1, Square.Direction.WEST));
+
+    }
+    @Test
+    void sameDirectionNorth(){
+        Square square1=new Square(Square.Color.PURPLE,false);
+        Square square2=new Square(Square.Color.PURPLE,true);
+        square1.setNumber(0);
+        square2.setNumber(4);
+        assertTrue(square2.sameDirection(square1, Square.Direction.NORTH));
+
+    }
+
 }

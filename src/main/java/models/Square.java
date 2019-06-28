@@ -61,6 +61,12 @@ public class Square {
      */
     public int getNumber(){return this.position;}
 
+    /**
+     * Boolean, analyze squares in same direction.
+     *
+     * @param targetSquare the target square
+     * @return the boolean
+     */
     public boolean sameDirection(Square targetSquare){
         int position1= this.getNumber();
         int position2= targetSquare.getNumber();
