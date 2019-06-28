@@ -59,7 +59,7 @@ public class PowerUpController implements Initializable {
                     discardGrenadeButton.setDisable(false);
                     break;
 
-                case "Newton":
+                case "PowerUps":
                     int availableNewton = Integer.parseInt(netwonAvailability.getText());
                     availableNewton++;
                     netwonAvailability.setText(Integer.toString(availableNewton));
@@ -87,35 +87,32 @@ public class PowerUpController implements Initializable {
     }
 
     @FXML void discardGrenade(ActionEvent event) {
-
+        String s = "Tagback";
     }
 
     @FXML void discardNewton(ActionEvent event) {
+        String s = "PowerUps";
 
     }
 
     @FXML void discardScope(ActionEvent event) {
-
+        String s = "Targeting";
     }
 
     @FXML void discardTeleporter(ActionEvent event) {
-
+        String s = "Teleporter";
     }
 
     @FXML void useGrenade(ActionEvent event) {
-
     }
 
     @FXML void useNewton(ActionEvent event) {
-
     }
 
     @FXML void useScope(ActionEvent event) {
-
     }
 
     @FXML void useTeleporter(ActionEvent event) {
-
     }
 
 }
