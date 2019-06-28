@@ -8,6 +8,7 @@ import models.cards.PowerUp;
 import server.ClientHandler;
 import utils.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientController implements MessageVisitor {
@@ -206,7 +207,14 @@ public class ClientController implements MessageVisitor {
 
         // Reset the used effects of weapons
         if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
-            linkedPlayer.getWeapons().forEach(w -> w.getUsedEffects().clear());
+            linkedPlayer.getWeapons().forEach(w -> {
+                ArrayList<Integer> usedEffects = w.getUsedEffects();
+                if (usedEffects.size() > 0) {
+                    w.getUsedEffects().clear();
+                    w.forceReload();
+                }
+            });
+
         }
 
         linkedPlayer.setActiveAction(null);

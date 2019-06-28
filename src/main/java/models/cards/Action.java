@@ -49,7 +49,6 @@ public class Action {
     public HashMap<Effect.Input, Integer> getParameters () {
         HashMap<Effect.Input, Integer> map = new HashMap<>();
         parameters.forEach(stringParameter -> {
-            System.out.println(parameters);
             String[] parts = stringParameter.split(".");
             Effect.Input actionType = Effect.Input.valueOf(parts[0]);
             Integer index = Integer.parseInt(parts[1]);

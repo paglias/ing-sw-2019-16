@@ -254,11 +254,15 @@ public class GameController {
             newActivePlayer = gameBoard.nextPlayer(player);
         }
 
-        // Refill weapon slots
+        // Refill weapon slots and ammos
         gameBoard.getSquares().stream()
-                .filter(s -> s.isSpawnPoint())
-                .map(s -> s.getWeaponsSlot())
-                .forEach(slot -> slot.refill(gameBoard.getWeaponsDeck()));
+                .forEach(square -> {
+                    if (square.isSpawnPoint()) {
+                        square.getWeaponsSlot().refill(gameBoard.getWeaponsDeck());
+                    } else {
+                        square.setAmmo(gameBoard.getAmmoDeck());
+                    }
+                });
 
         startTurn();
     }

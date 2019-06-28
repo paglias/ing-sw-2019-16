@@ -20,7 +20,7 @@ public class SquareData {
     public SquareData (Square square) {
         color = square.getColor().toString();
         isSpawnPoint = square.isSpawnPoint();
-        ammo = square.getAmmo() != null;
+        ammo = square.hasAmmo();
 
         if (isSpawnPoint) {
             weaponsSlot = new WeaponsSlotData(square.getWeaponsSlot());

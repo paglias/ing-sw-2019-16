@@ -95,6 +95,13 @@ public class Weapon extends CardWithAction {
     public boolean isLoaded() {
         return loaded;
     }
+
+    /**
+     * Force the weapon to be reloaded.
+     */
+    public void forceReload () {
+        loaded = false;
+    }
     
 
     /**

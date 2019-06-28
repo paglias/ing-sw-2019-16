@@ -542,29 +542,28 @@ public class Player {
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
         } else {
             Ammo ammo = currentPosition.getAmmo();
-
             //if the ammo picked has a powerup, add it to your powerups
             if (ammo.getHasPowerUp()) {
                 addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
-            }
+            } else {
+                //if the ammo picked has ammocubes, add them to your cubes
+                int blueCubes = ammo.getBlueCubes();
+                while (blueCubes != 0) {
+                    addCube(Card.Color.BLUE);
+                    blueCubes--;
+                }
 
-            //if the ammo picked has ammocubes, add them to your cubes
-            int blueCubes = ammo.getBlueCubes();
-            while (blueCubes != 0) {
-                addCube(Card.Color.BLUE);
-                blueCubes--;
-            }
+                int yellowCubes = ammo.getYellowCubes();
+                while ((yellowCubes != 0)) {
+                    addCube(Card.Color.YELLOW);
+                    yellowCubes--;
+                }
 
-            int yellowCubes = ammo.getYellowCubes();
-            while ((yellowCubes != 0)) {
-                addCube(Card.Color.YELLOW);
-                yellowCubes--;
-            }
-
-            int redCubes = ammo.getRedCubes();
-            while ((redCubes != 0)) {
-                addCube(Card.Color.RED);
-                redCubes--;
+                int redCubes = ammo.getRedCubes();
+                while ((redCubes != 0)) {
+                    addCube(Card.Color.RED);
+                    redCubes--;
+                }
             }
 
             gameBoard.getAmmoDeck().discard(ammo);

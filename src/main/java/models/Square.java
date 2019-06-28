@@ -222,6 +222,15 @@ public class Square {
     }
 
     /**
+     * Is there an ammo?.
+     *
+     * @return true or false
+     */
+    public Boolean hasAmmo () {
+        return this.ammo != null;
+    }
+
+    /**
      * Gets color.
      *
      * @return the color
