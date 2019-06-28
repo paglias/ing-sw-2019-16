@@ -2,11 +2,17 @@ package client.views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import messages.client_data.PowerUpData;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -85,6 +91,9 @@ public class PowerUpController implements Initializable {
             }
         }
     }
+    Stage powerUpWindow = new Stage();
+    GenericWindows window = new GenericWindows();
+
 
     @FXML void discardGrenade(ActionEvent event) {
         String s = "Tagback";
@@ -104,15 +113,58 @@ public class PowerUpController implements Initializable {
     }
 
     @FXML void useGrenade(ActionEvent event) {
+        powerUpWindow.setTitle("GRENADE POWERUP");
+        powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/TagbackGrenade.fxml"));
+            Scene scene = new Scene(root);
+            powerUpWindow.setScene(scene);
+            powerUpWindow.show();
+            powerUpWindow.setResizable(false);
+        } catch (IOException e) {
+            window.loadingFailure();
+        }
     }
 
     @FXML void useNewton(ActionEvent event) {
+        powerUpWindow.setTitle("NEWTON POWERUP");
+        powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/Newton.fxml"));
+            Scene scene = new Scene(root);
+            powerUpWindow.setScene(scene);
+            powerUpWindow.show();
+            powerUpWindow.setResizable(false);
+        } catch (IOException e) {
+            window.loadingFailure();
+        }
     }
 
     @FXML void useScope(ActionEvent event) {
+            powerUpWindow.setTitle("TARGETING SCOPE POWERUP");
+            powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/TargetingScope.fxml"));
+                Scene scene = new Scene(root);
+                powerUpWindow.setScene(scene);
+                powerUpWindow.show();
+                powerUpWindow.setResizable(false);
+            } catch (IOException e) {
+                window.loadingFailure();
+        }
     }
 
     @FXML void useTeleporter(ActionEvent event) {
+            powerUpWindow.setTitle("TELEPORTER POWERUP");
+            powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/Teleporter.fxml"));
+                Scene scene = new Scene(root);
+                powerUpWindow.setScene(scene);
+                powerUpWindow.show();
+                powerUpWindow.setResizable(false);
+            } catch (IOException e) {
+                window.loadingFailure();
+        }
     }
-
 }
