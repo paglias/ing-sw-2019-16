@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
+//Controller for the window that displays the available weapons of the player.
 public class AvailableWeaponsController implements Initializable {
 
     @FXML private Button confirmButton;
