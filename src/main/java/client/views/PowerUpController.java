@@ -21,15 +21,30 @@ public class PowerUpController implements Initializable {
     @FXML private Text grenadeAvailability;
     @FXML private Text teleporterAvailability;
     @FXML private Text scopeAvailability;
+    @FXML private Button discardNewtonButton;
+    @FXML private Button discardGrenadeButton;
+    @FXML private Button discardTeleporterButton;
+    @FXML private Button discardScopeButton;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //Initializes the values to zero
+        //Initializes the values to zero, disables buttons
         scopeAvailability.setText("0");
         teleporterAvailability.setText("0");
         grenadeAvailability.setText("0");
         netwonAvailability.setText("0");
+
+        confirmTeleporter.setDisable(true);
+        confirmScope.setDisable(true);
+        confirmGrenade.setDisable(true);
+        confirmNewton.setDisable(true);
+
+        discardGrenadeButton.setDisable(true);
+        discardNewtonButton.setDisable(true);
+        discardScopeButton.setDisable(true);
+        discardTeleporterButton.setDisable(true);
 
         //Gets the powerUps in playeryoudata
         //increments availability of each powerup based on the powerUps received.
@@ -40,24 +55,32 @@ public class PowerUpController implements Initializable {
                     int availableGrenades = Integer.parseInt(grenadeAvailability.getText());
                     availableGrenades++;
                     grenadeAvailability.setText(Integer.toString(availableGrenades));
+                    confirmGrenade.setDisable(false);
+                    discardGrenadeButton.setDisable(false);
                     break;
 
                 case "Newton":
                     int availableNewton = Integer.parseInt(netwonAvailability.getText());
                     availableNewton++;
                     netwonAvailability.setText(Integer.toString(availableNewton));
+                    confirmNewton.setDisable(false);
+                    discardNewtonButton.setDisable(false);
                     break;
 
                 case "Targeting":
                     int availableScopes = Integer.parseInt(scopeAvailability.getText());
                     availableScopes++;
                     scopeAvailability.setText(Integer.toString(availableScopes));
+                    confirmScope.setDisable(false);
+                    discardScopeButton.setDisable(false);
                     break;
 
                 case "Teleporter":
                     int availableTeleporters = Integer.parseInt(teleporterAvailability.getText());
                     availableTeleporters++;
                     teleporterAvailability.setText(Integer.toString(availableTeleporters));
+                    confirmTeleporter.setDisable(false);
+                    discardTeleporterButton.setDisable(false);
                     break;
             }
         }
@@ -71,33 +94,27 @@ public class PowerUpController implements Initializable {
 
     }
 
-    @FXML
-    void discardScope(ActionEvent event) {
+    @FXML void discardScope(ActionEvent event) {
 
     }
 
-    @FXML
-    void discardTeleporter(ActionEvent event) {
+    @FXML void discardTeleporter(ActionEvent event) {
 
     }
 
-    @FXML
-    void useGrenade(ActionEvent event) {
+    @FXML void useGrenade(ActionEvent event) {
 
     }
 
-    @FXML
-    void useNewton(ActionEvent event) {
+    @FXML void useNewton(ActionEvent event) {
 
     }
 
-    @FXML
-    void useScope(ActionEvent event) {
+    @FXML void useScope(ActionEvent event) {
 
     }
 
-    @FXML
-    void useTeleporter(ActionEvent event) {
+    @FXML void useTeleporter(ActionEvent event) {
 
     }
 

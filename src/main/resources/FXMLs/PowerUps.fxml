@@ -44,10 +44,10 @@
             <Button fx:id="confirmGrenade" mnemonicParsing="false" onAction="#useGrenade" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button fx:id="confirmTeleporter" mnemonicParsing="false" onAction="#useTeleporter" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Button fx:id="confirmScope" mnemonicParsing="false" onAction="#useScope" prefHeight="30.0" prefWidth="70.0" text="USE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#discardNewton" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#discardGrenade" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#discardTeleporter" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#discardScope" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button fx:id="discardNewtonButton" mnemonicParsing="false" onAction="#discardNewton" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="discardGrenadeButton" mnemonicParsing="false" onAction="#discardGrenade" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="discardTeleporterButton" mnemonicParsing="false" onAction="#discardTeleporter" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="discardScopeButton" mnemonicParsing="false" onAction="#discardScope" prefHeight="30.0" prefWidth="70.0" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Label layoutX="217.0" layoutY="29.0" text="AVAILABLE" GridPane.columnIndex="1" />
             <Text fx:id="netwonAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text fx:id="grenadeAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
