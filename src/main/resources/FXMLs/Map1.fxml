@@ -391,31 +391,11 @@
                                        <children>
                                           <HBox fx:id="HB0" layoutY="14.0" prefHeight="40.0" prefWidth="133.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                                              <children>
-                                                <ImageView fx:id="slot1Square0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../JPGs/GameBlue.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="slot2Square0" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../JPGs/GameGray.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="slot3Square0" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../JPGs/GameGreen.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="slot4Square0" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../JPGs/GamePurple.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="slot5Square0" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../JPGs/GameYellow.jpg" />
-                                                   </image>
-                                                </ImageView>
+                                                <ImageView fx:id="slot1Square0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="slot2Square0" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="slot3Square0" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="slot4Square0" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="slot5Square0" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </HBox>
                                        </children>

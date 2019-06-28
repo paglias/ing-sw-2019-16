@@ -15,7 +15,7 @@
         </Label>
         <ChoiceBox fx:id="targetChoice" layoutX="144.0" layoutY="150.0" prefWidth="150.0" />
         <Label layoutX="44.0" layoutY="97.0" prefWidth="218.0" text="Give a mark to a player you can see:" />
-        <Button fx:id="confirmButton" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" onAction="#confirm" prefHeight="35.0" prefWidth="78.0" text="Confirm" />
+        <Button fx:id="confirmButton" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" onAction="#activate" prefHeight="35.0" prefWidth="78.0" text="Confirm" />
       <Label layoutX="56.0" layoutY="154.0" text="Player target" />
     </children>
 </AnchorPane>
