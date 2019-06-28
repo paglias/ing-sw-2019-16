@@ -15,6 +15,6 @@
       </Label>
       <ChoiceBox fx:id="positionChoice" layoutX="50.0" layoutY="150.0" prefWidth="150.0" />
       <Label layoutX="44.0" layoutY="97.0" text="Choose a position on the map:" />
-      <Button fx:id="teleport" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="78.0" text="Teleport" />
+      <Button fx:id="teleport" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="35.0" prefWidth="78.0" text="Teleport" />
    </children>
 </AnchorPane>
