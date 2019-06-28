@@ -22,7 +22,7 @@ public class GameStateMessage extends AbstractMessage {
             PlayerYouData playerYouData = new PlayerYouData(p);
             GameStateMessage gameStateMessage = new GameStateMessage(gameBoardData, playerYouData);
 
-            if (clientForPlayer != null) clientForPlayer.sendMsg(gameStateMessage);
+            if (clientForPlayer != null && p.isConnected()) clientForPlayer.sendMsg(gameStateMessage);
         });
     }
 

@@ -43,17 +43,10 @@ public class Server implements Closeable {
         boolean condition = true;
         while (condition) {
             Socket clientSocket = acceptConnection();
-            GameController lastGameController = !gameControllers.isEmpty() ? gameControllers.get(gameControllers.size() - 1) : null;
-
-            if (lastGameController == null || lastGameController.getGameBoard().hasStarted()) {
-                // Create a game controller if none exists
-                // Or if a game has already started setup a new one
-                gameControllers.add(new GameController());
-            }
 
             pool.submit(() -> {
                 try {
-                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameControllers.get(gameControllers.size() - 1));
+                    ClientHandler clientHandler = new ClientHandler(clientSocket);
                     clientHandler.handleConnection();
                 } catch (Throwable e) {
                     Logger.err(e, "Problem! closing client " + clientSocket.getLocalAddress());

@@ -68,13 +68,12 @@ public class GameController {
      * @param clientController the client controller
      */
     public synchronized void addPlayer(String nickname, ClientController clientController) {
-        if (nickname == null) throw new IllegalArgumentException("Nickname must exist");
         Player existingPlayer = gameBoard.getPlayers().stream()
                 .filter(p -> p.getNickname().equals(nickname))
                 .findFirst()
                 .orElse(null);
 
-        // Player riconnected
+        // Player reconnected
         if (existingPlayer != null) {
             ClientController oldClient = getClientForPlayer(existingPlayer);
             clients.remove(oldClient);
@@ -142,6 +141,8 @@ public class GameController {
             } else if (gameStartTimer != null){
                 gameStartTimer.cancel();
             }
+        } else {
+            GameStateMessage.updateClients(this);
         }
     }
 
@@ -280,6 +281,7 @@ public class GameController {
         endGameMessage.setWinner(winner.getNickname());
 
         dispatchToClients(endGameMessage);
+        ClientController.onEndedGame(this);
     }
 }
 

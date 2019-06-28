@@ -186,7 +186,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username1;
                     playerStatus = player1Active;
 
-                    if (!player.position.equals(player1Position)) {
+                    if (player1Position != null && !player.position.equals(player1Position)) {
                         unloadPlayerFromMap(pIndex, player1Position);
                         player1Position = player.position;
                         loadPlayerOnMap(pIndex, player1Position);
@@ -197,7 +197,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username2;
                     playerStatus = player2Active;
 
-                    if (!player.position.equals(player2Position)) {
+                    if (player2Position != null && !player.position.equals(player2Position)) {
                         unloadPlayerFromMap(pIndex, player2Position);
                         player2Position = player.position;
                         loadPlayerOnMap(pIndex, player2Position);
@@ -207,7 +207,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username3;
                     playerStatus = player3Active;
 
-                    if (!player.position.equals(player3Position))  {
+                    if (player3Position != null && !player.position.equals(player3Position))  {
                         unloadPlayerFromMap(pIndex, player3Position);
                         player3Position = player.position;
                         loadPlayerOnMap(pIndex, player3Position);
@@ -218,7 +218,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username4;
                     playerStatus = player4Active;
 
-                    if (!player.position.equals(player4Position)) {
+                    if (player4Position != null && !player.position.equals(player4Position)) {
                         unloadPlayerFromMap(pIndex, player4Position);
                         player4Position = player.position;
                         loadPlayerOnMap(pIndex, player4Position);
@@ -228,7 +228,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username5;
                     playerStatus = player5Active;
 
-                    if (!player.position.equals(player5Position)) {
+                    if (player5Position != null && !player.position.equals(player5Position)) {
                         unloadPlayerFromMap(pIndex, player5Position);
                         player5Position = player.position;
                         loadPlayerOnMap(pIndex, player5Position);

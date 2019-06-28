@@ -221,6 +221,8 @@ public class Lobby extends AbstractView {
     }
 
     public void updateWithData(GameStateMessage gameStateMessage) {
+        if (gameStateMessage == null || gameStateMessage.gameBoardData == null) return;
+
         if (gameStateMessage.gameBoardData.gameSetup) {
             setMap(gameStateMessage.gameBoardData.nMap);
             setSkulls(gameStateMessage.gameBoardData.skullsN);
