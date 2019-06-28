@@ -20,7 +20,7 @@ public class Constants {
 
     public static void load () {
         Gson gson = new Gson();
-        String settingsPath = File.separatorChar + "settings.json";
+        String settingsPath = "/" + "settings.json";
         InputStreamReader settingsInput = new InputStreamReader(Constants.class.getResourceAsStream(settingsPath));
         JsonReader settingsReader = new JsonReader(settingsInput);
         ParsedSettings parsedSettings = gson.fromJson(settingsReader, ParsedSettings.class);

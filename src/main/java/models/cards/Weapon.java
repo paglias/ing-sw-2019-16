@@ -60,7 +60,7 @@ public class Weapon extends CardWithAction {
 
             try {
                 for (String weaponName : weaponsNames) {
-                    String weaponPath = File.separatorChar + "Weapons" + File.separatorChar + weaponName + ".json";
+                    String weaponPath = "/" + "Weapons" + "/" + weaponName + ".json";
                     InputStreamReader weaponInput = new InputStreamReader(Weapon.class.getResourceAsStream(weaponPath));
                     JsonReader weapon = new JsonReader(weaponInput);
                     weapons.add(gson.fromJson(weapon, Weapon.class));
