@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
+import utils.Logger;
 
 //Creates game stage, loads Adrenaline.jpg. Later it will be changed to game overview.
 public class Game extends Application {
@@ -33,7 +33,8 @@ public class Game extends Application {
             window.show();
             window.setResizable(false);
             window.centerOnScreen();
-        } catch (IOException e) {
+        } catch (Throwable e) {
+            Logger.err(e, null);
             GenericWindows genericWindows = new GenericWindows();
             genericWindows.loadingFailure();
         }

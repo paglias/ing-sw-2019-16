@@ -6,6 +6,7 @@ import utils.Logger;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,25 +37,23 @@ public class Server implements Closeable {
         // but then it's only handled in a ClientHandler class that runs in a different thread
         // Multiple games are supported
 
-        GameController lastGameController = null;
+        ArrayList<GameController> gameControllers = new ArrayList<>();
+
 
         boolean condition = true;
         while (condition) {
             Socket clientSocket = acceptConnection();
+            GameController lastGameController = !gameControllers.isEmpty() ? gameControllers.get(gameControllers.size() - 1) : null;
 
             if (lastGameController == null || lastGameController.getGameBoard().hasStarted()) {
                 // Create a game controller if none exists
                 // Or if a game has already started setup a new one
-                lastGameController = new GameController();
+                gameControllers.add(new GameController());
             }
-
-            // Trick needed to use gameController in the lambda
-            // See https://stackoverflow.com/questions/34865383/variable-used-in-lambda-expression-should-be-final-or-effectively-final
-            GameController gameController = lastGameController;
 
             pool.submit(() -> {
                 try {
-                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameController);
+                    ClientHandler clientHandler = new ClientHandler(clientSocket, gameControllers.get(gameControllers.size() - 1));
                     clientHandler.handleConnection();
                 } catch (Throwable e) {
                     Logger.err(e, "Problem! closing client " + clientSocket.getLocalAddress());
