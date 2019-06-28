@@ -15,10 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
-import messages.client_data.PlayerOtherData;
-import messages.client_data.PlayerYouData;
-import messages.client_data.WeaponData;
-import messages.client_data.WeaponsSlotData;
+import messages.client_data.*;
 import models.cards.Weapon;
 import utils.Logger;
 
@@ -156,86 +153,30 @@ public class MapController1 extends AbstractView implements Initializable {
     Integer player4Position;
     Integer player5Position;
 
-
-
-
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage){
+        drawPlayers(gameStateMessage.gameBoardData.players);
+        drawCurrentPlayer(gameStateMessage.playerYouData);
+        drawWeaponSlots(gameStateMessage.gameBoardData.squares);
+    }
 
+    public void drawCurrentPlayer (PlayerYouData currentPlayer) {
+        //Set totalpoints and actioncounter
+        totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
+        actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
 
-        ArrayList<PlayerOtherData> players = gameStateMessage.gameBoardData.players;
-        PlayerYouData currentPlayer = gameStateMessage.playerYouData;
+        drawCubes(currentPlayer);
+    }
 
-
+    public void drawPlayers (ArrayList<PlayerOtherData> players) {
         //For-switch that gets the player position for each player and assigns it to the Integers above.
         //Then sends the player number and position to the loadPlayerOnMap function
         //IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
         //If the position of a player is different than gamestatemessage, unloads all players
         // and call loadplayeronmap and load image.
-        int posIndex = 0;
-        for (PlayerOtherData playerForPosition : players) {
-            switch (posIndex) {
-                case 0:
-                    if (playerForPosition.position.equals(player1Position)) {
-                        break;
-                    }
-                    else {
-                        unloadPlayerFromMap(posIndex, player1Position);
-                        player1Position = playerForPosition.position;
-                        loadPlayerOnMap(posIndex, player1Position);
-                        break;
-                    }
-                case 1:
-                    if (playerForPosition.position.equals(player2Position)) {
-                        break;
-                    }
-                    else {
-                        unloadPlayerFromMap(posIndex, player2Position);
-                        player2Position = playerForPosition.position;
-                        loadPlayerOnMap(posIndex, player2Position);
-                        break;
-                    }
-                case 2:
-                    if (playerForPosition.position.equals(player3Position)) {
-                        break;
-                    }
-                    else {
-                        unloadPlayerFromMap(posIndex, player3Position);
-                        player3Position = playerForPosition.position;
-                        loadPlayerOnMap(posIndex, player3Position);
-                        break;
-                    }
-                case 3:
-                    if (playerForPosition.position.equals(player4Position)) {
-                        break;
-                    }
-                    else {
-                        unloadPlayerFromMap(posIndex, player4Position);
-                        player4Position = playerForPosition.position;
-                        loadPlayerOnMap(posIndex, player4Position);
-                        break;
-                    }
-                case 4:
-                    if (playerForPosition.position.equals(player5Position)) {
-                        break;
-                    }
-                    else {
-                        unloadPlayerFromMap(posIndex, player5Position);
-                        player5Position = playerForPosition.position;
-                        loadPlayerOnMap(posIndex, player5Position);
-                        break;
-                    }
-            }
-            posIndex++;
-        }
-        //At the end of this cycle the integers above contain the player positions and
-        //if position change is detected, the old images on the map are unloaded and
-        //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
+        // Also sets the labels for username and status
 
-
-        //Loads the username tags and status on GUI with the server message
         int pIndex = 0;
-
         Label usernameLabel = null;
         Label playerStatus = null;
 
@@ -244,22 +185,54 @@ public class MapController1 extends AbstractView implements Initializable {
                 case 0:
                     usernameLabel = username1;
                     playerStatus = player1Active;
+
+                    if (!player.position.equals(player1Position)) {
+                        unloadPlayerFromMap(pIndex, player1Position);
+                        player1Position = player.position;
+                        loadPlayerOnMap(pIndex, player1Position);
+                    }
+
                     break;
                 case 1:
                     usernameLabel = username2;
                     playerStatus = player2Active;
+
+                    if (!player.position.equals(player2Position)) {
+                        unloadPlayerFromMap(pIndex, player2Position);
+                        player2Position = player.position;
+                        loadPlayerOnMap(pIndex, player2Position);
+                    }
                     break;
                 case 2:
                     usernameLabel = username3;
                     playerStatus = player3Active;
+
+                    if (!player.position.equals(player3Position))  {
+                        unloadPlayerFromMap(pIndex, player3Position);
+                        player3Position = player.position;
+                        loadPlayerOnMap(pIndex, player3Position);
+                    }
+
                     break;
                 case 3:
                     usernameLabel = username4;
                     playerStatus = player4Active;
+
+                    if (!player.position.equals(player4Position)) {
+                        unloadPlayerFromMap(pIndex, player4Position);
+                        player4Position = player.position;
+                        loadPlayerOnMap(pIndex, player4Position);
+                    }
                     break;
                 case 4:
                     usernameLabel = username5;
                     playerStatus = player5Active;
+
+                    if (!player.position.equals(player5Position)) {
+                        unloadPlayerFromMap(pIndex, player5Position);
+                        player5Position = player.position;
+                        loadPlayerOnMap(pIndex, player5Position);
+                    }
                     break;
             }
 
@@ -273,13 +246,16 @@ public class MapController1 extends AbstractView implements Initializable {
                     playerStatus.setText("CONNECTED");
                 }
             }
+
             pIndex++;
         }
 
-        //Set totalpoints and actioncounter
-        totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
-        actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
+        //At the end of this cycle the integers above contain the player positions and
+        //if position change is detected, the old images on the map are unloaded and
+        //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
+    }
 
+    public void drawCubes (PlayerYouData currentPlayer) {
         //Set ammo on GUI
         int redAmmoN = 0;
         int blueAmmoN = 0;
@@ -303,42 +279,49 @@ public class MapController1 extends AbstractView implements Initializable {
         yellowAmmo.setText(String.valueOf(yellowAmmoN));
         blueAmmo.setText(String.valueOf(blueAmmoN));
 
+    }
+
+    public void drawWeaponSlots (ArrayList<SquareData> squares) {
         //Sets the weapons in weaponslots
-        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(gameStateMessage.gameBoardData.squares.stream()
+        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
                 .filter(s -> s.isSpawnPoint == true)
                 .map(s -> s.weaponsSlot)
                 .collect(Collectors.toList()));
 
 
         for (WeaponsSlotData slot : weaponsSlots) {
-            ArrayList<WeaponData> weapons = slot.weapons;
-            Label weapon1;
-            Label weapon2;
-            Label weapon3;
+            drawWeaponSlot(slot);
+        }
+    }
 
-            if (slot.color.equals("RED")) {
-                weapon1 = redWeapon1;
-                weapon2 = redWeapon2;
-                weapon3 = redWeapon3;
-            } else if (slot.color.equals("YELLOW")) {
-                weapon1 = yellowWeapon1;
-                weapon2 = yellowWeapon2;
-                weapon3 = yellowWeapon3;
-            } else { // BLUE
-                weapon1 = blueWeapon1;
-                weapon2 = blueWeapon2;
-                weapon3 = blueWeapon3;
-            }
+    public void drawWeaponSlot (WeaponsSlotData slot) {
+        ArrayList<WeaponData> weapons = slot.weapons;
+        Label weapon1;
+        Label weapon2;
+        Label weapon3;
 
-            if (!weapons.isEmpty()) {
-                weapon1.setText(weapons.get(0).name);
-            }
-            if (weapons.size() > 1) {
-                weapon2.setText(weapons.get(1).name);
-            }
-            if (weapons.size() > 2) {
-                weapon3.setText(weapons.get(2).name);
-            }
+        if (slot.color.equals("RED")) {
+            weapon1 = redWeapon1;
+            weapon2 = redWeapon2;
+            weapon3 = redWeapon3;
+        } else if (slot.color.equals("YELLOW")) {
+            weapon1 = yellowWeapon1;
+            weapon2 = yellowWeapon2;
+            weapon3 = yellowWeapon3;
+        } else { // BLUE
+            weapon1 = blueWeapon1;
+            weapon2 = blueWeapon2;
+            weapon3 = blueWeapon3;
+        }
+
+        if (!weapons.isEmpty()) {
+            weapon1.setText(weapons.get(0).name);
+        }
+        if (weapons.size() > 1) {
+            weapon2.setText(weapons.get(1).name);
+        }
+        if (weapons.size() > 2) {
+            weapon3.setText(weapons.get(2).name);
         }
     }
 
@@ -362,7 +345,6 @@ public class MapController1 extends AbstractView implements Initializable {
             if (picture.getImage() == null) {
                 Image finalPlayerImagePosition = new Image(correctImage);
                 picture.setImage(finalPlayerImagePosition);
-                System.out.println("Player positions were loaded on the map");
                 break;
             }
         }
@@ -410,7 +392,6 @@ public class MapController1 extends AbstractView implements Initializable {
                 correctHBox = HB2;
                 break;
             case 3:
-                System.out.println("Error, this map does not have that square");
                 break;
             case 4:
                 correctHBox = HB4;
