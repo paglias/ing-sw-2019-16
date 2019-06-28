@@ -23,7 +23,7 @@ public class PowerUp extends CardWithAction {
         Gson gson = new Gson();
 
         if (!powerUpsLoadedFromFile) {
-            String[] powerUpsNames = {"PowerUps",   "Tagback",    "Targeting", "Teleporter"};
+            String[] powerUpsNames = {"Newton",   "Tagback",    "Targeting", "Teleporter"};
             ArrayList<PowerUp> powerUps = new ArrayList<>();
 
             try {
