@@ -11,6 +11,8 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utils.Logger;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -295,5 +297,24 @@ public class GenericWindows {
         } catch (IOException e) {
             loadingFailure();
         }
+    }
+    public void weaponGrab(){
+        //Create new window, let user choose which weapon
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/WeaponGrab.fxml"));
+        try {
+            loader.load();
+        } catch (Throwable e) {
+            Logger.err(e, null);
+            loadingFailure();
+        }
+
+        Parent root = loader.getRoot();
+        Stage weaponChooserStage = new Stage();
+        weaponChooserStage.setTitle("CHOOSE A WEAPON");
+        weaponChooserStage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(root);
+        weaponChooserStage.setScene(scene);
+        weaponChooserStage.show();
     }
 }
