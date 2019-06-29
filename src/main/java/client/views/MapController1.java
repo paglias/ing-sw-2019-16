@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -145,6 +146,8 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB9;
     @FXML private HBox HB10;
     @FXML private HBox HB11;
+    @FXML private TextArea textArea;
+    @FXML private Button endTurnButton;
 
     //These integers contain the players positions on the map, as square numbers
     Integer player1Position;
@@ -449,6 +452,8 @@ public class MapController1 extends AbstractView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        textArea.setEditable(false);//text area cant be changed by user, it only receives messages to print.
+
         Game.controller.registerCurrentView(this);
 
         //Adjusts map size correctly
@@ -558,5 +563,9 @@ public class MapController1 extends AbstractView implements Initializable {
     }
     @FXML void blueWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(9);
+    }
+
+    @FXML void endTurn(){
+
     }
 }
