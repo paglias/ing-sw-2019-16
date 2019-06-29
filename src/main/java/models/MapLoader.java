@@ -39,7 +39,7 @@ public class MapLoader {
         ParsedSquare[] parsedSquares;
 
         try {
-            String mapPath = File.separatorChar + "Maps" + File.separatorChar + "map" + mapNumber + ".json";
+            String mapPath = "/" + "Maps" + "/" + "map" + mapNumber + ".json";
             InputStreamReader mapInput = new InputStreamReader(MapLoader.class.getResourceAsStream(mapPath));
             JsonReader mapReader = new JsonReader(mapInput);
             parsedSquares = gson.fromJson(mapReader, ParsedSquare[].class);

@@ -11,7 +11,6 @@ import java.net.Socket;
 
 public class ClientHandler {
     private Socket clientSocket;
-    private GameController gameController;
     private ClientController clientController;
 
     // Not used to write or read
@@ -22,9 +21,8 @@ public class ClientHandler {
     private BufferedReader readStream;
     private PrintWriter writeStream;
 
-    ClientHandler (Socket socket, GameController gameController) {
+    ClientHandler (Socket socket) {
         this.clientSocket = socket;
-        this.gameController = gameController;
     }
 
     void handleConnection() throws IOException {
@@ -38,7 +36,7 @@ public class ClientHandler {
 
             Logger.info("Connected client " + clientSocket.getRemoteSocketAddress());
 
-            clientController = new ClientController(gameController, this);
+            clientController = new ClientController(this);
 
             // Handle incoming data from client
             String msg;
@@ -75,7 +73,9 @@ public class ClientHandler {
     public void close () throws IOException {
         Logger.info("Closing client " + clientSocket.getLocalAddress());
 
-        gameController.disconnectPlayer(clientController);
+        if (clientController != null && clientController.getGameController() != null) {
+            clientController.getGameController().disconnectPlayer(clientController);
+        }
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

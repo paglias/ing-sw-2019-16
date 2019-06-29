@@ -1,9 +1,16 @@
 package client.views.ActionsControllers;
 
+import client.views.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import messages.ActionMessage;
+import messages.client_data.ClientInput;
+import messages.client_data.WeaponData;
+
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //Reload window. Lets a player select a weapon to reload.
@@ -22,22 +29,45 @@ public class GenericReloadController {
 
 
     public void initialize(URL location, ResourceBundle resources) {
+
+        ArrayList<WeaponData> weapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
+        int weaponIndex = 0;
+        if (!weapons.isEmpty()) {
+            for (WeaponData weapon : weapons) {
+                switch (weaponIndex) {
+                    case 0:
+                        weapon1 = weapon.name;
+                        break;
+                    case 1:
+                        weapon2 = weapon.name;
+                        break;
+                    case 2:
+                        weapon3 = weapon.name;
+                        break;
+                }
+                weaponIndex++;
+            }
+        }
+
         weaponSelected.getItems().add(weapon1);
         weaponSelected.getItems().add(weapon2);
         weaponSelected.getItems().add(weapon3);
     }
+
     @FXML void confirmReload(){
-    }
+        ActionMessage actionMessage = new ActionMessage();
+        actionMessage.setActionItem("RELOAD");
 
-    public void setWeapon1(String weapon1) {
-        this.weapon1 = weapon1;
-    }
+        String selection = weaponSelected.getValue();
 
-    public void setWeapon2(String weapon2) {
-        this.weapon2 = weapon2;
-    }
+        ClientInput clientInput = new ClientInput();
 
-    public void setWeapon3(String weapon3) {
-        this.weapon3 = weapon3;
+        clientInput.weaponName = selection;
+
+        actionMessage.setClientInput(clientInput);
+        Game.controller.sendMsg(actionMessage);
+
+        Stage stage = (Stage) confirm.getScene().getWindow();
+        stage.close();
     }
 }

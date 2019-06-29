@@ -28,7 +28,7 @@ public class PowerUp extends CardWithAction {
 
             try {
                 for (String powerUpName : powerUpsNames) {
-                    String powerUpPath = File.separatorChar + "Powerups" + File.separatorChar + powerUpName + ".json";
+                    String powerUpPath = "/" + "Powerups" + "/" + powerUpName + ".json";
                     InputStreamReader powerUpInput = new InputStreamReader(PowerUp.class.getResourceAsStream(powerUpPath));
                     JsonReader powerUp = new JsonReader(powerUpInput);
                     powerUps.add(gson.fromJson(powerUp, PowerUp.class));

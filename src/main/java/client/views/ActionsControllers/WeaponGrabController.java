@@ -13,7 +13,6 @@ import messages.client_data.ClientInput;
 import messages.client_data.SquareData;
 import messages.client_data.WeaponData;
 import messages.client_data.WeaponsSlotData;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

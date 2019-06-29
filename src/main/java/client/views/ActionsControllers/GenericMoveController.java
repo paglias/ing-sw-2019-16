@@ -50,19 +50,7 @@ public class GenericMoveController implements Initializable {
         positions.add("9");
         positions.add("10");
         positions.add("11");
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(
-                positions.get(0),
-                positions.get(1),
-                positions.get(2),
-                positions.get(3),
-                positions.get(4),
-                positions.get(5),
-                positions.get(6),
-                positions.get(7),
-                positions.get(8),
-                positions.get(9),
-                positions.get(10),
-                positions.get(11));
+        ObservableList<String> availableChoices = FXCollections.observableArrayList(positions);
         newPosition.setItems(availableChoices);
     }
 }

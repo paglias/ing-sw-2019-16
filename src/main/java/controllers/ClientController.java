@@ -2,25 +2,35 @@ package controllers;
 
 import messages.*;
 import messages.client_data.ClientInput;
-import models.GameBoard;
 import models.Player;
 import models.cards.PowerUp;
 import server.ClientHandler;
 import utils.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientController implements MessageVisitor {
+    private static ArrayList<GameController> gameControllers = new ArrayList<>();
+
     private ClientHandler clientHandler;
     private GameController gameController;
-    private GameBoard gameBoard;
     private Player linkedPlayer; // The player associated to this client
 
-    public ClientController (GameController gameController, ClientHandler clientHandler) {
-        this.gameController = gameController;
+    public ClientController (ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
-        this.gameBoard = gameController.getGameBoard();
+        this.gameController = null;
+        this.linkedPlayer = null;
+    }
+
+    /**
+     * On ended game, unregister the game controller
+     *
+     * @param endedGame the ended game
+     */
+    public static void onEndedGame (GameController endedGame) {
+        ClientController.gameControllers.remove(endedGame);
     }
 
     /**
@@ -31,6 +41,13 @@ public class ClientController implements MessageVisitor {
     public Player getLinkedPlayer () {
         return linkedPlayer;
     }
+
+    /**
+     * Gets game controller.
+     *
+     * @return the game controller for this client
+     */
+    public GameController getGameController () { return gameController; }
 
     /**
      * Sets linked player.
@@ -55,13 +72,61 @@ public class ClientController implements MessageVisitor {
      *
      * @param msg the msg
      */
-// Message already serialized
     public void sendMsg (String msg) {
         clientHandler.sendMessage(msg);
     }
 
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
-        gameController.addPlayer(chooseNicknameMessage.getNickname(), this);
+        String nickname = chooseNicknameMessage.getNickname();
+        if (nickname == null) {
+            try {
+                clientHandler.close();
+            } catch (IOException e) {
+                Logger.err(e, "Error disconnecting client with no username");
+            }
+
+            return;
+        }
+
+        GameController gameControllerWithUser = null;
+
+        for (GameController gC : ClientController.gameControllers) {
+            // See if the user disconnected from a previous game
+            Player existingPlayer = gC.getGameBoard().getPlayers().stream()
+                    .filter(p -> p.getNickname().equals(nickname))
+                    .findFirst()
+                    .orElse(null);
+
+            if (existingPlayer != null && !existingPlayer.isConnected()) {
+                gameControllerWithUser = gC;
+                break;
+            }
+        }
+
+        if (gameControllerWithUser != null) {
+            // Can reconnect
+            gameController = gameControllerWithUser;
+            gameControllerWithUser.addPlayer(nickname, this);
+        } else {
+            GameController lastGameController = null;
+
+            if (!ClientController.gameControllers.isEmpty()) {
+                lastGameController = ClientController.gameControllers.get(ClientController.gameControllers.size() - 1);
+            }
+
+            // No active game or last game started, create a new one
+            if (lastGameController == null || lastGameController.getGameBoard().hasStarted()) {
+                GameController newGameController = new GameController();
+                ClientController.gameControllers.add(newGameController);
+                gameController = newGameController;
+                newGameController.addPlayer(chooseNicknameMessage.getNickname(), this);
+            } else { // join the existing game
+                gameController = lastGameController;
+                lastGameController.addPlayer(nickname, this);
+            }
+
+
+        }
     }
     public void visit(GameSettingsMessage gameSettingsMessage) {
         gameController.setup(gameSettingsMessage);

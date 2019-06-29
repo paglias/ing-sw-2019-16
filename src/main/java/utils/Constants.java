@@ -1,8 +1,31 @@
 package utils;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
+import java.io.File;
+import java.io.InputStreamReader;
+
 public class Constants {
     private Constants () { }  // Cannot be instantiated
 
-    public static final boolean DEBUG = true;
-    public static final long TIMEOUT = 30;
+    // Only used as a temporary store for settings parsed from JSON
+    private class ParsedSettings {
+        Boolean DEBUG;
+        int TIMEOUT;
+    }
+
+    public static boolean DEBUG;
+    public static long TIMEOUT;
+
+    public static void load () {
+        Gson gson = new Gson();
+        String settingsPath = "/" + "settings.json";
+        InputStreamReader settingsInput = new InputStreamReader(Constants.class.getResourceAsStream(settingsPath));
+        JsonReader settingsReader = new JsonReader(settingsInput);
+        ParsedSettings parsedSettings = gson.fromJson(settingsReader, ParsedSettings.class);
+
+        DEBUG = parsedSettings.DEBUG;
+        TIMEOUT = parsedSettings.TIMEOUT;
+    }
 }
