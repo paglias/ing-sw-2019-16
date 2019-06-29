@@ -37,6 +37,7 @@ public class PowerUpController implements Initializable {
     @FXML private Button discardScopeButton;
     @FXML private Button closeButton;
 
+
     private Stage powerUpWindow = new Stage();
     GenericWindows window = new GenericWindows();
     private ActionStartMessage startMessage = new ActionStartMessage();

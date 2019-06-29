@@ -4,6 +4,7 @@ import client.views.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
@@ -65,5 +66,8 @@ public class GenericReloadController {
 
         actionMessage.setClientInput(clientInput);
         Game.controller.sendMsg(actionMessage);
+
+        Stage stage = (Stage) confirm.getScene().getWindow();
+        stage.close();
     }
 }

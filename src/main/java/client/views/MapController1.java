@@ -568,4 +568,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML void endTurn(){
         genericWindows.endTurn();
     }
+    @FXML void discardAndSpawn(){
+        genericWindows.spawn();
+    }
 }

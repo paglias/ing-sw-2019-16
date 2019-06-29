@@ -18,14 +18,6 @@ public class GenericWindows {
     private static int currentPlayer;
     private static int currentSlot;
 
-    public int getCurrentSlot() {
-        return currentSlot;
-    }
-
-    public void setCurrentSlot(int n) {
-        this.currentSlot = n;
-    }
-
     public int getCurrentPlayer() {
         return currentPlayer;
     }
@@ -49,17 +41,6 @@ public class GenericWindows {
         } else {
             quitAlert.close();
         }
-    }
-
-    /**
-     * No map chosen.
-     */
-    public void noMapChosen() {
-        Alert mapAlert = new Alert(Alert.AlertType.WARNING);
-        mapAlert.setTitle("Warning Dialog");
-        mapAlert.setHeaderText("There was an error choosing the map.");
-        mapAlert.setContentText("Please choose a map before continuing.");
-        mapAlert.showAndWait();
     }
 
     /**
@@ -288,6 +269,21 @@ public class GenericWindows {
             endTurnStage.setScene(scene);
             endTurnStage.show();
             endTurnStage.setResizable(false);
+        } catch (IOException e) {
+            loadingFailure();
+        }
+    }
+
+    public void spawn(){
+        Stage spawnStage = new Stage();
+        spawnStage.setTitle("SPAWNING");
+        spawnStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/SpawnAction.fxml"));
+            Scene scene = new Scene(root);
+            spawnStage.setScene(scene);
+            spawnStage.show();
+            spawnStage.setResizable(false);
         } catch (IOException e) {
             loadingFailure();
         }
