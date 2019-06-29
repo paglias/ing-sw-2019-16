@@ -16,7 +16,6 @@ import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
 import utils.Constants;
 import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,9 +29,7 @@ public class ScopeController implements Initializable {
     private String playerFive;
 
     @FXML private ChoiceBox<String> targetChoice;
-
     @FXML private Button scopeButton;
-
     @FXML private ChoiceBox<String> ammoChoice;
 
     private ActionEndMessage endMessage = new ActionEndMessage();
@@ -60,6 +57,7 @@ public class ScopeController implements Initializable {
         }
 
         clientInput.powerUpIndex = powerUpIndex;
+        message.setClientInput(clientInput);
 
         Game.controller.sendMsg(message);
 
@@ -125,4 +123,3 @@ public class ScopeController implements Initializable {
         }
     }
 }
-

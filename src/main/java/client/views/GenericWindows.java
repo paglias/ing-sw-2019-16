@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;
@@ -19,7 +20,6 @@ import java.util.Optional;
 public class GenericWindows {
 
     private static int currentPlayer;
-    private static int currentSlot;
 
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -105,17 +105,17 @@ public class GenericWindows {
     public void showWeapon(int currentSlot) {
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
         weaponWindow.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/FXMLs//WeaponWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs//WeaponWindow.fxml"));
         try {
-            Loader.load();
+            loader.load();
         } catch (
                 IOException e) {
             loadingFailure();
         }
-        WeaponPreviewController controller = Loader.getController();
+        WeaponPreviewController controller = loader.getController();
         controller.setSlot(currentSlot);
-        Parent root = Loader.getRoot();
+        Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         weaponWindow.setScene(scene);
         weaponWindow.showAndWait();
@@ -170,15 +170,15 @@ public class GenericWindows {
      * Shoot window.
      */
     public void shootWindow() {
-        Stage moveStage = new Stage();
-        moveStage.setTitle("Shoot action");
-        moveStage.initModality(Modality.APPLICATION_MODAL);
+        Stage shootWindow = new Stage();
+        shootWindow.setTitle("Shoot action");
+        shootWindow.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericShoot.fxml"));
             Scene scene = new Scene(root);
-            moveStage.setScene(scene);
-            moveStage.show();
-            moveStage.setResizable(false);
+            shootWindow.setScene(scene);
+            shootWindow.show();
+            shootWindow.setResizable(false);
         } catch (
                 IOException e) {
             loadingFailure();
@@ -189,15 +189,15 @@ public class GenericWindows {
      * Reload window.
      */
     public void reloadWindow() {
-        Stage moveStage = new Stage();
-        moveStage.setTitle("Reload action");
-        moveStage.initModality(Modality.APPLICATION_MODAL);
+        Stage reloadStage = new Stage();
+        reloadStage.setTitle("Reload action");
+        reloadStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericReload.fxml"));
             Scene scene = new Scene(root);
-            moveStage.setScene(scene);
-            moveStage.show();
-            moveStage.setResizable(false);
+            reloadStage.setScene(scene);
+            reloadStage.show();
+            reloadStage.setResizable(false);
         } catch (
                 IOException e) {
             loadingFailure();
@@ -212,39 +212,37 @@ public class GenericWindows {
 //Receives a weapon selected from the previous window, creates a new window and passes the value
     //to the controller of that window (WeaponController)
     public void weaponWindow(String weaponName) {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/Weapon.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/Weapon.fxml"));
         try {
-            Loader.load();
+            loader.load();
         } catch (
                 IOException e) {
             loadingFailure();
         }
-        WeaponController weapon = Loader.getController();
+        WeaponController weapon = loader.getController();
         weapon.setWeaponChosen(weaponName);
-        Parent root = Loader.getRoot();
-        Stage shootStage = new Stage();
-        shootStage.setTitle(weaponName);
-        shootStage.initModality(Modality.APPLICATION_MODAL);
+        Parent root = loader.getRoot();
+        Stage weaponStage = new Stage();
+        weaponStage.setTitle(weaponName);
+        weaponStage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
-        shootStage.setScene(scene);
-        shootStage.show();
-        shootStage.setResizable(false);
+        weaponStage.setScene(scene);
+        weaponStage.show();
+        weaponStage.setResizable(false);
     }
 
     //Opens user available weapons on button click
     public void availableWeapons(){
-        Stage availableWeapons = new Stage();
-        availableWeapons.setTitle("WEAPONS");
-        availableWeapons.initModality(Modality.APPLICATION_MODAL);
+        Stage weaponStage = new Stage();
+        weaponStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/AvailableWeapons.fxml"));
-            Scene scene = new Scene(root);
-            availableWeapons.setScene(scene);
-            availableWeapons.show();
-            availableWeapons.setResizable(false);
-        } catch (
-                IOException e) {
+            Scene weaponScene = new Scene(root);
+            weaponStage.setScene(weaponScene);
+            weaponStage.show();
+            weaponStage.setResizable(false);
+        } catch (IOException e) {
             loadingFailure();
         }
     }
@@ -298,6 +296,7 @@ public class GenericWindows {
             loadingFailure();
         }
     }
+
     public void weaponGrab(){
         //Create new window, let user choose which weapon
         FXMLLoader loader = new FXMLLoader();

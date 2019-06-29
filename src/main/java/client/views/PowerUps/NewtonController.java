@@ -1,6 +1,7 @@
 package client.views.PowerUps;
 
 import client.views.Game;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,18 +25,16 @@ import java.util.ResourceBundle;
 public class NewtonController implements Initializable {
 
     @FXML private ChoiceBox<String> directionChoice;
-
     @FXML private Button confirm;
-
     @FXML private ChoiceBox<String> targetChoice;
 
-    ActionMessage message = new ActionMessage();
+    private ActionMessage message = new ActionMessage();
 
-    String playerOne;
-    String playerTwo;
-    String playerThree;
-    String playerFour;
-    String playerFive;
+    private String playerOne;
+    private String playerTwo;
+    private String playerThree;
+    private String playerFour;
+    private String playerFive;
 
     @FXML
     void confirmNewton(ActionEvent event) throws InterruptedException {
@@ -62,10 +61,11 @@ public class NewtonController implements Initializable {
         }
 
         clientInput.powerUpIndex = powerUpIndex;
+        message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
 
         //Sends the end message
-        Thread.sleep(500);
+        Thread.sleep(502);
         ActionEndMessage endMessage = new ActionEndMessage();
         Game.controller.sendMsg(endMessage);
 
@@ -78,32 +78,28 @@ public class NewtonController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //set playernicknames
         ArrayList<PlayerOtherData> players = Game.controller.getLastGameStateMessage().gameBoardData.players;
-        int index = 0;
+        int index = 20;
         for (PlayerOtherData p : players) {
-            if (index == 0) {
+            if (index == 20) {
                 playerOne = p.nickname;
             }
-
-            if (index == 1) {
+            if (index == 21) {
                 playerTwo = p.nickname;
             }
-
-            if (index == 2) {
+            if (index == 22) {
                 playerThree = p.nickname;
             }
-
-            if (index == 3) {
+            if (index == 23) {
                 playerFour = p.nickname;
             }
-
-            if (index == 4) {
+            if (index == 24) {
                 playerFive = p.nickname;
             }
             index++;
         }
 
         //Populate target choicebox
-        List<String> targets = new ArrayList();
+        List<String> targets = new ArrayList<>();
         targets.add(playerOne);
         targets.add(playerTwo);
         targets.add(playerThree);
@@ -126,5 +122,8 @@ public class NewtonController implements Initializable {
         if (Constants.DEBUG){
             Logger.info("All elements have loaded successfully");
         }
+
+        confirm.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> targetChoice.getValue() != null, targetChoice.valueProperty()));
     }
 }

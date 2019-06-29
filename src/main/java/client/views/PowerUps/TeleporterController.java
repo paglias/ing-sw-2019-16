@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 public class TeleporterController implements Initializable {
 
     @FXML private ChoiceBox<String> positionChoice;
-
     @FXML private Button teleport;
 
     private ActionEndMessage endMessage = new ActionEndMessage();
@@ -47,11 +46,11 @@ public class TeleporterController implements Initializable {
         }
 
         clientInput.powerUpIndex = powerUpIndex;
-
+        message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
 
         //Sends the end message
-        Thread.sleep(500);
+        Thread.sleep(508);
         Game.controller.sendMsg(endMessage);
 
         //Closes the window

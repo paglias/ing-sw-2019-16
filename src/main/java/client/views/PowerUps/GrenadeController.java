@@ -1,6 +1,7 @@
 package client.views.PowerUps;
 
 import client.views.Game;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,10 +56,11 @@ public class GrenadeController implements Initializable {
 
         clientInput.powerUpIndex = powerUpIndex;
 
+        message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
 
         //Sends the end message
-        Thread.sleep(500);
+        Thread.sleep(504);
         Game.controller.sendMsg(endMessage);
 
         //Closes the window
@@ -70,25 +72,25 @@ public class GrenadeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //SETS NICKNAMES OF PLAYERS
         ArrayList<PlayerOtherData> players = Game.controller.getLastGameStateMessage().gameBoardData.players;
-        int index = 0;
+        int index = 10;
         for (PlayerOtherData p : players) {
-            if (index == 0) {
+            if (index == 10) {
                 playerOne = p.nickname;
             }
 
-            if (index == 1) {
+            if (index == 11) {
                 playerTwo = p.nickname;
             }
 
-            if (index == 2) {
+            if (index == 12) {
                 playerThree = p.nickname;
             }
 
-            if (index == 3) {
+            if (index == 13) {
                 playerFour = p.nickname;
             }
 
-            if (index == 4) {
+            if (index == 14) {
                 playerFive = p.nickname;
             }
             index++;
@@ -106,5 +108,7 @@ public class GrenadeController implements Initializable {
         if (Constants.DEBUG){
             Logger.info("All elements have loaded successfully");
         }
+        confirmButton.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> targetChoice.getValue() != null, targetChoice.valueProperty()));
     }
 }

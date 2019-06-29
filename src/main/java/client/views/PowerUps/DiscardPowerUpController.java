@@ -32,7 +32,7 @@ public class DiscardPowerUpController implements Initializable {
     private ActionStartMessage startMessage = new ActionStartMessage();
     private ActionMessage message = new ActionMessage();
     private ClientInput clientInput = new ClientInput();
-    ActionEndMessage endMessage = new ActionEndMessage();
+    private ActionEndMessage endMessage = new ActionEndMessage();
 
     //This window is only for this type of powerUp, out of 4.
     //This parameter is received from the previous window.
@@ -108,7 +108,7 @@ public class DiscardPowerUpController implements Initializable {
         message.setActionItem(discard);
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
-        Thread.sleep(500);
+        Thread.sleep(502);
 
         Game.controller.sendMsg(endMessage);
 
@@ -138,7 +138,7 @@ public class DiscardPowerUpController implements Initializable {
         message.setActionItem(discard);
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
-        Thread.sleep(500);
+        Thread.sleep(503);
 
         Game.controller.sendMsg(endMessage);
 

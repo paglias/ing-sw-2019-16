@@ -48,12 +48,12 @@ public class AvailableWeaponsController implements Initializable {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(505);
 
         clientInput.weaponName=firstWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
-        Thread.sleep(500);
+        Thread.sleep(502);
 
         message.setActionItem(discard);
         Game.controller.sendMsg(endMessage);
@@ -63,12 +63,12 @@ public class AvailableWeaponsController implements Initializable {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(501);
 
         clientInput.weaponName=thirdWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
-        Thread.sleep(500);
+        Thread.sleep(504);
 
         message.setActionItem(discard);
         Game.controller.sendMsg(endMessage);
@@ -78,12 +78,12 @@ public class AvailableWeaponsController implements Initializable {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(503);
 
         clientInput.weaponName=secondWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
-        Thread.sleep(500);
+        Thread.sleep(508);
 
         message.setActionItem(discard);
         Game.controller.sendMsg(endMessage);
