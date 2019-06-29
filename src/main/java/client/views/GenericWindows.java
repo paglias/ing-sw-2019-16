@@ -277,4 +277,19 @@ public class GenericWindows {
         discardWindow.setScene(scene);
         discardWindow.show();
     }
+
+    public void endTurn(){
+        Stage endTurnStage = new Stage();
+        endTurnStage.setTitle("END TURN");
+        endTurnStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/EndTurn.fxml"));
+            Scene scene = new Scene(root);
+            endTurnStage.setScene(scene);
+            endTurnStage.show();
+            endTurnStage.setResizable(false);
+        } catch (IOException e) {
+            loadingFailure();
+        }
+    }
 }
