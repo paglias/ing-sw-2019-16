@@ -437,19 +437,19 @@ public class MapController1 extends AbstractView implements Initializable {
         //Selects the correct image to be loaded, based on player order/number
         switch (playerNumber) {
             case 0:
-                correctImage = correctImage + "/Gray.jpg";
+                correctImage = correctImage + "/GameGray.jpg";
                 break;
             case 1:
-                correctImage = correctImage + "/Blue.jpg";
+                correctImage = correctImage + "/GameBlue.jpg";
                 break;
             case 2:
-                correctImage = correctImage + "/Purple.jpg";
+                correctImage = correctImage + "/GamePurple.jpg";
                 break;
             case 3:
-                correctImage = correctImage + "/Green.jpg";
+                correctImage = correctImage + "/GameGreen.jpg";
                 break;
             case 4:
-                correctImage = correctImage + "/Yellow.jpg";
+                correctImage = correctImage + "/GameYellow.jpg";
                 break;
         }
         return correctImage;
