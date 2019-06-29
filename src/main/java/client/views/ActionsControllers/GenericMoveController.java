@@ -12,6 +12,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
+import messages.client_data.PlayerYouData;
+import messages.client_data.SquareData;
+import models.Square;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -46,19 +50,13 @@ public class GenericMoveController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<String> positions= new ArrayList<>();
-        positions.add("0");
-        positions.add("1");
-        positions.add("2");
-        positions.add("2");
-        positions.add("4");
-        positions.add("5");
-        positions.add("6");
-        positions.add("7");
-        positions.add("8");
-        positions.add("9");
-        positions.add("10");
-        positions.add("11");
+        ArrayList<String> positions = new ArrayList<>();
+        PlayerYouData player = Game.controller.getLastGameStateMessage().playerYouData;
+        SquareData square = Game.controller.getLastGameStateMessage().gameBoardData.squares.get(player.position);
+
+        square.canAccessDirectly.forEach(s -> {
+            positions.add(String.valueOf(s));
+        });
         ObservableList<String> availableChoices = FXCollections.observableArrayList(positions);
         newPosition.setItems(availableChoices);
 
