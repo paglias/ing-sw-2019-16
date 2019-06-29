@@ -21,6 +21,7 @@
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <ImageView fx:id="weaponView" fitHeight="298.0" fitWidth="204.0" layoutX="97.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="endButton" layoutX="124.0" layoutY="511.0" mnemonicParsing="false" onAction="#endShoot" prefHeight="48.0" prefWidth="150.0" text="END SHOOT ACTION" />
          </children></AnchorPane>
     <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="247.0">
          <children>

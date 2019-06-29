@@ -63,29 +63,25 @@ public class WeaponPreviewController implements Initializable {
                 if (weapons.size() > 2 && mapSlot == 3) {
                     weaponThree = weapons.get(2).name;
                 }
-
-                else if (slot.color.equals("YELLOW")) {
-                    if (!weapons.isEmpty() && mapSlot == 4) {
-                        weaponFour = weapons.get(0).name;
-                    }
-                    if (weapons.size() > 1 && mapSlot == 5) {
-                        weaponFive = weapons.get(1).name;
-                    }
-                    if (weapons.size() > 2 && mapSlot == 6) {
-                        weaponSix = weapons.get(2).name;
-                    }
+            } else if (slot.color.equals("YELLOW")) {
+                if (!weapons.isEmpty() && mapSlot == 4) {
+                    weaponFour = weapons.get(0).name;
                 }
-                else
-                    { // BLUE
-                    if (!weapons.isEmpty() && mapSlot == 7) {
-                        weaponSeven = weapons.get(0).name;
-                    }
-                    if (weapons.size() > 1 && mapSlot == 8) {
-                        weaponEight = weapons.get(1).name;
-                    }
-                    if (weapons.size() > 2 && mapSlot == 9) {
-                        weaponNine = weapons.get(2).name;
-                    }
+                if (weapons.size() > 1 && mapSlot == 5) {
+                    weaponFive = weapons.get(1).name;
+                }
+                if (weapons.size() > 2 && mapSlot == 6) {
+                    weaponSix = weapons.get(2).name;
+                }
+            } else { // BLUE
+                if (!weapons.isEmpty() && mapSlot == 7) {
+                    weaponSeven = weapons.get(0).name;
+                }
+                if (weapons.size() > 1 && mapSlot == 8) {
+                    weaponEight = weapons.get(1).name;
+                }
+                if (weapons.size() > 2 && mapSlot == 9) {
+                    weaponNine = weapons.get(2).name;
                 }
             }
         }

@@ -1,12 +1,15 @@
 package client.views.ActionsControllers;
 
+import client.views.Game;
 import client.views.GenericWindows;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import messages.client_data.WeaponData;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,45 +20,29 @@ import java.util.ResourceBundle;
 
 public class GenericShootController {
 
-    String weapon1;
-    String weapon2;
-    String weapon3;
-
-    GenericWindows newWindow = new GenericWindows();
+    private GenericWindows newWindow = new GenericWindows();
 
     @FXML private Button confirm;
-
     @FXML private ChoiceBox<String> weaponSelected;
 
-    @FXML
-    void confirmShoot(ActionEvent event) {
+    @FXML void confirmShoot(ActionEvent event) {
         String weapon = weaponSelected.getSelectionModel().getSelectedItem();
         newWindow.weaponWindow(weapon);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
 
+        confirm.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
+
         //Populate choicebox with available weapons
-        ArrayList<String> weapons= new ArrayList();
-        weapons.add(weapon1);
-        weapons.add(weapon2);
-        weapons.add(weapon3);
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(
-                weapons.get(0),
-                weapons.get(1),
-                weapons.get(2));
+        ArrayList<WeaponData> weapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
+        ArrayList<String> availableWeapons = new ArrayList<>();
+        for (WeaponData weapon : weapons){
+            availableWeapons.add(weapon.name);
+        }
+
+        ObservableList<String> availableChoices = FXCollections.observableArrayList(availableWeapons);
         weaponSelected.setItems(availableChoices);
-    }
-
-    public void setWeapon1(String weapon1) {
-        this.weapon1 = weapon1;
-    }
-
-    public void setWeapon2(String weapon2) {
-        this.weapon2 = weapon2;
-    }
-
-    public void setWeapon3(String weapon3) {
-        this.weapon3 = weapon3;
     }
 }

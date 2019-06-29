@@ -6,7 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.GameStateMessage;
 import messages.client_data.ClientInput;
@@ -19,17 +20,15 @@ import java.util.ResourceBundle;
 
 public class WeaponGrabController implements Initializable {
 
-    public String weaponChosen;
+    private String weaponChosen;
 
     @FXML private Button confirm;
-    @FXML private ToggleGroup weaponSelected;
-
     @FXML private RadioButton weaponOne;
     @FXML private RadioButton weaponTwo;
     @FXML private RadioButton weaponThree;
 
     //Sets the selected weapon and sends it to server
-    @FXML void confirmGrab(ActionEvent event) {
+    @FXML void confirmGrab(ActionEvent event) throws InterruptedException {
         if (weaponOne.isSelected()){
             weaponChosen =  weaponOne.getText();
         }
@@ -47,6 +46,13 @@ public class WeaponGrabController implements Initializable {
         clientInput.weaponName = weaponChosen;
         actionMessage.setClientInput(clientInput);
         Game.controller.sendMsg(actionMessage);
+        Thread.sleep(500);
+
+        ActionEndMessage endMessage = new ActionEndMessage();
+        Game.controller.sendMsg(endMessage);
+
+        Stage stage = (Stage) confirm.getScene().getWindow();
+        stage.close();
 
     }
 

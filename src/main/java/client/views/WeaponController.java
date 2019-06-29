@@ -1,5 +1,6 @@
 package client.views;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,9 +12,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
+
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +29,9 @@ import java.util.ResourceBundle;
 //EACH EFFECT CAN HAVE A MULTIPLE PLAYER TARGET, A POSITION TARGET AND A DIRECTION TARGET
 public class WeaponController implements Initializable {
 
-    public String weaponChosen;
-    ClientInput clientInput = new ClientInput();
-    ActionMessage shootMessage = new ActionMessage();
-
+    private String weaponChosen;
+    private ClientInput clientInput = new ClientInput();
+    private ActionMessage shootMessage = new ActionMessage();
 
     public void setWeaponChosen(String weaponChosen) {
         this.weaponChosen = weaponChosen;
@@ -70,12 +74,15 @@ public class WeaponController implements Initializable {
     @FXML private Button confirm2;
     @FXML private Button confirm3;
     @FXML private Button confirm4;
+    @FXML private Button endButton;
+
+    private  String shoot = "SHOOT";
 
     //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
     @FXML void confirmFirstPrimary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
-        shootMessage.setActionItem("SHOOT");
+        shootMessage.setActionItem(shoot);
 
         if (firstPrimary.isSelected()) {
             clientInput.effectType=1;
@@ -114,7 +121,7 @@ public class WeaponController implements Initializable {
     @FXML void confirmSecondPrimary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
-        shootMessage.setActionItem("SHOOT");
+        shootMessage.setActionItem(shoot);
 
         if (secondPrimary.isSelected()) {
             clientInput.effectType = 1;
@@ -155,7 +162,7 @@ public class WeaponController implements Initializable {
     @FXML void confirmSecondary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
-        shootMessage.setActionItem("SHOOT");
+        shootMessage.setActionItem(shoot);
 
         if (secondary.isSelected()) {
             clientInput.effectType=2;
@@ -196,7 +203,7 @@ public class WeaponController implements Initializable {
     @FXML void confirmTertiary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
-        shootMessage.setActionItem("SHOOT");
+        shootMessage.setActionItem(shoot);
 
         if (tertiary.isSelected()) {
             clientInput.effectType = 3;
@@ -234,8 +241,28 @@ public class WeaponController implements Initializable {
         Game.controller.sendMsg(shootMessage);
     }
 
+    //Sends end message, closes the window
+    @FXML public void endShoot(){
+        ActionEndMessage endMessage = new ActionEndMessage();
+        Game.controller.sendMsg(endMessage);
+        Stage stage = (Stage) endButton.getScene().getWindow();
+        stage.close();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ArrayList<Button> buttons = new ArrayList<>();
+        buttons.add(confirm1);
+        buttons.add(confirm2);
+        buttons.add(confirm3);
+        buttons.add(confirm4);
+
+        confirm1.setDisable(true);
+        confirm2.setDisable(true);
+        confirm3.setDisable(true);
+        confirm4.setDisable(true);
+        endButton.setDisable(true);
 
         //Loads the image
 
@@ -245,7 +272,7 @@ public class WeaponController implements Initializable {
 
         //Populate the choice boxes
 
-        ArrayList<String> positions = new ArrayList();
+        ArrayList<String> positions = new ArrayList<>();
         positions.add("0");
         positions.add("1");
         positions.add("2");
@@ -265,25 +292,9 @@ public class WeaponController implements Initializable {
         directions.add("EAST");
         directions.add("WEST");
 
-        ObservableList<String> availablePositionChoices = FXCollections.observableArrayList(
-                positions.get(0),
-                positions.get(1),
-                positions.get(2),
-                positions.get(3),
-                positions.get(4),
-                positions.get(5),
-                positions.get(6),
-                positions.get(7),
-                positions.get(8),
-                positions.get(9),
-                positions.get(10),
-                positions.get(11));
+        ObservableList<String> availablePositionChoices = FXCollections.observableArrayList(positions);
 
-        ObservableList<String> availableDirectionChoices = FXCollections.observableArrayList(
-                directions.get(0),
-                directions.get(1),
-                directions.get(2),
-                directions.get(3));
+        ObservableList<String> availableDirectionChoices = FXCollections.observableArrayList(directions);
 
         FPPosition.setItems(availablePositionChoices);
         SPPosition.setItems(availablePositionChoices);
@@ -335,6 +346,9 @@ public class WeaponController implements Initializable {
                 player5tertiary.setText(p.nickname);
             }
             index++;
+        }
+        if (firstPrimary.isSelected()){
+            confirm1.setDisable(false);
         }
     }
 }

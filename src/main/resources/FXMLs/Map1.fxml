@@ -629,29 +629,17 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <ImageView fx:id="skullOne" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../JPGs/Skull.png" />
-                                             </image>
-                                          </ImageView>
+                                          <ImageView fx:id="skullOne" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <ImageView fx:id="skullTwo" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../JPGs/Skull.png" />
-                                             </image>
-                                          </ImageView>
+                                          <ImageView fx:id="skullTwo" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                        <children>
-                                          <ImageView fx:id="skullThree" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../JPGs/Skull.png" />
-                                             </image>
-                                          </ImageView>
+                                          <ImageView fx:id="skullThree" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">

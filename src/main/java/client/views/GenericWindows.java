@@ -213,13 +213,13 @@ public class GenericWindows {
         WeaponController weapon = Loader.getController();
         weapon.setWeaponChosen(weaponName);
         Parent root = Loader.getRoot();
-        Stage moveStage = new Stage();
-        moveStage.setTitle(weaponName);
-        moveStage.initModality(Modality.APPLICATION_MODAL);
+        Stage shootStage = new Stage();
+        shootStage.setTitle(weaponName);
+        shootStage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
-        moveStage.setScene(scene);
-        moveStage.show();
-        moveStage.setResizable(false);
+        shootStage.setScene(scene);
+        shootStage.show();
+        shootStage.setResizable(false);
     }
 
     //Opens user available weapons on button click

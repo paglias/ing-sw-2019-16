@@ -1,6 +1,7 @@
 package client.views.ActionsControllers;
 
 import client.views.Game;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import java.net.URL;
@@ -19,25 +21,31 @@ import java.util.ResourceBundle;
 public class GenericMoveController implements Initializable {
 
     @FXML public Button confirm;
-
     @FXML public ChoiceBox<String> newPosition;
 
     //Takes the selected value from the choicebox, creates clientinput, sends the message to the
     // server
     @FXML void confirmMove(ActionEvent event) {
-        String positionSelected = newPosition.getSelectionModel().getSelectedItem();
-        int square = Integer.parseInt(positionSelected);
 
-        ActionMessage newPositionMessage = new ActionMessage();
-        newPositionMessage.setActionItem("MOVE");
-        ClientInput clientInput = new ClientInput();
-        clientInput.position= square;
-        Game.controller.sendMsg(newPositionMessage);
+        if (newPosition.getValue()!=null){
+            String positionSelected = newPosition.getSelectionModel().getSelectedItem();
+            int square = Integer.parseInt(positionSelected);
+
+            ActionMessage newPositionMessage = new ActionMessage();
+            newPositionMessage.setActionItem("MOVE");
+            ClientInput clientInput = new ClientInput();
+            clientInput.position= square;
+            Game.controller.sendMsg(newPositionMessage);
+
+            Stage stage = (Stage) confirm.getScene().getWindow();
+            stage.close();
+        }
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<String> positions= new ArrayList();
+        ArrayList<String> positions= new ArrayList<>();
         positions.add("0");
         positions.add("1");
         positions.add("2");
@@ -52,5 +60,8 @@ public class GenericMoveController implements Initializable {
         positions.add("11");
         ObservableList<String> availableChoices = FXCollections.observableArrayList(positions);
         newPosition.setItems(availableChoices);
+
+        confirm.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> newPosition.getValue() != null, newPosition.valueProperty()));
     }
 }

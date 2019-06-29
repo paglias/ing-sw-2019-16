@@ -23,6 +23,7 @@
                 <Button fx:id="move" layoutX="58.0" layoutY="125.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="Move" />
                 <Button fx:id="grab" layoutX="58.0" layoutY="174.0" mnemonicParsing="false" onAction="#openGrab" prefHeight="25.0" prefWidth="88.0" text="Grab" />
                 <Text layoutX="50.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please perform the following actions as needed:" />
+            <Button fx:id="confirmButton" layoutX="344.0" layoutY="199.0" mnemonicParsing="false" onAction="#confirmChoice" text="Confirm" />
             </children>
         </Pane>
     </children>

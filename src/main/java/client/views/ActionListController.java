@@ -22,6 +22,7 @@ public class ActionListController implements Initializable {
      * The Confirm button.
      */
     @FXML Button confirmButton;
+    private  String action = "ACTION";
 
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -36,7 +37,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage moveStage = new Stage();
-        moveStage.setTitle("ACTION");
+        moveStage.setTitle(action);
         moveStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveThree.fxml"));
@@ -59,7 +60,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage moveGrabStage = new Stage();
-        moveGrabStage.setTitle("ACTION");
+        moveGrabStage.setTitle(action);
         moveGrabStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveGrab.fxml"));
@@ -82,7 +83,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage shoot = new Stage();
-        shoot.setTitle("ACTION");
+        shoot.setTitle(action);
         shoot.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericShoot.fxml"));
@@ -105,7 +106,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage moveAndGrabStage = new Stage();
-        moveAndGrabStage.setTitle("ACTION");
+        moveAndGrabStage.setTitle(action);
         moveAndGrabStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveTwiceGrab.fxml"));
@@ -128,7 +129,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage moveShootStage = new Stage();
-        moveShootStage.setTitle("ACTION");
+        moveShootStage.setTitle(action);
         moveShootStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveAndShoot.fxml"));
@@ -151,7 +152,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage frenzyStageOne = new Stage();
-        frenzyStageOne.setTitle("ACTION");
+        frenzyStageOne.setTitle(action);
         frenzyStageOne.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveReloadShoot.fxml"));
@@ -186,7 +187,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage frenzyStageFour = new Stage();
-        frenzyStageFour.setTitle("ACTION");
+        frenzyStageFour.setTitle(action);
         frenzyStageFour.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveFour.fxml"));
@@ -209,7 +210,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage frenzyStageFive = new Stage();
-        frenzyStageFive.setTitle("ACTION");
+        frenzyStageFive.setTitle(action);
         frenzyStageFive.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveThreeGrab.fxml"));
@@ -232,7 +233,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage frenzyStageSix = new Stage();
-        frenzyStageSix.setTitle("ACTION");
+        frenzyStageSix.setTitle(action);
         frenzyStageSix.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveTwoReloadShoot.fxml"));
