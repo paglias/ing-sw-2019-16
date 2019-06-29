@@ -1,7 +1,6 @@
 package client.views.PowerUps;
 
 import client.views.Game;
-import controllers.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PowerUpData;
-
+import utils.Constants;
+import utils.Logger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,7 +25,9 @@ public class TeleporterController implements Initializable {
 
     @FXML private Button teleport;
 
-    @FXML void teleportAction(ActionEvent event) {
+    private ActionEndMessage endMessage = new ActionEndMessage();
+
+    @FXML void teleportAction(ActionEvent event) throws InterruptedException {
         String position = positionChoice.getValue();
 
         ActionMessage message = new ActionMessage();
@@ -39,17 +43,25 @@ public class TeleporterController implements Initializable {
             if (powerUpData.name.equals("Teleporter")) {
                 break;
             }
-
             powerUpIndex++;
         }
 
         clientInput.powerUpIndex = powerUpIndex;
 
         Game.controller.sendMsg(message);
+
+        //Sends the end message
+        Thread.sleep(500);
+        Game.controller.sendMsg(endMessage);
+
+        //Closes the window
+        Stage stage = (Stage) teleport.getScene().getWindow();
+        stage.close();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<String> positions= new ArrayList();
+        ArrayList<String> positions= new ArrayList<>();
         positions.add("0");
         positions.add("1");
         positions.add("2");
@@ -64,5 +76,9 @@ public class TeleporterController implements Initializable {
         positions.add("11");
         ObservableList<String> availableChoices = FXCollections.observableArrayList(positions);
         positionChoice.setItems(availableChoices);
+
+        if (Constants.DEBUG){
+            Logger.info("All elements have loaded successfully");
+        }
     }
 }

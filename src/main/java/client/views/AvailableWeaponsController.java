@@ -12,6 +12,9 @@ import messages.ActionMessage;
 import messages.ActionStartMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
+import utils.Constants;
+import utils.Logger;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,41 +45,46 @@ public class AvailableWeaponsController implements Initializable {
     @FXML private Button discardButton3;
 
 
-    @FXML void discardWeaponOne(ActionEvent event) {
+    @FXML void discardWeaponOne(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
+        Thread.sleep(500);
 
         clientInput.weaponName=firstWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
+        Thread.sleep(500);
 
         message.setActionItem(discard);
         Game.controller.sendMsg(endMessage);
     }
 
-    @FXML void discardWeaponThree(ActionEvent event) {
+    @FXML void discardWeaponThree(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
-
-        clientInput.weaponName=secondWeapon;
-        message.setClientInput(clientInput);
-        Game.controller.sendMsg(message);
-
-
-        message.setActionItem(discard);
-        Game.controller.sendMsg(endMessage);
-    }
-
-    @FXML void discardWeaponTwo(ActionEvent event) {
-
-        startMessage.setAction(discard);
-        Game.controller.sendMsg(startMessage);
+        Thread.sleep(500);
 
         clientInput.weaponName=thirdWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
+        Thread.sleep(500);
+
+        message.setActionItem(discard);
+        Game.controller.sendMsg(endMessage);
+    }
+
+    @FXML void discardWeaponTwo(ActionEvent event) throws InterruptedException {
+
+        startMessage.setAction(discard);
+        Game.controller.sendMsg(startMessage);
+        Thread.sleep(500);
+
+        clientInput.weaponName=secondWeapon;
+        message.setClientInput(clientInput);
+        Game.controller.sendMsg(message);
+        Thread.sleep(500);
 
         message.setActionItem(discard);
         Game.controller.sendMsg(endMessage);
@@ -104,6 +112,8 @@ public class AvailableWeaponsController implements Initializable {
         weaponTwo.setImage(secondImage);
         weaponThree.setImage(thirdImage);
 
-        System.out.println("Weapons loaded correctly");
+        if (Constants.DEBUG){
+            Logger.info("Weapons have successfully loaded");
+        }
     }
 }

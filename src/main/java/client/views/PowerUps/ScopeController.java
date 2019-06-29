@@ -8,21 +8,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
+import utils.Constants;
+import utils.Logger;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ScopeController implements Initializable {
 
-    String playerOne;
-    String playerTwo;
-    String playerThree;
-    String playerFour;
-    String playerFive;
+    private String playerOne;
+    private String playerTwo;
+    private String playerThree;
+    private String playerFour;
+    private String playerFive;
 
     @FXML private ChoiceBox<String> targetChoice;
 
@@ -30,7 +35,9 @@ public class ScopeController implements Initializable {
 
     @FXML private ChoiceBox<String> ammoChoice;
 
-    @FXML void confirmScope(ActionEvent event) {
+    private ActionEndMessage endMessage = new ActionEndMessage();
+
+    @FXML void confirmScope(ActionEvent event) throws InterruptedException {
         String target = targetChoice.getValue();
         String ammo = ammoChoice.getValue();
 
@@ -55,6 +62,14 @@ public class ScopeController implements Initializable {
         clientInput.powerUpIndex = powerUpIndex;
 
         Game.controller.sendMsg(message);
+
+        //Sends the end message
+        Thread.sleep(500);
+        Game.controller.sendMsg(endMessage);
+
+        //Closes the window
+        Stage stage = (Stage) scopeButton.getScene().getWindow();
+        stage.close();
     }
 
     @Override
@@ -86,7 +101,7 @@ public class ScopeController implements Initializable {
         }
 
         //Populate target choicebox
-        ArrayList<String> playerTarget = new ArrayList();
+        ArrayList<String> playerTarget = new ArrayList<>();
         playerTarget.add(playerOne);
         playerTarget.add(playerTwo);
         playerTarget.add(playerThree);
@@ -104,7 +119,10 @@ public class ScopeController implements Initializable {
 
         ObservableList<String> colorChoices = FXCollections.observableArrayList(cubeColors);
         ammoChoice.setItems(colorChoices);
-    }
 
+        if (Constants.DEBUG){
+            Logger.info("All elements have loaded successfully");
+        }
+    }
 }
 

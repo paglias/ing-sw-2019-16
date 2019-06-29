@@ -12,6 +12,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionStartMessage;
 import messages.client_data.PowerUpData;
+import utils.Constants;
+import utils.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,9 +35,9 @@ public class PowerUpController implements Initializable {
     @FXML private Button discardTeleporterButton;
     @FXML private Button discardScopeButton;
 
-    Stage powerUpWindow = new Stage();
+    private Stage powerUpWindow = new Stage();
     GenericWindows window = new GenericWindows();
-    ActionStartMessage startMessage = new ActionStartMessage();
+    private ActionStartMessage startMessage = new ActionStartMessage();
     private String powerUp = "USE_POWER_UP";
     private  String discard = "DISCARD";
 
@@ -62,8 +64,8 @@ public class PowerUpController implements Initializable {
         //Gets the powerUps in playeryoudata
         //increments availability of each powerup based on the powerUps received.
         ArrayList<PowerUpData> powerUps = Game.controller.getLastGameStateMessage().playerYouData.powerUps;
-        for (PowerUpData powerUp : powerUps) {
-            switch (powerUp.name) {
+        for (PowerUpData playerPowerUP : powerUps) {
+            switch (playerPowerUP.name) {
                 case "TagbackGrenade":
                     int availableGrenades = Integer.parseInt(grenadeAvailability.getText());
                     availableGrenades++;
@@ -96,6 +98,9 @@ public class PowerUpController implements Initializable {
                     discardTeleporterButton.setDisable(false);
                     break;
             }
+        }
+        if (Constants.DEBUG){
+            Logger.info("All elements have loaded correctly");
         }
     }
 

@@ -8,28 +8,33 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
-
+import utils.Constants;
+import utils.Logger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GrenadeController implements Initializable {
 
-    String playerOne;
-    String playerTwo;
-    String playerThree;
-    String playerFour;
-    String playerFive;
+    private String playerOne;
+    private String playerTwo;
+    private String playerThree;
+    private String playerFour;
+    private String playerFive;
+
+    private ActionEndMessage endMessage = new ActionEndMessage();
 
     @FXML private ChoiceBox<String> targetChoice;
 
     @FXML private Button confirmButton;
 
-    @FXML void activate(ActionEvent event) {
+    @FXML void activate(ActionEvent event) throws InterruptedException {
         ActionMessage message = new ActionMessage();
         message.setActionItem("USE_POWER_UP");
         String target = targetChoice.getValue();
@@ -51,6 +56,14 @@ public class GrenadeController implements Initializable {
         clientInput.powerUpIndex = powerUpIndex;
 
         Game.controller.sendMsg(message);
+
+        //Sends the end message
+        Thread.sleep(500);
+        Game.controller.sendMsg(endMessage);
+
+        //Closes the window
+        Stage stage = (Stage) confirmButton.getScene().getWindow();
+        stage.close();
     }
 
     @Override
@@ -80,7 +93,7 @@ public class GrenadeController implements Initializable {
             }
             index++;
         }
-        ArrayList<String> targets = new ArrayList();
+        ArrayList<String> targets = new ArrayList<>();
         targets.add(playerOne);
         targets.add(playerTwo);
         targets.add(playerThree);
@@ -89,6 +102,9 @@ public class GrenadeController implements Initializable {
 
         ObservableList<String> availableChoices = FXCollections.observableArrayList(targets);
         targetChoice.setItems(availableChoices);
+
+        if (Constants.DEBUG){
+            Logger.info("All elements have loaded successfully");
+        }
     }
 }
-

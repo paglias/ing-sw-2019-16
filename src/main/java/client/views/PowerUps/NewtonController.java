@@ -8,11 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
-
+import utils.Constants;
+import utils.Logger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +23,13 @@ import java.util.ResourceBundle;
 
 public class NewtonController implements Initializable {
 
-    @FXML
-    private ChoiceBox<String> directionChoice;
+    @FXML private ChoiceBox<String> directionChoice;
 
-    @FXML
-    private Button confirm;
+    @FXML private Button confirm;
 
-    @FXML
-    private ChoiceBox<String> targetChoice;
+    @FXML private ChoiceBox<String> targetChoice;
+
+    ActionMessage message = new ActionMessage();
 
     String playerOne;
     String playerTwo;
@@ -36,11 +38,12 @@ public class NewtonController implements Initializable {
     String playerFive;
 
     @FXML
-    void confirmNewton(ActionEvent event) {
+    void confirmNewton(ActionEvent event) throws InterruptedException {
+
+        //Loads input on message and sends it to server
         String target = targetChoice.getValue();
         String direction = directionChoice.getValue();
 
-        ActionMessage message = new ActionMessage();
         message.setActionItem("USE_POWER_UP");
 
         ClientInput clientInput = new ClientInput();
@@ -59,8 +62,16 @@ public class NewtonController implements Initializable {
         }
 
         clientInput.powerUpIndex = powerUpIndex;
-
         Game.controller.sendMsg(message);
+
+        //Sends the end message
+        Thread.sleep(500);
+        ActionEndMessage endMessage = new ActionEndMessage();
+        Game.controller.sendMsg(endMessage);
+
+        //Closes the window
+        Stage stage = (Stage) confirm.getScene().getWindow();
+        stage.close();
     }
 
     @Override
@@ -111,5 +122,9 @@ public class NewtonController implements Initializable {
 
         ObservableList<String> choices = FXCollections.observableArrayList(directions);
         directionChoice.setItems(choices);
+
+        if (Constants.DEBUG){
+            Logger.info("All elements have loaded successfully");
+        }
     }
 }
