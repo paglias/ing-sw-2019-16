@@ -105,6 +105,7 @@ public class Square {
                 if(position1>=8 && position1<=11){
                     return position2>=8 && position2<=11;
                 }
+                break;
             case WEST:
                 if(indexDifference<0){
                     if(position1>=0 && position1<=3){

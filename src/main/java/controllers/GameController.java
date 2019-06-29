@@ -94,6 +94,9 @@ public class GameController {
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
+            System.out.println("player created " + player.getNickname() + " has n powerups:" + player.getPowerUps().size());
+
+
             player.setDead(true); // Useful to make sure they spawn as first thing
 
             gameBoard.addPlayer(player);
@@ -137,7 +140,7 @@ public class GameController {
 
         if (remainingPlayers < 3) {
             if (gameBoard.hasStarted()) {
-                endGame();
+                if (!gameBoard.hasEnded()) endGame();
             } else if (gameStartTimer != null){
                 gameStartTimer.cancel();
             }
@@ -195,7 +198,7 @@ public class GameController {
 
         Logger.info("Staring game!");
 
-        GameStateMessage.updateClients(this);
+        startTurn();
     }
 
     /**
@@ -210,7 +213,7 @@ public class GameController {
             public void run() {
                 if (player.isActive()) endTurn(true);
             }
-        }, Constants.TIMEOUT * 1000);
+        }, Constants.TURN_TIMEOUT * 1000);
 
 
         ActionController actionController = new ActionController(this);
@@ -241,6 +244,8 @@ public class GameController {
         }
 
         Logger.info("Ending turn for " + player.getNickname());
+
+        player.setActiveAction(null);
 
         Player newActivePlayer = gameBoard.nextPlayer(player);
 
@@ -282,6 +287,8 @@ public class GameController {
 
         dispatchToClients(endGameMessage);
         ClientController.onEndedGame(this);
+
+        gameBoard.endGame();
     }
 }
 

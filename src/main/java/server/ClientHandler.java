@@ -65,7 +65,6 @@ public class ClientHandler {
     }
 
     public void sendMessage (String msg) {
-        if (Constants.DEBUG) Logger.info("Sending message >>> " + msg);
         writeStream.println(msg);
         writeStream.flush();
     }

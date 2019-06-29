@@ -83,7 +83,6 @@ public class Controller implements MessageVisitor  {
 
     public void visit(ErrorMessage errorMessage) {
         // TODO show popup
-        Logger.info("Received error message from server: " + errorMessage.getErrorMsg());
     }
 
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {

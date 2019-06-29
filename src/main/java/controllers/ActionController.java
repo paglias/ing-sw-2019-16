@@ -69,11 +69,11 @@ public class ActionController {
     public List<Action> getPossibleActions (){
         List<Action> actionsList = new ArrayList<>();
 
+        if (player.isDead()) actionsList.add(Action.DISCARD_AND_SPAWN);
+
         actionsList.add(ActionController.Action.USE_POWER_UP);
         actionsList.add(ActionController.Action.DISCARD);
         actionsList.add(ActionController.Action.RELOAD);
-
-        if (player.isDead()) actionsList.add(Action.DISCARD_AND_SPAWN);
 
         int adrenalineLevel = player.getAdrenaline();
 
@@ -154,12 +154,13 @@ public class ActionController {
                 switch (type) {
                     case TARGET:
                         card.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
-                        return;
+                        break;
                     case POSITION:
                         card.addPosition(clientInput.getPositions(gameBoardModel).get(index));
-                        return;
+                        break;
                     case DIRECTION:
                         card.setDirection(clientInput.getDirection());
+                        break;
                 }
             });
 
@@ -208,6 +209,7 @@ public class ActionController {
      * @param clientInput the client input
      */
     public void discardPowerUpAndSpawn (ClientInput clientInput) {
+        System.out.println("discardPowerUpAndSpawn CODE");
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
         player.removePowerUp(powerUp);

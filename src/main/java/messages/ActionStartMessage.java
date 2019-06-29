@@ -3,7 +3,7 @@ package messages;
 import controllers.ActionController;
 
 public class ActionStartMessage extends AbstractMessage {
-    public final MessageTopic topic = MessageTopic.ACTION;
+    public final MessageTopic topic = MessageTopic.ACTION_START;
     private String action; // Single action
 
     public void accept(MessageVisitor v) {

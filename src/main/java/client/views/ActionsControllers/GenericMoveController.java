@@ -35,6 +35,7 @@ public class GenericMoveController implements Initializable {
             newPositionMessage.setActionItem("MOVE");
             ClientInput clientInput = new ClientInput();
             clientInput.position= square;
+            newPositionMessage.setClientInput(clientInput);
             Game.controller.sendMsg(newPositionMessage);
 
             Stage stage = (Stage) confirm.getScene().getWindow();

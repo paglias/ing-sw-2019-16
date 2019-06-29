@@ -3,7 +3,6 @@ package utils;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import java.io.File;
 import java.io.InputStreamReader;
 
 public class Constants {
@@ -13,10 +12,12 @@ public class Constants {
     private class ParsedSettings {
         Boolean DEBUG;
         int TIMEOUT;
+        int TURN_TIMEOUT;
     }
 
     public static boolean DEBUG;
     public static long TIMEOUT;
+    public static long TURN_TIMEOUT;
 
     public static void load () {
         Gson gson = new Gson();
@@ -27,5 +28,6 @@ public class Constants {
 
         DEBUG = parsedSettings.DEBUG;
         TIMEOUT = parsedSettings.TIMEOUT;
+        TURN_TIMEOUT = parsedSettings.TURN_TIMEOUT;
     }
 }

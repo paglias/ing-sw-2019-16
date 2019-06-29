@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.*;
  */
 public class GameBoard {
     private Date gameStartDate;
+    private Boolean gameEnded;
     private Boolean gameSetup;;
     private Skulls skulls;
     private PowerUpsDeck powerUpsDeck;
@@ -42,6 +43,7 @@ public class GameBoard {
 
         isFinalFrenzy = false;
         gameSetup = false;
+        gameEnded = false;
     }
 
     /**
@@ -155,6 +157,23 @@ public class GameBoard {
     public synchronized boolean hasStarted () {
         return gameStartDate != null;
     }
+
+    /**
+     * End game.
+     */
+    public synchronized void endGame () {
+        gameEnded = true;
+    }
+
+    /**
+     * Has ended boolean.
+     *
+     * @return the boolean
+     */
+    public synchronized boolean hasEnded () {
+        return gameEnded;
+    }
+
 
     /**
      * Gets power ups deck.

@@ -5,6 +5,7 @@ import messages.client_data.ClientInput;
 import models.Player;
 import models.cards.PowerUp;
 import server.ClientHandler;
+import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;
@@ -64,6 +65,7 @@ public class ClientController implements MessageVisitor {
      * @param msg the msg
      */
     public void sendMsg (AbstractMessage msg) {
+        if (Constants.DEBUG) Logger.info("Sending message >>> " + msg.getClass().getName() + " to " + getLinkedPlayer().getNickname());
         clientHandler.sendMessage(msg.serialize());
     }
 
@@ -140,18 +142,21 @@ public class ClientController implements MessageVisitor {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not your turn!");
             sendMsg(errorMessage);
+            return;
         }
 
         if (linkedPlayer.getActionCounter() < 1) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not available actions remained!");
             sendMsg(errorMessage);
+            return;
         }
 
         if (linkedPlayer.getActiveAction() != null) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("An action has already started, finish it first!");
             sendMsg(errorMessage);
+            return;
         }
 
 
@@ -159,12 +164,14 @@ public class ClientController implements MessageVisitor {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Invalid action!");
             sendMsg(errorMessage);
+            return;
         }
 
         if (linkedPlayer.isDead() && action != ActionController.Action.DISCARD_AND_SPAWN) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("You must respawn before doing anything else!");
             sendMsg(errorMessage);
+            return;
         }
 
         // These actions are not counted towards the actions limit
@@ -196,6 +203,7 @@ public class ClientController implements MessageVisitor {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("No active action!");
             sendMsg(errorMessage);
+            return;
         }
 
         ActionController.ActionItem actionItem = actionMessage.getActionItem();
@@ -206,16 +214,20 @@ public class ClientController implements MessageVisitor {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Invalid action item for the active action!");
             sendMsg(errorMessage);
+            return;
         }
 
         if (activeActionItems.get(0) != actionItem) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Action items must be done in order!");
             sendMsg(errorMessage);
+            return;
         }
 
         ClientInput clientInput = actionMessage.getClientInput();
         ActionController actionController = new ActionController(gameController);
+
+        System.out.println("handling action for " + linkedPlayer.getNickname());
 
         // Tagback grenade can be used outside of the user's turn
         if (!linkedPlayer.isActive()) {
@@ -229,24 +241,33 @@ public class ClientController implements MessageVisitor {
                 ErrorMessage errorMessage = new ErrorMessage();
                 errorMessage.setErrorMsg("Not your turn!");
                 sendMsg(errorMessage);
+                return;
             }
         }
 
         switch (actionItem) {
             case GRAB:
                 actionController.grab(clientInput);
+                break;
             case MOVE:
                 actionController.move(clientInput);
+                break;
             case SHOOT:
                 actionController.shoot(clientInput);
+                break;
             case RELOAD:
                 actionController.reload(clientInput);
+                break;
             case USE_POWER_UP:
                 actionController.usePowerUp(clientInput);
+                break;
             case DISCARD_AND_SPAWN:
+                System.out.println("handling discardANDSspawn with n powerups:" + linkedPlayer.getPowerUps().size());
                 actionController.discardPowerUpAndSpawn(clientInput);
+                break;
             case DISCARD:
                 actionController.discard(clientInput);
+                break;
         }
 
         // Do not remove shoot because it can be used once per effect
@@ -261,12 +282,14 @@ public class ClientController implements MessageVisitor {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not your turn!");
             sendMsg(errorMessage);
+            return;
         }
 
         if (linkedPlayer.getActiveAction() == null) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("No active action!");
             sendMsg(errorMessage);
+            return;
         }
 
 
@@ -288,6 +311,12 @@ public class ClientController implements MessageVisitor {
     }
 
     public void visit(EndTurnMessage endTurnMessage) {
+        if (!linkedPlayer.isActive()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Not your turn!");
+            sendMsg(errorMessage);
+            return;
+        }
         gameController.endTurn(false);
     }
 
