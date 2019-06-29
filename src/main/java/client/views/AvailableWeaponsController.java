@@ -22,10 +22,14 @@ import java.util.ResourceBundle;
 //Controller for the window that displays the available weapons of the player.
 public class AvailableWeaponsController implements Initializable {
 
-    @FXML private Button confirmButton;
-    @FXML private ImageView weaponOne;
-    @FXML private ImageView weaponTwo;
-    @FXML private ImageView weaponThree;
+    @FXML
+    private Button confirmButton;
+    @FXML
+    private ImageView weaponOne;
+    @FXML
+    private ImageView weaponTwo;
+    @FXML
+    private ImageView weaponThree;
 
     private String imagePath = "/JPGs/Weapons/";
     private ActionStartMessage startMessage = new ActionStartMessage();
@@ -39,18 +43,22 @@ public class AvailableWeaponsController implements Initializable {
     private String secondWeapon;
     private String thirdWeapon;
 
-    @FXML private Button discardButton1;
-    @FXML private Button discardButton2;
-    @FXML private Button discardButton3;
+    @FXML
+    private Button discardButton1;
+    @FXML
+    private Button discardButton2;
+    @FXML
+    private Button discardButton3;
 
 
-    @FXML void discardWeaponOne(ActionEvent event) throws InterruptedException {
+    @FXML
+    void discardWeaponOne(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
         Thread.sleep(505);
 
-        clientInput.weaponName=firstWeapon;
+        clientInput.weaponName = firstWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
         Thread.sleep(502);
@@ -59,13 +67,14 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
-    @FXML void discardWeaponThree(ActionEvent event) throws InterruptedException {
+    @FXML
+    void discardWeaponThree(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
         Thread.sleep(501);
 
-        clientInput.weaponName=thirdWeapon;
+        clientInput.weaponName = thirdWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
         Thread.sleep(504);
@@ -74,13 +83,14 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
-    @FXML void discardWeaponTwo(ActionEvent event) throws InterruptedException {
+    @FXML
+    void discardWeaponTwo(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
         Game.controller.sendMsg(startMessage);
         Thread.sleep(503);
 
-        clientInput.weaponName=secondWeapon;
+        clientInput.weaponName = secondWeapon;
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
         Thread.sleep(508);
@@ -89,30 +99,49 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
-    @FXML void closeWindow(ActionEvent event) {
-            Stage mainWindow;
-            mainWindow = (Stage) confirmButton.getScene().getWindow();
-            mainWindow.close();
+    @FXML
+    void closeWindow(ActionEvent event) {
+        Stage mainWindow;
+        mainWindow = (Stage) confirmButton.getScene().getWindow();
+        mainWindow.close();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ArrayList<WeaponData> availableWeapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
 
-        firstWeapon = availableWeapons.get(0).name;
-        secondWeapon = availableWeapons.get(1).name;
-        thirdWeapon = availableWeapons.get(2).name;
-
-        Image firstImage = new Image(imagePath+firstWeapon);
-        Image secondImage = new Image(imagePath+secondWeapon);
-        Image thirdImage = new Image(imagePath+thirdWeapon);
-
-        weaponOne.setImage(firstImage);
-        weaponTwo.setImage(secondImage);
-        weaponThree.setImage(thirdImage);
-
-        if (Constants.DEBUG){
-            Logger.info("Weapons have successfully loaded");
+        if (availableWeapons.isEmpty()) {
+            discardButton1.setDisable(true);
+            discardButton2.setDisable(true);
+            discardButton3.setDisable(true);
+        } else {
+            int index = 0;
+            for (WeaponData weapon : availableWeapons) {
+                switch (index) {
+                    case 0:
+                        firstWeapon = weapon.name;
+                        discardButton1.setDisable(false);
+                        Image firstImage = new Image(imagePath+firstWeapon);
+                        weaponOne.setImage(firstImage);
+                        break;
+                    case 1:
+                        secondWeapon = weapon.name;
+                        discardButton2.setDisable(false);
+                        Image secondImage = new Image(imagePath+secondWeapon);
+                        weaponTwo.setImage(secondImage);
+                        break;
+                    case 2:
+                        thirdWeapon = weapon.name;
+                        discardButton3.setDisable(false);
+                        Image thirdImage = new Image(imagePath+thirdWeapon);
+                        weaponThree.setImage(thirdImage);
+                        break;
+                }
+                index++;
+                if (Constants.DEBUG) {
+                    Logger.info("Weapons have been successfully loaded");
+                }
+            }
         }
     }
 }
