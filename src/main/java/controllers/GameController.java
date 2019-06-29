@@ -16,6 +16,7 @@ public class GameController {
     private GameBoard gameBoard;
     private ArrayList<ClientController> clients = new ArrayList<>();
     private Timer gameStartTimer;
+    private Timer turnTimer;
 
     public GameBoard getGameBoard () { return gameBoard; }
 
@@ -25,6 +26,18 @@ public class GameController {
 
     public void addClient (ClientController clientController) {
         clients.add(clientController);
+    }
+
+    public void rescheduleTurnTimer (Player player) {
+        if (turnTimer != null) turnTimer.cancel();
+        turnTimer = new Timer();
+        turnTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (player.isActive()) endTurn(true);
+            }
+        }, Constants.TURN_TIMEOUT * 1000);
+
     }
 
     /**
@@ -207,14 +220,7 @@ public class GameController {
     public synchronized void startTurn() {
         Player player = gameBoard.getActivePlayer();
 
-        Timer turnTimer = new Timer();
-        turnTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (player.isActive()) endTurn(true);
-            }
-        }, Constants.TURN_TIMEOUT * 1000);
-
+        rescheduleTurnTimer(player);
 
         ActionController actionController = new ActionController(this);
         player.setPossibleActions(actionController.getPossibleActions());

@@ -174,6 +174,8 @@ public class ClientController implements MessageVisitor {
             return;
         }
 
+        gameController.rescheduleTurnTimer(getLinkedPlayer());
+
         // These actions are not counted towards the actions limit
         if (
                 action != ActionController.Action.USE_POWER_UP
