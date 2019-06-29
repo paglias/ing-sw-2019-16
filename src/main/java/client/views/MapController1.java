@@ -500,7 +500,6 @@ public class MapController1 extends AbstractView implements Initializable {
         genericWindows.powerUps();
     }
 
-    @FXML void drawPowerUp(ActionEvent event) {}
 
     @FXML void openWeaponsWindow(ActionEvent event) {
         genericWindows.availableWeapons();

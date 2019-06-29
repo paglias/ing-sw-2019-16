@@ -20,12 +20,12 @@
                         <Insets left="10.0" right="10.0" top="20.0" />
                     </padding>
                 </Label>
-                <Button fx:id="moveOne" layoutX="65.0" layoutY="100.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="First Move" />
-                <Button fx:id="moveTwo" layoutX="64.0" layoutY="135.0" mnemonicParsing="false" onAction="#openMove" text="Second Move" />
-                <Button fx:id="moveThree" layoutX="65.0" layoutY="170.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="Third Move" />
+                <Button fx:id="moveOne" layoutX="65.0" layoutY="100.0" mnemonicParsing="false" onAction="#openMoveOne" prefHeight="25.0" prefWidth="88.0" text="First Move" />
+                <Button fx:id="moveTwo" layoutX="64.0" layoutY="135.0" mnemonicParsing="false" onAction="#openMoveTwo" text="Second Move" />
+                <Button fx:id="moveThree" layoutX="65.0" layoutY="170.0" mnemonicParsing="false" onAction="#openMoveThree" prefHeight="25.0" prefWidth="88.0" text="Third Move" />
                 <Button fx:id="confirm" layoutX="321.0" layoutY="213.0" mnemonicParsing="false" onAction="#closeWindow" text="Continue" />
                 <Text layoutX="65.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please perform the following actions as needed:" />
-            <Button fx:id="moveFour" layoutX="65.0" layoutY="205.0" mnemonicParsing="false" onAction="#openMove" prefHeight="25.0" prefWidth="88.0" text="Fourth Move" />
+            <Button fx:id="moveFour" layoutX="65.0" layoutY="205.0" mnemonicParsing="false" onAction="#openMoveFour" prefHeight="25.0" prefWidth="88.0" text="Fourth Move" />
             </children>
         </Pane>
     </children>

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import messages.client_data.WeaponData;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 //The available weapons are stored in 3 string attributes.
 // The attributes must be updated using the available setter methods.
 
-public class GenericShootController {
+public class GenericShootController implements Initializable {
 
     private GenericWindows newWindow = new GenericWindows();
 
@@ -30,6 +31,7 @@ public class GenericShootController {
         newWindow.weaponWindow(weapon);
     }
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         confirm.visibleProperty().bind(Bindings.createBooleanBinding(
@@ -44,5 +46,8 @@ public class GenericShootController {
 
         ObservableList<String> availableChoices = FXCollections.observableArrayList(availableWeapons);
         weaponSelected.setItems(availableChoices);
+
+        confirm.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
     }
 }

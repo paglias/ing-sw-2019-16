@@ -37,7 +37,7 @@ public class MoveGrabController implements Initializable {
             ClientInput clientInput = new ClientInput();
             actionMessage.setClientInput(clientInput);
             Game.controller.sendMsg(actionMessage);
-            Thread.sleep(500);
+            Thread.sleep(501);
 
             ActionEndMessage endMessage = new ActionEndMessage();
             Game.controller.sendMsg(endMessage);

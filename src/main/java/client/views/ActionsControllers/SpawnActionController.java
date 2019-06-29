@@ -37,10 +37,10 @@ public class SpawnActionController implements Initializable {
     private String spawn = "DISCARD_AND_SPAWN";
     private String notUsed = "Not Available";
 
-    ActionStartMessage startMessage = new ActionStartMessage();
-    ActionMessage message = new ActionMessage();
-    ActionEndMessage endMessage = new ActionEndMessage();
-    ClientInput clientInput = new ClientInput();
+    private ActionStartMessage startMessage = new ActionStartMessage();
+    private ActionMessage message = new ActionMessage();
+    private ActionEndMessage endMessage = new ActionEndMessage();
+    private ClientInput clientInput = new ClientInput();
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -151,8 +151,7 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    void newtonDiscard(ActionEvent event) throws InterruptedException {
+    @FXML void newtonDiscard(ActionEvent event) throws InterruptedException {
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
         Thread.sleep(500);
@@ -180,8 +179,7 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    void scopeDiscard(ActionEvent event) throws InterruptedException {
+    @FXML void scopeDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
@@ -210,8 +208,7 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    void teleporterDiscard(ActionEvent event) throws InterruptedException {
+    @FXML void teleporterDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);

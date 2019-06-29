@@ -11,7 +11,7 @@ import messages.EndTurnMessage;
 //Controller of a window that has 2 buttons, reload and end turn. Lets user either reload a weapon or end his turn.
 public class EndTurnController {
 
-    GenericWindows window = new GenericWindows();
+    private GenericWindows window = new GenericWindows();
 
     @FXML private Button endTurnButton;
 

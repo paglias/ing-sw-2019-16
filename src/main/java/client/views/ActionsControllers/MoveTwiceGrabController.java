@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MoveTwiceGrabController implements Initializable {
-    GenericWindows genericWindow = new GenericWindows();
+    private GenericWindows genericWindow = new GenericWindows();
 
     @FXML private Button moveOne;
     @FXML private Button moveTwo;

@@ -33,24 +33,24 @@ public class MoveThreeController implements Initializable {
 
     @FXML void openMoveOne(ActionEvent event) {
         genericWindow.moveWindow();
-        confirm.setVisible(true);
-        moveOne.setVisible(false);
-        moveTwo.setVisible(true);
+        confirm.setDisable(false);
+        moveOne.setDisable(true);
+        moveTwo.setDisable(false);
     }
 
     @FXML void openMoveTwo(ActionEvent event) {
         genericWindow.moveWindow();
-        moveTwo.setVisible(false);
-        moveThree.setVisible(true);
+        moveTwo.setDisable(true);
+        moveThree.setDisable(false);
     }
     @FXML void openMoveThree(ActionEvent event) {
         genericWindow.moveWindow();
-        moveThree.setVisible(false);
+        moveThree.setDisable(true);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        confirm.setVisible(false);
-        moveTwo.setVisible(false);
-        moveThree.setVisible(false);
+        confirm.setDisable(true);
+        moveTwo.setDisable(true);
+        moveThree.setDisable(true);
     }
 }

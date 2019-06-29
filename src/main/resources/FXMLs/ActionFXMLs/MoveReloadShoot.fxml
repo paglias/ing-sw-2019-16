@@ -24,6 +24,7 @@
                 <Button fx:id="reload" layoutX="65.0" layoutY="150.0" mnemonicParsing="false" onAction="#openReload" prefHeight="25.0" prefWidth="88.0" text="Reload" />
                 <Button fx:id="shoot" layoutX="65.0" layoutY="200.0" mnemonicParsing="false" onAction="#openShoot" prefHeight="25.0" prefWidth="88.0" text="Shoot" />
                 <Text layoutX="65.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please perform the following actions as needed:" />
+            <Button fx:id="continueButton" layoutX="339.0" layoutY="200.0" mnemonicParsing="false" onAction="#confirmAction" text="Continue" />
             </children>
         </Pane>
     </children>

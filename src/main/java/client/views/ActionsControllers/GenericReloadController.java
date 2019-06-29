@@ -1,14 +1,15 @@
 package client.views.ActionsControllers;
 
 import client.views.Game;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,17 +18,16 @@ import java.util.ResourceBundle;
 //The available weapons are stored in 3 string attributes that populate the choicebox.
 // The attributes must be updated using the available setter methods.
 
-public class GenericReloadController {
+public class GenericReloadController implements Initializable {
 
-    String weapon1;
-    String weapon2;
-    String weapon3;
+    private String weapon1;
+    private String weapon2;
+    private String weapon3;
 
     @FXML private Button confirm;
-
     @FXML private ChoiceBox<String> weaponSelected;
 
-
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         ArrayList<WeaponData> weapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
@@ -52,6 +52,9 @@ public class GenericReloadController {
         weaponSelected.getItems().add(weapon1);
         weaponSelected.getItems().add(weapon2);
         weaponSelected.getItems().add(weapon3);
+
+        confirm.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
     }
 
     @FXML void confirmReload(){
