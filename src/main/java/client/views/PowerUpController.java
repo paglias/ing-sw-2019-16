@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import messages.ActionStartMessage;
 import messages.client_data.PowerUpData;
 
 import java.io.IOException;
@@ -31,6 +32,12 @@ public class PowerUpController implements Initializable {
     @FXML private Button discardGrenadeButton;
     @FXML private Button discardTeleporterButton;
     @FXML private Button discardScopeButton;
+
+    Stage powerUpWindow = new Stage();
+    GenericWindows window = new GenericWindows();
+    ActionStartMessage startMessage = new ActionStartMessage();
+    private String powerUp = "USE_POWER_UP";
+    private  String discard = "DISCARD";
 
 
     @Override
@@ -55,9 +62,9 @@ public class PowerUpController implements Initializable {
         //Gets the powerUps in playeryoudata
         //increments availability of each powerup based on the powerUps received.
         ArrayList<PowerUpData> powerUps = Game.controller.getLastGameStateMessage().playerYouData.powerUps;
-        for (PowerUpData powerUp : powerUps){
-            switch (powerUp.name){
-                case "Tagback":
+        for (PowerUpData powerUp : powerUps) {
+            switch (powerUp.name) {
+                case "TagbackGrenade":
                     int availableGrenades = Integer.parseInt(grenadeAvailability.getText());
                     availableGrenades++;
                     grenadeAvailability.setText(Integer.toString(availableGrenades));
@@ -65,7 +72,7 @@ public class PowerUpController implements Initializable {
                     discardGrenadeButton.setDisable(false);
                     break;
 
-                case "PowerUps":
+                case "Newton":
                     int availableNewton = Integer.parseInt(netwonAvailability.getText());
                     availableNewton++;
                     netwonAvailability.setText(Integer.toString(availableNewton));
@@ -73,7 +80,7 @@ public class PowerUpController implements Initializable {
                     discardNewtonButton.setDisable(false);
                     break;
 
-                case "Targeting":
+                case "TargetingScope":
                     int availableScopes = Integer.parseInt(scopeAvailability.getText());
                     availableScopes++;
                     scopeAvailability.setText(Integer.toString(availableScopes));
@@ -91,27 +98,48 @@ public class PowerUpController implements Initializable {
             }
         }
     }
-    Stage powerUpWindow = new Stage();
-    GenericWindows window = new GenericWindows();
-
 
     @FXML void discardGrenade(ActionEvent event) {
-        String s = "Tagback";
+
+        startMessage.setAction(discard);
+        Game.controller.sendMsg(startMessage);
+
+        String s = "TagbackGrenade";
+        window.discardPowerUp(s);
     }
 
     @FXML void discardNewton(ActionEvent event) {
+
+        startMessage.setAction(discard);
+        Game.controller.sendMsg(startMessage);
+
         String s = "Newton";
+        window.discardPowerUp(s);
     }
 
     @FXML void discardScope(ActionEvent event) {
-        String s = "Targeting";
+
+        startMessage.setAction(discard);
+        Game.controller.sendMsg(startMessage);
+
+        String s = "TargetingScope";
+        window.discardPowerUp(s);
     }
 
     @FXML void discardTeleporter(ActionEvent event) {
+
+        startMessage.setAction(discard);
+        Game.controller.sendMsg(startMessage);
+
         String s = "Teleporter";
+        window.discardPowerUp(s);
     }
 
     @FXML void useGrenade(ActionEvent event) {
+
+        startMessage.setAction(powerUp);
+        Game.controller.sendMsg(startMessage);
+
         powerUpWindow.setTitle("GRENADE POWERUP");
         powerUpWindow.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -126,6 +154,10 @@ public class PowerUpController implements Initializable {
     }
 
     @FXML void useNewton(ActionEvent event) {
+
+        startMessage.setAction(powerUp);
+        Game.controller.sendMsg(startMessage);
+
         powerUpWindow.setTitle("NEWTON POWERUP");
         powerUpWindow.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -140,30 +172,38 @@ public class PowerUpController implements Initializable {
     }
 
     @FXML void useScope(ActionEvent event) {
-            powerUpWindow.setTitle("TARGETING SCOPE POWERUP");
-            powerUpWindow.initModality(Modality.APPLICATION_MODAL);
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/TargetingScope.fxml"));
-                Scene scene = new Scene(root);
-                powerUpWindow.setScene(scene);
-                powerUpWindow.show();
-                powerUpWindow.setResizable(false);
-            } catch (IOException e) {
-                window.loadingFailure();
+
+        startMessage.setAction(powerUp);
+        Game.controller.sendMsg(startMessage);
+
+        powerUpWindow.setTitle("TARGETING SCOPE POWERUP");
+        powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/TargetingScope.fxml"));
+            Scene scene = new Scene(root);
+            powerUpWindow.setScene(scene);
+            powerUpWindow.show();
+            powerUpWindow.setResizable(false);
+        } catch (IOException e) {
+            window.loadingFailure();
         }
     }
 
     @FXML void useTeleporter(ActionEvent event) {
-            powerUpWindow.setTitle("TELEPORTER POWERUP");
-            powerUpWindow.initModality(Modality.APPLICATION_MODAL);
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/Teleporter.fxml"));
-                Scene scene = new Scene(root);
-                powerUpWindow.setScene(scene);
-                powerUpWindow.show();
-                powerUpWindow.setResizable(false);
-            } catch (IOException e) {
-                window.loadingFailure();
+
+        startMessage.setAction(powerUp);
+        Game.controller.sendMsg(startMessage);
+
+        powerUpWindow.setTitle("TELEPORTER POWERUP");
+        powerUpWindow.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps/Teleporter.fxml"));
+            Scene scene = new Scene(root);
+            powerUpWindow.setScene(scene);
+            powerUpWindow.show();
+            powerUpWindow.setResizable(false);
+        } catch (IOException e) {
+            window.loadingFailure();
         }
     }
 }

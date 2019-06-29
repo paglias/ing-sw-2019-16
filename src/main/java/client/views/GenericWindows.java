@@ -1,5 +1,6 @@
 package client.views;
 
+import client.views.PowerUps.DiscardPowerUpController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -255,5 +256,25 @@ public class GenericWindows {
                 IOException e) {
             loadingFailure();
         }
+    }
+
+    public void discardPowerUp(String powerUpType){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/PowerUps/DiscardPowerUp.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            loadingFailure();
+        }
+        DiscardPowerUpController discard = loader.getController();
+        discard.setPowerUpType(powerUpType);
+
+        Parent root = loader.getRoot();
+        Stage discardWindow = new Stage();
+        discardWindow.setTitle("DISCARD A POWERUP");
+        discardWindow.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(root);
+        discardWindow.setScene(scene);
+        discardWindow.show();
     }
 }
