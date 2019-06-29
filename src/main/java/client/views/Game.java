@@ -28,7 +28,7 @@ public class Game extends Application {
         window = primaryStage;
         window.setTitle("Adrenaline");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/WeaponGrab.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Welcome.fxml"));
             window.setScene(new Scene(root));
             window.show();
             window.setResizable(false);

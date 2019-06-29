@@ -19,7 +19,7 @@ public class Controller implements MessageVisitor  {
     private Scanner keyboard;
     private ExecutorService pool;
     private AbstractView currentView;
-    private GameStateMessage lastGameStateMessage;
+    private GameStateMessage lastGameStateMessage = null;
 
     Controller(Connection connection, Scanner keyboard) {
         this.connection = connection;

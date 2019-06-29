@@ -48,11 +48,11 @@ public class GenericMoveController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<String> positions = new ArrayList<>();
+    public void loadCanAccess () {
         PlayerYouData player = Game.controller.getLastGameStateMessage().playerYouData;
         SquareData square = Game.controller.getLastGameStateMessage().gameBoardData.squares.get(player.position);
+
+        ArrayList<String> positions = new ArrayList<>();
 
         square.canAccessDirectly.forEach(s -> {
             positions.add(String.valueOf(s));
@@ -62,5 +62,11 @@ public class GenericMoveController implements Initializable {
 
         confirm.visibleProperty().bind(Bindings.createBooleanBinding(
                 () -> newPosition.getValue() != null, newPosition.valueProperty()));
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadCanAccess();
     }
 }
