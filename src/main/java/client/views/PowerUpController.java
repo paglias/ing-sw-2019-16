@@ -100,8 +100,7 @@ public class PowerUpController implements Initializable {
     }
 
     @FXML void discardNewton(ActionEvent event) {
-        String s = "PowerUps";
-
+        String s = "Newton";
     }
 
     @FXML void discardScope(ActionEvent event) {

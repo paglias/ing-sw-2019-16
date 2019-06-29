@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.AvailableWeaponsController">
+<AnchorPane prefHeight="570.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.AvailableWeaponsController">
     <children>
-        <Button fx:id="confirmButton" layoutX="305.0" layoutY="428.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="90.0" text="CONFIRM" />
+        <Button fx:id="confirmButton" layoutX="304.0" layoutY="496.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="90.0" text="CONFIRM" />
         <Label layoutX="192.0" layoutY="14.0" prefHeight="78.0" prefWidth="315.0" text="These are your available weapons:">
             <font>
                 <Font size="18.0" />
@@ -31,5 +31,8 @@
             </ImageView>
          </children>
       </HBox>
+      <Button fx:id="discardButton1" layoutX="120.0" layoutY="420.0" mnemonicParsing="false" onAction="#discardWeaponOne" prefHeight="35.0" prefWidth="65.0" text="Discard" />
+      <Button fx:id="discardButton2" layoutX="320.0" layoutY="421.0" mnemonicParsing="false" onAction="#discardWeaponTwo" prefHeight="35.0" prefWidth="65.0" text="Discard" />
+      <Button fx:id="discardButton3" layoutX="520.0" layoutY="421.0" mnemonicParsing="false" onAction="#discardWeaponThree" prefHeight="35.0" prefWidth="65.0" text="Discard" />
     </children>
 </AnchorPane>
