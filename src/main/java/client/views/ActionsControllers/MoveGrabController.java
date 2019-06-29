@@ -17,7 +17,6 @@ import messages.GameStateMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.SquareData;
 import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -33,8 +32,7 @@ public class MoveGrabController implements Initializable {
     @FXML
     private Button confirmButton;
 
-    @FXML
-    void openGrab(ActionEvent event) throws InterruptedException {
+    @FXML void openGrab(ActionEvent event) throws InterruptedException {
         GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
 
         int playerPosition = gameStateMessage.playerYouData.position;

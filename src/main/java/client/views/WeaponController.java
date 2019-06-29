@@ -17,8 +17,6 @@ import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
-
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,10 +68,6 @@ public class WeaponController implements Initializable {
     @FXML private ChoiceBox<String> SPDirection;
     @FXML private ChoiceBox<String> secondaryDirection;
     @FXML private ChoiceBox<String> tertiaryDirection;
-    @FXML private Button confirm1;
-    @FXML private Button confirm2;
-    @FXML private Button confirm3;
-    @FXML private Button confirm4;
     @FXML private Button endButton;
 
     private  String shoot = "SHOOT";
@@ -97,20 +91,17 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : firstPrimarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String t = playerIsSelected.getText();
-                clientInput.players.add(t);
+                clientInput.players.add(playerIsSelected.getText());
             }
         }
         boolean isFirstPrimaryPositionEmpty = FPPosition.getSelectionModel().isEmpty();
         boolean isFirstPrimaryDirectionEmpty = FPDirection.getSelectionModel().isEmpty();
 
         if (!isFirstPrimaryPositionEmpty) {
-            String p = FPPosition.getValue();
-            clientInput.positions.add(Integer.parseInt(p));
+            clientInput.positions.add(Integer.parseInt(FPPosition.getValue()));
         }
-        if (!isFirstPrimaryDirectionEmpty) {
-            String d = FPDirection.getValue();
-            clientInput.direction = d;
+        if (!isFirstPrimaryDirectionEmpty){
+            clientInput.direction = FPDirection.getValue();
         }
 
         shootMessage.setClientInput(clientInput);
@@ -146,12 +137,10 @@ public class WeaponController implements Initializable {
         boolean isSecondPrimaryDirectionEmpty = SPDirection.getSelectionModel().isEmpty();
 
         if (!isSecondPrimaryPositionEmpty) {
-            String p = SPPosition.getValue();
-            clientInput.positions.add(Integer.parseInt(p));
+            clientInput.positions.add(Integer.parseInt(SPPosition.getValue()));
         }
         if (!isSecondPrimaryDirectionEmpty) {
-            String d = SPDirection.getValue();
-            clientInput.direction = d;
+            clientInput.direction = SPDirection.getValue();
         }
 
         shootMessage.setClientInput(clientInput);
@@ -165,7 +154,7 @@ public class WeaponController implements Initializable {
         shootMessage.setActionItem(shoot);
 
         if (secondary.isSelected()) {
-            clientInput.effectType=2;
+            clientInput.effectType = 2;
         }
 
         List<CheckBox> secondarySelectedTargets = new ArrayList<>();
@@ -177,8 +166,7 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : secondarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String t = playerIsSelected.getText();
-                clientInput.players.add(t);
+                clientInput.players.add(playerIsSelected.getText());
             }
         }
 
@@ -186,13 +174,11 @@ public class WeaponController implements Initializable {
         boolean isSecondaryDirectionEmpty = secondaryDirection.getSelectionModel().isEmpty();
 
         if (!isSecondaryPositionEmpty) {
-            String p = SecondaryPosition.getValue();
-            clientInput.positions.add(Integer.parseInt(p));
+            clientInput.positions.add(Integer.parseInt(SecondaryPosition.getValue()));
         }
 
         if (!isSecondaryDirectionEmpty) {
-            String d = secondaryDirection.getValue();
-            clientInput.direction = d;
+            clientInput.direction = secondaryDirection.getValue();
         }
 
         shootMessage.setClientInput(clientInput);
@@ -218,8 +204,7 @@ public class WeaponController implements Initializable {
 
         for (CheckBox playerIsSelected : tertiarySelectedTargets) {
             if (playerIsSelected.isSelected()) {
-                String t = playerIsSelected.getText();
-                clientInput.players.add(t);
+                clientInput.players.add(playerIsSelected.getText());
             }
         }
 
@@ -228,13 +213,11 @@ public class WeaponController implements Initializable {
 
 
         if (!isTertiaryPositionEmpty) {
-            String p = tertiaryPosition.getValue();
-            clientInput.positions.add(Integer.parseInt(p));
+            clientInput.positions.add(Integer.parseInt(tertiaryPosition.getValue()));
         }
 
         if (!isTertiaryDirectionEmpty) {
-            String d = tertiaryDirection.getValue();
-            clientInput.direction = d;
+            clientInput.direction = tertiaryDirection.getValue();
         }
 
         shootMessage.setClientInput(clientInput);
@@ -251,18 +234,6 @@ public class WeaponController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        ArrayList<Button> buttons = new ArrayList<>();
-        buttons.add(confirm1);
-        buttons.add(confirm2);
-        buttons.add(confirm3);
-        buttons.add(confirm4);
-
-        confirm1.setDisable(true);
-        confirm2.setDisable(true);
-        confirm3.setDisable(true);
-        confirm4.setDisable(true);
-        endButton.setDisable(true);
 
         //Loads the image
 
@@ -346,9 +317,6 @@ public class WeaponController implements Initializable {
                 player5tertiary.setText(p.nickname);
             }
             index++;
-        }
-        if (firstPrimary.isSelected()){
-            confirm1.setDisable(false);
         }
     }
 }
