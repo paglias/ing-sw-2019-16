@@ -55,6 +55,6 @@
             <Text fx:id="scopeAvailability" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button layoutX="265.0" layoutY="391.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" text="Close" />
+      <Button fx:id="closeButton" layoutX="265.0" layoutY="391.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="28.0" prefWidth="70.0" text="Close" />
    </children>
 </AnchorPane>

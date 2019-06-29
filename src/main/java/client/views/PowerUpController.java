@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionStartMessage;
 import messages.client_data.PowerUpData;
+import models.cards.Action;
 import utils.Constants;
 import utils.Logger;
 
@@ -34,12 +35,12 @@ public class PowerUpController implements Initializable {
     @FXML private Button discardGrenadeButton;
     @FXML private Button discardTeleporterButton;
     @FXML private Button discardScopeButton;
+    @FXML private Button closeButton;
 
     private Stage powerUpWindow = new Stage();
     GenericWindows window = new GenericWindows();
     private ActionStartMessage startMessage = new ActionStartMessage();
     private String powerUp = "USE_POWER_UP";
-    private  String discard = "DISCARD";
 
 
     @Override
@@ -106,17 +107,11 @@ public class PowerUpController implements Initializable {
 
     @FXML void discardGrenade(ActionEvent event) {
 
-        startMessage.setAction(discard);
-        Game.controller.sendMsg(startMessage);
-
         String s = "TagbackGrenade";
         window.discardPowerUp(s);
     }
 
     @FXML void discardNewton(ActionEvent event) {
-
-        startMessage.setAction(discard);
-        Game.controller.sendMsg(startMessage);
 
         String s = "Newton";
         window.discardPowerUp(s);
@@ -124,17 +119,11 @@ public class PowerUpController implements Initializable {
 
     @FXML void discardScope(ActionEvent event) {
 
-        startMessage.setAction(discard);
-        Game.controller.sendMsg(startMessage);
-
         String s = "TargetingScope";
         window.discardPowerUp(s);
     }
 
     @FXML void discardTeleporter(ActionEvent event) {
-
-        startMessage.setAction(discard);
-        Game.controller.sendMsg(startMessage);
 
         String s = "Teleporter";
         window.discardPowerUp(s);
@@ -210,5 +199,10 @@ public class PowerUpController implements Initializable {
         } catch (IOException e) {
             window.loadingFailure();
         }
+    }
+
+    @FXML void closeWindow(ActionEvent event){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }
