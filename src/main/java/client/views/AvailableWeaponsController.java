@@ -22,14 +22,10 @@ import java.util.ResourceBundle;
 //Controller for the window that displays the available weapons of the player.
 public class AvailableWeaponsController implements Initializable {
 
-    @FXML
-    private Button confirmButton;
-    @FXML
-    private ImageView weaponOne;
-    @FXML
-    private ImageView weaponTwo;
-    @FXML
-    private ImageView weaponThree;
+    @FXML private Button confirmButton;
+    @FXML private ImageView weaponOne;
+    @FXML private ImageView weaponTwo;
+    @FXML private ImageView weaponThree;
 
     private String imagePath = "/JPGs/Weapons/";
     private ActionStartMessage startMessage = new ActionStartMessage();
@@ -43,12 +39,9 @@ public class AvailableWeaponsController implements Initializable {
     private String secondWeapon;
     private String thirdWeapon;
 
-    @FXML
-    private Button discardButton1;
-    @FXML
-    private Button discardButton2;
-    @FXML
-    private Button discardButton3;
+    @FXML private Button discardButton1;
+    @FXML private Button discardButton2;
+    @FXML private Button discardButton3;
 
 
     @FXML
