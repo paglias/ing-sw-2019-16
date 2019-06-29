@@ -385,5 +385,12 @@ public class EffectTest {
         assertEquals(player2.getDamage().size(), nDamage+1);
         assertTrue(player2.getDamage().contains(player1));
     }
+    @Test
+    void getType(){
+        Action action= new Action();
+        Action.Type type=action.getType();
+        assertFalse(type!=null);
+    }
+
 }
 

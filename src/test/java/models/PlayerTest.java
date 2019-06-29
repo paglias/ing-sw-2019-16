@@ -17,8 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
     Player player;
     GameBoard gameBoard;
-    ActionController actionController;
-    GameController gameController;
+
 
     @BeforeEach
     void setup() {
@@ -26,6 +25,7 @@ class PlayerTest {
         player.setNickname("First");
         gameBoard = new GameBoard();
         gameBoard.addPlayer(player);
+
 
     }
 
@@ -363,6 +363,14 @@ class PlayerTest {
         List<ActionController.Action>pActions=new ArrayList<>();
         player.getActiveActionItems();
         assertFalse(pActions.size()>0);
+    }
+
+    @Test
+    void setActiveAction(){
+        List<ActionController.Action>pActions=new ArrayList<>();
+        pActions.add(ActionController.Action.MOVE);
+        player.setActiveAction(pActions.get(0));
+        assertTrue(pActions.size()>0);
     }
 
 }
