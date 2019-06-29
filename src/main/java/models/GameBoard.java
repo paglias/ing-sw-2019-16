@@ -224,12 +224,12 @@ public class GameBoard {
         }
 
         int i = players.indexOf(currentPlayer);
-        try {
-            players.get(i++);
-        } catch (IndexOutOfBoundsException e) {
-            players.get(0).setActive(true);
-            i=0;
+        if (i == players.size() - 1) {
+            i = 0;
+        } else {
+            i = i+1;
         }
+
         players.get(i).setActive(true);
         currentPlayer.setActive(false);
         return players.get(i);

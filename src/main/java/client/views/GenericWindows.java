@@ -1,5 +1,6 @@
 package client.views;
 
+import client.views.ActionsControllers.GenericMoveController;
 import client.views.PowerUps.DiscardPowerUpController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -146,16 +147,23 @@ public class GenericWindows {
         Stage moveStage = new Stage();
         moveStage.setTitle("Move action");
         moveStage.initModality(Modality.APPLICATION_MODAL);
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericMove.fxml"));
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/GenericMove.fxml"));
+            try {
+                loader.load();
+            } catch (
+                    IOException e) {
+                loadingFailure();
+            }
+            GenericMoveController ctrl = loader.getController();
+            ctrl.loadCanAccess();
+
+            Parent root = loader.getRoot();
             Scene scene = new Scene(root);
             moveStage.setScene(scene);
             moveStage.show();
             moveStage.setResizable(false);
-        } catch (
-                IOException e) {
-            loadingFailure();
-        }
     }
 
     /**

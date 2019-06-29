@@ -4,6 +4,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -150,11 +151,18 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Button endTurnButton;
 
     //These integers contain the players positions on the map, as square numbers
-    Integer player1Position;
-    Integer player2Position;
-    Integer player3Position;
-    Integer player4Position;
-    Integer player5Position;
+    Integer player1Position = null;
+    Integer player2Position = null;
+    Integer player3Position = null;
+    Integer player4Position = null;
+    Integer player5Position = null;
+
+    // The players images
+    ImageView player1Image = null;
+    ImageView player2Image = null;
+    ImageView player3Image = null;
+    ImageView player4Image = null;
+    ImageView player5Image = null;
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage){
@@ -189,8 +197,8 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username1;
                     playerStatus = player1Active;
 
-                    if (player1Position != null && !player.position.equals(player1Position)) {
-                        unloadPlayerFromMap(pIndex, player1Position);
+                    if (player.position != null && !player.position.equals(player1Position)) {
+                        unloadPlayerFromMap(player1Position, player1Image);
                         player1Position = player.position;
                         loadPlayerOnMap(pIndex, player1Position);
                     }
@@ -200,8 +208,8 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username2;
                     playerStatus = player2Active;
 
-                    if (player2Position != null && !player.position.equals(player2Position)) {
-                        unloadPlayerFromMap(pIndex, player2Position);
+                    if (player.position != null && !player.position.equals(player2Position)) {
+                        unloadPlayerFromMap(player2Position, player2Image);
                         player2Position = player.position;
                         loadPlayerOnMap(pIndex, player2Position);
                     }
@@ -210,8 +218,8 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username3;
                     playerStatus = player3Active;
 
-                    if (player3Position != null && !player.position.equals(player3Position))  {
-                        unloadPlayerFromMap(pIndex, player3Position);
+                    if (player.position != null && !player.position.equals(player3Position))  {
+                        unloadPlayerFromMap(player3Position, player3Image);
                         player3Position = player.position;
                         loadPlayerOnMap(pIndex, player3Position);
                     }
@@ -221,8 +229,8 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username4;
                     playerStatus = player4Active;
 
-                    if (player4Position != null && !player.position.equals(player4Position)) {
-                        unloadPlayerFromMap(pIndex, player4Position);
+                    if (player.position != null && !player.position.equals(player4Position)) {
+                        unloadPlayerFromMap(player4Position, player4Image);
                         player4Position = player.position;
                         loadPlayerOnMap(pIndex, player4Position);
                     }
@@ -231,8 +239,8 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username5;
                     playerStatus = player5Active;
 
-                    if (player5Position != null && !player.position.equals(player5Position)) {
-                        unloadPlayerFromMap(pIndex, player5Position);
+                    if (player.position != null && !player.position.equals(player5Position)) {
+                        unloadPlayerFromMap(player5Position, player5Image);
                         player5Position = player.position;
                         loadPlayerOnMap(pIndex, player5Position);
                     }
@@ -330,8 +338,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
     //gamestate message. Loads a JPG with color based on player number and his position.
-    public void loadPlayerOnMap(int playerNumber, int position) {
-
+    public void loadPlayerOnMap(int playerNumber, Integer position) {
         String correctImage = getImageToLoadByPlayerNumber(playerNumber);
 
         //Selects the location where to load the image.
@@ -341,13 +348,22 @@ public class MapController1 extends AbstractView implements Initializable {
         HBox correctHBox = getHBoxByPosition(position);
 
         //Gets all the imageViews of the correct square (indentified by a HBOX)
-        ArrayList<ImageView> squarePictures = new ArrayList<>();
-        squarePictures.add((ImageView) correctHBox.getChildren());
-
-        for (ImageView picture : squarePictures) {
+        for (Node pictureNode : correctHBox.getChildren()) {
+            ImageView picture = (ImageView) pictureNode;
             if (picture.getImage() == null) {
                 Image finalPlayerImagePosition = new Image(correctImage);
                 picture.setImage(finalPlayerImagePosition);
+                if (playerNumber == 0) {
+                    player1Image = picture;
+                } else if (playerNumber == 1) {
+                    player2Image = picture;
+                } else if (playerNumber == 2) {
+                    player3Image = picture;
+                } else if (playerNumber == 3) {
+                    player4Image = picture;
+                } else if (playerNumber == 4) {
+                    player5Image = picture;
+                }
                 break;
             }
         }
@@ -359,23 +375,13 @@ public class MapController1 extends AbstractView implements Initializable {
     //Unloads the player image from the position.
     //For loop that compares each image in that square (5 max possible images) and if
     //the one of those images matches the standard Player image, it removes it from the square.
-    public void unloadPlayerFromMap(int playerNumber, int position){
-        HBox correctHBox = getHBoxByPosition(position);
+    public void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage){
+        if (previousPosition == null) return;
+        HBox correctHBox = getHBoxByPosition(previousPosition);
 
-        ArrayList<ImageView> squarePictures = new ArrayList<>();
-        squarePictures.add((ImageView) correctHBox.getChildren());
-
-        String correctImage = getImageToLoadByPlayerNumber(playerNumber);
-        Image playerImage = new Image(correctImage);
-
-        for (ImageView picture : squarePictures) {
-            for (int i = 0; i < picture.getFitWidth(); i++) {
-                for (int j = 0; j < picture.getFitHeight(); j++) {
-                    if (picture.getImage().getPixelReader().getColor(i, j).equals(playerImage.getPixelReader().getColor(i, j))){
-                        picture.setImage(null);
-                    }
-                }
-            }
+        for (Node pictureNode : correctHBox.getChildren()) {
+            ImageView picture = (ImageView) pictureNode;
+            if (picture == previousImage) picture.setImage(null);
         }
     }
 
@@ -431,19 +437,19 @@ public class MapController1 extends AbstractView implements Initializable {
         //Selects the correct image to be loaded, based on player order/number
         switch (playerNumber) {
             case 0:
-                correctImage = correctImage + "/Gray.jpg";
+                correctImage = correctImage + "/GameGray.jpg";
                 break;
             case 1:
-                correctImage = correctImage + "/Blue.jpg";
+                correctImage = correctImage + "/GameBlue.jpg";
                 break;
             case 2:
-                correctImage = correctImage + "/Purple.jpg";
+                correctImage = correctImage + "/GamePurple.jpg";
                 break;
             case 3:
-                correctImage = correctImage + "/Green.jpg";
+                correctImage = correctImage + "/GameGreen.jpg";
                 break;
             case 4:
-                correctImage = correctImage + "/Yellow.jpg";
+                correctImage = correctImage + "/GameYellow.jpg";
                 break;
         }
         return correctImage;
