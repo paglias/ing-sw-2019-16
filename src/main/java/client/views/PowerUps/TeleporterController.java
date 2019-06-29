@@ -1,5 +1,7 @@
 package client.views.PowerUps;
 
+import client.views.Game;
+import controllers.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
+import messages.client_data.PowerUpData;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -26,7 +30,22 @@ public class TeleporterController implements Initializable {
         message.setActionItem("USE_POWER_UP");
 
         ClientInput clientInput = new ClientInput();
-        //TODO SET PARAMETERS ON CLIENTINPUT
+        clientInput.positions.add(Integer.parseInt(position));
+
+        int powerUpIndex = 0;
+
+        for (PowerUpData powerUpData : Game.controller.getLastGameStateMessage()
+                .playerYouData.powerUps) {
+            if (powerUpData.name.equals("Teleporter")) {
+                break;
+            }
+
+            powerUpIndex++;
+        }
+
+        clientInput.powerUpIndex = powerUpIndex;
+
+        Game.controller.sendMsg(message);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

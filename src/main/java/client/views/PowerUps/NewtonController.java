@@ -11,6 +11,8 @@ import javafx.scene.control.ChoiceBox;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerOtherData;
+import messages.client_data.PowerUpData;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +44,23 @@ public class NewtonController implements Initializable {
         message.setActionItem("USE_POWER_UP");
 
         ClientInput clientInput = new ClientInput();
-        //TODO FIX PARAMETERS CLIENTINPUT
+        clientInput.direction = direction;
+        clientInput.players.add(target);
 
+        int powerUpIndex = 0;
+
+        for (PowerUpData powerUpData : Game.controller.getLastGameStateMessage()
+                .playerYouData.powerUps) {
+            if (powerUpData.name.equals("Newton")) {
+                break;
+            }
+
+            powerUpIndex++;
+        }
+
+        clientInput.powerUpIndex = powerUpIndex;
+
+        Game.controller.sendMsg(message);
     }
 
     @Override
