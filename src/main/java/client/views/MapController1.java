@@ -86,6 +86,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private GridPane playerThreeDamage;
     @FXML private GridPane playerFourDamage;
     @FXML private GridPane playerFiveDamage;
+    @FXML private GridPane spawnButton;
 
     //These integers contain the players positions on the map, as square numbers
     private Integer player1Position = null;
@@ -126,6 +127,9 @@ public class MapController1 extends AbstractView implements Initializable {
             actionsButton.setDisable(false);
             endTurnButton.setDisable(false);
             weaponsButton.setDisable(false);
+        }
+        if(gameStateMessage.playerYouData.possibleActions.contains("DISCARD_AND_SPAWN")) {
+            spawnButton.setDisable(false);
         }
     }
 
@@ -689,6 +693,7 @@ public class MapController1 extends AbstractView implements Initializable {
         actionsButton.setDisable(true);
         endTurnButton.setDisable(true);
         weaponsButton.setDisable(true);
+        spawnButton.setDisable(true);
 
         textArea.setEditable(false);//text area cant be changed by user, it only receives messages to print.
 
