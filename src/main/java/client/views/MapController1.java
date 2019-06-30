@@ -29,82 +29,36 @@ public class MapController1 extends AbstractView implements Initializable {
 
     private GenericWindows genericWindows = new GenericWindows();
 
-    @FXML
-    private ImageView image1;
-    @FXML
-    private AnchorPane imageAnchorPane;
-    @FXML
-    private Button quitButton;
-    @FXML
-    private SplitPane horizontalSplit;
-    @FXML
-    private SplitPane verticalSplit;
-    @FXML
-    private SplitPane horizontalSplit2;
-    @FXML
-    private AnchorPane upperLeftPane;
-    @FXML
-    private AnchorPane lowerLeftPane;
-    @FXML
-    private GridPane playerboardGrid;
-    @FXML
-    private Label username5;
-    @FXML
-    private Button marksPlayer5;
-    @FXML
-    private Label username1;
-    @FXML
-    private Button marksPlayer1;
-    @FXML
-    private Label username2;
-    @FXML
-    private Button marksPlayer2;
-    @FXML
-    private Label username3;
-    @FXML
-    private Label username4;
-    @FXML
-    private GridPane gridPane1;
-    @FXML
-    private Label redWeapon1;
-    @FXML
-    private Label redWeapon2;
-    @FXML
-    private Label redWeapon3;
-    @FXML
-    private Label blueWeapon1;
-    @FXML
-    private Label blueWeapon2;
-    @FXML
-    private Label blueWeapon3;
-    @FXML
-    private Label yellowWeapon1;
-    @FXML
-    private Label yellowWeapon2;
-    @FXML
-    private Label yellowWeapon3;
-    @FXML
-    private Button actionsButton;
-    @FXML
-    private Button powerUpsButton;
-    @FXML
-    private Button weaponsButton;
-    @FXML
-    private Text redAmmo;
-    @FXML
-    private Text blueAmmo;
-    @FXML
-    private Text yellowAmmo;
-    @FXML
-    private Text actionCounter;
-    @FXML
-    private Text totalPoints;
-    @FXML
-    private ImageView skullOne;
-    @FXML
-    private ImageView skullTwo;
-    @FXML
-    private ImageView skullThree;
+    @FXML private ImageView image1;
+    @FXML private Button endTurnButton;
+    @FXML private AnchorPane imageAnchorPane;
+    @FXML private SplitPane horizontalSplit;
+    @FXML private SplitPane verticalSplit;
+    @FXML private SplitPane horizontalSplit2;
+    @FXML private Label username5;
+    @FXML private Label username1;
+    @FXML private Label username2;
+    @FXML private Label username3;
+    @FXML private Label username4;
+    @FXML private Label redWeapon1;
+    @FXML private Label redWeapon2;
+    @FXML private Label redWeapon3;
+    @FXML private Label blueWeapon1;
+    @FXML private Label blueWeapon2;
+    @FXML private Label blueWeapon3;
+    @FXML private Label yellowWeapon1;
+    @FXML private Label yellowWeapon2;
+    @FXML private Label yellowWeapon3;
+    @FXML private Button actionsButton;
+    @FXML private Button weaponsButton;
+    @FXML private Text redAmmo;
+    @FXML private Text blueAmmo;
+    @FXML private Text yellowAmmo;
+    @FXML private Text actionCounter;
+    @FXML private Text totalPoints;
+    @FXML private ImageView skullOne;
+    @FXML private ImageView skullTwo;
+    @FXML private ImageView skullThree;
     @FXML private ImageView skullFour;
     @FXML private ImageView skullFive;
     @FXML private ImageView skullSix;
@@ -167,6 +121,12 @@ public class MapController1 extends AbstractView implements Initializable {
         }
 
         textArea.setText(textAreaBuilder.toString());
+
+        if (gameStateMessage.playerYouData.isActive){
+            actionsButton.setDisable(false);
+            endTurnButton.setDisable(false);
+            weaponsButton.setDisable(false);
+        }
     }
 
     public void drawCurrentPlayer(PlayerYouData currentPlayer) {
@@ -725,6 +685,10 @@ public class MapController1 extends AbstractView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        actionsButton.setDisable(true);
+        endTurnButton.setDisable(true);
+        weaponsButton.setDisable(true);
 
         textArea.setEditable(false);//text area cant be changed by user, it only receives messages to print.
 
