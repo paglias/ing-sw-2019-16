@@ -14,6 +14,7 @@ public class PlayerOtherData {
     public String nickname;
     public Integer position; // The number of the square where the player is positioned (Integer so it can be set to null)
     public Boolean isActive; // The current player?
+    public Boolean isDead; // The current player?
     public int nDeaths = 0; // The number of times the player died
     public ArrayList<String> marks; // marks, as a list of nicknames
     public ArrayList<String> damage; // damage, as a list of nicknames
@@ -26,6 +27,7 @@ public class PlayerOtherData {
         position = player.getPosition() != null ? player.getPosition().getNumber() : null;
         isActive = player.isActive();
         isConnected = player.isConnected();
+        isDead = player.isDead();
         activeAction = player.getActiveAction() != null ? player.getActiveAction().toString() : null;
         nDeaths = player.getNDeaths();
         marks = new ArrayList<>(player.getMarks().stream()
