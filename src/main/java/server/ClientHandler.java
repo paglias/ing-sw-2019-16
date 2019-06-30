@@ -2,7 +2,9 @@ package server;
 
 import controllers.ClientController;
 import controllers.GameController;
+import javafx.application.Platform;
 import messages.AbstractMessage;
+import models.Player;
 import utils.Constants;
 import utils.Logger;
 
@@ -50,6 +52,7 @@ public class ClientHandler {
         } finally {
             Logger.info("Closing connection from client " + clientSocket.getLocalAddress());
             close();
+            clientController.getGameController().disconnectPlayer(clientController);
         }
     }
 
