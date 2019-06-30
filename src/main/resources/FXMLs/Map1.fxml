@@ -611,7 +611,7 @@
                                        </children></Pane>
                                  </children>
                               </GridPane>
-                              <GridPane layoutX="56.0" layoutY="33.0" prefHeight="32.0" prefWidth="266.0">
+                              <GridPane fx:id="skullPane" layoutX="56.0" layoutY="33.0" prefHeight="32.0" prefWidth="266.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
@@ -629,42 +629,42 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <ImageView fx:id="skullOne" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullEight" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <ImageView fx:id="skullTwo" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullSeven" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                        <children>
-                                          <ImageView fx:id="skullThree" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullSix" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                                        <children>
-                                          <ImageView fx:id="skullFour" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullFive" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                                        <children>
-                                          <ImageView fx:id="skullFive" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullFour" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                                        <children>
-                                          <ImageView fx:id="skullSix" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullThree" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                                        <children>
-                                          <ImageView fx:id="skullSeven" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullTwo" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
                                        <children>
-                                          <ImageView fx:id="skullEight" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="skullOne" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
                                  </children>

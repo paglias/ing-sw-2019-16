@@ -1,6 +1,8 @@
 package client.views;
 
+import javafx.beans.value.ObservableListValue;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,9 +48,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Label username2;
     @FXML private Button marksPlayer2;
     @FXML private Label username3;
-    @FXML private Button marksPlayer3;
     @FXML private Label username4;
-    @FXML private Button marksPlayer4;
     @FXML private GridPane gridPane1;
     @FXML private Label redWeapon1;
     @FXML private Label redWeapon2;
@@ -59,7 +59,6 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Label yellowWeapon1;
     @FXML private Label yellowWeapon2;
     @FXML private Label yellowWeapon3;
-    @FXML private Button drawButton;
     @FXML private Button actionsButton;
     @FXML private Button powerUpsButton;
     @FXML private Button weaponsButton;
@@ -93,6 +92,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB10;
     @FXML private HBox HB11;
     @FXML private TextArea textArea;
+    @FXML private GridPane skullPane;
 
     //These integers contain the players positions on the map, as square numbers
     private Integer player1Position = null;
@@ -113,6 +113,7 @@ public class MapController1 extends AbstractView implements Initializable {
         drawPlayers(gameStateMessage.gameBoardData.players);
         drawCurrentPlayer(gameStateMessage.playerYouData);
         drawWeaponSlots(gameStateMessage.gameBoardData.squares);
+        drawSkulls(gameStateMessage.gameBoardData.skullsN);
 
         StringBuilder textAreaBuilder = new StringBuilder();
 
@@ -136,7 +137,7 @@ public class MapController1 extends AbstractView implements Initializable {
         drawCubes(currentPlayer);
     }
 
-    public void drawPlayers (ArrayList<PlayerOtherData> players) {
+    public void drawPlayers (List<PlayerOtherData> players) {
         //For-switch that gets the player position for each player and assigns it to the Integers above.
         //Then sends the player number and position to the loadPlayerOnMap function
         //IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
@@ -410,6 +411,40 @@ public class MapController1 extends AbstractView implements Initializable {
                 break;
         }
         return correctImage;
+    }
+
+    //loads skulls on map
+    public void drawSkulls(int skulls){
+        int i;
+        String skullPath = "/JPGs/Skull.png";
+        Image skullImage = new Image(skullPath);
+        for (i = 0;i < skulls;i++){
+           switch (i){
+               case 0:
+                   skullOne.setImage(skullImage);
+                   break;
+               case 1:
+                   skullTwo.setImage(skullImage);
+                   break;
+               case 2:
+                   skullThree.setImage(skullImage);
+                   break;
+               case 3:
+                   skullFour.setImage(skullImage);
+                   break;
+               case 4:
+                   skullFive.setImage(skullImage);
+                   break;
+               case 5:
+                   skullSix.setImage(skullImage);
+                   break;
+               case 6:
+                   skullSeven.setImage(skullImage);
+                   break;
+               case 7:
+                   skullEight.setImage(skullImage);
+           }
+        }
     }
 
     @Override
