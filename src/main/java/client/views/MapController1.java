@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -521,91 +522,200 @@ public class MapController1 extends AbstractView implements Initializable {
     //Used for one player at a time
     //Receives the correct playerboard and the correct player to get the damage from.
     // (damage is an arraylist of nicknames)
-    //For each nickname inside the player damage, loads an ImageView inside the gridpane
+    //For each nickname inside the player damage, creates a borderpane, loads an ImageView inside the gridpane
     //The loading location varies based on the position of the Arraylist damage
+    //Also checks if the borderpane is empty before loading.
     public void drawDamageOnOnePlayer(GridPane playerboard, PlayerOtherData player){
         int index=0;
         for (String damagingPlayer : player.damage) {
-            ImageView imageView;
             switch (index) {
                 case 0:
+                    ImageView imageView;
+                    BorderPane pane= new BorderPane();
                     imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 0, 0);
+
+                    if (pane.getCenter()!= null){
+                        pane.setCenter(null);
+                    }
+
+                    pane.setCenter(imageView);
+                    imageView.fitWidthProperty().bind(pane.widthProperty());
+                    playerboard.add(pane, 0, 0);
                     break;
+
                 case 1:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 1, 0);
+                    ImageView imageView1;
+                    BorderPane pane1= new BorderPane();
+                    imageView1 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane1.getCenter()!= null) {
+                        pane1.setCenter(null);
+                    }
+                    pane1.setCenter(imageView1);
+                    imageView1.fitWidthProperty().bind(pane1.widthProperty());
+                    playerboard.add(pane1, 1, 0);
                     break;
+
                 case 2:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 2, 0);
+                    ImageView imageView2;
+                    BorderPane pane2= new BorderPane();
+                    imageView2 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane2.getCenter()!= null) {
+                        pane2.setCenter(null);
+                    }
+                    pane2.setCenter(imageView2);
+                    imageView2.fitWidthProperty().bind(pane2.widthProperty());
+                    playerboard.add(pane2, 2, 0);
                     break;
+
                 case 3:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 3, 0);
+                    ImageView imageView3;
+                    BorderPane pane3= new BorderPane();
+                    imageView3 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane3.getCenter()!= null) {
+                        pane3.setCenter(null);
+                    }
+                    pane3.setCenter(imageView3);
+                    imageView3.fitWidthProperty().bind(pane3.widthProperty());
+                    playerboard.add(pane3, 3, 0);
                     break;
+
                 case 4:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 4, 0);
+                    ImageView imageView4;
+                    BorderPane pane4= new BorderPane();
+                    imageView4 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane4.getCenter()!= null) {
+                        pane4.setCenter(null);
+                    }
+                    pane4.setCenter(imageView4);
+                    imageView4.fitWidthProperty().bind(pane4.widthProperty());
+                    playerboard.add(pane4, 4, 0);
                     break;
+
                 case 5:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 5, 0);
+                    ImageView imageView5;
+                    BorderPane pane5= new BorderPane();
+                    imageView5 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane5.getCenter()!= null) {
+                        pane5.setCenter(null);
+                    }
+                    pane5.setCenter(imageView5);
+                    imageView5.fitWidthProperty().bind(pane5.widthProperty());
+                    playerboard.add(pane5, 5, 0);
                     break;
+
                 case 6:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 6, 0);
+                    ImageView imageView6;
+                    BorderPane pane6= new BorderPane();
+                    imageView6 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane6.getCenter()!= null) {
+                        pane6.setCenter(null);
+                    }
+                    pane6.setCenter(imageView6);
+                    imageView6.fitWidthProperty().bind(pane6.widthProperty());
+                    playerboard.add(pane6, 6, 0);
                     break;
+
                 case 7:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 7, 0);
+                    ImageView imageView7;
+                    BorderPane pane7= new BorderPane();
+                    imageView7 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane7.getCenter()!= null) {
+                        pane7.setCenter(null);
+                    }
+                    pane7.setCenter(imageView7);
+                    imageView7.fitWidthProperty().bind(pane7.widthProperty());
+                    playerboard.add(pane7, 7, 0);
                     break;
+
                 case 8:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 8, 0);
+                    ImageView imageView8;
+                    BorderPane pane8= new BorderPane();
+                    imageView8 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane8.getCenter()!= null) {
+                        pane8.setCenter(null);
+                    }
+                    pane8.setCenter(imageView8);
+                    imageView8.fitWidthProperty().bind(pane8.widthProperty());
+                    playerboard.add(pane8, 8, 0);
                     break;
+
                 case 9:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 9, 0);
+                    ImageView imageView9;
+                    BorderPane pane9= new BorderPane();
+                    imageView9 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane9.getCenter()!= null) {
+                        pane9.setCenter(null);
+                    }
+                    pane9.setCenter(imageView9);
+                    imageView9.fitWidthProperty().bind(pane9.widthProperty());
+                    playerboard.add(pane9, 9, 0);
                     break;
+
                 case 10:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 10, 0);
+                    ImageView imageView10;
+                    BorderPane pane10= new BorderPane();
+                    imageView10 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane10.getCenter()!= null) {
+                        pane10.setCenter(null);
+                    }
+                    pane10.setCenter(imageView10);
+                    imageView10.fitWidthProperty().bind(pane10.widthProperty());
+                    playerboard.add(pane10, 10, 0);
                     break;
+
                 case 11:
-                    imageView = getImageViewToLoad(damagingPlayer);
-                    playerboard.add(imageView, 11, 0);
+                    ImageView imageView11;
+                    BorderPane pane11= new BorderPane();
+                    imageView11 = getImageViewToLoad(damagingPlayer);
+
+                    if (pane11.getCenter()!= null) {
+                        pane11.setCenter(null);
+                    }
+                    pane11.setCenter(imageView11);
+                    imageView11.fitWidthProperty().bind(pane11.widthProperty());
+                    playerboard.add(pane11, 11, 0);
                     break;
             }
             index++;
         }
     }
+
     //Receives string/nicknames of a player
     //Returns imageView object containing Image of the correct player
     public ImageView getImageViewToLoad(String damagingPlayer) {
 
         ImageView imageView = new ImageView();
-        if (damagingPlayer.equals(username1.getText())) {
+        if (damagingPlayer.equals(username1.getText())&& username1.getText()!= null) {
             String imagePlayer = getImageToLoadByPlayerNumber(0);
             Image playerOne = new Image(imagePlayer);
             imageView.setImage(playerOne);
         }
-        if (damagingPlayer.equals(username2.getText())) {
+        if (damagingPlayer.equals(username2.getText()) && username2.getText()!= null) {
             String imagePlayer = getImageToLoadByPlayerNumber(1);
             Image playerOne = new Image(imagePlayer);
             imageView.setImage(playerOne);
         }
-        if (damagingPlayer.equals(username3.getText())) {
+        if (damagingPlayer.equals(username3.getText()) && username3.getText()!= null) {
             String imagePlayer = getImageToLoadByPlayerNumber(2);
             Image playerOne = new Image(imagePlayer);
             imageView.setImage(playerOne);
         }
-        if (damagingPlayer.equals(username4.getText())) {
+        if (damagingPlayer.equals(username4.getText()) && username4.getText()!= null) {
             String imagePlayer = getImageToLoadByPlayerNumber(3);
             Image playerOne = new Image(imagePlayer);
             imageView.setImage(playerOne);
         }
-        if (damagingPlayer.equals(username5.getText())) {
+        if (damagingPlayer.equals(username5.getText()) && username5.getText()!= null) {
             String imagePlayer = getImageToLoadByPlayerNumber(4);
             Image playerOne = new Image(imagePlayer);
             imageView.setImage(playerOne);
