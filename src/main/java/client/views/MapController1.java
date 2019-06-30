@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class MapController1 extends AbstractView implements Initializable {
-    GenericWindows genericWindows = new GenericWindows();
+    private GenericWindows genericWindows = new GenericWindows();
 
     @FXML private ImageView image1;
     @FXML private AnchorPane imageAnchorPane;
@@ -81,61 +81,6 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private Label player3Active;
     @FXML private Label player4Active;
     @FXML private Label player5Active;
-    @FXML private ImageView slot1Square0;
-    @FXML private ImageView slot2Square0;
-    @FXML private ImageView slot3Square0;
-    @FXML private ImageView slot4Square0;
-    @FXML private ImageView slot5Square0;
-    @FXML private ImageView slot1Square1;
-    @FXML private ImageView slot2Square1;
-    @FXML private ImageView slot3Square1;
-    @FXML private ImageView slot4Square1;
-    @FXML private ImageView slot5Square1;
-    @FXML private ImageView slot1Square2;
-    @FXML private ImageView slot2Square2;
-    @FXML private ImageView slot3Square2;
-    @FXML private ImageView slot4Square2;
-    @FXML private ImageView slot5Square2;
-    @FXML private ImageView slot1Square4;
-    @FXML private ImageView slot2Square4;
-    @FXML private ImageView slot3Square4;
-    @FXML private ImageView slot4Square4;
-    @FXML private ImageView slot5Square4;
-    @FXML private ImageView slot1Square5;
-    @FXML private ImageView slot2Square5;
-    @FXML private ImageView slot3Square5;
-    @FXML private ImageView slot4Square5;
-    @FXML private ImageView slot5Square5;
-    @FXML private ImageView slot1Square6;
-    @FXML private ImageView slot2Square6;
-    @FXML private ImageView slot3Square6;
-    @FXML private ImageView slot4Square6;
-    @FXML private ImageView slot5Square6;
-    @FXML private ImageView slot1Square7;
-    @FXML private ImageView slot2Square7;
-    @FXML private ImageView slot3Square7;
-    @FXML private ImageView slot4Square7;
-    @FXML private ImageView slot5Square7;
-    @FXML private ImageView slot1Square8;
-    @FXML private ImageView slot2Square8;
-    @FXML private ImageView slot3Square8;
-    @FXML private ImageView slot4Square8;
-    @FXML private ImageView slot5Square8;
-    @FXML private ImageView slot1Square9;
-    @FXML private ImageView slot2Square9;
-    @FXML private ImageView slot3Square9;
-    @FXML private ImageView slot4Square9;
-    @FXML private ImageView slot5Square9;
-    @FXML private ImageView slot1Square10;
-    @FXML private ImageView slot2Square10;
-    @FXML private ImageView slot3Square10;
-    @FXML private ImageView slot4Square10;
-    @FXML private ImageView slot5Square10;
-    @FXML private ImageView slot1Square11;
-    @FXML private ImageView slot2Square11;
-    @FXML private ImageView slot3Square11;
-    @FXML private ImageView slot4Square11;
-    @FXML private ImageView slot5Square11;
     @FXML private HBox HB0;
     @FXML private HBox HB1;
     @FXML private HBox HB2;
@@ -148,21 +93,20 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB10;
     @FXML private HBox HB11;
     @FXML private TextArea textArea;
-    @FXML private Button endTurnButton;
 
     //These integers contain the players positions on the map, as square numbers
-    Integer player1Position = null;
-    Integer player2Position = null;
-    Integer player3Position = null;
-    Integer player4Position = null;
-    Integer player5Position = null;
+    private Integer player1Position = null;
+    private Integer player2Position = null;
+    private Integer player3Position = null;
+    private Integer player4Position = null;
+    private Integer player5Position = null;
 
     // The players images
-    ImageView player1Image = null;
-    ImageView player2Image = null;
-    ImageView player3Image = null;
-    ImageView player4Image = null;
-    ImageView player5Image = null;
+    private ImageView player1Image = null;
+    private ImageView player2Image = null;
+    private ImageView player3Image = null;
+    private ImageView player4Image = null;
+    private ImageView player5Image = null;
 
     //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage){
@@ -305,10 +249,10 @@ public class MapController1 extends AbstractView implements Initializable {
 
     }
 
-    public void drawWeaponSlots (ArrayList<SquareData> squares) {
+    public void drawWeaponSlots (List<SquareData> squares) {
         //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
-                .filter(s -> s.isSpawnPoint == true)
+                .filter(s -> s.isSpawnPoint)
                 .map(s -> s.weaponsSlot)
                 .collect(Collectors.toList()));
 
@@ -480,7 +424,7 @@ public class MapController1 extends AbstractView implements Initializable {
         image1.fitHeightProperty().bind(imageAnchorPane.heightProperty());
 
         //Locks all splitPanes so they cannot be moved
-        ArrayList<SplitPane> splitPanes = new ArrayList();
+        ArrayList<SplitPane> splitPanes = new ArrayList<>();
         splitPanes.add(verticalSplit);
         splitPanes.add(horizontalSplit);
         splitPanes.add(horizontalSplit2);
