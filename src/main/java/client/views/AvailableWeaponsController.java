@@ -131,9 +131,8 @@ public class AvailableWeaponsController implements Initializable {
                         break;
                 }
                 index++;
-                if (Constants.DEBUG) {
+                if (Constants.DEBUG)
                     Logger.info("Weapons have been successfully loaded");
-                }
             }
         }
     }

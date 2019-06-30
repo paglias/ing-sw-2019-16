@@ -128,6 +128,12 @@ public class MapController1 extends AbstractView implements Initializable {
             endTurnButton.setDisable(false);
             weaponsButton.setDisable(false);
         }
+        if (!gameStateMessage.playerYouData.isActive) {
+            actionsButton.setDisable(true);
+            endTurnButton.setDisable(true);
+            weaponsButton.setDisable(true);
+        }
+
         if(gameStateMessage.playerYouData.possibleActions.contains("DISCARD_AND_SPAWN")) {
             spawnButton.setDisable(false);
         }

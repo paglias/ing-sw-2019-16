@@ -14,6 +14,9 @@ import messages.client_data.ClientInput;
 import messages.client_data.SquareData;
 import messages.client_data.WeaponData;
 import messages.client_data.WeaponsSlotData;
+import utils.Constants;
+import utils.Logger;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -53,33 +56,39 @@ public class WeaponGrabController implements Initializable {
 
         Stage stage = (Stage) confirm.getScene().getWindow();
         stage.close();
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
 
         int playerPosition = gameStateMessage.playerYouData.position;
         SquareData square = gameStateMessage.gameBoardData.squares.get(playerPosition);
-        WeaponsSlotData slot = square.weaponsSlot;
-        ArrayList<WeaponData> weapons = slot.weapons;
+        if (square.isSpawnPoint) {
+            WeaponsSlotData slot = square.weaponsSlot;
+            ArrayList<WeaponData> weapons = slot.weapons;
 
-        int wIndex = 0;
+            int wIndex = 0;
 
-        for (WeaponData weapon : weapons) {
-            switch (wIndex) {
-                case 0:
-                    weaponOne.setText(weapon.name);
-                    break;
-                case 1:
-                    weaponTwo.setText(weapon.name);
-                    break;
-                case 2:
-                    weaponThree.setText(weapon.name);
-                    break;
+            for (WeaponData weapon : weapons) {
+                switch (wIndex) {
+                    case 0:
+                        weaponOne.setText(weapon.name);
+                        break;
+                    case 1:
+                        weaponTwo.setText(weapon.name);
+                        break;
+                    case 2:
+                        weaponThree.setText(weapon.name);
+                        break;
+                }
+                wIndex++;
             }
-            wIndex++;
+        }
+        else{
+            if(Constants.DEBUG)
+                Logger.info("End of initialize not reached. It's not a spawnpoint");
         }
     }
 }

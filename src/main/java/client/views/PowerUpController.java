@@ -101,9 +101,7 @@ public class PowerUpController implements Initializable {
                     break;
             }
         }
-        if (Constants.DEBUG){
-            Logger.info("All elements have loaded correctly");
-        }
+        if (Constants.DEBUG) Logger.info("All elements have loaded correctly");
     }
 
     @FXML void discardGrenade(ActionEvent event) {

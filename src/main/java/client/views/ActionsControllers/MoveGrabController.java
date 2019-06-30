@@ -25,6 +25,7 @@ public class MoveGrabController implements Initializable {
     @FXML private Button confirmButton;
 
     @FXML void openGrab(ActionEvent event) throws InterruptedException {
+
         GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
 
         int playerPosition = gameStateMessage.playerYouData.position;
@@ -44,7 +45,9 @@ public class MoveGrabController implements Initializable {
 
             Stage stage = (Stage) grab.getScene().getWindow();
             stage.close();
-        } else {
+        }
+        else if (squares.get(playerPosition).isSpawnPoint)
+        {
             genericWindow.weaponGrab();
 
             Stage stage = (Stage) grab.getScene().getWindow();
