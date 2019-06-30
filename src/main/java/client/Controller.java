@@ -2,6 +2,7 @@ package client;
 
 import client.views.AbstractView;
 import client.views.Game;
+import client.views.GenericWindows;
 import client.views.Lobby;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
@@ -65,7 +66,10 @@ public class Controller implements MessageVisitor  {
             AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
             parsedMsg.accept(this);
         } catch (Throwable e) {
-            // TODO show popup
+            Platform.runLater(() -> {
+                GenericWindows errorWindow = new GenericWindows();
+                errorWindow.errorMessage(e.getMessage());
+            });
         }
     }
 
@@ -78,11 +82,19 @@ public class Controller implements MessageVisitor  {
     }
 
     public void visit(EndGameMessage endGameMessage) {
-        if (Constants.DEBUG) Logger.info("handling end game msg" + endGameMessage.serialize());
+        if (Constants.DEBUG) Logger.info("handling end game msg, winner" + endGameMessage.getWinner());
+        Platform.runLater(() -> {
+            GenericWindows winnerWindow = new GenericWindows();
+            winnerWindow.winnerMessage(endGameMessage.getWinner());
+        });
     }
 
     public void visit(ErrorMessage errorMessage) {
-        // TODO show popup
+        if (Constants.DEBUG) Logger.info("handling error msg" + errorMessage.getErrorMsg());
+        Platform.runLater(() -> {
+            GenericWindows errorWindow = new GenericWindows();
+            errorWindow.errorMessage(errorMessage.getErrorMsg());
+        });
     }
 
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {

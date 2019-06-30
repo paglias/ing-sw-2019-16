@@ -107,9 +107,6 @@ public class GameController {
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
-            System.out.println("player created " + player.getNickname() + " has n powerups:" + player.getPowerUps().size());
-
-
             player.setDead(true); // Useful to make sure they spawn as first thing
 
             gameBoard.addPlayer(player);
@@ -148,6 +145,7 @@ public class GameController {
         Player player = clientController.getLinkedPlayer();
         player.setConnected(false);
         Logger.info("Player " + player.getNickname() + " disconnected.");
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " disconnected!");
 
         long remainingPlayers = gameBoard.getNConnectedPlayers();
 
@@ -210,6 +208,7 @@ public class GameController {
         gameBoard.getPlayers().get(0).setActive(true);
 
         Logger.info("Staring game!");
+        GameStateMessage.actionsHistoryTemp.add("Game started!");
 
         startTurn();
     }
@@ -234,6 +233,7 @@ public class GameController {
         player.setStartTurnDate(new Date());
 
         Logger.info("Starting turn, active player " + player.getNickname());
+        GameStateMessage.actionsHistoryTemp.add("It's " + player.getNickname() + "'s turn!");
         GameStateMessage.updateClients(this);
     }
 
@@ -250,6 +250,7 @@ public class GameController {
         }
 
         Logger.info("Ending turn for " + player.getNickname());
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + "'s turn ended!");
 
         player.setActiveAction(null);
 

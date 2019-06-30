@@ -229,8 +229,6 @@ public class ClientController implements MessageVisitor {
         ClientInput clientInput = actionMessage.getClientInput();
         ActionController actionController = new ActionController(gameController);
 
-        System.out.println("handling action for " + linkedPlayer.getNickname());
-
         // Tagback grenade can be used outside of the user's turn
         if (!linkedPlayer.isActive()) {
             PowerUp powerUp = null;
@@ -264,7 +262,6 @@ public class ClientController implements MessageVisitor {
                 actionController.usePowerUp(clientInput);
                 break;
             case DISCARD_AND_SPAWN:
-                System.out.println("handling discardANDSspawn with n powerups:" + linkedPlayer.getPowerUps().size());
                 actionController.discardPowerUpAndSpawn(clientInput);
                 break;
             case DISCARD:

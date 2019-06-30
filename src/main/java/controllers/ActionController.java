@@ -1,5 +1,6 @@
 package controllers;
 
+import messages.GameStateMessage;
 import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
@@ -121,6 +122,7 @@ public class ActionController {
     public void move (ClientInput clientInput) {
         Square newPosition = gameBoardModel.getSquares().get(clientInput.position);
         player.move(newPosition);
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " moved to position " + newPosition.getNumber());
     }
 
     /**
@@ -140,6 +142,7 @@ public class ActionController {
     public void reload (ClientInput clientInput) {
         Weapon weapon = player.getWeaponByName(clientInput.weaponName);
         player.reload(weapon);
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " realoded weapon " + clientInput.weaponName);
     }
 
     private void executeAction (Effect effect, CardWithAction card, ClientInput clientInput) {
@@ -201,6 +204,7 @@ public class ActionController {
         executeAction(effect, powerUp, clientInput);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
         player.removePowerUp(powerUp);
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " used powerup " + powerUp.getName());
     }
 
     /**
@@ -209,7 +213,6 @@ public class ActionController {
      * @param clientInput the client input
      */
     public void discardPowerUpAndSpawn (ClientInput clientInput) {
-        System.out.println("discardPowerUpAndSpawn CODE");
         PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
         gameBoardModel.getPowerUpsDeck().discard(powerUp);
         player.removePowerUp(powerUp);
@@ -224,6 +227,7 @@ public class ActionController {
         // Make sure to reset the user to the initial state
         player.setDead(false);
         player.getDamage().clear();
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " spawned at position " + spawnPosition.getNumber());
     }
 
     /**
@@ -235,9 +239,11 @@ public class ActionController {
         if (clientInput.weaponName != null) {
             Weapon weapon = player.getWeaponByName(clientInput.weaponName);
             player.removeWeapon(weapon);
+            GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " discarded a weapon: " + clientInput.weaponName);
         } else if (clientInput.powerUpIndex != null) {
             PowerUp powerUp = player.getPowerUps().get(clientInput.powerUpIndex);
             gameBoardModel.getPowerUpsDeck().sell(player, powerUp);
+            GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " discarded a powerup: " + powerUp.getName());
         }
     }
 
@@ -266,6 +272,8 @@ public class ActionController {
         if (clientInput.effectType > 1 && !weapon.getUsedEffects().contains(1)) {
             throw new IllegalArgumentException("Secondary/tertiary can only be used after primary has been used.");
         }
+
+        GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " used a weapon: " + clientInput.weaponName);
 
         List<Effect> effects = weapon.getEffects(clientInput.effectType);
 

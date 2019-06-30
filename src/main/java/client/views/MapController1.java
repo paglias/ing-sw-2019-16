@@ -169,6 +169,19 @@ public class MapController1 extends AbstractView implements Initializable {
         drawPlayers(gameStateMessage.gameBoardData.players);
         drawCurrentPlayer(gameStateMessage.playerYouData);
         drawWeaponSlots(gameStateMessage.gameBoardData.squares);
+
+        StringBuilder textAreaBuilder = new StringBuilder();
+
+        if (textArea.getText() != null) {
+            textAreaBuilder.append(textArea.getText());
+        }
+
+        for (String msg: gameStateMessage.actionsHistory) {
+            textAreaBuilder.append(msg);
+            textAreaBuilder.append('\n');
+        }
+
+        textArea.setText(textAreaBuilder.toString());
     }
 
     public void drawCurrentPlayer (PlayerYouData currentPlayer) {

@@ -7,11 +7,15 @@ import messages.client_data.PlayerYouData;
 import models.GameBoard;
 import utils.Logger;
 
+import java.util.ArrayList;
+
 public class GameStateMessage extends AbstractMessage {
     public final MessageTopic topic = MessageTopic.GAME_STATE;
+    public static ArrayList<String> actionsHistoryTemp = new ArrayList<>();
 
     public GameBoardData gameBoardData;
     public PlayerYouData playerYouData;
+    public ArrayList<String> actionsHistory;
 
     public static void updateClients (GameController gameController) {
         GameBoard gameBoard = gameController.getGameBoard();
@@ -24,6 +28,7 @@ public class GameStateMessage extends AbstractMessage {
 
             if (clientForPlayer != null && p.isConnected()) clientForPlayer.sendMsg(gameStateMessage);
         });
+        actionsHistoryTemp.clear();
     }
 
     public void accept(MessageVisitor v) {
@@ -33,5 +38,7 @@ public class GameStateMessage extends AbstractMessage {
     public GameStateMessage (GameBoardData gameBoardData, PlayerYouData playerYouData) {
         this.gameBoardData = gameBoardData;
         this.playerYouData = playerYouData;
+        this.actionsHistory = new ArrayList<>();
+        actionsHistory.addAll(actionsHistoryTemp);
     }
 }
