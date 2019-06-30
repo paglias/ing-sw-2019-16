@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import messages.ActionEndMessage;
 import messages.ActionMessage;
@@ -16,7 +17,6 @@ import messages.client_data.WeaponData;
 import messages.client_data.WeaponsSlotData;
 import utils.Constants;
 import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,6 +29,7 @@ public class WeaponGrabController implements Initializable {
     @FXML private RadioButton weaponOne;
     @FXML private RadioButton weaponTwo;
     @FXML private RadioButton weaponThree;
+    @FXML private ToggleGroup weaponSelected;
 
     //Sets the selected weapon and sends it to server
     @FXML void confirmGrab(ActionEvent event) throws InterruptedException {
@@ -88,7 +89,7 @@ public class WeaponGrabController implements Initializable {
         }
         else{
             if(Constants.DEBUG)
-                Logger.info("End of initialize not reached. It's not a spawnpoint");
+                Logger.info("it's not a spawnpoint");
         }
     }
 }

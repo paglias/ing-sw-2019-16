@@ -338,4 +338,21 @@ public class GenericWindows {
         weaponChooserStage.setScene(scene);
         weaponChooserStage.show();
     }
+
+    //Preview of the map during move action
+    public void mapPreview(int mapNumber){
+        String map = Integer.toString(mapNumber);
+        Stage previewStage = new Stage();
+        previewStage.setTitle("MAP PREVIEW");
+        previewStage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap" +map+ ".fxml"));
+            Scene scene = new Scene(root);
+            previewStage.setScene(scene);
+            previewStage.show();
+            previewStage.setResizable(false);
+        } catch (IOException e) {
+            loadingFailure();
+        }
+    }
 }

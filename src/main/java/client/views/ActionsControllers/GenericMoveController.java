@@ -1,6 +1,7 @@
 package client.views.ActionsControllers;
 
 import client.views.Game;
+import client.views.GenericWindows;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,8 +15,6 @@ import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PlayerYouData;
 import messages.client_data.SquareData;
-import models.Square;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -26,6 +25,7 @@ public class GenericMoveController implements Initializable {
 
     @FXML public Button confirm;
     @FXML public ChoiceBox<String> newPosition;
+    @FXML public Button viewMapButton;
 
     //Takes the selected value from the choicebox, creates clientinput, sends the message to the
     // server
@@ -46,6 +46,12 @@ public class GenericMoveController implements Initializable {
             stage.close();
         }
 
+    }
+
+    public void openMap(){
+        GenericWindows window = new GenericWindows();
+        int map = Game.controller.getLastGameStateMessage().gameBoardData.nMap;
+        window.mapPreview(map);
     }
 
     public void loadCanAccess () {
