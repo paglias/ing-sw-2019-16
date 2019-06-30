@@ -128,7 +128,7 @@ public class GenericWindows {
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
         weaponWindow.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXMLs//WeaponWindow.fxml"));
+        loader.setLocation(getClass().getResource("/FXMLs/WeaponWindow.fxml"));
         try {
             loader.load();
         } catch (
