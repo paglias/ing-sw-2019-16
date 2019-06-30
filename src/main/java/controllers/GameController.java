@@ -107,9 +107,6 @@ public class GameController {
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
-            System.out.println("player created " + player.getNickname() + " has n powerups:" + player.getPowerUps().size());
-
-
             player.setDead(true); // Useful to make sure they spawn as first thing
 
             gameBoard.addPlayer(player);

@@ -64,13 +64,35 @@ public class GenericWindows {
     }
 
     /**
-     * Loading failure.
+     * Launch loading failure popup.
      */
     public void loadingFailure() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Loading error");
         alert.setHeaderText("Fatal error while loading the FXML file");
         alert.setContentText("FXML loading error, check the presence of the FXML");
+        alert.showAndWait();
+    }
+
+    /**
+     * Launch error message popup.
+     */
+    public void errorMessage (String errorMsg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Something went wrong with the last command!");
+        alert.setContentText(errorMsg);
+        alert.showAndWait();
+    }
+
+    /**
+     * Launch winner message popup.
+     */
+    public void winnerMessage (String winner) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game ended!");
+        alert.setHeaderText("The game ended!");
+        alert.setContentText("The winner is " + winner);
         alert.showAndWait();
     }
 
