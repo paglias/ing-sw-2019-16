@@ -88,7 +88,7 @@
                                     </ImageView>
                                     <Pane prefHeight="131.0" prefWidth="351.0" GridPane.columnIndex="1">
                                        <children>
-                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane fx:id="playerOneDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                             <columnConstraints>
                                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -124,7 +124,7 @@
                                     </Pane>
                                     <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane fx:id="playerTwoDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -160,7 +160,7 @@
                                     </Pane>
                                     <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane fx:id="playerThreeDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -196,7 +196,7 @@
                                     </Pane>
                                     <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane fx:id="playerFourDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
@@ -232,7 +232,7 @@
                                     </Pane>
                                     <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
-                                          <GridPane layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                          <GridPane fx:id="playerFiveDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />

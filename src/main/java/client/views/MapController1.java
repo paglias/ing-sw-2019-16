@@ -1,8 +1,6 @@
 package client.views;
 
-import javafx.beans.value.ObservableListValue;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
 import messages.client_data.*;
-import models.cards.Weapon;
-import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,46 +25,85 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class MapController1 extends AbstractView implements Initializable {
+
     private GenericWindows genericWindows = new GenericWindows();
 
-    @FXML private ImageView image1;
-    @FXML private AnchorPane imageAnchorPane;
-    @FXML private Button quitButton;
-    @FXML private SplitPane horizontalSplit;
-    @FXML private SplitPane verticalSplit;
-    @FXML private SplitPane horizontalSplit2;
-    @FXML private AnchorPane upperLeftPane;
-    @FXML private AnchorPane lowerLeftPane;
-    @FXML private GridPane playerboardGrid;
-    @FXML private Label username5;
-    @FXML private Button marksPlayer5;
-    @FXML private Label username1;
-    @FXML private Button marksPlayer1;
-    @FXML private Label username2;
-    @FXML private Button marksPlayer2;
-    @FXML private Label username3;
-    @FXML private Label username4;
-    @FXML private GridPane gridPane1;
-    @FXML private Label redWeapon1;
-    @FXML private Label redWeapon2;
-    @FXML private Label redWeapon3;
-    @FXML private Label blueWeapon1;
-    @FXML private Label blueWeapon2;
-    @FXML private Label blueWeapon3;
-    @FXML private Label yellowWeapon1;
-    @FXML private Label yellowWeapon2;
-    @FXML private Label yellowWeapon3;
-    @FXML private Button actionsButton;
-    @FXML private Button powerUpsButton;
-    @FXML private Button weaponsButton;
-    @FXML private Text redAmmo;
-    @FXML private Text blueAmmo;
-    @FXML private Text yellowAmmo;
-    @FXML private Text actionCounter;
-    @FXML private Text totalPoints;
-    @FXML private ImageView skullOne;
-    @FXML private ImageView skullTwo;
-    @FXML private ImageView skullThree;
+    @FXML
+    private ImageView image1;
+    @FXML
+    private AnchorPane imageAnchorPane;
+    @FXML
+    private Button quitButton;
+    @FXML
+    private SplitPane horizontalSplit;
+    @FXML
+    private SplitPane verticalSplit;
+    @FXML
+    private SplitPane horizontalSplit2;
+    @FXML
+    private AnchorPane upperLeftPane;
+    @FXML
+    private AnchorPane lowerLeftPane;
+    @FXML
+    private GridPane playerboardGrid;
+    @FXML
+    private Label username5;
+    @FXML
+    private Button marksPlayer5;
+    @FXML
+    private Label username1;
+    @FXML
+    private Button marksPlayer1;
+    @FXML
+    private Label username2;
+    @FXML
+    private Button marksPlayer2;
+    @FXML
+    private Label username3;
+    @FXML
+    private Label username4;
+    @FXML
+    private GridPane gridPane1;
+    @FXML
+    private Label redWeapon1;
+    @FXML
+    private Label redWeapon2;
+    @FXML
+    private Label redWeapon3;
+    @FXML
+    private Label blueWeapon1;
+    @FXML
+    private Label blueWeapon2;
+    @FXML
+    private Label blueWeapon3;
+    @FXML
+    private Label yellowWeapon1;
+    @FXML
+    private Label yellowWeapon2;
+    @FXML
+    private Label yellowWeapon3;
+    @FXML
+    private Button actionsButton;
+    @FXML
+    private Button powerUpsButton;
+    @FXML
+    private Button weaponsButton;
+    @FXML
+    private Text redAmmo;
+    @FXML
+    private Text blueAmmo;
+    @FXML
+    private Text yellowAmmo;
+    @FXML
+    private Text actionCounter;
+    @FXML
+    private Text totalPoints;
+    @FXML
+    private ImageView skullOne;
+    @FXML
+    private ImageView skullTwo;
+    @FXML
+    private ImageView skullThree;
     @FXML private ImageView skullFour;
     @FXML private ImageView skullFive;
     @FXML private ImageView skullSix;
@@ -92,7 +126,11 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB10;
     @FXML private HBox HB11;
     @FXML private TextArea textArea;
-    @FXML private GridPane skullPane;
+    @FXML private GridPane playerOneDamage;
+    @FXML private GridPane playerTwoDamage;
+    @FXML private GridPane playerThreeDamage;
+    @FXML private GridPane playerFourDamage;
+    @FXML private GridPane playerFiveDamage;
 
     //These integers contain the players positions on the map, as square numbers
     private Integer player1Position = null;
@@ -109,11 +147,12 @@ public class MapController1 extends AbstractView implements Initializable {
     private ImageView player5Image = null;
 
     //Updates game values with message received by server
-    public void updateWithData(GameStateMessage gameStateMessage){
+    public void updateWithData(GameStateMessage gameStateMessage) {
         drawPlayers(gameStateMessage.gameBoardData.players);
         drawCurrentPlayer(gameStateMessage.playerYouData);
         drawWeaponSlots(gameStateMessage.gameBoardData.squares);
         drawSkulls(gameStateMessage.gameBoardData.skullsN);
+        drawDamage(gameStateMessage);
 
         StringBuilder textAreaBuilder = new StringBuilder();
 
@@ -121,7 +160,7 @@ public class MapController1 extends AbstractView implements Initializable {
             textAreaBuilder.append(textArea.getText());
         }
 
-        for (String msg: gameStateMessage.actionsHistory) {
+        for (String msg : gameStateMessage.actionsHistory) {
             textAreaBuilder.append(msg);
             textAreaBuilder.append('\n');
         }
@@ -129,7 +168,7 @@ public class MapController1 extends AbstractView implements Initializable {
         textArea.setText(textAreaBuilder.toString());
     }
 
-    public void drawCurrentPlayer (PlayerYouData currentPlayer) {
+    public void drawCurrentPlayer(PlayerYouData currentPlayer) {
         //Set totalpoints and actioncounter
         totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
         actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
@@ -137,7 +176,7 @@ public class MapController1 extends AbstractView implements Initializable {
         drawCubes(currentPlayer);
     }
 
-    public void drawPlayers (List<PlayerOtherData> players) {
+    public void drawPlayers(List<PlayerOtherData> players) {
         //For-switch that gets the player position for each player and assigns it to the Integers above.
         //Then sends the player number and position to the loadPlayerOnMap function
         //IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
@@ -176,7 +215,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     usernameLabel = username3;
                     playerStatus = player3Active;
 
-                    if (player.position != null && !player.position.equals(player3Position))  {
+                    if (player.position != null && !player.position.equals(player3Position)) {
                         unloadPlayerFromMap(player3Position, player3Image);
                         player3Position = player.position;
                         loadPlayerOnMap(pIndex, player3Position);
@@ -224,7 +263,7 @@ public class MapController1 extends AbstractView implements Initializable {
         //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
     }
 
-    public void drawCubes (PlayerYouData currentPlayer) {
+    public void drawCubes(PlayerYouData currentPlayer) {
         //Set ammo on GUI
         int redAmmoN = 0;
         int blueAmmoN = 0;
@@ -250,7 +289,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     }
 
-    public void drawWeaponSlots (List<SquareData> squares) {
+    public void drawWeaponSlots(List<SquareData> squares) {
         //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
                 .filter(s -> s.isSpawnPoint)
@@ -263,7 +302,7 @@ public class MapController1 extends AbstractView implements Initializable {
         }
     }
 
-    public void drawWeaponSlot (WeaponsSlotData slot) {
+    public void drawWeaponSlot(WeaponsSlotData slot) {
         ArrayList<WeaponData> weapons = slot.weapons;
         Label weapon1;
         Label weapon2;
@@ -333,7 +372,7 @@ public class MapController1 extends AbstractView implements Initializable {
     //Unloads the player image from the position.
     //For loop that compares each image in that square (5 max possible images) and if
     //the one of those images matches the standard Player image, it removes it from the square.
-    public void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage){
+    public void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage) {
         if (previousPosition == null) return;
         HBox correctHBox = getHBoxByPosition(previousPosition);
 
@@ -343,8 +382,8 @@ public class MapController1 extends AbstractView implements Initializable {
         }
     }
 
-    //Gets the correct square based by an int position (example, position 5 means square 5)
-    public HBox getHBoxByPosition(int position){
+    //Gets the correct square based on an int position (example, position 5 means square 5)
+    public HBox getHBoxByPosition(int position) {
 
         HBox correctHBox = new HBox();
 
@@ -388,6 +427,7 @@ public class MapController1 extends AbstractView implements Initializable {
         return correctHBox;
     }
 
+    //Returns correct imagePath based on player number received (index in arraylist)
     public String getImageToLoadByPlayerNumber(int playerNumber) {
 
         String correctImage = "/JPGs";
@@ -414,37 +454,163 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //loads skulls on map
-    public void drawSkulls(int skulls){
+    public void drawSkulls(int skulls) {
         int i;
         String skullPath = "/JPGs/Skull.png";
         Image skullImage = new Image(skullPath);
-        for (i = 0;i < skulls;i++){
-           switch (i){
-               case 0:
-                   skullOne.setImage(skullImage);
-                   break;
-               case 1:
-                   skullTwo.setImage(skullImage);
-                   break;
-               case 2:
-                   skullThree.setImage(skullImage);
-                   break;
-               case 3:
-                   skullFour.setImage(skullImage);
-                   break;
-               case 4:
-                   skullFive.setImage(skullImage);
-                   break;
-               case 5:
-                   skullSix.setImage(skullImage);
-                   break;
-               case 6:
-                   skullSeven.setImage(skullImage);
-                   break;
-               case 7:
-                   skullEight.setImage(skullImage);
-           }
+        for (i = 0; i < skulls; i++) {
+            switch (i) {
+                case 0:
+                    skullOne.setImage(skullImage);
+                    break;
+                case 1:
+                    skullTwo.setImage(skullImage);
+                    break;
+                case 2:
+                    skullThree.setImage(skullImage);
+                    break;
+                case 3:
+                    skullFour.setImage(skullImage);
+                    break;
+                case 4:
+                    skullFive.setImage(skullImage);
+                    break;
+                case 5:
+                    skullSix.setImage(skullImage);
+                    break;
+                case 6:
+                    skullSeven.setImage(skullImage);
+                    break;
+                case 7:
+                    skullEight.setImage(skullImage);
+            }
         }
+    }
+
+    //Adds damage on each player based on gamestatemessage
+    public void drawDamage(GameStateMessage gameState) {
+
+        ArrayList<PlayerOtherData> players = gameState.gameBoardData.players;
+
+        int index = 0;
+        for (PlayerOtherData player : players) {
+            switch(index) {
+                case 0:
+                    drawDamageOnOnePlayer(playerOneDamage, player);
+                    break;
+                case 1:
+                    drawDamageOnOnePlayer(playerTwoDamage, player);
+                    break;
+                case 2:
+                    drawDamageOnOnePlayer(playerThreeDamage, player);
+                    break;
+                case 3:
+                    drawDamageOnOnePlayer(playerFourDamage, player);
+                    break;
+                case 4:
+                    drawDamageOnOnePlayer(playerFiveDamage, player);
+                    break;
+                case 5:
+                    drawDamageOnOnePlayer(playerOneDamage, player);
+                    break;
+            }
+            index++;
+        }
+    }
+
+    //Used for one player at a time
+    //Receives the correct playerboard and the correct player to get the damage from.
+    // (damage is an arraylist of nicknames)
+    //For each nickname inside the player damage, loads an ImageView inside the gridpane
+    //The loading location varies based on the position of the Arraylist damage
+    public void drawDamageOnOnePlayer(GridPane playerboard, PlayerOtherData player){
+        int index=0;
+        for (String damagingPlayer : player.damage) {
+            ImageView imageView;
+            switch (index) {
+                case 0:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 0, 0);
+                    break;
+                case 1:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 1, 0);
+                    break;
+                case 2:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 2, 0);
+                    break;
+                case 3:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 3, 0);
+                    break;
+                case 4:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 4, 0);
+                    break;
+                case 5:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 5, 0);
+                    break;
+                case 6:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 6, 0);
+                    break;
+                case 7:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 7, 0);
+                    break;
+                case 8:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 8, 0);
+                    break;
+                case 9:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 9, 0);
+                    break;
+                case 10:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 10, 0);
+                    break;
+                case 11:
+                    imageView = getImageViewToLoad(damagingPlayer);
+                    playerboard.add(imageView, 11, 0);
+                    break;
+            }
+            index++;
+        }
+    }
+    //Receives string/nicknames of a player
+    //Returns imageView object containing Image of the correct player
+    public ImageView getImageViewToLoad(String damagingPlayer) {
+
+        ImageView imageView = new ImageView();
+        if (damagingPlayer.equals(username1.getText())) {
+            String imagePlayer = getImageToLoadByPlayerNumber(0);
+            Image playerOne = new Image(imagePlayer);
+            imageView.setImage(playerOne);
+        }
+        if (damagingPlayer.equals(username2.getText())) {
+            String imagePlayer = getImageToLoadByPlayerNumber(1);
+            Image playerOne = new Image(imagePlayer);
+            imageView.setImage(playerOne);
+        }
+        if (damagingPlayer.equals(username3.getText())) {
+            String imagePlayer = getImageToLoadByPlayerNumber(2);
+            Image playerOne = new Image(imagePlayer);
+            imageView.setImage(playerOne);
+        }
+        if (damagingPlayer.equals(username4.getText())) {
+            String imagePlayer = getImageToLoadByPlayerNumber(3);
+            Image playerOne = new Image(imagePlayer);
+            imageView.setImage(playerOne);
+        }
+        if (damagingPlayer.equals(username5.getText())) {
+            String imagePlayer = getImageToLoadByPlayerNumber(4);
+            Image playerOne = new Image(imagePlayer);
+            imageView.setImage(playerOne);
+        }
+        return imageView;
     }
 
     @Override
