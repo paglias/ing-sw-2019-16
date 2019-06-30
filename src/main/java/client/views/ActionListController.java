@@ -32,8 +32,6 @@ public class ActionListController implements Initializable {
     @FXML private Button beforeFrenzyGrabButton;
     @FXML private Button afterFrenzyGrabButton;
     @FXML private Button afterFrenzyShootButton;
-    @FXML private AnchorPane rightPane;
-    @FXML private AnchorPane leftPane;
 
     private  String action = "ACTION";
 
@@ -41,17 +39,19 @@ public class ActionListController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        for (Node node : rightPane.getChildren()){
-            if (node instanceof Button){
-                node.setDisable(true);
-            }
-        }
+        moveButton.setDisable(true);
+        moveGrabButton.setDisable(true);
+        shootButton.setDisable(true);
 
-        for (Node node : leftPane.getChildren()){
-            if (node instanceof Button){
-                node.setDisable(true);
-            }
-        }
+        adrenalineGrabButton.setDisable(true);
+        adrenalineShootButton.setDisable(true);
+
+        beforeFrenzyShootButton.setDisable(true);
+        beforeFrenzyMoveButton.setDisable(true);
+        beforeFrenzyGrabButton.setDisable(true);
+
+        afterFrenzyGrabButton.setDisable(true);
+        afterFrenzyShootButton.setDisable(true);
 
         List<String> availableActions =  Game.controller.getLastGameStateMessage().playerYouData.possibleActions;
         if (availableActions.contains("MOVE")){

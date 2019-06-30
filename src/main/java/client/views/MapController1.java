@@ -86,7 +86,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private GridPane playerThreeDamage;
     @FXML private GridPane playerFourDamage;
     @FXML private GridPane playerFiveDamage;
-    @FXML private GridPane spawnButton;
+    @FXML private Button spawnButton;
 
     //These integers contain the players positions on the map, as square numbers
     private Integer player1Position = null;
