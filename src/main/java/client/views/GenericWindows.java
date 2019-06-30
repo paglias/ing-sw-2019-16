@@ -117,26 +117,22 @@ public class GenericWindows {
         }
     }
 
-    /**
-     * Show weapon.
-     *
-     * @param currentSlot the current slot
-     */
 //Shows a window with the weapon contained in the weaponSlot.
     //The weapon is loaded in WeaponPreviewController
-    public void showWeapon(int currentSlot) {
+    public void showWeapon(String weaponName) {
+
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
         weaponWindow.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLs/WeaponWindow.fxml"));
         try {
             loader.load();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
             loadingFailure();
         }
         WeaponPreviewController controller = loader.getController();
-        controller.setSlot(currentSlot);
+        controller.setWeapon(weaponName);
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         weaponWindow.setScene(scene);

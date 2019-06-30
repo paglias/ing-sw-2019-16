@@ -778,39 +778,39 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Handling clicks on weapons on board
     @FXML void redWeapon1Click(MouseEvent event) {
-        genericWindows.showWeapon(1);
+        genericWindows.showWeapon(redWeapon1.getText());
 
     }
     @FXML void redWeapon2Click(MouseEvent event) {
-        genericWindows.showWeapon(2);
+        genericWindows.showWeapon(redWeapon2.getText());
 
     }
     @FXML void redWeapon3Click(MouseEvent event) {
-        genericWindows.showWeapon(3);
+        genericWindows.showWeapon(redWeapon3.getText());
 
     }
     @FXML void yellowWeapon1Click(MouseEvent event) {
-        genericWindows.showWeapon(4);
+        genericWindows.showWeapon(yellowWeapon1.getText());
 
     }
     @FXML void yellowWeapon2Click(MouseEvent event) {
-        genericWindows.showWeapon(5);
+        genericWindows.showWeapon(yellowWeapon2.getText());
 
     }
     @FXML void yellowWeapon3Click(MouseEvent event) {
-        genericWindows.showWeapon(6);
+        genericWindows.showWeapon(yellowWeapon3.getText());
 
     }
     @FXML void blueWeapon1Click(MouseEvent event) {
-        genericWindows.showWeapon(7);
+        genericWindows.showWeapon(blueWeapon1.getText());
 
     }
     @FXML void blueWeapon2Click(MouseEvent event) {
-        genericWindows.showWeapon(8);
+        genericWindows.showWeapon(blueWeapon2.getText());
 
     }
     @FXML void blueWeapon3Click(MouseEvent event) {
-        genericWindows.showWeapon(9);
+        genericWindows.showWeapon(blueWeapon3.getText());
     }
 
     @FXML void endTurn(){

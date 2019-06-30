@@ -33,6 +33,7 @@ public class WeaponGrabController implements Initializable {
 
     //Sets the selected weapon and sends it to server
     @FXML void confirmGrab(ActionEvent event) throws InterruptedException {
+
         if (weaponOne.isSelected()){
             weaponChosen =  weaponOne.getText();
         }
