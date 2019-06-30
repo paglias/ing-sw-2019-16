@@ -268,7 +268,7 @@
                                     </Pane>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                                        <children>
-                                          <Label fx:id="player5Active" text="ACTIVE" />
+                                          <Label fx:id="player5Active" text="NOT PLAYING" />
                                           <Label fx:id="username5" text="Username">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -286,7 +286,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label fx:id="player1Active" text="ACTIVE" />
+                                          <Label fx:id="player1Active" text="NOT PLAYING" />
                                           <Label fx:id="username1" text="Username">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -304,7 +304,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                        <children>
-                                          <Label fx:id="player2Active" text="ACTIVE" />
+                                          <Label fx:id="player2Active" text="NOT PLAYING" />
                                           <Label fx:id="username2" text="Username">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -322,7 +322,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                        <children>
-                                          <Label fx:id="player3Active" text="ACTIVE" />
+                                          <Label fx:id="player3Active" text="NOT PLAYING" />
                                           <Label fx:id="username3" text="Username">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -340,7 +340,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                                        <children>
-                                          <Label fx:id="player4Active" text="ACTIVE" />
+                                          <Label fx:id="player4Active" text="NOT PLAYING" />
                                           <Label fx:id="username4" text="Username">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
