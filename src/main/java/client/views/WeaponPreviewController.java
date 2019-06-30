@@ -30,6 +30,7 @@ public class WeaponPreviewController implements Initializable {
     @FXML ImageView weaponImage;
     @FXML Button closeButton;
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         Image image = new Image("/JPGs/Weapons/" + weaponName + ".png");
