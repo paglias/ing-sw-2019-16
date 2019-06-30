@@ -3,28 +3,88 @@ package client.views;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionStartMessage;
-
 import java.io.IOException;
 import java.net.URL;
+
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActionListController implements Initializable {
 
-    GenericWindows newWindow = new GenericWindows();
+    private GenericWindows newWindow = new GenericWindows();
 
-    /**
-     * The Confirm button.
-     */
     @FXML Button confirmButton;
+    @FXML private Button moveButton;
+    @FXML private Button moveGrabButton;
+    @FXML private Button shootButton;
+    @FXML private Button adrenalineGrabButton;
+    @FXML private Button adrenalineShootButton;
+    @FXML private Button beforeFrenzyShootButton;
+    @FXML private Button beforeFrenzyMoveButton;
+    @FXML private Button beforeFrenzyGrabButton;
+    @FXML private Button afterFrenzyGrabButton;
+    @FXML private Button afterFrenzyShootButton;
+    @FXML private AnchorPane rightPane;
+    @FXML private AnchorPane leftPane;
+
     private  String action = "ACTION";
 
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        for (Node node : rightPane.getChildren()){
+            if (node instanceof Button){
+                node.setDisable(true);
+            }
+        }
+
+        for (Node node : leftPane.getChildren()){
+            if (node instanceof Button){
+                node.setDisable(true);
+            }
+        }
+
+        List<String> availableActions =  Game.controller.getLastGameStateMessage().playerYouData.possibleActions;
+        if (availableActions.contains("MOVE")){
+            moveButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_GRAB")){
+            moveGrabButton.setDisable(false);
+        }
+        if (availableActions.contains("SHOOT")){
+            shootButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_MOVE_GRAB")){
+            adrenalineGrabButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_SHOOT")){
+            adrenalineShootButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_RELOAD_SHOOT")){
+            beforeFrenzyShootButton.setDisable(false);
+        }
+        if (availableActions.contains("FOUR_MOVE")){
+            beforeFrenzyMoveButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_MOVE_GRAB") &&
+                Game.controller.getLastGameStateMessage().gameBoardData.isFinalFrenzy){
+            beforeFrenzyGrabButton.setDisable(false);
+        }
+        if (availableActions.contains("MOVE_MOVE_RELOAD_SHOOT")){
+            afterFrenzyShootButton.setDisable(false);
+        }
+        if (availableActions.contains("THREE_MOVE_GRAB")){
+            afterFrenzyGrabButton.setDisable(false);
+        }
     }
 
     /**
@@ -48,6 +108,8 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        moveGrabButton.setDisable(true);
+        shootButton.setDisable(true);
     }
 
     /**
@@ -71,6 +133,8 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        moveButton.setDisable(true);
+        shootButton.setDisable(true);
     }
 
     /**
@@ -94,6 +158,8 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        moveButton.setDisable(true);
+        moveGrabButton.setDisable(true);
     }
 
     /**
@@ -117,6 +183,7 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        adrenalineShootButton.setDisable(true);
     }
 
     /**
@@ -140,6 +207,7 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        adrenalineGrabButton.setDisable(true);
     }
 
     /**
@@ -163,6 +231,8 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        beforeFrenzyMoveButton.setDisable(true);
+        beforeFrenzyGrabButton.setDisable(true);
     }
 
     /**
@@ -175,6 +245,8 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         adrenalineGrab();
+        beforeFrenzyMoveButton.setDisable(true);
+        beforeFrenzyShootButton.setDisable(true);
     }
 
     /**
@@ -198,6 +270,8 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        beforeFrenzyShootButton.setDisable(true);
+        beforeFrenzyGrabButton.setDisable(true);
     }
 
     /**
@@ -221,6 +295,7 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        afterFrenzyShootButton.setDisable(true);
     }
 
     /**
@@ -244,6 +319,7 @@ public class ActionListController implements Initializable {
         } catch (IOException e) {
             newWindow.loadingFailure();
         }
+        afterFrenzyGrabButton.setDisable(true);
     }
 
     /**
