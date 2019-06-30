@@ -1,6 +1,7 @@
 package models;
 
 import controllers.ActionController;
+import messages.GameStateMessage;
 import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
@@ -540,11 +541,13 @@ public class Player {
         if (currentPosition.isSpawnPoint()) {
             Weapon weaponToPick = currentPosition.getWeaponsSlot().getWeaponByName(weaponName);
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
+            GameStateMessage.actionsHistoryTemp.add(getNickname() + " grabbed weapon " + weaponName);
         } else {
             Ammo ammo = currentPosition.getAmmo();
             //if the ammo picked has a powerup, add it to your powerups
             if (ammo.getHasPowerUp()) {
                 addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
+                GameStateMessage.actionsHistoryTemp.add(getNickname() + " grabbed a powerup!");
             } else {
                 //if the ammo picked has ammocubes, add them to your cubes
                 int blueCubes = ammo.getBlueCubes();
@@ -588,6 +591,7 @@ public class Player {
         if (playerTarget.getDamage().size() > 10) {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
+            GameStateMessage.actionsHistoryTemp.add(playerTarget.getNickname() + " died!");
 
             // Give the target player a power up
             playerTarget.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
