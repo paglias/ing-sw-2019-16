@@ -1,6 +1,5 @@
 package client;
 
-import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;
@@ -30,12 +29,14 @@ public class CLI {
                 msg = connection.receive();
                 if (msg != null) controller.onServerMessage(msg);
             } while (msg != null);
-
         } catch (Throwable e) {
             Logger.err(e, null);
         } finally {
-            Logger.info("Closing connection to server!");
             if (!connection.isClosed()) connection.close();
+            Logger.info("To reconnect to the game," +
+                    " join the same server with your previous username.");
+
+            System.exit(0);
         }
     }
 

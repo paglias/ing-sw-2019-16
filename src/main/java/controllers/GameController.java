@@ -34,7 +34,9 @@ public class GameController {
         turnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (player.isActive()) endTurn(true);
+                if (gameBoard.hasStarted() && !gameBoard.hasEnded() && player.isActive()) {
+                    endTurn(true);
+                }
             }
         }, Constants.TURN_TIMEOUT * 1000);
 
@@ -115,7 +117,7 @@ public class GameController {
         }
 
         // Start the game when 5 players have joined
-        if (gameBoard.getPlayers().size() == 5) {
+        if (!gameBoard.hasStarted() && gameBoard.getPlayers().size() == 5) {
             start();
         } else {
             // Start a timer when 3 players are connected
