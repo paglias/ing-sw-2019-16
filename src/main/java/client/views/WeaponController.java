@@ -33,6 +33,11 @@ public class WeaponController implements Initializable {
 
     public void setWeaponChosen(String weaponChosen) {
         this.weaponChosen = weaponChosen;
+
+        //Loads the image
+        String imagePath = "/JPGs/Weapons/";
+        Image image = new Image(imagePath + weaponChosen + ".png");
+        weaponView.setImage(image);
     }
 
     @FXML private ImageView weaponView;
@@ -234,13 +239,6 @@ public class WeaponController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //Loads the image
-
-        String imagePath = "/JPGs/Weapons/";
-        Image image = new Image(imagePath + weaponChosen + ".png");
-        weaponView.setImage(image);
-
         //Populate the choice boxes
 
         ArrayList<String> positions = new ArrayList<>();

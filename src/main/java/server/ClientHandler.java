@@ -50,7 +50,9 @@ public class ClientHandler {
         } finally {
             Logger.info("Closing connection from client " + clientSocket.getLocalAddress());
             close();
-            clientController.getGameController().disconnectPlayer(clientController);
+            if (clientController.getGameController() != null && clientController != null) {
+                clientController.getGameController().disconnectPlayer(clientController);
+            }
         }
     }
 

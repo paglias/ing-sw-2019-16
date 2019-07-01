@@ -266,7 +266,7 @@ public class GameController {
 
         // Make sure the next player is connected
         while (!newActivePlayer.isConnected()) {
-            newActivePlayer = gameBoard.nextPlayer(player);
+            newActivePlayer = gameBoard.nextPlayer(newActivePlayer);
         }
 
         // Refill weapon slots and ammos
