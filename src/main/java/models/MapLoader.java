@@ -28,7 +28,7 @@ public class MapLoader {
     }
 
     /**
-     * Load map array list.
+     * Load all game maps.
      *
      * @param mapNumber   the map number
      * @param weaponsDeck the weapons deck

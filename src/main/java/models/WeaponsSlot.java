@@ -25,6 +25,11 @@ public class WeaponsSlot {
         }
     }
 
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
     public Square.Color getColor () { return this.color; }
 
     /**
@@ -41,6 +46,12 @@ public class WeaponsSlot {
         }
     }
 
+    /**
+     * Gets weapon by name.
+     *
+     * @param name the name
+     * @return the weapon by name
+     */
     public Weapon getWeaponByName (String name) {
         return getWeapons().stream()
                 .filter(weapon -> weapon.getName().equals(name))

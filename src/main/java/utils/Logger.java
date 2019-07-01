@@ -3,10 +3,21 @@ package utils;
 public class Logger {
     private Logger () {} // Cannot instantiate this class
 
-    public static void info (String s) {
-        System.out.println(s);
+    /**
+     * Log message to system.out.
+     *
+     * @param msg the message to log
+     */
+    public static void info (String msg) {
+        System.out.println(msg);
     }
 
+    /**
+     * Log error to system.err.
+     *
+     * @param e the error object.
+     * @param s the optional message.
+     */
     public static void err (Throwable e, String s) {
         e.printStackTrace();
 

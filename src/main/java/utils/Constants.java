@@ -19,6 +19,9 @@ public class Constants {
     public static long TIMEOUT;
     public static long TURN_TIMEOUT;
 
+    /**
+     * Load game settings from Json.
+     */
     public static void load () {
         Gson gson = new Gson();
         String settingsPath = "/" + "settings.json";

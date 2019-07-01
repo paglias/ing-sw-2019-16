@@ -43,7 +43,8 @@ public class Action {
     }
 
     /**
-     * Gets parameters.
+     * Create a map with a string key and an integer value.
+     * Splits parameter in two, first one is the effect input, second one the index
      *
      * @return the parameters
      */

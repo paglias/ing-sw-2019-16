@@ -47,7 +47,7 @@ public class CardWithAction extends Card {
     }
 
     /**
-     * Effect.
+     * List of weapon effects.
      *
      * @param effect the effect
      */

@@ -28,17 +28,13 @@ public class Server implements Closeable {
         return accepted;
     }
 
+    /**
+     * List for new connections to the server as long as it's open.
+     * When a client connect spawn a new thread and create a client handler.
+     */
     private void lifeCycle() throws IOException {
         serverSocket = new ServerSocket(port);
         Logger.info("Server listening on port " + port);
-
-        // Create a GameController controller
-        // It's created here to make it possible to share it between clients
-        // but then it's only handled in a ClientHandler class that runs in a different thread
-        // Multiple games are supported
-
-        ArrayList<GameController> gameControllers = new ArrayList<>();
-
 
         boolean condition = true;
         while (condition) {
@@ -57,11 +53,23 @@ public class Server implements Closeable {
         }
     }
 
+    /**
+     * Close the game server.
+     * Destroy the socket.
+     */
     public void close() throws IOException {
         Logger.info("Server is shutting down...");
         serverSocket.close();
     }
 
+    /**
+     * Start the game server.
+     * Ask for connection string.
+     *
+     *
+     * @param keyboard a keyboard scanner
+     * @throws IOException an io exception
+     */
     public static void start (Scanner keyboard) throws IOException {
         Logger.info("Server is starting...");
         Logger.info("Choose a port:");

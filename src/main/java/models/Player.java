@@ -72,28 +72,70 @@ public class Player {
         setConnected(true);
     }
 
+    /**
+     * Sets game board.
+     *
+     * @param gameBoard the game board
+     */
     public void setGameBoard (GameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
 
+    /**
+     * Player is before first player?.
+     *
+     * @return the boolean
+     */
     public boolean isBeforeFirstPlayer(){
         return this.isBeforeFirstPlayer;
     }
+
+    /**
+     * Set if player is before first player for final frenzy mode.
+     *
+     * @param isBeforeFirstPlayer the is before first player
+     */
     public void setIsBeforeFirstPlayer(Boolean isBeforeFirstPlayer){
         this.isBeforeFirstPlayer = isBeforeFirstPlayer;
     }
 
+    /**
+     * Player has completed a turn in final frenzy mode.
+     *
+     * @return the boolean
+     */
     public boolean finalFrenzyDone () { return hasCompletedFinalFrenzyTurn; }
+
+    /**
+     * Sets final frenzy done.
+     */
     public void setFinalFrenzyDone () { hasCompletedFinalFrenzyTurn = true; }
 
+    /**
+     * Gets user possible actions.
+     *
+     * @return the possible actions
+     */
     public List<ActionController.Action> getPossibleActions () {
         return this.possibleActions;
     }
 
+    /**
+     * Sets user possible actions.
+     *
+     *
+     * @param possibleActions the possible actions
+     */
     public void setPossibleActions (List<ActionController.Action> possibleActions) {
         this.possibleActions = possibleActions;
     }
 
+    /**
+     * Sets active action.
+     * If there's an active action, add all the sub actions
+     *
+     * @param activeAction the active action
+     */
     public void setActiveAction (ActionController.Action activeAction) {
         this.activeAction = activeAction;
         this.activeActionItems.clear();
@@ -102,13 +144,35 @@ public class Player {
             this.activeActionItems.addAll(activeAction.getActionItems());
         }
     }
+
+    /**
+     * Gets active action.
+     *
+     * @return the active action
+     */
     public ActionController.Action getActiveAction () {
         return this.activeAction;
     }
 
+    /**
+     * Gets sub actions.
+     *
+     * @return the active action items
+     */
     public List<ActionController.ActionItem> getActiveActionItems () { return  this.activeActionItems; }
 
+    /**
+     * Player is connected?.
+     *
+     * @return the boolean
+     */
     public synchronized boolean isConnected () { return  isConnected; }
+
+    /**
+     * Sets the player connected.
+     *
+     * @param isConnected the is connected
+     */
     public synchronized void setConnected (boolean isConnected) { this.isConnected = isConnected; }
 
     /**
@@ -141,10 +205,20 @@ public class Player {
         this.givenPoints = givenPoints;
     }
 
+    /**
+     * Gets start turn date.
+     *
+     * @return the start turn date
+     */
     public Date getStartTurnDate () {
         return startTurnDate;
     }
 
+    /**
+     * Sets start turn date.
+     *
+     * @param date the date
+     */
     public void setStartTurnDate (Date date) {
         startTurnDate = date;
     }
@@ -225,7 +299,8 @@ public class Player {
 
     /**
      * Adds cubes of different types to the available cubes of the player.
-     * Checks if there are less than 3 cubes
+     * Checks if there are less than 3 cubes.
+     * Is not possible to have more than three cubes of the same color.
      *
      * @param cubeColor the cube color
      */
@@ -418,6 +493,12 @@ public class Player {
         return weapons;
     }
 
+    /**
+     * Gets weapon by name.
+     *
+     * @param name the name
+     * @return the weapon by name
+     */
     public Weapon getWeaponByName (String name) {
         return getWeapons().stream()
                 .filter(weapon -> weapon.getName().equals(name))

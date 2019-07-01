@@ -86,6 +86,14 @@ public class Square {
             return false;
     }
 
+    /**
+     * Analyze squares in same direction.
+     * Check all cardinal directions.
+     *
+     * @param targetSquare the target square
+     * @param direction    the direction
+     * @return the boolean
+     */
     public boolean sameDirection(Square targetSquare, Direction direction){
         int position1= this.getNumber();
         int position2= targetSquare.getNumber();

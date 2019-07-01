@@ -9,6 +9,9 @@ import utils.Logger;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * The type Client handler.
+ */
 public class ClientHandler {
     private Socket clientSocket;
     private ClientController clientController;
@@ -21,10 +24,23 @@ public class ClientHandler {
     private BufferedReader readStream;
     private PrintWriter writeStream;
 
+    /**
+     * Instantiates a new Client handler.
+     *
+     * @param socket the socket
+     */
     ClientHandler (Socket socket) {
         this.clientSocket = socket;
     }
 
+    /**
+     * Create the input and output streams.
+     * Create a controller for the client.
+     * Read all data and messages from the client.
+     * Manage disconnection.
+     *
+     * @throws IOException the io exception
+     */
     void handleConnection() throws IOException {
         try {
             // Communication streams
@@ -50,12 +66,18 @@ public class ClientHandler {
         } finally {
             Logger.info("Closing connection from client " + clientSocket.getLocalAddress());
             close();
-            if (clientController.getGameController() != null && clientController != null) {
+            if (clientController != null && clientController.getGameController() != null) {
                 clientController.getGameController().disconnectPlayer(clientController);
             }
         }
     }
 
+    /**
+     * Handle message from client to server.
+     * Dispatch message to the right handler.
+     *
+     * @param msg the msg
+     */
     void handleMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From client >>> " + msg);
 
@@ -70,11 +92,21 @@ public class ClientHandler {
         }
     }
 
+    /**
+     * Send message to the client.
+     *
+     * @param msg the msg
+     */
     public void sendMessage (String msg) {
         writeStream.println(msg);
         writeStream.flush();
     }
 
+    /**
+     * Close client connection.
+     *
+     * @throws IOException the io exception
+     */
     public void close () throws IOException {
         Logger.info("Closing client " + clientSocket.getLocalAddress());
 
