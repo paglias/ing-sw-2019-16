@@ -231,7 +231,7 @@ public class GenericWindows {
     //to the controller of that window (WeaponController)
     public void weaponWindow(String weaponName) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/Weapon.fxml"));
+        loader.setLocation(getClass().getResource("/FXMLs/Weapon.fxml"));
         try {
             loader.load();
         } catch (
