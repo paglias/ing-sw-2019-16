@@ -28,11 +28,11 @@ public class MapLoader {
     }
 
     /**
-     * Load all game maps.
+     * Load one game map.
      *
      * @param mapNumber   the map number
      * @param weaponsDeck the weapons deck
-     * @return the array list
+     * @return the array list of squares that are part of the map
      */
     public static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck, AmmoDeck ammoDeck) {
         Gson gson = new Gson();

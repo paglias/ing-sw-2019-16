@@ -6,6 +6,7 @@ import messages.GameSettingsMessage;
 import messages.GameStateMessage;
 import models.GameBoard;
 import models.Player;
+import models.Square;
 import models.cards.PowerUp;
 import utils.Constants;
 import utils.Logger;
@@ -295,7 +296,7 @@ public class GameController {
                 .forEach(square -> {
                     if (square.isSpawnPoint()) {
                         square.getWeaponsSlot().refill(gameBoard.getWeaponsDeck());
-                    } else {
+                    } else if (!square.getColor().equals(Square.Color.EMPTY)){
                         square.setAmmo(gameBoard.getAmmoDeck());
                     }
                 });
