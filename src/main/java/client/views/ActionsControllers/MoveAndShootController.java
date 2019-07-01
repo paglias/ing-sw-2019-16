@@ -29,12 +29,22 @@ public class MoveAndShootController implements Initializable {
     }
 
 
+    /**
+     * Open move.
+     *
+     * @param event the event
+     */
     @FXML void openMove(ActionEvent event) {
         genericWindow.moveWindow();
         move.setDisable(true);
         continueButton.setDisable(false);
     }
 
+    /**
+     * Open shoot.
+     *
+     * @param event the event
+     */
     @FXML void openShoot(ActionEvent event) {
         genericWindow.shootWindow();
         Stage stage = (Stage) shoot.getScene().getWindow();

@@ -17,7 +17,12 @@ public class EndTurnController {
 
     @FXML private Button reloadButton;
 
-    //sends endturn message, closes the window.
+    /**
+     * End turn event.
+     *
+     * @param event the event
+     */
+//sends endturn message, closes the window.
     @FXML void endTurn(ActionEvent event) {
         EndTurnMessage message = new EndTurnMessage();
         Game.controller.sendMsg(message);

@@ -18,12 +18,25 @@ public class GameController {
     private Timer gameStartTimer;
     private Timer turnTimer;
 
+    /**
+     * Gets game board.
+     *
+     * @return the game board
+     */
     public GameBoard getGameBoard () { return gameBoard; }
 
+    /**
+     * Instantiates a new Game controller.
+     */
     public GameController () {
         gameBoard = new GameBoard();
     }
 
+    /**
+     * Add client.
+     *
+     * @param clientController the client controller
+     */
     public void addClient (ClientController clientController) {
         clients.add(clientController);
     }
@@ -56,7 +69,7 @@ public class GameController {
     }
 
     /**
-     * Gets client for player.
+     * Get player by nickname.
      *
      * @param nickname the nickname
      * @return the client for player
@@ -78,6 +91,11 @@ public class GameController {
 
     /**
      * Add player.
+     * If there's already an existing player connect the new player
+     * If there's not an existing player this add the first player of the game
+     * If there are 5 players start the game
+     * If there are 3 players start the timer
+     *
      *
      * @param nickname         the nickname
      * @param clientController the client controller
@@ -140,6 +158,7 @@ public class GameController {
 
     /**
      * Disconnect a player.
+     * If there are less than 3 players end the game
      *
      * @param clientController the client controller
      */
@@ -164,6 +183,8 @@ public class GameController {
 
     /**
      * Setup the game.
+     * Set the skulls.
+     * Choose the map.
      *
      * @param gameSettingsMessage the game settings message
      */
@@ -216,7 +237,7 @@ public class GameController {
     }
 
     /**
-     * Start turn.
+     * Start new turn.
      */
     public synchronized void startTurn() {
         Player player = gameBoard.getActivePlayer();

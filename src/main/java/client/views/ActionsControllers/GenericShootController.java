@@ -28,12 +28,23 @@ public class GenericShootController implements Initializable {
     @FXML
     private ChoiceBox<String> weaponSelected;
 
+    /**
+     * Confirm weapon usage.
+     *
+     * @param event the event
+     */
     @FXML
     void confirmShoot(ActionEvent event) {
         String weapon = weaponSelected.getSelectionModel().getSelectedItem();
         newWindow.weaponWindow(weapon);
     }
 
+    /**
+     * Possible choice of usable weapons.
+     *
+     * @param location  the location
+     * @param resources the resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -36,6 +36,9 @@ public class Controller implements MessageVisitor  {
         });
     }
 
+    /**
+     * Update view.
+     */
     void updateView () {
         if (currentView == null) return;
 
@@ -48,18 +51,38 @@ public class Controller implements MessageVisitor  {
         });
     }
 
+    /**
+     * Register current view.
+     *
+     * @param abstractView the abstract view
+     */
     public void registerCurrentView (AbstractView abstractView) {
         currentView = abstractView;
         // Update immediately with current data
         updateView();
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void sendMsg (AbstractMessage msg) {
         connection.send(msg.serialize());
     }
 
+    /**
+     * Gets last game state message.
+     *
+     * @return the last game state message
+     */
     public GameStateMessage getLastGameStateMessage () { return lastGameStateMessage; }
 
+    /**
+     * On server message.
+     *
+     * @param msg the msg
+     */
     void onServerMessage (String msg) {
         if (Constants.DEBUG) Logger.info("From server >>> " + msg);
         try {

@@ -64,6 +64,8 @@ public class ActionController {
 
     /**
      * Get possible actions list.
+     * Different action based on the game state.
+     * Different actions based on adrenaline level, or final frenzy state.
      *
      * @return the list
      */
@@ -114,7 +116,7 @@ public class ActionController {
     }
 
     /**
-     * Move.
+     * Move the player .
      *
      * @param clientInput the client input
      */
@@ -126,7 +128,7 @@ public class ActionController {
     }
 
     /**
-     * Grab.
+     * Grab a card.
      *
      * @param clientInput the client input
      */
@@ -135,7 +137,7 @@ public class ActionController {
     }
 
     /**
-     * Reload.
+     * Reload weapon.
      *
      * @param clientInput the client input
      */
@@ -249,6 +251,7 @@ public class ActionController {
 
     /**
      * Use weapon effect.
+     * Effect can be primary, other primary, secondary or tertiary.
      *
      * @param clientInput the client input
      */

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -391,6 +392,7 @@ public class EffectTest {
         Action.Type type=action.getType();
         assertFalse(type!=null);
     }
+
 
 }
 

@@ -78,6 +78,13 @@ public class ClientController implements MessageVisitor {
         clientHandler.sendMessage(msg);
     }
 
+    /**
+     * Gets the nickname.
+     * If there's no player with nickname, cannot disconnect it.
+     *
+     *
+     * @param chooseNicknameMessage
+     */
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         String nickname = chooseNicknameMessage.getNickname();
         if (nickname == null) {
@@ -130,10 +137,20 @@ public class ClientController implements MessageVisitor {
 
         }
     }
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(GameSettingsMessage gameSettingsMessage) {
         gameController.setup(gameSettingsMessage);
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(ActionStartMessage actionStartMessage) {
         ActionController.Action action = actionStartMessage.getAction();
 
@@ -200,6 +217,11 @@ public class ClientController implements MessageVisitor {
         GameStateMessage.updateClients(gameController);
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(ActionMessage actionMessage) {
         if (linkedPlayer.getActiveAction() == null) {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -276,6 +298,11 @@ public class ClientController implements MessageVisitor {
         GameStateMessage.updateClients(gameController);
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit (ActionEndMessage actionEndMessage) {
         if (!linkedPlayer.isActive()) {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -309,6 +336,11 @@ public class ClientController implements MessageVisitor {
         GameStateMessage.updateClients(gameController);
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(EndTurnMessage endTurnMessage) {
         if (!linkedPlayer.isActive()) {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -319,13 +351,27 @@ public class ClientController implements MessageVisitor {
         gameController.endTurn(false);
     }
 
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(ErrorMessage errorMessage) {
         Logger.info("Received error message from client: " + errorMessage.getErrorMsg());
     }
-
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(GameStateMessage gameStateMessage) {
         // Not implemented, client side only
     }
+    /**
+     * Send msg.
+     *
+     * @param msg the msg
+     */
     public void visit(EndGameMessage endGameMessage) {
         // Not implemented, client side only
     }

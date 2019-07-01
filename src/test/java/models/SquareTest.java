@@ -39,9 +39,12 @@ class SquareTest {
 
     @Test
     void isSpawnPoint () {
-        Square square = new Square(Square.Color.PURPLE, false);
-        assertEquals(square.isSpawnPoint(), false);
+        Square square = new Square(Square.Color.PURPLE, true);
+        assertEquals(square.isSpawnPoint(), true);
+
     }
+
+
     @Test
     void position () {
         Square square = new Square(Square.Color.PURPLE, false);

@@ -30,6 +30,11 @@ public class MoveFourController implements Initializable {
         moveFour.setDisable(true);
     }
 
+    /**
+     * Close window.
+     *
+     * @param event the event
+     */
     @FXML void closeWindow(ActionEvent event) {
         ActionEndMessage endMessage = new ActionEndMessage();
         Game.controller.sendMsg(endMessage);
@@ -44,6 +49,12 @@ public class MoveFourController implements Initializable {
     }
 
     @FXML void openMoveOne(ActionEvent event) {
+    /**
+     * Open move.
+     *
+     * @param event the event
+     */
+    @FXML void openMove(ActionEvent event) {
         genericWindow.moveWindow();
         moveOne.setDisable(true);
         moveTwo.setDisable(false);

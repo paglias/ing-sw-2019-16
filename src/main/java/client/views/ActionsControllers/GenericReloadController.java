@@ -27,6 +27,13 @@ public class GenericReloadController implements Initializable {
     @FXML private Button confirm;
     @FXML private ChoiceBox<String> weaponSelected;
 
+
+    /**
+     * Add weapons to usable weapons.
+     *
+     * @param location  the location
+     * @param resources the resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -57,6 +64,9 @@ public class GenericReloadController implements Initializable {
                 () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
     }
 
+    /**
+     * Confirm that weapon is reloaded.
+     */
     @FXML void confirmReload(){
         ActionMessage actionMessage = new ActionMessage();
         actionMessage.setActionItem("RELOAD");
