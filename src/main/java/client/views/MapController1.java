@@ -782,23 +782,23 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Opens window showing marks on player
     @FXML void marksPlayer1(ActionEvent event) {
-        genericWindows.showMarks(1);
+        genericWindows.showMarks(0);
     }
 
     @FXML void marksPlayer2(ActionEvent event) {
-        genericWindows.showMarks(2);
+        genericWindows.showMarks(1);
     }
 
     @FXML void marksPlayer3(ActionEvent event) {
-        genericWindows.showMarks(3);
+        genericWindows.showMarks(2);
     }
 
     @FXML void marksPlayer4(ActionEvent event) {
-        genericWindows.showMarks(4);
+        genericWindows.showMarks(3);
     }
 
     @FXML void marksPlayer5(ActionEvent event) {
-        genericWindows.showMarks(5);
+        genericWindows.showMarks(4);
     }
 
 

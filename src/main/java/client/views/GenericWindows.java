@@ -105,17 +105,24 @@ public class GenericWindows {
 //Shows a window with the current marks
     public void showMarks(int playerNumber) {
         Stage marksWindow = new Stage();
+        marksWindow.initStyle(StageStyle.UNDECORATED);
         marksWindow.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs/Marks.fxml"));
         try {
-            setCurrentPlayer(playerNumber);
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Marks.fxml"));
-            Scene actionListView = new Scene(root);
-            marksWindow.setScene(actionListView);
-            marksWindow.show();
-            marksWindow.setResizable(false);
+            loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             loadingFailure();
         }
+        MarksController controller = loader.getController();
+        controller.setCurrentPlayer(playerNumber);
+        Parent root = loader.getRoot();
+        Scene scene = new Scene(root);
+        marksWindow.setScene(scene);
+        marksWindow.show();
+        marksWindow.setResizable(false);
     }
 
 //Shows a window with the weapon contained in the weaponSlot.

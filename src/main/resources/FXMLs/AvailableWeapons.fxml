@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="570.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.AvailableWeaponsController">
     <children>
-        <Button fx:id="confirmButton" layoutX="304.0" layoutY="496.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="90.0" text="CONFIRM" />
+        <Button fx:id="confirmButton" layoutX="304.0" layoutY="496.0" mnemonicParsing="false" onAction="#closeTheWindow" prefHeight="34.0" prefWidth="90.0" text="CONFIRM" />
         <Label layoutX="192.0" layoutY="14.0" prefHeight="78.0" prefWidth="315.0" text="These are your available weapons:">
             <font>
                 <Font size="18.0" />

@@ -94,7 +94,7 @@ public class AvailableWeaponsController implements Initializable {
     }
 
     @FXML
-    void closeWindow(ActionEvent event) {
+    void closeTheWindow(ActionEvent event) {
         Stage mainWindow;
         mainWindow = (Stage) confirmButton.getScene().getWindow();
         mainWindow.close();
