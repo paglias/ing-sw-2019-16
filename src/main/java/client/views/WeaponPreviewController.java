@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class WeaponPreviewController implements Initializable {
 
-    public String weaponName=null;
+    public String weaponName;
 
     public void setWeapon(String weapon) {
         this.weaponName = weapon;

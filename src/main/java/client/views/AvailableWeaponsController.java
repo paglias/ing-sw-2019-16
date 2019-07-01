@@ -114,19 +114,19 @@ public class AvailableWeaponsController implements Initializable {
                     case 0:
                         firstWeapon = weapon.name;
                         discardButton1.setDisable(false);
-                        Image firstImage = new Image(imagePath+firstWeapon);
+                        Image firstImage = new Image(imagePath+firstWeapon+".png");
                         weaponOne.setImage(firstImage);
                         break;
                     case 1:
                         secondWeapon = weapon.name;
                         discardButton2.setDisable(false);
-                        Image secondImage = new Image(imagePath+secondWeapon);
+                        Image secondImage = new Image(imagePath+secondWeapon+".png");
                         weaponTwo.setImage(secondImage);
                         break;
                     case 2:
                         thirdWeapon = weapon.name;
                         discardButton3.setDisable(false);
-                        Image thirdImage = new Image(imagePath+thirdWeapon);
+                        Image thirdImage = new Image(imagePath+thirdWeapon+".png");
                         weaponThree.setImage(thirdImage);
                         break;
                 }

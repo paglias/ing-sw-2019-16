@@ -121,7 +121,7 @@ public class MapController1 extends AbstractView implements Initializable {
             textAreaBuilder.append('\n');
         }
 
-        textArea.setText(textAreaBuilder.toString());
+        textArea.appendText(textAreaBuilder.toString());
 
         if (gameStateMessage.playerYouData.isActive){
             actionsButton.setDisable(false);
