@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionStartMessage;
 import messages.client_data.PowerUpData;
-import models.cards.Action;
 import utils.Constants;
 import utils.Logger;
 

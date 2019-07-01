@@ -1,15 +1,12 @@
 package models.cards;
 
+import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import models.Player;
+import utils.Logger;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import com.google.gson.*;
-import utils.Logger;
 
 public class Weapon extends CardWithAction {
     // Weapons are only loaded from file once

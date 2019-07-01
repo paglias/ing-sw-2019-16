@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import messages.ActionEndMessage;
-import messages.ActionStartMessage;
 
 import java.net.URL;
 import java.util.ResourceBundle;

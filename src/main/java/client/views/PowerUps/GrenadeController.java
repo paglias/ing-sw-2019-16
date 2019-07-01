@@ -17,6 +17,7 @@ import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
 import utils.Constants;
 import utils.Logger;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

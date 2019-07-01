@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import messages.client_data.WeaponData;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

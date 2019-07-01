@@ -1,11 +1,5 @@
 package models.decks;
 
-import models.cards.Card;
-import models.cards.PowerUp;
-import models.decks.PowerUpsDeck;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 public class PowerUpDeckTest {
 
     /*@Test

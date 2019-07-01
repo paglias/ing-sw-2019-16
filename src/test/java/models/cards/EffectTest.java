@@ -1,18 +1,11 @@
 package models.cards;
 
-import static org.junit.jupiter.api.Assertions.*;
 import models.Player;
 import models.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EffectTest {
     Weapon weapon;

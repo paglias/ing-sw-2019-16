@@ -1,12 +1,12 @@
 package server;
 
-import controllers.GameController;
+import utils.Constants;
 import utils.Logger;
 
-import java.io.*;
+import java.io.Closeable;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,15 +63,20 @@ public class Server implements Closeable {
     }
 
     /**
-     * Start the game server.
-     * Ask for connection string.
+     * Main class for the server of the game.
      *
-     *
-     * @param keyboard a keyboard scanner
-     * @throws IOException an io exception
+     * @param args the input arguments
+     * @throws IOException the io exception
      */
-    public static void start (Scanner keyboard) throws IOException {
+    public static void main (String[] args) throws IOException {
+        Constants.load();
+
+        Logger.info("Welcome to Adrenaline!");
+
         Logger.info("Server is starting...");
+
+        Scanner keyboard = new Scanner(System.in);
+
         Logger.info("Choose a port:");
         int chosenPort = Integer.parseInt(keyboard.nextLine());
         keyboard.close();
@@ -82,6 +87,7 @@ public class Server implements Closeable {
         } catch (Throwable e) {
             Logger.err(e, "Exception in server.lifeCycle!");
         } finally {
+            Logger.info("Server is closing.");
             server.close();
         }
     }

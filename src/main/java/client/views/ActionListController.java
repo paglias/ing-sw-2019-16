@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messages.ActionStartMessage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

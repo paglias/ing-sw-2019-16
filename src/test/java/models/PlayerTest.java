@@ -1,13 +1,12 @@
 package models;
 
 import controllers.ActionController;
-import controllers.GameController;
-import models.cards.Action;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

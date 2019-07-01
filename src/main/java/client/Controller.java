@@ -3,28 +3,22 @@ package client;
 import client.views.AbstractView;
 import client.views.Game;
 import client.views.GenericWindows;
-import client.views.Lobby;
 import javafx.application.Platform;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import messages.*;
 import utils.Constants;
 import utils.Logger;
 
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Controller implements MessageVisitor  {
     private Connection connection;
-    private Scanner keyboard;
     private ExecutorService pool;
     private AbstractView currentView;
     private GameStateMessage lastGameStateMessage = null;
 
-    Controller(Connection connection, Scanner keyboard) {
+    Controller(Connection connection) {
         this.connection = connection;
-        this.keyboard = keyboard;
         this.pool = Executors.newCachedThreadPool();
     }
 

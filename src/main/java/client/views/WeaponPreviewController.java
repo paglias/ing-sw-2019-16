@@ -3,18 +3,12 @@ package client.views;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import messages.client_data.PlayerYouData;
-import messages.client_data.WeaponData;
-import messages.client_data.WeaponsSlotData;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 //WeaponSlot controller, loads weapons on window, when the weaponSlot is clicked
 

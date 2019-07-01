@@ -17,6 +17,7 @@ import messages.client_data.WeaponData;
 import messages.client_data.WeaponsSlotData;
 import utils.Constants;
 import utils.Logger;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

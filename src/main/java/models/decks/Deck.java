@@ -51,12 +51,11 @@ public abstract class Deck {
      * @return A card
      */
     public Card pick () {
-        boolean isEmpty = availableCards.isEmpty();
-        Card picked = isEmpty ?
+        Card picked = availableCards.isEmpty() ?
                 null :
                 availableCards.remove(0);
 
-        if (isEmpty && canRefill) {
+        if (getRemainingCards() == 0 && canRefill) {
             refillFromDiscarded();
         }
 

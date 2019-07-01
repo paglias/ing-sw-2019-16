@@ -3,7 +3,6 @@ package client.views;
 import client.CLI;
 import client.views.ActionsControllers.GenericMoveController;
 import client.views.PowerUps.DiscardPowerUpController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;

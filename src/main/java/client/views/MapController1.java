@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
 import messages.client_data.*;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

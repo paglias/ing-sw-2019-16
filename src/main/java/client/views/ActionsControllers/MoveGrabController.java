@@ -12,6 +12,7 @@ import messages.ActionMessage;
 import messages.GameStateMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.SquareData;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

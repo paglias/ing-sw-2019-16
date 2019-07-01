@@ -2,9 +2,9 @@ package models.decks;
 
 import models.cards.Card;
 import models.cards.Weapon;
-import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WeaponsDeckTest {
 

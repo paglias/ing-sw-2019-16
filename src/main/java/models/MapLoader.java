@@ -1,15 +1,13 @@
 package models;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import com.google.gson.*;
+import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import models.decks.AmmoDeck;
 import models.decks.WeaponsDeck;
 import utils.Logger;
+
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * The type Map loader.

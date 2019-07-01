@@ -5,7 +5,6 @@ import controllers.GameController;
 import messages.client_data.GameBoardData;
 import messages.client_data.PlayerYouData;
 import models.GameBoard;
-import utils.Logger;
 
 import java.util.ArrayList;
 

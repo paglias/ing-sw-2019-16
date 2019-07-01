@@ -1,17 +1,13 @@
 package client;
 
+import utils.Constants;
 import utils.Logger;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class CLI {
-    private Connection connection;
-    private Scanner keyboard;
-
-    private CLI (Scanner keyboard) {
-        this.keyboard = keyboard;
-    }
+    private CLI () { throw new IllegalStateException("CLI class cannot be instantiated."); }
 
     public static void quit () {
         Logger.info("To reconnect to the game," +
@@ -20,14 +16,16 @@ public class CLI {
         System.exit(0);
     }
 
-    private void connect (String host, int port) throws IOException {
+    private static void connect (String host, int port) throws IOException {
+        Connection connection = null;
+
         try {
             Logger.info("Connecting to server at " + host + ":" + port);
 
             connection  = new Connection(host, port);
             connection.init();
 
-            Controller controller = new Controller(connection, keyboard);
+            Controller controller = new Controller(connection);
             controller.init();
 
             // Handle messages from the server
@@ -39,13 +37,24 @@ public class CLI {
         } catch (Throwable e) {
             Logger.err(e, null);
         } finally {
-            if (!connection.isClosed()) connection.close();
+            if (connection != null) connection.close();
             CLI.quit();
         }
     }
 
-    public static void startCli (Scanner keyboard) throws IOException {
-        Logger.info("Provide host:port please");
+    /**
+     * Main class for the client of the game.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
+    public static void main (String[] args) throws IOException {
+        Constants.load();
+
+        Scanner keyboard = new Scanner(System.in);
+        Logger.info("Welcome to Adrenaline!");
+
+        Logger.info("Provide host:port of the server you want to connect to:");
         String[] tokens = keyboard.nextLine().split(":");
 
         if (tokens.length < 2) {
@@ -55,7 +64,6 @@ public class CLI {
         String host = tokens[0];
         int port = Integer.parseInt(tokens[1]);
 
-        CLI cli = new CLI(keyboard);
-        cli.connect(host, port);
+        CLI.connect(host, port);
     }
 }

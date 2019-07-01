@@ -3,6 +3,7 @@ package models;
 import models.decks.AmmoDeck;
 import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;

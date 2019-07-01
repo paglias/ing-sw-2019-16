@@ -1,6 +1,5 @@
 package client.views;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +13,6 @@ import javafx.stage.Window;
 import messages.GameSettingsMessage;
 import messages.GameStateMessage;
 import messages.client_data.PlayerOtherData;
-import models.Player;
 import utils.Logger;
 
 import java.io.IOException;

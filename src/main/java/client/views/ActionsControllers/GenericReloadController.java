@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import messages.ActionMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
