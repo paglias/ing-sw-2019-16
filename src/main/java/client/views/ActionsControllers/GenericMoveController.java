@@ -30,11 +30,13 @@ public class GenericMoveController implements Initializable {
     /**
      * Confirm move event.
      * move the player to the selected position.
+     * Takes the selected value from the choicebox, creates clientinput, sends the message to the
+     * server
      *
      * @param event the event
      */
-//Takes the selected value from the choicebox, creates clientinput, sends the message to the
-    // server
+
+
     @FXML void confirmMove(ActionEvent event) {
 
         if (newPosition.getValue()!=null){

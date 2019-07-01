@@ -2,6 +2,7 @@ package models.cards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Action {
     public enum Type {
@@ -49,7 +50,7 @@ public class Action {
     public HashMap<Effect.Input, Integer> getParameters () {
         HashMap<Effect.Input, Integer> map = new HashMap<>();
         parameters.forEach(stringParameter -> {
-            String[] parts = stringParameter.split(".");
+            String[] parts = stringParameter.split(Pattern.quote("."));
             Effect.Input actionType = Effect.Input.valueOf(parts[0]);
             Integer index = Integer.parseInt(parts[1]);
             map.put(actionType, index);

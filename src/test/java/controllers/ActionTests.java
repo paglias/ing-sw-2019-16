@@ -5,13 +5,13 @@ import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import models.Square;
-import models.cards.Card;
-import models.cards.PowerUp;
-import models.cards.Weapon;
+import models.cards.*;
+import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -171,6 +171,22 @@ public class ActionTests {
         clientInput.weaponName = player.getWeapons().get(0).getName();
         actionController.discard(clientInput);
         assertEquals(player.getWeapons().size(), nWeaponse - 1);
+    }
+    @Test
+    void getParameters(){
+        WeaponsDeck weaponsDeck= new WeaponsDeck();
+        Weapon weapon= (Weapon)weaponsDeck.pick();
+        Effect effect= weapon.getEffects(1).get(0);
+        Action action= effect.getActions().get(0);
+        HashMap<Effect.Input, Integer> map= action.getParameters();
+        assertTrue(map.size()>0);
+        String firstInput= map.keySet().toArray()[0].toString();
+        assertDoesNotThrow(()->{
+            Effect.Input.valueOf(firstInput);
+        });
+        assertNotNull(map.get( Effect.Input.valueOf(firstInput)));
+
+
     }
 }
 
