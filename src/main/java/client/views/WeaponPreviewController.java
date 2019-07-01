@@ -24,6 +24,8 @@ public class WeaponPreviewController implements Initializable {
 
     public void setWeapon(String weapon) {
         this.weaponName = weapon;
+        Image image = new Image("/JPGs/Weapons/" + weaponName + ".png");
+        weaponImage.setImage(image);
     }
 
     //Area that receives the image to be loaded
@@ -32,10 +34,6 @@ public class WeaponPreviewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        Image image = new Image("/JPGs/Weapons/" + weaponName + ".png");
-        weaponImage.setImage(image);
-
     }
 
     //Closes the weaponWindow
