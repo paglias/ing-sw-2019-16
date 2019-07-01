@@ -23,10 +23,13 @@ public class GenericShootController implements Initializable {
 
     private GenericWindows newWindow = new GenericWindows();
 
-    @FXML private Button confirm;
-    @FXML private ChoiceBox<String> weaponSelected;
+    @FXML
+    private Button confirm;
+    @FXML
+    private ChoiceBox<String> weaponSelected;
 
-    @FXML void confirmShoot(ActionEvent event) {
+    @FXML
+    void confirmShoot(ActionEvent event) {
         String weapon = weaponSelected.getSelectionModel().getSelectedItem();
         newWindow.weaponWindow(weapon);
     }
@@ -38,15 +41,17 @@ public class GenericShootController implements Initializable {
                 () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
 
         //Populate choicebox with available weapons
-        ArrayList<WeaponData> weapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
-        ArrayList<String> availableWeapons = new ArrayList<>();
-        for (WeaponData weapon : weapons){
-            availableWeapons.add(weapon.name);
+        if (!Game.controller.getLastGameStateMessage().playerYouData.weapons.isEmpty()) {
+            ArrayList<WeaponData> weapons = Game.controller.getLastGameStateMessage().playerYouData.weapons;
+            ArrayList<String> availableWeapons = new ArrayList<>();
+            for (WeaponData weapon : weapons) {
+                availableWeapons.add(weapon.name);
+            }
+
+            ObservableList<String> availableChoices = FXCollections.observableArrayList(availableWeapons);
+            weaponSelected.setItems(availableChoices);
+
         }
-
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(availableWeapons);
-        weaponSelected.setItems(availableChoices);
-
         confirm.visibleProperty().bind(Bindings.createBooleanBinding(
                 () -> weaponSelected.getValue() != null, weaponSelected.valueProperty()));
     }
