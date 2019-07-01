@@ -87,6 +87,12 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private GridPane playerFourDamage;
     @FXML private GridPane playerFiveDamage;
     @FXML private Button spawnButton;
+    @FXML private ImageView playerboard1;
+    @FXML private ImageView playerboard2;
+    @FXML private ImageView playerboard3;
+    @FXML private ImageView playerboard4;
+    @FXML private ImageView playerboard5;
+
 
     //These integers contain the players positions on the map, as square numbers
     private Integer player1Position = null;
@@ -481,9 +487,6 @@ public class MapController1 extends AbstractView implements Initializable {
                 case 4:
                     drawDamageOnOnePlayer(playerFiveDamage, player);
                     break;
-                case 5:
-                    drawDamageOnOnePlayer(playerOneDamage, player);
-                    break;
             }
             index++;
         }
@@ -504,12 +507,12 @@ public class MapController1 extends AbstractView implements Initializable {
                     BorderPane pane= new BorderPane();
                     imageView = getImageViewToLoad(damagingPlayer);
 
-                    if (pane.getCenter()!= null){
+                    if (pane.getCenter()!=null){
                         pane.setCenter(null);
                     }
-
-                    pane.setCenter(imageView);
-                    imageView.fitWidthProperty().bind(pane.widthProperty());
+                    imageView.setFitWidth(20);
+                    imageView.setFitHeight(30);
+                    imageView.setPreserveRatio(true);
                     playerboard.add(pane, 0, 0);
                     break;
 
@@ -521,8 +524,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane1.getCenter()!= null) {
                         pane1.setCenter(null);
                     }
+                    imageView1.setFitWidth(20);
+                    imageView1.setFitHeight(30);
+                    imageView1.setPreserveRatio(true);
                     pane1.setCenter(imageView1);
-                    imageView1.fitWidthProperty().bind(pane1.widthProperty());
                     playerboard.add(pane1, 1, 0);
                     break;
 
@@ -534,8 +539,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane2.getCenter()!= null) {
                         pane2.setCenter(null);
                     }
+                    imageView2.setFitWidth(20);
+                    imageView2.setFitHeight(30);
+                    imageView2.setPreserveRatio(true);
                     pane2.setCenter(imageView2);
-                    imageView2.fitWidthProperty().bind(pane2.widthProperty());
                     playerboard.add(pane2, 2, 0);
                     break;
 
@@ -547,8 +554,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane3.getCenter()!= null) {
                         pane3.setCenter(null);
                     }
+                    imageView3.setFitWidth(20);
+                    imageView3.setFitHeight(30);
+                    imageView3.setPreserveRatio(true);
                     pane3.setCenter(imageView3);
-                    imageView3.fitWidthProperty().bind(pane3.widthProperty());
                     playerboard.add(pane3, 3, 0);
                     break;
 
@@ -560,8 +569,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane4.getCenter()!= null) {
                         pane4.setCenter(null);
                     }
+                    imageView4.setFitWidth(20);
+                    imageView4.setFitHeight(30);
+                    imageView4.setPreserveRatio(true);
                     pane4.setCenter(imageView4);
-                    imageView4.fitWidthProperty().bind(pane4.widthProperty());
                     playerboard.add(pane4, 4, 0);
                     break;
 
@@ -573,8 +584,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane5.getCenter()!= null) {
                         pane5.setCenter(null);
                     }
+                    imageView5.setFitWidth(20);
+                    imageView5.setFitHeight(30);
+                    imageView5.setPreserveRatio(true);
                     pane5.setCenter(imageView5);
-                    imageView5.fitWidthProperty().bind(pane5.widthProperty());
                     playerboard.add(pane5, 5, 0);
                     break;
 
@@ -586,8 +599,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane6.getCenter()!= null) {
                         pane6.setCenter(null);
                     }
+                    imageView6.setFitWidth(20);
+                    imageView6.setFitHeight(30);
+                    imageView6.setPreserveRatio(true);
                     pane6.setCenter(imageView6);
-                    imageView6.fitWidthProperty().bind(pane6.widthProperty());
                     playerboard.add(pane6, 6, 0);
                     break;
 
@@ -599,8 +614,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane7.getCenter()!= null) {
                         pane7.setCenter(null);
                     }
+                    imageView7.setFitWidth(20);
+                    imageView7.setFitHeight(30);
+                    imageView7.setPreserveRatio(true);
                     pane7.setCenter(imageView7);
-                    imageView7.fitWidthProperty().bind(pane7.widthProperty());
                     playerboard.add(pane7, 7, 0);
                     break;
 
@@ -612,8 +629,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane8.getCenter()!= null) {
                         pane8.setCenter(null);
                     }
+                    imageView8.setFitWidth(20);
+                    imageView8.setFitHeight(30);
+                    imageView8.setPreserveRatio(true);
                     pane8.setCenter(imageView8);
-                    imageView8.fitWidthProperty().bind(pane8.widthProperty());
                     playerboard.add(pane8, 8, 0);
                     break;
 
@@ -625,8 +644,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane9.getCenter()!= null) {
                         pane9.setCenter(null);
                     }
+                    imageView9.setFitWidth(20);
+                    imageView9.setFitHeight(30);
+                    imageView9.setPreserveRatio(true);
                     pane9.setCenter(imageView9);
-                    imageView9.fitWidthProperty().bind(pane9.widthProperty());
                     playerboard.add(pane9, 9, 0);
                     break;
 
@@ -638,8 +659,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane10.getCenter()!= null) {
                         pane10.setCenter(null);
                     }
+                    imageView10.setFitWidth(20);
+                    imageView10.setFitHeight(30);
+                    imageView10.setPreserveRatio(true);
                     pane10.setCenter(imageView10);
-                    imageView10.fitWidthProperty().bind(pane10.widthProperty());
                     playerboard.add(pane10, 10, 0);
                     break;
 
@@ -651,8 +674,10 @@ public class MapController1 extends AbstractView implements Initializable {
                     if (pane11.getCenter()!= null) {
                         pane11.setCenter(null);
                     }
+                    imageView11.setFitWidth(20);
+                    imageView11.setFitHeight(30);
+                    imageView11.setPreserveRatio(true);
                     pane11.setCenter(imageView11);
-                    imageView11.fitWidthProperty().bind(pane11.widthProperty());
                     playerboard.add(pane11, 11, 0);
                     break;
             }

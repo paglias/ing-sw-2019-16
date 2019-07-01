@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 //WeaponSlot controller, loads weapons on window, when the weaponSlot is clicked
 
-public class WeaponPreviewController implements Initializable {
+public class WeaponPreviewController  {
 
     public String weaponName;
 
@@ -31,10 +31,6 @@ public class WeaponPreviewController implements Initializable {
     //Area that receives the image to be loaded
     @FXML ImageView weaponImage;
     @FXML Button closeButton;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 
     //Closes the weaponWindow
     public void closeWindow(){
