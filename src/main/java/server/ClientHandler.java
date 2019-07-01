@@ -1,10 +1,8 @@
 package server;
 
 import controllers.ClientController;
-import controllers.GameController;
-import javafx.application.Platform;
 import messages.AbstractMessage;
-import models.Player;
+import messages.ErrorMessage;
 import utils.Constants;
 import utils.Logger;
 
@@ -63,6 +61,9 @@ public class ClientHandler {
             AbstractMessage parsedMsg = AbstractMessage.deserialize(msg);
             parsedMsg.accept(clientController);
         } catch (Throwable e) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("Error processing the action on the server, make sure it was possible");
+            clientController.sendMsg(errorMessage);
             Logger.err(e, "Error handling client message " + clientSocket.getLocalAddress());
         }
     }

@@ -234,8 +234,8 @@ public class GenericWindows {
         loader.setLocation(getClass().getResource("/FXMLs/Weapon.fxml"));
         try {
             loader.load();
-        } catch (
-                IOException e) {
+        } catch (Throwable e) {
+            Logger.err(e, "Error loading weapon window");
             loadingFailure();
         }
         WeaponController weapon = loader.getController();
@@ -260,7 +260,8 @@ public class GenericWindows {
             weaponStage.setScene(weaponScene);
             weaponStage.show();
             weaponStage.setResizable(false);
-        } catch (IOException e) {
+        } catch (Throwable e) {
+            Logger.err(e, "Error loading weapons list");
             loadingFailure();
         }
     }
