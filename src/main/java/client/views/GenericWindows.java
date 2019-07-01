@@ -1,5 +1,6 @@
 package client.views;
 
+import client.CLI;
 import client.views.ActionsControllers.GenericMoveController;
 import client.views.PowerUps.DiscardPowerUpController;
 import javafx.application.Platform;
@@ -40,7 +41,7 @@ public class GenericWindows {
 
         Optional<ButtonType> result = quitAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Platform.exit();
+            CLI.quit();
         } else {
             quitAlert.close();
         }
@@ -94,6 +95,8 @@ public class GenericWindows {
         alert.setHeaderText("The game ended!");
         alert.setContentText("The winner is " + winner);
         alert.showAndWait();
+
+        CLI.quit();
     }
 
     /**

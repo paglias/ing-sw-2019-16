@@ -9,11 +9,18 @@ public class CLI {
     private Connection connection;
     private Scanner keyboard;
 
-    public  CLI (Scanner keyboard) {
+    private CLI (Scanner keyboard) {
         this.keyboard = keyboard;
     }
 
-    void connect (String host, int port) throws IOException {
+    public static void quit () {
+        Logger.info("To reconnect to the game," +
+                " join the same server with your previous username.");
+
+        System.exit(0);
+    }
+
+    private void connect (String host, int port) throws IOException {
         try {
             Logger.info("Connecting to server at " + host + ":" + port);
 
@@ -33,10 +40,7 @@ public class CLI {
             Logger.err(e, null);
         } finally {
             if (!connection.isClosed()) connection.close();
-            Logger.info("To reconnect to the game," +
-                    " join the same server with your previous username.");
-
-            System.exit(0);
+            CLI.quit();
         }
     }
 
