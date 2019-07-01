@@ -2,6 +2,7 @@ package client;
 
 import utils.Constants;
 import utils.Logger;
+import utils.Utils;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -51,11 +52,11 @@ public class CLI {
     public static void main (String[] args) throws IOException {
         Constants.load();
 
-        Scanner keyboard = new Scanner(System.in);
-        Logger.info("Welcome to Adrenaline!");
+        Logger.info("Welcome to the Adrenaline Client!");
 
         Logger.info("Provide host:port of the server you want to connect to:");
-        String[] tokens = keyboard.nextLine().split(":");
+        Scanner keyboard = Utils.getKeyboard();
+        String[] tokens = keyboard.next().split(":");
 
         if (tokens.length < 2) {
             throw new IllegalArgumentException("Bad formatting: " + tokens[0]);

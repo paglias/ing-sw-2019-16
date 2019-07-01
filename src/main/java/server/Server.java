@@ -2,6 +2,7 @@ package server;
 
 import utils.Constants;
 import utils.Logger;
+import utils.Utils;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -71,15 +72,13 @@ public class Server implements Closeable {
     public static void main (String[] args) throws IOException {
         Constants.load();
 
-        Logger.info("Welcome to Adrenaline!");
-
+        Logger.info("Welcome to the Adrenaline Server!");
         Logger.info("Server is starting...");
 
-        Scanner keyboard = new Scanner(System.in);
-
         Logger.info("Choose a port:");
-        int chosenPort = Integer.parseInt(keyboard.nextLine());
-        keyboard.close();
+        Scanner keyboard = Utils.getKeyboard();
+
+        int chosenPort = Integer.parseInt(keyboard.next());
 
         Server server = new Server(chosenPort);
         try {
