@@ -48,7 +48,6 @@ public class MoveFourController implements Initializable {
 
     }
 
-    @FXML void openMoveOne(ActionEvent event) {
     /**
      * Open move.
      *
