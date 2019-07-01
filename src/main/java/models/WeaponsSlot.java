@@ -1,5 +1,6 @@
 package models;
 
+import models.cards.Card;
 import models.cards.Weapon;
 import models.decks.WeaponsDeck;
 
@@ -52,7 +53,10 @@ public class WeaponsSlot {
     public void refill (WeaponsDeck weaponsDeck) {
         int missing = 3 - weapons.size();
         for (int i = 0; i < missing; i++) {
-            weapons.add((Weapon) weaponsDeck.pick());
+            Card weapon = weaponsDeck.pick();
+            if (weapon != null) {
+                weapons.add((Weapon) weaponsDeck.pick());
+            }
         }
     }
 

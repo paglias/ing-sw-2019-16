@@ -544,6 +544,7 @@ public class Player {
             GameStateMessage.actionsHistoryTemp.add(getNickname() + " grabbed weapon " + weaponName);
         } else {
             Ammo ammo = currentPosition.getAmmo();
+
             //if the ammo picked has a powerup, add it to your powerups
             if (ammo.getHasPowerUp()) {
                 addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
