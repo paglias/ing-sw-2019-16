@@ -386,76 +386,6 @@ public class MapController1 extends AbstractView implements Initializable {
         //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
     }
 
-    private void drawCubes(PlayerYouData currentPlayer) {
-        //Set ammo on GUI
-        int redAmmoN = 0;
-        int blueAmmoN = 0;
-        int yellowAmmoN = 0;
-
-        for (String cube : currentPlayer.cubes) {
-            switch (cube) {
-                case "RED":
-                    redAmmoN++;
-                    break;
-                case "BLUE":
-                    blueAmmoN++;
-                    break;
-                case "YELLOW":
-                    yellowAmmoN++;
-                    break;
-            }
-        }
-
-        redAmmo.setText(String.valueOf(redAmmoN));
-        yellowAmmo.setText(String.valueOf(yellowAmmoN));
-        blueAmmo.setText(String.valueOf(blueAmmoN));
-
-    }
-
-    private void drawWeaponSlots(List<SquareData> squares) {
-        //Sets the weapons in weaponslots
-        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
-                .filter(s -> s.isSpawnPoint)
-                .map(s -> s.weaponsSlot)
-                .collect(Collectors.toList()));
-
-
-        for (WeaponsSlotData slot : weaponsSlots) {
-            drawWeaponSlot(slot);
-        }
-    }
-
-    private void drawWeaponSlot(WeaponsSlotData slot) {
-        ArrayList<WeaponData> weapons = slot.weapons;
-        Label weapon1;
-        Label weapon2;
-        Label weapon3;
-
-        if (slot.color.equals("RED")) {
-            weapon1 = redWeapon1;
-            weapon2 = redWeapon2;
-            weapon3 = redWeapon3;
-        } else if (slot.color.equals("YELLOW")) {
-            weapon1 = yellowWeapon1;
-            weapon2 = yellowWeapon2;
-            weapon3 = yellowWeapon3;
-        } else { // BLUE
-            weapon1 = blueWeapon1;
-            weapon2 = blueWeapon2;
-            weapon3 = blueWeapon3;
-        }
-
-        if (!weapons.isEmpty()) {
-            weapon1.setText(weapons.get(0).name);
-        }
-        if (weapons.size() > 1) {
-            weapon2.setText(weapons.get(1).name);
-        }
-        if (weapons.size() > 2) {
-            weapon3.setText(weapons.get(2).name);
-        }
-    }
-
     //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
     //gamestate message. Loads a JPG with color based on player number and his position.
     private void loadPlayerOnMap(int playerNumber, Integer position) {
@@ -865,6 +795,77 @@ public class MapController1 extends AbstractView implements Initializable {
         }
         return imageView;
     }
+
+    private void drawWeaponSlots(List<SquareData> squares) {
+        //Sets the weapons in weaponslots
+        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
+                .filter(s -> s.isSpawnPoint)
+                .map(s -> s.weaponsSlot)
+                .collect(Collectors.toList()));
+
+
+        for (WeaponsSlotData slot : weaponsSlots) {
+            drawWeaponSlot(slot);
+        }
+    }
+
+    private void drawWeaponSlot(WeaponsSlotData slot) {
+        ArrayList<WeaponData> weapons = slot.weapons;
+        Label weapon1;
+        Label weapon2;
+        Label weapon3;
+
+        if (slot.color.equals("RED")) {
+            weapon1 = redWeapon1;
+            weapon2 = redWeapon2;
+            weapon3 = redWeapon3;
+        } else if (slot.color.equals("YELLOW")) {
+            weapon1 = yellowWeapon1;
+            weapon2 = yellowWeapon2;
+            weapon3 = yellowWeapon3;
+        } else { // BLUE
+            weapon1 = blueWeapon1;
+            weapon2 = blueWeapon2;
+            weapon3 = blueWeapon3;
+        }
+
+        if (!weapons.isEmpty()) {
+            weapon1.setText(weapons.get(0).name);
+        }
+        if (weapons.size() > 1) {
+            weapon2.setText(weapons.get(1).name);
+        }
+        if (weapons.size() > 2) {
+            weapon3.setText(weapons.get(2).name);
+        }
+    }
+
+    private void drawCubes(PlayerYouData currentPlayer) {
+        //Set ammo on GUI
+        int redAmmoN = 0;
+        int blueAmmoN = 0;
+        int yellowAmmoN = 0;
+
+        for (String cube : currentPlayer.cubes) {
+            switch (cube) {
+                case "RED":
+                    redAmmoN++;
+                    break;
+                case "BLUE":
+                    blueAmmoN++;
+                    break;
+                case "YELLOW":
+                    yellowAmmoN++;
+                    break;
+            }
+        }
+
+        redAmmo.setText(String.valueOf(redAmmoN));
+        yellowAmmo.setText(String.valueOf(yellowAmmoN));
+        blueAmmo.setText(String.valueOf(blueAmmoN));
+
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
