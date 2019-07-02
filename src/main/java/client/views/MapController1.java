@@ -73,6 +73,7 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private HBox HB0;
     @FXML private HBox HB1;
     @FXML private HBox HB2;
+    @FXML private HBox HB3;
     @FXML private HBox HB4;
     @FXML private HBox HB5;
     @FXML private HBox HB6;
@@ -93,6 +94,11 @@ public class MapController1 extends AbstractView implements Initializable {
     @FXML private ImageView playerboard3;
     @FXML private ImageView playerboard4;
     @FXML private ImageView playerboard5;
+    @FXML private GridPane deathGrid1;
+    @FXML private GridPane deathGrid2;
+    @FXML private GridPane deathGrid3;
+    @FXML private GridPane deathGrid4;
+    @FXML private GridPane deathGrid5;
 
 
     //These integers contain the players positions on the map, as square numbers
@@ -116,6 +122,7 @@ public class MapController1 extends AbstractView implements Initializable {
         drawWeaponSlots(gameStateMessage.gameBoardData.squares);
         drawSkulls(gameStateMessage.gameBoardData.skullsN);
         drawDamage(gameStateMessage);
+        finalFrenzy(gameStateMessage);
 
         StringBuilder textAreaBuilder = new StringBuilder();
 
@@ -149,7 +156,45 @@ public class MapController1 extends AbstractView implements Initializable {
         }
     }
 
-    public void drawCurrentPlayer(PlayerYouData currentPlayer) {
+    //Changes graphic elements in finalfrenzy mode
+    private void finalFrenzy(GameStateMessage gameState){
+        if (gameState.gameBoardData.isFinalFrenzy){
+            loadPlayerBoardByPlayerName(gameState);
+        }
+    }
+
+    //Loads correct playerboard image when finalfrenzy is true
+    private void loadPlayerBoardByPlayerName(GameStateMessage gameState) {
+
+        for (PlayerOtherData player : gameState.gameBoardData.players) {
+
+            if (player.damage.isEmpty()) {
+
+                if (player.nickname.equals(username1.getText())) {
+                    Image board = new Image("/JPGs/FrenzyPlayerboard1.jpg");
+                    playerboard1.setImage(board);
+                }
+                if (player.nickname.equals(username2.getText())) {
+                    Image board = new Image("/JPGs/FrenzyPlayerboard2.jpg");
+                    playerboard2.setImage(board);
+                }
+                if (player.nickname.equals(username3.getText())) {
+                    Image board = new Image("/JPGs/FrenzyPlayerboard3.jpg");
+                    playerboard3.setImage(board);
+                }
+                if (player.nickname.equals(username4.getText())) {
+                    Image board = new Image("/JPGs/FrenzyPlayerboard4.jpg");
+                    playerboard4.setImage(board);
+                }
+                if (player.nickname.equals(username5.getText())) {
+                    Image board = new Image("/JPGs/FrenzyPlayerboard5.jpg");
+                    playerboard5.setImage(board);
+                }
+            }
+        }
+    }
+
+    private void drawCurrentPlayer(PlayerYouData currentPlayer) {
         //Set totalpoints and actioncounter
         totalPoints.setText(String.valueOf(currentPlayer.totalPoints));
         actionCounter.setText(String.valueOf(currentPlayer.actionCounter));
