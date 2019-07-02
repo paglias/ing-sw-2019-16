@@ -178,7 +178,7 @@ public class ClientController implements MessageVisitor {
             return;
         }
 
-        if (linkedPlayer.getActionCounter() < 1 && action != ActionController.Action.RELOAD) {
+        if (linkedPlayer.getActionCounter() < 1 && action != ActionController.Action.RELOAD && action != ActionController.Action.USE_POWER_UP) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not available actions remained!");
             sendMsg(errorMessage);

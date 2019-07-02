@@ -20,11 +20,13 @@ public class Action {
 
         MOVE,
         MOVE_TARGET,
+        MOVE_DIRECTION,
 
         MARK,
         MARK_VIEW,
         MARK_TWO_AWAY_VIEW,
         MARK_EVERY_ONE_AWAY_VIEW,
+        MARK_ONE_AWAY_VIEW,
         MARK_EVERY,
 
         ATTRACT_TARGET

@@ -495,9 +495,6 @@ class PlayerTest {
         player.setPosition(gameBoard.getSquares().get(0));
         player.grabItem(null);
 
-        player.setPosition(gameBoard.getSquares().get(1));
-        player.grabItem(null);
-
         assertTrue(player.getPowerUps().size() > powerupN || player.getCubes().size() > cubesN);
     }
 

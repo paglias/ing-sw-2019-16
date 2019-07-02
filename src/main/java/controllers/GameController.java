@@ -301,7 +301,7 @@ public class GameController {
                 .forEach(square -> {
                     if (square.isSpawnPoint()) {
                         square.getWeaponsSlot().refill(gameBoard.getWeaponsDeck());
-                    } else if (!square.getColor().equals(Square.Color.EMPTY)){
+                    } else if (!square.getColor().equals(Square.Color.EMPTY) && !square.hasAmmo()) {
                         square.setAmmo(gameBoard.getAmmoDeck());
                     }
                 });

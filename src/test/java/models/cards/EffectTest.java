@@ -1,5 +1,6 @@
 package models.cards;
 
+import models.GameBoard;
 import models.Player;
 import models.Square;
 import org.junit.jupiter.api.BeforeEach;
@@ -276,15 +277,22 @@ public class EffectTest {
 
     @Test
     void shootDirection() {
-        player1.setPosition(square1);
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+
+        gameBoard.setMap(1);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+
         weapon.setDamagingPlayer(player1);
-        weapon.addPosition(square1);
-        weapon.addPosition(square2);
-        weapon.addPosition(square3);
         weapon.addPlayerTarget(player2);
         weapon.addPlayerTarget(player3);
-        player2.setPosition(square2);
-        player3.setPosition(square3);
+
+        player2.setPosition(gameBoard.getSquares().get(4));
+        player3.setPosition(gameBoard.getSquares().get(4));
+
         square1.setNumber(0);
         square2.setNumber(4);
         square3.setNumber(8);

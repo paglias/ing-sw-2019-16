@@ -98,6 +98,12 @@ public class CardWithAction extends Card {
             case MARK_EVERY_ONE_AWAY_VIEW:
                 this.markEveryOneAwayView();
                 return;
+            case MARK_ONE_AWAY_VIEW:
+                this.markOneAwayView();
+                return;
+            case MOVE_DIRECTION:
+                this.moveDirection();
+                return;
             case SHOOT_ROOM_CAN_SEE:
                 this.shootRoomCanSee();
                 return;
@@ -324,15 +330,29 @@ public class CardWithAction extends Card {
      */
     public void shootDirection() {
         Square position= damagingPlayer.getPosition();
+        List<Square> allSquares = damagingPlayer.getGameBoard().getSquares();
 
         int playersShot=0;
-        for(Square square: position.filterDirectionSquare(positions, direction)){
+        for(Square square: position.filterDirectionSquare(allSquares, direction)){
             for(Player player:square.getPlayersHere(playerTargets)){
                 player.addDamage(damagingPlayer);
                 playersShot++;
             }
         }
         if(playersShot==0){
+            throw new IllegalArgumentException("Not usable method");
+        }
+    }
+
+    /**
+     * Move target in a definite direction.
+     */
+    public void moveDirection () {
+        List<Square> squares = damagingPlayer.getGameBoard().getSquares();
+        List<Square> squareList = playerTargets.get(0).getPosition().filterDirectionSquare(squares, direction);
+        if (squareList.contains(positions.get(0))) {
+            playerTargets.get(0).setPosition(positions.get(0));
+        } else {
             throw new IllegalArgumentException("Not usable method");
         }
     }

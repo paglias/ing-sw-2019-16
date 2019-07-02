@@ -6,6 +6,7 @@ import models.cards.Ammo;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
+import utils.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -80,6 +81,14 @@ public class Player {
      */
     public void setGameBoard (GameBoard gameBoard) {
         this.gameBoard = gameBoard;
+    }
+
+    /**
+     * Gets game board.
+     *
+     */
+    public GameBoard getGameBoard () {
+        return this.gameBoard;
     }
 
     /**
@@ -635,19 +644,25 @@ public class Player {
                 //if the ammo picked has ammocubes, add them to your cubes
                 int blueCubes = ammo.getBlueCubes();
                 while (blueCubes != 0) {
-                    addCube(Card.Color.BLUE);
+                    try { addCube(Card.Color.BLUE); } catch (Exception e) {
+                        Logger.info("Max blue cubes");
+                    }
                     blueCubes--;
                 }
 
                 int yellowCubes = ammo.getYellowCubes();
                 while ((yellowCubes != 0)) {
-                    addCube(Card.Color.YELLOW);
+                    try { addCube(Card.Color.YELLOW); } catch (Exception e) {
+                        Logger.info("Max yellow cubes");
+                    }
                     yellowCubes--;
                 }
 
                 int redCubes = ammo.getRedCubes();
                 while ((redCubes != 0)) {
-                    addCube(Card.Color.RED);
+                    try { addCube(Card.Color.RED); } catch (Exception e) {
+                        Logger.info("Max red cubes");
+                    }
                     redCubes--;
                 }
             }
