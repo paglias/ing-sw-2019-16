@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 // Every attribute is public to make it easier to create it
 public class SquareData {
     public String color;
-    public Boolean isSpawnPoint;
-    public Boolean ammo; // If there's an ammo
+    public boolean isSpawnPoint;
+    public boolean ammo; // If there's an ammo
     public WeaponsSlotData weaponsSlot;
     public ArrayList<Integer> canView;
     public ArrayList<Integer> canAccessDirectly;

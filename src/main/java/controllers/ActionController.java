@@ -160,6 +160,16 @@ public class ActionController {
                 parameters.forEach((Effect.Input type, Integer index) -> {
                     switch (type) {
                         case TARGET:
+                            // Skip if the action required more players than playing
+                            if (index >= gameBoardModel.getPlayers().size()) {
+                                break;
+                            }
+
+                            // if the player is not sent in clientinput, skip
+                            if (index >= clientInput.players.size()) {
+                                break;
+                            }
+
                             card.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
                             break;
                         case POSITION:

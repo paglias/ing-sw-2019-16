@@ -1,12 +1,13 @@
 package models.decks;
 
+import models.cards.Ammo;
 import models.cards.Card;
 
 import java.util.ArrayList;
 
 public abstract class Deck {
     protected ArrayList<Card> availableCards;
-    private ArrayList<Card> discardedCards = new ArrayList<>();
+    private ArrayList<Card> discardedCards;
     private final Boolean canRefill;
     private final int deckSize;
 
@@ -80,6 +81,7 @@ public abstract class Deck {
         this.canRefill = canRefill;
         this.deckSize = deckSize;
         availableCards = new ArrayList<>();
+        discardedCards = new ArrayList<>();
         generateCards();
     }
 

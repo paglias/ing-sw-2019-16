@@ -4,7 +4,7 @@ public class Ammo extends Card {
     private int nYellowCubes;
     private int nBlueCubes;
     private int nRedCubes;
-    private Boolean hasPowerUp;
+    private boolean hasPowerUp;
 
     /**
      * Gets boolean has power up.

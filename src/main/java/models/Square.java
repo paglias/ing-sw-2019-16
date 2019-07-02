@@ -241,7 +241,7 @@ public class Square {
      *
      * @return true or false
      */
-    public Boolean hasAmmo () {
+    public boolean hasAmmo () {
         return this.ammo != null;
     }
 
