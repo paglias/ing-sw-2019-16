@@ -144,6 +144,9 @@ public class MapController1 extends AbstractView implements Initializable {
         if(gameStateMessage.playerYouData.possibleActions.contains("DISCARD_AND_SPAWN")) {
             spawnButton.setDisable(false);
         }
+        else{
+            spawnButton.setDisable(true);
+        }
     }
 
     public void drawCurrentPlayer(PlayerYouData currentPlayer) {
