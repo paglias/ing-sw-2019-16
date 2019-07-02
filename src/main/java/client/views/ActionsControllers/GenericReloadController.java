@@ -7,7 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
+import messages.ActionEndMessage;
 import messages.ActionMessage;
+import messages.ActionStartMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
 
@@ -68,7 +70,13 @@ public class GenericReloadController implements Initializable {
     /**
      * Confirm that weapon is reloaded.
      */
-    @FXML void confirmReload(){
+    @FXML void confirmReload () throws InterruptedException{
+        ActionStartMessage actionStartMessage = new ActionStartMessage();
+        actionStartMessage.setAction("RELOAD");
+        Game.controller.sendMsg(actionStartMessage);
+        Thread.sleep(563);
+
+
         ActionMessage actionMessage = new ActionMessage();
         actionMessage.setActionItem("RELOAD");
 
@@ -80,6 +88,12 @@ public class GenericReloadController implements Initializable {
 
         actionMessage.setClientInput(clientInput);
         Game.controller.sendMsg(actionMessage);
+        Thread.sleep(567);
+
+        ActionEndMessage actionEndMessage = new ActionEndMessage();
+        Game.controller.sendMsg(actionEndMessage);
+        Thread.sleep(563);
+
 
         Stage stage = (Stage) confirm.getScene().getWindow();
         stage.close();

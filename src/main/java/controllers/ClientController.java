@@ -25,6 +25,22 @@ public class ClientController implements MessageVisitor {
         this.linkedPlayer = null;
     }
 
+    private void cleanUpAction () {
+        // Reset the used effects of weapons
+        if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
+            linkedPlayer.getWeapons().forEach(w -> {
+                ArrayList<Integer> usedEffects = w.getUsedEffects();
+                if (usedEffects.size() > 0) {
+                    w.getUsedEffects().clear();
+                    w.forceReload();
+                }
+            });
+        }
+
+        linkedPlayer.setActiveAction(null);
+    }
+
+
     /**
      * On ended game, unregister the game controller
      *
@@ -149,7 +165,7 @@ public class ClientController implements MessageVisitor {
     /**
      * Send msg.
      *
-     * @param msg the msg
+     * @param actionStartMessage the msg
      */
     public void visit(ActionStartMessage actionStartMessage) {
         ActionController.Action action = actionStartMessage.getAction();
@@ -162,7 +178,7 @@ public class ClientController implements MessageVisitor {
             return;
         }
 
-        if (linkedPlayer.getActionCounter() < 1) {
+        if (linkedPlayer.getActionCounter() < 1 && action != ActionController.Action.RELOAD) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not available actions remained!");
             sendMsg(errorMessage);
@@ -170,10 +186,7 @@ public class ClientController implements MessageVisitor {
         }
 
         if (linkedPlayer.getActiveAction() != null) {
-            ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setErrorMsg("An action has already started, finish it first!");
-            sendMsg(errorMessage);
-            return;
+            cleanUpAction();
         }
 
 
@@ -198,6 +211,7 @@ public class ClientController implements MessageVisitor {
                 action != ActionController.Action.USE_POWER_UP
                 && action != ActionController.Action.DISCARD_AND_SPAWN
                 && action != ActionController.Action.DISCARD
+                        && action != ActionController.Action.RELOAD
         ) {
             linkedPlayer.decreaseActionCounter();
         }
@@ -319,19 +333,7 @@ public class ClientController implements MessageVisitor {
         }
 
 
-        // Reset the used effects of weapons
-        if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
-            linkedPlayer.getWeapons().forEach(w -> {
-                ArrayList<Integer> usedEffects = w.getUsedEffects();
-                if (usedEffects.size() > 0) {
-                    w.getUsedEffects().clear();
-                    w.forceReload();
-                }
-            });
-
-        }
-
-        linkedPlayer.setActiveAction(null);
+        cleanUpAction();
 
         GameStateMessage.updateClients(gameController);
     }

@@ -278,7 +278,7 @@ public class GameController {
 
         player.setActiveAction(null);
 
-        if (gameBoard.getSkulls().getNRemaining() > 0) {
+        if (gameBoard.getSkulls().getNRemaining() == 0) {
             Logger.info("Entering final frenzy!");
             gameBoard.finalFrenzy();
         }

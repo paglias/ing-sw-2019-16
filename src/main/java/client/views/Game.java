@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Logger;
 
+
 //Creates game stage, loads Adrenaline.jpg. Later it will be changed to game overview.
 public class Game extends Application {
     Stage window;

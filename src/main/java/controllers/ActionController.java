@@ -155,19 +155,24 @@ public class ActionController {
             // reset the parameters just to be sure there's no old data
             card.reset();
             card.setDamagingPlayer(player);
-            parameters.forEach((Effect.Input type, Integer index) -> {
-                switch (type) {
-                    case TARGET:
-                        card.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
-                        break;
-                    case POSITION:
-                        card.addPosition(clientInput.getPositions(gameBoardModel).get(index));
-                        break;
-                    case DIRECTION:
-                        card.setDirection(clientInput.getDirection());
-                        break;
-                }
-            });
+
+            try {
+                parameters.forEach((Effect.Input type, Integer index) -> {
+                    switch (type) {
+                        case TARGET:
+                            card.addPlayerTarget(clientInput.getPlayers(gameBoardModel).get(index));
+                            break;
+                        case POSITION:
+                            card.addPosition(clientInput.getPositions(gameBoardModel).get(index));
+                            break;
+                        case DIRECTION:
+                            card.setDirection(clientInput.getDirection());
+                            break;
+                    }
+                });
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Missing target.");
+            }
 
             // Targeting scope is a special case in that it doesn't follow the same rules as every other card
             // So it gets some special code

@@ -11,7 +11,7 @@ public class Ammo extends Card {
      *
      * @return the boolean has power up
      */
-    public Boolean getHasPowerUp() {
+    public boolean getHasPowerUp() {
         return hasPowerUp;
     }
 
@@ -55,6 +55,10 @@ public class Ammo extends Card {
         this.nBlueCubes = nBlueCubes;
         this.nRedCubes = nRedCubes;
         this.nYellowCubes = nYellowCubes;
-        this.hasPowerUp = powerUpAmmo;
+        this.hasPowerUp = false;
+
+        if (powerUpAmmo) {
+            this.hasPowerUp = true;
+        }
     }
 }

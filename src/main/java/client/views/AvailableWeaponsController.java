@@ -54,6 +54,7 @@ public class AvailableWeaponsController implements Initializable {
 
         clientInput.weaponName = firstWeapon;
         message.setClientInput(clientInput);
+        message.setActionItem("DISCARD");
         Game.controller.sendMsg(message);
         Thread.sleep(502);
 
@@ -70,6 +71,7 @@ public class AvailableWeaponsController implements Initializable {
 
         clientInput.weaponName = thirdWeapon;
         message.setClientInput(clientInput);
+        message.setActionItem("DISCARD");
         Game.controller.sendMsg(message);
         Thread.sleep(504);
 
@@ -86,6 +88,7 @@ public class AvailableWeaponsController implements Initializable {
 
         clientInput.weaponName = secondWeapon;
         message.setClientInput(clientInput);
+        message.setActionItem("DISCARD");
         Game.controller.sendMsg(message);
         Thread.sleep(508);
 
