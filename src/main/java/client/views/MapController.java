@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class MapController1 extends AbstractView implements Initializable {
+public class MapController extends AbstractView implements Initializable {
 
     private GenericWindows genericWindows = new GenericWindows();
 
