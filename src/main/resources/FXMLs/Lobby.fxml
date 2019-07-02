@@ -46,7 +46,7 @@
                </padding></RadioButton>
          </children>
       </VBox>
-      <Label layoutX="264.0" layoutY="42.0" prefHeight="38.0" prefWidth="72.0" text="LOBBY">
+      <Label layoutX="264.0" layoutY="42.0" prefHeight="38.0" prefWidth="102.0" text="LOBBY">
          <font>
             <Font size="22.0" />
          </font>

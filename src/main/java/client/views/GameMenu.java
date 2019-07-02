@@ -1,5 +1,6 @@
 package client.views;
 
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import messages.ChooseNicknameMessage;
+import utils.Logger;
 
 import java.io.IOException;
 
@@ -16,14 +18,22 @@ import java.io.IOException;
 public class GameMenu {
     @FXML Button confirmButton;
     @FXML TextField username;
+    @FXML TextField address;
 
     /**
-     * Next window.
+     * Connect and open next window.
      *
      * @param event the event
      */
-//When Confirm is pressed, loads a new scene with Lobby view
     public void nextWindow(ActionEvent event) {
+        connectToServer();
+
+        try {
+            Thread.sleep(1000); // wait for connetion to setup
+        } catch (InterruptedException e) {
+            Logger.err(e, "Sleep failed");
+        }
+
         setNickname();
 
         Parent root;
@@ -44,10 +54,25 @@ public class GameMenu {
     }
 
     /**
-     * Set nickname.
+     * Connect to the server.
      */
-//sends nickname entered by user
-    void setNickname (){
+    private void connectToServer () {
+        String[] tokens = address.getText().split(":");
+
+        if (tokens.length < 2) {
+            throw new IllegalArgumentException("Invalid address and port");
+        }
+
+        String host = tokens[0];
+        int port = Integer.parseInt(tokens[1]);
+
+        Client.connect(host, port);
+    }
+
+    /**
+     * Set nickname on the server.
+     */
+    private void setNickname (){
         ChooseNicknameMessage chooseNicknameMessage = new ChooseNicknameMessage();
         chooseNicknameMessage.setNickname(username.getText());
         Game.controller.sendMsg(chooseNicknameMessage);

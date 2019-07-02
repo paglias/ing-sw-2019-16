@@ -154,7 +154,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>client.CLI</mainClass>
+                                    <mainClass>client.Client</mainClass>
                                 </manifest>
                             </archive>
                             <finalName>client.jar</finalName>

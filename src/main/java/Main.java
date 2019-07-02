@@ -1,4 +1,4 @@
-import client.CLI;
+import client.Client;
 import server.Server;
 import utils.Constants;
 import utils.Logger;
@@ -31,7 +31,7 @@ public class Main {
         if (choice == 1) {
             Server.main(null);
         } else if (choice == 2) {
-            CLI.main(null);
+            Client.main(null);
         }
 
         keyboard.close(); // close keyboard scanner at the end

@@ -8,6 +8,7 @@ import messages.*;
 import utils.Constants;
 import utils.Logger;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,9 +18,37 @@ public class Controller implements MessageVisitor  {
     private AbstractView currentView;
     private GameStateMessage lastGameStateMessage = null;
 
-    Controller(Connection connection) {
-        this.connection = connection;
+    Controller() {
         this.pool = Executors.newCachedThreadPool();
+    }
+
+    void connect (String host, int port) {
+        // Connect and handle messages from the server in a separate thread to avoid blocking the gui
+        pool.submit(() -> {
+            try {
+                Logger.info("Connecting to server at " + host + ":" + port);
+
+                connection  = new Connection(host, port);
+                connection.init();
+
+                String msg;
+                do {
+                    msg = connection.receive();
+                    if (msg != null) onServerMessage(msg);
+                } while (msg != null);
+            } catch (Throwable e) {
+                Logger.err(e, null);
+            } finally {
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (IOException e) {
+                        Logger.err(e, "Error closing connection.");
+                    }
+                }
+                Client.quit();
+            }
+        });
     }
 
     void init () {
