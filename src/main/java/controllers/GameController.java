@@ -269,8 +269,8 @@ public class GameController {
 
         // Disconnect players if the timeout activated
         if (fromTimeout) {
-            player.setConnected(false);
             Logger.info("Turn timeout ended for " + player.getNickname());
+            getClientForPlayer(player).disconnect();
         }
 
         Logger.info("Ending turn for " + player.getNickname());

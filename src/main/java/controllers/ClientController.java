@@ -25,6 +25,14 @@ public class ClientController implements MessageVisitor {
         this.linkedPlayer = null;
     }
 
+    public void disconnect () {
+        try {
+            clientHandler.close();
+        } catch (IOException e) {
+            Logger.err(e, "Error closing connection.");
+        }
+    }
+
     private void cleanUpAction () {
         // Reset the used effects of weapons
         if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
