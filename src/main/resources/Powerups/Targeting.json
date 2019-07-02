@@ -7,7 +7,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "SHOOT",
+          "type": "SHOOT",
           "parameters": [
             "TARGET.0"
           ]

@@ -7,7 +7,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "MARK_VIEW",
+          "type": "MARK_VIEW",
           "parameters": [
             "TARGET.0"
           ]

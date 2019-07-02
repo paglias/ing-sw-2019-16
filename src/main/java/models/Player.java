@@ -679,13 +679,12 @@ public class Player {
             // Give the target player a power up
             playerTarget.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 
-            calculateDeathPoints();
-
-            gameBoard.getSkulls().decreaseSkullsRemaining();
+            playerTarget.calculateDeathPoints();
 
             if (gameBoard.getSkulls().getNRemaining()==0){
                 gameBoard.finalFrenzy();
             } else{
+                gameBoard.getSkulls().decreaseSkullsRemaining();
                 gameBoard.getSkulls().addKiller(this);
             }
         }
@@ -734,7 +733,7 @@ public class Player {
 
         //assigns values in givenPoints arraylist to players in playerByDamage, by calling assignPoints in gameBoard
         //checks if givenPoints is empty
-        if (givenPoints != null && !givenPoints.isEmpty()) {
+        if (getGivenPoints() != null && !getGivenPoints().isEmpty()) {
             gameBoard.assignPoints(givenPoints, playersByDamage);
         } else {
             //if givenPoints is empty, the players has been killed more than 6 times,
@@ -742,6 +741,7 @@ public class Player {
             int deathPoints = 1;
             addToTotalPoints(deathPoints);
         }
+
         //Assigning first blood points
         getDamage().get(0).addToTotalPoints(1);
     }

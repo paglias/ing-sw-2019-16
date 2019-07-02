@@ -8,7 +8,7 @@
       "cost": null,
       "actions": [
         {
-          "name": "MOVE_DIRECTION",
+          "type": "MOVE_DIRECTION",
           "parameters": [
             "DIRECTION.0",
             "TARGET.0"

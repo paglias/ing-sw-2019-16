@@ -26,8 +26,6 @@ class PlayerTest {
         player.setNickname("First");
         gameBoard = new GameBoard();
         gameBoard.addPlayer(player);
-
-
     }
 
     @Test
@@ -439,7 +437,10 @@ class PlayerTest {
     }
     @Test
     void afterShoot3(){
+        gameBoard.getSkulls().setNRemaining(5);
         Player player1=new Player();
+        player1.setNickname("test");
+
         player.addDamage(player1);
         player.addDamage(player1);
         player.addDamage(player1);
@@ -451,31 +452,37 @@ class PlayerTest {
         player.addDamage(player1);
         player.addDamage(player1);
         player.addDamage(player1);
+
+        gameBoard.addPlayer(player1);
+
         assertEquals(player.getDamage().size(), 11);
         int size=player.getNDeaths();
         int killers=gameBoard.getSkulls().getKillers().size();
         player.addPowerUp((PowerUp)gameBoard.getPowerUpsDeck().pick());
+
         player1.afterShoot(player);
+
         assertTrue(player.isDead());
         assertEquals(player.getNDeaths(), size+1);
         gameBoard.getSkulls().setNRemaining(0);
-        assertTrue(gameBoard.isFinalFrenzy());
+        assertFalse(gameBoard.isFinalFrenzy());
         gameBoard.getSkulls().setNRemaining(2);
         assertEquals(gameBoard.getSkulls().getKillers().size(), killers+1);
 
 
     }
+
     @Test
     void grabItem(){
-        Ammo ammo=new Ammo(3,4,5,false);
-        int blues= ammo.getBlueCubes();
-        assertEquals(blues, 4);
-        player.addWeapon((Weapon)gameBoard.getWeaponsDeck().pick());
-        Weapon weapon=player.getWeapons().get(player.getWeapons().size()-1);
-        Square position= player.getPosition();
+        gameBoard.setMap(1);
+        player.setPosition(gameBoard.getSquares().get(4));
+
+        Weapon weapon = player.getPosition().getWeaponsSlot().getWeapons().get(0);
         player.grabItem(weapon.getName());
-        assertEquals(blues, 3);
-        assertEquals(player.getCubes().size(), player.getCubes().size()+1);
+
+        assertDoesNotThrow(() -> {
+            player.getWeaponByName(weapon.getName());
+        });
     }
 
     @Test
