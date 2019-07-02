@@ -1,6 +1,8 @@
 package models;
 
 import controllers.ActionController;
+import controllers.GameController;
+import models.cards.*;
 import models.cards.Card;
 import models.cards.PowerUp;
 import models.cards.Weapon;
@@ -114,6 +116,13 @@ class PlayerTest {
 
         assertEquals(player.getCubes().size(), 1);
         assertEquals(player.getCubes().get(0), Card.Color.RED);
+
+        player.addCube(Card.Color.BLUE);
+        player.addCube(Card.Color.BLUE);
+        player.addCube(Card.Color.BLUE);
+        assertThrows(IllegalArgumentException.class, ()->{
+            player.addCube(Card.Color.BLUE);
+        });
     }
 
     @Test
@@ -216,6 +225,22 @@ class PlayerTest {
         player.removeWeapon(weapon2);
         assertEquals(player.getWeapons().size(), 2);
         assertEquals(player.getWeapons().get(0), weapon1);
+
+        player.getWeapons().clear();
+        assertThrows(IllegalArgumentException.class, ()->{
+            player.removeWeapon(weapon1);
+        });
+    }
+    @Test
+    void reloadWeapon(){
+        player.getCubes().clear();
+        player.addWeapon((Weapon)gameBoard.getWeaponsDeck().pick());
+        Weapon weapon1=player.getWeapons().get(0);
+        assertThrows(IllegalArgumentException.class, ()-> {
+            player.reload(weapon1);
+        });
+
+
     }
 
     @Test
@@ -275,6 +300,11 @@ class PlayerTest {
 
         player.move(target);
         assertEquals(player.getPosition(), target);
+
+        Square notAccessable= new Square(Square.Color.RED, false);
+        assertThrows(IllegalArgumentException.class, ()->{
+            player.move(notAccessable);
+        });
     }
 
     @Test
@@ -297,6 +327,10 @@ class PlayerTest {
         Player playerD = new Player();
         playerD.setNickname("Gamma");
         gameBoard.addPlayer(playerD);
+
+        Player playerE=new Player();
+        playerE.setNickname("Echo");
+        gameBoard.addPlayer(playerE);
 
         newPlayerPoints.add(1);
         newPlayerPoints.add(1);
@@ -324,6 +358,11 @@ class PlayerTest {
         assertEquals(playerD.getTotalPoints(), 5);
         assertEquals(playerC.getTotalPoints(), 4);
         assertEquals(playerB.getTotalPoints(), 2);
+        int size= playerE.getGivenPoints().size();
+        size=0;
+        int points=playerE.getTotalPoints();
+        player.calculateDeathPoints();
+        assertEquals(playerE.getTotalPoints(), points);
     }
 
     @Test
@@ -371,6 +410,85 @@ class PlayerTest {
         player.setActiveAction(pActions.get(0));
         assertTrue(pActions.size()>0);
     }
+    @Test
+    void afterShoot(){
+        Player player1=new Player();
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        assertEquals(player.getDamage().size(), 3);
+        player.setAdrenaline(0);
+        player1.afterShoot(player);
+        assertEquals(player.getAdrenaline(), 1);
+
+    }
+    @Test
+    void afterShoot2(){
+        Player player1=new Player();
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        assertEquals(player.getDamage().size(), 6);
+        player.setAdrenaline(1);
+        player1.afterShoot(player);
+        assertEquals(player.getAdrenaline(), 2);
+
+    }
+    @Test
+    void afterShoot3(){
+        Player player1=new Player();
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        player.addDamage(player1);
+        assertEquals(player.getDamage().size(), 11);
+        int size=player.getNDeaths();
+        int killers=gameBoard.getSkulls().getKillers().size();
+        player.addPowerUp((PowerUp)gameBoard.getPowerUpsDeck().pick());
+        player1.afterShoot(player);
+        assertTrue(player.isDead());
+        assertEquals(player.getNDeaths(), size+1);
+        gameBoard.getSkulls().setNRemaining(0);
+        assertTrue(gameBoard.isFinalFrenzy());
+        gameBoard.getSkulls().setNRemaining(2);
+        assertEquals(gameBoard.getSkulls().getKillers().size(), killers+1);
+
+
+    }
+    @Test
+    void grabItem(){
+        Ammo ammo=new Ammo(3,4,5,false);
+        int blues= ammo.getBlueCubes();
+        assertEquals(blues, 4);
+        player.addWeapon((Weapon)gameBoard.getWeaponsDeck().pick());
+        Weapon weapon=player.getWeapons().get(player.getWeapons().size()-1);
+        Square position= player.getPosition();
+        player.grabItem(weapon.getName());
+        assertEquals(blues, 3);
+        assertEquals(player.getCubes().size(), player.getCubes().size()+1);
+    }
+
+    @Test
+    void FinalFrenzyDone(){
+        player.finalFrenzyDone();
+        assertFalse(player.finalFrenzyDone());
+    }
+    @Test
+    void setFinalFrenzyDone(){
+        player.setFinalFrenzyDone();
+        assertTrue(player.finalFrenzyDone());
+    }
+
 
 }
 
