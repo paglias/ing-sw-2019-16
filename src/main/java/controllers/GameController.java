@@ -278,6 +278,11 @@ public class GameController {
 
         player.setActiveAction(null);
 
+        if (gameBoard.getSkulls().getNRemaining() > 0) {
+            Logger.info("Entering final frenzy!");
+            gameBoard.finalFrenzy();
+        }
+
         Player newActivePlayer = gameBoard.nextPlayer(player);
 
         // Everyone has done their final frenzy turn, the game ends here

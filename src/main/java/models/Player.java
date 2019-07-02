@@ -681,12 +681,10 @@ public class Player {
 
             playerTarget.calculateDeathPoints();
 
-            if (gameBoard.getSkulls().getNRemaining()==0){
-                gameBoard.finalFrenzy();
-            } else{
+            if (gameBoard.getSkulls().getNRemaining() > 0){
                 gameBoard.getSkulls().decreaseSkullsRemaining();
                 gameBoard.getSkulls().addKiller(this);
-            }
+            } // else } Final frenzy is enabled at end of turn
         }
 
         //Player overkill
