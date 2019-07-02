@@ -473,7 +473,7 @@ class PlayerTest {
     }
 
     @Test
-    void grabItem(){
+    void grabItemWeapon(){
         gameBoard.setMap(1);
         player.setPosition(gameBoard.getSquares().get(4));
 
@@ -483,6 +483,20 @@ class PlayerTest {
         assertDoesNotThrow(() -> {
             player.getWeaponByName(weapon.getName());
         });
+    }
+
+    @Test
+    void grabItemAmmo(){
+        gameBoard.setMap(1);
+        player.setPosition(gameBoard.getSquares().get(0));
+
+        int cubesN = player.getCubes().size();
+        int powerupN = player.getPowerUps().size();
+
+
+        player.grabItem(null);
+
+        assertTrue(player.getPowerUps().size() > powerupN || player.getCubes().size() > cubesN);
     }
 
     @Test
