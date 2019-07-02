@@ -39,11 +39,10 @@ public class DiscardPowerUpController implements Initializable {
     //This parameter is received from the previous window.
     public void setPowerUpType(String powerUpType) {
         this.powerUpType = powerUpType;
+        draw();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void draw () {
         //Names the window correctly
         switch (powerUpType) {
             case "TagbackGrenade":
@@ -84,6 +83,11 @@ public class DiscardPowerUpController implements Initializable {
                 yellowPowerUps.setText(Integer.toString(availableYellow));
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     //Discards the blue powerup. by its index

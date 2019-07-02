@@ -124,7 +124,7 @@ public class GameController {
             Player player = new Player();
             player.setNickname(nickname);
 
-            // Give the each player 2 powerups (one will be discarded)
+            // Give each player 2 powerups (one will be discarded)
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
             player.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 

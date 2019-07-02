@@ -276,11 +276,12 @@ public class GenericWindows {
 
     public void discardPowerUp(String powerUpType){
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/PowerUps/DiscardPowerUp.fxml"));
+        loader.setLocation(getClass().getResource("/FXMLs/PowerUps/DiscardPowerUp.fxml"));
         try {
             loader.load();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             loadingFailure();
+            Logger.err(e, "Error loading discard powerup controller");
         }
         DiscardPowerUpController discard = loader.getController();
         discard.setPowerUpType(powerUpType);
