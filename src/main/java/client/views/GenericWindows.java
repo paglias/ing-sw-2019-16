@@ -305,7 +305,6 @@ public class GenericWindows {
         Stage endTurnStage = new Stage();
         endTurnStage.setTitle("END TURN");
         endTurnStage.initModality(Modality.APPLICATION_MODAL);
-        endTurnStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/EndTurn.fxml"));
             Scene scene = new Scene(root);

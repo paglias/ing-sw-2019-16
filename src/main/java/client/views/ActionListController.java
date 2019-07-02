@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import messages.ActionStartMessage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -32,7 +32,6 @@ public class ActionListController implements Initializable {
     @FXML private Button afterFrenzyShootButton;
 
     private  String action = "ACTION";
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,6 +96,7 @@ public class ActionListController implements Initializable {
         Stage moveStage = new Stage();
         moveStage.setTitle(action);
         moveStage.initModality(Modality.APPLICATION_MODAL);
+        moveStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveThree.fxml"));
             Scene scene = new Scene(root);
@@ -125,6 +125,7 @@ public class ActionListController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveGrab.fxml"));
             Scene scene = new Scene(root);
+            moveGrabStage.initStyle(StageStyle.UNDECORATED);
             moveGrabStage.setScene(scene);
             moveGrabStage.show();
             moveGrabStage.setResizable(false);
@@ -145,6 +146,7 @@ public class ActionListController implements Initializable {
         Game.controller.sendMsg(message);
 
         Stage shoot = new Stage();
+        shoot.initStyle(StageStyle.UNDECORATED);
         shoot.setTitle(action);
         shoot.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -174,6 +176,7 @@ public class ActionListController implements Initializable {
         moveAndGrabStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveTwiceGrab.fxml"));
+            moveAndGrabStage.initStyle(StageStyle.UNDECORATED);
             Scene scene = new Scene(root);
             moveAndGrabStage.setScene(scene);
             moveAndGrabStage.show();
@@ -195,6 +198,7 @@ public class ActionListController implements Initializable {
 
         Stage moveShootStage = new Stage();
         moveShootStage.setTitle(action);
+        moveShootStage.initStyle(StageStyle.UNDECORATED);
         moveShootStage.initModality(Modality.APPLICATION_MODAL);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/MoveAndShoot.fxml"));
@@ -217,7 +221,7 @@ public class ActionListController implements Initializable {
         message.setAction("MOVE_RELOAD_SHOOT");
         Game.controller.sendMsg(message);
 
-        Stage frenzyStageOne = new Stage();
+        Stage frenzyStageOne = new Stage(StageStyle.UNDECORATED);
         frenzyStageOne.setTitle(action);
         frenzyStageOne.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -256,7 +260,7 @@ public class ActionListController implements Initializable {
         message.setAction("FOUR_MOVE");
         Game.controller.sendMsg(message);
 
-        Stage frenzyStageFour = new Stage();
+        Stage frenzyStageFour = new Stage(StageStyle.UNDECORATED);
         frenzyStageFour.setTitle(action);
         frenzyStageFour.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -281,7 +285,7 @@ public class ActionListController implements Initializable {
         message.setAction("THREE_MOVE_GRAB");
         Game.controller.sendMsg(message);
 
-        Stage frenzyStageFive = new Stage();
+        Stage frenzyStageFive = new Stage(StageStyle.UNDECORATED);
         frenzyStageFive.setTitle(action);
         frenzyStageFive.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -305,7 +309,7 @@ public class ActionListController implements Initializable {
         message.setAction("MOVE_MOVE_RELOAD_SHOOT");
         Game.controller.sendMsg(message);
 
-        Stage frenzyStageSix = new Stage();
+        Stage frenzyStageSix = new Stage(StageStyle.UNDECORATED);
         frenzyStageSix.setTitle(action);
         frenzyStageSix.initModality(Modality.APPLICATION_MODAL);
         try {

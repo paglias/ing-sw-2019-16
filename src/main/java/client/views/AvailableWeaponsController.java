@@ -14,7 +14,6 @@ import messages.client_data.ClientInput;
 import messages.client_data.WeaponData;
 import utils.Constants;
 import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -43,7 +42,6 @@ public class AvailableWeaponsController implements Initializable {
     @FXML private Button discardButton1;
     @FXML private Button discardButton2;
     @FXML private Button discardButton3;
-
 
     @FXML
     void discardWeaponOne(ActionEvent event) throws InterruptedException {

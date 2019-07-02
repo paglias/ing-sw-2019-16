@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.*;
 public class GameBoard {
     private Date gameStartDate;
     private Boolean gameEnded;
-    private Boolean gameSetup;;
+    private Boolean gameSetup;
     private Skulls skulls;
     private PowerUpsDeck powerUpsDeck;
     private WeaponsDeck weaponsDeck;
@@ -23,7 +23,6 @@ public class GameBoard {
     private ArrayList<Player> players;
     private ArrayList<Square> squares;
     private Boolean isFinalFrenzy;
-    private ArrayList<Weapon> weapons;
     private int mapN;
 
     /**
@@ -33,14 +32,10 @@ public class GameBoard {
     public GameBoard () {
         weaponsDeck = new WeaponsDeck();
         squares = new ArrayList<>();
-
         powerUpsDeck = new PowerUpsDeck();
         ammoDeck = new AmmoDeck();
-
         players = new ArrayList<>();
-
         skulls = new Skulls();
-
         isFinalFrenzy = false;
         gameSetup = false;
         gameEnded = false;
@@ -101,7 +96,6 @@ public class GameBoard {
                 .filter(player -> player.getNickname().equals(nickname))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
     }
-
 
     /**
      * Gets active player.

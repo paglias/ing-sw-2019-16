@@ -1,6 +1,7 @@
 package client.views;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -123,16 +124,17 @@ public class MapController1 extends AbstractView implements Initializable {
         drawDamage(gameStateMessage);
         finalFrenzy(gameStateMessage);
         buttonDisabler(gameStateMessage);
-        dealWithPlayerDeath(gameStateMessage);
+        updatePlayerDeaths(gameStateMessage);
         textAreaHandler(gameStateMessage);
 
         //Shows death window to current user
-        if (gameStateMessage.playerYouData.isDead){
+        //TODO CHECK IF THIS WORKS
+        if (gameStateMessage.playerYouData.isDead && !gameStateMessage.gameBoardData.killers.isEmpty()) {
             genericWindows.deathWindow();
         }
     }
 
-    private void textAreaHandler(GameStateMessage gameStateMessage){
+    private void textAreaHandler(GameStateMessage gameStateMessage) {
         StringBuilder textAreaBuilder = new StringBuilder();
 
         for (String msg : gameStateMessage.actionsHistory) {
@@ -145,15 +147,86 @@ public class MapController1 extends AbstractView implements Initializable {
         }
 
         textArea.setText(textAreaBuilder.toString());
-
     }
 
-    private void dealWithPlayerDeath(GameStateMessage gameState) {
-        for (PlayerOtherData player : gameState.gameBoardData.players) {
-            if (player.isDead) {
+    //Loads a skull for each player death, on each grid
+    //Removes all skulls every time before loading new ones.
+    private void updatePlayerDeaths(GameStateMessage gameState) {
 
+        int index = 0;
+        for (PlayerOtherData player : gameState.gameBoardData.players) {
+
+            int deaths = player.nDeaths;
+            int i = 0;
+
+            if (deaths != 0) {
+                switch (index) {
+                    case 0:
+                        skullRemover(deathGrid1);
+                        while (deaths > 0) {
+                            deathGrid1.add(createNewSkullImage(), i, 0);
+                            deaths--;
+                            i++;
+                        }
+                        break;
+                    case 1:
+                        skullRemover(deathGrid2);
+                        while (deaths > 0) {
+                            deathGrid2.add(createNewSkullImage(), i, 0);
+                            deaths--;
+                            i++;
+                        }
+                        break;
+                    case 2:
+                        skullRemover(deathGrid3);
+                        while (deaths > 0) {
+                            deathGrid3.add(createNewSkullImage(), i, 0);
+                            deaths--;
+                            i++;
+                        }
+                        break;
+                    case 3:
+                        skullRemover(deathGrid4);
+                        while (deaths > 0) {
+                            deathGrid4.add(createNewSkullImage(), i, 0);
+                            deaths--;
+                            i++;
+                        }
+                        break;
+                    case 4:
+                        skullRemover(deathGrid5);
+                        while (deaths > 0) {
+                            deathGrid5.add(createNewSkullImage(), i, 0);
+                            deaths--;
+                            i++;
+                        }
+                        break;
+                }
+            }
+            index++;
+        }
+    }
+
+    //Receives a playerboard and removes all skulls from it
+    private void skullRemover(GridPane grid){
+        ObservableList<Node> children = grid.getChildren();
+        for(Node node : children) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                grid.getChildren().remove(imageView);
             }
         }
+    }
+
+    //Loads a new skull Image
+    private ImageView createNewSkullImage(){
+        String skullPath = "/JPGs/Skull.png";
+        Image image = new Image(skullPath);
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(30);
+        imageView.setFitWidth(25);
+        imageView.setImage(image);
+        return imageView;
     }
 
     //Disables buttons
