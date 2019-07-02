@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane fx:id="workArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.MapController3">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="workArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.MapController">
     <children>
-        <SplitPane fx:id="horizontalSplit" dividerPositions="0.4222873900293255" layoutX="147.0" layoutY="93.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane fx:id="verticalSplit" dividerPositions="0.4223" layoutX="147.0" layoutY="93.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <SplitPane dividerPositions="0.14521193092621665" layoutX="39.0" layoutY="78.0" orientation="VERTICAL" prefHeight="766.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="horizontalSplit" dividerPositions="0.14521193092621665" layoutX="39.0" layoutY="78.0" orientation="VERTICAL" prefHeight="766.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <AnchorPane fx:id="upperLeftPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
                                         <HBox alignment="CENTER" layoutY="4.0" prefHeight="108.0" prefWidth="572.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <Button fx:id="timer" defaultButton="true" mnemonicParsing="false" onAction="#timerPrint" prefHeight="50.0" prefWidth="150.0" text="Timer Place Holder">
+                                                <TextArea fx:id="textArea" prefHeight="86.0" prefWidth="283.0">
                                                     <HBox.margin>
-                                                        <Insets right="40.0" />
+                                                        <Insets bottom="10.0" right="20.0" top="10.0" />
                                                     </HBox.margin>
+                                                </TextArea>
+                                                <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#endTurn" prefHeight="40.0" prefWidth="100.0" text="End Turn" />
+                                                <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="40.0" prefWidth="100.0" text="Quit">
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
-                                                </Button>
-                                                <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#showSettings" prefHeight="50.0" prefWidth="150.0" text="Settings" textAlignment="CENTER">
                                                     <HBox.margin>
-                                                        <Insets right="40.0" />
+                                                        <Insets left="20.0" />
                                                     </HBox.margin>
-                                                    <font>
-                                                        <Font size="15.0" />
-                                                    </font>
-                                                </Button>
-                                                <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="50.0" prefWidth="150.0" text="Quit">
-                                                    <font>
-                                                        <Font size="15.0" />
-                                                    </font>
                                                 </Button>
                                             </children>
                                         </HBox>
@@ -45,7 +50,8 @@
                                     <children>
                                         <GridPane fx:id="playerboardGrid" alignment="CENTER" gridLinesVisible="true" prefHeight="650.0" prefWidth="572.0">
                                             <columnConstraints>
-                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.4666748046875" minWidth="10.0" prefWidth="73.39999084472656" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="502.53336334228516" minWidth="10.0" prefWidth="498.2000091552734" />
                                             </columnConstraints>
                                             <rowConstraints>
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -55,31 +61,301 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <ImageView fx:id="playerboard1" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                                <ImageView fx:id="playerboard1" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1">
                                                     <image>
                                                         <Image url="@../JPGs/Playerboard1.jpg" />
                                                     </image>
                                                 </ImageView>
-                                                <ImageView fx:id="playerboard2" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="1">
+                                                <ImageView fx:id="playerboard2" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                     <image>
                                                         <Image url="@../JPGs/Playerboard2.jpg" />
                                                     </image>
                                                 </ImageView>
-                                                <ImageView fx:id="playerboard3" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="2">
+                                                <ImageView fx:id="playerboard3" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                     <image>
                                                         <Image url="@../JPGs/Playerboard3.jpg" />
                                                     </image>
                                                 </ImageView>
-                                                <ImageView fx:id="playerboard4" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="3">
+                                                <ImageView fx:id="playerboard4" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                     <image>
                                                         <Image url="@../JPGs/Playerboard4.jpg" />
                                                     </image>
                                                 </ImageView>
-                                                <ImageView fx:id="playerboard5" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="4">
+                                                <ImageView fx:id="playerboard5" fitHeight="450.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                     <image>
                                                         <Image url="@../JPGs/Playerboard5.jpg" />
                                                     </image>
                                                 </ImageView>
+                                                <Pane prefHeight="131.0" prefWidth="351.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <GridPane fx:id="playerOneDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                        <GridPane fx:id="deathGrid1" layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <GridPane fx:id="playerTwoDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                        <GridPane fx:id="deathGrid2" layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <GridPane fx:id="playerThreeDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                        <GridPane fx:id="deathGrid3" layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                    <children>
+                                                        <GridPane fx:id="playerFourDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                        <GridPane fx:id="deathGrid4" layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <GridPane fx:id="playerFiveDamage" layoutX="62.0" layoutY="42.0" prefHeight="32.0" prefWidth="303.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="104.0" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="104.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="102.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                        <GridPane fx:id="deathGrid5" layoutX="115.0" layoutY="84.0" prefHeight="30.0" prefWidth="150.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </Pane>
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <Label fx:id="player5Active" text="NOT PLAYING" />
+                                                        <Label fx:id="username5" text="Username">
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <Button fx:id="marksPlayer5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer5" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                                            <font>
+                                                                <Font size="10.0" />
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0">
+                                                    <children>
+                                                        <Label fx:id="player1Active" text="NOT PLAYING" />
+                                                        <Label fx:id="username1" text="Username">
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <Button fx:id="marksPlayer1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer1" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                                            <font>
+                                                                <Font size="10.0" />
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label fx:id="player2Active" text="NOT PLAYING" />
+                                                        <Label fx:id="username2" text="Username">
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <Button fx:id="marksPlayer2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer2" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                                            <font>
+                                                                <Font size="10.0" />
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label fx:id="player3Active" text="NOT PLAYING" />
+                                                        <Label fx:id="username3" text="Username">
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <Button fx:id="marksPlayer3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer3" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                                            <font>
+                                                                <Font size="10.0" />
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                                    <children>
+                                                        <Label fx:id="player4Active" text="NOT PLAYING" />
+                                                        <Label fx:id="username4" text="Username">
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <Button fx:id="marksPlayer4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#marksPlayer4" prefHeight="30.0" prefWidth="61.0" text="Marks">
+                                                            <font>
+                                                                <Font size="10.0" />
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="20.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
                                             </children>
                                             <opaqueInsets>
                                                 <Insets />
@@ -95,7 +371,7 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="427.0">
                     <children>
-                        <SplitPane fx:id="verticalSplit" dividerPositions="0.7820383451059536" layoutX="117.0" layoutY="92.0" orientation="VERTICAL" prefHeight="398.4" prefWidth="393.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="horizontalSplit2" dividerPositions="0.7820383451059536" layoutX="117.0" layoutY="92.0" orientation="VERTICAL" prefHeight="398.4" prefWidth="393.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <AnchorPane fx:id="imageAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="392.0">
                                     <children>
@@ -116,28 +392,215 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
+                                            <children>
+                                                <AnchorPane fx:id="square0" prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <HBox fx:id="HB0" layoutY="14.0" prefHeight="40.0" prefWidth="133.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square0" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square0" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square0" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square0" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <HBox fx:id="HB1" layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square1" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square1" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square1" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square1" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square4" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <HBox fx:id="HB4" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square4" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square4" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square4" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square4" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="pane5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <HBox fx:id="HB5" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square5" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square5" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square5" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square5" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square8" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <HBox fx:id="HB8" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square8" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square8" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square8" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square8" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <HBox fx:id="HB9" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square9" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square9" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square9" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square9" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <HBox fx:id="HB10" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square10" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square10" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square10" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square10" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <HBox fx:id="HB6" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square6" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square6" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square6" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square6" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <HBox fx:id="HB11" layoutX="12.0" layoutY="50.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square11" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square11" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square11" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square11" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="square7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <HBox fx:id="HB7" layoutX="12.0" layoutY="18.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square7" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square7" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square7" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square7" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                    <children>
+                                                        <HBox fx:id="HB2" layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square2" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square2" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square2" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square2" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="pane21" layoutX="279.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                                    <children>
+                                                        <HBox fx:id="HB3" layoutY="14.0" prefHeight="40.0" prefWidth="133.0">
+                                                            <children>
+                                                                <ImageView fx:id="slot1Square3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot2Square3" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot3Square3" fitHeight="20.0" fitWidth="20.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot4Square4" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <ImageView fx:id="slot5Square5" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
                                         </GridPane>
-                                        <GridPane layoutX="1.0" layoutY="205.0" prefHeight="266.0" prefWidth="115.0">
+                                        <GridPane layoutX="1.0" layoutY="212.0" prefHeight="259.0" prefWidth="115.0">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
                                                 <RowConstraints maxHeight="91.8000244140625" minHeight="10.0" prefHeight="87.8000244140625" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="138.9999755859375" minHeight="10.0" prefHeight="90.1999755859375" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="91.80002441406253" minHeight="10.0" prefHeight="69.40000000000003" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="138.9999755859375" minHeight="10.0" prefHeight="84.59998168945313" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="91.80002441406253" minHeight="10.0" prefHeight="89.40001831054687" vgrow="SOMETIMES" />
                                             </rowConstraints>
+                                            <children>
+                                                <Pane prefHeight="98.0" prefWidth="115.0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label fx:id="redWeapon2" layoutX="21.0" layoutY="23.0" onMouseClicked="#redWeapon2Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label fx:id="redWeapon3" layoutX="21.0" layoutY="20.0" onMouseClicked="#redWeapon3Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Label fx:id="redWeapon1" layoutX="21.0" layoutY="26.0" onMouseClicked="#redWeapon1Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
                                         </GridPane>
                                         <GridPane layoutX="407.0" layoutY="-1.0" prefHeight="111.0" prefWidth="260.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.2000732421875" minWidth="10.0" prefWidth="90.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="88.80009765625002" minWidth="10.0" prefWidth="83.20000000000002" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="92.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.2000732421875" minWidth="10.0" prefWidth="87.8000244140625" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.00004882812502" minWidth="10.0" prefWidth="87.199951171875" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.00002441406252" minWidth="10.0" prefWidth="86.40004882812502" />
                                             </columnConstraints>
                                             <rowConstraints>
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
+                                            <children>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Label fx:id="blueWeapon1" layoutX="4.0" layoutY="41.0" onMouseClicked="#blueWeapon1Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <Label fx:id="blueWeapon2" layoutX="9.0" layoutY="41.0" onMouseClicked="#blueWeapon2Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                    <children>
+                                                        <Label fx:id="blueWeapon3" layoutX="6.0" layoutY="41.0" onMouseClicked="#blueWeapon3Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                            </children>
                                         </GridPane>
-                                        <GridPane layoutX="668.0" layoutY="338.0" prefHeight="254.0" prefWidth="115.0">
+                                        <GridPane layoutX="668.0" layoutY="333.0" prefHeight="259.0" prefWidth="115.0">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
@@ -146,7 +609,80 @@
                                                 <RowConstraints maxHeight="96.59998168945313" minHeight="10.0" prefHeight="87.2000244140625" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="88.80005493164063" minHeight="10.0" prefHeight="83.9999755859375" vgrow="SOMETIMES" />
                                             </rowConstraints>
+                                            <children>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Label fx:id="yellowWeapon1" layoutX="25.0" layoutY="26.0" onMouseClicked="#yellowWeapon1Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label fx:id="yellowWeapon2" layoutX="25.0" layoutY="28.0" onMouseClicked="#yellowWeapon2Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label fx:id="yellowWeapon3" layoutX="25.0" layoutY="27.0" onMouseClicked="#yellowWeapon3Click" text="Click to see &#10;weapon" textFill="WHITE" wrapText="true" />
+                                                    </children></Pane>
+                                            </children>
                                         </GridPane>
+                                        <GridPane fx:id="skullPane" layoutX="56.0" layoutY="33.0" prefHeight="32.0" prefWidth="266.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="30.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="35.0" prefWidth="25.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ImageView fx:id="skullEight" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <ImageView fx:id="skullSeven" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                    <children>
+                                                        <ImageView fx:id="skullSix" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                                    <children>
+                                                        <ImageView fx:id="skullFive" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                                    <children>
+                                                        <ImageView fx:id="skullFour" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                                    <children>
+                                                        <ImageView fx:id="skullThree" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                                    <children>
+                                                        <ImageView fx:id="skullTwo" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                                    <children>
+                                                        <ImageView fx:id="skullOne" fitHeight="38.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </GridPane>
+                                        <Button fx:id="spawnButton" layoutX="688.0" layoutY="30.0" mnemonicParsing="false" onAction="#discardAndSpawn" prefHeight="72.0" prefWidth="74.0" text="DISCARD AND SPAWN" wrapText="true" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -155,10 +691,31 @@
                                             <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                     <children>
-                                                        <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="162.0" prefWidth="608.0">
+                                                        <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="162.0" prefWidth="391.0">
                                                             <columnConstraints>
                                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Button fx:id="actionsButton" mnemonicParsing="false" onAction="#openActionWindow" prefHeight="35.0" prefWidth="90.0" text="ACTIONS">
+                                                                    <font>
+                                                                        <Font size="15.0" />
+                                                                    </font>
+                                                                </Button>
+                                                                <Button fx:id="powerUpsButton" mnemonicParsing="false" onAction="#openPowerUpsWindow" prefHeight="35.0" prefWidth="90.0" text="POWERUPS" wrapText="true" GridPane.rowIndex="1">
+                                                                    <font>
+                                                                        <Font size="11.0" />
+                                                                    </font>
+                                                                </Button>
+                                                                <Button fx:id="weaponsButton" layoutX="202.0" layoutY="130.0" mnemonicParsing="false" onAction="#openWeaponsWindow" prefHeight="35.0" prefWidth="90.0" text="WEAPONS" GridPane.rowIndex="2" />
+                                                            </children>
+                                                        </GridPane>
+                                                        <GridPane layoutX="391.0" prefHeight="164.0" prefWidth="217.0">
+                                                            <columnConstraints>
                                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                             </columnConstraints>
@@ -168,33 +725,11 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                                <Button fx:id="actionsButton" mnemonicParsing="false" onAction="#openActionWindow" prefHeight="45.0" prefWidth="91.0" text="ACTIONS">
-                                                                    <font>
-                                                                        <Font size="15.0" />
-                                                                    </font>
-                                                                </Button>
-                                                                <TextField fx:id="actionChosen" alignment="CENTER" editable="false" promptText="Action Chosen" GridPane.rowIndex="1" />
-                                                                <Button fx:id="confirmAction" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#confirmAction" prefHeight="32.0" prefWidth="72.0" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                <Button fx:id="powerUpsButton" mnemonicParsing="false" onAction="#openPowerUpsWindow" prefHeight="45.0" prefWidth="120.0" text="POWERUPS" wrapText="true" GridPane.columnIndex="3">
-                                                                    <font>
-                                                                        <Font size="15.0" />
-                                                                    </font>
-                                                                </Button>
-                                                                <TextField fx:id="powerUpChosen" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="124.0" promptText="PowerUp Chosen" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                                <Button fx:id="confirmPowerUp" layoutX="208.0" layoutY="131.0" mnemonicParsing="false" onAction="#confirmPowerUp" prefHeight="30.0" prefWidth="60.0" text="Confirm" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                                <Label text="Target" GridPane.columnIndex="1">
-                                                                    <font>
-                                                                        <Font size="15.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                <Button fx:id="grabButton" layoutX="202.0" layoutY="130.0" mnemonicParsing="false" onAction="#grabAction" prefHeight="32.0" prefWidth="72.0" text="Grab" GridPane.rowIndex="2" />
-                                                                <Label layoutX="216.0" layoutY="26.0" text="Weapons" GridPane.columnIndex="2">
-                                                                    <font>
-                                                                        <Font size="15.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <ChoiceBox layoutX="163.0" layoutY="77.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                <Label text="Actions left" GridPane.rowIndex="1" />
+                                                                <Text fx:id="actionCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="125.0" text="AVAILABILITY" wrapText="true" />
+                                                                <Label text="Total Points" GridPane.rowIndex="2" />
+                                                                <Text fx:id="totalPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                             </children>
                                                         </GridPane>
                                                     </children>
@@ -213,7 +748,6 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="125.0" text="AVAILABLE AMMO" wrapText="true" />
                                                                 <Label text="RED AMMO" GridPane.rowIndex="1">
                                                                     <font>
                                                                         <Font size="10.0" />
@@ -232,6 +766,7 @@
                                                                 <Text fx:id="redAmmo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                                 <Text fx:id="blueAmmo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                                 <Text fx:id="yellowAmmo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                <Label text="Ammo" />
                                                             </children>
                                                         </GridPane>
                                                     </children>
