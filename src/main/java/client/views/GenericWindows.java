@@ -102,7 +102,6 @@ public class GenericWindows {
      *
      * @param playerNumber the player number
      */
-//Shows a window with the current marks
     public void showMarks(int playerNumber) {
         Stage marksWindow = new Stage();
         marksWindow.initStyle(StageStyle.UNDECORATED);
@@ -112,8 +111,8 @@ public class GenericWindows {
         loader.setLocation(getClass().getResource("/FXMLs/Marks.fxml"));
         try {
             loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            Logger.err(e, "Error showing marks");
             loadingFailure();
         }
         MarksController controller = loader.getController();
