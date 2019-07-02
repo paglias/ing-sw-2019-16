@@ -12,21 +12,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Logger;
-
 import java.io.IOException;
 import java.util.Optional;
 
 public class GenericWindows {
-
-    private static int currentPlayer;
-
-    public int getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(int Player) {
-        this.currentPlayer = Player;
-    }
 
     /**
      * Quit game.
@@ -361,7 +350,11 @@ public class GenericWindows {
         }
     }
 
-    public void deathWindow(){
-
+    public void deathWindow() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("YOU SUCK");
+        alert.setHeaderText("You have DIED! You are terrible at this game");
+        alert.setContentText("You will have to spawn again next turn. Go cry in a corner now");
+        alert.showAndWait();
     }
 }
