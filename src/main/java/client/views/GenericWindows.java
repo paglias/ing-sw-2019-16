@@ -360,4 +360,8 @@ public class GenericWindows {
             loadingFailure();
         }
     }
+
+    public void deathWindow(){
+
+    }
 }

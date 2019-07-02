@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import messages.GameStateMessage;
 import messages.client_data.*;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +122,17 @@ public class MapController1 extends AbstractView implements Initializable {
         drawSkulls(gameStateMessage.gameBoardData.skullsN);
         drawDamage(gameStateMessage);
         finalFrenzy(gameStateMessage);
+        buttonDisabler(gameStateMessage);
+        dealWithPlayerDeath(gameStateMessage);
+        textAreaHandler(gameStateMessage);
 
+        //Shows death window to current user
+        if (gameStateMessage.playerYouData.isDead){
+            genericWindows.deathWindow();
+        }
+    }
+
+    private void textAreaHandler(GameStateMessage gameStateMessage){
         StringBuilder textAreaBuilder = new StringBuilder();
 
         for (String msg : gameStateMessage.actionsHistory) {
@@ -137,6 +146,18 @@ public class MapController1 extends AbstractView implements Initializable {
 
         textArea.setText(textAreaBuilder.toString());
 
+    }
+
+    private void dealWithPlayerDeath(GameStateMessage gameState) {
+        for (PlayerOtherData player : gameState.gameBoardData.players) {
+            if (player.isDead) {
+
+            }
+        }
+    }
+
+    //Disables buttons
+    private void buttonDisabler(GameStateMessage gameStateMessage){
         if (gameStateMessage.playerYouData.isActive){
             actionsButton.setDisable(false);
             endTurnButton.setDisable(false);
@@ -147,7 +168,7 @@ public class MapController1 extends AbstractView implements Initializable {
             endTurnButton.setDisable(true);
             weaponsButton.setDisable(true);
         }
-
+        //Disables spawn button when spawn is not possible
         if(gameStateMessage.playerYouData.possibleActions.contains("DISCARD_AND_SPAWN")) {
             spawnButton.setDisable(false);
         }
@@ -171,7 +192,7 @@ public class MapController1 extends AbstractView implements Initializable {
         }
     }
 
-    public void loadBoard(PlayerOtherData player) {
+    private void loadBoard(PlayerOtherData player) {
         if (player.damage.isEmpty()) {
 
             if (player.nickname.equals(username1.getText())) {
