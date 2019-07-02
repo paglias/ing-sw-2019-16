@@ -18,16 +18,12 @@ public abstract class Card {
         return color;
     }
 
-    public void setColor (Color color) { this.color = color; }
-
     /**
-     * Instantiates a new Card.
+     * Sets color of the card.
      *
      * @param color the color
      */
-    public Card (Color color){
-        this.color = color;
-    }
+    public void setColor (Color color) { this.color = color; }
 
     /**
      * Instantiates a new Card without color.
