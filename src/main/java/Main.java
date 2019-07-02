@@ -20,7 +20,7 @@ public class Main {
      * @throws IOException the io exception
      */
     public static void main (String[] args) throws IOException {
-        Constants.load();
+        Constants.load(args);
 
         Scanner keyboard = Utils.getKeyboard();
 

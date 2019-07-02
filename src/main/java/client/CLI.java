@@ -50,7 +50,7 @@ public class CLI {
      * @throws IOException the io exception
      */
     public static void main (String[] args) throws IOException {
-        Constants.load();
+        Constants.load(args);
 
         Logger.info("Welcome to the Adrenaline Client!");
 
