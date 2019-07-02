@@ -167,29 +167,32 @@ public class MapController1 extends AbstractView implements Initializable {
     private void loadPlayerBoardByPlayerName(GameStateMessage gameState) {
 
         for (PlayerOtherData player : gameState.gameBoardData.players) {
+            loadBoard(player);
+        }
+    }
 
-            if (player.damage.isEmpty()) {
+    public void loadBoard(PlayerOtherData player) {
+        if (player.damage.isEmpty()) {
 
-                if (player.nickname.equals(username1.getText())) {
-                    Image board = new Image("/JPGs/FrenzyPlayerboard1.jpg");
-                    playerboard1.setImage(board);
-                }
-                if (player.nickname.equals(username2.getText())) {
-                    Image board = new Image("/JPGs/FrenzyPlayerboard2.jpg");
-                    playerboard2.setImage(board);
-                }
-                if (player.nickname.equals(username3.getText())) {
-                    Image board = new Image("/JPGs/FrenzyPlayerboard3.jpg");
-                    playerboard3.setImage(board);
-                }
-                if (player.nickname.equals(username4.getText())) {
-                    Image board = new Image("/JPGs/FrenzyPlayerboard4.jpg");
-                    playerboard4.setImage(board);
-                }
-                if (player.nickname.equals(username5.getText())) {
-                    Image board = new Image("/JPGs/FrenzyPlayerboard5.jpg");
-                    playerboard5.setImage(board);
-                }
+            if (player.nickname.equals(username1.getText())) {
+                Image board = new Image("/JPGs/FrenzyPlayerboard1.jpg");
+                playerboard1.setImage(board);
+            }
+            if (player.nickname.equals(username2.getText())) {
+                Image board = new Image("/JPGs/FrenzyPlayerboard2.jpg");
+                playerboard2.setImage(board);
+            }
+            if (player.nickname.equals(username3.getText())) {
+                Image board = new Image("/JPGs/FrenzyPlayerboard3.jpg");
+                playerboard3.setImage(board);
+            }
+            if (player.nickname.equals(username4.getText())) {
+                Image board = new Image("/JPGs/FrenzyPlayerboard4.jpg");
+                playerboard4.setImage(board);
+            }
+            if (player.nickname.equals(username5.getText())) {
+                Image board = new Image("/JPGs/FrenzyPlayerboard5.jpg");
+                playerboard5.setImage(board);
             }
         }
     }
@@ -202,7 +205,7 @@ public class MapController1 extends AbstractView implements Initializable {
         drawCubes(currentPlayer);
     }
 
-    public void drawPlayers(List<PlayerOtherData> players) {
+    private void drawPlayers(List<PlayerOtherData> players) {
         //For-switch that gets the player position for each player and assigns it to the Integers above.
         //Then sends the player number and position to the loadPlayerOnMap function
         //IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
@@ -289,7 +292,7 @@ public class MapController1 extends AbstractView implements Initializable {
         //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
     }
 
-    public void drawCubes(PlayerYouData currentPlayer) {
+    private void drawCubes(PlayerYouData currentPlayer) {
         //Set ammo on GUI
         int redAmmoN = 0;
         int blueAmmoN = 0;
@@ -315,7 +318,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     }
 
-    public void drawWeaponSlots(List<SquareData> squares) {
+    private void drawWeaponSlots(List<SquareData> squares) {
         //Sets the weapons in weaponslots
         ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
                 .filter(s -> s.isSpawnPoint)
@@ -328,7 +331,7 @@ public class MapController1 extends AbstractView implements Initializable {
         }
     }
 
-    public void drawWeaponSlot(WeaponsSlotData slot) {
+    private void drawWeaponSlot(WeaponsSlotData slot) {
         ArrayList<WeaponData> weapons = slot.weapons;
         Label weapon1;
         Label weapon2;
@@ -361,7 +364,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
     //gamestate message. Loads a JPG with color based on player number and his position.
-    public void loadPlayerOnMap(int playerNumber, Integer position) {
+    private void loadPlayerOnMap(int playerNumber, Integer position) {
         String correctImage = getImageToLoadByPlayerNumber(playerNumber);
 
         //Selects the location where to load the image.
@@ -398,7 +401,7 @@ public class MapController1 extends AbstractView implements Initializable {
     //Unloads the player image from the position.
     //For loop that compares each image in that square (5 max possible images) and if
     //the one of those images matches the standard Player image, it removes it from the square.
-    public void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage) {
+    private void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage) {
         if (previousPosition == null) return;
         HBox correctHBox = getHBoxByPosition(previousPosition);
 
@@ -409,7 +412,7 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //Gets the correct square based on an int position (example, position 5 means square 5)
-    public HBox getHBoxByPosition(int position) {
+    private HBox getHBoxByPosition(int position) {
 
         HBox correctHBox = new HBox();
 
@@ -424,6 +427,7 @@ public class MapController1 extends AbstractView implements Initializable {
                 correctHBox = HB2;
                 break;
             case 3:
+                correctHBox = HB3;
                 break;
             case 4:
                 correctHBox = HB4;
@@ -454,7 +458,7 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //Returns correct imagePath based on player number received (index in arraylist)
-    public String getImageToLoadByPlayerNumber(int playerNumber) {
+    private String getImageToLoadByPlayerNumber(int playerNumber) {
 
         String correctImage = "/JPGs";
 
@@ -480,7 +484,7 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //loads skulls on map
-    public void drawSkulls(int skulls) {
+    private void drawSkulls(int skulls) {
         int i;
         String skullPath = "/JPGs/Skull.png";
         Image skullImage = new Image(skullPath);
@@ -514,7 +518,7 @@ public class MapController1 extends AbstractView implements Initializable {
     }
 
     //Adds damage on each player based on gamestatemessage
-    public void drawDamage(GameStateMessage gameState) {
+    private void drawDamage(GameStateMessage gameState) {
 
         ArrayList<PlayerOtherData> players = gameState.gameBoardData.players;
 
@@ -547,7 +551,7 @@ public class MapController1 extends AbstractView implements Initializable {
     //For each nickname inside the player damage, creates a borderpane, loads an ImageView inside the gridpane
     //The loading location varies based on the position of the Arraylist damage
     //Also checks if the borderpane is empty before loading.
-    public void drawDamageOnOnePlayer(GridPane playerboard, PlayerOtherData player){
+    private void drawDamageOnOnePlayer(GridPane playerboard, PlayerOtherData player){
         int index=0;
         for (String damagingPlayer : player.damage) {
             switch (index) {
@@ -737,7 +741,7 @@ public class MapController1 extends AbstractView implements Initializable {
 
     //Receives string/nicknames of a player
     //Returns imageView object containing Image of the correct player
-    public ImageView getImageViewToLoad(String damagingPlayer) {
+    private ImageView getImageViewToLoad(String damagingPlayer) {
 
         ImageView imageView = new ImageView();
         if (damagingPlayer.equals(username1.getText())&& username1.getText()!= null) {
