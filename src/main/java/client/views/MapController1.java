@@ -514,6 +514,7 @@ public class MapController1 extends AbstractView implements Initializable {
                     imageView.setFitWidth(20);
                     imageView.setFitHeight(30);
                     imageView.setPreserveRatio(true);
+                    pane.setCenter(imageView);
                     playerboard.add(pane, 0, 0);
                     break;
 
