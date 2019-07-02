@@ -738,8 +738,8 @@ public class Player {
         } else {
             //if givenPoints is empty, the players has been killed more than 6 times,
             // he still awards 1 point to the killer
-            int deathPoints = 1;
-            addToTotalPoints(deathPoints);
+            // the killer is the last in damage
+            getDamage().get(getDamage().size() - 1).addToTotalPoints(1);
         }
 
         //Assigning first blood points
