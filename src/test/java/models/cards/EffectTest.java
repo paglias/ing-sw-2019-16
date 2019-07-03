@@ -32,6 +32,12 @@ public class EffectTest {
 
     }
 
+    @Test
+    void invalidEffect () {
+        assertThrows(IllegalArgumentException.class, () -> {
+            weapon.getEffects(4);
+        });
+    }
 
     @Test
     void shootSamePosition() {
@@ -84,6 +90,30 @@ public class EffectTest {
         square1.addCanAccessSquare(square2);
         weapon.move();
         assertEquals(player1.getPosition(), square2);
+    }
+
+    @Test
+    void moveDirection() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+
+        square1.setNumber(0);
+        square2.setNumber(4);
+        square3.setNumber(8);
+
+        Square.Direction direction = Square.Direction.SOUTH;
+        player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(4));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
+        weapon.addPosition(gameBoard.getSquares().get(8));
+        weapon.setDirection(direction);
+
+        weapon.moveDirection();
+        assertEquals(player2.getPosition(), gameBoard.getSquares().get(8));
     }
 
     @Test

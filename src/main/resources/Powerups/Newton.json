@@ -3,6 +3,7 @@
   "primaryEffect": [{
       "input": [
         "DIRECTION",
+        "POSITION",
         "TARGET"
       ],
       "cost": [],
@@ -11,6 +12,7 @@
           "type": "MOVE_DIRECTION",
           "parameters": [
             "DIRECTION.0",
+            "POSITION.0",
             "TARGET.0"
           ]
         }

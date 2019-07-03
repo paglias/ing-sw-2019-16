@@ -7,7 +7,7 @@
       "cost": [],
       "actions": [
         {
-          "type": "SHOOT",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
