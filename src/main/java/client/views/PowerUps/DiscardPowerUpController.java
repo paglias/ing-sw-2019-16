@@ -88,10 +88,10 @@ public class DiscardPowerUpController implements Initializable {
     /**
      * Discard blue powerup.
      *
-     * @param event the event
+     * @param location the location
+     * @param resources the resources bundle
      * @throws InterruptedException the interrupted exception
      */
-//Discards the blue powerup. by its index
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

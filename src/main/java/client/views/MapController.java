@@ -115,10 +115,7 @@ public class MapController extends AbstractView implements Initializable {
     private ImageView player4Image = null;
     private ImageView player5Image = null;
 
-    /**
-     * Updates game values with message received by server
-     */
-
+    //Updates game values with message received by server
     public void updateWithData(GameStateMessage gameStateMessage) {
         drawPlayers(gameStateMessage.gameBoardData.players);
         drawCurrentPlayer(gameStateMessage.playerYouData);
@@ -253,12 +250,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-    /**
-     *  Set totalpoints and actioncounter.
-     *
-     * @param currentPlayer the current player
-     */
-    public void drawCurrentPlayer(PlayerYouData currentPlayer) {
     //Changes graphic elements in finalfrenzy mode
     private void finalFrenzy(GameStateMessage gameState){
         if (gameState.gameBoardData.isFinalFrenzy){
@@ -307,21 +298,6 @@ public class MapController extends AbstractView implements Initializable {
 
         drawCubes(currentPlayer);
     }
-
-    /**
-     * For-switch that gets the player position for each player and assigns it to the Integers above.
-     * Then sends the player number and position to the loadPlayerOnMap function
-     *  IF ELSE: if the position of a player is the same as gamestatemessage, break from switch, do nothing.
-     *  If the position of a player is different than gamestatemessage, unloads all players
-     *  and call loadplayeronmap and load image.
-     *  Also sets the labels for username and status
-     *    At the end of this cycle the integers above contain the player positions and
-     *   if position change is detected, the old images on the map are unloaded and
-     *   new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
-     *
-     * @param players the players
-     */
-    public void drawPlayers(List<PlayerOtherData> players) {
 
     private void drawPlayers(List<PlayerOtherData> players) {
         //For-switch that gets the player position for each player and assigns it to the Integers above.
@@ -405,109 +381,20 @@ public class MapController extends AbstractView implements Initializable {
             pIndex++;
         }
 
+        //At the end of this cycle the integers above contain the player positions and
+        //if position change is detected, the old images on the map are unloaded and
+        //new images are loaded in the correct VBOX/IMAGEVIEW/IMAGE
     }
 
-    /**
-     * Set ammo on GUI.
-     *
-     * @param currentPlayer the current player
-     */
-    public void drawCubes(PlayerYouData currentPlayer) {
-
-        int redAmmoN = 0;
-        int blueAmmoN = 0;
-        int yellowAmmoN = 0;
-
-        for (String cube : currentPlayer.cubes) {
-            switch (cube) {
-                case "RED":
-                    redAmmoN++;
-                    break;
-                case "BLUE":
-                    blueAmmoN++;
-                    break;
-                case "YELLOW":
-                    yellowAmmoN++;
-                    break;
-            }
-        }
-
-        redAmmo.setText(String.valueOf(redAmmoN));
-        yellowAmmo.setText(String.valueOf(yellowAmmoN));
-        blueAmmo.setText(String.valueOf(blueAmmoN));
-
-    }
-
-    /**
-     * Set the weapons in WeaponSlots.
-     *
-     * @param squares the squares
-     */
-    public void drawWeaponSlots(List<SquareData> squares) {
-        ArrayList<WeaponsSlotData> weaponsSlots = new ArrayList<>(squares.stream()
-                .filter(s -> s.isSpawnPoint)
-                .map(s -> s.weaponsSlot)
-                .collect(Collectors.toList()));
-
-
-        for (WeaponsSlotData slot : weaponsSlots) {
-            drawWeaponSlot(slot);
-        }
-    }
-
-    /**
-     * Set weapons slot with slots colours.
-     *
-     * @param slot the slot
-     */
-    public void drawWeaponSlot(WeaponsSlotData slot) {
-        ArrayList<WeaponData> weapons = slot.weapons;
-        Label weapon1;
-        Label weapon2;
-        Label weapon3;
-
-        if (slot.color.equals("RED")) {
-            weapon1 = redWeapon1;
-            weapon2 = redWeapon2;
-            weapon3 = redWeapon3;
-        } else if (slot.color.equals("YELLOW")) {
-            weapon1 = yellowWeapon1;
-            weapon2 = yellowWeapon2;
-            weapon3 = yellowWeapon3;
-        } else { // BLUE
-            weapon1 = blueWeapon1;
-            weapon2 = blueWeapon2;
-            weapon3 = blueWeapon3;
-        }
-
-        if (!weapons.isEmpty()) {
-            weapon1.setText(weapons.get(0).name);
-        }
-        if (weapons.size() > 1) {
-            weapon2.setText(weapons.get(1).name);
-        }
-        if (weapons.size() > 2) {
-            weapon3.setText(weapons.get(2).name);
-        }
-    }
-
-
-    /**
-     *  Receives playernumber and position from updateWithGamestate function (that separates each players position from the
-     *  gamestate message. Loads a JPG with color based on player number and his position.
-     *  Selects the location where to load the image.
-     *  HBOX is the parent of the objects (ImageView) that each load an image representing a player on a square.
-     *  HB1,2,3,4... are HBOXs on each square. Each HBOX has 5 Imageviews (in case 5 players are on the same square).
-     *  Each Imageview can load one image, based on player.
-     *
-     * @param playerNumber the player number
-     * @param position     the position
-     */
-    public void loadPlayerOnMap(int playerNumber, Integer position) {
     //Receives playernumber and position from updateWithGamestate function (that separates each players position from the
     //gamestate message. Loads a JPG with color based on player number and his position.
     private void loadPlayerOnMap(int playerNumber, Integer position) {
         String correctImage = getImageToLoadByPlayerNumber(playerNumber);
+
+        //Selects the location where to load the image.
+        //HBOX is the parent of the objects (ImageView) that each load an image representing a player on a square.
+        //HB1,2,3,4... are HBOXs on each square. Each HBOX has 5 Imageviews (in case 5 players are on the same square).
+        //Each Imageview can load one image, based on player.
         HBox correctHBox = getHBoxByPosition(position);
 
         //Gets all the imageViews of the correct square (indentified by a HBOX)
@@ -532,14 +419,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     * Unload player from map.
-     *
-     * @param previousPosition the previous position
-     * @param previousImage    the previous image
-     */
-    public void unloadPlayerFromMap(Integer previousPosition, ImageView previousImage) {
     //Receives playernumber and position.
     //Finds the square based on the position
     //Finds the playerImageColor based on the position.
@@ -556,14 +435,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     *  Gets the correct square based on an int position (example, position 5 means square 5)
-     *
-     * @param position the position
-     * @return the h box by position
-     */
-    public HBox getHBoxByPosition(int position) {
     //Gets the correct square based on an int position (example, position 5 means square 5)
     private HBox getHBoxByPosition(int position) {
 
@@ -610,14 +481,6 @@ public class MapController extends AbstractView implements Initializable {
         return correctHBox;
     }
 
-
-    /**
-     * Returns correct imagePath based on player number received (index in arraylist)
-     *
-     * @param playerNumber the player number
-     * @return the image to load by player number
-     */
-    public String getImageToLoadByPlayerNumber(int playerNumber) {
     //Returns correct imagePath based on player number received (index in arraylist)
     private String getImageToLoadByPlayerNumber(int playerNumber) {
 
@@ -644,13 +507,6 @@ public class MapController extends AbstractView implements Initializable {
         return correctImage;
     }
 
-
-    /**
-     * Loads skulls on map
-     *
-     * @param skulls the skulls
-     */
-    public void drawSkulls(int skulls) {
     //loads skulls on map
     private void drawSkulls(int skulls) {
         int i;
@@ -685,13 +541,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     * Adds damage on each player based on gamestatemessage.
-     *
-     * @param gameState the game state
-     */
-    public void drawDamage(GameStateMessage gameState) {
     //Adds damage on each player based on gamestatemessage
     private void drawDamage(GameStateMessage gameState) {
 
@@ -720,19 +569,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     *  Used for one player at a time
-     *  Receives the correct playerboard and the correct player to get the damage from.
-     *  (damage is an arraylist of nicknames)
-     *   For each nickname inside the player damage, creates a borderpane, loads an ImageView inside the gridpane
-     *   The loading location varies based on the position of the Arraylist damage
-     *   Also checks if the borderpane is empty before loading.
-     *
-     * @param playerboard the playerboard
-     * @param player      the player
-     */
-    public void drawDamageOnOnePlayer(GridPane playerboard, PlayerOtherData player){
     //Used for one player at a time
     //Receives the correct playerboard and the correct player to get the damage from.
     // (damage is an arraylist of nicknames)
@@ -927,15 +763,6 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     *  Receives string/nicknames of a player
-     *  Returns imageView object containing Image of the correct player
-     *
-     * @param damagingPlayer the damaging player
-     * @return the image view to load
-     */
-    public ImageView getImageViewToLoad(String damagingPlayer) {
     //Receives string/nicknames of a player
     //Returns imageView object containing Image of the correct player
     private ImageView getImageViewToLoad(String damagingPlayer) {
@@ -1079,187 +906,90 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-
-    /**
-     * Alert box for quitting the game
-     */
+    //Alert box for quitting the game
     @FXML public void quitGame(){
         genericWindows.quitGame();
     }
 
-
-    /**
-     * Opens a window with the actions available. Many buttons will be disabled.
-     */
+    //Opens a window with the actions available. Many buttons will be disabled.
     @FXML
     public void openActionWindow(){
         genericWindows.actionWindow();
     }
 
 
-    /**
-     * Opens the powerup window where you can choose what powerup you want to use
-     */
+    //Opens the powerup window where you can choose what powerup you want to use
     @FXML void openPowerUpsWindow() {
         genericWindows.powerUps();
     }
 
 
-    /**
-     * Open weapons window.
-     *
-     * @param event the event
-     */
     @FXML void openWeaponsWindow(ActionEvent event) {
         genericWindows.availableWeapons();
     }
 
-
-    /**
-     * Marks player 1.
-     *
-     * @param event the event
-     */
+    //Opens window showing marks on player
     @FXML void marksPlayer1(ActionEvent event) {
         genericWindows.showMarks(0);
     }
 
-    /**
-     * Marks player 2.
-     *
-     * @param event the event
-     */
     @FXML void marksPlayer2(ActionEvent event) {
         genericWindows.showMarks(1);
     }
 
-    /**
-     * Marks player 3.
-     *
-     * @param event the event
-     */
     @FXML void marksPlayer3(ActionEvent event) {
         genericWindows.showMarks(2);
     }
 
-    /**
-     * Marks player 4.
-     *
-     * @param event the event
-     */
     @FXML void marksPlayer4(ActionEvent event) {
         genericWindows.showMarks(3);
     }
 
-    /**
-     * Marks player 5.
-     *
-     * @param event the event
-     */
     @FXML void marksPlayer5(ActionEvent event) {
         genericWindows.showMarks(4);
     }
 
 
-    /**
-     *  Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
+    //Handling clicks on weapons on board
     @FXML void redWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon1.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void redWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon2.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void redWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon3.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void yellowWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon1.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void yellowWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon2.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void yellowWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon3.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void blueWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon1.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void blueWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon2.getText());
 
     }
-
-    /**
-     * Handling clicks on weapons on board
-     *
-     * @param event the event
-     */
     @FXML void blueWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon3.getText());
     }
 
-    /**
-     * End turn.
-     */
     @FXML void endTurn(){
         genericWindows.endTurn();
     }
-
-    /**
-     * Discard and spawn.
-     */
     @FXML void discardAndSpawn(){
         genericWindows.spawn();
     }

@@ -10,8 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
-
+//MarksController windows showing how many marks has each player
 public class MarksController implements Initializable {
 
     @FXML Label playerName;
@@ -30,111 +29,68 @@ public class MarksController implements Initializable {
     private ArrayList<PlayerOtherData> currentPlayers =
             Game.controller.getLastGameStateMessage().gameBoardData.players;
 
-    /**
-     * Sets current player.
-     *
-     * @param playerNumber the player number
-     */
-    public void setCurrentPlayer(int playerNumber) {
-        this.currentPlayer = playerNumber;
-        currentPlayerName = currentPlayers.get(currentPlayer).nickname;
-        playerName.setText(currentPlayerName);
-    }
+    public void draw () {
+        int nPlayers = currentPlayers.size();
 
+        switch (currentPlayer) {
+            case 0:
+                firstPlayerMarks.setText(currentPlayers.get(1).nickname);
+                secondPlayerMarks.setText(currentPlayers.get(2).nickname);
+                if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
+                if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
 
-    /**
-     *  Receives A and B (in order). A and B are player numbers, in the list of players in the game (indexes)
-     *  Calculates how many times marking the second marked the first.
-     *
-     * @param markedPlayer  the marked player
-     * @param markingPlayer the marking player
-     * @return the int
-     */
-    public int calculateMarks(int markedPlayer, int markingPlayer){
-        int i = 0;
-        if (currentPlayers.get(markingPlayer)!=null) {
-            for (String mark : currentPlayers.get(markedPlayer).marks) {
-                if (mark.equals(currentPlayers.get(markingPlayer).nickname)) {
-                    i++;
-                }
-            }
+                number1Marks.setText(Integer.toString(calculateMarks(0,1)));
+                number2Marks.setText(Integer.toString(calculateMarks(0,2)));
+                if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(0,3)));
+                if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(0,4)));
+                break;
+            case 1:
+                firstPlayerMarks.setText(currentPlayers.get(0).nickname);
+                secondPlayerMarks.setText(currentPlayers.get(2).nickname);
+                if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
+                if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
+
+                number1Marks.setText(Integer.toString(calculateMarks(1,0)));
+                number2Marks.setText(Integer.toString(calculateMarks(1,2)));
+                if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(1,3)));
+                if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(1,4)));
+                break;
+            case 2:
+                firstPlayerMarks.setText(currentPlayers.get(0).nickname);
+                secondPlayerMarks.setText(currentPlayers.get(1).nickname);
+                if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
+                if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
+
+                number1Marks.setText(Integer.toString(calculateMarks(2,0)));
+                number2Marks.setText(Integer.toString(calculateMarks(2,1)));
+                if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(2,3)));
+                if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(2,4)));
+                break;
+            case 3:
+                firstPlayerMarks.setText(currentPlayers.get(0).nickname);
+                secondPlayerMarks.setText(currentPlayers.get(1).nickname);
+                thirdPlayerMarks.setText(currentPlayers.get(2).nickname);
+                if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
+
+                number1Marks.setText(Integer.toString(calculateMarks(3,0)));
+                number2Marks.setText(Integer.toString(calculateMarks(3,1)));
+                number3Marks.setText(Integer.toString(calculateMarks(3,2)));
+                if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(3,4)));
+                break;
+            case 4:
+                firstPlayerMarks.setText(currentPlayers.get(0).nickname);
+                secondPlayerMarks.setText(currentPlayers.get(1).nickname);
+                thirdPlayerMarks.setText(currentPlayers.get(2).nickname);
+                if (nPlayers > 3) fourthPlayerMarks.setText(currentPlayers.get(3).nickname);
+
+                number1Marks.setText(Integer.toString(calculateMarks(4,0)));
+                number2Marks.setText(Integer.toString(calculateMarks(4,1)));
+                number3Marks.setText(Integer.toString(calculateMarks(4,2)));
+                if (nPlayers > 3) number4Marks.setText(Integer.toString(calculateMarks(4,3)));
+                break;
+
         }
-        return i;
     }
-
-    /**
-     * Close window.
-     */
-    @FXML public void closeWindow(){
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        public void draw () {
-            int nPlayers = currentPlayers.size();
-
-            switch (currentPlayer) {
-                case 0:
-                    firstPlayerMarks.setText(currentPlayers.get(1).nickname);
-                    secondPlayerMarks.setText(currentPlayers.get(2).nickname);
-                    if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
-                    if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
-
-                    number1Marks.setText(Integer.toString(calculateMarks(0, 1)));
-                    number2Marks.setText(Integer.toString(calculateMarks(0, 2)));
-                    if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(0, 3)));
-                    if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(0, 4)));
-                    break;
-                case 1:
-                    firstPlayerMarks.setText(currentPlayers.get(0).nickname);
-                    secondPlayerMarks.setText(currentPlayers.get(2).nickname);
-                    if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
-                    if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
-
-                    number1Marks.setText(Integer.toString(calculateMarks(1, 0)));
-                    number2Marks.setText(Integer.toString(calculateMarks(1, 2)));
-                    if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(1, 3)));
-                    if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(1, 4)));
-                    break;
-                case 2:
-                    firstPlayerMarks.setText(currentPlayers.get(0).nickname);
-                    secondPlayerMarks.setText(currentPlayers.get(1).nickname);
-                    if (nPlayers > 3) thirdPlayerMarks.setText(currentPlayers.get(3).nickname);
-                    if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
-
-                    number1Marks.setText(Integer.toString(calculateMarks(2, 0)));
-                    number2Marks.setText(Integer.toString(calculateMarks(2, 1)));
-                    if (nPlayers > 3) number3Marks.setText(Integer.toString(calculateMarks(2, 3)));
-                    if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(2, 4)));
-                    break;
-                case 3:
-                    firstPlayerMarks.setText(currentPlayers.get(0).nickname);
-                    secondPlayerMarks.setText(currentPlayers.get(1).nickname);
-                    thirdPlayerMarks.setText(currentPlayers.get(2).nickname);
-                    if (nPlayers > 4) fourthPlayerMarks.setText(currentPlayers.get(4).nickname);
-
-                    number1Marks.setText(Integer.toString(calculateMarks(3, 0)));
-                    number2Marks.setText(Integer.toString(calculateMarks(3, 1)));
-                    number3Marks.setText(Integer.toString(calculateMarks(3, 2)));
-                    if (nPlayers > 4) number4Marks.setText(Integer.toString(calculateMarks(3, 4)));
-                    break;
-                case 4:
-                    firstPlayerMarks.setText(currentPlayers.get(0).nickname);
-                    secondPlayerMarks.setText(currentPlayers.get(1).nickname);
-                    thirdPlayerMarks.setText(currentPlayers.get(2).nickname);
-                    if (nPlayers > 3) fourthPlayerMarks.setText(currentPlayers.get(3).nickname);
-
-                    number1Marks.setText(Integer.toString(calculateMarks(4, 0)));
-                    number2Marks.setText(Integer.toString(calculateMarks(4, 1)));
-                    number3Marks.setText(Integer.toString(calculateMarks(4, 2)));
-                    if (nPlayers > 3) number4Marks.setText(Integer.toString(calculateMarks(4, 3)));
-                    break;
-
-            }
-        }
-
 
     public void setCurrentPlayer(int playerNumber) {
         this.currentPlayer = playerNumber;
