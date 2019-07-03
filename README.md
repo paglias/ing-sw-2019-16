@@ -42,6 +42,11 @@ nella cartella `jars`. Prima di eseguire i jar è necessario estrarre lo zip per
 il proprio sistema operativo e (nel caso non sia già stato fatto automaticamente) spostare
 i file estratti in una cartella chiamata `javafx-sdk-11.0.2` dentro `jars`.
 
+NOTA: In base al sistema operativo l'estrazione dello zip potrebbe già
+generare una cartella `javafx-sdk-11.0.2`, in quel caso non è necessario
+spostare alcun file ma è sufficiente avere
+ la cartella `javafx-sdk-11.0.2` all'interno di `jars`.
+
 ### Linux e macOs
 
 Esistono 3 jar che possono essere trovati nella cartella `jars` e 3 script sh
