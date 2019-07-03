@@ -5,6 +5,7 @@ import messages.client_data.ClientInput;
 import models.GameBoard;
 import models.Player;
 import models.Square;
+import models.WeaponsSlot;
 import models.cards.*;
 import models.decks.WeaponsDeck;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,9 +57,32 @@ public class ActionTests {
         pActions = actionController.getPossibleActions();
         assertTrue(pActions.contains(ActionController.Action.DISCARD_AND_SPAWN));
 
+       player.setAdrenaline(1);
+       pActions = actionController.getPossibleActions();
+       assertTrue(pActions.contains(ActionController.Action.MOVE));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_GRAB));
+       assertTrue(pActions.contains(ActionController.Action.SHOOT));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_MOVE_GRAB));
+
+       player.setAdrenaline(2);
+       pActions = actionController.getPossibleActions();
+       assertTrue(pActions.contains(ActionController.Action.MOVE));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_GRAB));
+       assertTrue(pActions.contains(ActionController.Action.SHOOT));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_MOVE_GRAB));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_SHOOT));
+
         gameBoard.finalFrenzy();
+        player.setIsBeforeFirstPlayer(true);
         pActions = actionController.getPossibleActions();
-        assertTrue(pActions.contains(ActionController.Action.MOVE_MOVE_RELOAD_SHOOT));
+        assertTrue(pActions.contains(ActionController.Action.MOVE_RELOAD_SHOOT));
+       assertTrue(pActions.contains(ActionController.Action.FOUR_MOVE));
+       assertTrue(pActions.contains(ActionController.Action.MOVE_MOVE_GRAB));
+
+       player.setIsBeforeFirstPlayer(false);
+       pActions = actionController.getPossibleActions();
+       assertTrue(pActions.contains(ActionController.Action.MOVE_MOVE_RELOAD_SHOOT));
+       assertTrue(pActions.contains(ActionController.Action.THREE_MOVE_GRAB));
     }
 
     @Test
@@ -185,9 +209,97 @@ public class ActionTests {
             Effect.Input.valueOf(firstInput);
         });
         assertNotNull(map.get( Effect.Input.valueOf(firstInput)));
-
-
     }
+
+    @Test
+    void userPowerup() {
+        gameController.getGameBoard().addPlayer(player);
+        player.setActive(true);
+        player.setPosition(gameBoard.getSquares().get(0));
+        clientInput.positions.add(1);
+        clientInput.powerUpIndex=0;
+
+        PowerUp powerUp = (PowerUp) gameBoard.getPowerUpsDeck().pick();
+
+        while (!powerUp.getName().equals("Teleporter")) {
+            powerUp = (PowerUp) gameBoard.getPowerUpsDeck().pick();
+        }
+
+        player.addPowerUp(powerUp);
+
+        actionController.usePowerUp(clientInput);
+        assertEquals(player.getPowerUps().size(), 0);
+        assertEquals(player.getPosition(), gameBoard.getSquares().get(1));
+    }
+
+    @Test
+    void shoot() {
+        gameController.getGameBoard().addPlayer(player);
+
+        Player player1 = new Player();
+        player1.setNickname("target");
+        gameBoard.addPlayer(player1);
+
+        player.setPosition(gameBoard.getSquares().get(0));
+        player1.setPosition(gameBoard.getSquares().get(0));
+
+        player.setActive(true);
+
+        clientInput.players.add("target");
+        clientInput.effectType = 1;
+        clientInput.useSecondPrimary = false;
+        clientInput.weaponName = "Sledgehammer";
+
+        // Bad way of searching for a weapon but the only one
+
+        Weapon weapon = (Weapon) gameBoard.getWeaponsDeck().pick();
+        boolean notFoundInDeck = false;
+
+        while (!notFoundInDeck && !weapon.getName().equals("Sledgehammer")) {
+            weapon = (Weapon) gameBoard.getWeaponsDeck().pick();
+            if (weapon == null) notFoundInDeck = true;
+        }
+
+        WeaponsSlot weaponsSlot1 = gameBoard.getSquares().get(4).getWeaponsSlot();
+        WeaponsSlot weaponsSlot2 = gameBoard.getSquares().get(11).getWeaponsSlot();
+        WeaponsSlot weaponsSlot3 = gameBoard.getSquares().get(2).getWeaponsSlot();
+
+        // If not found in deck, see weapons slots
+        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+            for (Weapon w : weaponsSlot1.getWeapons()) {
+                if (w.getName().equals("Sledgehammer")) {
+                    weapon = w;
+                    break;
+                }
+            }
+        }
+
+        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+            for (Weapon w : weaponsSlot2.getWeapons()) {
+                if (w.getName().equals("Sledgehammer")) {
+                    weapon = w;
+                    break;
+                }
+            }
+        }
+
+        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+            for (Weapon w : weaponsSlot3.getWeapons()) {
+                if (w.getName().equals("Sledgehammer")) {
+                    weapon = w;
+                    break;
+                }
+            }
+        }
+
+
+        player.addWeapon(weapon);
+
+        actionController.shoot(clientInput);
+        assertTrue(player.getWeapons().get(0).isLoaded());
+        assertEquals(player1.getDamage().size(), 2);
+    }
+
 }
 
 
