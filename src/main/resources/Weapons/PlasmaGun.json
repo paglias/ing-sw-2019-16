@@ -8,7 +8,7 @@
       "input": [
         "TARGET"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_VIEW",
@@ -30,7 +30,7 @@
       "input": [
         "POSITION"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE",

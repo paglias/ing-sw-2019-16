@@ -13,7 +13,7 @@
       "input": [
         "TARGET"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT",
@@ -35,7 +35,7 @@
       "input": [
         "POSITION"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE",

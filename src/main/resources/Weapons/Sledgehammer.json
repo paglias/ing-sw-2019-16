@@ -2,11 +2,11 @@
   "name": "Sledgehammer",
   "color": "YELLOW",
   "rechargeCost": ["YELLOW"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT",

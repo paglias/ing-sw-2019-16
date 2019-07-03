@@ -2,11 +2,11 @@
   "name": "VortexCannon",
   "color": "RED",
   "rechargeCost": ["RED","BLUE"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["POSITION","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE_TARGET",

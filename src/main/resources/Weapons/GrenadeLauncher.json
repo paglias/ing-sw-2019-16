@@ -2,11 +2,11 @@
   "name": "GrenadeLauncher",
   "color": "RED",
   "rechargeCost": ["RED"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["TARGET","POSITION"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_VIEW",

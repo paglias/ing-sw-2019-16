@@ -2,11 +2,11 @@
   "name": "Shockwave",
   "color": "YELLOW",
   "rechargeCost": ["YELLOW"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["TARGET","TARGET","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_ONE_AWAY_VIEW",

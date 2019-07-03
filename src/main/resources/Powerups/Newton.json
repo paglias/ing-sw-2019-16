@@ -5,7 +5,7 @@
         "DIRECTION",
         "TARGET"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE_DIRECTION",

@@ -631,6 +631,13 @@ public class Player {
         //If you are on a spawnpoint, you will grab a weapon of your choice
         if (currentPosition.isSpawnPoint()) {
             Weapon weaponToPick = currentPosition.getWeaponsSlot().getWeaponByName(weaponName);
+
+            if (getCubes().containsAll(weaponToPick.getCost())) {
+                weaponToPick.payCost(this);
+            } else {
+                throw new IllegalArgumentException("Weapon cannot be purchased due to insufficient cubes.");
+            }
+
             addWeapon(currentPosition.getWeaponsSlot().weaponChoice(weaponToPick));
             GameStateMessage.actionsHistoryTemp.add(getNickname() + " grabbed weapon " + weaponName);
         } else {

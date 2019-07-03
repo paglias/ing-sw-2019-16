@@ -111,6 +111,12 @@ public class Weapon extends CardWithAction {
         this.loaded = true;
     }
 
+    /**
+     * Pay effect of the weapon.
+     *
+     * @param player the player
+     * @param effect the effect
+     */
     public void payEffect (Player player, Effect effect) {
         ArrayList<Card.Color> cost = effect.getCost();
 
@@ -119,6 +125,18 @@ public class Weapon extends CardWithAction {
         }
     }
 
+    /**
+     * Pay cost of the weapon when grabbing.
+     *
+     * @param player the player
+     */
+    public void payCost (Player player) {
+        ArrayList<Card.Color> cost = getCost();
+
+        for(Color color: cost){
+            player.removeCube(color);
+        }
+    }
 }
 
 

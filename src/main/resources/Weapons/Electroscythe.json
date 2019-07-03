@@ -2,11 +2,11 @@
   "name": "Electroscythe",
   "color": "BLUE",
   "rechargeCost": ["BLUE"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["TARGET","TARGET","TARGET","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_EVERY",

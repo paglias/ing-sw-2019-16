@@ -8,7 +8,7 @@
       "input": [
         "TARGET"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_VIEW",

@@ -6,7 +6,7 @@
   "primaryEffect": [
     {
       "input": ["TARGET","POSITION"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT",
@@ -37,7 +37,7 @@
     },
     {
       "input": ["TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_ONE_AWAY_VIEW",

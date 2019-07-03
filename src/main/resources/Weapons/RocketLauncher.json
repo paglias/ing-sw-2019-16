@@ -9,7 +9,7 @@
         "TARGET",
         "POSITION"
       ],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_VIEW",

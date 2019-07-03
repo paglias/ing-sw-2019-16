@@ -86,7 +86,15 @@ public class ClientHandler {
             parsedMsg.accept(clientController);
         } catch (Throwable e) {
             ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setErrorMsg("Error processing the action on the server, make sure it was possible");
+            String errorString = "Error processing the action on the server, make sure it was possible. Error: ";
+
+            if (e.getMessage() != null) {
+                errorString += e.getMessage();
+            } else {
+                errorString += "no error.";
+            }
+
+            errorMessage.setErrorMsg(errorString);
             clientController.sendMsg(errorMessage);
             Logger.err(e, "Error handling client message " + clientSocket.getLocalAddress());
         }

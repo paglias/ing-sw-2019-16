@@ -478,7 +478,14 @@ class PlayerTest {
         player.setPosition(gameBoard.getSquares().get(4));
 
         Weapon weapon = player.getPosition().getWeaponsSlot().getWeapons().get(0);
+
+        int cubesN = player.getCubes().size();
+
         player.grabItem(weapon.getName());
+
+        if (weapon.getCost().size() > 0) {
+            assertEquals(player.getCubes().size(), cubesN - weapon.getCost().size());
+        }
 
         assertDoesNotThrow(() -> {
             player.getWeaponByName(weapon.getName());

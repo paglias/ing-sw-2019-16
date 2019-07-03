@@ -6,7 +6,7 @@
   "primaryEffect": [
     {
       "input": ["POSITION", "TARGET","TARGET","TARGET","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_ROOM_CAN_SEE",

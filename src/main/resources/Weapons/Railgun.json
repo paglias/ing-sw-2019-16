@@ -6,7 +6,7 @@
   "primaryEffect": [
     {
       "input": ["DIRECTION","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_DIRECTION",
@@ -33,7 +33,7 @@
     },
     {
       "input": ["DIRECTION","TARGET","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "SHOOT_DIRECTION",

@@ -2,11 +2,11 @@
   "name": "TractorBeam",
   "color": "BLUE",
   "rechargeCost": ["BLUE"],
-  "cost": null,
+  "cost": [],
   "primaryEffect": [
     {
       "input": ["POSITION","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE_TARGET_CAN_SEE",

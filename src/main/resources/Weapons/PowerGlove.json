@@ -6,7 +6,7 @@
   "primaryEffect": [
     {
       "input": ["POSITION","TARGET"],
-      "cost": null,
+      "cost": [],
       "actions": [
         {
           "type": "MOVE",
