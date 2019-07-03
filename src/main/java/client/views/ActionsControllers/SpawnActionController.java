@@ -36,10 +36,6 @@ public class SpawnActionController implements Initializable {
     @FXML private Button scope;
     @FXML private Button newton;
     @FXML private Button teleporter;
-    @FXML private Label newtonTitle;
-    @FXML private Label teleporterTitle;
-    @FXML private Label grenadeTitle;
-    @FXML private Label scopeTitle;
     @FXML private Button duplicateButton;
 
 
@@ -72,6 +68,7 @@ public class SpawnActionController implements Initializable {
         scope.setDisable(true);
         newton.setDisable(true);
         teleporter.setDisable(true);
+        duplicateButton.setVisible(false);
 
         int scopeCounter = 0;
         int teleporterCounter = 0;
@@ -148,22 +145,23 @@ public class SpawnActionController implements Initializable {
                 }
             }
         }
-        if (scopeCounter==2||grenadeCounter==2||newtonCounter==2||teleporterCounter==2){
+        if (scopeCounter>=2||grenadeCounter>=2||newtonCounter>=2||teleporterCounter>=2){
             grenade.setDisable(true);
             newton.setDisable(true);
             scope.setDisable(true);
             teleporter.setDisable(true);
+            duplicateButton.setVisible(true);
         }
-        if (scopeCounter==2){
+        if (scopeCounter>=2){
             duplicated=targetingScope;
         }
-        if (grenadeCounter==2){
+        if (grenadeCounter>=2){
             duplicated=grenadePowerup;
         }
-        if (teleporterCounter==2){
+        if (teleporterCounter>=2){
             duplicated=teleporterPowerup;
         }
-        if (newtonCounter==2){
+        if (newtonCounter>=2){
             duplicated=newtonPowerup;
         }
     }
@@ -178,16 +176,20 @@ public class SpawnActionController implements Initializable {
         try {
             loader.load();
         } catch (Throwable e) {
-            Logger.err(e, "Error showing marks");
+            Logger.err(e, "Error opening duplicate window");
             window.loadingFailure();
         }
         Parent root = loader.getRoot();
         DuplicateSpawnController controller = loader.getController();
         controller.setDuplicatedPowerUp(duplicated);
+
         Scene scene = new Scene(root);
         duplicateWindow.setScene(scene);
         duplicateWindow.setResizable(false);
         duplicateWindow.show();
+
+        Stage stage = (Stage) duplicateButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML void grenadeDiscard(ActionEvent event) throws InterruptedException {
