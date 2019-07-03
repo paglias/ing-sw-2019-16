@@ -102,14 +102,9 @@ public class GrenadeController implements Initializable {
             }
             index++;
         }
-        ArrayList<String> targets = new ArrayList<>();
-        targets.add(playerOne);
-        targets.add(playerTwo);
-        targets.add(playerThree);
-        targets.add(playerFour);
-        targets.add(playerFive);
 
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(targets);
+        ObservableList<String> availableChoices = FXCollections.observableArrayList(playerOne,
+                playerTwo,playerThree,playerFour,playerFive);
         targetChoice.setItems(availableChoices);
 
         if (Constants.DEBUG){

@@ -15,9 +15,7 @@ import messages.client_data.ClientInput;
 import messages.client_data.PowerUpData;
 import utils.Constants;
 import utils.Logger;
-
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TeleporterController implements Initializable {
@@ -67,20 +65,9 @@ public class TeleporterController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<String> positions= new ArrayList<>();
-        positions.add("0");
-        positions.add("1");
-        positions.add("2");
-        positions.add("2");
-        positions.add("4");
-        positions.add("5");
-        positions.add("6");
-        positions.add("7");
-        positions.add("8");
-        positions.add("9");
-        positions.add("10");
-        positions.add("11");
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(positions);
+
+        ObservableList<String> availableChoices = FXCollections.observableArrayList("0","1","2",
+                "3","4","5","6","7","8","9","10","11");
         positionChoice.setItems(availableChoices);
 
         if (Constants.DEBUG){

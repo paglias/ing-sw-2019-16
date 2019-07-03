@@ -28,6 +28,7 @@ public class NewtonController implements Initializable {
     @FXML private ChoiceBox<String> directionChoice;
     @FXML private Button confirm;
     @FXML private ChoiceBox<String> targetChoice;
+    @FXML private ChoiceBox<String> positionChoice;
 
     private ActionMessage message = new ActionMessage();
 
@@ -68,6 +69,7 @@ public class NewtonController implements Initializable {
         }
 
         clientInput.powerUpIndex = powerUpIndex;
+        clientInput.positions.add(Integer.parseInt(positionChoice.getValue()));
         message.setClientInput(clientInput);
         Game.controller.sendMsg(message);
 
@@ -105,15 +107,15 @@ public class NewtonController implements Initializable {
             index++;
         }
 
-        //Populate target choicebox
-        List<String> targets = new ArrayList<>();
-        targets.add(playerOne);
-        targets.add(playerTwo);
-        targets.add(playerThree);
-        targets.add(playerFour);
-        targets.add(playerFive);
+        //Populate position choicebox
 
-        ObservableList<String> availableChoices = FXCollections.observableArrayList(targets);
+        positionChoice.setItems(FXCollections.observableArrayList(
+                "0", "1", "2", "3", "4", "5",
+                "6","7","8","9","10","11"));
+
+        //Populate target choicebox
+        ObservableList<String> availableChoices = FXCollections.observableArrayList(playerOne,playerTwo,
+                playerThree,playerFour,playerFive);
         targetChoice.setItems(availableChoices);
 
         //Populate cube choicebox
