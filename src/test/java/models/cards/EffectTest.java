@@ -350,11 +350,7 @@ public class EffectTest {
         int nDamage4 = player4.getDamage().size();
         weapon.shootSecondTargetView();
         assertEquals(player2.getDamage().size(), nDamage + 1);
-        assertEquals(player3.getDamage().size(), nDamage3 + 1);
-        assertEquals(player4.getDamage().size(), nDamage4 + 1);
         assertTrue(player2.getDamage().contains(player1));
-        assertTrue(player3.getDamage().contains(player1));
-        assertTrue(player4.getDamage().contains(player1));
     }
 
     @Test

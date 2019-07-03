@@ -36,25 +36,19 @@
       ]
     },
     {
-      "input": ["TARGET","TARGET","TARGET","TARGET"],
+      "input": ["TARGET"],
       "cost": null,
       "actions": [
         {
           "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
-            "TARGET.0",
-            "TARGET.1",
-            "TARGET.2",
-            "TARGET.3"
+            "TARGET.0"
           ]
         },
         {
           "type": "SHOOT_ONE_AWAY_VIEW",
           "parameters": [
-            "TARGET.0",
-            "TARGET.1",
-            "TARGET.2",
-            "TARGET.3"
+            "TARGET.0"
           ]
         }
       ]

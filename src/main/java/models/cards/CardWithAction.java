@@ -292,7 +292,7 @@ public class CardWithAction extends Card {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
-        if(CanView.contains(position)){
+        if(CanView.contains(position) || position.getNumber() == damagingPlayer.getPosition().getNumber()){
             playerTarget.addDamage(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
@@ -307,7 +307,7 @@ public class CardWithAction extends Card {
         List<Square> CanView = damagingPlayer.getPosition().getCanView();
         Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
-        if(CanView.contains(position)){
+        if(CanView.contains(position) || position.getNumber() == damagingPlayer.getPosition().getNumber()){
             playerTarget.addMark(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
@@ -381,9 +381,9 @@ public class CardWithAction extends Card {
         Square position = playerTarget.getPosition();
         Player secondTarget= playerTargets.get(1);
         Square secondTargetPosition= secondTarget.getPosition();
-        if(CanView.contains(position)) {
+        if(CanView.contains(position) || position.getNumber() == damagingPlayer.getPosition().getNumber()) {
             playerTarget.addDamage(damagingPlayer);
-            if (position.getCanView().contains(secondTargetPosition)) {
+            if (position.getCanView().contains(secondTargetPosition)  || position.getNumber() == secondTargetPosition.getNumber()) {
                 secondTarget.addDamage(damagingPlayer);
             }
         }
@@ -404,10 +404,10 @@ public class CardWithAction extends Card {
         Square secondTargetPosition = secondTarget.getPosition();
         Player thirdTarget= playerTargets.get(2);
         Square thirdTargetPosition= thirdTarget.getPosition();
-        if (CanView.contains(position)) {
+        if (CanView.contains(position) || position.getNumber() == damagingPlayer.getPosition().getNumber()) {
             playerTarget.addDamage(damagingPlayer);
-            if (position.getCanView().contains(secondTargetPosition)) {
-                if (secondTargetPosition.getCanView().contains(thirdTargetPosition)) {
+            if (position.getCanView().contains(secondTargetPosition)  || position.getNumber() == secondTargetPosition.getNumber()) {
+                if (secondTargetPosition.getCanView().contains(thirdTargetPosition) || secondTargetPosition.getNumber() == thirdTargetPosition.getNumber()) {
                     thirdTarget.addDamage(damagingPlayer);
                 }
             }
