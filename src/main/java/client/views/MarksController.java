@@ -29,6 +29,9 @@ public class MarksController implements Initializable {
     private ArrayList<PlayerOtherData> currentPlayers =
             Game.controller.getLastGameStateMessage().gameBoardData.players;
 
+    /**
+     * Draw.
+     */
     public void draw () {
         int nPlayers = currentPlayers.size();
 
@@ -92,6 +95,11 @@ public class MarksController implements Initializable {
         }
     }
 
+    /**
+     * Sets current player.
+     *
+     * @param playerNumber the player number
+     */
     public void setCurrentPlayer(int playerNumber) {
         this.currentPlayer = playerNumber;
         currentPlayerName = currentPlayers.get(currentPlayer).nickname;
@@ -100,8 +108,15 @@ public class MarksController implements Initializable {
         draw();
     }
 
-    // Receives A and B (in order). A and B are player numbers, in the list of players in the game (indexes)
-    // Calculates how many times marking the second marked the first.
+
+    /**
+     * Receives A and B (in order). A and B are player numbers, in the list of players in the game (indexes)
+     * Calculates how many times marking the second marked the first.
+     *
+     * @param markedPlayer  the marked player
+     * @param markingPlayer the marking player
+     * @return the int
+     */
     public int calculateMarks(int markedPlayer, int markingPlayer){
         int i = 0;
         if (currentPlayers.get(markingPlayer)!=null) {
@@ -114,6 +129,9 @@ public class MarksController implements Initializable {
         return i;
     }
 
+    /**
+     * Close window.
+     */
     @FXML public void closeWindow(){
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();

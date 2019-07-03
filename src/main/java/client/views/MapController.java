@@ -115,7 +115,7 @@ public class MapController extends AbstractView implements Initializable {
     private ImageView player4Image = null;
     private ImageView player5Image = null;
 
-    //Updates game values with message received by server
+
     public void updateWithData(GameStateMessage gameStateMessage) {
         drawPlayers(gameStateMessage.gameBoardData.players);
         drawCurrentPlayer(gameStateMessage.playerYouData);
@@ -906,90 +906,189 @@ public class MapController extends AbstractView implements Initializable {
         }
     }
 
-    //Alert box for quitting the game
+    /**
+     * Quit game.
+     */
+//Alert box for quitting the game
     @FXML public void quitGame(){
         genericWindows.quitGame();
     }
 
-    //Opens a window with the actions available. Many buttons will be disabled.
+    /**
+     * Open action window.
+     */
+//Opens a window with the actions available. Many buttons will be disabled.
     @FXML
     public void openActionWindow(){
         genericWindows.actionWindow();
     }
 
 
-    //Opens the powerup window where you can choose what powerup you want to use
+    /**
+     * Open power ups window.
+     */
+//Opens the powerup window where you can choose what powerup you want to use
     @FXML void openPowerUpsWindow() {
         genericWindows.powerUps();
     }
 
 
+    /**
+     * Open weapons window.
+     *
+     * @param event the event
+     */
     @FXML void openWeaponsWindow(ActionEvent event) {
         genericWindows.availableWeapons();
     }
 
-    //Opens window showing marks on player
+    /**
+     * Marks player 1.
+     *
+     * @param event the event
+     */
+//Opens window showing marks on player
     @FXML void marksPlayer1(ActionEvent event) {
         genericWindows.showMarks(0);
     }
 
+    /**
+     * Marks player 2.
+     *
+     * @param event the event
+     */
     @FXML void marksPlayer2(ActionEvent event) {
         genericWindows.showMarks(1);
     }
 
+    /**
+     * Marks player 3.
+     *
+     * @param event the event
+     */
     @FXML void marksPlayer3(ActionEvent event) {
         genericWindows.showMarks(2);
     }
 
+    /**
+     * Marks player 4.
+     *
+     * @param event the event
+     */
     @FXML void marksPlayer4(ActionEvent event) {
         genericWindows.showMarks(3);
     }
 
+    /**
+     * Marks player 5.
+     *
+     * @param event the event
+     */
     @FXML void marksPlayer5(ActionEvent event) {
         genericWindows.showMarks(4);
     }
 
 
-    //Handling clicks on weapons on board
+    /**
+     * Red weapon 1 click.
+     *
+     * @param event the event
+     */
+//Handling clicks on weapons on board
     @FXML void redWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon1.getText());
 
     }
+
+    /**
+     * Red weapon 2 click.
+     *
+     * @param event the event
+     */
     @FXML void redWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon2.getText());
 
     }
+
+    /**
+     * Red weapon 3 click.
+     *
+     * @param event the event
+     */
     @FXML void redWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(redWeapon3.getText());
 
     }
+
+    /**
+     * Yellow weapon 1 click.
+     *
+     * @param event the event
+     */
     @FXML void yellowWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon1.getText());
 
     }
+
+    /**
+     * Yellow weapon 2 click.
+     *
+     * @param event the event
+     */
     @FXML void yellowWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon2.getText());
 
     }
+
+    /**
+     * Yellow weapon 3 click.
+     *
+     * @param event the event
+     */
     @FXML void yellowWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(yellowWeapon3.getText());
 
     }
+
+    /**
+     * Blue weapon 1 click.
+     *
+     * @param event the event
+     */
     @FXML void blueWeapon1Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon1.getText());
 
     }
+
+    /**
+     * Blue weapon 2 click.
+     *
+     * @param event the event
+     */
     @FXML void blueWeapon2Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon2.getText());
 
     }
+
+    /**
+     * Blue weapon 3 click.
+     *
+     * @param event the event
+     */
     @FXML void blueWeapon3Click(MouseEvent event) {
         genericWindows.showWeapon(blueWeapon3.getText());
     }
 
+    /**
+     * End turn.
+     */
     @FXML void endTurn(){
         genericWindows.endTurn();
     }
+
+    /**
+     * Discard and spawn.
+     */
     @FXML void discardAndSpawn(){
         genericWindows.spawn();
     }

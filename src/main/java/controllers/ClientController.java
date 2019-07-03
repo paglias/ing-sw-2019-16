@@ -25,6 +25,9 @@ public class ClientController implements MessageVisitor {
         this.linkedPlayer = null;
     }
 
+    /**
+     * Disconnect player.
+     */
     public void disconnect () {
         try {
             clientHandler.close();
