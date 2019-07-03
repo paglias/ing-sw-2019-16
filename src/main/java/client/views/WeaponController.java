@@ -22,9 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//SHOOT WINDOW CONTROLLER. HAS A WEAPON IMAGE ON THE LEFT, TARGETS AND EFFECTS ON THE RIGHT.
-//EFFECTS CAN BE FIRST PRIMARY, SECOND PRIMARY, SECONDARY, TERTIARY
-//EACH EFFECT CAN HAVE A MULTIPLE PLAYER TARGET, A POSITION TARGET AND A DIRECTION TARGET
+
+
 public class WeaponController implements Initializable {
 
     private String weaponChosen;
@@ -77,7 +76,13 @@ public class WeaponController implements Initializable {
 
     private  String shoot = "SHOOT";
 
-    //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
+
+    /**
+     * Confirm first weapon primary effect.
+     * Sends the selected parameters to server, by filling clientinputs
+     *
+     * @param event the event
+     */
     @FXML void confirmFirstPrimary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
@@ -113,7 +118,14 @@ public class WeaponController implements Initializable {
         Game.controller.sendMsg(shootMessage);
     }
 
-    //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
+
+    /**
+     * Confirm second primary weapon effect.
+     * Sends the selected parameters to server, by filling clientinputs
+     *
+     *
+     * @param event the event
+     */
     @FXML void confirmSecondPrimary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
@@ -152,7 +164,12 @@ public class WeaponController implements Initializable {
         Game.controller.sendMsg(shootMessage);
     }
 
-    //SENDS THE SELECTED PARAMETERS TO SERVER, BY FILLING CLIENTINPUT
+
+    /**
+     * Confirm secondary weapon effect.
+     *
+     * @param event the event
+     */
     @FXML void confirmSecondary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
@@ -191,6 +208,11 @@ public class WeaponController implements Initializable {
     }
 
 
+    /**
+     * Confirm tertiary weapon effect.
+     *
+     * @param event the event
+     */
     @FXML void confirmTertiary(ActionEvent event) {
 
         clientInput.weaponName = weaponChosen;
@@ -229,7 +251,11 @@ public class WeaponController implements Initializable {
         Game.controller.sendMsg(shootMessage);
     }
 
-    //Sends end message, closes the window
+
+    /**
+     * End shoot.
+     * Sends end message, closes the window
+     */
     @FXML public void endShoot(){
         ActionEndMessage endMessage = new ActionEndMessage();
         Game.controller.sendMsg(endMessage);

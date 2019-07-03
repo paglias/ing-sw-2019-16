@@ -35,6 +35,12 @@ public class ScopeController implements Initializable {
 
     private ActionEndMessage endMessage = new ActionEndMessage();
 
+    /**
+     * Use powerup effect for Targeting Scope powerup..
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void confirmScope(ActionEvent event) throws InterruptedException {
         String target = targetChoice.getValue();
         String ammo = ammoChoice.getValue();

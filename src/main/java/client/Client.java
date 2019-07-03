@@ -5,11 +5,15 @@ import utils.Logger;
 
 import java.io.IOException;
 
+
 public class Client {
     private static Controller controller;
 
     private Client() { throw new IllegalStateException("Client class cannot be instantiated."); }
 
+    /**
+     * Quit client from the game.
+     */
     public static void quit () {
         Logger.info("To reconnect to the game," +
                 " join the same server with your previous username.");
@@ -17,6 +21,12 @@ public class Client {
         System.exit(0);
     }
 
+    /**
+     * Connect the host to the game.
+     *
+     * @param host the host
+     * @param port the port
+     */
     public static void connect (String host, int port) {
         controller.connect(host, port);
     }

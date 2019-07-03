@@ -27,6 +27,12 @@ public class ClientInput {
     public ArrayList<Integer> positions = new ArrayList<>();
     public String direction;
 
+    /**
+     * Gets players by nickname.
+     *
+     * @param gameBoard the game board
+     * @return the arraylist of players
+     */
     public ArrayList<Player> getPlayers (GameBoard gameBoard) {
         return new ArrayList<>(
                 players
@@ -36,6 +42,12 @@ public class ClientInput {
         );
     }
 
+    /**
+     * Gets squares on the map and get players positions.
+     *
+     * @param gameBoard the game board
+     * @return the positions
+     */
     public ArrayList<Square> getPositions (GameBoard gameBoard) {
         return new ArrayList<>(
                 positions

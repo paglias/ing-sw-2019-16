@@ -42,6 +42,11 @@ public class MoveFourController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Open move four action window.
+     *
+     * @param event the event
+     */
     @FXML void openMoveFour(ActionEvent event) {
         genericWindow.moveWindow();
         moveFour.setDisable(true);
@@ -49,7 +54,7 @@ public class MoveFourController implements Initializable {
     }
 
     /**
-     * Open move.
+     * Open move action window.
      *
      * @param event the event
      */
@@ -60,12 +65,22 @@ public class MoveFourController implements Initializable {
         confirm.setDisable(false);
     }
 
+    /**
+     * Open move three action window.
+     *
+     * @param event the event
+     */
     @FXML void openMoveThree(ActionEvent event) {
         genericWindow.moveWindow();
         moveThree.setDisable(true);
         moveFour.setDisable(false);
     }
 
+    /**
+     * Open move two action window.
+     *
+     * @param event the event
+     */
     @FXML void openMoveTwo(ActionEvent event) {
         genericWindow.moveWindow();
         moveTwo.setDisable(true);

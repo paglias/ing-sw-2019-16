@@ -32,7 +32,13 @@ public class WeaponGrabController implements Initializable {
     @FXML private RadioButton weaponThree;
     @FXML private ToggleGroup weaponSelected;
 
-    //Sets the selected weapon and sends it to server
+
+    /**
+     * Sets weapons to grab and send to the server.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void confirmGrab(ActionEvent event) throws InterruptedException {
 
         if (weaponOne.isSelected()){

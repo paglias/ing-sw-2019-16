@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
 public class PowerUpController implements Initializable {
 
     @FXML private Button confirmNewton;
@@ -103,30 +104,55 @@ public class PowerUpController implements Initializable {
         if (Constants.DEBUG) Logger.info("All elements have loaded correctly");
     }
 
+    /**
+     * Discard grenade.
+     *
+     * @param event the event
+     */
     @FXML void discardGrenade(ActionEvent event) {
 
         String s = "TagbackGrenade";
         window.discardPowerUp(s);
     }
 
+    /**
+     * Discard newton.
+     *
+     * @param event the event
+     */
     @FXML void discardNewton(ActionEvent event) {
 
         String s = "Newton";
         window.discardPowerUp(s);
     }
 
+    /**
+     * Discard scope.
+     *
+     * @param event the event
+     */
     @FXML void discardScope(ActionEvent event) {
 
         String s = "TargetingScope";
         window.discardPowerUp(s);
     }
 
+    /**
+     * Discard teleporter.
+     *
+     * @param event the event
+     */
     @FXML void discardTeleporter(ActionEvent event) {
 
         String s = "Teleporter";
         window.discardPowerUp(s);
     }
 
+    /**
+     * Use grenade.
+     *
+     * @param event the event
+     */
     @FXML void useGrenade(ActionEvent event) {
 
         startMessage.setAction(powerUp);
@@ -145,6 +171,11 @@ public class PowerUpController implements Initializable {
         }
     }
 
+    /**
+     * Use newton.
+     *
+     * @param event the event
+     */
     @FXML void useNewton(ActionEvent event) {
 
         startMessage.setAction(powerUp);
@@ -163,6 +194,11 @@ public class PowerUpController implements Initializable {
         }
     }
 
+    /**
+     * Use scope.
+     *
+     * @param event the event
+     */
     @FXML void useScope(ActionEvent event) {
 
         startMessage.setAction(powerUp);
@@ -181,6 +217,11 @@ public class PowerUpController implements Initializable {
         }
     }
 
+    /**
+     * Use teleporter.
+     *
+     * @param event the event
+     */
     @FXML void useTeleporter(ActionEvent event) {
 
         startMessage.setAction(powerUp);
@@ -199,6 +240,11 @@ public class PowerUpController implements Initializable {
         }
     }
 
+    /**
+     * Close window.
+     *
+     * @param event the event
+     */
     @FXML void closeWindow(ActionEvent event){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();

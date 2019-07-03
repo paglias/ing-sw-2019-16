@@ -8,6 +8,12 @@ public class PowerUpData {
 
     public EffectData primaryEffect;
 
+    /**
+     * Instantiates a new Power up data.
+     * Gets powerups color and name.
+     *
+     * @param powerUp the power up
+     */
     public PowerUpData (PowerUp powerUp) {
         color = powerUp.getColor().toString();
         name = powerUp.getName();

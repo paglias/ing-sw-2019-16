@@ -161,18 +161,22 @@ public class ClientController implements MessageVisitor {
         }
     }
     /**
-     * Send msg.
+     * Setup the starting game state messages.
      *
-     * @param msg the msg
+     * @param  gameSettingsMessage the message for initial game settings
      */
     public void visit(GameSettingsMessage gameSettingsMessage) {
         gameController.setup(gameSettingsMessage);
     }
 
     /**
-     * Send msg.
+     * Controls the action starting.
+     * Use power up and reload are not counted as possible actions.
+     * Every player has 2 possible actions.
+     * Discard and spawn when the first turn of every player starts and when the player dies.
      *
-     * @param actionStartMessage the msg
+     *
+     * @param actionStartMessage for starting the action
      */
     public void visit(ActionStartMessage actionStartMessage) {
         ActionController.Action action = actionStartMessage.getAction();
@@ -254,9 +258,11 @@ public class ClientController implements MessageVisitor {
     }
 
     /**
-     * Send msg.
+     * Properly for the action that the player want to choose.
+     * Every player has two possible actions.
+     * Action items must be executed in order in every action, unless there will be an error message.
      *
-     * @param msg the msg
+     * @param actionMessage for making the action
      */
     public void visit(ActionMessage actionMessage) {
         if (linkedPlayer.getActiveAction() == null) {
@@ -335,9 +341,10 @@ public class ClientController implements MessageVisitor {
     }
 
     /**
-     * Send msg.
+     * Controls the end of an action, if a player, whose turn finishes, try to do another move,
+     * error message.
      *
-     * @param msg the msg
+     * @param actionEndMessage to end the action
      */
     public void visit (ActionEndMessage actionEndMessage) {
         if (!linkedPlayer.isActive()) {
@@ -361,9 +368,9 @@ public class ClientController implements MessageVisitor {
     }
 
     /**
-     * Send msg.
+     * Control end turn for all players.
      *
-     * @param msg the msg
+     * @param endTurnMessage to end the turn.
      */
     public void visit(EndTurnMessage endTurnMessage) {
         if (!linkedPlayer.isActive()) {
@@ -376,27 +383,27 @@ public class ClientController implements MessageVisitor {
     }
 
     /**
-     * Send msg.
+     * Errors management.
      *
-     * @param msg the msg
+     * @param errorMessage the error message
      */
     public void visit(ErrorMessage errorMessage) {
         Logger.info("Received error message from client: " + errorMessage.getErrorMsg());
     }
     /**
-     * Send msg.
+     * Implemented only in client side, manages all game state messages .
      *
-     * @param msg the msg
+     * @param gameStateMessage the state of the game process.
      */
     public void visit(GameStateMessage gameStateMessage) {
-        // Not implemented, client side only
+
     }
     /**
-     * Send msg.
+     *  Implemented only in client side, manages the end of the game.
      *
-     * @param msg the msg
+     * @param endGameMessage the end game message.
      */
     public void visit(EndGameMessage endGameMessage) {
-        // Not implemented, client side only
+
     }
 }

@@ -27,6 +27,12 @@ public class TeleporterController implements Initializable {
 
     private ActionEndMessage endMessage = new ActionEndMessage();
 
+    /**
+     * Use powerup effect for Teleporter powerup..
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void teleportAction(ActionEvent event) throws InterruptedException {
         String position = positionChoice.getValue();
 

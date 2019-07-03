@@ -9,6 +9,12 @@ public class EffectData {
     public ArrayList<String> cost;
     public ArrayList<String> input;
 
+    /**
+     * Instantiates a new Effect data.
+     * Gets effect cost and effect input, can be position, direction or target.
+     *
+     * @param effect the effect
+     */
     public EffectData(Effect effect) {
         cost = effect.getCost() != null ? new ArrayList<>(effect.getCost().stream()
                 .map(c -> c.toString()).collect(Collectors.toList())) : new ArrayList<>();

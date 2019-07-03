@@ -10,12 +10,18 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//WeaponSlot controller, loads weapons on window, when the weaponSlot is clicked
+
+
 
 public class WeaponPreviewController  {
 
     public String weaponName;
 
+    /**
+     * Sets weapon images.
+     *
+     * @param weapon the weapon
+     */
     public void setWeapon(String weapon) {
         this.weaponName = weapon;
         Image image = new Image("/JPGs/Weapons/" + weaponName + ".png");
@@ -26,7 +32,9 @@ public class WeaponPreviewController  {
     @FXML ImageView weaponImage;
     @FXML Button closeButton;
 
-    //Closes the weaponWindow
+    /**
+     * Close weapon window.
+     */
     public void closeWindow(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();

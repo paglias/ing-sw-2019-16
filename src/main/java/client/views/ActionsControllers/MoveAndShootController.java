@@ -30,7 +30,7 @@ public class MoveAndShootController implements Initializable {
 
 
     /**
-     * Open move.
+     *  Open the move window with position choice.
      *
      * @param event the event
      */
@@ -41,7 +41,8 @@ public class MoveAndShootController implements Initializable {
     }
 
     /**
-     * Open shoot.
+     * Open shoot action.
+     * Allows you to choose the weapon, position,direction and the target
      *
      * @param event the event
      */

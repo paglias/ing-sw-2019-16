@@ -43,6 +43,12 @@ public class SpawnActionController implements Initializable {
     private ActionEndMessage endMessage = new ActionEndMessage();
     private ClientInput clientInput = new ClientInput();
 
+    /**
+     * Initialize text colors based on powerups.
+     *
+     * @param location the location
+     *
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
@@ -56,8 +62,7 @@ public class SpawnActionController implements Initializable {
         newton.setDisable(true);
         teleporter.setDisable(true);
 
-        //INITIALIZES TEXT COLORS BASED ON POWERUPS
-        //Enables buttons only if there is a powerup of that type
+
         ArrayList<PowerUpData> powerUps = Game.controller.getLastGameStateMessage().playerYouData.powerUps;
         for (PowerUpData powerUp : powerUps){
             if (powerUp.name.equals(grenadePowerup)) {
@@ -123,6 +128,13 @@ public class SpawnActionController implements Initializable {
         }
 
     }
+
+    /**
+     * Discard powerup tagback grenade.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void grenadeDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
@@ -152,6 +164,12 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Discard window of Newton Powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void newtonDiscard(ActionEvent event) throws InterruptedException {
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
@@ -180,6 +198,12 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Discard window of targeting scope.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void scopeDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
@@ -209,6 +233,12 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Discard window of Teleporter powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void teleporterDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);

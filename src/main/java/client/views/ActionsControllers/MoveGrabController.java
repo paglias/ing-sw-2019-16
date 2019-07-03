@@ -25,6 +25,13 @@ public class MoveGrabController implements Initializable {
     @FXML private Button grab;
     @FXML private Button confirmButton;
 
+    /**
+     * Open grab action window.
+     * If there's not a weapon, pick a ammo.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void openGrab(ActionEvent event) throws InterruptedException {
 
         GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
@@ -56,12 +63,20 @@ public class MoveGrabController implements Initializable {
         }
     }
 
+    /**
+     * Open move action window.
+     *
+     * @param event the event
+     */
     @FXML
     void openMove(ActionEvent event) {
         genericWindow.moveWindow();
         confirmButton.setDisable(false);
     }
 
+    /**
+     * Ensures that the player has ended the action he wanted to do.
+     */
     @FXML
     void confirmChoice() {
         ActionEndMessage endMessage = new ActionEndMessage();

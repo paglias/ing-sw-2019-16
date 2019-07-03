@@ -85,7 +85,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Move.
+     * Move action for available actions.
      */
     @FXML public void move() {
 
@@ -111,7 +111,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Move grab.
+     * Add window for move/grab action.
      */
     @FXML public void moveGrab(){
 
@@ -137,7 +137,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Shoot.
+     * Window for shoot action.
      */
     @FXML public void shoot(){
 
@@ -163,7 +163,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Adrenaline grab.
+     * When in adrenaline mode, show window for adrenaline grab action.
      */
     @FXML public void adrenalineGrab(){
 
@@ -188,7 +188,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Adrenaline shoot.
+     * When in adrenaline mode, show window for adrenaline grab action..
      */
     @FXML public void adrenalineShoot(){
 
@@ -213,7 +213,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Before frenzy shoot.
+     * Final frenzy mode, add window for move/reload/shoot in final frenzy if before first player.
      */
     @FXML public void beforeFrenzyShoot(){
 
@@ -238,7 +238,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Before frenzy grab.
+     *  Final frenzy mode, add window for move/move/grab in final frenzy if before first player..
      */
     @FXML public void beforeFrenzyGrab(){
 
@@ -252,7 +252,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Before frenzy move.
+     *  Final frenzy mode, add window for four moves in final frenzy if before first player.
      */
     @FXML public void beforeFrenzyMove(){
 
@@ -277,7 +277,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * After frenzy grab.
+     *  Final frenzy mode, add window for three moves grab in final frenzy if after first player..
      */
     @FXML public void afterFrenzyGrab(){
 
@@ -301,7 +301,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * After frenzy shoot.
+     *  Final frenzy mode, add window for move/move/reload/shoot in final frenzy if after first player.
      */
     @FXML public void afterFrenzyShoot(){
 
@@ -325,7 +325,7 @@ public class ActionListController implements Initializable {
     }
 
     /**
-     * Confirm action.
+     * Confirm action window.
      */
     @FXML public void confirmAction(){
         Stage mainWindow;

@@ -20,6 +20,11 @@ public class MoveThreeController implements Initializable {
     @FXML private Button moveThree;
     @FXML private Button confirm;
 
+    /**
+     * Close window after action is done.
+     *
+     * @param event the event
+     */
     @FXML
     void closeWindow(ActionEvent event) {
 
@@ -30,6 +35,12 @@ public class MoveThreeController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Open move one action window.
+     * You can choose new position.
+     *
+     * @param event the event
+     */
     @FXML void openMoveOne(ActionEvent event) {
         genericWindow.moveWindow();
         confirm.setDisable(false);
@@ -37,11 +48,22 @@ public class MoveThreeController implements Initializable {
         moveTwo.setDisable(false);
     }
 
+    /**
+     Open move second action window.
+     * You can choose new position.
+     * @param event the event
+     */
     @FXML void openMoveTwo(ActionEvent event) {
         genericWindow.moveWindow();
         moveTwo.setDisable(true);
         moveThree.setDisable(false);
     }
+
+    /**
+     Open move third action window.
+     * You can choose new position.
+     * @param event the event
+     */
     @FXML void openMoveThree(ActionEvent event) {
         genericWindow.moveWindow();
         moveThree.setDisable(true);

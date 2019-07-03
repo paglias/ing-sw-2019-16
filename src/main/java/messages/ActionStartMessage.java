@@ -10,10 +10,20 @@ public class ActionStartMessage extends AbstractMessage {
         v.visit(this);
     }
 
+    /**
+     * Gets action.
+     *
+     * @return the action
+     */
     public ActionController.Action getAction() {
         return ActionController.Action.valueOf(action);
     }
 
+    /**
+     * Sets action.
+     *
+     * @param action the action
+     */
     public void setAction(String action) {
         this.action = action;
     }

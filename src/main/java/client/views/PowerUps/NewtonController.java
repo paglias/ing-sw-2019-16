@@ -37,6 +37,12 @@ public class NewtonController implements Initializable {
     private String playerFour;
     private String playerFive;
 
+    /**
+     * Use powerup effect for Newton powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML
     void confirmNewton(ActionEvent event) throws InterruptedException {
 

@@ -15,7 +15,7 @@ public class Game extends Application {
     public static Controller controller;
 
     /**
-     * Start game.
+     * Start game window.
      *
      * @param controller the controller
      */

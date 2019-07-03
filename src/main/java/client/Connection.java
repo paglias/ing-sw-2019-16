@@ -5,6 +5,7 @@ import utils.Logger;
 import java.io.*;
 import java.net.Socket;
 
+
 public class Connection implements Closeable {
     private final String host;
     private final int port;
@@ -17,6 +18,11 @@ public class Connection implements Closeable {
         this.port = port;
     }
 
+    /**
+     * Instances game connection.
+     *
+     * @throws IOException the io exception
+     */
     public void init () throws IOException {
         socket = new Socket(host, port);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -24,16 +30,37 @@ public class Connection implements Closeable {
         out = new PrintWriter(socket.getOutputStream(), true);
     }
 
+    /**
+     * Receive string messages.
+     *
+     * @return the string
+     * @throws IOException the io exception
+     */
     public String receive () throws IOException {
         return in.readLine();
     }
 
+    /**
+     * Send messages.
+     *
+     * @param message the message
+     */
     public void send (String message) {
         out.println(message);
     }
 
+    /**
+     * Is closed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isClosed () { return socket.isClosed(); }
 
+    /**
+     * Close connection to the server.
+     *
+     * @return the boolean
+     */
     public void close() throws IOException {
         Logger.info("Closing connection to server at " + host + ":" + port);
         in.close();

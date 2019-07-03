@@ -18,11 +18,11 @@ public class EndTurnController {
     @FXML private Button reloadButton;
 
     /**
-     * End turn event.
+     * End turn event, closes the window.
      *
      * @param event the event
      */
-//sends endturn message, closes the window.
+
     @FXML void endTurn(ActionEvent event) {
         EndTurnMessage message = new EndTurnMessage();
         Game.controller.sendMsg(message);
@@ -30,7 +30,12 @@ public class EndTurnController {
         stage.close();
     }
 
-    //Opens a new window where the player can reload
+    /**
+     * Open a new window where the player can reload.
+     *
+     * @param event the event
+     */
+
     @FXML void reload(ActionEvent event) {
         window.reloadWindow();
     }

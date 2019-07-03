@@ -35,6 +35,12 @@ public class MoveTwiceGrabController implements Initializable {
         moveTwo.setDisable(true);
     }
 
+    /**
+     * Grab.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void grab(ActionEvent event) throws InterruptedException {
 
         GameStateMessage gameStateMessage = Game.controller.getLastGameStateMessage();
@@ -63,6 +69,11 @@ public class MoveTwiceGrabController implements Initializable {
         }
     }
 
+    /**
+     * Confirm action.
+     *
+     * @param event the event
+     */
     @FXML void confirmAction(ActionEvent event) {
         Game.controller.sendMsg(endMessage);
         Stage stage = (Stage) continueButton.getScene().getWindow();
@@ -70,6 +81,11 @@ public class MoveTwiceGrabController implements Initializable {
 
     }
 
+    /**
+     * Open move one.
+     *
+     * @param event the event
+     */
     @FXML void openMoveOne(ActionEvent event) {
         genericWindow.moveWindow();
         moveOne.setDisable(true);
@@ -77,6 +93,11 @@ public class MoveTwiceGrabController implements Initializable {
         continueButton.setDisable(false);
     }
 
+    /**
+     * Open move two.
+     *
+     * @param event the event
+     */
     @FXML void openMoveTwo(ActionEvent event) {
         genericWindow.moveWindow();
         moveTwo.setDisable(true);

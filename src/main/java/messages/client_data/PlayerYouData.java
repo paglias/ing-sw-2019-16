@@ -21,6 +21,15 @@ public class PlayerYouData extends PlayerOtherData {
     public int totalPoints;                                // total points of the current player
     public List<String> possibleActions;
 
+    /**
+     * Class used to represent the Player model on the client
+     * Contains all the data from the Player model that can be shown to yourself
+     * It extends the PlayerOther class to avoid duplication
+     * And optimized for usage on the client
+     * Every attribute is public to make it easier to create it
+     *
+     * @param player the player
+     */
     public PlayerYouData (Player player) {
         super(player);
 

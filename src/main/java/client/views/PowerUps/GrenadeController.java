@@ -36,6 +36,12 @@ public class GrenadeController implements Initializable {
 
     @FXML private Button confirmButton;
 
+    /**
+     * Use powerup effect for tagback grenade.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void activate(ActionEvent event) throws InterruptedException {
         ActionMessage message = new ActionMessage();
         message.setActionItem("USE_POWER_UP");

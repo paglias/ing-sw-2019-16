@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 public class Controller implements MessageVisitor  {
     private Connection connection;
     private ExecutorService pool;
@@ -22,6 +23,13 @@ public class Controller implements MessageVisitor  {
         this.pool = Executors.newCachedThreadPool();
     }
 
+    /**
+     * Connect client to server, need a host and a connection port.
+     * Send error message if connection is closed wrong or if client is connecting wrong.
+     *
+     * @param host the host
+     * @param port the port
+     */
     void connect (String host, int port) {
         // Connect and handle messages from the server in a separate thread to avoid blocking the gui
         pool.submit(() -> {
@@ -51,6 +59,9 @@ public class Controller implements MessageVisitor  {
         });
     }
 
+    /**
+     * Start the GUI.
+     */
     void init () {
         Logger.info("Starting the GUI...");
 
@@ -102,7 +113,7 @@ public class Controller implements MessageVisitor  {
     public GameStateMessage getLastGameStateMessage () { return lastGameStateMessage; }
 
     /**
-     * On server message.
+     * Messages sent by server.
      *
      * @param msg the msg
      */
@@ -118,7 +129,11 @@ public class Controller implements MessageVisitor  {
             });
         }
     }
-
+    /**
+     * Messages sent by server.
+     *
+     * @param gameStateMessage
+     */
     public void visit(GameStateMessage gameStateMessage) {
         if (Constants.DEBUG) Logger.info("handling game state msg");
         // Save a reference to the game state message in case we're changing window
@@ -126,7 +141,11 @@ public class Controller implements MessageVisitor  {
         lastGameStateMessage = gameStateMessage;
         updateView();
     }
-
+    /**
+     * Messages sent by server.
+     *
+     * @param endGameMessage
+     */
     public void visit(EndGameMessage endGameMessage) {
         if (Constants.DEBUG) Logger.info("handling end game msg, winner" + endGameMessage.getWinner());
         Platform.runLater(() -> {
@@ -134,7 +153,11 @@ public class Controller implements MessageVisitor  {
             winnerWindow.winnerMessage(endGameMessage.getWinner());
         });
     }
-
+    /**
+     * Manages error messages.
+     *
+     * @param errorMessage
+     */
     public void visit(ErrorMessage errorMessage) {
         if (Constants.DEBUG) Logger.info("handling error msg" + errorMessage.getErrorMsg());
         Platform.runLater(() -> {
@@ -142,22 +165,51 @@ public class Controller implements MessageVisitor  {
             errorWindow.errorMessage(errorMessage.getErrorMsg());
         });
     }
-
+    /**
+     * Choose nickname message for players, server only.
+     *
+     * @param chooseNicknameMessage
+     */
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
-        // Not implemented, server side only
+
     }
+    /**
+     * Manages game setting messages, server only.
+     *
+     * @param gameSettingsMessage
+     */
     public void visit(GameSettingsMessage gameSettingsMessage) {
-        // Not implemented, server side only
+
     }
+    /**
+     * New action start message, server only.
+     *
+     * @param actionStartMessage
+     */
     public void visit(ActionStartMessage actionStartMessage) {
         // Not implemented, server side only
     }
+    /**
+     * New action message, server only.
+     *
+     * @param actionMessage
+     */
     public void visit(ActionMessage actionMessage) {
         // Not implemented, server side only
     }
+    /**
+     * New action end message, server only.
+     *
+     * @param actionEndMessage
+     */
     public void visit(ActionEndMessage actionEndMessage) {
         // Not implemented, server side only
     }
+    /**
+     * New end turn message, server only.
+     *
+     * @param endTurnMessage
+     */
     public void visit(EndTurnMessage endTurnMessage) {
         // Not implemented, server side only
     }

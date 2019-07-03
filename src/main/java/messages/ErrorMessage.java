@@ -8,10 +8,20 @@ public class ErrorMessage extends AbstractMessage {
         v.visit(this);
     }
 
+    /**
+     * Gets error msg.
+     *
+     * @return the error msg
+     */
     public String getErrorMsg () {
         return errorMsg;
     }
 
+    /**
+     * Sets error msg.
+     *
+     * @param errorMsg the error msg
+     */
     public void setErrorMsg (String errorMsg) {
         this.errorMsg = errorMsg;
     }

@@ -5,10 +5,6 @@ import models.GameBoard;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// Class used to represent the GameBoard on the client
-// Contains all the data from the GameBoard model that can be shown to all users
-// And optimized for usage on the client
-// Every attribute is public to make it easier to create it
 
 public class GameBoardData {
     public Boolean gameSetup; // If the game is setup (map and n of skulls chosen)
@@ -20,6 +16,15 @@ public class GameBoardData {
     public Boolean isFinalFrenzy; // If we're during a final frenzy
     public ArrayList<SquareData> squares; // List of squares objects (with public info)
 
+    /**
+     *
+     *   Class used to represent the GameBoard on the client
+     *  Contains all the data from the GameBoard model that can be shown to all users
+     *  And optimized for usage on the client
+     * Every attribute is public to make it easier to create it
+     *
+     * @param gameBoard the game board
+     */
     public GameBoardData (GameBoard gameBoard) {
         gameSetup = gameBoard.isGameSetup();
         gameStarted = gameBoard.hasStarted();

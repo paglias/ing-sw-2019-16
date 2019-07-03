@@ -36,6 +36,7 @@ public class MoveThreeGrabController implements Initializable {
         moveThree.setDisable(true);
     }
 
+
     @FXML void grab(ActionEvent event) throws InterruptedException {
 
         int playerPosition = gameStateMessage.playerYouData.position;

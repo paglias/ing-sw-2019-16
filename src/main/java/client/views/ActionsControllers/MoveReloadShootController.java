@@ -33,16 +33,31 @@ public class MoveReloadShootController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Open move action window.
+     *
+     * @param event the event
+     */
     @FXML void openMove(ActionEvent event) {
         move.setDisable(true);
         genericWindow.moveWindow();
         continueButton.setDisable(false);
     }
 
+    /**
+     * Open reload action window.
+     *
+     * @param event the event
+     */
     @FXML void openReload(ActionEvent event) {
         genericWindow.reloadWindow();
     }
 
+    /**
+     * Open shoot action window.
+     *
+     * @param event the event
+     */
     @FXML void openShoot(ActionEvent event) {
         genericWindow.shootWindow();
         Stage stage = (Stage) shoot.getScene().getWindow();

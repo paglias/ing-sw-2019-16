@@ -16,6 +16,11 @@ public class GameStateMessage extends AbstractMessage {
     public PlayerYouData playerYouData;
     public ArrayList<String> actionsHistory;
 
+    /**
+     * Update clients on the actual state of the game.
+     *
+     * @param gameController the game controller
+     */
     public static void updateClients (GameController gameController) {
         GameBoard gameBoard = gameController.getGameBoard();
         GameBoardData gameBoardData = new GameBoardData(gameBoard);
@@ -34,6 +39,12 @@ public class GameStateMessage extends AbstractMessage {
         v.visit(this);
     }
 
+    /**
+     * Instantiates a new Game state message.
+     *
+     * @param gameBoardData the game board data
+     * @param playerYouData the player you data
+     */
     public GameStateMessage (GameBoardData gameBoardData, PlayerYouData playerYouData) {
         this.gameBoardData = gameBoardData;
         this.playerYouData = playerYouData;

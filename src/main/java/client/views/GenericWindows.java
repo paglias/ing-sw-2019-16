@@ -15,6 +15,9 @@ import utils.Logger;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * The type Generic windows.
+ */
 public class GenericWindows {
 
     /**
@@ -98,7 +101,7 @@ public class GenericWindows {
     }
 
     /**
-     * Show marks.
+     * Show marks remaining for a player.
      *
      * @param playerNumber the player number
      */
@@ -124,8 +127,13 @@ public class GenericWindows {
         marksWindow.setResizable(false);
     }
 
-//Shows a window with the weapon contained in the weaponSlot.
-    //The weapon is loaded in WeaponPreviewController
+
+    /**
+     * Shows a window with the weapon contained in the weaponSlot.
+     * The weapon is loaded in WeaponPreviewController.
+     *
+     * @param weaponName the weapon name
+     */
     public void showWeapon(String weaponName) {
 
         Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
@@ -148,7 +156,7 @@ public class GenericWindows {
     }
 
     /**
-     * Power ups.
+     * Shows available Power ups.
      */
     public void powerUps() {
         Stage powerUpWindow = new Stage();
@@ -166,7 +174,7 @@ public class GenericWindows {
     }
 
     /**
-     * Move window.
+     * Move window for move action.
      */
     public void moveWindow() {
         Stage moveStage = new Stage();
@@ -192,7 +200,7 @@ public class GenericWindows {
     }
 
     /**
-     * Shoot window.
+     * Shoot window for shoot action.
      */
     public void shootWindow() {
         Stage shootWindow = new Stage();
@@ -211,7 +219,7 @@ public class GenericWindows {
     }
 
     /**
-     * Reload window.
+     * Reload window for reload action.
      */
     public void reloadWindow() {
         Stage reloadStage = new Stage();
@@ -230,12 +238,12 @@ public class GenericWindows {
     }
 
     /**
-     * Weapon window.
+     * Receives a weapon selected from the previous window, creates a new window and passes the value
+     * to the controller of that window (WeaponController).
      *
      * @param weaponName the weapon name
      */
-//Receives a weapon selected from the previous window, creates a new window and passes the value
-    //to the controller of that window (WeaponController)
+
     public void weaponWindow(String weaponName) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLs/Weapon.fxml"));
@@ -257,7 +265,10 @@ public class GenericWindows {
         weaponStage.setResizable(false);
     }
 
-    //Opens user available weapons on button click
+
+    /**
+     * Opens user available weapons on button click.
+     */
     public void availableWeapons(){
         Stage weaponStage = new Stage();
         weaponStage.initModality(Modality.APPLICATION_MODAL);
@@ -273,6 +284,11 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Discard power up.
+     *
+     * @param powerUpType the power up type
+     */
     public void discardPowerUp(String powerUpType){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLs/PowerUps/DiscardPowerUp.fxml"));
@@ -294,6 +310,9 @@ public class GenericWindows {
         discardWindow.show();
     }
 
+    /**
+     * End turn.
+     */
     public void endTurn(){
         Stage endTurnStage = new Stage();
         endTurnStage.setTitle("END TURN");
@@ -309,6 +328,9 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * Spawn.
+     */
     public void spawn(){
         Stage spawnStage = new Stage();
         spawnStage.setTitle("SPAWNING");
@@ -324,8 +346,10 @@ public class GenericWindows {
         }
     }
 
+    /**
+     * User choose weapon to grab.
+     */
     public void weaponGrab(){
-        //Create new window, let user choose which weapon
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/WeaponGrab.fxml"));
         try {
@@ -344,7 +368,12 @@ public class GenericWindows {
         weaponChooserStage.show();
     }
 
-    //Preview of the map during move action
+    /**
+     * Map preview.
+     *
+     * @param mapNumber the map number
+     */
+//Preview of the map during move action
     public void mapPreview(int mapNumber){
         String map = Integer.toString(mapNumber);
         Stage previewStage = new Stage();

@@ -42,6 +42,12 @@ public class Lobby extends AbstractView {
     @FXML RadioButton mapChosen4;
 
     public int Map = 0;
+
+    /**
+     * Sets map.
+     *
+     * @param map the map
+     */
     public void setMap(int map) {
         this.Map = map;
         switch (map) {
@@ -62,6 +68,12 @@ public class Lobby extends AbstractView {
     }
 
     public int Skulls = 0;
+
+    /**
+     * Sets skulls.
+     *
+     * @param skulls the skulls
+     */
     public void setSkulls(int skulls) {
         this.Skulls = skulls;
         switch (Skulls) {
@@ -80,32 +92,65 @@ public class Lobby extends AbstractView {
         }
     }
 
+    /**
+     * Choose map 1.
+     */
     public void chooseMap1() {
         setMap(1);
     }
+
+    /**
+     * Choose map 2.
+     */
     public void chooseMap2() {
         setMap(2);
     }
+
+    /**
+     * Choose map 3.
+     */
     public void chooseMap3() {
         setMap(3);
     }
+
+    /**
+     * Choose map 4.
+     */
     public void chooseMap4() {
         setMap(4);
     }
 
+    /**
+     * Choose skulls 5.
+     */
     public void chooseSkulls5() {
         setSkulls(5);
     }
+
+    /**
+     * Choose skulls 6.
+     */
     public void chooseSkulls6() {
         setSkulls(6);
     }
+
+    /**
+     * Choose skulls 7.
+     */
     public void chooseSkulls7() {
         setSkulls(7);
     }
+
+    /**
+     * Choose skulls 8.
+     */
     public void chooseSkulls8() {
         setSkulls(8);
     }
 
+    /**
+     * Preview map 1.
+     */
     public void previewMap1() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -120,6 +165,10 @@ public class Lobby extends AbstractView {
             errorWindow.loadingFailure();
         }
     }
+
+    /**
+     * Preview map 2.
+     */
     public void previewMap2() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -134,6 +183,10 @@ public class Lobby extends AbstractView {
             errorWindow.loadingFailure();
         }
     }
+
+    /**
+     * Preview map 3.
+     */
     public void previewMap3() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -148,6 +201,10 @@ public class Lobby extends AbstractView {
             errorWindow.loadingFailure();
         }
     }
+
+    /**
+     * Preview map 4.
+     */
     public void previewMap4() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -163,6 +220,9 @@ public class Lobby extends AbstractView {
         }
     }
 
+    /**
+     * Sets game with skulls and map choice set.
+     */
     public void setupGame() {
         boolean isSetup = Game.controller.getLastGameStateMessage().gameBoardData.gameSetup;
 
@@ -174,6 +234,9 @@ public class Lobby extends AbstractView {
         }
     }
 
+    /**
+     * Start game.
+     */
     public void startGame() {
         Stage stage;
         Parent root;
@@ -217,7 +280,9 @@ public class Lobby extends AbstractView {
             errorWindow.loadingFailure();
         }
     }
-
+    /**
+     * Update on map choice, number of skulls, active players with nicknames.
+     */
     public void updateWithData(GameStateMessage gameStateMessage) {
         if (gameStateMessage == null || gameStateMessage.gameBoardData == null) return;
 

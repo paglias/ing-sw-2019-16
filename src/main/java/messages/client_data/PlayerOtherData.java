@@ -5,10 +5,7 @@ import models.Player;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// Class used to represent the Player model on the client
-// Contains all the data from the Player model that can be shown to all users
-// And optimized for usage on the client
-// Every attribute is public to make it easier to create it
+
 
 public class PlayerOtherData {
     public String nickname;
@@ -22,6 +19,14 @@ public class PlayerOtherData {
     public boolean isConnected;
     public String activeAction;
 
+    /**
+     *  Class used to represent the Player model on the client
+     *  Contains all the data from the Player model that can be shown to all users
+     *  And optimized for usage on the client
+     *  Every attribute is public to make it easier to create it
+     *
+     * @param player the player
+     */
     public PlayerOtherData (Player player) {
         nickname = player.getNickname();
         position = player.getPosition() != null ? player.getPosition().getNumber() : null;

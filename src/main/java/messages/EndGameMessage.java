@@ -8,6 +8,17 @@ public class EndGameMessage extends AbstractMessage {
         v.visit(this);
     }
 
+    /**
+     * Gets winner.
+     *
+     * @return the winner
+     */
     public String getWinner () { return winner; }
+
+    /**
+     * Sets winner.
+     *
+     * @param winner the winner
+     */
     public void setWinner (String winner) { this.winner = winner; }
 }

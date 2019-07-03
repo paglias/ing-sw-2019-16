@@ -17,6 +17,14 @@ public class WeaponData {
 
     public boolean loaded;
 
+    /**
+     * Instantiates a new Weapon data.
+     * Every weapon can have one or two primary effect, one secondary and one tertiary.
+     * Gets weapon cost to buy the weapon or the recharge cost.
+     * Controls if the weapon's loaded.
+     *
+     * @param weapon the weapon
+     */
     public WeaponData (Weapon weapon) {
         color = weapon.getColor().toString();
         name = weapon.getName();

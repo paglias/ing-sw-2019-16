@@ -212,7 +212,8 @@ public class GameController {
     }
 
     /**
-     * Start.
+     * Start the game, setup maps,skulls and all the stuff necessaries.
+     * Make sure there are active players.
      */
     public synchronized void start() {
         if (gameBoard.hasStarted()) {
@@ -231,7 +232,7 @@ public class GameController {
         gameBoard.startGame();
         gameBoard.getPlayers().get(0).setActive(true);
 
-        Logger.info("Staring game!");
+        Logger.info("Starting game!");
         GameStateMessage.actionsHistoryTemp.add("Game started!");
 
         startTurn();

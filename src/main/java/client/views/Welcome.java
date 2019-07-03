@@ -9,7 +9,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
+
 public class  Welcome {
+    /**
+     * First stage of the game, window for welcoming incoming players .
+     */
     public void clickAnywhere(){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

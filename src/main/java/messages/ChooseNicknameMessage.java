@@ -8,6 +8,17 @@ public class ChooseNicknameMessage extends AbstractMessage {
         v.visit(this);
     }
 
+    /**
+     * Gets nickname.
+     *
+     * @return the nickname
+     */
     public String getNickname () { return nickname; }
+
+    /**
+     * Sets nickname.
+     *
+     * @param nickname the nickname
+     */
     public void setNickname (String nickname) { this.nickname = nickname; }
 }

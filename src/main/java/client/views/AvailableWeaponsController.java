@@ -43,6 +43,13 @@ public class AvailableWeaponsController implements Initializable {
     @FXML private Button discardButton2;
     @FXML private Button discardButton3;
 
+
+    /**
+     * Allow the user to discard the first weapon.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML
     void discardWeaponOne(ActionEvent event) throws InterruptedException {
 
@@ -60,6 +67,12 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
+    /**
+     *  Allow the user to discard the third weapon..
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML
     void discardWeaponThree(ActionEvent event) throws InterruptedException {
 
@@ -77,6 +90,12 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
+    /**
+     *  Allow the user to discard the second weapon..
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML
     void discardWeaponTwo(ActionEvent event) throws InterruptedException {
 
@@ -94,6 +113,11 @@ public class AvailableWeaponsController implements Initializable {
         Game.controller.sendMsg(endMessage);
     }
 
+    /**
+     * Close the window.
+     *
+     * @param event the event
+     */
     @FXML
     void closeTheWindow(ActionEvent event) {
         Stage mainWindow;

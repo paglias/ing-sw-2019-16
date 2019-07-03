@@ -26,12 +26,22 @@ public class MoveTwoReloadShootController implements Initializable {
         moveTwo.setDisable(true);
     }
 
+    /**
+     * Open reload.
+     *
+     * @param event the event
+     */
     @FXML void openReload(ActionEvent event) {
         genericWindow.reloadWindow();
         moveOne.setDisable(true);
         moveTwo.setDisable(true);
     }
 
+    /**
+     * Open shoot.
+     *
+     * @param event the event
+     */
     @FXML void openShoot(ActionEvent event) {
         genericWindow.shootWindow();
         Stage stage = (Stage) shoot.getScene().getWindow();
@@ -39,7 +49,11 @@ public class MoveTwoReloadShootController implements Initializable {
     }
 
 
-
+    /**
+     * Confirm action.
+     *
+     * @param event the event
+     */
     @FXML void confirmAction(ActionEvent event) {
         ActionEndMessage endMessage = new ActionEndMessage();
         Game.controller.sendMsg(endMessage);
@@ -47,12 +61,22 @@ public class MoveTwoReloadShootController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Open move one.
+     *
+     * @param event the event
+     */
     @FXML void openMoveOne(ActionEvent event) {
         moveOne.setDisable(true);
         moveTwo.setDisable(false);
         continueButton.setDisable(false);
     }
 
+    /**
+     * Open move two.
+     *
+     * @param event the event
+     */
     @FXML void openMoveTwo(ActionEvent event) {
         moveTwo.setDisable(true);
     }

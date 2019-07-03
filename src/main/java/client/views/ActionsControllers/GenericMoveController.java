@@ -57,12 +57,18 @@ public class GenericMoveController implements Initializable {
 
     }
 
+    /**
+     * Open a map preview so the player knows where to move.
+     */
     public void openMap(){
         GenericWindows window = new GenericWindows();
         int map = Game.controller.getLastGameStateMessage().gameBoardData.nMap;
         window.mapPreview(map);
     }
 
+    /**
+     * Shows where player can access with a move action.
+     */
     public void loadCanAccess () {
         PlayerYouData player = Game.controller.getLastGameStateMessage().playerYouData;
         SquareData square = Game.controller.getLastGameStateMessage().gameBoardData.squares.get(player.position);

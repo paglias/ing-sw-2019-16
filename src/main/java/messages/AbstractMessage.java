@@ -8,6 +8,14 @@ public abstract class AbstractMessage implements MessageInterface {
     static Gson gson = new Gson();
     private static JsonParser jsonParser = new JsonParser();
 
+    /**
+     * Contains the method to deserialize messages from Json and to serialize
+     * object in Json messages.
+     *
+     *
+     * @param jsonMsg the json msg
+     * @return the abstract message
+     */
     public static AbstractMessage deserialize (String jsonMsg) {
         JsonObject jsonObj = jsonParser.parse(jsonMsg).getAsJsonObject();
 
@@ -45,6 +53,11 @@ public abstract class AbstractMessage implements MessageInterface {
         }
     }
 
+    /**
+     * Serialize string.
+     *
+     * @return the string
+     */
     public String serialize () {
         return gson.toJson(this);
     }

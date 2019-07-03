@@ -85,6 +85,13 @@ public class DiscardPowerUpController implements Initializable {
         }
     }
 
+    /**
+     * Discard blue powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
+//Discards the blue powerup. by its index
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -121,6 +128,12 @@ public class DiscardPowerUpController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Discard red powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void discardRed(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
@@ -151,6 +164,12 @@ public class DiscardPowerUpController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Discard yellow powerup.
+     *
+     * @param event the event
+     * @throws InterruptedException the interrupted exception
+     */
     @FXML void discardYellow(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
