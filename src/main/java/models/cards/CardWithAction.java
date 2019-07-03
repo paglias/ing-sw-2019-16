@@ -329,13 +329,13 @@ public class CardWithAction extends Card {
     }
 
     /**
-     * Move the target in an adjacent square.
+     * Move the target to a position you can see
      */
     public void moveTargetCanSee() {
         Player playerTarget= playerTargets.get(0);
         Square newPosition=positions.get(0);
         if (damagingPlayer.getPosition().getCanView().contains(newPosition) || newPosition.getNumber() == damagingPlayer.getPosition().getNumber()) {
-            playerTarget.move(newPosition);
+            playerTarget.setPosition(newPosition);
         }
         else throw new IllegalArgumentException("Not usable method");
     }

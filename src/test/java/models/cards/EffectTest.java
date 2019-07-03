@@ -276,6 +276,22 @@ public class EffectTest {
     }
 
     @Test
+    void moveTargetCanSee() {
+        weapon.setDamagingPlayer(player1);
+        player1.setPosition(square1);
+        square1.addCanAccessSquare(square2);
+
+        weapon.addPlayerTarget(player2);
+        player2.setPosition(square3);
+
+        weapon.addPosition(square2);
+
+        weapon.moveTargetCanSee();
+
+        assertEquals(player2.getPosition(), square2);
+    }
+
+    @Test
     void shootDirection() {
         GameBoard gameBoard = new GameBoard();
         gameBoard.addPlayer(player1);
