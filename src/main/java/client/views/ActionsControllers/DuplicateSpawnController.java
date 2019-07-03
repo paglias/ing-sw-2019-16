@@ -32,6 +32,7 @@ public class DuplicateSpawnController implements Initializable {
 
     public void setDuplicatedPowerUp(String powerUp){
         duplicated=powerUp;
+        loadElements();
     }
 
     @FXML void firstDiscard(ActionEvent event) throws InterruptedException {
@@ -46,26 +47,24 @@ public class DuplicateSpawnController implements Initializable {
                 }
             }
             powerUpIndex++;
-
-            startMessage.setAction(spawn);
-            Game.controller.sendMsg(startMessage);
-            Thread.sleep(480);
-
-            clientInput.powerUpIndex = powerUpIndex;
-            message.setActionItem(spawn);
-            message.setClientInput(clientInput);
-            Game.controller.sendMsg(message);
-            Thread.sleep(511);
-
-            Game.controller.sendMsg(endMessage);
-
-            Stage stage = (Stage) discardOneButton.getScene().getWindow();
-            stage.close();
         }
+        startMessage.setAction(spawn);
+        Game.controller.sendMsg(startMessage);
+        Thread.sleep(480);
+
+        clientInput.powerUpIndex = powerUpIndex;
+        message.setActionItem(spawn);
+        message.setClientInput(clientInput);
+        Game.controller.sendMsg(message);
+        Thread.sleep(511);
+
+        Game.controller.sendMsg(endMessage);
+
+        Stage stage = (Stage) discardOneButton.getScene().getWindow();
+        stage.close();
     }
 
-    @FXML
-    void secondDiscard(ActionEvent event) throws InterruptedException {
+    @FXML void secondDiscard(ActionEvent event) throws InterruptedException {
 
         int powerUpIndex = 0;
 
@@ -77,27 +76,24 @@ public class DuplicateSpawnController implements Initializable {
                 }
             }
             powerUpIndex++;
-
-            startMessage.setAction(spawn);
-            Game.controller.sendMsg(startMessage);
-            Thread.sleep(470);
-
-            clientInput.powerUpIndex = powerUpIndex;
-            message.setActionItem(spawn);
-            message.setClientInput(clientInput);
-            Game.controller.sendMsg(message);
-            Thread.sleep(521);
-
-            Game.controller.sendMsg(endMessage);
-
-            Stage stage = (Stage) discardTwoButton.getScene().getWindow();
-            stage.close();
         }
+        startMessage.setAction(spawn);
+        Game.controller.sendMsg(startMessage);
+        Thread.sleep(470);
+
+        clientInput.powerUpIndex = powerUpIndex;
+        message.setActionItem(spawn);
+        message.setClientInput(clientInput);
+        Game.controller.sendMsg(message);
+        Thread.sleep(521);
+
+        Game.controller.sendMsg(endMessage);
+
+        Stage stage = (Stage) discardTwoButton.getScene().getWindow();
+        stage.close();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    private void loadElements(){
         int powerUpIndex = 0;
 
         for (PowerUpData powerUp : Game.controller.getLastGameStateMessage()
@@ -121,5 +117,9 @@ public class DuplicateSpawnController implements Initializable {
             }
             powerUpIndex++;
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }
