@@ -177,15 +177,23 @@ public class ClientController implements MessageVisitor {
     public void visit(ActionStartMessage actionStartMessage) {
         ActionController.Action action = actionStartMessage.getAction();
 
-        // Allow out of turn actions only for some powerups
-        if (!linkedPlayer.isActive() && action != ActionController.Action.USE_POWER_UP) {
+        // Allow out of turn actions only for some powerups and discard and spawn
+        if (!linkedPlayer.isActive() &&
+            action != ActionController.Action.USE_POWER_UP &&
+            action != ActionController.Action.DISCARD_AND_SPAWN
+        ) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not your turn!");
             sendMsg(errorMessage);
             return;
         }
 
-        if (linkedPlayer.getActionCounter() < 1 && action != ActionController.Action.RELOAD && action != ActionController.Action.USE_POWER_UP) {
+        if (
+                linkedPlayer.getActionCounter() < 1 &&
+                action != ActionController.Action.RELOAD &&
+                action != ActionController.Action.USE_POWER_UP &&
+                action != ActionController.Action.DISCARD_AND_SPAWN
+        ) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("Not available actions remained!");
             sendMsg(errorMessage);
@@ -207,6 +215,13 @@ public class ClientController implements MessageVisitor {
         if (linkedPlayer.isDead() && action != ActionController.Action.DISCARD_AND_SPAWN) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setErrorMsg("You must respawn before doing anything else!");
+            sendMsg(errorMessage);
+            return;
+        }
+
+        if (!linkedPlayer.isDead() && action == ActionController.Action.DISCARD_AND_SPAWN) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setErrorMsg("You can only respawn when dead!");
             sendMsg(errorMessage);
             return;
         }

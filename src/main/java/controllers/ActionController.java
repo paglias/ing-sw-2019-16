@@ -63,6 +63,15 @@ public class ActionController {
     }
 
     /**
+     * Sets player, overriding the active one set by default in the constructor.
+     *
+     * @param p the p
+     */
+    public void setPlayer (Player p) {
+        this.player = p;
+    }
+
+    /**
      * Get possible actions list.
      * Different action based on the game state.
      * Different actions based on adrenaline level, or final frenzy state.

@@ -690,7 +690,7 @@ public class Player {
             playerTarget.setDead(true);
             playerTarget.increaseNDeaths();
             GameStateMessage.actionsHistoryTemp.add(playerTarget.getNickname() + " died!");
-
+            
             // Give the target player a power up
             playerTarget.addPowerUp((PowerUp) gameBoard.getPowerUpsDeck().pick());
 

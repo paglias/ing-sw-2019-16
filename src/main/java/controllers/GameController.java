@@ -306,6 +306,16 @@ public class GameController {
                     }
                 });
 
+        // Give dead players the ability to respawn at the end of turn even if it's not theirs
+        gameBoard.getPlayers()
+                .forEach(p -> {
+                    if (!p.isDead()) return;
+
+                    ActionController actionControllerForDead = new ActionController(this);
+                    actionControllerForDead.setPlayer(p);
+                    p.setPossibleActions(actionControllerForDead.getPossibleActions());
+                });
+
         startTurn();
     }
 
