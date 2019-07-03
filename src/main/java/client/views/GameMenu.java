@@ -25,14 +25,10 @@ public class GameMenu {
      *
      * @param event the event
      */
-    public void nextWindow(ActionEvent event) {
+    public void nextWindow(ActionEvent event) throws InterruptedException {
         connectToServer();
 
-        try {
-            Thread.sleep(1000); // wait for connetion to setup
-        } catch (InterruptedException e) {
-            Logger.err(e, "Sleep failed");
-        }
+        Thread.sleep(1000); // wait for connetion to setup
 
         setNickname();
 

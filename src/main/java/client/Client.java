@@ -27,7 +27,7 @@ public class Client {
      * @param args the input arguments
      * @throws IOException the io exception
      */
-    public static void main (String[] args) throws IOException {
+    public static void main (String[] args) {
         Constants.load(args);
 
         Logger.info("Welcome to the Adrenaline Client!");
