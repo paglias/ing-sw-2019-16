@@ -181,7 +181,7 @@ public class ActionController {
                     }
                 });
             } catch (Exception e) {
-                throw new IllegalArgumentException("Missing target.");
+                throw new IllegalArgumentException("Missing parameters.");
             }
 
             // Targeting scope is a special case in that it doesn't follow the same rules as every other card

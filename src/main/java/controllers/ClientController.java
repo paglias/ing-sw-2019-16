@@ -37,8 +37,7 @@ public class ClientController implements MessageVisitor {
         // Reset the used effects of weapons
         if (linkedPlayer.getActiveActionItems().contains(ActionController.ActionItem.SHOOT)) {
             linkedPlayer.getWeapons().forEach(w -> {
-                ArrayList<Integer> usedEffects = w.getUsedEffects();
-                if (usedEffects.size() > 0) {
+                if (!w.getUsedEffects().isEmpty()) {
                     w.getUsedEffects().clear();
                     w.forceReload();
                 }

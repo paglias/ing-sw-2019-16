@@ -154,7 +154,6 @@ public class GenericWindows {
         Stage powerUpWindow = new Stage();
         powerUpWindow.setTitle("Available PowerUps");
         powerUpWindow.initModality(Modality.APPLICATION_MODAL);
-        powerUpWindow.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PowerUps.fxml"));
             Scene scene = new Scene(root);
@@ -188,7 +187,6 @@ public class GenericWindows {
             Parent root = loader.getRoot();
             Scene scene = new Scene(root);
             moveStage.setScene(scene);
-            moveStage.initStyle(StageStyle.UNDECORATED);
             moveStage.show();
             moveStage.setResizable(false);
     }
@@ -205,7 +203,6 @@ public class GenericWindows {
             Scene scene = new Scene(root);
             shootWindow.setScene(scene);
             shootWindow.show();
-            shootWindow.initStyle(StageStyle.UNDECORATED);
             shootWindow.setResizable(false);
         } catch (
                 IOException e) {
@@ -220,7 +217,6 @@ public class GenericWindows {
         Stage reloadStage = new Stage();
         reloadStage.setTitle("Reload action");
         reloadStage.initModality(Modality.APPLICATION_MODAL);
-        reloadStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/GenericReload.fxml"));
             Scene scene = new Scene(root);
@@ -254,7 +250,6 @@ public class GenericWindows {
         Parent root = loader.getRoot();
         Stage weaponStage = new Stage();
         weaponStage.setTitle(weaponName);
-        weaponStage.initStyle(StageStyle.UNDECORATED);
         weaponStage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
         weaponStage.setScene(scene);
@@ -266,7 +261,6 @@ public class GenericWindows {
     public void availableWeapons(){
         Stage weaponStage = new Stage();
         weaponStage.initModality(Modality.APPLICATION_MODAL);
-        weaponStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/AvailableWeapons.fxml"));
             Scene weaponScene = new Scene(root);
@@ -296,7 +290,6 @@ public class GenericWindows {
         discardWindow.setTitle("DISCARD A POWERUP");
         discardWindow.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
-        discardWindow.initStyle(StageStyle.UNDECORATED);
         discardWindow.setScene(scene);
         discardWindow.show();
     }
@@ -320,7 +313,6 @@ public class GenericWindows {
         Stage spawnStage = new Stage();
         spawnStage.setTitle("SPAWNING");
         spawnStage.initModality(Modality.APPLICATION_MODAL);
-        spawnStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/ActionFXMLs/SpawnAction.fxml"));
             Scene scene = new Scene(root);
@@ -347,7 +339,6 @@ public class GenericWindows {
         Stage weaponChooserStage = new Stage();
         weaponChooserStage.setTitle("CHOOSE A WEAPON");
         weaponChooserStage.initModality(Modality.APPLICATION_MODAL);
-        weaponChooserStage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         weaponChooserStage.setScene(scene);
         weaponChooserStage.show();
