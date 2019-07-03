@@ -67,7 +67,6 @@ public class DuplicateSpawnController implements Initializable {
     @FXML
     void secondDiscard(ActionEvent event) throws InterruptedException {
 
-
         int powerUpIndex = 0;
 
         for (PowerUpData powerUpData : Game.controller.getLastGameStateMessage()
@@ -91,7 +90,7 @@ public class DuplicateSpawnController implements Initializable {
 
             Game.controller.sendMsg(endMessage);
 
-            Stage stage = (Stage) discardOneButton.getScene().getWindow();
+            Stage stage = (Stage) discardTwoButton.getScene().getWindow();
             stage.close();
         }
     }
