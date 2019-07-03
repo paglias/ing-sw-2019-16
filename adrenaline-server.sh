@@ -1,2 +1,2 @@
 #!/bin/bash
-java --module-path ./out/artifacts/javafx-sdk-11.0.2/lib --add-modules javafx.fxml --add-modules javafx.controls  -jar ./target/server.jar-jar-with-dependencies.jar TIMEOUT=20 TURN_TIMEOUT=120 DEBUG=true
+java -jar ./jars/adrenaline-server.jar TIMEOUT=30 TURN_TIMEOUT=120 DEBUG=true

@@ -1,2 +1,2 @@
 #!/bin/bash
-java --module-path ./out/artifacts/javafx-sdk-11.0.2/lib --add-modules javafx.fxml --add-modules javafx.controls  -jar ./out/artifacts/ing_sw_2019_16_jar/ing-sw-2019-16.jar TIMEOUT=20 TURN_TIMEOUT=120 DEBUG=true
+java --module-path ./jars/javafx-sdk-11.0.2/lib --add-modules javafx.fxml --add-modules javafx.controls  -jar ./jars/adrenaline.jar TIMEOUT=30 TURN_TIMEOUT=120 DEBUG=true

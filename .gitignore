@@ -1,5 +1,5 @@
 target/
-/out/artifacts/javafx-sdk-**
+/jars/javafx-sdk-**
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
