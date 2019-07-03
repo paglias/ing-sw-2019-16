@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.ActionsControllers.SpawnActionController">
    <children>
       <Label layoutX="238.0" layoutY="19.0" prefHeight="72.0" prefWidth="150.0" text="SPAWNING">
@@ -32,10 +37,10 @@
          <children>
             <Label text="Power Up type" />
             <Label text="Color" GridPane.rowIndex="1" />
-            <Label text="Tagback Grenade" GridPane.columnIndex="1" />
-            <Label text="Targeting Scope" GridPane.columnIndex="2" />
-            <Label text="Newton" GridPane.columnIndex="3" />
-            <Label text="Teleporter" GridPane.columnIndex="4" />
+            <Label fx:id="grenadeTitle" text="Tagback Grenade" GridPane.columnIndex="1" />
+            <Label fx:id="scopeTitle" text="Targeting Scope" GridPane.columnIndex="2" />
+            <Label fx:id="newtonTitle" text="Newton" GridPane.columnIndex="3" />
+            <Label fx:id="teleporterTitle" text="Teleporter" GridPane.columnIndex="4" />
             <Text fx:id="grenadeColor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text fx:id="scopeColor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Text fx:id="newtonColor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -44,6 +49,7 @@
             <Button fx:id="scope" mnemonicParsing="false" onAction="#scopeDiscard" text="DISCARD" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button fx:id="newton" mnemonicParsing="false" onAction="#newtonDiscard" text="DISCARD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Button fx:id="teleporter" mnemonicParsing="false" onAction="#teleporterDiscard" text="DISCARD" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button fx:id="duplicateButton" mnemonicParsing="false" onAction="#openDuplicate" text="DUPLICATES" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

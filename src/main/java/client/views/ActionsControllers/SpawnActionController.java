@@ -1,17 +1,26 @@
 package client.views.ActionsControllers;
 
 import client.views.Game;
+import client.views.GenericWindows;
+import client.views.MarksController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import messages.ActionEndMessage;
 import messages.ActionMessage;
 import messages.ActionStartMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PowerUpData;
+import utils.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,6 +36,12 @@ public class SpawnActionController implements Initializable {
     @FXML private Button scope;
     @FXML private Button newton;
     @FXML private Button teleporter;
+    @FXML private Label newtonTitle;
+    @FXML private Label teleporterTitle;
+    @FXML private Label grenadeTitle;
+    @FXML private Label scopeTitle;
+    @FXML private Button duplicateButton;
+
 
     private String grenadePowerup = "TagbackGrenade";
     private String newtonPowerup = "Newton";
@@ -37,18 +52,14 @@ public class SpawnActionController implements Initializable {
     private String yellowColor = "YELLOW";
     private String spawn = "DISCARD_AND_SPAWN";
     private String notUsed = "Not Available";
+    private String duplicated=null;
 
     private ActionStartMessage startMessage = new ActionStartMessage();
     private ActionMessage message = new ActionMessage();
     private ActionEndMessage endMessage = new ActionEndMessage();
     private ClientInput clientInput = new ClientInput();
+    private GenericWindows window = new GenericWindows();
 
-    /**
-     * Initialize text colors based on powerups.
-     *
-     * @param location the location
-     *
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
@@ -62,10 +73,18 @@ public class SpawnActionController implements Initializable {
         newton.setDisable(true);
         teleporter.setDisable(true);
 
+        int scopeCounter = 0;
+        int teleporterCounter = 0;
+        int newtonCounter = 0;
+        int grenadeCounter = 0;
 
+        //INITIALIZES TEXT COLORS BASED ON POWERUPS
+        //Enables buttons only if there is a powerup of that type
         ArrayList<PowerUpData> powerUps = Game.controller.getLastGameStateMessage().playerYouData.powerUps;
         for (PowerUpData powerUp : powerUps){
+
             if (powerUp.name.equals(grenadePowerup)) {
+                grenadeCounter++;
                 grenade.setDisable(false);
                 if (powerUp.color.equals(blueColor))
                 {
@@ -81,6 +100,7 @@ public class SpawnActionController implements Initializable {
                 }
             }
             if (powerUp.name.equals(newtonPowerup)){
+                newtonCounter++;
                 newton.setDisable(false);
                 if (powerUp.color.equals(blueColor))
                 {
@@ -96,6 +116,7 @@ public class SpawnActionController implements Initializable {
                 }
             }
             if (powerUp.name.equals(teleporterPowerup)){
+                teleporterCounter++;
                 teleporter.setDisable(false);
                 if (powerUp.color.equals(blueColor))
                 {
@@ -111,6 +132,7 @@ public class SpawnActionController implements Initializable {
                 }
             }
             if (powerUp.name.equals(targetingScope)){
+                scopeCounter++;
                 scope.setDisable(false);
                 if (powerUp.color.equals(blueColor))
                 {
@@ -126,15 +148,48 @@ public class SpawnActionController implements Initializable {
                 }
             }
         }
-
+        if (scopeCounter==2||grenadeCounter==2||newtonCounter==2||teleporterCounter==2){
+            grenade.setDisable(true);
+            newton.setDisable(true);
+            scope.setDisable(true);
+            teleporter.setDisable(true);
+        }
+        if (scopeCounter==2){
+            duplicated=targetingScope;
+        }
+        if (grenadeCounter==2){
+            duplicated=grenadePowerup;
+        }
+        if (teleporterCounter==2){
+            duplicated=teleporterPowerup;
+        }
+        if (newtonCounter==2){
+            duplicated=newtonPowerup;
+        }
     }
 
-    /**
-     * Discard powerup tagback grenade.
-     *
-     * @param event the event
-     * @throws InterruptedException the interrupted exception
-     */
+    @FXML void openDuplicate(){
+        Stage duplicateWindow = new Stage();
+        duplicateWindow.initStyle(StageStyle.UNDECORATED);
+        duplicateWindow.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXMLs/ActionFXMLs/DuplicateSpawn.fxml"));
+        try {
+            loader.load();
+        } catch (Throwable e) {
+            Logger.err(e, "Error showing marks");
+            window.loadingFailure();
+        }
+        Parent root = loader.getRoot();
+        DuplicateSpawnController controller = loader.getController();
+        controller.setDuplicatedPowerUp(duplicated);
+        Scene scene = new Scene(root);
+        duplicateWindow.setScene(scene);
+        duplicateWindow.setResizable(false);
+        duplicateWindow.show();
+    }
+
     @FXML void grenadeDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
@@ -164,16 +219,10 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    /**
-     * Discard window of Newton Powerup.
-     *
-     * @param event the event
-     * @throws InterruptedException the interrupted exception
-     */
     @FXML void newtonDiscard(ActionEvent event) throws InterruptedException {
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(490);
 
         int powerUpIndex = 0;
 
@@ -198,17 +247,11 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    /**
-     * Discard window of targeting scope.
-     *
-     * @param event the event
-     * @throws InterruptedException the interrupted exception
-     */
     @FXML void scopeDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(510);
 
         int powerUpIndex = 0;
 
@@ -233,17 +276,11 @@ public class SpawnActionController implements Initializable {
         stage.close();
     }
 
-    /**
-     * Discard window of Teleporter powerup.
-     *
-     * @param event the event
-     * @throws InterruptedException the interrupted exception
-     */
     @FXML void teleporterDiscard(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(spawn);
         Game.controller.sendMsg(startMessage);
-        Thread.sleep(500);
+        Thread.sleep(512);
 
         int powerUpIndex = 0;
 
