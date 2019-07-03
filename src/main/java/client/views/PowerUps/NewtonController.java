@@ -17,10 +17,8 @@ import messages.client_data.PlayerOtherData;
 import messages.client_data.PowerUpData;
 import utils.Constants;
 import utils.Logger;
-
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class NewtonController implements Initializable {
@@ -108,7 +106,6 @@ public class NewtonController implements Initializable {
         }
 
         //Populate position choicebox
-
         positionChoice.setItems(FXCollections.observableArrayList(
                 "0", "1", "2", "3", "4", "5",
                 "6","7","8","9","10","11"));
