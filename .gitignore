@@ -1,4 +1,5 @@
 target/
+out/
 /jars/javafx-sdk-**
 pom.xml.tag
 pom.xml.releaseBackup
