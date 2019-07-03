@@ -16,13 +16,13 @@
           ]
         },
         {
-          "type": "SHOOT",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "type": "SHOOT",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -41,7 +41,7 @@
           ]
         },
         {
-          "type": "SHOOT",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.0"
           ]
@@ -54,7 +54,7 @@
           ]
         },
         {
-          "type": "SHOOT",
+          "type": "SHOOT_VIEW",
           "parameters": [
             "TARGET.1"
           ]

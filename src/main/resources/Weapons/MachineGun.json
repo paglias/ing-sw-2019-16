@@ -29,7 +29,6 @@
   "secondaryEffect": [
     {
       "input": [
-        "TARGET",
         "TARGET"
       ],
       "cost": ["YELLOW"],
@@ -37,8 +36,7 @@
         {
           "type": "SHOOT_VIEW",
           "parameters": [
-            "TARGET.0",
-            "TARGET.1"
+            "TARGET.0"
           ]
         }
       ]
@@ -47,7 +45,6 @@
   "tertiaryEffect": [
     {
       "input": [
-        "TARGET",
         "TARGET",
         "TARGET"
       ],
@@ -58,14 +55,13 @@
         {
           "type": "SHOOT_VIEW",
           "parameters": [
-            "TARGET.0",
-            "TARGET.1"
+            "TARGET.0"
           ]
         },
         {
           "type": "SHOOT_VIEW",
           "parameters": [
-            "TARGET.2"
+            "TARGET.1"
           ]
         }
       ]

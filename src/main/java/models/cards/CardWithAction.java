@@ -77,6 +77,9 @@ public class CardWithAction extends Card {
             case MOVE_TARGET:
                 this.moveTarget();
                 return;
+            case MOVE_TARGET_CAN_SEE:
+                this.moveTargetCanSee();
+                return;
             case MOVE:
                 this.move();
                 return;
@@ -326,6 +329,18 @@ public class CardWithAction extends Card {
     }
 
     /**
+     * Move the target in an adjacent square.
+     */
+    public void moveTargetCanSee() {
+        Player playerTarget= playerTargets.get(0);
+        Square newPosition=positions.get(0);
+        if (damagingPlayer.getPosition().getCanView().contains(newPosition) || newPosition.getNumber() == damagingPlayer.getPosition().getNumber()) {
+            playerTarget.move(newPosition);
+        }
+        else throw new IllegalArgumentException("Not usable method");
+    }
+
+    /**
      * Shoot every target in a cardinal direction you choose.
      */
     public void shootDirection() {
@@ -391,11 +406,10 @@ public class CardWithAction extends Card {
         Square thirdTargetPosition= thirdTarget.getPosition();
         if (CanView.contains(position)) {
             playerTarget.addDamage(damagingPlayer);
-            if (position.getCanView().contains(secondTargetPosition)){
-                secondTarget.addDamage(damagingPlayer);
-            }
-            if(secondTargetPosition.getCanView().contains(thirdTargetPosition)){
-                thirdTarget.addDamage(damagingPlayer);
+            if (position.getCanView().contains(secondTargetPosition)) {
+                if (secondTargetPosition.getCanView().contains(thirdTargetPosition)) {
+                    thirdTarget.addDamage(damagingPlayer);
+                }
             }
         }
         else throw new IllegalArgumentException("Not usable method");

@@ -15,6 +15,12 @@
           "parameters": [
             "TARGET.0"
           ]
+        },
+        {
+          "type": "SHOOT_VIEW",
+          "parameters": [
+            "TARGET.0"
+          ]
         }
       ]
     }
@@ -22,6 +28,7 @@
   "secondaryEffect": [
     {
       "input": [
+        "TARGET",
         "TARGET"
       ],
       "cost": ["BLUE"],
@@ -29,7 +36,8 @@
         {
           "type": "SHOOT_TARGET_VIEW",
           "parameters": [
-            "TARGET.0"
+            "TARGET.0",
+            "TARGET.1"
           ]
         }
       ]
@@ -38,6 +46,8 @@
   "tertiaryEffect": [
     {
       "input": [
+        "TARGET",
+        "TARGET",
         "TARGET"
       ],
       "cost": [
@@ -47,7 +57,9 @@
         {
           "type": "SHOOT_SECOND_TARGET_VIEW",
           "parameters": [
-            "TARGET.0"
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2"
           ]
         }
       ]

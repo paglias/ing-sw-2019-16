@@ -41,13 +41,13 @@
           ]
         },
         {
-          "type": "MARK__ONE_AWAY_VIEW",
+          "type": "MARK_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]
         },
         {
-          "type": "MARK__ONE_AWAY_VIEW",
+          "type": "MARK_ONE_AWAY_VIEW",
           "parameters": [
             "TARGET.0"
           ]

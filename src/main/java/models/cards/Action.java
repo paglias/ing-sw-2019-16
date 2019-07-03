@@ -20,6 +20,7 @@ public class Action {
 
         MOVE,
         MOVE_TARGET,
+        MOVE_TARGET_CAN_SEE,
         MOVE_DIRECTION,
 
         MARK,
