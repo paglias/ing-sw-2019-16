@@ -22,7 +22,11 @@
 
 ## Sonar
 
-TODO Sonar immagine qua (con test coverage per cartelle e spiegazione)
+Lo screenshot dell'ultimo report di Sonar si trova nella cartella `sonar` insieme ad
+uno screenshot che mostra la coverage per package.
+
+Abbiamo una coverage > 80% per il model e i controller che non interagiscono con
+la rete. Abbiamo inoltre dei test per alcune utils.
 
 ## UML
 
