@@ -23,7 +23,9 @@ public class GameMenu {
     /**
      * Connect and open next window.
      *
+     *
      * @param event the event
+     * @throws InterruptedException if sleep doesn't work.
      */
     public void nextWindow(ActionEvent event) throws InterruptedException {
         connectToServer();

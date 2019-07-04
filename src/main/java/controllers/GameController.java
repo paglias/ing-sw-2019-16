@@ -264,6 +264,7 @@ public class GameController {
 
     /**
      * End turn.
+     * @param fromTimeout true if timeout made turn end.
      */
     public synchronized void endTurn(boolean fromTimeout) {
         Player player = gameBoard.getActivePlayer();

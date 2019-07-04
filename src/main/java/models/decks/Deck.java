@@ -75,7 +75,9 @@ public abstract class Deck {
     /**
      * Instantiates a new Deck.
      *
+     * @param canRefill if the deck can be refilled.
      * @param deckSize The deck size
+     *
      */
     public Deck (Boolean canRefill, int deckSize) {
         this.canRefill = canRefill;

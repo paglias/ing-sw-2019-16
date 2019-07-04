@@ -132,7 +132,7 @@ public class Controller implements MessageVisitor  {
     /**
      * Messages sent by server.
      *
-     * @param gameStateMessage
+     * @param gameStateMessage for game state.
      */
     public void visit(GameStateMessage gameStateMessage) {
         if (Constants.DEBUG) Logger.info("handling game state msg");
@@ -144,7 +144,7 @@ public class Controller implements MessageVisitor  {
     /**
      * Messages sent by server.
      *
-     * @param endGameMessage
+     * @param endGameMessage the ending game message.
      */
     public void visit(EndGameMessage endGameMessage) {
         if (Constants.DEBUG) Logger.info("handling end game msg, winner" + endGameMessage.getWinner());
@@ -156,7 +156,7 @@ public class Controller implements MessageVisitor  {
     /**
      * Manages error messages.
      *
-     * @param errorMessage
+     * @param errorMessage the error message.
      */
     public void visit(ErrorMessage errorMessage) {
         if (Constants.DEBUG) Logger.info("handling error msg" + errorMessage.getErrorMsg());
@@ -168,7 +168,7 @@ public class Controller implements MessageVisitor  {
     /**
      * Choose nickname message for players, server only.
      *
-     * @param chooseNicknameMessage
+     * @param chooseNicknameMessage the message for choosing nickname.
      */
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
 
@@ -176,7 +176,7 @@ public class Controller implements MessageVisitor  {
     /**
      * Manages game setting messages, server only.
      *
-     * @param gameSettingsMessage
+     * @param gameSettingsMessage the message for game settings.
      */
     public void visit(GameSettingsMessage gameSettingsMessage) {
 
@@ -184,7 +184,7 @@ public class Controller implements MessageVisitor  {
     /**
      * New action start message, server only.
      *
-     * @param actionStartMessage
+     * @param actionStartMessage for action to start.
      */
     public void visit(ActionStartMessage actionStartMessage) {
         // Not implemented, server side only
@@ -192,7 +192,7 @@ public class Controller implements MessageVisitor  {
     /**
      * New action message, server only.
      *
-     * @param actionMessage
+     * @param actionMessage for action to be made.
      */
     public void visit(ActionMessage actionMessage) {
         // Not implemented, server side only
@@ -200,7 +200,7 @@ public class Controller implements MessageVisitor  {
     /**
      * New action end message, server only.
      *
-     * @param actionEndMessage
+     * @param actionEndMessage for action to end.
      */
     public void visit(ActionEndMessage actionEndMessage) {
         // Not implemented, server side only
@@ -208,7 +208,7 @@ public class Controller implements MessageVisitor  {
     /**
      * New end turn message, server only.
      *
-     * @param endTurnMessage
+     * @param endTurnMessage for turn to end.
      */
     public void visit(EndTurnMessage endTurnMessage) {
         // Not implemented, server side only

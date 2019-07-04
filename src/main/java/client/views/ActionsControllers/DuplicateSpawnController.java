@@ -30,6 +30,11 @@ public class DuplicateSpawnController implements Initializable {
     private String spawn = "DISCARD_AND_SPAWN";
     private String duplicated = null;
 
+    /**
+     * Set duplicated power up.
+     *
+     * @param powerUp the power up
+     */
     public void setDuplicatedPowerUp(String powerUp){
         duplicated=powerUp;
         loadElements();

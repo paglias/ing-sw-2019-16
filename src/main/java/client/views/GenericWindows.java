@@ -67,6 +67,7 @@ public class GenericWindows {
 
     /**
      * Launch error message popup.
+     * @param errorMsg the error message
      */
     public void errorMessage (String errorMsg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -78,6 +79,7 @@ public class GenericWindows {
 
     /**
      * Launch winner message popup.
+     * @param winner the game winner
      */
     public void winnerMessage (String winner) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

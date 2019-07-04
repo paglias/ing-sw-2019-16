@@ -109,7 +109,7 @@ public class ClientController implements MessageVisitor {
      * If there's no player with nickname, cannot disconnect it.
      *
      *
-     * @param chooseNicknameMessage
+     * @param chooseNicknameMessage for choosing nickname.
      */
     public void visit(ChooseNicknameMessage chooseNicknameMessage) {
         String nickname = chooseNicknameMessage.getNickname();

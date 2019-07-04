@@ -85,6 +85,7 @@ public class Player {
 
     /**
      * Gets game board.
+     * @return the gameboard
      *
      */
     public GameBoard getGameBoard () {

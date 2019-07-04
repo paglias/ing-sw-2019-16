@@ -35,7 +35,7 @@ public class Client {
      * Main class for the client of the game.
      *
      * @param args the input arguments
-     * @throws IOException the io exception
+     *
      */
     public static void main (String[] args) {
         Constants.load(args);

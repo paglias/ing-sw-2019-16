@@ -30,6 +30,7 @@ public class MapLoader {
      *
      * @param mapNumber   the map number
      * @param weaponsDeck the weapons deck
+     * @param ammoDeck the ammo deck
      * @return the array list of squares that are part of the map
      */
     public static ArrayList<Square> loadMap(int mapNumber, WeaponsDeck weaponsDeck, AmmoDeck ammoDeck) {

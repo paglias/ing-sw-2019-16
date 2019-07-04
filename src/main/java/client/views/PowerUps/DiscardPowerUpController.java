@@ -90,7 +90,7 @@ public class DiscardPowerUpController implements Initializable {
      *
      * @param location the location
      * @param resources the resources bundle
-     * @throws InterruptedException the interrupted exception
+     *
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

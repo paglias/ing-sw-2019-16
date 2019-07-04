@@ -59,7 +59,7 @@ public class Connection implements Closeable {
     /**
      * Close connection to the server.
      *
-     * @return the boolean
+     * @throws IOException in closing the connection.
      */
     public void close() throws IOException {
         Logger.info("Closing connection to server at " + host + ":" + port);

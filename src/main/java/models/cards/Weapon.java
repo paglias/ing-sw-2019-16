@@ -103,6 +103,7 @@ public class Weapon extends CardWithAction {
 
     /**
      * Reload the weapon.
+     * @param player the player owning the weapon.
      */
     public void reload (Player player){
         for(Color color: getRechargeCost()){

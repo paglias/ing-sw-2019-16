@@ -69,6 +69,7 @@ public class GenericReloadController implements Initializable {
 
     /**
      * Confirm that weapon is reloaded.
+     * @throws InterruptedException if the sleep fails.
      */
     @FXML void confirmReload () throws InterruptedException{
         ActionStartMessage actionStartMessage = new ActionStartMessage();

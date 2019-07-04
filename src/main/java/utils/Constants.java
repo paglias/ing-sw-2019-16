@@ -24,6 +24,7 @@ public class Constants {
 
     /**
      * Load game settings from Json.
+     * @param args the args from command line
      */
     public static void load (String[] args) {
         if (loaded) return;

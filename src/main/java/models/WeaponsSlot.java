@@ -35,6 +35,7 @@ public class WeaponsSlot {
     /**
      * Pick a weapon from the slot, remove it and pass it to the player.
      *
+     * @param weaponChosen the weapon chosen
      * @return the weapon chosen
      */
     public Weapon weaponChoice (Weapon weaponChosen) {
@@ -60,6 +61,7 @@ public class WeaponsSlot {
 
     /**
      * Refill the weapon slot after a weapon has been picked.
+     * @param weaponsDeck the weapons deck
      */
     public void refill (WeaponsDeck weaponsDeck) {
         int missing = 3 - weapons.size();

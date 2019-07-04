@@ -55,6 +55,7 @@ public class Skulls {
      * Sets remaining.
      *
      * @param nRemaining the n remaining
+     * @return number of skulls remaining.
      */
     public int setNRemaining(int nRemaining) {
         if (nRemaining < 0) throw new IllegalArgumentException("Remaining skulls can't be negative.");
