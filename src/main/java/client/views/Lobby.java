@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Lobby extends AbstractView {
-    GenericWindows errorWindow = new GenericWindows();
+    private GenericWindows errorWindow = new GenericWindows();
 
     @FXML Button startButton;
     @FXML Label connectedPlayer1;
