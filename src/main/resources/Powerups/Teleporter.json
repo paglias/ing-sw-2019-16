@@ -7,7 +7,7 @@
       "cost": [],
       "actions": [
         {
-          "type": "MOVE",
+          "type": "MOVE_ANYWHERE",
           "parameters": [
             "POSITION.0"
           ]

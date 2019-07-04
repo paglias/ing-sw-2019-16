@@ -22,6 +22,7 @@ public class Action {
         MOVE_TARGET,
         MOVE_TARGET_CAN_SEE,
         MOVE_DIRECTION,
+        MOVE_ANYWHERE,
 
         MARK,
         MARK_VIEW,

@@ -93,6 +93,15 @@ public class EffectTest {
     }
 
     @Test
+    void moveAnywhere() {
+        player1.setPosition(square1);
+        weapon.setDamagingPlayer(player1);
+        weapon.addPosition(square2);
+        weapon.moveAnywhere();
+        assertEquals(player1.getPosition(), square2);
+    }
+
+    @Test
     void moveDirection() {
         GameBoard gameBoard = new GameBoard();
         gameBoard.setMap(1);

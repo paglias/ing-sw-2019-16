@@ -295,11 +295,6 @@ public class ActionController {
             throw new IllegalArgumentException("Effect " + clientInput.effectType + " already used!");
         }
 
-        // Make sure secondary/tertiary can only be used after primary
-        if (clientInput.effectType > 1 && !weapon.getUsedEffects().contains(1)) {
-            throw new IllegalArgumentException("Secondary/tertiary can only be used after primary has been used.");
-        }
-
         GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " used a weapon: " + clientInput.weaponName);
 
         List<Effect> effects = weapon.getEffects(clientInput.effectType);

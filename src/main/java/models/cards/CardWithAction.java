@@ -83,6 +83,9 @@ public class CardWithAction extends Card {
             case MOVE:
                 this.move();
                 return;
+            case MOVE_ANYWHERE:
+                this.moveAnywhere();
+                return;
             case SHOOT_SECOND_TARGET_VIEW:
                 this.shootSecondTargetView();
                 return;
@@ -162,6 +165,14 @@ public class CardWithAction extends Card {
             damagingPlayer.move(position);
         }
         else throw new IllegalArgumentException("Not usable method");
+    }
+
+    /**
+     * Move to any square.
+     */
+    public void moveAnywhere() {
+        Square position= positions.get(0);
+        damagingPlayer.setPosition(position);
     }
 
     /**
