@@ -257,9 +257,9 @@ public class CardWithAction extends Card {
      * Shoot every other target in your square.
      */
     public void shootEvery() {
-        for (Player Players : playerTargets) {
-            if (damagingPlayer.getPosition().equals(Players.getPosition())) {
-                Players.addDamage(damagingPlayer);
+        for (Player player : playerTargets) {
+            if (damagingPlayer.getPosition().equals(player.getPosition())) {
+                player.addDamage(damagingPlayer);
             }
             else throw new IllegalArgumentException("Not usable method");
         }

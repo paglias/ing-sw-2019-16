@@ -109,7 +109,6 @@ public class GenericWindows {
      */
     public void showMarks(int playerNumber) {
         Stage marksWindow = new Stage();
-        marksWindow.initStyle(StageStyle.UNDECORATED);
         marksWindow.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader loader = new FXMLLoader();
@@ -138,7 +137,7 @@ public class GenericWindows {
      */
     public void showWeapon(String weaponName) {
 
-        Stage weaponWindow = new Stage(StageStyle.UNDECORATED);
+        Stage weaponWindow = new Stage();
         weaponWindow.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLs/WeaponWindow.fxml"));
@@ -381,7 +380,6 @@ public class GenericWindows {
         Stage previewStage = new Stage();
         previewStage.setTitle("MAP PREVIEW");
         previewStage.initModality(Modality.APPLICATION_MODAL);
-        previewStage.initStyle(StageStyle.UNDECORATED);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/PreviewMap" +map+ ".fxml"));
             Scene scene = new Scene(root);

@@ -271,7 +271,7 @@ public class WeaponController implements Initializable {
         positions.add("0");
         positions.add("1");
         positions.add("2");
-        positions.add("2");
+        positions.add("3");
         positions.add("4");
         positions.add("5");
         positions.add("6");

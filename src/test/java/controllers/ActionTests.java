@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -202,13 +203,14 @@ public class ActionTests {
         Weapon weapon= (Weapon)weaponsDeck.pick();
         Effect effect= weapon.getEffects(1).get(0);
         Action action= effect.getActions().get(0);
-        HashMap<Effect.Input, Integer> map= action.getParameters();
-        assertTrue(map.size()>0);
-        String firstInput= map.keySet().toArray()[0].toString();
+        List<String> parameters = action.getParameters();
+        assertTrue(parameters.size()>0);
+
+        String[] parts = parameters.get(0).split(Pattern.quote("."));
+
         assertDoesNotThrow(()->{
-            Effect.Input.valueOf(firstInput);
+            Effect.Input.valueOf(parts[0]);
         });
-        assertNotNull(map.get( Effect.Input.valueOf(firstInput)));
     }
 
     @Test
@@ -240,22 +242,29 @@ public class ActionTests {
         player1.setNickname("target");
         gameBoard.addPlayer(player1);
 
+        Player player2 = new Player();
+        player2.setNickname("target2");
+        gameBoard.addPlayer(player2);
+
         player.setPosition(gameBoard.getSquares().get(0));
         player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(0));
 
         player.setActive(true);
 
         clientInput.players.add("target");
+        clientInput.players.add("target2");
+
         clientInput.effectType = 1;
         clientInput.useSecondPrimary = false;
-        clientInput.weaponName = "Sledgehammer";
+        clientInput.weaponName = "Electroscythe";
 
         // Bad way of searching for a weapon but the only one
 
         Weapon weapon = (Weapon) gameBoard.getWeaponsDeck().pick();
         boolean notFoundInDeck = false;
 
-        while (!notFoundInDeck && !weapon.getName().equals("Sledgehammer")) {
+        while (!notFoundInDeck && !weapon.getName().equals("Electroscythe")) {
             weapon = (Weapon) gameBoard.getWeaponsDeck().pick();
             if (weapon == null) notFoundInDeck = true;
         }
@@ -265,39 +274,39 @@ public class ActionTests {
         WeaponsSlot weaponsSlot3 = gameBoard.getSquares().get(2).getWeaponsSlot();
 
         // If not found in deck, see weapons slots
-        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+        if (weapon == null || !weapon.getName().equals("Electroscythe")) {
             for (Weapon w : weaponsSlot1.getWeapons()) {
-                if (w.getName().equals("Sledgehammer")) {
+                if (w.getName().equals("Electroscythe")) {
                     weapon = w;
                     break;
                 }
             }
         }
 
-        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+        if (weapon == null || !weapon.getName().equals("Electroscythe")) {
             for (Weapon w : weaponsSlot2.getWeapons()) {
-                if (w.getName().equals("Sledgehammer")) {
+                if (w.getName().equals("Electroscythe")) {
                     weapon = w;
                     break;
                 }
             }
         }
 
-        if (weapon == null || !weapon.getName().equals("Sledgehammer")) {
+        if (weapon == null || !weapon.getName().equals("Electroscythe")) {
             for (Weapon w : weaponsSlot3.getWeapons()) {
-                if (w.getName().equals("Sledgehammer")) {
+                if (w.getName().equals("Electroscythe")) {
                     weapon = w;
                     break;
                 }
             }
         }
-
 
         player.addWeapon(weapon);
 
         actionController.shoot(clientInput);
         assertTrue(player.getWeapons().get(0).isLoaded());
-        assertEquals(player1.getDamage().size(), 2);
+        assertEquals(player1.getDamage().size(), 1);
+        assertEquals(player2.getDamage().size(), 1);
     }
 
 }

@@ -168,7 +168,6 @@ public class SpawnActionController implements Initializable {
 
     @FXML void openDuplicate(){
         Stage duplicateWindow = new Stage();
-        duplicateWindow.initStyle(StageStyle.UNDECORATED);
         duplicateWindow.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader loader = new FXMLLoader();

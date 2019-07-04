@@ -6,11 +6,13 @@ import models.GameBoard;
 import models.Player;
 import models.Square;
 import models.cards.*;
+import utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ActionController {
     // Single items that
@@ -156,17 +158,31 @@ public class ActionController {
         GameStateMessage.actionsHistoryTemp.add(player.getNickname() + " realoded weapon " + clientInput.weaponName);
     }
 
+    /**
+     *  Split the parameters in two using the dot, left is type,right is index
+     *  Throws error if there are missing parameters
+     *  Targeting scope is a special case in that it doesn't follow the same rules as every other card
+     *  So it gets some special code
+     *
+     *
+     * @param clientInput the client input
+     */
     private void executeAction (Effect effect, CardWithAction card, ClientInput clientInput) {
         for (models.cards.Action action : effect.getActions()) {
             models.cards.Action.Type actionType = action.getType();
-            HashMap<Effect.Input, Integer> parameters = action.getParameters();
+            List<String> parameters = action.getParameters();
 
             // reset the parameters just to be sure there's no old data
             card.reset();
             card.setDamagingPlayer(player);
 
             try {
-                parameters.forEach((Effect.Input type, Integer index) -> {
+                parameters.forEach((String parameter) -> {
+
+                    String[] parts = parameter.split(Pattern.quote("."));
+                    Effect.Input type = Effect.Input.valueOf(parts[0]);
+                    Integer index = Integer.parseInt(parts[1]);
+
                     switch (type) {
                         case TARGET:
                             // Skip if the action required more players than playing
@@ -190,11 +206,11 @@ public class ActionController {
                     }
                 });
             } catch (Exception e) {
+                Logger.err(e, "Error with parameters");
                 throw new IllegalArgumentException("Missing parameters.");
             }
 
-            // Targeting scope is a special case in that it doesn't follow the same rules as every other card
-            // So it gets some special code
+
             if (card.getName().equals("TargetingScope")) {
                 // Make sure the target is valid
                 Player target = card.getPlayerTargets().get(0);

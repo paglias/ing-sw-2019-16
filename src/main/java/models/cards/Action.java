@@ -2,6 +2,7 @@ package models.cards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Action {
@@ -50,21 +51,12 @@ public class Action {
     }
 
     /**
-     * Create a map with a string key and an integer value.
-     * Splits parameter in two, first one is the effect input, second one the index
+     * Return the parameters for this action.
      *
      * @return the parameters
      */
-    public HashMap<Effect.Input, Integer> getParameters () {
-        HashMap<Effect.Input, Integer> map = new HashMap<>();
-        parameters.forEach(stringParameter -> {
-            String[] parts = stringParameter.split(Pattern.quote("."));
-            Effect.Input actionType = Effect.Input.valueOf(parts[0]);
-            Integer index = Integer.parseInt(parts[1]);
-            map.put(actionType, index);
-        });
-
-        return map;
+    public List<String> getParameters () {
+        return  parameters;
     }
 
 }

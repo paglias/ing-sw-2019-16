@@ -1,4 +1,6 @@
 import client.Client;
+import models.GameBoard;
+import models.cards.Weapon;
 import server.Server;
 import utils.Constants;
 import utils.Logger;

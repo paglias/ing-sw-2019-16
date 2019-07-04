@@ -199,6 +199,7 @@ public class ClientController implements MessageVisitor {
                 linkedPlayer.getActionCounter() < 1 &&
                 action != ActionController.Action.RELOAD &&
                 action != ActionController.Action.USE_POWER_UP &&
+                action != ActionController.Action.DISCARD &&
                 action != ActionController.Action.DISCARD_AND_SPAWN
         ) {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -240,7 +241,7 @@ public class ClientController implements MessageVisitor {
                 action != ActionController.Action.USE_POWER_UP
                 && action != ActionController.Action.DISCARD_AND_SPAWN
                 && action != ActionController.Action.DISCARD
-                        && action != ActionController.Action.RELOAD
+                && action != ActionController.Action.RELOAD
         ) {
             linkedPlayer.decreaseActionCounter();
         }
