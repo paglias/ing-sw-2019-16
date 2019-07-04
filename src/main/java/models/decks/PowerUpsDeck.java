@@ -44,6 +44,4 @@ public class PowerUpsDeck extends Deck {
         discard(powerUp);
         player.removePowerUp(powerUp);
     }
-
-
 }

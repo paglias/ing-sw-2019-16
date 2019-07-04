@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import messages.ChooseNicknameMessage;
-import utils.Logger;
-
 import java.io.IOException;
 
 

@@ -117,7 +117,7 @@ public class MarksController implements Initializable {
      * @param markingPlayer the marking player
      * @return the int
      */
-    public int calculateMarks(int markedPlayer, int markingPlayer){
+    private int calculateMarks(int markedPlayer, int markingPlayer){
         int i = 0;
         if (currentPlayers.get(markingPlayer)!=null) {
             for (String mark : currentPlayers.get(markedPlayer).marks) {

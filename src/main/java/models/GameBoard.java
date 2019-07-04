@@ -1,12 +1,9 @@
 package models;
 
-import models.cards.Weapon;
 import models.decks.AmmoDeck;
 import models.decks.PowerUpsDeck;
 import models.decks.WeaponsDeck;
-
 import java.util.*;
-
 import static java.util.stream.Collectors.*;
 
 /**
