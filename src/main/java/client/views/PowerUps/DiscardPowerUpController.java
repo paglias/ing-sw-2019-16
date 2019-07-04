@@ -13,7 +13,6 @@ import messages.ActionMessage;
 import messages.ActionStartMessage;
 import messages.client_data.ClientInput;
 import messages.client_data.PowerUpData;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -94,10 +93,9 @@ public class DiscardPowerUpController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
-    //Discards the blue powerup. by its index
+    //Discards the blue powerup, by its index
     @FXML void discardBlue(ActionEvent event) throws InterruptedException {
 
         startMessage.setAction(discard);
