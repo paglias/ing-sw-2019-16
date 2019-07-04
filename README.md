@@ -2,7 +2,7 @@
 
 - Matteo Pagliazzi - 847228 - [paglias](https://github.com/paglias)
 - Bruno Sciarrone - 891589 - [brunosciarrone](https://github.com/brunosciarrone)
-- Andrei - - [andreipricope](https://github.com/andreipricope)
+- Andrei Pricope Sergiu - 807181 - [andreipricope](https://github.com/andreipricope)
 
 ## Funzionalità Implementate:
 
@@ -26,11 +26,16 @@ TODO Sonar immagine qua (con test coverage per cartelle e spiegazione)
 
 ## UML
 
-TODO link
+Nella cartella `uml` sono presenti l'uml iniziale (del model) e un flow diagram che avevamo sviluppato all'inizio
+del progetto per mostrare i vari stati del gioco.
+
+In `uml/Final UML` sono presenti gli UML finali generati con il tool di IntelliJ. E' presente un UML per ogni classe
+con attributi e metodi, uno per le dipendenze tra le classi all'interno dei package e uno generico
+per le dipendenze tra i package.
 
 ## JavaDoc
 
-TODO link/istruzioni
+I Javadoc generati si trovano nella cartella `javadoc`.
 
 ## Lancio JAR
 
@@ -44,8 +49,7 @@ i file estratti in una cartella chiamata `javafx-sdk-11.0.2` dentro `jars`.
 
 NOTA: In base al sistema operativo l'estrazione dello zip potrebbe già
 generare una cartella `javafx-sdk-11.0.2`, in quel caso non è necessario
-spostare alcun file ma è sufficiente avere
- la cartella `javafx-sdk-11.0.2` all'interno di `jars`.
+spostare alcun file ma è sufficiente avere la cartella `javafx-sdk-11.0.2` all'interno di `jars`.
 
 ### Linux e macOs
 
@@ -95,7 +99,6 @@ Come mostrato poco sopra è possibile passare 3 settaggi per il gioco da linea d
 Il jar completo è generabile tramite la funzionalità `Artifacts` di IntelliJ IDEA. 
 Il jar viene generato nella cartella `out/artifacts/ing_sw_2019_16_jar` 
 e prima di poter essere utilizzato deve essere rinominato in `adrenaline.jar` e spostato in `jars`.
-
 
 ### JAR separati per Client e Server
 
