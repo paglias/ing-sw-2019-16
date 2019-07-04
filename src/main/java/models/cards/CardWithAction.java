@@ -4,6 +4,7 @@ import models.Player;
 import models.Square;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardWithAction extends Card {
@@ -77,11 +78,17 @@ public class CardWithAction extends Card {
             case MOVE_TARGET:
                 this.moveTarget();
                 return;
+            case MOVE_TARGET_TWO:
+                this.moveTargetTwo();
+                return;
             case MOVE_TARGET_CAN_SEE:
                 this.moveTargetCanSee();
                 return;
             case MOVE:
                 this.move();
+                return;
+            case MOVE_TWO:
+                this.moveTwo();
                 return;
             case MOVE_ANYWHERE:
                 this.moveAnywhere();
@@ -100,6 +107,9 @@ public class CardWithAction extends Card {
                 return;
             case SHOOT_EVERY_ONE_AWAY_VIEW:
                 this.shootEveryOneAwayView();
+                return;
+            case SHOOT_EVERY_TWO_AWAY_VIEW:
+                this.shootEveryTwoAwayView();
                 return;
             case MARK_EVERY_ONE_AWAY_VIEW:
                 this.markEveryOneAwayView();
@@ -168,6 +178,23 @@ public class CardWithAction extends Card {
     }
 
     /**
+     * Move one or two positions
+     */
+    public void moveTwo() {
+        Square position = positions.get(0);
+
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectlyPosition = position.getCanAccessDirectly();
+        boolean noPositionTwoMoves = Collections.disjoint(canAccessDirectly, canAccessDirectlyPosition);
+
+        if(canAccessDirectly.contains(position) || !noPositionTwoMoves){
+            damagingPlayer.setPosition(position);
+        } else {
+            throw new IllegalArgumentException("Not usable method.");
+        }
+    }
+
+    /**
      * Move to any square.
      */
     public void moveAnywhere() {
@@ -182,7 +209,7 @@ public class CardWithAction extends Card {
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
-        if(canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(canAccessDirectly.contains(position) && damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
@@ -208,7 +235,7 @@ public class CardWithAction extends Card {
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
-        if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(!canAccessDirectly.contains(position) && damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addDamage(damagingPlayer);
         }
         else throw new IllegalArgumentException("Not usable method");
@@ -221,7 +248,7 @@ public class CardWithAction extends Card {
         List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
         Player playerTarget= playerTargets.get(0);
         Square position = playerTarget.getPosition();
-        if(!canAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+        if(!canAccessDirectly.contains(position) && damagingPlayer.getPosition().getCanView().contains(position)){
             playerTarget.addMark(damagingPlayer);
         }
     }
@@ -273,13 +300,24 @@ public class CardWithAction extends Card {
         for (Player Players : playerTargets) {
             List<Square> CanAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
             Square position = Players.getPosition();
-            if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
+            if(CanAccessDirectly.contains(position) && damagingPlayer.getPosition().getCanView().contains(position)){
                 Players.addDamage(damagingPlayer);
-
             }
-            else throw new IllegalArgumentException("Not usable method");
         }
+    }
 
+    /**
+     * Choose a square two moves away (in the same direction) and shoot every target on that square.
+     */
+    public void shootEveryTwoAwayView() {
+        for (Player player : playerTargets) {
+            List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+            Square position = player.getPosition();
+
+            if(!canAccessDirectly.contains(position) && damagingPlayer.getPosition().getCanView().contains(position)){
+                player.addDamage(damagingPlayer);
+            }
+        }
     }
 
     /**
@@ -292,7 +330,6 @@ public class CardWithAction extends Card {
             if(CanAccessDirectly.contains(position)&& damagingPlayer.getPosition().getCanView().contains(position)){
                 Players.addMark(damagingPlayer);
             }
-            else throw new IllegalArgumentException("Not usable method");
         }
     }
 
@@ -334,6 +371,23 @@ public class CardWithAction extends Card {
         Square newPosition=positions.get(0);
         if (CanAccessDirectly.contains(newPosition)) {
             playerTarget.move(newPosition);
+        }
+        else throw new IllegalArgumentException("Not usable method");
+    }
+
+    /**
+     * Move the target one or two moves
+     */
+    public void moveTargetTwo() {
+        Player playerTarget = playerTargets.get(0);
+        List<Square> canAccessDirectly = playerTarget.getPosition().getCanAccessDirectly();
+        Square newPosition=positions.get(0);
+        List<Square> canAccessDirectlyPosition = newPosition.getCanAccessDirectly();
+
+        boolean noPositionTwoMoves = Collections.disjoint(canAccessDirectly, canAccessDirectlyPosition);
+
+        if (canAccessDirectly.contains(newPosition) || !noPositionTwoMoves) {
+            playerTarget.setPosition(newPosition);
         }
         else throw new IllegalArgumentException("Not usable method");
 
@@ -431,11 +485,16 @@ public class CardWithAction extends Card {
      * Attract target to your square.
      */
     public void attractTarget() {
-        Square position= damagingPlayer.getPosition();
-        Player playerTarget= playerTargets.get(0);
-        Square targetPosition= playerTarget.getPosition();
-        if(position.sameDirection(targetPosition,direction)){
-            playerTarget.setPosition(position);
+        Player playerTarget = playerTargets.get(0);
+        Square position = playerTarget.getPosition();
+
+
+        List<Square> canAccessDirectly = damagingPlayer.getPosition().getCanAccessDirectly();
+        List<Square> canAccessDirectlyPosition = playerTarget.getPosition().getCanAccessDirectly();
+        boolean noPositionTwoMoves = Collections.disjoint(canAccessDirectly, canAccessDirectlyPosition);
+
+        if(canAccessDirectly.contains(position) || !noPositionTwoMoves) {
+            playerTarget.setPosition(damagingPlayer.getPosition());
         }
         else throw new IllegalArgumentException("Not usable method");
     }

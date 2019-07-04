@@ -33,13 +33,7 @@
       "cost": [],
       "actions": [
         {
-          "type": "MOVE",
-          "parameters": [
-            "POSITION.0"
-          ]
-        },
-        {
-          "type": "MOVE",
+          "type": "MOVE_TWO",
           "parameters": [
             "POSITION.0"
           ]

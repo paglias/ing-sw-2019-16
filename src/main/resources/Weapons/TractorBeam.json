@@ -24,13 +24,12 @@
       ]
     },
     {
-      "input": ["POSITION","TARGET"],
+      "input": ["TARGET"],
       "cost": ["RED", "YELLOW"],
       "actions": [
         {
-          "type": "MOVE_TARGET_CAN_SEE",
+          "type": "ATTRACT_TARGET",
           "parameters": [
-            "POSITION.0",
             "TARGET.0"
           ]
         },

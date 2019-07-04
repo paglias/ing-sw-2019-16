@@ -36,11 +36,29 @@
             "TARGET.2",
             "TARGET.3"
           ]
-        }
-        ]
+        },
+        {
+          "type": "SHOOT_EVERY_ONE_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
+        },
+        {
+          "type": "SHOOT_EVERY_TWO_AWAY_VIEW",
+          "parameters": [
+            "TARGET.0",
+            "TARGET.1",
+            "TARGET.2",
+            "TARGET.3"
+          ]
         }
       ]
     }
+  ]
+}
 
 
 

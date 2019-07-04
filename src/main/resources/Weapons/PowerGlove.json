@@ -35,7 +35,7 @@
       ]
     },
     {
-      "input": ["POSITION","TARGET","POSITION","TARGET"],
+      "input": ["POSITION","TARGET","TARGET"],
       "cost": ["BLUE"],
       "actions": [
         {
@@ -48,12 +48,6 @@
           "type": "SHOOT",
           "parameters": [
             "TARGET.0"
-          ]
-        },
-        {
-          "type": "MOVE",
-          "parameters": [
-            "POSITION.1"
           ]
         },
         {

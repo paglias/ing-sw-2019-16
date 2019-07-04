@@ -45,17 +45,10 @@
           ]
         },
         {
-          "type": "MOVE_TARGET",
+          "type": "MOVE_TARGET_TWO",
           "parameters": [
             "TARGET.0",
             "POSITION.0"
-          ]
-        },
-        {
-          "type": "MOVE_TARGET",
-          "parameters": [
-            "TARGET.0",
-            "POSITION.1"
           ]
         }
       ]

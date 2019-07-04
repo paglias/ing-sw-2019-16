@@ -93,6 +93,57 @@ public class EffectTest {
     }
 
     @Test
+    void moveTwo() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPosition(gameBoard.getSquares().get(2));
+
+        weapon.moveTwo();
+
+        assertEquals(player1.getPosition(), gameBoard.getSquares().get(2));
+    }
+
+    @Test
+    void moveTwoOne() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPosition(gameBoard.getSquares().get(1));
+
+        weapon.moveTwo();
+
+        assertEquals(player1.getPosition(), gameBoard.getSquares().get(1));
+    }
+
+    @Test
+    void moveTwoFails() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPosition(gameBoard.getSquares().get(3));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            weapon.moveTwo();
+        });
+    }
+
+    @Test
     void moveAnywhere() {
         player1.setPosition(square1);
         weapon.setDamagingPlayer(player1);
@@ -259,6 +310,40 @@ public class EffectTest {
     }
 
     @Test
+    void shootEveryTwoAwayView() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        Player player4 = new Player();
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+        gameBoard.addPlayer(player3);
+        gameBoard.addPlayer(player4);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(1)); // should not be shot
+        player3.setPosition(gameBoard.getSquares().get(2));
+        player4.setPosition(gameBoard.getSquares().get(5)); // should not be shot
+
+        weapon.addPlayerTarget(player2);
+        weapon.addPlayerTarget(player3);
+        weapon.addPlayerTarget(player4);
+
+        weapon.setDamagingPlayer(player1);
+
+        int nDamage2 = player2.getDamage().size();
+        int nDamage3 = player3.getDamage().size();
+        int nDamage4= player4.getDamage().size();
+
+        weapon.shootEveryTwoAwayView();
+
+        assertEquals(player2.getDamage().size(), nDamage2);
+        assertEquals(player3.getDamage().size(), nDamage3 + 1);
+        assertEquals(player4.getDamage().size(), nDamage4);
+        assertTrue(player3.getDamage().contains(player1));
+    }
+
+    @Test
     void markEveryOneAwayView() {
         player1.setPosition(square1);
         weapon.addPlayerTarget(player2);
@@ -312,6 +397,72 @@ public class EffectTest {
         weapon.addPosition(square2);
         weapon.moveTarget();
         assertEquals(player1.getPosition(), square2);
+    }
+
+    @Test
+    void moveTargetTwo() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        Player player2 = new Player();
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(11));
+        player2.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
+        weapon.addPosition(gameBoard.getSquares().get(2));
+
+        weapon.moveTargetTwo();
+
+        assertEquals(player2.getPosition(), gameBoard.getSquares().get(2));
+    }
+
+    @Test
+    void moveTargetTwoOnePos() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        Player player2 = new Player();
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(11));
+        player2.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
+        weapon.addPosition(gameBoard.getSquares().get(1));
+
+        weapon.moveTargetTwo();
+
+        assertEquals(player2.getPosition(), gameBoard.getSquares().get(1));
+    }
+
+    @Test
+    void moveTargetTwoFails() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+
+        gameBoard.addPlayer(player1);
+
+        Player player2 = new Player();
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(11));
+        player2.setPosition(gameBoard.getSquares().get(0));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
+        weapon.addPosition(gameBoard.getSquares().get(3));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            weapon.moveTargetTwo();
+        });
     }
 
     @Test
@@ -409,22 +560,58 @@ public class EffectTest {
     }
 
     @Test
-    void AttractTarget() {
-        player1.setPosition(square1);
-        player2.setPosition(square2);
+    void AttractTargetError() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(3));
 
         weapon.setDamagingPlayer(player1);
         weapon.addPlayerTarget(player2);
-        // TODO this is wrong, the manual doesn't mention direction
-        weapon.setDirection(Square.Direction.EAST);
 
-        square1.setNumber(7);
-        square2.setNumber(4);
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            weapon.attractTarget();
+        });
+    }
+
+    @Test
+    void AttractTargetOne() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(1));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
 
         weapon.attractTarget();
 
-        assertEquals(player2.getPosition(), square1);
+        assertEquals(player2.getPosition(), player1.getPosition());
+    }
+
+    @Test
+    void AttractTargetTwo() {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.setMap(1);
+        gameBoard.addPlayer(player1);
+        gameBoard.addPlayer(player2);
+
+        player1.setPosition(gameBoard.getSquares().get(0));
+        player2.setPosition(gameBoard.getSquares().get(2));
+
+        weapon.setDamagingPlayer(player1);
+        weapon.addPlayerTarget(player2);
+
+        weapon.attractTarget();
+
+        assertEquals(player2.getPosition(), player1.getPosition());
     }
 
     @Test

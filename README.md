@@ -22,7 +22,7 @@
 
 ## Sonar
 
-TODO Sonar immagine qua (con test coverage per cartelle)
+TODO Sonar immagine qua (con test coverage per cartelle e spiegazione)
 
 ## UML
 
