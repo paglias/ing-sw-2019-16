@@ -30,7 +30,7 @@ public class MarksController implements Initializable {
             Game.controller.getLastGameStateMessage().gameBoardData.players;
 
     /**
-     * Draw.
+     * Main method to manage the number of marks for each player.
      */
     public void draw () {
         int nPlayers = currentPlayers.size();
