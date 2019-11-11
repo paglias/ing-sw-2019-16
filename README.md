@@ -1,8 +1,10 @@
 # ing-sw-2019-16
 
-- Matteo Pagliazzi - 847228 - [paglias](https://github.com/paglias)
-- Bruno Sciarrone - 891589 - [brunosciarrone](https://github.com/brunosciarrone)
-- Andrei Pricope Sergiu - 807181 - [andreipricope](https://github.com/andreipricope)
+Implementazione in Java di una versione multiplayer del gioco da tavolo Adrenalina per il progetto finale di Ingegneria del Software presso il Politecnico di Milano.
+
+- Matteo Pagliazzi - [paglias](https://github.com/paglias)
+- Bruno Sciarrone - [brunosciarrone](https://github.com/brunosciarrone)
+- Andrei Pricope Sergiu - [andreipricope](https://github.com/andreipricope)
 
 ## Funzionalità Implementate:
 
